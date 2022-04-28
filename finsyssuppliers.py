@@ -86,8 +86,6 @@ def sherryplus():
     ab=ch.get()
     print(ab)
 
-    
-
     l6=tk.Label(frame2,text='Default Tax Code',bg='#243e54',font=('times new roman', 14)).place(relx=0.5,rely=0.63)
     val=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
     '3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST','3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST']
