@@ -7,7 +7,7 @@ from tkcalendar import DateEntry,Calendar
 import mysql.connector
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
 cur=mydata.cursor()
-def plus():
+def sherryplus():
     def valueget():
         ac=cm1.get()
         n=e3.get()
@@ -57,15 +57,17 @@ def plus():
     
     l5=tk.Label(frame2,text='Description',bg='#243e54',font=('times new roman', 14)).place(relx=0.5,rely=0.25)
     e5=StringVar()
-    tk.Entry(frame2).place(relx=0.5,rely=0.35,relwidth=0.4,relheight=0.065)
+    tk.Entry(frame2,textvariable=e5).place(relx=0.5,rely=0.35,relwidth=0.4,relheight=0.065)
 
     message='''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
     text_box=Text(frame2)
     text_box.place(relx=0.04,rely=0.55,relwidth=0.4,relheight=0.2)
     text_box.insert('end',message)
     text_box.config(state='disabled')
-    Checkbutton(frame2, text = "Is sub-account ",bg='#243e54',font=('times new roman', 12)).place(relx=0.5,rely=0.45)
-    bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
+
+    def activator():
+        global cb
+        bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
          'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
         'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
         'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
@@ -77,8 +79,14 @@ def plus():
         'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
         'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
 
-    cb=ttk.Combobox(frame2,values=bal)
-    cb.place(relx=0.5,rely=0.55,relwidth=0.4,relheight=0.065)
+        cb=ttk.Combobox(frame2,values=bal)
+        cb.place(relx=0.5,rely=0.55,relwidth=0.4,relheight=0.065)
+    ch=IntVar()
+    Checkbutton(frame2, text = "Is sub-account ",bg='#243e54',font=('times new roman', 12),command=activator,variable=ch).place(relx=0.5,rely=0.45)
+    ab=ch.get()
+    print(ab)
+
+    
 
     l6=tk.Label(frame2,text='Default Tax Code',bg='#243e54',font=('times new roman', 14)).place(relx=0.5,rely=0.63)
     val=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
@@ -240,7 +248,7 @@ def addsuppliers():
     edefexp.current(0)
     edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
-    tk.Button(hd1,text='+',font=(14),command=plus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
+    tk.Button(hd1,text='+',font=(14),command=sherryplus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
 
     tk.Label(hd1,text='Apply TDS for Supplier',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.42)
     etds=StringVar()
@@ -525,7 +533,7 @@ def sherrymain():
         edefexp.insert(0,s[17])
         edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
-        tk.Button(hd1,text='+',font=(14),command=plus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
+        tk.Button(hd1,text='+',font=(14),command=sherryplus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
 
         tk.Label(hd1,text='Apply TDS for Supplier',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.42)
         etds=StringVar()
@@ -596,7 +604,7 @@ def sherrymain():
         tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.92,relwidth=1,relheight=0.08)
         D.mainloop()
 
-    def delete():
+    def supplierdelete():
         # Get selected item to Delete
         str=treevv.focus() 
         values=treevv.item(str,'values')
@@ -605,13 +613,9 @@ def sherrymain():
         mydata.commit()
         print('sucessfully deleted')
         treevv.delete(str)
-    def set():
-        str=treevv.focus() 
-        values=treevv.item(str,'values')
-        b=[values[0]]
     edit_btn = Button(hd, text="Edit",command=editsupplier)
     edit_btn.place(relx=0.35,rely=0.8,relheight=0.1,relwidth=0.1)
-    del_btn = Button(hd, text="Delete", command=delete)
+    del_btn = Button(hd, text="Delete", command=supplierdelete)
     del_btn.place(relx=0.5,rely=0.8,relheight=0.1,relwidth=0.1)   
     treevv.bind("<<TreeviewSelect>>")
     A.mainloop()   

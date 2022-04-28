@@ -35,7 +35,7 @@ def time():
 
     f2=tk.Frame(win,bg='#243e54')
     size=(400,500)
-    ax=ImageTk.PhotoImage(Image.open('time.png').resize(size))
+    ax=ImageTk.PhotoImage(Image.open('timeact.png').resize(size))
     tk.Label(f2,image=ax,bg='#243e54').place(relx=0.05,rely=0.05,relheight=0.8,relwidth=0.2)
 
     tk.Label(f2,text='Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.1)
@@ -59,14 +59,24 @@ def time():
     timecus.current(0)  
     timecus.place(relx=0.3,rely=0.31,relwidth=0.65,relheight=0.05)
     
+    timbill=StringVar()
+    zz=tk.Entry(f2,textvariable=timbill)
+    zz.place(relx=0.58,rely=0.4,relwidth=0.18,relheight=0.05)
+
+    def billchkk(widget):
+        print()
+        if timebill=='No':
+            widget.pack_forget()
+        else:
+            zz['state']='normal'    
+
     tk.Label(f2,text='Billable(/hr)',font=('times new roman', 12),bg='#2f516f').place(relx=0.3,rely=0.4)
     bl=['Yes','No']
     timebill=ttk.Combobox(f2,values=bl)
     timebill.place(relx=0.38,rely=0.4,relwidth=0.18,relheight=0.05)
-    print(timebill.get())
+    
 
-    timbill=StringVar()
-    tk.Entry(f2,textvariable=timbill).place(relx=0.58,rely=0.4,relwidth=0.18,relheight=0.05)
+    
 
     tk.Label(f2,text='Enter start and end time',font=('times new roman', 12),bg='#2f516f').place(relx=0.3,rely=0.5)
     time=ttk.Combobox(f2,values=bl)

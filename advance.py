@@ -32,7 +32,7 @@ def advance():
     f4=tk.Frame(wn,bg='#243e54')
 
     size=(400,400)
-    ax=ImageTk.PhotoImage(Image.open('advance.png').resize(size))
+    ax=ImageTk.PhotoImage(Image.open('advancepayment.png').resize(size))
     tk.Label(f4,image=ax,bg='#243e54').place(relx=0.63,rely=0.01,relheight=0.8,relwidth=0.35)
 
     tk.Label(f4,text='Payee',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.1)
@@ -66,7 +66,7 @@ def advance():
 
     tk.Label(f4,text='Amount',font=('times new roman', 14),bg='#2f516f').place(relx=0.38,rely=0.24)
     amount=StringVar()
-    tk.Entry(f4,textvariable=amount).place(relx=0.38,rely=0.3,relwidth=0.2,relheight=0.05)
+    tk.Entry(f4).place(relx=0.38,rely=0.3,relwidth=0.2,relheight=0.05)
 
     tk.Label(f4,text='Payment Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.48)
     dte=StringVar()
