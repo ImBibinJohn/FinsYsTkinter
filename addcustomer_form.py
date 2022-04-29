@@ -18,52 +18,68 @@ def fun():#db connection
         )
     mycursor = mydb.cursor()
 
-#hi
+#insert values to database
 def save_customdata():
-    fun()
-    global title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry
-    title=title.get()
-    first_name=first_name.get()
-    last_name=last_name.get()
-    company=company.get()
-    location=location.get()
-    gst=gst.get()
-    gstin=gstin.get()
-    pan_no=pan_no.get()
-    email=email.get()
-    website=website.get()
-    mobile=mobile.get()
-    street=street.get()
-    city=city.get()
-    state=state.get()
-    pin=pin.get()
-    country=country.get()
-    shipstreet=shipstreet.get()
-    shipcity=shipcity.get()
-    shipstate=shipstate.get()
-    shippin=shippin.get()
-    shipcountry=shipcountry.get()
+    if CheckVar1.get()==1:
+        fun()
+        global title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry
+        title=title.get()
+        first_name=first_name.get()
+        last_name=last_name.get()
+        company=company.get()
+        location=location.get()
+        gst=gst.get()
+        gstin=gstin.get()
+        pan_no=pan_no.get()
+        email=email.get()
+        website=website.get()
+        mobile=mobile.get()
+        street=street.get()
+        city=city.get()
+        state=state.get()
+        pin=pin.get()
+        country=country.get()
+        shipstreet=shipstreet.get()
+        shipcity=shipcity.get()
+        shipstate=shipstate.get()
+        shippin=shippin.get()
+        shipcountry=shipcountry.get()
 
-    sql='SELECT * FROM customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
-    val=(first_name,last_name)
-    mycursor.execute(sql,val)
-    if mycursor.fetchone()is not None:
-        messagebox.showerror('error', 'First Name and Last Name already exist!!')
-    else:
-        sql="INSERT INTO customer VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-        val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry)
+        sql='SELECT * FROM customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
+        val=(first_name,last_name)
         mycursor.execute(sql,val)
-        mydb.commit()
-        messagebox.showinfo('New Customer Added')
+        if mycursor.fetchone()is not None:
+            messagebox.showerror('error', 'First Name and Last Name already exist!!')
+        else:
+            
+            sql="INSERT INTO customer (title,firstname,lastname ,company,location,gsttype,gstin ,panno ,email ,website,mobile,street ,city ,state,pincode ,country ,shipstreet ,shipcity ,shipstate,shippincode ,shipcountry) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            mydb.close()
+            messagebox.showinfo('New Customer Added')
+    else:
+        messagebox.showerror('error', 'Accept terms and conditions')
 
 
 
 
+#assign Shipping address 
+def sameaddress():
+    global selstreet,selcity,selstate,selpin,selcountry
+    if CheckVar2.get()==1:
+        selstreet=street.get()
+        shipstreet.set(selstreet)
+        selcity=city.get()
+        shipcity.set(selcity)
+        selstate=state.get()
+        shipstate.set(selstate)
+        selpin=pin.get()
+        shippin.set(selpin)
+        selcountry=country.get()
+        shipcountry.set(selcountry)
 
-
-
-
-
+    
 
 
 addcustomer_form = tk.Tk()
@@ -159,7 +175,8 @@ location_input.place(x=530,y=230,height=40)
 
 GST_lab=tk.Label(form_frame,text="GST Type",bg='#243e55',fg='#fff')
 GST_drop=ttk.Combobox(form_frame,textvariable = gst)
-GST_drop['values']=("Consumer","GST Registered-Regular","GST Registered-Composition","Overseas")
+GST_drop['values']=("Consumer","GST Registered-Regular","GST Registered-Composition","Overseas", "Deemed exports - EOU's STP's EHTP's")
+
 GST_lab.place(x=20,y=300,height=15,width=100)
 GST_drop.place(x=30,y=330,height=40,width=450)
 
@@ -212,7 +229,8 @@ city_input.place(x=30,y=280,height=40)
 state_lab=tk.Label(form2_frame,text="State",bg='#243e55',fg='#fff')
 state_lab.place(x=370,y=250,)
 state_drop=ttk.Combobox(form2_frame,textvariable = state)
-state_drop['values']=("Kerala","Karnataka","Tamilnadu")
+state_drop['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
+                                            
 state_drop.place(x=370,y=280,height=40,width=330)
 
 pin_lab=Label(form2_frame,text="Pin code",bg='#243e55',fg='#fff')
@@ -237,7 +255,7 @@ shipping_heading=tk.Label(form2_frame, text="Shipping Address",fg='#fff',bg='#24
 shipping_heading.place(x=850,y=10,)
 
 CheckVar2 = IntVar()
-same_address=Checkbutton(form2_frame, variable = CheckVar2,onvalue = 1, offvalue = 0,bg='#243e55')
+same_address=Checkbutton(form2_frame, variable = CheckVar2,onvalue = 1, offvalue = 0,bg='#243e55',command=sameaddress)
 same_address.place(x=1100,y=30,)   
 same_address_lab= Label(form2_frame,text = "Same as Billing Address",bg='#243e55',fg='#fff') 
 same_address_lab.place(x=1150,y=30,)
@@ -257,7 +275,7 @@ city_input.place(x=850,y=280,height=40)
 state_lab=tk.Label(form2_frame,text="State",bg='#243e55',fg='#fff')
 state_lab.place(x=1200,y=250,)
 state_drop=ttk.Combobox(form2_frame,textvariable = shipstate)
-state_drop['values']=("Kerala","Karnataka","Tamilnadu")
+state_drop['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
 state_drop.place(x=1200,y=280,height=40,width=330)
 
 pin_lab=Label(form2_frame,text="Pin code",bg='#243e55',fg='#fff')
