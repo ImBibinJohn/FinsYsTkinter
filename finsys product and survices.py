@@ -198,10 +198,6 @@ def splus():
     
     
 def select_product():
-    def add_product23():
-        L=tk.Toplevel(B)
-        L.title('Add products')
-        L.geometry('1400x700')
     
     global B
     B=tk.Toplevel(A)
@@ -221,10 +217,6 @@ def select_product():
     head1 = tk.LabelFrame(frame,borderwidth=0,bg='#243e54')
     f1 = font.Font(family='poppins',size=30)#font
     lb1=tk.Label(head1,text='PRODUCT / SERVICE INFORMATION',bg='#243e54',foreground='white')
-    
-
-    # but = Button(root,text = "UPLOAD IMAGE",bg="black",fg="#fff",font=('mali', 10, 'bold'))  
-    # but.place(x=550,y=350,width=250,height=40) 
     
     lb1['font']=f1
     lb1.place(relx=0.2,rely=0.2)
@@ -258,44 +250,46 @@ def select_product():
 
     tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
     #title.grid(row=3,column=2,padx=20,pady=20)
-    pname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
+    productname=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='SKU',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.35,rely=0.05)
-    psku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+    sku=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='HSN Code',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.05)
-    phsncode=tk.Entry(hd1).place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
+    phsncode=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
     
     
     tk.Label(hd1,text='Unit',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.13)
-    valu=['BAG Bags','BAL Bale BOU','BDL Bundles','BKL Buckles','BOX Box','BTL Bottles','CAN Cans','CTN Cartons','CCM Cubic centimeters','CBM Cubic meters','CMS Centimeters','DRM Drums','DOZ Dozens','GGK Great gross GYD','GRS GrossGMS','KME Kilometre','KGS Kilograms','KLR Kilo litre','MTS Metric ton','MLT Mili litre','MTR Meters','NOS Numbers','PAC Packs','PCS Pieces','PRS Pairs','QTL Quintal','ROL Rolls','SQY Square Yards','SET Sets','SQF Square feet','SQM Square meters','TBS Tablets','TUB Tubes','TGM Ten Gross','THD Thousands','TON Tonnes','UNT Units','lons','YDS Yards']
-    punit=ttk.Combobox(hd1,values=valu).place(relx=0.02,rely=0.16,relwidth=0.3,relheight=0.035)
+    valu=['CHOOSE','BAG Bags','BAL Bale BOU','BDL Bundles','BKL Buckles','BOX Box','BTL Bottles','CAN Cans','CTN Cartons','CCM Cubic centimeters','CBM Cubic meters','CMS Centimeters','DRM Drums','DOZ Dozens','GGK Great gross GYD','GRS GrossGMS','KME Kilometre','KGS Kilograms','KLR Kilo litre','MTS Metric ton','MLT Mili litre','MTR Meters','NOS Numbers','PAC Packs','PCS Pieces','PRS Pairs','QTL Quintal','ROL Rolls','SQY Square Yards','SET Sets','SQF Square feet','SQM Square meters','TBS Tablets','TUB Tubes','TGM Ten Gross','THD Thousands','TON Tonnes','UNT Units','lons','YDS Yards']
+    punit=ttk.Combobox(hd1,values=valu)
+    punit.current(0)
+    punit.place(relx=0.02,rely=0.16,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Catogory',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.13)
-    eemail=tk.Entry(hd1)
+    eemail=tk.Entry(hd1,bg='#2f516f')
     eemail.place(relx=0.35,rely=0.16,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Low stock alert',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.13)
-    emobile=tk.Entry(hd1).place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
+    emobile=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
     
     tk.Label(hd1,text='Description',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.20)
-    eopen=tk.Entry(hd1).place(relx=0.02,rely=0.24,relwidth=0.3,relheight=0.035)
+    eopen=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.24,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Sales price/rate',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.20)
-    e_accno=tk.Entry(hd1).place(relx=0.35,rely=0.24,relwidth=0.3,relheight=0.035)
+    e_accno=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.24,relwidth=0.3,relheight=0.035)
 
     web=tk.Label(hd1,text='Initial quantity on hand',font=('poppins', 14),bg='#243e54',foreground='white')
     web.place(relx=0.68,rely=0.20)
-    eweb=tk.Entry(hd1)
+    eweb=tk.Entry(hd1,bg='#2f516f')
   
     eweb.place(relx=0.68,rely=0.24,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Purchasing information',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.28)
-    ebill=tk.Entry(hd1).place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.035)
+    ebill=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Cost',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.28)
     Checkbutton(frame, text = "Inclusive of purchase tax ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.4,rely=0.55)
-    eterms=tk.Entry(hd1).place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
+    eterms=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
     
 
     tk.Label(hd1,text='TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.35)
@@ -319,7 +313,7 @@ def select_product():
     
 
     date=tk.Label(hd1,text='As of date',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
-    edate=DateEntry(hd1).place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
+    edate=DateEntry(hd1,bg='#2f516f').place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
     tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
     
     defexp=tk.Label(hd1,text='Inventory asset account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.42)
@@ -342,21 +336,21 @@ def select_product():
     
 
     street=tk.Label(hd1,text='Reverse Charge %',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.53)
-    estreet=tk.Entry(hd1).place(relx=0.02,rely=0.57,relwidth=0.63,relheight=0.035)  
+    estreet=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.57,relwidth=0.63,relheight=0.035)  
     
     city=tk.Label(hd1,text='Preferred Supplier',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.68,rely=0.53)
-    ecity=tk.Entry(hd1).place(relx=0.68,rely=0.57,relwidth=0.3,relheight=0.035)
+    ecity=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.57,relwidth=0.3,relheight=0.035)
 
     
 
-    Checkbutton(hd1, text = "Agree to Terms and Conditions",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.02,rely=0.76)  
+    
 
 
     sub=tk.Button(hd1,text='SUBMIT',font=15,bg='#5193e6',foreground='white').place(relx=0.02,rely=0.65)
 
     hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
     
-    tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.92,relwidth=1,relheight=0.08)
+    # tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.4,relwidth=1,relheight=0.01)
     B.mainloop()
     
 def select_product3():
@@ -420,18 +414,134 @@ def select_product3():
 
     tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
     #title.grid(row=3,column=2,padx=20,pady=20)
-    pname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
+    productname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='SKU',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.35,rely=0.05)
-    psku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+    sku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='Description',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.05)
     phsncode=tk.Entry(hd1).place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
     hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
     
     tk.Label(hd1,text='Products/services included in the bundle',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.15)
+    tk.Label(hd1,text='PRODUCT/SERVICE',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.20)
+  
+    defvalue=['choose','laptop','smartphone','smartwatch']
+    etds=ttk.Combobox(hd1,values=defvalue)
+    etds.current(0)
+    etds.place(relx=0.02,rely=0.25,relheight=0.035,relwidth=0.12)
+
+    etds1=ttk.Combobox(hd1,values=defvalue)
+    etds1.current(0)
+    etds1.place(relx=0.02,rely=0.30,relheight=0.035,relwidth=0.12)
     
-    tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.92,relwidth=1,relheight=0.08)
+
+    etds2=ttk.Combobox(hd1,values=defvalue)
+    etds2.current(0)
+    etds2.place(relx=0.02,rely=0.35,relheight=0.035,relwidth=0.12)
+
+    etds3=ttk.Combobox(hd1,values=defvalue)
+    etds3.current(0)
+    etds3.place(relx=0.02,rely=0.40,relheight=0.035,relwidth=0.12)
+
+
+
+#col-2
+
+    tk.Label(hd1,text='HSN',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.18,rely=0.20)
+    phsncode=tk.Entry(hd1).place(relx=0.15,rely=0.25,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode1=tk.Entry(hd1).place(relx=0.15,rely=0.30,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0.20,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode2=tk.Entry(hd1).place(relx=0.15,rely=0.35,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode3=tk.Entry(hd1).place(relx=0.15,rely=0.40,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+    
+
+    tk.Label(hd1,text='DESCRIPTION',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.28,rely=0.20)
+    phsncode=tk.Entry(hd1).place(relx=0.28,rely=0.25,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode1=tk.Entry(hd1).place(relx=0.28,rely=0.30,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0.20,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode2=tk.Entry(hd1).place(relx=0.28,rely=0.35,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode3=tk.Entry(hd1).place(relx=0.28,rely=0.40,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+
+
+    tk.Label(hd1,text='QTY',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.43,rely=0.20)
+    phsncode=tk.Entry(hd1).place(relx=0.41,rely=0.25,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode1=tk.Entry(hd1).place(relx=0.41,rely=0.30,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0.20,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode2=tk.Entry(hd1).place(relx=0.41,rely=0.35,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode3=tk.Entry(hd1).place(relx=0.41,rely=0.40,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+
+
+    tk.Label(hd1,text='PRICE',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.56,rely=0.20)
+    phsncode=tk.Entry(hd1).place(relx=0.54,rely=0.25,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode1=tk.Entry(hd1).place(relx=0.54,rely=0.30,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0.20,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode2=tk.Entry(hd1).place(relx=0.54,rely=0.35,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode3=tk.Entry(hd1).place(relx=0.54,rely=0.40,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+#col-6
+    tk.Label(hd1,text='TOTAL',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.69,rely=0.20)
+    phsncode=tk.Entry(hd1).place(relx=0.67,rely=0.25,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode1=tk.Entry(hd1).place(relx=0.67,rely=0.30,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0.20,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode2=tk.Entry(hd1).place(relx=0.67,rely=0.35,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+    phsncode3=tk.Entry(hd1).place(relx=0.67,rely=0.40,relwidth=0.12,relheight=0.035)
+    hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+
+#ocol-7
+    tk.Label(hd1,text='TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.82,rely=0.20)
+    defvalue=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
+    etds=ttk.Combobox(hd1,values=defvalue)
+    etds.current(0)
+    etds.place(relx=0.80,rely=0.25,relheight=0.035,relwidth=0.12)
+
+    defvalue=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
+    etds=ttk.Combobox(hd1,values=defvalue)
+    etds.current(0)
+    etds.place(relx=0.80,rely=0.30,relheight=0.035,relwidth=0.12)
+
+    defvalue=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
+    etds=ttk.Combobox(hd1,values=defvalue)
+    etds.current(0)
+    etds.place(relx=0.80,rely=0.35,relheight=0.035,relwidth=0.12)
+
+    defvalue=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
+    etds=ttk.Combobox(hd1,values=defvalue)
+    etds.current(0)
+    etds.place(relx=0.80,rely=0.40,relheight=0.035,relwidth=0.12)
+
+
     B.mainloop()
     
 def select_product2():
@@ -495,10 +605,10 @@ def select_product2():
 
     tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
     #title.grid(row=3,column=2,padx=20,pady=20)
-    pname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
+    productname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='SKU',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.35,rely=0.05)
-    psku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+    sku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='SAC Code',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.05)
     phsncode=tk.Entry(hd1).place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
@@ -643,10 +753,10 @@ def select_product1():
 
     tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
     #title.grid(row=3,column=2,padx=20,pady=20)
-    pname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
+    productname=tk.Entry(hd1).place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='SKU',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.35,rely=0.05)
-    psku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+    sku=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
 
     tk.Label(hd1,text='HSN Code',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.05)
     phsncode=tk.Entry(hd1).place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
@@ -867,158 +977,166 @@ def main():
     # data=['lowstock.png','Inventory','carlo','M24','m416','2000']
     # treevv.insert('', 'end', text=data, values=(data))
     treevv.place(relx=0,rely=0.5,relwidth=1,relheight=0.6)
+
+
     def edit_product():
-        # Get selected item to Edit
+    
         selected_item = treevv.selection()[0]
-        global D
-        D=tk.Toplevel(A)
-        D.title('PRODUCT / SERVICE INFORMATION')
-        D.geometry('1500x1000')
-        D['bg'] = '#2f516f'
-        head1 = tk.LabelFrame(D,borderwidth=0,bg='#2f516f')
+        global B
+        B=tk.Toplevel(A)
+        B.title('Add products')
+        B.title('edit products')
+        B.geometry('1400x700')
+        mycanvas=tk.Canvas(B,width=1500,height=1200)
+        mycanvas.place(relx=0,rely=0,relwidth=1,relheight=1)
+        yscrollbar =ttk.Scrollbar(B,orient='vertical',command=mycanvas.yview)
+        yscrollbar.pack(side=RIGHT,fill=Y)
+        mycanvas.configure(yscrollcommand=yscrollbar.set)
+        mycanvas.bind('<Configure>',lambda e:mycanvas.configure(scrollregion=mycanvas.bbox('all')))
+        frame=tk.Frame(mycanvas)
+        frame['bg']='#2f516f'
+        mycanvas.create_window((0,0),window=frame,anchor='nw',width=1500,height=1000)
+        #head frame
+
+        head1 = tk.LabelFrame(frame,borderwidth=0,bg='#243e54')
         f1 = font.Font(family='poppins',size=30)#font
-        lb1=tk.Label(head1,text='EDIT PRODUCT',bg='#2f516f')
-        
+        lb1=tk.Label(head1,text='PRODUCT / SERVICE INFORMATION',bg='#243e54',foreground='white')
+    
         lb1['font']=f1
-        lb1.place(relx=0.4,rely=0)
-        head1.place(relx=0.1,rely=0,relwidth=0.8,relheight=0.05)
-        #contents frame
-        hd1=tk.Frame(D) 
-        hd1['bg'] = '#2f516f'
-        f2 = font.Font(family='poppins',size=20)#font
-        label1=tk.Label(hd1,text='Supplier Information',bg='#2f516f')
-        label1['font']=f2
-        label1.place(relx=0.01,rely=0)
+        lb1.place(relx=0.2,rely=0.2)
+        head1.place(relx=0,rely=0.05,relwidth=1,relheight=0.08)
+    
+        head3 = tk.LabelFrame(frame,borderwidth=0,bg='#243e54')
+        f2 = font.Font(family='poppins',size=25)#font
+        lb2=tk.Label(head3,text='INVENTORY',bg='#243e54',foreground='white')
+        bu = Button(head3,text = "Choose Type",command=selectproduct,bg="#5193e6",fg="#fff",font=('mali', 10, 'bold'))  
+        bu.place(relx=0.5,rely=0.2,width=250,height=40) 
+    
+        lb2['font']=f2
+        lb2.place(relx=0.3,rely=0.2)
+        head3.place(relx=0,rely=0.15,relwidth=1,relheight=0.08)
+    
+    
+    
+    
+    
+    
 
-        title=tk.Label(hd1,text='Title',bg='#2f516f',font=('poppins', 14))
-        title.place(relx=0.02,rely=0.05)
-        cont=['Mr','Mrs','Miss','Ms']
-        cmb=ttk.Combobox(hd1,values=cont)
-        cmb.current(0)
-        cmb.place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
-        fname=tk.Label(hd1,text='First Name',bg='#2f516f',font=('poppins', 14)).place(relx=0.35,rely=0.05)
-        efname=tk.Entry(hd1).place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+    #contents frame
+        hd1= tk.LabelFrame(frame,borderwidth=0,bg='#243e54') 
+   
+        f3 = font.Font(family='poppins',size=18)#font
+        hd1.place(relx=0,rely=0.06,relwidth=1,relheight=0.1)
+    
+        but2 = Button(hd1,text = "UPLOAD IMAGE",command=upload_file,bg="black",fg="#fff",font=('mali', 10, 'bold'))  
+        but2.place(relx=0.8,rely=0.02,width=250,height=30) 
 
-        lname=tk.Label(hd1,text='Last Name',font=('poppins', 14),bg='#2f516f').place(relx=0.68,rely=0.05)
-        elname=tk.Entry(hd1).place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
-        
-        comp=tk.Label(hd1,text='Company',font=('poppins', 14),bg='#2f516f').place(relx=0.02,rely=0.13)
-        ecomp=tk.Entry(hd1).place(relx=0.02,rely=0.16,relwidth=0.3,relheight=0.035)
+        tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
+    #title.grid(row=3,column=2,padx=20,pady=20)
+        productname=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
-        email=tk.Label(hd1,text='Email',font=('poppins', 14),bg='#2f516f')
-        email.place(relx=0.35,rely=0.13)
-        eemail=tk.Entry(hd1)
-        eemail.insert(0,'example@gmail.com')
+        tk.Label(hd1,text='SKU',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.35,rely=0.05)
+        sku=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
+
+        tk.Label(hd1,text='HSN Code',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.05)
+        phsncode=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
+    
+    
+        tk.Label(hd1,text='Unit',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.13)
+        valu=['CHOOSE','BAG Bags','BAL Bale BOU','BDL Bundles','BKL Buckles','BOX Box','BTL Bottles','CAN Cans','CTN Cartons','CCM Cubic centimeters','CBM Cubic meters','CMS Centimeters','DRM Drums','DOZ Dozens','GGK Great gross GYD','GRS GrossGMS','KME Kilometre','KGS Kilograms','KLR Kilo litre','MTS Metric ton','MLT Mili litre','MTR Meters','NOS Numbers','PAC Packs','PCS Pieces','PRS Pairs','QTL Quintal','ROL Rolls','SQY Square Yards','SET Sets','SQF Square feet','SQM Square meters','TBS Tablets','TUB Tubes','TGM Ten Gross','THD Thousands','TON Tonnes','UNT Units','lons','YDS Yards']
+        punit=ttk.Combobox(hd1,values=valu)
+        punit.current(0)
+        punit.place(relx=0.02,rely=0.16,relwidth=0.3,relheight=0.035)
+
+        tk.Label(hd1,text='Catogory',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.13)
+        eemail=tk.Entry(hd1,bg='#2f516f')
         eemail.place(relx=0.35,rely=0.16,relwidth=0.3,relheight=0.035)
 
-        mobile=tk.Label(hd1,text='Mobile',font=('poppins', 14),bg='#2f516f').place(relx=0.68,rely=0.13)
-        emobile=tk.Entry(hd1).place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
-        
-        open_bal=tk.Label(hd1,text='Opening Balance',font=('poppins', 14),bg='#2f516f').place(relx=0.02,rely=0.20)
-        eopen=tk.Entry(hd1).place(relx=0.02,rely=0.24,relwidth=0.3,relheight=0.035)
+        tk.Label(hd1,text='Low stock alert',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.13)
+        emobile=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
+    
+        tk.Label(hd1,text='Description',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.20)
+        eopen=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.24,relwidth=0.3,relheight=0.035)
 
-        acc_no=tk.Label(hd1,text='Account No:',font=('poppins', 14),bg='#2f516f').place(relx=0.35,rely=0.20)
-        e_accno=tk.Entry(hd1).place(relx=0.35,rely=0.24,relwidth=0.3,relheight=0.035)
+        tk.Label(hd1,text='Sales price/rate',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.20)
+        e_accno=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.24,relwidth=0.3,relheight=0.035)
 
-        web=tk.Label(hd1,text='Website',font=('poppins', 14),bg='#2f516f')
+        web=tk.Label(hd1,text='Initial quantity on hand',font=('poppins', 14),bg='#243e54',foreground='white')
         web.place(relx=0.68,rely=0.20)
-        eweb=tk.Entry(hd1)
-        eweb.insert(0,'www.example.com')
+        eweb=tk.Entry(hd1,bg='#2f516f')
+  
         eweb.place(relx=0.68,rely=0.24,relwidth=0.3,relheight=0.035)
 
-        bill_rate=tk.Label(hd1,text='Billing Rate',font=('poppins', 14),bg='#2f516f').place(relx=0.02,rely=0.28)
-        ebill=tk.Entry(hd1).place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.035)
+        tk.Label(hd1,text='Purchasing information',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.28)
+        ebill=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.035)
 
-        terms=tk.Label(hd1,text='Term',font=('poppins', 14),bg='#2f516f')
-        terms.place(relx=0.35,rely=0.28)
-        termvalues=['DUE ON RECEIPT','NET15','NET30','NET60','ADD NEW TERMS']
-        eterms=ttk.Combobox(hd1,values=termvalues)
-        eterms.current(0)
-        eterms.place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
+        tk.Label(hd1,text='Cost',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.28)
+        Checkbutton(frame, text = "Inclusive of purchase tax ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.4,rely=0.55)
+        eterms=tk.Entry(hd1,bg='#2f516f').place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
+    
 
-        gst_type=tk.Label(hd1,text='GST Type',font=('poppins', 14),bg='#2f516f')
-        gst_type.place(relx=0.02,rely=0.35)
-        gstvalues=['CHOOSE','GST registered-Regular','GST registered-Composition','GST-unregistered']
+        tk.Label(hd1,text='TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.35)
+        gstvalues=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
         egst=ttk.Combobox(hd1,values=gstvalues)
         egst.current(0)
         egst.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.035)
 
-        gst_in=tk.Label(hd1,text='GST IN',font=('poppins', 14),bg='#2f516f')
-        gst_in.place(relx=0.35,rely=0.35)
-        egst_in=tk.Entry(hd1)
-        egst_in.insert(0,'22AAAAA0000A1Z5')
+        tk.Label(hd1,text='Purchase TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.35)
+        purchasetaxvalues=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
+        egst_in=ttk.Combobox(hd1,values=purchasetaxvalues)
+        egst_in.current(0)
         egst_in.place(relx=0.35,rely=0.38,relwidth=0.3,relheight=0.035)
 
-        taxreg=tk.Label(hd1,text='Tax Registeration N0',font=('poppins', 14),bg='#2f516f').place(relx=0.68,rely=0.35)
-        etaxreg=tk.Entry(hd1).place(relx=0.68,rely=0.38,relwidth=0.3,relheight=0.035)  
+        tk.Label(hd1,text='Income account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.35)
+        incometaxvalues=['Billable Expense Income','Product Sales','Sales','Sales-Hardware','Sales-Software','Sales-Support and Maintanance','Sales of Product Income','Uncategorised Income']
+        inctax_in=ttk.Combobox(hd1,values=incometaxvalues)
+        inctax_in.current(0)
+        inctax_in
+        inctax_in.place(relx=0.68,rely=0.38,relwidth=0.27,relheight=0.035)  
+    
 
-        date=tk.Label(hd1,text='Effective Date',font=('poppins', 14),bg='#2f516f').place(relx=0.02,rely=0.42)
-        edate=DateEntry(hd1).place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
-        
-        defexp=tk.Label(hd1,text='Default Expense Account',font=('poppins', 14),bg='#2f516f').place(relx=0.35,rely=0.42)
-        defvalues=['choose','Advertising/Promotional','Bank Charges','Business Licenses and Permitts','Charitable Contributions','Computer and Internet Expense','Continuing Education','Depreciation Expense','Dues and Subscriptions',
-        'Housekeeping Charges','Insurance Expenses','Insurance Expenses-General Liability Insurance','Insurance Expenses-Health Insurance','Insurance Expenses-Life and Disability Insurance','Insurance Expenses-Professional Liability',
-        'Internet Expenses','Meals and Entertainment','Office Supplies','Postage and Delivery','Printing and Reproduction','Professional Fees','Purchases','Rent Expense','Repair and Maintenance','Small Tools and Equipments',
-        'wachh Barath Cess Expense','Taxes-Property','Telephone Expense','Travel Expense','Uncategorised Expense','Utilities','Ask My Accountant','CGST write-off','GST write-off','IGST write-off','Miscellaneous Expense','Political Contributions',
-        'Reconciliation Discrepancies','SGST Write-off','Tax Write-off','Vehicle Expenses','Cost of Sales','Equipment Rental for Jobs','Freight and Shipping Cost','Merchant Account Fees','Purchases-Hardware For Resale','Purchases-Software For Resale','Subcontracted Services','Tools and Craft Suppliers']
+        date=tk.Label(hd1,text='As of date',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
+        edate=DateEntry(hd1,bg='#2f516f').place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
+        tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
+    
+        defexp=tk.Label(hd1,text='Inventory asset account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.42)
+        defvalues=['Inventory Assets']
         edefexp=ttk.Combobox(hd1,values=defvalues)
         edefexp.current(0)
         edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
         tk.Button(hd1,text='+',font=(14),command=splus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
 
-        tds=tk.Label(hd1,text='Apply TDS for Supplier',font=('poppins', 14),bg='#2f516f').place(relx=0.68,rely=0.42)
-        etds=tk.Entry(hd1).place(relx=0.68,rely=0.45,relwidth=0.3,relheight=0.035)  
-        
-        label2=tk.Label(hd1,text='Address',bg='#2f516f')
-        label2['font']=f2
-        label2.place(relx=0.01,rely=0.49)
+    
 
-        street=tk.Label(hd1,text='Street',bg='#2f516f',font=('poppins', 14)).place(relx=0.02,rely=0.53)
-        estreet=tk.Entry(hd1).place(relx=0.02,rely=0.57,relwidth=0.63,relheight=0.035)  
-        
-        city=tk.Label(hd1,text='City',bg='#2f516f',font=('poppins', 14)).place(relx=0.68,rely=0.53)
-        ecity=tk.Entry(hd1).place(relx=0.68,rely=0.57,relwidth=0.3,relheight=0.035)
+        tds=tk.Label(hd1,text='Expense account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.42)
+        defvalue=['Cost of sales']
+        etds=ttk.Combobox(hd1,values=defvalue)
+        etds.current(0)
+        etds.place(relx=0.68,rely=0.45,relwidth=0.27,relheight=0.035) 
+        tk.Button(hd1,text='+',font=(14),command=suplus).place(relx=0.955,rely=0.45,relwidth=0.025,relheight=0.035)
+    
+    
 
-        state=tk.Label(hd1,text='State',bg='#2f516f',font=('poppins', 14)).place(relx=0.02,rely=0.61)
-        stvalues=['choose','Andaman and Nicobar Islands','Andhra Pradhesh','Arunachal Pradesh','Assam','Bihar','Chandigarh','Chhattisgarh',
-        'Dadra and Nagar Haveli','Damn anad Diu','Delhi','Goa','Gujarat','Haryana','Himachal Predesh','Jammu and Kashmir'
-        ,'Jharkhand','Karnataka','Kerala','Ladakh','Lakshadweep','Madhya Predesh','Maharashtra','Manipur',
-        'Meghalaya','Mizoram','Nagaland','Odisha','Puducherry','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura',
-        'Uttar Predesh','Uttarakhand','West Bengal','Other Territory']
-        estate=ttk.Combobox(hd1,values=stvalues)
-        estate.current(0) 
-        estate.place(relx=0.02,rely=0.64,relwidth=0.3,relheight=0.035) 
+        street=tk.Label(hd1,text='Reverse Charge %',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.53)
+        estreet=tk.Entry(hd1,bg='#2f516f').place(relx=0.02,rely=0.57,relwidth=0.63,relheight=0.035)  
+    
+        city=tk.Label(hd1,text='Preferred Supplier',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.68,rely=0.53)
+        ecity=tk.Entry(hd1,bg='#2f516f').place(relx=0.68,rely=0.57,relwidth=0.3,relheight=0.035)
 
-        pin=tk.Label(hd1,text='Pin Code',bg='#2f516f',font=('poppins', 14)).place(relx=0.35,rely=0.61)
-        epin=tk.Entry(hd1).place(relx=0.35,rely=0.64,relwidth=0.3,relheight=0.035)
+    
 
-        cont=tk.Label(hd1,text='Country',bg='#2f516f',font=('poppins', 14)).place(relx=0.68,rely=0.61)
-        ctvalues=['choose','Afghanistan','Albania','Algeria','American Samoa','Andorra','Anguilla','Argentina','Aruba','Australia','Austria','Azerbaijan',
-        'Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bermuda','Bhutan','Bolivia','Bosnia & Herzegovina','Botswana',
-        'Bulgaria','Burundi','Cameroon','Canada','Canary Islands','Cape Verde','Chad','Channel Islands','Cape Verde','Cayman Islands','Channel Islands',
-        'Chile','china','Christmas Island','Cocos Island','Colombia','Comoros','Congo','Cook Island','Costa Rica','Cote Divoire','Croatia','Cuba','Curacoa',
-        'Cyprus','Czech Republic','Denmark','Dominica','Dominican Republic','East Timor','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia',
-        'Ethiopia','Faroe Islands','Fiji','Finland','French Guiana','French Polynesia','French Southern Ter','Gabon','Gambia','Georgia','Germany','Ghana','Gibraltar',
-        'Great Britain','Greece','Greenland','Guadeloupe','Guam','Guatemala','Guinea','Guyana','Haiti','Hawaii','Hong Kong','Hungary','Iceland','Indonesia','India','Iran',
-        'Iraq','Ireland','Isle of Man','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kazakhstan','Kenya','Kiribati','Korea North','Korea South','Kuwait','Kyrgyzstan',
-        'Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Macau','Macedonia','Madagascar','Malaysia','Malawi','Malidives','Mali','Malta',
-        'Marshall Island','Martinique','Mauritania','Mauritius','Mayotte']
-        econt=ttk.Combobox(hd1,values=ctvalues)
-        econt.current(0)
-        econt.place(relx=0.68,rely=0.64,relwidth=0.3,relheight=0.035)
-
-        notes=tk.Label(hd1,text='Notes',bg='#2f516f',font=('poppins', 14)).place(relx=0.02,rely=0.68)
-        enotes=tk.Entry(hd1).place(relx=0.02,rely=0.71,relwidth=0.8,relheight=0.045) 
-
-        Checkbutton(hd1, text = "Agree to Terms and Conditions",bg='#2f516f',font=('poppins', 12)).place(relx=0.02,rely=0.76)  
+    
 
 
-        sub=tk.Button(hd1,text='SUBMIT',font=15,bg='#2f516f').place(relx=0.5,rely=0.79)
+        sub=tk.Button(hd1,text='SUBMIT',font=15,bg='#5193e6',foreground='white').place(relx=0.02,rely=0.65)
 
-        hd1.place(relx=0.1,rely=0.07,relwidth=0.8,relheight=1)
-        D.mainloop()
+        hd1.place(relx=0,rely=0.3,relwidth=0.9,relheight=0.9)
+    
+
+        tk.Frame(frame, bg='#243e54').place(relx=0.02, rely=0.95, relwidth=0.90, relheight=0.8)
+        B.mainloop()
 
     def delete():
         # Get selected item to Delete

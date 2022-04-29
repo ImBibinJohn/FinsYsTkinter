@@ -66,7 +66,6 @@ def submit():
         MessageBox.showinfo("Insert Status", "Inserted Successfully")
         con.close()
 
-
 debit_form = tk.Tk()
 debit_form.title("finsYs")
 debit_form.geometry("1000x1000")
@@ -305,6 +304,7 @@ taxpro_drop3['values'] = ("", "", "", "")
 pro.place(x=1250, y=310, height=15, width=150)
 taxpro_drop3.place(x=1250, y=310, height=40, width=200)
 
+
 ##################
 
 
@@ -330,5 +330,6 @@ grand_input.place(x=1000, y=200, height=40, width=200)
 
 submit = tk.Button(form3_frame, text="Submit Form", command=submit)
 submit.place(x=1050, y=280, width=100)
+
 
 debit_form.mainloop()
