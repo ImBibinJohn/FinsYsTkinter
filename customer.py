@@ -1,13 +1,27 @@
+
 from tkinter import *
 import tkinter.font as font
 from  tkinter import ttk
 import tkinter as tk
 
+import mysql.connector
+from tkinter import messagebox
+
+def fun():#db connection
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='finsys_tkinter'
+        )
+    mycursor = mydb.cursor()
 
 def add_customer():
    import addcustomer_form
 
 customer =tk.Tk()
+fun()
 customer.title('fynsYs')
 customer.geometry("2000x2000")
 customer['bg']='#2f516a'
@@ -48,6 +62,14 @@ custom_data.heading("action",text="ACTION",anchor=CENTER)
 
 custom_data.place(x=180,y=200)
 
+sql='SELECT firstname,gsttype,gstin,panno,email,mobile from customer'
+mycursor.execute(sql)
+customer_data=mycursor.fetchall()
+total=mycursor.rowcount
+
+
+for data in customer_data: 
+    custom_data.insert("", 'end',values=data)
 
 
 content_label.place(x=0,y=150)
