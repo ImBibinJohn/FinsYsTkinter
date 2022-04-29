@@ -234,7 +234,7 @@ def addsuppliers():
 
     em_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
     em_bl.place(relx=0.35,rely=0.19)
-
+    #second commit
     def valid_int(inp):
         if inp.isdigit():
                 mb_bl.config(text='Looks Good',fg='green') 
