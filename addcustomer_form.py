@@ -1,4 +1,5 @@
 
+from calendar import c
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -6,9 +7,7 @@ import tkinter.font as font
 import mysql.connector
 from tkinter import messagebox
 
-
-
-
+#fffffffffff
 def fun():#db connection
     global mydb,mycursor
     mydb=mysql.connector.connect(
@@ -260,7 +259,6 @@ same_address=Checkbutton(form2_frame, variable = CheckVar2,onvalue = 1, offvalue
 same_address.place(x=1100,y=30,)   
 same_address_lab= Label(form2_frame,text = "Same as Billing Address",bg='#243e55',fg='#fff') 
 same_address_lab.place(x=1150,y=30,)
-
 
 street_lab=Label(form2_frame,text="Street",bg='#243e55',fg='#fff')
 street_lab.place(x=850,y=100,)
