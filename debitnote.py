@@ -1,15 +1,14 @@
-
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import tkinter.font as font
 
 
-payment_form = tk.Tk()
-payment_form.title("finsYs")
-payment_form.geometry("1000x1000")
-payment_form['bg'] = '#2f516a'
-wrappen = ttk.LabelFrame(payment_form)
+debit_form = tk.Tk()
+debit_form.title("finsYs")
+debit_form.geometry("1000x1000")
+debit_form['bg'] = "#badc57"
+wrappen = ttk.LabelFrame(debit_form)
 mycanvas = Canvas(wrappen)
 mycanvas.pack(side=LEFT, fill="both", expand="yes")
 yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
@@ -19,79 +18,55 @@ mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
 
-full_frame = Frame(mycanvas, width=1500, height=1600, bg='#2f516a')
+full_frame = Frame(mycanvas, width=2000, height=1600, bg='#2f516a')
 mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
 
 heading_frame = Frame(mycanvas)
 mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
 headingfont = font.Font(family='Times New Roman', size=25,)
-credit_heading = Label(heading_frame, text="PAYMENT", fg='#fff',
-                       bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=75)
+credit_heading = Label(heading_frame, text="Debit Note", fg='#fff',
+                       bg="#243e55", height=2, bd=5, relief="groove", font=headingfont, width=100)
 credit_heading.pack(padx=0, pady=0)
 
 # form fields
 sub_headingfont = font.Font(family='Times New Roman', size=20,)
-form_frame = Frame(mycanvas, width=1500, height=500, bg='#243e55')
+form_frame = Frame(mycanvas, width=1400, height=500, bg='#243e55')
 mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
+form_lable = tk.Label(form_frame, bg='#243e55', width=100)
+form_lable.place(x=2, y=5)
+form_heading = tk.Label(form_lable, text="finsYs", fg='#fff', bg='#243e55',
+                        height=2, bd=1, relief="groove", font=sub_headingfont, width=125)
+form_heading.pack()
 
-
-title_lab = tk.Label(form_frame, text="Choose Ref No", bg='#243e55', fg='#fff')
+title_lab = tk.Label(form_frame, text="Supplier", bg='#243e55', fg='#fff')
 place_input = StringVar()
 drop2 = ttk.Combobox(form_frame, textvariable=place_input)
 
-drop2['values'] = ("REF1 REF2 REF3 REF4")
+drop2['values'] = ("Select Supplier")
 
-title_lab.place(x=20, y=100, height=15, width=100)
+title_lab.place(x=10, y=100, height=15, width=60)
 drop2.place(x=30, y=130, height=40, width=450)
 wrappen.pack(fill='both', expand='yes',)
 
-payee = Label(form_frame, text="Payee", bg='#243e55', fg='#fff')
-payee.place(x=30, y=200,)
-payee_input = Entry(form_frame, width=55, bg='#243e55', fg='#fff')
-payee_input.place(x=30, y=230, height=40)
+
+billing_ad = Label(form_frame, text="Maling Address", bg='#243e55', fg='#fff')
+billing_ad.place(x=30, y=200,)
+billing_input = Entry(form_frame, width=40, bg='#243e55', fg='#fff')
+billing_input.place(x=30, y=230, height=90)
 
 
-payment_account_lab = tk.Label(
-    form_frame, text="Payment account", bg='#243e55', fg='#fff')
-place_input = StringVar()
-drop2 = ttk.Combobox(form_frame, textvariable=place_input)
-
-drop2['values'] = ("Acc1 Acc2 Acc3 Acc4")
-
-payment_account_lab.place(x=530, y=200, height=15, width=100)
-drop2.place(x=530, y=230, height=40, width=450)
-wrappen.pack(fill='both', expand='yes',)
-
-payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
-payment_date.place(x=30, y=300,)
-payment_input = Entry(form_frame, width=55, bg='#243e55', fg='#fff')
-payment_input.place(x=30, y=330, height=40)
-
-
-payment_method_lab = tk.Label(
-    form_frame, text="Payment Method", bg='#243e55', fg='#fff')
-place_input = StringVar()
-drop2 = ttk.Combobox(form_frame, textvariable=place_input)
-
-drop2['values'] = ("Cash Cheque Debit_Card Credit_Card")
-
-payment_method_lab.place(x=530, y=300, height=15, width=100)
-drop2.place(x=530, y=330, height=40, width=450)
-wrappen.pack(fill='both', expand='yes',)
-
-amount = Label(form_frame, text="AMOUNT", bg='#243e55', fg='#fff')
-amount.place(x=1130, y=270,)
-
-
-digit = font.Font(family='Times New Roman', size=35,)
-digit = Label(form_frame, text="0.00", bg='#243e55', font=digit, fg='#fff')
-digit.place(x=1130, y=320,)
+payment_period = tk.Label(
+    form_frame, text="Payment Date", bg='#243e55', fg='#fff')
+payment_drop = ttk.Combobox(form_frame)
+payment_drop['values'] = ("OCT2022-DEC2022", "", "", "")
+payment_period.place(x=20, y=330, height=15, width=100)
+payment_drop.place(x=30, y=620, height=40, width=450)
 
 
 # CATEGORY DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
-form2_frame = Frame(mycanvas, width=1500, height=500,
+form2_frame = Frame(mycanvas, width=1600, height=500,
                     bg='#243e55', bd=1, relief="groove")
 mycanvas.create_window((0, 650), window=form2_frame, anchor="nw")
 
@@ -101,7 +76,7 @@ bill_heading.place(x=30, y=0,)
 
 label = tk.Label(form2_frame, text="CATEGORY\t\tDESCRIPTION\t\tNOT APPLICABLE\t\tPRICE\t\tTOTAL\t\t",
                  bg='#243e55', fg="white", font=('Arial', 15))
-label.place(x=120, y=60)
+label.place(x=120, y=50)
 
 # row1
 pro = tk.Label(form2_frame, text="", bg='#243e55', fg='#fff')
@@ -293,4 +268,4 @@ grand_input.place(x=1000, y=200, height=40, width=200)
 button = tk.Button(form3_frame, text="Submit Form",)
 button.place(x=1050, y=280, width=100)
 
-payment_form.mainloop()
+debit_form.mainloop()
