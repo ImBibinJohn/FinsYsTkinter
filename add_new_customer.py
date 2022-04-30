@@ -6,7 +6,7 @@ from  tkinter import ttk
 from tkinter import messagebox
 from tkinter import font
 import mysql.connector
-
+##
 #db connection
 def db_connection():
     global mydb,mycursor
