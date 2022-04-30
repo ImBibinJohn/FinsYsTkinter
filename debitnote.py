@@ -58,7 +58,7 @@ def submit():
         MessageBox.showinfo("Insert the values!!!")
     else:
         con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter")
+                            password="", database="fynsystkinter", )
         cursor = con.cursor()
         cursor.execute("insert into expenses values('" + supplier + "' , '" + mailaddress + "', '" + payment_date + "', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
                        "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
@@ -66,6 +66,7 @@ def submit():
 
         MessageBox.showinfo("Insert Status", "Inserted Successfully")
         con.close()
+
 
 debit_form = tk.Tk()
 debit_form.title("finsYs")

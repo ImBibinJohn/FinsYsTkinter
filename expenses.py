@@ -8,7 +8,6 @@ from unicodedata import category
 import mysql.connector as mysql
 
 
-
 def submit():
     payee = drop2.get()
     payment_date = payment_input.get()
@@ -113,7 +112,7 @@ wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_date.place(x=30, y=200,)
-payment_input = Entry(form_frame, width=55, bg='#243e55', fg='#fff')
+payment_input = Entry(form_frame, width=50, bg='#243e55', fg='#fff')
 payment_input.place(x=30, y=230, height=40)
 
 
@@ -146,9 +145,9 @@ bill_heading = tk.Label(form2_frame, text="Catgory Details", fg='#fff',
                         bg='#243e55', height=2, font=sub_headingfont, width=15)
 bill_heading.place(x=30, y=0,)
 
-label = tk.Label(form2_frame, text="CATEGORY\t\tDESCRIPTION\t\tNOT APPLICABLE\t\tPRICE\t\tTOTAL\t\t",
+label = tk.Label(form2_frame, text="CATEGORY\t\t\tDESCRIPTION\t\t\tNOT APPLICABLE\t\t PRICE\t\t\tTOTAL\t\t",
                  bg='#243e55', fg="white", font=('Arial', 15))
-label.place(x=120, y=50)
+label.place(x=120, y=55)
 
 # row1
 pro = tk.Label(form2_frame, text="", bg='#243e55', fg='#fff')
@@ -168,7 +167,6 @@ cpro_drop3 = ttk.Combobox(form2_frame)
 cpro_drop3['values'] = ("", "", "", "")
 pro.place(x=50, y=280, height=15, width=150)
 cpro_drop3.place(x=50, y=310, height=40, width=200)
-
 
 
 # row 1
@@ -194,23 +192,23 @@ quantity_input3.place(x=650, y=310, height=40, width=200)
 
 # row 1
 price_input1 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-price_input1.place(x=880, y=150, height=40, width=150)
+price_input1.place(x=900, y=150, height=40, width=150)
 # row2
 price_input2 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-price_input2.place(x=880, y=240, height=40, width=150)
+price_input2.place(x=900, y=240, height=40, width=150)
 # row3
 price_input3 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-price_input3.place(x=880, y=310, height=40, width=150)
+price_input3.place(x=900, y=310, height=40, width=150)
 
 # row 1
 ctotal_input1 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-ctotal_input1.place(x=1080, y=150, height=40, width=100)
+ctotal_input1.place(x=1100, y=150, height=40, width=100)
 # row2
 ctotal_input2 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-ctotal_input2.place(x=1080, y=240, height=40, width=100)
+ctotal_input2.place(x=1100, y=240, height=40, width=100)
 # row3
 ctotal_input3 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
-ctotal_input3.place(x=1080, y=310, height=40, width=100)
+ctotal_input3.place(x=1100, y=310, height=40, width=100)
 
 
 ##################
@@ -225,7 +223,7 @@ bill_heading = tk.Label(form4_frame, text="Item Details", fg='#fff',
                         bg='#243e55', height=2, font=sub_headingfont, width=15)
 bill_heading.place(x=30, y=0,)
 
-label = tk.Label(form4_frame, text="PRODUCT/SERVICE\tHSN\tDESCRIPTION\t\tQUANTITY\t\tPRICE\t\tTOTAL\t\tTAX\t\t",
+label = tk.Label(form4_frame, text="PRODUCT/SERVICE\t\tHSN\t\tDESCRIPTION\t\tQUANTITY\t\tPRICE\t\tTOTAL\t\tTAX\t\t",
                  bg='#243e55', fg="white", font=('Arial', 15))
 label.place(x=60, y=60)
 
