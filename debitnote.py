@@ -6,6 +6,7 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
+from tkcalendar import Calendar, DateEntry
 
 
 def submit():
@@ -77,6 +78,11 @@ mycanvas.pack(side=LEFT, fill="both", expand="yes")
 yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
 yscrollbar.pack(side=RIGHT, fill='y')
 
+cal = Calendar(debit_form, selectmode='day',
+               year=2020, month=5,
+               day=22)
+cal.pack(pady=20)
+
 mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
@@ -122,7 +128,9 @@ billing_input.place(x=30, y=230, height=90)
 payment_period = tk.Label(
     form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_drop = ttk.Combobox(form_frame)
-payment_drop['values'] = ("OCT2022-DEC2022", "", "", "")
+payment_drop = DateEntry(
+    debit_form, width=16, background="magenta3", foreground="white", bd=2)
+
 payment_period.place(x=20, y=330, height=15, width=100)
 payment_drop.place(x=30, y=620, height=40, width=450)
 
