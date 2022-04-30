@@ -124,6 +124,7 @@ drop3['values'] = ("Acc1 Acc2 Acc3 Acc4")
 
 payment_account_lab.place(x=530, y=200, height=15, width=100)
 drop3.place(x=530, y=230, height=40, width=450)
+
 wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
@@ -141,6 +142,7 @@ drop4['values'] = ("Cash Cheque Debit_Card Credit_Card")
 
 payment_method_lab.place(x=530, y=300, height=15, width=100)
 drop4.place(x=530, y=330, height=40, width=450)
+
 wrappen.pack(fill='both', expand='yes',)
 
 amount = Label(form_frame, text="AMOUNT", bg='#243e55', fg='#fff')
@@ -155,6 +157,7 @@ digit.place(x=1130, y=320,)
 # CATEGORY DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
 form2_frame = Frame(mycanvas, width=1600, height=500,
+
                     bg='#243e55', bd=1, relief="groove")
 mycanvas.create_window((0, 650), window=form2_frame, anchor="nw")
 
@@ -226,6 +229,8 @@ ctotal_input2.place(x=1080, y=240, height=40, width=100)
 # row3
 ctotal_input3 = Entry(form2_frame, width=40, bg='#243e55', fg='#fff')
 ctotal_input3.place(x=1080, y=310, height=40, width=100)
+
+
 
 
 ##################
@@ -330,6 +335,7 @@ taxpro_drop3['values'] = ("", "", "", "")
 pro.place(x=1250, y=310, height=15, width=150)
 taxpro_drop3.place(x=1250, y=310, height=40, width=200)
 
+
 ##################
 
 
@@ -355,5 +361,6 @@ grand_input.place(x=1000, y=200, height=40, width=200)
 
 submit = tk.Button(form3_frame, text="Submit Form", command=submit)
 submit.place(x=1050, y=280, width=100)
+
 
 payment_form.mainloop()

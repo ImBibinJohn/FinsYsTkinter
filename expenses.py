@@ -8,6 +8,7 @@ from unicodedata import category
 import mysql.connector as mysql
 
 
+
 def submit():
     payee = drop2.get()
     payment_date = payment_input.get()
@@ -15,6 +16,7 @@ def submit():
     category1 = cpro_drop1.get()
     category2 = cpro_drop2.get()
     category3 = cpro_drop3.get()
+
     categorydescription1 = discription_input1.get()
     categorydescription2 = discription_input2.get()
     categorydescription3 = discription_input3.get()
@@ -30,6 +32,7 @@ def submit():
     product1 = prod_drop1.get()
     product2 = prod_drop2.get()
     product3 = prod_drop3.get()
+
     productdescription1 = description_input1.get()
     productdescription2 = description_input2.get()
     productdescription3 = description_input3.get()
@@ -165,6 +168,7 @@ cpro_drop3 = ttk.Combobox(form2_frame)
 cpro_drop3['values'] = ("", "", "", "")
 pro.place(x=50, y=280, height=15, width=150)
 cpro_drop3.place(x=50, y=310, height=40, width=200)
+
 
 
 # row 1
