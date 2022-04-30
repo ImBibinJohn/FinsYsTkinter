@@ -3,11 +3,19 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+import mysql.connector
 
+def fun():#db connection
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='finsys_tkinter'
+        )
+    mycursor = mydb.cursor()
 
-
-
-
+fun()
 editcustomer_form = tk.Tk()
 editcustomer_form.title("finsYs")
 editcustomer_form.geometry("2000x2000")
@@ -32,6 +40,14 @@ addcustomer_heading= tk.Label(heading_frame, text="EDIT CUSTOMER",fg='#fff',bg='
 addcustomer_heading.pack()
 
 #form fields
+# treevv=ttk.Treeview
+# str = treevv.focus()
+# values=treevv.item(str,'values')
+# b=[values[0]]
+sql=('select * customer where id=2')
+s=mycursor.fetchone()
+print(sql)
+
 
 form_frame=Frame(mycanvas,width=1600,height=1000,bg='#243e55')
 mycanvas.create_window((150,150),window=form_frame,anchor="nw")
