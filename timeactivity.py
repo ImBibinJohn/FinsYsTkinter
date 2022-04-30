@@ -43,8 +43,8 @@ def time():
     DateEntry(f2,textvariable=timedate).place(relx=0.3,rely=0.16,relwidth=0.3,relheight=0.05)
 
     tk.Label(f2,text='Name',font=('times new roman', 14),bg='#2f516f').place(relx=0.65,rely=0.1)
-    timename=StringVar()
-    tk.Entry(f2,textvariable=timename).place(relx=0.65,rely=0.16,relwidth=0.3,relheight=0.05)
+    timename=tk.Entry(f2)
+    timename.place(relx=0.65,rely=0.16,relwidth=0.3,relheight=0.05)
 
     tk.Label(f2,text='Customer',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.25)   
     def comboinput():
@@ -59,40 +59,51 @@ def time():
     timecus.current(0)  
     timecus.place(relx=0.3,rely=0.31,relwidth=0.65,relheight=0.05)
     
-    timbill=StringVar()
-    zz=tk.Entry(f2,textvariable=timbill)
-    zz.place(relx=0.58,rely=0.4,relwidth=0.18,relheight=0.05)
+    timbill=tk.Entry(f2)
+    timbill.place(relx=0.58,rely=0.4,relwidth=0.18,relheight=0.05)
 
     def billchkk(widget):
-        print()
-        if timebill=='No':
-            widget.pack_forget()
+        tim=timebill.get()
+        if tim=='No':
+            timbill['state']='disabled'
         else:
-            zz['state']='normal'    
-
+            timbill['state']='normal'    
     tk.Label(f2,text='Billable(/hr)',font=('times new roman', 12),bg='#2f516f').place(relx=0.3,rely=0.4)
     bl=['Yes','No']
     timebill=ttk.Combobox(f2,values=bl)
+    timebill.bind('<FocusOut>',billchkk)
     timebill.place(relx=0.38,rely=0.4,relwidth=0.18,relheight=0.05)
-    
-
-    
-
-    tk.Label(f2,text='Enter start and end time',font=('times new roman', 12),bg='#2f516f').place(relx=0.3,rely=0.5)
-    time=ttk.Combobox(f2,values=bl)
-    time.place(relx=0.43,rely=0.5,relwidth=0.05,relheight=0.05)
 
     tk.Label(f2,text='Start time',font=('times new roman', 12),bg='#2f516f').place(relx=0.55,rely=0.5)
     hr=StringVar()
-    min_sb = tk.Spinbox(f2,from_=0,to=23,wrap=True,state="readonly",textvariable=hr).place(relx=0.61,rely=0.5,relwidth=0.05,relheight=0.05)
+    min_sb = tk.Spinbox(f2,from_=0,to=23,wrap=True,state="readonly",textvariable=hr)
+    min_sb.place(relx=0.61,rely=0.5,relwidth=0.05,relheight=0.05)
     min=StringVar()
-    sec_sb = tk.Spinbox(f2,from_=0,to=59,wrap=True,state="readonly",textvariable=min).place(relx=0.66,rely=0.5,relwidth=0.05,relheight=0.05)
+    sec_sb = tk.Spinbox(f2,from_=0,to=59,wrap=True,state="readonly",textvariable=min)
+    sec_sb.place(relx=0.66,rely=0.5,relwidth=0.05,relheight=0.05)
 
     tk.Label(f2,text='Endtime',font=('times new roman', 12),bg='#2f516f').place(relx=0.72,rely=0.5)
     eh=StringVar()
     em=StringVar()
-    emin_sb = tk.Spinbox(f2,from_=0,to=23,wrap=True,state="readonly",textvariable=eh).place(relx=0.77,rely=0.5,relwidth=0.05,relheight=0.05)
-    esec_sb = tk.Spinbox(f2,from_=0,to=59,wrap=True,state="readonly",textvariable=em).place(relx=0.82,rely=0.5,relwidth=0.05,relheight=0.05)
+    emin_sb = tk.Spinbox(f2,from_=0,to=23,wrap=True,state="readonly",textvariable=eh)
+    emin_sb.place(relx=0.77,rely=0.5,relwidth=0.05,relheight=0.05)
+    esec_sb = tk.Spinbox(f2,from_=0,to=59,wrap=True,state="readonly",textvariable=em)
+    esec_sb.place(relx=0.82,rely=0.5,relwidth=0.05,relheight=0.05)
+
+    def billchktime(widget):
+        tim=time.get()
+        if tim=='No':
+            min_sb['state']='disabled'
+            sec_sb['state']='disabled'
+            emin_sb['state']='disabled'
+            esec_sb['state']='disabled'
+        else:
+            timbill['state']='normal'    
+
+    tk.Label(f2,text='Enter start and end time',font=('times new roman', 12),bg='#2f516f').place(relx=0.3,rely=0.5)
+    time=ttk.Combobox(f2,values=bl)
+    time.bind('<FocusOut>',billchktime)
+    time.place(relx=0.43,rely=0.5,relwidth=0.05,relheight=0.05)
 
     tk.Label(f2,text='Time',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.58)
     timeh=StringVar()

@@ -98,6 +98,7 @@ def sherryplus():
     C.mainloop()
 def addsuppliers():
     def enter():
+ 
         title=cmb.get()
         fname=efname.get()
         lname=elname.get()
@@ -125,21 +126,19 @@ def addsuppliers():
         ckh=chh.get()
         print(mob,fname)
         if fname=='':
-            messagebox.showerror('Error','Please enter your first',parent=B)
+            messagebox.showerror('Error','Please enter your Firstname',parent=B)
         elif lname=='':
             messagebox.showerror('Error','Please enter your lastname',parent=B)
         elif comp=='':
             messagebox.showerror('Error','Please enter your company',parent=B)   
         elif mail=='':
             messagebox.showerror('Error','Please enter your mail',parent=B)  
-        elif mob=='':
-            messagebox.showerror('Error','Please enter your mobile number',parent=B)    
+        elif mob=='' or len(mob)<10:
+            messagebox.showerror('Error','Please enter valid mobile number',parent=B)    
         elif open=='':
             messagebox.showerror('Error','Please enter your opening balance',parent=B)
         elif acc=='':
             messagebox.showerror('Error','Please enter your account number',parent=B)  
-    
-            messagebox.showerror('Error','Please enter a valid city',parent=B)       
         elif street=='':
                   chk_bl.config(text='Please enter a valid street',fg='red')  
         elif city=='':
@@ -150,14 +149,13 @@ def addsuppliers():
                   chk_b4.config(text='Please agree to terms and conditions',fg='red') 
         else:
             chk_b4.config(text='checked',fg='green')                                                  
-        #tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
-        #gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
-        #VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        #cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
-        #(tds),(street),(city),(state),(pin),(contry),(note)])
-        #mydata.commit()
-        #B.destroy()
-
+            tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
+            gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+            cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
+            (tds),(street),(city),(state),(pin),(contry),(note)])
+            mydata.commit()
+            messagebox.showinfo('Sucessfull','Supplier added sucessfully')
     global B
     B=tk.Toplevel(A)
     B.title('Add suppliers')
@@ -200,9 +198,13 @@ def addsuppliers():
     efname=tk.Entry(hd1)
     efname.place(relx=0.35,rely=0.075,relwidth=0.3,relheight=0.025)
 
+    f_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
+    f_bl.place(relx=0.35,rely=0.11)
+
     tk.Label(hd1,text='Last Name',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.045)
     elname=tk.Entry(hd1)
     elname.place(relx=0.68,rely=0.075,relwidth=0.3,relheight=0.025)
+
 
     
     tk.Label(hd1,text='Company',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.13)
@@ -240,7 +242,6 @@ def addsuppliers():
                 mb_bl.config(text='Looks Good',fg='green') 
                 return True          
         else:
-            mb_bl.config(text='Please Provide Valid Number',fg='red') 
             return False
 
     tk.Label(hd1,text='Mobile',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.13)
@@ -250,47 +251,85 @@ def addsuppliers():
     mb.config(validate='key',validatecommand=(val,"%P"))
 
     mb_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
-    mb_bl.place(relx=0.68,rely=0.19)
+    mb_bl.place(relx=0.68,rely=0.19)  
 
-    
+    def valid_open(inp):
+        if inp.isdigit():
+                op_bl.config(text='Looks Good',fg='green') 
+                return True          
+        else:
+            return False
+
+       
    
     tk.Label(hd1,text='Opening Balance',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.21)
     eopen=tk.Entry(hd1)
     eopen.place(relx=0.02,rely=0.235,relwidth=0.3,relheight=0.025)
-    eopen.config(validate='key',validatecommand=(val,"%P"))
+    opn=B.register(valid_open)
+    eopen.config(validate='key',validatecommand=(opn,"%P"))
+ 
+    op_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
+    op_bl.place(relx=0.02,rely=0.26)
 
-    mb_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
-    mb_bl.place(relx=0.02,rely=0.26)
+    def valid_account(inp):
+        if inp.isdigit():
+                ap_bl.config(text='Looks Good',fg='green') 
+                return True          
+        else:
+            return False
+
 
     tk.Label(hd1,text='Account No:',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.21)
     e_accno=tk.Entry(hd1)
     e_accno.place(relx=0.35,rely=0.235,relwidth=0.3,relheight=0.025)
-    e_accno.config(validate='key',validatecommand=(val,"%P"))
+    acn=B.register(valid_account)
+    e_accno.config(validate='key',validatecommand=(acn,"%P"))
 
-    #mb_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
-    #mb_bl.place(relx=0.35,rely=0.26)
+   
+
+    ap_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
+    ap_bl.place(relx=0.35,rely=0.26)
+
+    def checkweb(event):
+        wbbb=web.get()  
+        if re.match("^www.",wbbb):
+            w_bl.config(text='Looks Good',fg='green') 
+            return True
+        else:
+                w_bl.config(text='Enter Valid Website',fg='RED')
+                return False    
 
     tk.Label(hd1,text='Website',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.21)
     web=tk.Entry(hd1)
     web.insert(0,'www.example.com')
+    web.bind('<FocusOut>',checkweb)
     web.place(relx=0.68,rely=0.235,relwidth=0.3,relheight=0.025)
-    #web.config(validate='key',validatecommand=(val,"%P"))
 
-    #mb_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
-    #mb_bl.place(relx=0.68,rely=0.26)
+    w_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
+    w_bl.place(relx=0.68,rely=0.26)
 
     tk.Label(hd1,text='Billing Rate',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.28)
     ebill=tk.Entry(hd1)
     ebill.place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.025)
 
+    def addnewterms(event):
+        
+        et=eterms.get() 
+        t=termvalues[4]  
+        if et==t:
+            bm.place(relx=0.68,rely=0.31,relwidth=0.3,relheight=0.025)
+            return True
+        else:
+            return False  
+
+   
+    bm=tk.Entry(hd1,)
     tk.Label(hd1,text='Term',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.28)
     termvalues=['DUE ON RECEIPT','NET15','NET30','NET60','ADD NEW TERMS']
     eterms=ttk.Combobox(hd1,values=termvalues)
-    eterms.current(0)
+    eterms.bind('<FocusOut>',addnewterms)
     eterms.place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.025)
 
-    bm=tk.Entry(hd1)
-    bm.place(relx=0.68,rely=0.31,relwidth=0.3,relheight=0.025)
 
     tk.Label(hd1,text='GST Type',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.35)
     gstvalues=['GST registered-Regular','GST registered-Composition','GST-unregistered']
@@ -298,11 +337,23 @@ def addsuppliers():
     egst.current(0)
     egst.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.025)
 
+    def checkgst(event):
+        gstno=egst_in.get()
+        if re.match('^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$',gstno):
+            return True
+        else:
+            messagebox.showwarning('Invalid','Enter Valid GST NO:',parent=B)               
+
+
     tk.Label(hd1,text='GST IN',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.35)
     gstin=StringVar()
     egst_in=tk.Entry(hd1,textvariable=gstin)
     egst_in.insert(0,'22AAAAA0000A1Z5')
+    egst_in.bind('<FocusOut>',checkgst)
     egst_in.place(relx=0.35,rely=0.38,relwidth=0.3,relheight=0.025)
+
+    w_bl=tk.Label(hd1,text='',font=('arial',11),fg='red',bg='#243e54')
+    w_bl.place(relx=0.68,rely=0.26)
 
     taxreg=tk.Label(hd1,text='Tax Registeration N0',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.35)
     etaxreg=tk.Entry(hd1)
