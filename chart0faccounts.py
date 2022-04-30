@@ -4,11 +4,6 @@ from tkinter import VERTICAL, ttk
 import tkinter.font as font
 from tkcalendar import DateEntry, Calendar
 
-<<<<<<< HEAD
-# ffffff
-
-=======
->>>>>>> Nirmal
 
 def main():
 
