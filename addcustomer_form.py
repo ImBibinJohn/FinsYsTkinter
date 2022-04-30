@@ -13,7 +13,7 @@ def fun():#db connection
     mydb=mysql.connector.connect(
         host='localhost',
         user='root',
-        password='root',
+        password='',
         database='finsys_tkinter'
         )
     mycursor = mydb.cursor()
