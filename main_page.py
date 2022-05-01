@@ -1,41 +1,41 @@
 import tkinter as tk
-import webbrowser
-from tkinter import *
-from tkinter import ttk, filedialog, scrolledtext, messagebox
-from datetime import date
-from tkcalendar import DateEntry
-import datetime
-import center_tk_window
-import os
-from tkinter.filedialog import askopenfile
-from tkinter import filedialog as fd
-
-root = tk.Tk()
-root.title('FinsYs Tkinter')
-width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
-root.geometry("%dx%d" % (width, height))
-
-tabControl = ttk.Notebook(root)
-invs= ttk.Frame(tabControl)
-inv=PhotoImage(file='invoice.png')
-invo=inv.subsample(1,1)
-tabControl.add(invs, text ='Invoices',image=invo,compound=LEFT)
+from tkinter import ttk
 
 
-label = Label(root, text="Registration form",width=20,font=("bold", 20))
-label.grid(padx=90,pady=53)
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("320x80")
+        self.title('Tkinter OptionMenu Widget')
 
-invs = ttk.Frame(tabControl)
-tabControl.add(invs, text='Invoices', compound=LEFT)
+        # initialize data
+        self.languages = ('Python', 'JavaScript', 'Java',
+                        'Swift', 'GoLang', 'C#', 'C++', 'Scala')
+
+        # set up variable
+        self.option_var = tk.StringVar(self)
+
+        # create widget
+        self.create_wigets()
+
+    def create_wigets(self):
+        # padding for widgets using the grid layout
+        paddings = {'padx': 5, 'pady': 5}
+
+        # option menu
+        option_menu = ttk.OptionMenu(
+            self,
+            self.option_var,
+            self.languages[0],
+            *self.languages)
+
+        option_menu.grid(column=1, row=0, sticky=tk.W, **paddings)
+
+        # output label
+        self.output_label = ttk.Label(self, foreground='red')
+        self.output_label.grid(column=0, row=1, sticky=tk.W, **paddings)
 
 
-tabControl.pack(expand=1, fill="both", pady=20)
-
-frame0 = tk.Frame(invs)
-frame0.pack(fill=tk.X)
-c1 = Label(frame0)
-
-c1.pack(side=tk.LEFT)
-
-root.mainloop()
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()
