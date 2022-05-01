@@ -22,8 +22,9 @@ inv=PhotoImage(file='invoice.png')
 invo=inv.subsample(1,1)
 tabControl.add(invs, text ='Invoices',image=invo,compound=LEFT)
 
-invs = ttk.Frame(tabControl)
-tabControl.add(invs, text='Invoices', compound=LEFT)
+
+label = Label(root, text="Registration form",width=20,font=("bold", 20))
+label.grid(padx=90,pady=53)
 
 invs = ttk.Frame(tabControl)
 tabControl.add(invs, text='Invoices', compound=LEFT)
