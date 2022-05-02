@@ -44,9 +44,9 @@ addcustomer_heading.pack()
 # str = treevv.focus()
 # values=treevv.item(str,'values')
 # b=[values[0]]
-sql=('select * customer where id=2')
-s=mycursor.fetchone()
-print(sql)
+# sql=('select * customer where id=2')
+# s=mycursor.fetchone()
+# print(sql)
 
 
 form_frame=Frame(mycanvas,width=1600,height=1000,bg='#243e55')
