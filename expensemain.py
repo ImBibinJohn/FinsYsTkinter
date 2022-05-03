@@ -2,15 +2,38 @@ import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
+import click
+from requests import options
+
 # from tkcalendar import DateEntry, Calendar
 
+
+def selected(event):
+    if menu.get() == 'Expenses':
+        import expenses
+    elif menu.get() == 'Payment':
+        import debitnote
+    elif menu.get() == 'Debit Note ':
+        import payment
+    elif menu.get() == 'Expenses Main':
+        import expensemain
+
+
+menu = StringVar()
+menu.set("New Transaction")
+options = ["Expenses", "Payment", "Debit Note ", "Expenses Main"]
+drop = OptionMenu(A, menu, *options, command=selected)
+drop.config(bg='#243e55', fg="white", font=('Arial', 18))
+drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
+
+drop.place(x=1000, y=110)
 
 
 def main():
 
     global A, data
     A = tk.Tk()
-    A.title('suppliers')
+    A.title('Expenses')
     A.geometry('1500x1000')
     A['bg'] = '#2f516f'
 
