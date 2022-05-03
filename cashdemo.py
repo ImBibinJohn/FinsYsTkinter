@@ -214,4 +214,4 @@ grand_input.place(x=1000,y=200,height=40,width=200)
 button=tk.Button(form3_frame, text="SAVE",) 
 button.place(x=1050,y=280,width=100)
 
-credit_note_form.mainloop()
+credit_form.mainloop()
