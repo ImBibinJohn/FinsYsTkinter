@@ -48,5 +48,5 @@ drop.place(x=1000,y=110)
 
 inv_heading= Label(window, borderwidth=1, relief="raised",width=60,font=headingfont,bg='#243e55', fg='#fff',height=50)
 inv_heading.pack(pady=20)
-
+# chart view
 window.mainloop()
