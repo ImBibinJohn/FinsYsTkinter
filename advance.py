@@ -26,13 +26,13 @@ def advance():
             rf_bl.config(text='Enter Reference no',fg='red') 
         elif len(memo)<=1:
             mm_bl.config(text='Enter memo',fg='red')       
-
-        #ad='''INSERT INTO advancepayment (payee,account,address,amount,paymentdate,refno,memo) 
-        #VALUES (%s,%s,%s,%s,%s,%s,%s)'''
-        #cur.execute(ad,[(payy),(acc),(maill),(amountt),(date),(ref),(memo)])
-        #mydata.commit()
-        #print('sucessfully added')
-        #wn.destroy()
+        else:
+            ad='''INSERT INTO advancepayment (payee,account,address,amount,paymentdate,refno,memo) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s)'''
+            cur.execute(ad,[(payy),(acc),(maill),(amountt),(date),(ref),(memo)])
+            mydata.commit()
+            print('sucessfully added')
+            wn.destroy()
     wn=tk.Tk()
     wn.title('Advance Payment')
     wn.geometry('1500x1000')
