@@ -6,6 +6,6 @@ root.title("Registration Form")
 
 
 label = Label(root, text="Registration form",width=20,font=("bold", 20))
-label.grid(padx=90,pady=53)
+label.grid(padx=90,pady=54)
 
 root.mainloop()
