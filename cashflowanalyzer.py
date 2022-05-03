@@ -4,7 +4,7 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 
-
+# comment
 window = tk.Tk()
 window.title("finsYs")
 width=window.winfo_screenwidth()
