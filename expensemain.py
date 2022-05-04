@@ -19,16 +19,6 @@ def selected(event):
         import expensemain
 
 
-menu = StringVar()
-menu.set("New Transaction")
-options = ["Expenses", "Payment", "Debit Note ", "Expenses Main"]
-drop = OptionMenu(A, menu, *options, command=selected)
-drop.config(bg='#243e55', fg="white", font=('Arial', 18))
-drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
-
-drop.place(x=1000, y=110)
-
-
 def main():
 
     global A, data
@@ -89,6 +79,15 @@ def main():
     edit_btn.place(relx=0.35, rely=0.8, relheight=0.1, relwidth=0.1)
     del_btn = ttk.Button(hd, text="Delete", command=delete)
     del_btn.place(relx=0.5, rely=0.8, relheight=0.1, relwidth=0.1)
+
+    menu = StringVar()
+    menu.set("New Transaction")
+    options = ["Expenses", "Payment", "Debit Note ", "Expenses Main"]
+    drop = OptionMenu(A, menu, *options, command=selected)
+    drop.config(bg='#243e55', fg="white", font=('Arial', 18))
+    drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
+
+    drop.place(x=1000, y=110)
     A.mainloop()
 
 

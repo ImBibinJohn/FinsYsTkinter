@@ -7,31 +7,17 @@ import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
 # from tkcalendar import Calendar, DateEntry
-import click
-from requests import options
-
-# from tkcalendar import DateEntry, Calendar
 
 
-def selected(event):
-    if menu.get() == 'Expenses':
-        import expenses
-    elif menu.get() == 'Payment':
-        import debitnote
-    elif menu.get() == 'Debit Note ':
-        import payment
-    elif menu.get() == 'Expenses Main':
-        import expensemain
-
-
-menu = StringVar()
-menu.set("New Transaction")
-options = ["Expenses", "Payment", "Debit Note ", "Expenses Main"]
-drop = OptionMenu(A, menu, *options, command=selected)
-drop.config(bg='#243e55', fg="white", font=('Arial', 18))
-drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
-
-drop.place(x=1000, y=110)
+debit_form = tk.Tk()
+debit_form.title("finsYs")
+debit_form.geometry("1500x1000")
+debit_form['bg'] = "#badc57"
+wrappen = ttk.LabelFrame(debit_form)
+mycanvas = Canvas(wrappen)
+mycanvas.pack(side=LEFT, fill="both", expand="yes")
+yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
+yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
@@ -83,31 +69,20 @@ def submit():
         MessageBox.showinfo("Insert the values!!!")
     else:
         con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter", )
+                            password="", database="fynsystkinter", port='3307')
         cursor = con.cursor()
-        cursor.execute("insert into expenses values('" + supplier + "' , '" + mailaddress + "', '" + payment_date + "', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
+        cursor.execute("INSERT into debitnote values('" + supplier + "' , '" + mailaddress + "', '" + payment_date + "', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
                        "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
-        cursor.excecute("commit")
+        cursor.Commit()
 
         MessageBox.showinfo("Insert Status", "Inserted Successfully")
         con.close()
 
 
-debit_form = tk.Tk()
-debit_form.title("finsYs")
-debit_form.geometry("1000x1000")
-debit_form['bg'] = "#badc57"
-wrappen = ttk.LabelFrame(debit_form)
-mycanvas = Canvas(wrappen)
-mycanvas.pack(side=LEFT, fill="both", expand="yes")
-yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
-yscrollbar.pack(side=RIGHT, fill='y')
-
 # cal = Calendar(debit_form, selectmode='day',
 #                year=2020, month=5,
 #                day=22)
 # cal.pack(pady=20)
-
 mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))

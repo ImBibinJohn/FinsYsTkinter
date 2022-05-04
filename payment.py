@@ -7,31 +7,18 @@ import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
 
-import click
-from requests import options
 
 # from tkcalendar import DateEntry, Calendar
 
-
-def selected(event):
-    if menu.get() == 'Expenses':
-        import expenses
-    elif menu.get() == 'Payment':
-        import debitnote
-    elif menu.get() == 'Debit Note ':
-        import payment
-    elif menu.get() == 'Expenses Main':
-        import expensemain
-
-
-menu = StringVar()
-menu.set("New Transaction")
-options = ["Expenses", "Payment", "Debit Note ", "Expenses Main"]
-drop = OptionMenu(A, menu, *options, command=selected)
-drop.config(bg='#243e55', fg="white", font=('Arial', 18))
-drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
-
-drop.place(x=1000, y=110)
+payment_form = tk.Tk()
+payment_form.title("finsYs")
+payment_form.geometry("1500x1000")
+payment_form['bg'] = '#2f516a'
+wrappen = ttk.LabelFrame(payment_form)
+mycanvas = Canvas(wrappen)
+mycanvas.pack(side=LEFT, fill="both", expand="yes")
+yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
+yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
@@ -84,7 +71,7 @@ def submit():
         MessageBox.showinfo("Insert the values!!!")
     else:
         con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter")
+                            password="", database="fynsystkinter", port='3307')
         cursor = con.cursor()
         cursor.execute("insert into expenses values('" + payee + "' , '" + refno + "', '"+payment_account+"', '" + payment_date + "', '"+payment_method+"', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
                        "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
@@ -93,16 +80,6 @@ def submit():
         MessageBox.showinfo("Insert Status", "Inserted Successfully")
         con.close()
 
-
-payment_form = tk.Tk()
-payment_form.title("finsYs")
-payment_form.geometry("1000x1000")
-payment_form['bg'] = '#2f516a'
-wrappen = ttk.LabelFrame(payment_form)
-mycanvas = Canvas(wrappen)
-mycanvas.pack(side=LEFT, fill="both", expand="yes")
-yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
-yscrollbar.pack(side=RIGHT, fill='y')
 
 mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
