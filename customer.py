@@ -7,6 +7,8 @@ import tkinter as tk
 import mysql.connector
 from tkinter import messagebox
 
+
+
 def fun():#db connection
     global mydb,mycursor
     mydb=mysql.connector.connect(
@@ -18,9 +20,9 @@ def fun():#db connection
     mycursor = mydb.cursor()
 
 def add_customer():
-   import addcustomer_form
-
-
+    from addcustomer_form import CheckVar2,CheckVar1
+    import addcustomer_form
+    
 
 
 #edir customer 
