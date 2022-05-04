@@ -6,6 +6,7 @@ import tkinter as tk
 
 import mysql.connector
 from tkinter import messagebox
+# from addcustomer_form import CheckVar2,CheckVar1
 
 def fun():#db connection
     global mydb,mycursor
@@ -18,9 +19,9 @@ def fun():#db connection
     mycursor = mydb.cursor()
 
 def add_customer():
-   import addcustomer_form
-
-
+    import addcustomer_form
+    
+    
 
 
 #edir customer 
@@ -53,7 +54,7 @@ def edit_customer():
     
         eshipcountry=e_shipcountry.get()
         mycursor.execute("UPDATE customer SET title =%s, firstname =%s, lastname =%s, company =%s, location =%s, gsttype =%s, gstin =%s, panno =%s, email =%s, website =%s,mobile =%s, street =%s,city =%s, state =%s, pincode =%s, country=%s, shipstreet =%s, shipcity =%s, shipstate =%s, shippincode =%s, shipcountry =%s where customerid=%s"
-            ,(etitle, efirst_name, elast_name, ecompany,elocation, egst, egstin, epan_no, eemail, ewebsite, emobile, estreet, ecity, estate, epin, ecountry, eshipstreet,eshipcity, eshipstate, eshippin, eshipcountry,s[0]))
+            ,(etitle, efirst_name, elast_name, ecompany,elocation, egst, egstin, epan_no, eemail, ewebsite, emobile, estreet, ecity, estate, epin, ecountry, eshipstreet,eshipcity, eshipstate, eshippin, eshipcountry,data[0]))
         mydb.commit()
         messagebox.showinfo('successfully Updated')
         mydb.close()
@@ -63,9 +64,9 @@ def edit_customer():
     global fname
     focus_data = custom_data.focus()
     values=custom_data.item(focus_data,'values')
-    fname=[values[0]]
-    mycursor.execute("SELECT * FROM customer WHERE firstname=%s",(fname))
-    s=mycursor.fetchone()
+    customer_id=[values[-1]]
+    mycursor.execute("SELECT * FROM customer WHERE customerid=%s",(customer_id))
+    data=mycursor.fetchone()
     editcustomer_form = tk.Tk()
     editcustomer_form.title("finsYs")
     editcustomer_form.geometry("2000x2000")
@@ -120,9 +121,83 @@ def edit_customer():
     e_shippin=StringVar(form_frame)
     e_shipcountry=StringVar(form_frame)
 
+    #asssign existing datas into edit field
+    existing_title=data[1]
+    e_title.set(existing_title)
 
+    existing_first_name=data[2]
+    e_first_name.set(existing_first_name)
 
+    existing_last_name=data[3]
+    e_last_name.set(existing_last_name)
+   
+    existing_company=data[4]
+    e_company.set(existing_company)
+    
+    existing_location=data[5]
+    e_location.set(existing_location)
+    
+    existing_gst=data[6]
+    e_gst.set(existing_gst)
+    
 
+    existing_gstin=data[7]
+    e_gstin.set(existing_gstin)
+    
+
+    existing_pan_no=data[8]
+    e_pan_no.set(existing_pan_no)
+    
+
+    existing_email=data[9]
+    e_email.set(existing_email)
+    
+
+    existing_website=data[10]
+    e_website.set(existing_website)
+    
+
+    existing_mobile=data[11]
+    e_mobile.set(existing_mobile)
+    
+
+    existing_street=data[12]
+    e_street.set(existing_street)
+    
+
+    existing_city=data[13]
+    e_city.set(existing_city)
+    e_city
+
+    existing_state=data[14]
+    e_state.set(existing_state)
+    
+    existing_pin=data[15]
+    e_pin.set(existing_pin)
+    
+
+    existing_country=data[16]
+    e_country.set(existing_country)
+    
+    existing_shipstreet=data[17]
+    e_shipstreet.set(existing_shipstreet)
+    
+
+    existing_shipcity=data[18]
+    e_shipcity.set(existing_shipcity)
+    
+
+    existing_shipstate=data[19]
+    e_shipstate.set(existing_shipstate)
+    
+
+    existing_shippin=data[20]
+    e_shippin.set(existing_shippin)
+    
+
+    existing_shipcountry=data[21]
+    e_shipcountry.set(existing_shipcountry)
+    
 
 
     title_lab=tk.Label(form_frame,text="Title",bg='#243e55',fg='#fff')
@@ -270,8 +345,8 @@ def edit_customer():
 def delete_customer():
     focus_data = custom_data.focus()
     values=custom_data.item(focus_data,'values')
-    fname=[values[0]]
-    mycursor.execute("DELETE FROM customer WHERE firstname=%s",(fname))
+    customer_id=[values[-1]]
+    mycursor.execute("DELETE FROM customer WHERE customerid=%s",(customer_id))
     mydb.commit()
     messagebox.showinfo('successfully Delated')
     print('sucessfully deleted')
@@ -320,7 +395,7 @@ custom_data.heading("mobile",text="MOBILE NO",anchor=CENTER)
 
 custom_data.place(x=280,y=200)
 
-sql='SELECT firstname,gsttype,gstin,panno,email,mobile from customer'
+sql='SELECT firstname,gsttype,gstin,panno,email,mobile,customerid from customer'
 mycursor.execute(sql)
 customer_data=mycursor.fetchall()
 total=mycursor.rowcount
