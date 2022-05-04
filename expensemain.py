@@ -14,7 +14,7 @@ def selected(event):
     elif menu.get() == 'Payment':
         import debitnote
     elif menu.get() == 'Debit Note ':
-        import payment
+        import paymentpy
     elif menu.get() == 'Expenses Main':
         import expensemain
 
