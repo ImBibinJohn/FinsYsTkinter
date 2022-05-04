@@ -93,6 +93,7 @@ def main():
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
     A.mainloop()
+    A.destroy()
 
 
 main()
