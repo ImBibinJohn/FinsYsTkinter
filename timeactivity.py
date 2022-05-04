@@ -36,7 +36,8 @@ def time():
     f2=tk.Frame(win,bg='#243e54')
     size=(400,500)
     ax=ImageTk.PhotoImage(Image.open('timeact.png').resize(size))
-    tk.Label(f2,image=ax,bg='#243e54').place(relx=0.05,rely=0.05,relheight=0.8,relwidth=0.2)
+    ay=tk.Label(f2,image=ax,bg='#243e54')
+    ay.place(relx=0.05,rely=0.05,relheight=0.8,relwidth=0.2)
 
     tk.Label(f2,text='Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.1)
     timedate=StringVar()
@@ -118,4 +119,4 @@ def time():
     tk.Button(f2,text='Submit Form',font=('times new roman', 16),bg='#2f516f',command=getdetails).place(relx=0.45,rely=0.92,relwidth=0.2,relheight=0.05)
     f2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)
     win.mainloop()
-time()    
+time()   

@@ -1,22 +1,21 @@
 from tkinter import *
-
-
 root=Tk()
-menubar=Menu(root)
 
-def call():
-    from  finsyssuppliers import sherrymain   
-filemenu=Menu(menubar,tearoff=0)
-filemenu.add_command(label='Expenses')
-expmenu=Menu(menubar)
-expmenu.add_command(label='Time Activity')
-expmenu.add_command(label='Advance Payment')
+root.geometry('500x500')
+framee=LabelFrame(root,width=1000,height=50,bg='red')
+framee.pack()
+drop = ['Expenses','Suppliers']
+variable = StringVar(framee)
+variable.set("Expenses")
+def bn(event):
+    v=variable.get()
+    if v=='Suppliers':
+        import finsyssuppliers
+    elif v=='Expenses':
+        import timeactivity
+opt = OptionMenu(framee,variable,*drop,command=bn)
+opt.config(bg='#243e55', fg="white", font=('Arial', 18))
 
-filemenu.add_command(label='Suppliers',command=call)
-filemenu.add_separator()
-
-menubar.add_cascade(label='Expenses',menu=filemenu)
-
-root.config(menu=menubar)
-
+opt['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
+opt.pack()
 root.mainloop()

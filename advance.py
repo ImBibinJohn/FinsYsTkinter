@@ -46,7 +46,8 @@ def advance():
 
     size=(400,400)
     ax=ImageTk.PhotoImage(Image.open('advancepayment.png').resize(size))
-    tk.Label(f4,image=ax,bg='#243e54').place(relx=0.63,rely=0.01,relheight=0.8,relwidth=0.35)
+    ay=tk.Label(f4,image=ax,bg='#243e54')
+    ay.place(relx=0.63,rely=0.01,relheight=0.8,relwidth=0.35)
 
     def payye(ent):
         o=pay.get()
