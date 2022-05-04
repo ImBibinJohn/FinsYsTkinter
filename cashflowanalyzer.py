@@ -3,6 +3,17 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+import mysql.connector
+
+def db_connection():
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='finsys'
+        )
+    mycursor = mydb.cursor()
 
 # comment
 window = tk.Tk()
