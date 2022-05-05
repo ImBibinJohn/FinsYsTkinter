@@ -15,27 +15,6 @@ mydata = mysql.connector.connect(
 cur = mydata.cursor()
 
 
-def fetch():
-    def getdetails():
-
-        name = timename.get()
-        type = timecus.get()
-        detail_type = timebill.get()
-        tax_rate = timbill.get()
-        finsys_amt = time.get()
-        bank_amt = hr.get()+':'+min.get()
-        endtime = eh.get()+':'+em.get()
-        ttime = timeh.get()+':'+timem.get()
-        text = timetext.get("1.0", "end")
-        tg = '''INSERT INTO chartofaccounts (timdate,timname,timcus,timcheck,timebill,timecheckk,timestart,timeend,tyme,timedes) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(tg, [(date), (name), (cus), (checkbill), (bill),
-                    (timecheck), (starttime), (endtime), (ttime), (text)])
-        # print(date,name,cus,checkbill,bill,timecheck,starttime,endtime,ttime,text)
-        mydata.commit()
-        A.destroy()
-
-
 def selected(event):
     if menu.get() == 'Chart Of Accounts':
         import chart0faccounts
