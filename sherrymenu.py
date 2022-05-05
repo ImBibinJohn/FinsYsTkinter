@@ -12,7 +12,7 @@ def bn(event):
     if v=='Suppliers':
         import finsyssuppliers
     elif v=='Expenses':
-        import timeactivity
+        import advance
 opt = OptionMenu(framee,variable,*drop,command=bn)
 opt.config(bg='#243e55', fg="white", font=('Arial', 18))
 

@@ -1,3 +1,4 @@
+from doctest import master
 import tkinter as tk
 from xml.dom.minicompat import StringTypes
 from PIL import Image, ImageTk
@@ -35,7 +36,8 @@ def time():
 
     f2=tk.Frame(win,bg='#243e54')
     size=(400,500)
-    ax=ImageTk.PhotoImage(Image.open('timeact.png').resize(size))
+    cv=Image.open('timeact.png').resize(size)
+    ax=ImageTk.PhotoImage(cv,master=win)
     ay=tk.Label(f2,image=ax,bg='#243e54')
     ay.place(relx=0.05,rely=0.05,relheight=0.8,relwidth=0.2)
 
