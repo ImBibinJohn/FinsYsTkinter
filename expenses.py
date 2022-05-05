@@ -66,18 +66,16 @@ def submit():
     tax = tax_input.get()
     grandtotal = grand_input.get()
 
-    if(payee == "" or payment_date == "" or payment_method == ""):
-        MessageBox.showinfo("Insert the values!!!")
-    else:
-        con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter", port='3307')
-        cursor = con.cursor()
-        cursor.Commit("INSERT INTO expenses values('" + payee + "' , '" + payment_date + "', '"+payment_method+"', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
-                      "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
-        cursor.Commit()
-
-        MessageBox.showinfo("Insert Status", "Inserted Successfully")
-        con.close()
+    con = mysql.connect(host="127.0.0.1", user="root",
+                        password="", database="fynsystkinter", port='3307')
+    cur = con.cursor()
+    d = '''INSERT INTO expenses(payee , payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
+                    , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+    cur.execute(d, [(payee), (payment_date), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+                (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
+    con.commit()
+    MessageBox.showinfo("Insert Status", "Inserted Successfully")
+    expense_form.destroy()
 
 
 mycanvas.configure(yscrollcommand=yscrollbar.set)

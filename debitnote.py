@@ -6,7 +6,7 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
-# from tkcalendar import Calendar, DateEntry
+# from tkcalendar import DateEntry
 
 
 debit_form = tk.Tk()
@@ -65,24 +65,18 @@ def submit():
     tax = tax_input.get()
     grandtotal = grand_input.get()
 
-    if(supplier == "" or payment_date == ""):
-        MessageBox.showinfo("Insert the values!!!")
-    else:
-        con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter", port='3307')
-        cursor = con.cursor()
-        cursor.execute("INSERT into debitnote values('" + supplier + "' , '" + mailaddress + "', '" + payment_date + "', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
-                       "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
-        cursor.Commit()
-
-        MessageBox.showinfo("Insert Status", "Inserted Successfully")
-        con.close()
+    con = mysql.connect(host="127.0.0.1", user="root",
+                        password="", database="fynsystkinter", port='3307')
+    cur = con.cursor()
+    d = '''INSERT INTO debit_form(supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
+                    , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+    cur.execute(d, [(supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+                (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
+    con.commit()
+    MessageBox.showinfo("Insert Status", "Inserted Successfully")
+    debit_form.destroy()
 
 
-# cal = Calendar(debit_form, selectmode='day',
-#                year=2020, month=5,
-#                day=22)
-# cal.pack(pady=20)
 mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
@@ -114,25 +108,26 @@ drop2 = ttk.Combobox(form_frame, textvariable=place_input)
 
 drop2['values'] = ("Select Supplier")
 
-title_lab.place(x=10, y=100, height=15, width=60)
+title_lab.place(x=30, y=100, height=15, width=60)
 drop2.place(x=30, y=130, height=40, width=450)
 wrappen.pack(fill='both', expand='yes',)
 
 
 billing_ad = Label(form_frame, text="Maling Address", bg='#243e55', fg='#fff')
 billing_ad.place(x=30, y=200,)
-billing_input = Entry(form_frame, width=40, bg='#2f516f', fg='#fff')
+billing_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
 billing_input.place(x=30, y=230, height=90)
 
 
 payment_period = tk.Label(
     form_frame, text="Payment Date", bg='#243e55', fg='#fff')
-payment_drop = ttk.Combobox(form_frame)
-# payment_drop = DateEntry(
-#     debit_form, width=16, background="magenta3", bg="#2f516f", bd=2)
+payment_period.place(x=30, y=330, height=15, width=100)
 
-payment_period.place(x=20, y=330, height=15, width=100)
-payment_drop.place(x=30, y=620, height=40, width=450)
+# payment_drop = ttk.Combobox(form_frame)
+payment_drop = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+payment_drop.place(x=30, y=360, height=40)
+
+# DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
 
 # CATEGORY DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
