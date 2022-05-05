@@ -28,7 +28,7 @@ mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 
 heading_frame=Frame(mycanvas)
 mycanvas.create_window((0,40),window=heading_frame,anchor="nw")
-invoice_heading= tk.Label(heading_frame, text="INVOICE",fg='#fff',bg='#243e55',height=2,bd=5,relief="groove",font=('Times', 25),width=74)
+invoice_heading= tk.Label(heading_frame, text="CASH MEMO NO. 1003",fg='#fff',bg='#243e55',height=2,bd=5,relief="groove",font=('Times', 25),width=74)
 invoice_heading.pack()
 
 #form fields

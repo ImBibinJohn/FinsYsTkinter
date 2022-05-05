@@ -15,8 +15,10 @@ def fun():#db connection
     mydb=mysql.connector.connect(
         host='localhost',
         user='root',
+
         password='root',
         database='finsYs_tkinter'
+
         )
     mycursor = mydb.cursor()
 
