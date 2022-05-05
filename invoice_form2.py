@@ -2,15 +2,23 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+import datetime as dt
+import mysql.connector
 
-
+def fun():#db connection
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='finsYs_tkinter'
+        )
+    mycursor = mydb.cursor()
 def add_custom():
     import addcustomer_form
 
-def add_invoice():
-    fun()
-    
 
+fun()
 invoice_form = tk.Tk()
 invoice_form.title("finsYs")
 invoice_form.geometry("5000x2000")
@@ -42,8 +50,24 @@ form_lable.place(x=0,y=0)
 form_heading=tk.Label(form_lable, text="FinsYs",fg='#fff',bg='#243e55',height=2,bd=1,relief="groove",font=('Times', 20),width=125)
 form_heading.pack()
 
+#get customer datas from customer table
+mycursor.execute('select * from app1_customer ')
+customers=mycursor.fetchall()
 
 
+#set today date 
+date = dt.datetime.now()
+format_date = f"{date:%a, %b %d %Y}"
+today_date = Label(form_frame, text=format_date, fg="white", bg="black", font=("helvetica", 40))
+
+#company details
+cmp1=1
+
+mycursor.execute('select * from app1_inventory where cid_id=%s',(cmp1))
+inventory_data=mycursor.fetchone()
+print("inventory_data",inventory_data)
+
+global select_customer,email,invoice_date,terms,Due_date
 
 select_customer_lab=tk.Label(form_frame,text="Select Customer",bg='#243e55',fg='#fff')
 select_customer_input=StringVar()
@@ -255,7 +279,7 @@ balance_lab.place(x=970,y=1600,height=40)
 balance_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff')
 balance_input.place(x=1100,y=1600,height=40)
 
-submit_button=Button(form_frame,text="Save",background="#2f516a", foreground="white",width=20,height=2,command=add_invoice)
+submit_button=Button(form_frame,text="Save",background="#2f516a", foreground="white",width=20,height=2)
 
 submit_button.place(x=1150,y=1700)
 font=('Times', 15)

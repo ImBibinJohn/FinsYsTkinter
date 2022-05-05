@@ -1,11 +1,13 @@
 
 from calendar import c
+from select import select
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 import mysql.connector
 from tkinter import messagebox
+
 
 #fffffffffff
 def fun():#db connection
@@ -14,7 +16,7 @@ def fun():#db connection
         host='localhost',
         user='root',
         password='root',
-        database='finsys_tkinter'
+        database='finsYs_tkinter'
         )
     mycursor = mydb.cursor()
 
@@ -46,16 +48,16 @@ def save_customdata():
         shipstate=shipstate.get()
         shippin=shippin.get()
         shipcountry=shipcountry.get()
-
-        sql='SELECT * FROM customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
+        cid_id=1
+        sql='SELECT * FROM app1_customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
         val=(first_name,last_name)
         mycursor.execute(sql,val)
         if mycursor.fetchone()is not None:
             messagebox.showerror('error', 'First Name and Last Name already exist!!')
         else:
             
-            sql="INSERT INTO customer (title,firstname,lastname ,company,location,gsttype,gstin ,panno ,email ,website,mobile,street ,city ,state,pincode ,country ,shipstreet ,shipcity ,shipstate,shippincode ,shipcountry) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry)
+            sql="INSERT INTO app1_customer (title,firstname,lastname ,company,location,gsttype,gstin ,panno ,email ,website,mobile,street ,city ,state,pincode ,country ,shipstreet ,shipcity ,shipstate,shippincode ,shipcountry,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry,cid_id)
             mycursor.execute(sql,val)
             mydb.commit()
             mydb.close()
@@ -83,7 +85,7 @@ def sameaddress():
 
     
 
-
+fun()
 addcustomer_form = tk.Tk()
 addcustomer_form.title("finsYs")
 addcustomer_form.geometry("2000x2000")
@@ -100,7 +102,9 @@ mycanvas.bind('<Configure>',lambda e:mycanvas.configure(scrollregion=mycanvas.bb
 full_frame=Frame(mycanvas,width=2000,height=2000,bg='#2f516a')
 mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 
-
+# global cid
+# cid=mycursor.execute('select cid from app1_company where id_id=os.getuid()')
+# print(cid)
 heading_frame=Frame(mycanvas)
 mycanvas.create_window((150,40),window=heading_frame,anchor="nw")
 # headingfont=font.Font(family='Times New Roman', size=25,)
