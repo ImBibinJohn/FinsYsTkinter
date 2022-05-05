@@ -3,9 +3,16 @@ from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
 from tkcalendar import DateEntry, Calendar
-from PIL import ImageTk, Image
+
 import click
 from requests import options
+from xml.dom.minicompat import StringTypes
+
+from tkinter import StringVar
+import mysql.connector
+mydata = mysql.connector.connect(
+    host='localhost', user='root', password='', database='finsys_tkinter')
+cur = mydata.cursor()
 
 
 def selected(event):
@@ -22,7 +29,7 @@ def main():
 
     global A, data, menu
     A = tk.Tk()
-    A.title('suppliers')
+    A.title('chartofaccounts')
     A.geometry('1500x1000')
     A['bg'] = '#2f516f'
 
@@ -66,8 +73,14 @@ def main():
 
     # table view
 
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure('Treeview', background='silver',
+                    foreground='black', fieldbackground='#243e54')
+    style.map('Treeview', background=[('selected', 'green')])
     treevv = ttk.Treeview(hd, height=7, columns=(
         1, 2, 3, 4, 5, 6, 7), show='headings')
+
     treevv.heading(1, text='NAME')  # headings
     treevv.heading(2, text='TYPE')
     treevv.heading(3, text='DETAIL TYPE')
@@ -84,13 +97,17 @@ def main():
     treevv.column(5, minwidth=30, width=140, anchor=CENTER)
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     treevv.column(7, minwidth=30, width=140, anchor=CENTER)
-    #treevv.column(7, minwidth=30, width=120,anchor=CENTER)
-    data = ['Dhyan Kumar', 'Account Receivable(Debtors)', 'Account Receivable(Debtors)',
-            '99120.0', '100000', '']
-    data1 = ['Dhyan Kumar', 'Current Assets', 'Deferred Service Tax Input Credit',
-             '99120.0', '75048.0', '']
-    treevv.insert('', 'end', text=data, values=(data))
+
+    cur.execute(
+        "SELECT name,type,detail_type,tax_rate,finsys_amt,bank_amt FROM chartofaccounts")
+    val = cur.fetchall()
+    if val:
+        for x in val:
+            treevv.insert('', 'end', values=(
+                x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+
+    treevv.bind("<<TreeviewSelect>>")
 
     A.mainloop()
 

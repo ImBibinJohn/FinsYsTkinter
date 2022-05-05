@@ -6,7 +6,7 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
-# from tkcalendar import Calendar, DateEntry
+# from tkcalendar import DateEntry
 
 
 debit_form = tk.Tk()
@@ -65,24 +65,18 @@ def submit():
     tax = tax_input.get()
     grandtotal = grand_input.get()
 
-    if(supplier == "" or payment_date == ""):
-        MessageBox.showinfo("Insert the values!!!")
-    else:
-        con = mysql.connect(host="127.0.0.1", user="root",
-                            password="", database="fynsystkinter", port='3307')
-        cursor = con.cursor()
-        cursor.execute("INSERT into debitnote values('" + supplier + "' , '" + mailaddress + "', '" + payment_date + "', '" + category1 + "' , '" + category2 + "', '"+category3+"', '" + categorydescription1 + "' , '" + categorydescription2 +
-                       "', '"+categorydescription3+"', '" + categoryquantity1 + "' , '" + categoryquantity2 + "', '"+categoryquantity3+"', '" + categoryprice1 + "' , '" + categoryprice2 + "', '"+categoryprice3+"', '" + categorytotal1 + "' , '" + categorytotal2 + "', '"+categorytotal3+"', '" + product1 + "' , '" + product2 + "', '"+product3+"', '" + productdescription1 + "' , '" + productdescription2 + "', '"+productdescription3+"', '" + hsn1 + "' , '" + hsn2 + "', '"+hsn3+"', '" + productquantity1 + "' , '" + productquantity2 + "', '"+productquantity3+"', '" + productprice1 + "' , '" + productprice2 + "', '"+productprice3+"', '" + producttotal1 + "' , '" + producttotal2 + "', '"+producttotal3+"', '" + producttax1 + "' , '" + producttax2 + "', '"+producttax3+"', '" + subtotal + "' , '" + tax + "', '"+grandtotal+"') ")
-        cursor.Commit()
-
-        MessageBox.showinfo("Insert Status", "Inserted Successfully")
-        con.close()
+    con = mysql.connect(host="127.0.0.1", user="root",
+                        password="", database="fynsystkinter", port='3307')
+    cur = con.cursor()
+    d = '''INSERT INTO debit_form(supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
+                    , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+    cur.execute(d, [(supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+                (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
+    con.commit()
+    MessageBox.showinfo("Insert Status", "Inserted Successfully")
+    debit_form.destroy()
 
 
-# cal = Calendar(debit_form, selectmode='day',
-#                year=2020, month=5,
-#                day=22)
-# cal.pack(pady=20)
 mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
@@ -95,7 +89,7 @@ heading_frame = Frame(mycanvas)
 mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
 headingfont = font.Font(family='Times New Roman', size=25,)
 credit_heading = Label(heading_frame, text="Debit Note", fg='#fff',
-                       bg="#243e55", height=2, bd=5, relief="groove", font=headingfont, width=100)
+                       bg="#243e55", height=2, bd=5, relief="groove", font=headingfont, width=106)
 credit_heading.pack(padx=0, pady=0)
 
 # form fields
@@ -114,26 +108,26 @@ drop2 = ttk.Combobox(form_frame, textvariable=place_input)
 
 drop2['values'] = ("Select Supplier")
 
-title_lab.place(x=10, y=100, height=15, width=60)
+title_lab.place(x=30, y=100, height=15, width=60)
 drop2.place(x=30, y=130, height=40, width=450)
 wrappen.pack(fill='both', expand='yes',)
 
 
 billing_ad = Label(form_frame, text="Maling Address", bg='#243e55', fg='#fff')
 billing_ad.place(x=30, y=200,)
-billing_input = Entry(form_frame, width=40, bg='#2f516f', fg='#fff')
+billing_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
 billing_input.place(x=30, y=230, height=90)
 
 
 payment_period = tk.Label(
     form_frame, text="Payment Date", bg='#243e55', fg='#fff')
-payment_drop = ttk.Combobox(form_frame)
-# payment_drop = DateEntry(
-#     debit_form, width=16, background="magenta3", bg="#2f516f", bd=2)
+payment_period.place(x=30, y=330, height=15, width=100)
 
-payment_period.place(x=20, y=330, height=15, width=100)
-payment_drop.place(x=30, y=620, height=40, width=450)
+# payment_drop = ttk.Combobox(form_frame)
+payment_drop = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+payment_drop.place(x=30, y=360, height=40)
 
+# DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
 
 # CATEGORY DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
@@ -150,68 +144,93 @@ label = tk.Label(form2_frame, text="CATEGORY\t\t\tDESCRIPTION\t\t\tNOT APPLICABL
 label.place(x=120, y=50)
 
 # row1
-pro = tk.Label(form2_frame, text="", bg='#2f516f', fg='#fff')
+pro = tk.Label(form2_frame, text="", bg='#243e55', fg='#fff')
 cpro_drop1 = ttk.Combobox(form2_frame)
-cpro_drop1['values'] = ("", "", "", "")
+cpro_drop1['values'] = ("Category 1", "Category 2", "Catefory 3", "Category 4")
 pro.place(x=50, y=120, height=15, width=150)
 cpro_drop1.place(x=50, y=150, height=40, width=200)
 # 2
-pro = tk.Label(form2_frame, text="", bg='#2f516f', fg='#fff')
+pro = tk.Label(form2_frame, text="", bg='#243e55', fg='#fff')
 cpro_drop2 = ttk.Combobox(form2_frame)
-cpro_drop2['values'] = ("", "", "", "")
+cpro_drop2['values'] = ("Category 1", "Category 2", "Catefory 3", "Category 4")
 pro.place(x=50, y=210, height=15, width=150)
 cpro_drop2.place(x=50, y=240, height=40, width=200)
 # 3
-pro = tk.Label(form2_frame, text="", bg='#2f516f', fg='#fff')
+pro = tk.Label(form2_frame, text="", bg='#243e55', fg='#fff')
 cpro_drop3 = ttk.Combobox(form2_frame)
-cpro_drop3['values'] = ("", "", "", "")
+cpro_drop3['values'] = ("Category 1", "Category 2", "Catefory 3", "Category 4")
 pro.place(x=50, y=280, height=15, width=150)
 cpro_drop3.place(x=50, y=310, height=40, width=200)
 
 
 # row 1
-discription_input1 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+discription_input1 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 discription_input1.place(x=350, y=150, height=40, width=200)
 # row2
-discription_input2 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+discription_input2 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 discription_input2.place(x=350, y=240, height=40, width=200)
 # row3
-discription_input3 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+discription_input3 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 discription_input3.place(x=350, y=310, height=40, width=200)
 
 # row 1
-quantity_input1 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+quantity_input1 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 quantity_input1.place(x=650, y=150, height=40, width=200)
 # row2
-quantity_input2 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+quantity_input2 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 quantity_input2.place(x=650, y=240, height=40, width=200)
 # row3
-quantity_input3 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+quantity_input3 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
 quantity_input3.place(x=650, y=310, height=40, width=200)
 
 
+# def mulc(self, event):
+#     ctotal_input1.delete(0, 'end')
+#     price_input1 = int(price_input1.get())
+#     quantity_input1 = int(quantity_input1.get())
+#     resultc1 = price_input1*quantity_input1
+#     ctotal_input2.insert(END, str(resultc1))
+#     ctotal_input2.delete(0, 'end')
+#     price_input2 = int(price_input2.get())
+#     quantity_input2 = int(quantity_input2.get())
+#     resultc2 = price_input2*quantity_input2
+#     ctotal_input2.insert(END, str(resultc2))
+#     ctotal_input3.delete(0, 'end')
+#     price_input3 = int(price_input3.get())
+#     quantity_input3 = int(quantity_input3.get())
+#     resultc3 = price_input3*quantity_input3
+#     ctotal_input3.insert(END, str(resultc3))
+
+
 # row 1
-price_input1 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+price_input1 = Entry(form2_frame, width=40, bg='#2f516f',
+                     fg='#fff')
 price_input1.place(x=950, y=150, height=40, width=150)
 # row2
-price_input2 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+price_input2 = Entry(form2_frame, width=40, bg='#2f516f',
+                     fg='#fff')
 price_input2.place(x=950, y=240, height=40, width=150)
 # row3
-price_input3 = Entry(form2_frame, width=40, bg='#ffffff', fg='#000')
+price_input3 = Entry(form2_frame, width=40, bg='#2f516f',
+                     fg='#fff')
 price_input3.place(x=950, y=310, height=40, width=150)
 
 # row 1
-ctotal_input1 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
+ctotal_input1 = Entry(form2_frame, width=40, bg='#2f516f',
+                      fg='#fff', )
 ctotal_input1.place(x=1200, y=150, height=40, width=100)
 # row2
-ctotal_input2 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
+ctotal_input2 = Entry(form2_frame, width=40, bg='#2f516f',
+                      fg='#fff')
 ctotal_input2.place(x=1200, y=240, height=40, width=100)
 # row3
-ctotal_input3 = Entry(form2_frame, width=40, bg='#2f516f', fg='#fff')
+ctotal_input3 = Entry(form2_frame, width=40, bg='#2f516f',
+                      fg='#fff')
 ctotal_input3.place(x=1200, y=310, height=40, width=100)
 
 
 ##################
+
 
 # ITEM DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
@@ -223,93 +242,117 @@ bill_heading = tk.Label(form4_frame, text="Item Details", fg='#fff',
                         bg='#243e55', height=2, font=sub_headingfont, width=15)
 bill_heading.place(x=30, y=0,)
 
-label = tk.Label(form4_frame, text="PRODUCT/SERVICE\tHSN\t\tDESCRIPTION\t\t  QUANTITY\t\t  PRICE\t\t     TOTAL\t\t\t     TAX\t\t",
+label = tk.Label(form4_frame, text="PRODUCT/SERVICE\tHSN\t\tDESCRIPTION\t\t  QUANTITY\t\t  PRICE\t\t     TOTAL\t\t\t     TAX(%)\t\t",
                  bg='#243e55', fg="white", font=('Arial', 15))
 label.place(x=60, y=60)
 
 # row1
-prod = tk.Label(form4_frame, text="", bg='#2f516f', fg='#fff')
+prod = tk.Label(form4_frame, text="", bg='#243e55', fg='#fff')
 prod_drop1 = ttk.Combobox(form4_frame)
-prod_drop1['values'] = ("", "", "", "")
+prod_drop1['values'] = ("Product 1", "Product 2", "Product 3", "Product 4")
 prod.place(x=50, y=120, height=15, width=150)
 prod_drop1.place(x=50, y=150, height=40, width=175)
 # 2
-prod = tk.Label(form4_frame, text="", bg='#2f516f', fg='#fff')
+prod = tk.Label(form4_frame, text="", bg='#243e55', fg='#fff')
 prod_drop2 = ttk.Combobox(form4_frame)
-prod_drop2['values'] = ("", "", "", "")
+prod_drop2['values'] = ("Product 1", "Product 2", "Product 3", "Product 4")
 prod.place(x=50, y=210, height=15, width=150)
 prod_drop2.place(x=50, y=240, height=40, width=175)
 # 3
-prod = tk.Label(form4_frame, text="", bg='#2f516f', fg='#fff')
+prod = tk.Label(form4_frame, text="", bg='#243e55', fg='#fff')
 prod_drop3 = ttk.Combobox(form4_frame)
-prod_drop3['values'] = ("", "", "", "")
+prod_drop3['values'] = ("Product 1", "Product 2", "Product 3", "Product 4")
 prod.place(x=50, y=280, height=15, width=150)
 prod_drop3.place(x=50, y=310, height=40, width=175)
 
 
 # row 1
-description_input1 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+description_input1 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 description_input1.place(x=380, y=150, height=40, width=200)
 # row2
-description_input2 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+description_input2 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 description_input2.place(x=380, y=240, height=40, width=200)
 # row3
-description_input3 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+description_input3 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 description_input3.place(x=380, y=310, height=40, width=200)
 
 # row 1
-hsn_input1 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+hsn_input1 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 hsn_input1.place(x=250, y=150, height=40, width=100)
 # row2
-hsn_input2 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+hsn_input2 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 hsn_input2.place(x=250, y=240, height=40, width=100)
 # row3
-hsn_input3 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+hsn_input3 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 hsn_input3.place(x=250, y=310, height=40, width=100)
 
 # row 1
-pquantity_input1 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pquantity_input1 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pquantity_input1.place(x=610, y=150, height=40, width=200)
 # row2
-pquantity_input2 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pquantity_input2 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pquantity_input2.place(x=610, y=240, height=40, width=200)
 # row3
-pquantity_input3 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pquantity_input3 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pquantity_input3.place(x=610, y=310, height=40, width=200)
 
 
 # row 1
-pprice_input1 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pprice_input1 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pprice_input1.place(x=840, y=150, height=40, width=150)
 # row2
-pprice_input2 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pprice_input2 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pprice_input2.place(x=840, y=240, height=40, width=150)
 # row3
-pprice_input3 = Entry(form4_frame, width=40, bg='#ffffff', fg='#000')
+pprice_input3 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
 pprice_input3.place(x=840, y=310, height=40, width=150)
 
+
+# def mulc(self, event):
+#     ptotal_input1.delete(0, 'end')
+#     pprice_input1 = int(pprice_input1.get())
+#     pquantity_input1 = int(pquantity_input1.get())
+#     resultp1 = pprice_input1*pquantity_input1
+#     ptotal_input1.insert(END, str(resultp1))
+
+#     ptotal_input2.delete(0, 'end')
+#     pprice_input2 = int(pprice_input2.get())
+#     pquantity_input2 = int(pquantity_input2.get())
+#     resultp2 = pprice_input2*pquantity_input2
+#     ptotal_input2.insert(END, str(resultp2))
+
+#     ptotal_input3.delete(0, 'end')
+#     pprice_input3 = int(pprice_input3.get())
+#     pquantity_input3 = int(pquantity_input3.get())
+#     resultp3 = pprice_input3*pquantity_input3
+#     ptotal_input3.insert(END, str(resultp3))
+
+
 # row 1
-ptotal_input1 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
+ptotal_input1 = Entry(form4_frame, width=40, bg='#2f516f',
+                      fg='#fff')
 ptotal_input1.place(x=1020, y=150, height=40, width=100)
 # row2
-ptotal_input2 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
+ptotal_input2 = Entry(form4_frame, width=40, bg='#2f516f',
+                      fg='#fff')
 ptotal_input2.place(x=1020, y=240, height=40, width=100)
 # row3
-ptotal_input3 = Entry(form4_frame, width=40, bg='#2f516f', fg='#fff')
+ptotal_input3 = Entry(form4_frame, width=40, bg='#2f516f',
+                      fg='#fff')
 ptotal_input3.place(x=1020, y=310, height=40, width=100)
 # row1
 taxpro_drop1 = ttk.Combobox(form4_frame)
-taxpro_drop1['values'] = ("", "", "", "")
+taxpro_drop1['values'] = ("10", "18", "20", "30")
 pro.place(x=1150, y=150, height=15, width=150)
 taxpro_drop1.place(x=1150, y=150, height=40, width=200)
 # row2
 taxpro_drop2 = ttk.Combobox(form4_frame)
-taxpro_drop2['values'] = ("", "", "", "")
+taxpro_drop2['values'] = ("10", "18", "20", "30")
 pro.place(x=1150, y=240, height=15, width=150)
 taxpro_drop2.place(x=1150, y=240, height=40, width=200)
 # row3
 taxpro_drop3 = ttk.Combobox(form4_frame)
-taxpro_drop3['values'] = ("", "", "", "")
+taxpro_drop3['values'] = ("10", "18", "20", "30")
 pro.place(x=1150, y=310, height=15, width=150)
 taxpro_drop3.place(x=1150, y=310, height=40, width=200)
 
@@ -339,6 +382,5 @@ grand_input.place(x=1150, y=200, height=40, width=200)
 
 submit = tk.Button(form3_frame, text="Submit Form", command=submit)
 submit.place(x=1150, y=280, width=100)
-
 
 debit_form.mainloop()
