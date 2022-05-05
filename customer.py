@@ -14,7 +14,7 @@ def fun():#db connection
         host='localhost',
         user='root',
         password='root',
-        database='finsys_tkinter'
+        database='finsYs_tkinter'
         )
     mycursor = mydb.cursor()
 
@@ -51,9 +51,8 @@ def edit_customer():
         eshipcity=e_shipcity.get()
         eshipstate=e_shipstate.get()
         eshippin=e_shippin.get()
-    
         eshipcountry=e_shipcountry.get()
-        mycursor.execute("UPDATE customer SET title =%s, firstname =%s, lastname =%s, company =%s, location =%s, gsttype =%s, gstin =%s, panno =%s, email =%s, website =%s,mobile =%s, street =%s,city =%s, state =%s, pincode =%s, country=%s, shipstreet =%s, shipcity =%s, shipstate =%s, shippincode =%s, shipcountry =%s where customerid=%s"
+        mycursor.execute("UPDATE app1_customer SET title =%s, firstname =%s, lastname =%s, company =%s, location =%s, gsttype =%s, gstin =%s, panno =%s, email =%s, website =%s,mobile =%s, street =%s,city =%s, state =%s, pincode =%s, country=%s, shipstreet =%s, shipcity =%s, shipstate =%s, shippincode =%s, shipcountry =%s where customerid=%s"
             ,(etitle, efirst_name, elast_name, ecompany,elocation, egst, egstin, epan_no, eemail, ewebsite, emobile, estreet, ecity, estate, epin, ecountry, eshipstreet,eshipcity, eshipstate, eshippin, eshipcountry,data[0]))
         mydb.commit()
         messagebox.showinfo('successfully Updated')
@@ -65,7 +64,7 @@ def edit_customer():
     focus_data = custom_data.focus()
     values=custom_data.item(focus_data,'values')
     customer_id=[values[-1]]
-    mycursor.execute("SELECT * FROM customer WHERE customerid=%s",(customer_id))
+    mycursor.execute("SELECT * FROM app1_customer WHERE customerid=%s",(customer_id))
     data=mycursor.fetchone()
     editcustomer_form = tk.Tk()
     editcustomer_form.title("finsYs")
@@ -346,7 +345,7 @@ def delete_customer():
     focus_data = custom_data.focus()
     values=custom_data.item(focus_data,'values')
     customer_id=[values[-1]]
-    mycursor.execute("DELETE FROM customer WHERE customerid=%s",(customer_id))
+    mycursor.execute("DELETE FROM app1_customer WHERE customerid=%s",(customer_id))
     mydb.commit()
     messagebox.showinfo('successfully Delated')
     print('sucessfully deleted')
@@ -395,7 +394,7 @@ custom_data.heading("mobile",text="MOBILE NO",anchor=CENTER)
 
 custom_data.place(x=280,y=200)
 
-sql='SELECT firstname,gsttype,gstin,panno,email,mobile,customerid from customer'
+sql='SELECT firstname,gsttype,gstin,panno,email,mobile,customerid from app1_customer'
 mycursor.execute(sql)
 customer_data=mycursor.fetchall()
 total=mycursor.rowcount
