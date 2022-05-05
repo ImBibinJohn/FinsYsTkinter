@@ -1,5 +1,6 @@
 
 from calendar import c
+from select import select
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -7,14 +8,17 @@ import tkinter.font as font
 import mysql.connector
 from tkinter import messagebox
 
+
 #fffffffffff
 def fun():#db connection
     global mydb,mycursor
     mydb=mysql.connector.connect(
         host='localhost',
         user='root',
+
         password='root',
-        database='finsys_tkinter'
+        database='finsYs_tkinter'
+
         )
     mycursor = mydb.cursor()
 
@@ -29,6 +33,8 @@ def save_customdata():
         company=company.get()
         location=location.get()
         gst=gst.get()
+
+
         gstin=gstin.get()
         pan_no=pan_no.get()
         email=email.get()
@@ -44,16 +50,16 @@ def save_customdata():
         shipstate=shipstate.get()
         shippin=shippin.get()
         shipcountry=shipcountry.get()
-
-        sql='SELECT * FROM customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
+        cid_id=1
+        sql='SELECT * FROM app1_customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
         val=(first_name,last_name)
         mycursor.execute(sql,val)
         if mycursor.fetchone()is not None:
             messagebox.showerror('error', 'First Name and Last Name already exist!!')
         else:
             
-            sql="INSERT INTO customer (title,firstname,lastname ,company,location,gsttype,gstin ,panno ,email ,website,mobile,street ,city ,state,pincode ,country ,shipstreet ,shipcity ,shipstate,shippincode ,shipcountry) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry)
+            sql="INSERT INTO app1_customer (title,firstname,lastname ,company,location,gsttype,gstin ,panno ,email ,website,mobile,street ,city ,state,pincode ,country ,shipstreet ,shipcity ,shipstate,shippincode ,shipcountry,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry,cid_id)
             mycursor.execute(sql,val)
             mydb.commit()
             mydb.close()
@@ -81,7 +87,7 @@ def sameaddress():
 
     
 
-
+fun()
 addcustomer_form = tk.Tk()
 addcustomer_form.title("finsYs")
 addcustomer_form.geometry("2000x2000")
@@ -98,7 +104,9 @@ mycanvas.bind('<Configure>',lambda e:mycanvas.configure(scrollregion=mycanvas.bb
 full_frame=Frame(mycanvas,width=2000,height=2000,bg='#2f516a')
 mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 
-
+# global cid
+# cid=mycursor.execute('select cid from app1_company where id_id=os.getuid()')
+# print(cid)
 heading_frame=Frame(mycanvas)
 mycanvas.create_window((150,40),window=heading_frame,anchor="nw")
 # headingfont=font.Font(family='Times New Roman', size=25,)
@@ -175,10 +183,10 @@ location_input.place(x=530,y=230,height=40)
 
 GST_lab=tk.Label(form_frame,text="GST Type",bg='#243e55',fg='#fff')
 GST_drop=ttk.Combobox(form_frame,textvariable = gst)
-GST_drop['values']=("Consumer","GST Registered-Regular","GST Registered-Composition","Overseas", "Deemed exports - EOU's STP's EHTP's")
-
+GST_drop['values']=("Consumer","GST Registered-Regular","GST unregistered","GST Registered-Composition","Overseas", "Deemed exports - EOU's STP's EHTP's")
 GST_lab.place(x=20,y=300,height=15,width=100)
 GST_drop.place(x=30,y=330,height=40,width=450)
+
 
 gstin_lab=Label(form_frame,text="GSTIN",bg='#243e55',fg='#fff')
 gstin_lab.place(x=530,y=300,)
@@ -287,6 +295,7 @@ country_lab=Label(form2_frame,text="Country",bg='#243e55',fg='#fff')
 country_lab.place(x=1200,y=350,)
 country_input=Entry(form2_frame,width=40,bg='#2f516a',fg='#fff',textvariable = shipcountry)
 country_input.place(x=1200,y=380,height=40)
+
 
 submit_button=Button(form2_frame,text="Submit Form",background="#2f516a", foreground="white",width=40,height=2,command=save_customdata)
 
