@@ -6,7 +6,7 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
-# from tkcalendar import DateEntry
+from tkcalendar import DateEntry
 
 
 debit_form = tk.Tk()
@@ -124,10 +124,10 @@ payment_period = tk.Label(
 payment_period.place(x=30, y=330, height=15, width=100)
 
 # payment_drop = ttk.Combobox(form_frame)
-payment_drop = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+payment_drop = DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
+# Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
 payment_drop.place(x=30, y=360, height=40)
 
-# DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
 
 # CATEGORY DETAILS
 sub_headingfont = font.Font(family='Times New Roman', size=18,)
