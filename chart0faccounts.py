@@ -14,6 +14,8 @@ mydata = mysql.connector.connect(
     host='localhost', user='root', password='', database='finsys_tkinter')
 cur = mydata.cursor()
 
+# yyyyyy
+
 
 def selected(event):
     if menu.get() == 'Chart Of Accounts':
