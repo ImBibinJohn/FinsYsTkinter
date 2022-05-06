@@ -14,7 +14,7 @@ mydata = mysql.connector.connect(
     host='localhost', user='root', password='', database='finsys_tkinter')
 cur = mydata.cursor()
 
-# yyyyyyyyyyyygj
+# yyyyy
 
 
 def selected(event):
