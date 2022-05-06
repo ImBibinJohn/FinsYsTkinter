@@ -38,8 +38,8 @@ mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 heading_frame=Frame(mycanvas)
 mycanvas.create_window((40,40),window=heading_frame,anchor="nw")
 headingfont=font.Font(family='Arial', size=25,)
-addcustomer_heading= tk.Label(heading_frame, text="CASH FLOW ANALYZER",fg='#fff',bg='#243e55',height=2,bd=1,relief="raised",font=headingfont,width=76)
-addcustomer_heading.pack()
+cash_heading = tk.Label(heading_frame, text="CASH FLOW ANALYZER",fg='#fff',bg='#243e55',height=2,bd=1,relief="raised",font=headingfont,width=76)
+cash_heading.pack()
 
 #form fields
 sub_headingfont=font.Font(family='Times New Roman', size=26)
