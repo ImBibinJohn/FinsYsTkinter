@@ -8,7 +8,7 @@ import mysql.connector
 def add_custom():
     import add_new_customer
 
-#db connects here
+#db connects here ****
 def db_connection():
     global mydb,mycursor
     mydb=mysql.connector.connect(
@@ -156,10 +156,10 @@ invoice_drop['values']=("OCT2022-DEC2022","","","")
 invoice_period.place(x=20,y=330,height=15,width=100)
 invoice_drop.place(x=30,y=620,height=40,width=450)
 
-invoice_no=tk.Label(form_frame,text="SELECT INVOICE NO",bg='#243e55',fg='#fff')=ttk.Combobox(form_frame)
-invnum['values']=("SELECT INVOICE NO","","","")
-invoice_no.place(x=530,y=330,height=15,width=100)
-invoice_no_drop.place(x=530,y=360,height=40,width=450)
+# invoice_no=tk.Label(form_frame,text="SELECT INVOICE NO",bg='#243e55',fg='#fff')=ttk.Combobox(form_frame)
+# invnum['values']=("SELECT INVOICE NO","","","")
+# invoice_no.place(x=530,y=330,height=15,width=100)
+# invoice_no_drop.place(x=530,y=360,height=40,width=450)
 
 #Billing session
 sub_headingfont=font.Font(family='Times New Roman', size=18,)
