@@ -14,7 +14,6 @@ def db_connection():
         host='localhost',
         user='root',
         password='',
-
         database='finsys_tkinter'
         )
     mycursor = mydb.cursor()
