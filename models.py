@@ -131,3 +131,33 @@ shajeerdata.execute("""
 
                 """)
 
+
+shajeerdata.execute("""
+                 create table ItemModel(
+    Itemid int AUTO_INCREMENT,
+    Itemname varchar(100),
+    Pid int """)
+
+shajeerdata.execute("""
+                 create table ProductModel(
+    Productid int AUTO_INCREMENT,
+    Productname varchar(100),
+     """)
+
+shajeerdata.execute("""
+                 create table company(
+    cid int AUTO_INCREMENT,
+    # id ForeignKey(User, on_delete=models.CASCADE)
+    cname varchar(100),
+    caddress varchar(100),
+    city varchar(100),
+    state varchar(100),
+    pincode varchar(100),
+    cemail EmailField(100),
+    phone varchar(100),
+    # cimg ImageField(upload_to='images/', default='/images/default.png')
+    bname varchar(100),
+    industry varchar(100),
+    ctype varchar(100),
+    abt varchar(100),
+    paid varchar(100);""")
