@@ -55,6 +55,7 @@ def time():
         val=cur.fetchall()         
         for row in val:
             tm.append(row[0]+row[1])
+    #xxx        
     global tm  
     tm=['Select Customer']
     comboinput()     
