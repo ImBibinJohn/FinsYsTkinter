@@ -34,7 +34,7 @@ def expenseaccount():
         expdesc = expdescription.get()
         expgtype = expgst.get()
         exptaxval = exptaxcode.get()
-        e = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        e = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(e, [(expacctype), (expname), (expdtype), (expdesc), (expgtype), (exptaxval), ])
         shajeerdata.commit()
@@ -69,13 +69,7 @@ def expenseaccount():
     explabel4 = tk.Label(expframe2, text='Detail Type', bg='#243e54',
                          foreground='white', font=('poppins', 14)).place(relx=0.01, rely=0.25)
 
-    def expcomboinput():
-        shajeercursor.execute("SELECT itemname FROM itemmodel")
-        val = shajeercursor.fetchall()
-        for row in val:
-            cont.append(row[0])
     cont=[]
-    expcomboinput()
 
     expdetailtype = ttk.Combobox(expframe2, values=cont).place(
         relx=0.01, rely=0.35, relwidth=0.47, relheight=0.08)
@@ -135,7 +129,7 @@ def incomeaccount():
         incdesc = incdescription.get()
         incgtype = incgst.get()
         inctaxval = inctaxcode.get()
-        i = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        i = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(i, [(incacctype), (incname), (incdtype), (incdesc), (incgtype), (inctaxval), ])
         shajeerdata.commit()
@@ -236,7 +230,7 @@ def inventoryasset():
         invdesc = invdescription.get()
         invgtype = invgst.get()
         invtaxval = invtaxcode.get()
-        inv = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        inv = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(inv, [(invacctype), (invname), (invdtype), (invdesc), (invgtype), (invtaxval), ])
         shajeerdata.commit()
@@ -329,6 +323,7 @@ def inventoryasset():
 
 def add_inventory_product():
     def invproduct():
+        
         product_image = uploadproductimage.get()
         Product_name = invproductname.get()
         sku = invsku.get()
@@ -339,7 +334,7 @@ def add_inventory_product():
         As_of_date = invdate.get()
         Low_Stock_alert = invlsa.get()
         Inventory_asset_account = invinventoryassets.get()
-        description = invdescription.get()
+        prodescription = invdescription.get()
         Sales_price = invsalesprice.get()
         Tax = invtax.get()
         Income_Account = invincomeaccount.get()
@@ -375,9 +370,9 @@ def add_inventory_product():
                 messagebox.showerror('Error', 'Please enter the Low_Stock_alert', parent=B)
         elif Inventory_asset_account == '':
                 messagebox.showerror('Error', 'Please enter the Inventory_asset_account', parent=B)
-        elif description == '':
+        elif prodescription == '':
             messagebox.showerror(
-                'Error', 'Please enter the description', parent=B)
+                'Error', 'Please enter the prodescription', parent=B)
        
         elif Sales_price == '':
             messagebox.showerror(
@@ -415,15 +410,15 @@ def add_inventory_product():
         else:
             cctbn.config(text='checked', fg='green')
             # selecting entire table from db,taking username , nd check the existance
-            sql = 'SELECT * FROM Products WHERE Productname=%s'
+            sql = 'SELECT * FROM inventory WHERE Product_name=%s'
             val = (invproductname)
             shajeercursor.execute(sql, val)
             if shajeercursor.fetchone() is not None:
                 messagebox.showerror('error', ' product already exist!!')
             else:
-                sql = "INSERT INTO products (Image,Productname,SKU,HSN,Unit,Category,Initial_quantity_in_hand,As_of_date,Low_Stock_alert,Inventory_asset_account,description,Sales_price,Tax,Income_Account,Purchasing_information,Cost,Purchasetax,Expense_account,Reverse_charge,Preferred_Supplier) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"  # adding values into db
+                sql = "INSERT INTO app1_inventory (Image,Productname,SKU,HSN,Unit,Category,Initial_quantity_in_hand,As_of_date,Low_Stock_alert,Inventory_asset_account,prodescription,Sales_price,Tax,Income_Account,Purchasing_information,Cost,Purchasetax,Expense_account,Reverse_charge,Preferred_Supplier) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"  # adding values into db
                 val = (product_image, Product_name, sku, hsn, Unit, Category, Initial_quantity_in_hand, As_of_date, Low_Stock_alert, Inventory_asset_account,
-                   description, Sales_price, Tax, Income_Account, Purchasing_information, Cost, Purchasetax, Expense_account, Reverse_charge, Preferred_Supplier)
+                   prodescription, Sales_price, Tax, Income_Account, Purchasing_information, Cost, Purchasetax, Expense_account, Reverse_charge, Preferred_Supplier)
                 shajeercursor.execute(sql, val)
                 shajeerdata.commit()
                 shajeerdata.close()
@@ -477,7 +472,7 @@ def add_inventory_product():
     # As_of_date = StringVar()
     # Low_Stock_alert = StringVar()
     # Inventory_asset_account = StringVar()
-    # description = StringVar()
+    # prodescription = StringVar()
     # Sales_price = StringVar()
     # Tax = StringVar()
     # Income_Account = StringVar()
@@ -541,7 +536,7 @@ def add_inventory_product():
              bg='#243e54', foreground='white').place(relx=0.35, rely=0.20)
     Checksalesprice = IntVar()
     cctbn=Checkbutton(frame, text="Inclusive of tax ", variable=Checksalesprice, onvalue=1,
-                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.35, rely=0.255)
+                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.42, rely=0.48)
     invsalesprice = tk.Entry(hd1, bg='#2f516f').place(
         relx=0.35, rely=0.24, relwidth=0.3, relheight=0.035)
 
@@ -623,13 +618,13 @@ def add_inventory_product():
     invreversecharge = tk.Entry(hd1, bg='#2f516f').place(
         relx=0.02, rely=0.57, relwidth=0.63, relheight=0.035)
 
-    prefferdsupplier = tk.Label(hd1, text='Preferred Supplier', bg='#243e54',
+    invprefferdsupplier = tk.Label(hd1, text='Preferred Supplier', bg='#243e54',
                                 foreground='white', font=('poppins', 14)).place(relx=0.68, rely=0.53)
     invprefferdsupplier = tk.Entry(hd1, bg='#2f516f').place(
         relx=0.68, rely=0.57, relwidth=0.3, relheight=0.035)
 
     invsubmit = tk.Button(hd1, text='SUBMIT', font=15, bg='#5193e6', foreground='white',
-                          command=add_inventory_product).place(relx=0.02, rely=0.65)
+                          command=invproduct).place(relx=0.02, rely=0.65)
 
     hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
 
@@ -1337,13 +1332,14 @@ def main():
     treevv.bind('<Double-Button-2>', prfile_image)
 
     #treevv.column(7, minwidth=30, width=120,anchor=CENTER)
+    
     image = Image.open("pubg.jpg")
     resize_image = image.resize((280, 160))
     image = ImageTk.PhotoImage(resize_image)
     treevv.insert('', 'end', values=(
-        'Product pic', 'Inventory', 'Carlo', 'M24', 'M416', '2000'))
+        'double-tap to view', 'Inventory', 'Carlo', 'M24', 'M416', '2000'))
     treevv.insert('', 'end', values=(
-        'Product pic', 'Non inventory', 'Sara', 'AWM', 'M762', '22000'))
+        'double-tap to view', 'Non inventory', 'Sara', 'AWM', 'M762', '22000'))
     treevv.photo = image
     # data=['lowstock.png','Inventory','carlo','M24','m416','2000']
     # treevv.insert('', 'end', text=data, values=(data))
