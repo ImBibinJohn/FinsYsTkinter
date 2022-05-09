@@ -125,7 +125,6 @@ def addsuppliers():
         note=enotes.get()
         bn=bm.get()
         ckh=chh.get()
-        print(mob,fname)
         if fname=='':
             messagebox.showerror('Error','Please enter your Firstname',parent=B)
         elif lname=='':
@@ -149,14 +148,26 @@ def addsuppliers():
         elif ckh==0:
                   chk_b4.config(text='Please agree to terms and conditions',fg='red') 
         else:
-            chk_b4.config(text='checked',fg='green')                                                  
-            tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
-            gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
-            (tds),(street),(city),(state),(pin),(contry),(note)])
-            mydata.commit()
-            messagebox.showinfo('Sucessfull','Supplier added sucessfully')
+                ds="SELECT firstname FROM supplier WHERE firstname= %s"
+                cur.execute(ds,[fname])
+                r=cur.fetchall()
+                print(r) 
+                ss="SELECT lastname FROM supplier WHERE lastname= %s"
+                cur.execute(ss,[lname])
+                rr=cur.fetchall()
+                print(rr)
+                if r is not None and rr is not None:
+                    messagebox.showerror('Already Exist','User exists,Try another Name',parent=B)
+            
+                else:    
+                    chk_b4.config(text='checked',fg='green')                                                  
+                    tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
+                    gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                    cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
+                    (tds),(street),(city),(state),(pin),(contry),(note)])
+                    mydata.commit()
+                    messagebox.showinfo('Sucessfull','Supplier added sucessfully')     
     global B
     B=tk.Toplevel(A)
     B.title('Add suppliers')
@@ -214,9 +225,7 @@ def addsuppliers():
 
     def checkmail(event):
         mail=eemail.get()
-        print(mail)
         if len(mail)>=10:
-            print('checked')
             if re.match("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$",mail):
                 em_bl.config(text='Looks Good',fg='green') 
                 return True
