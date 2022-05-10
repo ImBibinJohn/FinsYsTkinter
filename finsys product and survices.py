@@ -8,6 +8,7 @@ from tkinter import messagebox
 import tkinter.font as font
 from tokenize import Name
 from unicodedata import category
+from colorama import Cursor
 from django.forms import ImageField
 from regex import P
 from tkcalendar import DateEntry
@@ -34,7 +35,7 @@ def expenseaccount():
         expdesc = expdescription.get()
         expgtype = expgst.get()
         exptaxval = exptaxcode.get()
-        e = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        e = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(e, [(expacctype), (expname), (expdtype), (expdesc), (expgtype), (exptaxval), ])
         shajeerdata.commit()
@@ -69,13 +70,7 @@ def expenseaccount():
     explabel4 = tk.Label(expframe2, text='Detail Type', bg='#243e54',
                          foreground='white', font=('poppins', 14)).place(relx=0.01, rely=0.25)
 
-    def expcomboinput():
-        shajeercursor.execute("SELECT itemname FROM itemmodel")
-        val = shajeercursor.fetchall()
-        for row in val:
-            cont.append(row[0])
     cont=[]
-    expcomboinput()
 
     expdetailtype = ttk.Combobox(expframe2, values=cont).place(
         relx=0.01, rely=0.35, relwidth=0.47, relheight=0.08)
@@ -135,7 +130,7 @@ def incomeaccount():
         incdesc = incdescription.get()
         incgtype = incgst.get()
         inctaxval = inctaxcode.get()
-        i = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        i = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(i, [(incacctype), (incname), (incdtype), (incdesc), (incgtype), (inctaxval), ])
         shajeerdata.commit()
@@ -236,7 +231,7 @@ def inventoryasset():
         invdesc = invdescription.get()
         invgtype = invgst.get()
         invtaxval = invtaxcode.get()
-        inv = '''INSERT INTO expaccount(acctype,name,detype,description,gst,deftaxcode) 
+        inv = '''INSERT INTO expaccount(acctype,name,detype,prodescription,gst,deftaxcode) 
             VALUES (%s,%s,%s,%s,%s,%s)'''
         shajeercursor.execute(inv, [(invacctype), (invname), (invdtype), (invdesc), (invgtype), (invtaxval), ])
         shajeerdata.commit()
@@ -329,6 +324,7 @@ def inventoryasset():
 
 def add_inventory_product():
     def invproduct():
+        
         product_image = uploadproductimage.get()
         Product_name = invproductname.get()
         sku = invsku.get()
@@ -339,7 +335,7 @@ def add_inventory_product():
         As_of_date = invdate.get()
         Low_Stock_alert = invlsa.get()
         Inventory_asset_account = invinventoryassets.get()
-        description = invdescription.get()
+        prodescription = invdescription.get()
         Sales_price = invsalesprice.get()
         Tax = invtax.get()
         Income_Account = invincomeaccount.get()
@@ -349,9 +345,8 @@ def add_inventory_product():
         Expense_account = invexpaccount.get()
         Reverse_charge = invreversecharge.get()
         Preferred_Supplier = invprefferdsupplier.get()
-        cctbn = Checkcosttax.get()
-        cspbn = Checksalesprice.get()
-        # print(mob,fname)
+        checkcostbn = Checkcosttax.get()
+        checksalebn = Checksalesprice.get()
         if product_image == '':
             messagebox.showerror('Error', 'Please select the image', parent=B)
         elif Product_name == '':
@@ -375,9 +370,9 @@ def add_inventory_product():
                 messagebox.showerror('Error', 'Please enter the Low_Stock_alert', parent=B)
         elif Inventory_asset_account == '':
                 messagebox.showerror('Error', 'Please enter the Inventory_asset_account', parent=B)
-        elif description == '':
+        elif prodescription == '':
             messagebox.showerror(
-                'Error', 'Please enter the description', parent=B)
+                'Error', 'Please enter the prodescription', parent=B)
        
         elif Sales_price == '':
             messagebox.showerror(
@@ -397,7 +392,7 @@ def add_inventory_product():
         elif Purchasetax == '':
             messagebox.showerror(
                 'Error', 'Please enter the purchase tax', parent=B)
-        elif expenseaccount == '':
+        elif Expense_account == '':
             messagebox.showerror(
                 'Error', 'Please enter the expense account', parent=B)
         elif reversecharge == '':
@@ -406,29 +401,220 @@ def add_inventory_product():
         elif Preferred_Supplier == '':
             messagebox.showerror(
                 'Error', 'Please enter the Preferred_Supplier', parent=B)
-        elif cctbn == 0:
-            cctbn.config(
+        elif checkcostbn == 0:
+            checkcostbn.config(
                 text='Please agree the Inclusive of tax', fg='red')
-        elif cspbn == 0:
-            cspbn.config(
+        elif checksalebn == 0:
+            checksalebn.config(
                 text='Please agree the Inclusive of purchase tax', fg='red')
         else:
-            cctbn.config(text='checked', fg='green')
+            checkcostbn.config(text='checked', fg='green')
+            tg='''INSERT INTO inventory (product_image,product_name,sku,hsn,unit,category,Initial_quantity_in_hand,As_of_date,Low_stock_alert,Inventory_asset_account,prodescription,Sales_price,Tax,
+            Income_account,Purchasing_information,cost,Purchase_tax,Expense_account,Reverse_charge,Preferred_Supplier)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
             # selecting entire table from db,taking username , nd check the existance
-            sql = 'SELECT * FROM Products WHERE Productname=%s'
-            val = (invproductname)
-            shajeercursor.execute(sql, val)
-            if shajeercursor.fetchone() is not None:
-                messagebox.showerror('error', ' product already exist!!')
-            else:
-                sql = "INSERT INTO products (Image,Productname,SKU,HSN,Unit,Category,Initial_quantity_in_hand,As_of_date,Low_Stock_alert,Inventory_asset_account,description,Sales_price,Tax,Income_Account,Purchasing_information,Cost,Purchasetax,Expense_account,Reverse_charge,Preferred_Supplier) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"  # adding values into db
-                val = (product_image, Product_name, sku, hsn, Unit, Category, Initial_quantity_in_hand, As_of_date, Low_Stock_alert, Inventory_asset_account,
-                   description, Sales_price, Tax, Income_Account, Purchasing_information, Cost, Purchasetax, Expense_account, Reverse_charge, Preferred_Supplier)
-                shajeercursor.execute(sql, val)
-                shajeerdata.commit()
-                shajeerdata.close()
-                messagebox.showinfo('New product Added')
+            shajeercursor.execute(tg,[(product_image),(Product_name),(sku),(hsn),(Unit),(Category),(Initial_quantity_in_hand),(As_of_date),(Low_Stock_alert),(Inventory_asset_account),(prodescription),(Sales_price),(Tax),
+                            (Income_Account),(Purchasing_information),(Cost),(Purchasetax),(Expense_account),(reversecharge),(Preferred_Supplier),])
+            shajeerdata.commit()
+            messagebox.showinfo('Sucessfully','product added sucessfully')
 
+
+
+    global B
+    B = tk.Toplevel(A)
+    B.title('Add products')
+    B.geometry('1400x700')
+    mycanvas = tk.Canvas(B, width=1500, height=1800)
+    mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+    yscrollbar = ttk.Scrollbar(B, orient='vertical', command=mycanvas.yview)
+    yscrollbar.pack(side=RIGHT, fill=Y)
+    mycanvas.configure(yscrollcommand=yscrollbar.set)
+    mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
+        scrollregion=mycanvas.bbox('all')))
+    frame = tk.Frame(mycanvas)
+    frame['bg'] = '#2f516f'
+    mycanvas.create_window((0, 0), window=frame,
+                           anchor='nw', width=1500, height=1800)
+    # head frame
+
+    head1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
+    f1 = font.Font(family='poppins', size=30)  # font
+    lb1 = tk.Label(head1, text='PRODUCT / SERVICE INFORMATION',
+                   bg='#243e54', foreground='white')
+    
+
+    lb1['font'] = f1
+    lb1.place(relx=0.2, rely=0.2)
+    head1.place(relx=0, rely=0.035, relwidth=1, relheight=0.05)
+
+
+
+    # contents frame
+    hd1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
+    
+    hd2 = tk.LabelFrame(frame, borderwidth=0, bg='#2f516f')
+
+    f3 = font.Font(family='poppins', size=18)  # font
+    hd2.place(relx=0.01, rely=0.115, relwidth=0.88, relheight=0.05)
+    lb2 = tk.Label(hd2, text='INVENTORY', bg='#2f516f', foreground='white')
+    producttype = Button(hd2, text="Choose Type", command=selectproducttype,
+                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
+    producttype.place(relx=0.55, rely=0.2, width=350, height=50)
+    f4 = font.Font(family='poppins', size=24)  # font
+    lb2['font'] = f4
+    lb2.place(relx=0.35, rely=0.3)
+
+
+    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", command=uploadimage,
+                  bg="#333333", fg="#fff", font=('mali', 10, 'bold'))
+    uploadproductimage.place(relx=0.4, rely=0.08, width=250, height=50)
+
+    tk.Label(hd1, text='Name', bg='#243e54', foreground='white',
+             font=('poppins', 12)).place(relx=0.01, rely=0.12)
+    # title.grid(row=3,column=2,padx=20,pady=20)
+    invproductname = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.135, relwidth=0.98, relheight=0.018)
+
+    tk.Label(hd1, text='SKU', bg='#243e54', foreground='white',
+             font=('poppins', 12)).place(relx=0.01, rely=0.16)
+    invsku = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.175, relwidth=0.49, relheight=0.018)
+
+    l1=tk.Label(hd1, text='HSN Code', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.16)
+    invhsncode = tk.Entry(hd1, bg='#2f516f').place(
+      relx=0.51, rely=0.175, relwidth=0.48, relheight=0.018)
+    style= ttk.Style()
+    style.theme_use('clam')
+    style.configure("TCombobox", fieldbackground= "#2f516f", background= "#2f516f")
+    tk.Label(hd1, text='Unit', font=('poppins', 12), bg='#243e54',
+            foreground='white').place(relx=0.01, rely=0.2)
+    
+    invunitvalu = ['CHOOSE', 'BAG Bags', 'BAL Bale BOU', 'BDL Bundles', 'BKL Buckles', 'BOX Box', 'BTL Bottles', 'CAN Cans', 'CTN Cartons', 'CCM Cubic centimeters', 'CBM Cubic meters', 'CMS Centimeters', 'DRM Drums', 'DOZ Dozens', 'GGK Great gross GYD', 'GRS GrossGMS', 'KME Kilometre', 'KGS Kilograms', 'KLR Kilo litre',
+                 'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
+    invunit = ttk.Combobox(hd1, values=invunitvalu)
+    invunit.pack()
+    invunit.place(relx=0.01, rely=0.215, relwidth=0.49, relheight=0.018)
+
+    tk.Label(hd1, text='Category', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.2)
+    invcategory = tk.Entry(hd1, bg='#2f516f')
+    invcategory.place(relx=0.51, rely=0.215, relwidth=0.48, relheight=0.018)
+
+    tk.Label(hd1, text='Initial quantity on hand', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.24)
+    invicoh = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.255, relwidth=0.32, relheight=0.018)
+    date = tk.Label(hd1, text='As of date', font=('poppins', 12),
+                    bg='#243e54', foreground='white').place(relx=0.34, rely=0.24)
+    invdate = DateEntry(hd1, bg='#2f516f').place(
+        relx=0.34, rely=0.255, relwidth=0.32, relheight=0.018)
+    
+    web = tk.Label(hd1, text='Low stock alert', font=(
+        'poppins', 12), bg='#243e54', foreground='white')
+    web.place(relx=0.67, rely=0.24)
+    invlsa = tk.Entry(hd1, bg='#2f516f')
+    invlsa.place(relx=0.67, rely=0.255, relwidth=0.32, relheight=0.018)
+    
+    defexp = tk.Label(hd1, text='Inventory asset account', font=(
+        'poppins', 12), bg='#243e54', foreground='white').place(relx=0.01, rely=0.28)
+    invassetsvalues = ['Inventory Assets']
+    invinventoryassets = ttk.Combobox(hd1, values=invassetsvalues)
+    invinventoryassets.current(0)
+    invinventoryassets.place(relx=0.01, rely=0.295,
+                             relwidth=0.44, relheight=0.018)
+
+    tk.Button(hd1, text='+', font=(12), bg='#243e54', command=inventoryasset).place(relx=0.46,
+                                                                      rely=0.295, relwidth=0.03, relheight=0.018)
+
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.32)
+    invdescription = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.335, relwidth=0.98, relheight=0.04)
+
+    tk.Label(hd1, text='Sales price/rate', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.38)
+    Checksalesprice = IntVar()
+    invsalesprice = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.395, relwidth=0.49, relheight=0.018)
+    checkcostbn=Checkbutton(hd1, text="Inclusive of tax ", variable=Checksalesprice, onvalue=1,
+                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.01, rely=0.415)
+    
+    tk.Label(hd1, text='TAX', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.38)
+    invtaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
+                    '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
+    invtax = ttk.Combobox(hd1, values=invtaxvalues)
+    invtax.current(0)
+    invtax.place(relx=0.51, rely=0.395, relwidth=0.48, relheight=0.018)
+    
+    tk.Label(hd1, text='Income account', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.43)
+    incometaxvalues = ['Billable Expense Income', 'Product Sales', 'Sales', 'Sales-Hardware',
+                       'Sales-Software', 'Sales-Support and Maintanance', 'Sales of Product Income', 'Uncategorised Income']
+    tk.Button(hd1, text='+', font=(12), bg='#243e54', command=incomeaccount).place(relx=0.46,
+                                                                     rely=0.445, relwidth=0.03, relheight=0.018)
+    invincomeaccount = ttk.Combobox(hd1, values=incometaxvalues)
+    invincomeaccount.current(0)
+    invincomeaccount
+    invincomeaccount.place(relx=0.01, rely=0.445,
+                           relwidth=0.44, relheight=0.018)
+
+    
+
+    tk.Label(hd1, text='Purchasing information', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.47)
+    invpurchasinginformation = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.485, relwidth=0.98, relheight=0.05)
+
+    tk.Label(hd1, text='Cost', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.01, rely=0.54)
+    Checkcosttax = IntVar()
+    checksalebn=Checkbutton(hd1, text="Inclusive of purchase tax ", variable=Checkcosttax, onvalue=1,
+                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.01, rely=0.575)
+    invcost = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.555, relwidth=0.49, relheight=0.018)
+
+
+
+    tk.Label(hd1, text='Purchase TAX', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.51, rely=0.54)
+    purchasetaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
+                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
+    invpurchasetax = ttk.Combobox(hd1, values=purchasetaxvalues)
+    invpurchasetax.current(0)
+    invpurchasetax.place(relx=0.51, rely=0.555, relwidth=0.48, relheight=0.018)
+
+
+    tds = tk.Label(hd1, text='Expense account', font=(
+        'poppins', 14), bg='#243e54', foreground='white').place(relx=0.01, rely=0.59)
+    invexpaccountvalues = ['Cost of sales']
+    invexpaccount = ttk.Combobox(hd1, values=invexpaccountvalues)
+    invexpaccount.current(0)
+    invexpaccount.place(relx=0.01, rely=0.605, relwidth=0.44, relheight=0.018)
+    tk.Button(hd1, text='+', font=(14), bg='#243e54', command=expenseaccount).place(relx=0.45,
+                                                                      rely=0.605, relwidth=0.03, relheight=0.018)
+
+    reversecharge = tk.Label(hd1, text='Reverse Charge %', bg='#243e54',
+                             foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.63)
+    invreversecharge = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.645, relwidth=0.49, relheight=0.018)
+
+    invprefferdsupplier = tk.Label(hd1, text='Preferred Supplier', bg='#243e54',
+                                foreground='white', font=('poppins', 12)).place(relx=0.51, rely=0.63)
+    invprefferdsupplier = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.51, rely=0.645, relwidth=0.48, relheight=0.018)
+
+    invsubmit = tk.Button(hd1, text='SUBMIT', font=14, bg='#5193e6', foreground='white',
+                          command=invproduct).place(relx=0.4, rely=0.69,width=250, height=40)
+
+    hd1.place(relx=0, rely=0.1, relwidth=0.9, relheight=1.2)
+
+    # tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.4,relwidth=1,relheight=0.01)
+    B.mainloop()
+
+
+def add_non_inventoryproduct():
 
     global B
     B = tk.Toplevel(A)
@@ -444,344 +630,133 @@ def add_inventory_product():
     frame = tk.Frame(mycanvas)
     frame['bg'] = '#2f516f'
     mycanvas.create_window((0, 0), window=frame,
-                           anchor='nw', width=1500, height=1000)
+                           anchor='nw', width=1500, height=1800)
     # head frame
 
     head1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
     f1 = font.Font(family='poppins', size=30)  # font
     lb1 = tk.Label(head1, text='PRODUCT / SERVICE INFORMATION',
                    bg='#243e54', foreground='white')
+    
 
     lb1['font'] = f1
     lb1.place(relx=0.2, rely=0.2)
-    head1.place(relx=0, rely=0.05, relwidth=1, relheight=0.08)
+    head1.place(relx=0, rely=0.035, relwidth=1, relheight=0.05)
 
-    head3 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-    f2 = font.Font(family='poppins', size=25)  # font
-    lb2 = tk.Label(head3, text='INVENTORY', bg='#243e54', foreground='white')
-    producttype = Button(head3, text="Choose Type", command=selectproducttype,
-                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
-    producttype.place(relx=0.5, rely=0.2, width=250, height=40)
 
-    lb2['font'] = f2
-    lb2.place(relx=0.3, rely=0.2)
-    head3.place(relx=0, rely=0.15, relwidth=1, relheight=0.08)
-
-    # Productimage = ImageField()
-    # Product_name = StringVar()
-    # sku = StringVar()
-    # hsn = StringVar()
-    # Unit = StringVar()
-    # Category = StringVar()
-    # Initial_quantity_in_hand = StringVar()
-    # As_of_date = StringVar()
-    # Low_Stock_alert = StringVar()
-    # Inventory_asset_account = StringVar()
-    # description = StringVar()
-    # Sales_price = StringVar()
-    # Tax = StringVar()
-    # Income_Account = StringVar()
-    # Purchasing_information = StringVar()
-    # Cost = StringVar()
-    # Purchasetax = StringVar()
-    # Expense_account = StringVar()
-    # Reverse_charge = StringVar()
-    # Preferred_Supplier = StringVar()
 
     # contents frame
     hd1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
+    
+    hd2 = tk.LabelFrame(frame, borderwidth=0, bg='#2f516f')
 
     f3 = font.Font(family='poppins', size=18)  # font
-    hd1.place(relx=0, rely=0.06, relwidth=1, relheight=0.1)
+    hd2.place(relx=0.01, rely=0.115, relwidth=0.88, relheight=0.05)
+    lb2 = tk.Label(hd2, text='NON INVENTORY', bg='#2f516f', foreground='white')
+    producttype = Button(hd2, text="Choose Type", command=selectproducttype,
+                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
+    producttype.place(relx=0.58, rely=0.2, width=350, height=50)
+    f4 = font.Font(family='poppins', size=24)  # font
+    lb2['font'] = f4
+    lb2.place(relx=0.35, rely=0.3)
+
 
     uploadproductimage = Button(hd1, text="UPLOAD IMAGE", command=uploadimage,
-                  bg="black", fg="#fff", font=('mali', 10, 'bold'))
-    uploadproductimage.place(relx=0.8, rely=0.02, width=250, height=30)
+                  bg="#333333", fg="#fff", font=('mali', 10, 'bold'))
+    uploadproductimage.place(relx=0.4, rely=0.08, width=250, height=50)
 
     tk.Label(hd1, text='Name', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.02, rely=0.05)
+             font=('poppins', 12)).place(relx=0.01, rely=0.12)
     # title.grid(row=3,column=2,padx=20,pady=20)
-    invproductname = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.02, rely=0.08, relwidth=0.3, relheight=0.035)
+    noninvproductname = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.135, relwidth=0.98, relheight=0.018)
 
     tk.Label(hd1, text='SKU', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.35, rely=0.05)
-    invsku = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.35, rely=0.08, relwidth=0.3, relheight=0.035)
+             font=('poppins', 12)).place(relx=0.01, rely=0.16)
+    noninvsku = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.175, relwidth=0.49, relheight=0.018)
 
-    tk.Label(hd1, text='HSN Code', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.68, rely=0.05)
-    invhsncode = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.68, rely=0.08, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Unit', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.02, rely=0.13)
+    l1=tk.Label(hd1, text='HSN Code', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.16)
+    noninvhsncode = tk.Entry(hd1, bg='#2f516f').place(
+      relx=0.51, rely=0.175, relwidth=0.48, relheight=0.018)
+    style= ttk.Style()
+    style.theme_use('clam')
+    style.configure("TCombobox", fieldbackground= "#2f516f", background= "#2f516f")
+    tk.Label(hd1, text='Unit', font=('poppins', 12), bg='#243e54',
+            foreground='white').place(relx=0.01, rely=0.2)
+    
     invunitvalu = ['CHOOSE', 'BAG Bags', 'BAL Bale BOU', 'BDL Bundles', 'BKL Buckles', 'BOX Box', 'BTL Bottles', 'CAN Cans', 'CTN Cartons', 'CCM Cubic centimeters', 'CBM Cubic meters', 'CMS Centimeters', 'DRM Drums', 'DOZ Dozens', 'GGK Great gross GYD', 'GRS GrossGMS', 'KME Kilometre', 'KGS Kilograms', 'KLR Kilo litre',
-                   'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
-    invunit = ttk.Combobox(hd1, values=invunitvalu)
-    invunit.current(0)
-    invunit.place(relx=0.02, rely=0.16, relwidth=0.3, relheight=0.035)
+                 'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
+    noninvunit = ttk.Combobox(hd1, values=invunitvalu)
+    noninvunit.pack()
+    noninvunit.place(relx=0.01, rely=0.215, relwidth=0.49, relheight=0.018)
 
-    tk.Label(hd1, text='Category', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.35, rely=0.13)
-    invcategory = tk.Entry(hd1, bg='#2f516f')
-    invcategory.place(relx=0.35, rely=0.16, relwidth=0.3, relheight=0.035)
+    tk.Label(hd1, text='Category', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.2)
+    noninvcategory = tk.Entry(hd1, bg='#2f516f')
+    noninvcategory.place(relx=0.51, rely=0.215, relwidth=0.48, relheight=0.018)
 
-    tk.Label(hd1, text='Low stock alert', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.68, rely=0.13)
-    invlsa = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.68, rely=0.16, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Description', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.20)
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.24)
+    Checkbutton(hd1, text="I sell this product/service to my customers. ",
+                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.255)
+    
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.28)
     invdescription = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.02, rely=0.24, relwidth=0.3, relheight=0.035)
+        relx=0.01, rely=0.3, relwidth=0.98, relheight=0.07)
 
-    tk.Label(hd1, text='Sales price/rate', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.35, rely=0.20)
+    tk.Label(hd1, text='Sales price/rate', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.38)
     Checksalesprice = IntVar()
-    cctbn=Checkbutton(frame, text="Inclusive of tax ", variable=Checksalesprice, onvalue=1,
-                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.35, rely=0.255)
     invsalesprice = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.35, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    web = tk.Label(hd1, text='Initial quantity on hand', font=(
-        'poppins', 14), bg='#243e54', foreground='white')
-    web.place(relx=0.68, rely=0.20)
-    invicoh = tk.Entry(hd1, bg='#2f516f')
-
-    invicoh.place(relx=0.68, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Purchasing information', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.28)
-    invpurchasinginformation = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.02, rely=0.31, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Cost', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.35, rely=0.28)
-    Checkcosttax = IntVar()
-    cspbn=Checkbutton(frame, text="Inclusive of purchase tax ", variable=Checkcosttax, onvalue=1,
-                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.4, rely=0.55)
-    invcost = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.35, rely=0.31, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='TAX', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.02, rely=0.35)
+        relx=0.01, rely=0.395, relwidth=0.49, relheight=0.018)
+    checkcostbn=Checkbutton(hd1, text="Inclusive of tax ", variable=Checksalesprice, onvalue=1,
+                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.01, rely=0.415)
+    
+    tk.Label(hd1, text='TAX', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.38)
     invtaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                     '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invtax = ttk.Combobox(hd1, values=invtaxvalues)
     invtax.current(0)
-    invtax.place(relx=0.02, rely=0.38, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Purchase TAX', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.35, rely=0.35)
-    purchasetaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
-                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
-    invpurchasetax = ttk.Combobox(hd1, values=purchasetaxvalues)
-    invpurchasetax.current(0)
-    invpurchasetax.place(relx=0.35, rely=0.38, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Income account', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.68, rely=0.35)
+    invtax.place(relx=0.51, rely=0.395, relwidth=0.48, relheight=0.018)
+    
+    tk.Label(hd1, text='Income account', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.43)
     incometaxvalues = ['Billable Expense Income', 'Product Sales', 'Sales', 'Sales-Hardware',
                        'Sales-Software', 'Sales-Support and Maintanance', 'Sales of Product Income', 'Uncategorised Income']
-    tk.Button(hd1, text='+', font=(14), command=incomeaccount).place(relx=0.955,
-                                                                     rely=0.38, relwidth=0.025, relheight=0.035)
+    tk.Button(hd1, text='+', font=(12), bg='#243e54', command=incomeaccount).place(relx=0.46,
+                                                                     rely=0.445, relwidth=0.03, relheight=0.018)
     invincomeaccount = ttk.Combobox(hd1, values=incometaxvalues)
     invincomeaccount.current(0)
     invincomeaccount
-    invincomeaccount.place(relx=0.68, rely=0.38,
-                           relwidth=0.27, relheight=0.035)
+    invincomeaccount.place(relx=0.01, rely=0.445,
+                           relwidth=0.44, relheight=0.018)
 
-    date = tk.Label(hd1, text='As of date', font=('poppins', 14),
-                    bg='#243e54', foreground='white').place(relx=0.02, rely=0.42)
-    invdate = DateEntry(hd1, bg='#2f516f').place(
-        relx=0.02, rely=0.45, relwidth=0.3, relheight=0.035)
+    
 
-    defexp = tk.Label(hd1, text='Inventory asset account', font=(
-        'poppins', 14), bg='#243e54', foreground='white').place(relx=0.35, rely=0.42)
-    invassetsvalues = ['Inventory Assets']
-    invinventoryassets = ttk.Combobox(hd1, values=invassetsvalues)
-    invinventoryassets.current(0)
-    invinventoryassets.place(relx=0.35, rely=0.45,
-                             relwidth=0.27, relheight=0.035)
-
-    tk.Button(hd1, text='+', font=(14), command=inventoryasset).place(relx=0.625,
-                                                                      rely=0.45, relwidth=0.025, relheight=0.035)
-
-    tds = tk.Label(hd1, text='Expense account', font=(
-        'poppins', 14), bg='#243e54', foreground='white').place(relx=0.68, rely=0.42)
-    invexpaccountvalues = ['Cost of sales']
-    invexpaccount = ttk.Combobox(hd1, values=invexpaccountvalues)
-    invexpaccount.current(0)
-    invexpaccount.place(relx=0.68, rely=0.45, relwidth=0.27, relheight=0.035)
-    tk.Button(hd1, text='+', font=(14), command=expenseaccount).place(relx=0.955,
-                                                                      rely=0.45, relwidth=0.025, relheight=0.035)
-
-    reversecharge = tk.Label(hd1, text='Reverse Charge %', bg='#243e54',
-                             foreground='white', font=('poppins', 14)).place(relx=0.02, rely=0.53)
-    invreversecharge = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.02, rely=0.57, relwidth=0.63, relheight=0.035)
-
-    prefferdsupplier = tk.Label(hd1, text='Preferred Supplier', bg='#243e54',
-                                foreground='white', font=('poppins', 14)).place(relx=0.68, rely=0.53)
-    invprefferdsupplier = tk.Entry(hd1, bg='#2f516f').place(
-        relx=0.68, rely=0.57, relwidth=0.3, relheight=0.035)
-
-    invsubmit = tk.Button(hd1, text='SUBMIT', font=15, bg='#5193e6', foreground='white',
-                          command=add_inventory_product).place(relx=0.02, rely=0.65)
-
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
-
-    # tk.Frame(frame,bg='#2f516f').place(relx=0,rely=0.4,relwidth=1,relheight=0.01)
-    B.mainloop()
-
-
-def add_non_inventoryproduct():
-
-    global B
-    B = tk.Toplevel(A)
-    B.title('Add products')
-    B.geometry('1400x700')
-    mycanvas = tk.Canvas(B, width=1500, height=1000)
-    mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
-    yscrollbar = ttk.Scrollbar(B, orient='vertical', command=mycanvas.yview)
-    yscrollbar.pack(side=RIGHT, fill=Y)
-    mycanvas.configure(yscrollcommand=yscrollbar.set)
-    mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
-        scrollregion=mycanvas.bbox('all')))
-    frame = tk.Frame(mycanvas)
-    frame['bg'] = '#2f516f'
-    mycanvas.create_window((0, 0), window=frame,
-                           anchor='nw', width=1500, height=1000)
-    # head frame
-
-    head1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-    f1 = font.Font(family='poppins', size=30)  # font
-    lb1 = tk.Label(head1, text='PRODUCT / SERVICE INFORMATION',
-                   bg='#243e54', foreground='white')
-
-    # but = Button(root,text = "UPLOAD IMAGE",bg="black",fg="#fff",font=('mali', 10, 'bold'))
-    # but.place(x=550,y=350,width=250,height=40)
-
-    lb1['font'] = f1
-    lb1.place(relx=0.2, rely=0.2)
-    head1.place(relx=0, rely=0.05, relwidth=1, relheight=0.08)
-
-    head3 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-    f2 = font.Font(family='poppins', size=25)  # font
-    lb2 = tk.Label(head3, text='NON INVENTORY',
-                   bg='#243e54', foreground='white')
-    bu = Button(head3, text="Choose Type", command=selectproducttype,
-                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
-    bu.place(relx=0.5, rely=0.2, width=250, height=40)
-
-    lb2['font'] = f2
-    lb2.place(relx=0.3, rely=0.2)
-    head3.place(relx=0, rely=0.15, relwidth=1, relheight=0.08)
-
-    # contents frame
-    hd1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-
-    f3 = font.Font(family='poppins', size=18)  # font
-    hd1.place(relx=0, rely=0.06, relwidth=1, relheight=0.1)
-
-    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", bg="black",
-                  fg="#fff", font=('mali', 10, 'bold'))
-    uploadproductimage.place(relx=0.8, rely=0.02, width=250, height=30)
-
-    tk.Label(hd1, text='Name', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.02, rely=0.05)
-    # title.grid(row=3,column=2,padx=20,pady=20)
-    productname = tk.Entry(hd1).place(
-        relx=0.02, rely=0.08, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='SKU', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.35, rely=0.05)
-    sku = tk.Entry(hd1).place(relx=0.35, rely=0.08,
-                              relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='HSN Code', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.68, rely=0.05)
-    phsncode = tk.Entry(hd1).place(relx=0.68, rely=0.08,
-                                   relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Unit', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.02, rely=0.13)
-    valu = ['BAG Bags', 'BAL Bale BOU', 'BDL Bundles', 'BKL Buckles', 'BOX Box', 'BTL Bottles', 'CAN Cans', 'CTN Cartons', 'CCM Cubic centimeters', 'CBM Cubic meters', 'CMS Centimeters', 'DRM Drums', 'DOZ Dozens', 'GGK Great gross GYD', 'GRS GrossGMS', 'KME Kilometre', 'KGS Kilograms', 'KLR Kilo litre',
-            'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
-    punit = ttk.Combobox(hd1, values=valu).place(
-        relx=0.02, rely=0.16, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Category', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.35, rely=0.13)
-    invcategory = tk.Entry(hd1)
-    invcategory.place(relx=0.35, rely=0.16, relwidth=0.3, relheight=0.035)
-
-    # tk.Label(hd1,text='Low stock alert',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.13)
-    # invlsa=tk.Entry(hd1).place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
-
-    tk.Label(hd1, text='Description', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.20)
-    Checkbutton(frame, text="I sell this product/service to my customers. ",
-                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.1, rely=0.48)
-    invdescription = tk.Entry(hd1).place(
-        relx=0.02, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Sales price/rate', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.35, rely=0.20)
-    Checkbutton(frame, text="Inclusive of purchase tax ", bg='#243e54',
-                foreground='white', font=('poppins', 12)).place(relx=0.31, rely=0.55)
-
-    invsalesprice = tk.Entry(hd1).place(
-        relx=0.35, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    web = tk.Label(hd1, text='Initial quantity on hand', font=(
-        'poppins', 14), bg='#243e54', foreground='white')
-    web.place(relx=0.68, rely=0.20)
-    invicoh = tk.Entry(hd1)
-
-    invicoh.place(relx=0.68, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Purchasing information', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.28)
-    Checkbutton(frame, text="I Purchase this product/service from Supplier. ",
+    tk.Label(hd1, text='Purchasing information', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.54)
+    invpurchasinginformation = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.485, relwidth=0.98, relheight=0.07)
+    tk.Label(hd1, text='Purchasing information', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.56)
+    Checkbutton(hd1, text="I Purchase this product/service from Supplier. ",
                 bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.58)
 
-    tk.Label(hd1, text='TAX', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.02, rely=0.35)
-    invtaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
-                    '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
-    invtax = ttk.Combobox(hd1, values=invtaxvalues)
-    invtax.current(0)
-    invtax.place(relx=0.02, rely=0.38, relwidth=0.3, relheight=0.035)
+    invsubmit = tk.Button(hd1, text='SUBMIT', font=14, bg='#5193e6', foreground='white',
+                          ).place(relx=0.4, rely=0.69,width=250, height=40)
 
-    tk.Label(hd1, text='Income account', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.68, rely=0.13)
-    incometaxvalues = ['Billable Expense Income', 'Product Sales', 'Sales', 'Sales-Hardware',
-                       'Sales-Software', 'Sales-Support and Maintanance', 'Sales of Product Income', 'Uncategorised Income']
-    invincomeaccount = ttk.Combobox(hd1, values=incometaxvalues)
-    invincomeaccount.current(0)
-    invincomeaccount.place(relx=0.68, rely=0.16,
-                           relwidth=0.27, relheight=0.035)
-    tk.Button(hd1, text='+', font=(14), command=incomeaccount).place(relx=0.955,
-                                                                     rely=0.16, relwidth=0.025, relheight=0.035)
+    hd1.place(relx=0, rely=0.1, relwidth=0.9, relheight=1.2)
 
-    sub = tk.Button(hd1, text='SUBMIT', font=15, bg='#5193e6',
-                    foreground='white').place(relx=0.02, rely=0.65)
-
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
-
-    tk.Frame(frame, bg='#2f516f').place(
-        relx=0, rely=0.92, relwidth=1, relheight=0.07)
+    
     B.mainloop()
 
 
 def add_services():
-    def add_product25():
-        L = tk.Toplevel(B)
-        L.title('PRODUCT / SERVICE INFORMATION')
-        L.geometry('1400x700')
+
 
     global B
     B = tk.Toplevel(A)
@@ -797,149 +772,140 @@ def add_services():
     frame = tk.Frame(mycanvas)
     frame['bg'] = '#2f516f'
     mycanvas.create_window((0, 0), window=frame,
-                           anchor='nw', width=1500, height=1000)
+                           anchor='nw', width=1500, height=1800)
     # head frame
 
     head1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
     f1 = font.Font(family='poppins', size=30)  # font
     lb1 = tk.Label(head1, text='PRODUCT / SERVICE INFORMATION',
                    bg='#243e54', foreground='white')
-
-    # but = Button(root,text = "UPLOAD IMAGE",bg="black",fg="#fff",font=('mali', 10, 'bold'))
-    # but.place(x=550,y=350,width=250,height=40)
+    
 
     lb1['font'] = f1
     lb1.place(relx=0.2, rely=0.2)
-    head1.place(relx=0, rely=0.05, relwidth=1, relheight=0.08)
+    head1.place(relx=0, rely=0.035, relwidth=1, relheight=0.05)
 
-    head3 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-    f2 = font.Font(family='poppins', size=25)  # font
-    lb2 = tk.Label(head3, text='SERVICES', bg='#243e54', foreground='white')
-    bu = Button(head3, text="Choose Type", command=selectproducttype,
-                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
-    bu.place(relx=0.5, rely=0.2, width=250, height=40)
 
-    lb2['font'] = f2
-    lb2.place(relx=0.3, rely=0.2)
-    head3.place(relx=0, rely=0.15, relwidth=1, relheight=0.08)
 
     # contents frame
     hd1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
+    
+    hd2 = tk.LabelFrame(frame, borderwidth=0, bg='#2f516f')
 
     f3 = font.Font(family='poppins', size=18)  # font
-    hd1.place(relx=0, rely=0.06, relwidth=1, relheight=0.1)
+    hd2.place(relx=0.01, rely=0.115, relwidth=0.88, relheight=0.05)
+    lb2 = tk.Label(hd2, text='SERVICES', bg='#2f516f', foreground='white')
+    producttype = Button(hd2, text="Choose Type", command=selectproducttype,
+                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
+    producttype.place(relx=0.58, rely=0.2, width=350, height=50)
+    f4 = font.Font(family='poppins', size=24)  # font
+    lb2['font'] = f4
+    lb2.place(relx=0.35, rely=0.3)
 
-    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", bg="black",
-                  fg="#fff", font=('mali', 10, 'bold'))
-    uploadproductimage.place(relx=0.8, rely=0.02, width=250, height=30)
+
+    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", command=uploadimage,
+                  bg="#333333", fg="#fff", font=('mali', 10, 'bold'))
+    uploadproductimage.place(relx=0.4, rely=0.08, width=250, height=50)
 
     tk.Label(hd1, text='Name', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.02, rely=0.05)
+             font=('poppins', 12)).place(relx=0.01, rely=0.12)
     # title.grid(row=3,column=2,padx=20,pady=20)
-    productname = tk.Entry(hd1).place(
-        relx=0.02, rely=0.08, relwidth=0.3, relheight=0.035)
+    noninvproductname = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.135, relwidth=0.98, relheight=0.018)
 
     tk.Label(hd1, text='SKU', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.35, rely=0.05)
-    sku = tk.Entry(hd1).place(relx=0.35, rely=0.08,
-                              relwidth=0.3, relheight=0.035)
+             font=('poppins', 12)).place(relx=0.01, rely=0.16)
+    noninvsku = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.175, relwidth=0.49, relheight=0.018)
 
-    tk.Label(hd1, text='SAC Code', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.68, rely=0.05)
-    phsncode = tk.Entry(hd1).place(relx=0.68, rely=0.08,
-                                   relwidth=0.3, relheight=0.035)
+    l1=tk.Label(hd1, text='SAC Code', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.16)
+    noninvhsncode = tk.Entry(hd1, bg='#2f516f').place(
+      relx=0.51, rely=0.175, relwidth=0.48, relheight=0.018)
+    style= ttk.Style()
+    style.theme_use('clam')
+    style.configure("TCombobox", fieldbackground= "#2f516f", background= "#2f516f")
+    tk.Label(hd1, text='Unit', font=('poppins', 12), bg='#243e54',
+            foreground='white').place(relx=0.01, rely=0.2)
+    
+    invunitvalu = ['CHOOSE', 'BAG Bags', 'BAL Bale BOU', 'BDL Bundles', 'BKL Buckles', 'BOX Box', 'BTL Bottles', 'CAN Cans', 'CTN Cartons', 'CCM Cubic centimeters', 'CBM Cubic meters', 'CMS Centimeters', 'DRM Drums', 'DOZ Dozens', 'GGK Great gross GYD', 'GRS GrossGMS', 'KME Kilometre', 'KGS Kilograms', 'KLR Kilo litre',
+                 'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
+    noninvunit = ttk.Combobox(hd1, values=invunitvalu)
+    noninvunit.pack()
+    noninvunit.place(relx=0.01, rely=0.215, relwidth=0.49, relheight=0.018)
 
-    tk.Label(hd1, text='Unit', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.02, rely=0.13)
-    valu = ['BAG Bags', 'BAL Bale BOU', 'BDL Bundles', 'BKL Buckles', 'BOX Box', 'BTL Bottles', 'CAN Cans', 'CTN Cartons', 'CCM Cubic centimeters', 'CBM Cubic meters', 'CMS Centimeters', 'DRM Drums', 'DOZ Dozens', 'GGK Great gross GYD', 'GRS GrossGMS', 'KME Kilometre', 'KGS Kilograms', 'KLR Kilo litre',
-            'MTS Metric ton', 'MLT Mili litre', 'MTR Meters', 'NOS Numbers', 'PAC Packs', 'PCS Pieces', 'PRS Pairs', 'QTL Quintal', 'ROL Rolls', 'SQY Square Yards', 'SET Sets', 'SQF Square feet', 'SQM Square meters', 'TBS Tablets', 'TUB Tubes', 'TGM Ten Gross', 'THD Thousands', 'TON Tonnes', 'UNT Units', 'lons', 'YDS Yards']
-    punit = ttk.Combobox(hd1, values=valu).place(
-        relx=0.02, rely=0.16, relwidth=0.3, relheight=0.035)
+    tk.Label(hd1, text='Category', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.2)
+    noninvcategory = tk.Entry(hd1, bg='#2f516f')
+    noninvcategory.place(relx=0.51, rely=0.215, relwidth=0.48, relheight=0.018)
 
-    tk.Label(hd1, text='Category', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.35, rely=0.13)
-    invcategory = tk.Entry(hd1)
-    invcategory.place(relx=0.35, rely=0.16, relwidth=0.3, relheight=0.035)
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.24)
+    Checkbutton(hd1, text="I sell this product/service to my customers. ",
+                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.255)
+    
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.28)
+    invdescription = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.3, relwidth=0.98, relheight=0.07)
 
-    # tk.Label(hd1,text='Low stock alert',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.13)
-    # invlsa=tk.Entry(hd1).place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
-
-    tk.Label(hd1, text='Description', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.20)
-    Checkbutton(frame, text="I sell this product/service to my customers. ",
-                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.1, rely=0.48)
-    invdescription = tk.Entry(hd1).place(
-        relx=0.02, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Sales price/rate', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.35, rely=0.20)
-    Checkbutton(frame, text="Inclusive of purchase tax ", bg='#243e54',
-                foreground='white', font=('poppins', 12)).place(relx=0.4, rely=0.48)
-    invsalesprice = tk.Entry(hd1).place(
-        relx=0.35, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='TAX', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.68, rely=0.20)
+    tk.Label(hd1, text='Sales price/rate', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.38)
+    Checksalesprice = IntVar()
+    invsalesprice = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.395, relwidth=0.49, relheight=0.018)
+    checkcostbn=Checkbutton(hd1, text="Inclusive of tax ", variable=Checksalesprice, onvalue=1,
+                offvalue=0, bg='#243e54', font=('poppins', 12)).place(relx=0.01, rely=0.415)
+    
+    tk.Label(hd1, text='TAX', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.38)
     invtaxvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                     '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invtax = ttk.Combobox(hd1, values=invtaxvalues)
     invtax.current(0)
-    invtax.place(relx=0.68, rely=0.24, relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Abatement %', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.28)
-    invpurchasinginformation = tk.Entry(hd1).place(
-        relx=0.02, rely=0.31, relwidth=0.3, relheight=0.035)
-
-    # tk.Label(hd1,text='Cost',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.28)
-    # Checkbutton(frame, text = "Inclusive of purchase tax ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.4,rely=0.55)
-    # invcost=tk.Entry(hd1).place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
-
-    # tk.Label(hd1,text='TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.35)
-    # invtaxvalues=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
-    # invtax=ttk.Combobox(hd1,values=invtaxvalues)
-    # invtax.current(0)
-    # invtax.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.035)
-
-    # tk.Label(hd1,text='Purchase TAX',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.35)
-    # purchasetaxvalues=['CHOOSE','28.0% GST (28%)','28.0% IGST (28%)','18.0% GST (18%)','18.0% IGST (18%)','15.0% ST (100%)','14.5% ST (100%)','14.00% ST (100%)','14.0% VAT (100%).36','12.36% ST (100%)','12.0% GST (12%)','12.0% IGST (12%)','6.0% GST (6%)','6.0% IGST (6%)','5.0% GST (5%)','5.0% IGST (5%)','5.0% VAT (100%)','4.0% VAT (100%)','3.0% GST (3%)','3.0% IGST (3%)','2.0% CST (100%)','25>0.25% GST (0.25%)25','0.25% IGST (0.25%)','0% GST (0%)','0% IGST (0%)','Exempt GST (0%)','Exempt IGST (0%)','Out of Scope(0%)']
-    # invpurchasetax=ttk.Combobox(hd1,values=purchasetaxvalues)
-    # invpurchasetax.current(0)
-    # invpurchasetax.place(relx=0.35,rely=0.38,relwidth=0.3,relheight=0.035)
-
-    tk.Label(hd1, text='Income account', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.68, rely=0.28)
+    invtax.place(relx=0.51, rely=0.395, relwidth=0.48, relheight=0.018)
+    
+    tk.Label(hd1, text='Income account', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.43)
     incometaxvalues = ['Billable Expense Income', 'Product Sales', 'Sales', 'Sales-Hardware',
                        'Sales-Software', 'Sales-Support and Maintanance', 'Sales of Product Income', 'Uncategorised Income']
+    tk.Button(hd1, text='+', font=(12), bg='#243e54', command=incomeaccount).place(relx=0.46,
+                                                                     rely=0.445, relwidth=0.03, relheight=0.018)
     invincomeaccount = ttk.Combobox(hd1, values=incometaxvalues)
     invincomeaccount.current(0)
     invincomeaccount
-    invincomeaccount.place(relx=0.68, rely=0.31,
-                           relwidth=0.27, relheight=0.035)
+    invincomeaccount.place(relx=0.01, rely=0.445,
+                           relwidth=0.44, relheight=0.018)
+
+
+
+    tk.Label(hd1, text='Purchasing information', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.54)
+    invpurchasinginformation = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.485, relwidth=0.98, relheight=0.07)
+    tk.Label(hd1, text='Purchasing information', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.56)
+    Checkbutton(hd1, text="I Purchase this product/service from Supplier. ",
+                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.58)
+    tk.Label(hd1, text='Abatement %', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.6)
+    invpurchasinginformation = tk.Entry(hd1, bg='#243e54').place(
+        relx=0.01, rely=0.62, relwidth=0.49, relheight=0.018)
+
 
     defexp = tk.Label(hd1, text='Service Type', font=(
-        'poppins', 14), bg='#243e54', foreground='white').place(relx=0.35, rely=0.28)
+        'poppins', 12), bg='#243e54', foreground='white').place(relx=0.51, rely=0.6)
     invassetsvalues = ['Stock Broking', 'General Insurance', 'Courier', 'Advertising Agency', 'Consulting Engineer', 'Custom House Agent', 'Steamer Agent', 'Clearing and Forwarding', 'Man power Recruiting', 'Air Travel Agent', 'Tour operator', 'Rent a Cab', 'Architect', 'Interior Director', 'Management Consultment', 'Chartered Accountant', 'Cost Accountant', 'Company Secretary', 'Real Estate Agent', 'Security Agency', 'Credit Rating Agency', 'Market Research Agency', 'Underwriter', 'Beauty Parlor', 'Cargo Handling', 'Cable Operators', 'Dry Cleaning', 'Event Management', 'Fashion Designer', 'Life insurance', 'Scientific and Technical Consultancy', 'Photograghy', 'Convention Services', 'Video Tape Production', 'Sound Recording', 'Broadcasting', 'Insurance Auxilary Service', 'Banking and Other Financial', 'Port Serrvices', 'Authorised Service Station', 'Health Club and fitness centres', 'Rail Travel Agent', 'Storage and Warehousing', 'Business Auxillary', 'Commercial Coaching', 'Erection or Installation', 'Franchise Service', 'Internet Cafe', 'Maintenance or repair', 'Techincal testing', 'Technical Inspection', 'Foreign exchange broking', 'Port', 'Airport Services', 'Air Transport', 'Business Exhibition',
                        'Goods Transport', 'Construction of commerce complex', 'Intellectual property service', 'Opinion poll service', 'Outdoor Catering', 'Television and Radio Programme Production', 'Survey and exploration of minerals', 'Pandal and shamiana', 'Travel Agent', 'Forward Contract Brokerage', 'Transport through pipeline', 'Site Preparation', 'Dredging', 'Survey and map making', 'Cleaning Service', 'Clubs and Association Service', 'Packaging Service', 'Mailing list Compilation', 'Residential Complex Construction', 'Share transfer Agent', 'Atm Manintenance', 'Recovery Agent', 'Sale of space for advertisement', 'Sponsorship', 'International Air travel', 'Containerised rail transport', 'Business Support Service', 'Action Service', 'Public Relation Management', 'Ship Management', 'Internet Telephony', 'Cruise Ship tour', 'Credit Card', 'Telecommuniction Service', 'Mining of Mi,Oil or gas', 'Renting Immovable Property', 'Works Contract', 'Development of Consent', 'Asset Management', 'Design Services', 'Information Technology Services', 'ULIP Management', 'Stock Exchange Service', 'Services for transaction in Goods', 'Clearing House Services', 'Supply of Tangible goods', 'Online Information Retrieval', 'Mandap keeper']
     invinventoryassets = ttk.Combobox(hd1, values=invassetsvalues)
     invinventoryassets.current(0)
-    invinventoryassets.place(relx=0.35, rely=0.31,
-                             relwidth=0.3, relheight=0.035)
+    invinventoryassets.place(relx=0.51, rely=0.62,
+                             relwidth=0.48, relheight=0.018)
 
-    tk.Button(hd1, text='+', font=(14), command=inventoryasset).place(relx=0.955,
-                                                                      rely=0.31, relwidth=0.025, relheight=0.035)
+    invsubmit = tk.Button(hd1, text='SUBMIT', font=14, bg='#5193e6', foreground='white',
+                          ).place(relx=0.4, rely=0.69,width=250, height=40)
 
-    tk.Label(hd1, text='Purchasing information', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.02, rely=0.42)
-    Checkbutton(frame, text="I Purchase this product/service from Supplier. ",
-                bg='#243e54', foreground='white', font=('poppins', 12)).place(relx=0.01, rely=0.7)
-    sub = tk.Button(hd1, text='SUBMIT', font=15, bg='#5193e6',
-                    foreground='white').place(relx=0.02, rely=0.65)
-
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
-
-    tk.Frame(frame, bg='#2f516f').place(
-        relx=0, rely=0.92, relwidth=1, relheight=0.08)
+    hd1.place(relx=0, rely=0.1, relwidth=0.9, relheight=1.2)
     B.mainloop()
 
 
@@ -963,201 +929,198 @@ def add_bundle_product():
     frame = tk.Frame(mycanvas)
     frame['bg'] = '#2f516f'
     mycanvas.create_window((0, 0), window=frame,
-                           anchor='nw', width=1500, height=1000)
+                           anchor='nw', width=1500, height=1800)
     # head frame
 
     head1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
     f1 = font.Font(family='poppins', size=30)  # font
     lb1 = tk.Label(head1, text='PRODUCT / SERVICE INFORMATION',
                    bg='#243e54', foreground='white')
-
-    # but = Button(root,text = "UPLOAD IMAGE",bg="black",fg="#fff",font=('mali', 10, 'bold'))
-    # but.place(x=550,y=350,width=250,height=40)
+    
 
     lb1['font'] = f1
     lb1.place(relx=0.2, rely=0.2)
-    head1.place(relx=0, rely=0.05, relwidth=1, relheight=0.08)
+    head1.place(relx=0, rely=0.035, relwidth=1, relheight=0.05)
 
-    head3 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
-    f2 = font.Font(family='poppins', size=25)  # font
-    lb2 = tk.Label(head3, text='BUNDLE', bg='#243e54', foreground='white')
-    bu = Button(head3, text="Choose Type", command=selectproducttype,
-                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
-    bu.place(relx=0.5, rely=0.2, width=250, height=40)
 
-    lb2['font'] = f2
-    lb2.place(relx=0.3, rely=0.2)
-    head3.place(relx=0, rely=0.15, relwidth=1, relheight=0.08)
 
     # contents frame
     hd1 = tk.LabelFrame(frame, borderwidth=0, bg='#243e54')
+    
+    hd2 = tk.LabelFrame(frame, borderwidth=0, bg='#2f516f')
 
     f3 = font.Font(family='poppins', size=18)  # font
-    hd1.place(relx=0, rely=0.06, relwidth=1, relheight=0.1)
+    hd2.place(relx=0.01, rely=0.115, relwidth=0.88, relheight=0.05)
+    lb2 = tk.Label(hd2, text='BUNDLE', bg='#2f516f', foreground='white')
+    producttype = Button(hd2, text="Choose Type", command=selectproducttype,
+                bg="#5193e6", fg="#fff", font=('mali', 10, 'bold'))
+    producttype.place(relx=0.58, rely=0.2, width=350, height=50)
+    f4 = font.Font(family='poppins', size=24)  # font
+    lb2['font'] = f4
+    lb2.place(relx=0.35, rely=0.3)
 
-    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", bg="black",
-                  fg="#fff", font=('mali', 10, 'bold'))
-    uploadproductimage.place(relx=0.8, rely=0.02, width=250, height=30)
+
+    uploadproductimage = Button(hd1, text="UPLOAD IMAGE", command=uploadimage,
+                  bg="#333333", fg="#fff", font=('mali', 10, 'bold'))
+    uploadproductimage.place(relx=0.4, rely=0.08, width=250, height=50)
+
+
 
     tk.Label(hd1, text='Name', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.02, rely=0.05)
-    # title.grid(row=3,column=2,padx=20,pady=20)
-    productname = tk.Entry(hd1).place(
-        relx=0.02, rely=0.08, relwidth=0.3, relheight=0.035)
+             font=('poppins', 12)).place(relx=0.01, rely=0.16)
+    noninvsku = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.175, relwidth=0.49, relheight=0.018)
 
-    tk.Label(hd1, text='SKU', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.35, rely=0.05)
-    sku = tk.Entry(hd1).place(relx=0.35, rely=0.08,
-                              relwidth=0.3, relheight=0.035)
-
-    tk.Label(hd1, text='Description', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.68, rely=0.05)
-    phsncode = tk.Entry(hd1).place(relx=0.68, rely=0.08,
-                                   relwidth=0.3, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
-
+    l1=tk.Label(hd1, text='SAC Code', font=('poppins', 12), bg='#243e54',
+             foreground='white').place(relx=0.51, rely=0.16)
+    noninvhsncode = tk.Entry(hd1, bg='#2f516f').place(
+      relx=0.51, rely=0.175, relwidth=0.48, relheight=0.018)
+    tk.Label(hd1, text='Description', font=('poppins', 12),
+             bg='#243e54', foreground='white').place(relx=0.01, rely=0.22)
+    invdescription = tk.Entry(hd1, bg='#2f516f').place(
+        relx=0.01, rely=0.25, relwidth=0.98, relheight=0.07)
+    style= ttk.Style()
+    style.theme_use('clam')
+    style.configure("TCombobox", fieldbackground= "#2f516f", background= "#2f516f")
     tk.Label(hd1, text='Products/services included in the bundle', bg='#243e54',
-             foreground='white', font=('poppins', 14)).place(relx=0.02, rely=0.15)
+             foreground='white', font=('poppins', 20)).place(relx=0.3, rely=0.37)
     tk.Label(hd1, text='PRODUCT/SERVICE', bg='#243e54', foreground='white',
-             font=('poppins', 14)).place(relx=0.02, rely=0.20)
+             font=('poppins', 13)).place(relx=0.01, rely=0.42)
 
     expaccountvalues = ['choose', 'laptop', 'smartphone', 'smartwatch']
     invexpaccount = ttk.Combobox(hd1, values=expaccountvalues)
     invexpaccount.current(0)
-    invexpaccount.place(relx=0.02, rely=0.25, relheight=0.035, relwidth=0.12)
+    invexpaccount.place(relx=0.01, rely=0.46, relheight=0.02, relwidth=0.13)
 
     etds1 = ttk.Combobox(hd1, values=expaccountvalues)
     etds1.current(0)
-    etds1.place(relx=0.02, rely=0.30, relheight=0.035, relwidth=0.12)
+    etds1.place(relx=0.01, rely=0.50, relheight=0.02, relwidth=0.13)
 
     etds2 = ttk.Combobox(hd1, values=expaccountvalues)
     etds2.current(0)
-    etds2.place(relx=0.02, rely=0.35, relheight=0.035, relwidth=0.12)
+    etds2.place(relx=0.01, rely=0.54, relheight=0.020, relwidth=0.13)
 
     etds3 = ttk.Combobox(hd1, values=expaccountvalues)
     etds3.current(0)
-    etds3.place(relx=0.02, rely=0.40, relheight=0.035, relwidth=0.12)
+    etds3.place(relx=0.01, rely=0.58, relheight=0.020, relwidth=0.13)
 
 
 # col-2
 
-    tk.Label(hd1, text='HSN', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.18, rely=0.20)
-    phsncode = tk.Entry(hd1).place(relx=0.15, rely=0.25,
-                                   relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    tk.Label(hd1, text='HSN', font=('poppins', 13), bg='#243e54',
+             foreground='white').place(relx=0.185, rely=0.42)
 
-    phsncode1 = tk.Entry(hd1).place(relx=0.15, rely=0.30,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0.20, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode = tk.Entry(hd1, bg='#2f516f').place(relx=0.155, rely=0.46,
+                                   relwidth=0.13, relheight=0.020)
+    
 
-    phsncode2 = tk.Entry(hd1).place(relx=0.15, rely=0.35,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode1 = tk.Entry(hd1, bg='#2f516f').place(relx=0.155, rely=0.50,
+                                    relwidth=0.13, relheight=0.020)
 
-    phsncode3 = tk.Entry(hd1).place(relx=0.15, rely=0.40,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode2 = tk.Entry(hd1, bg='#2f516f').place(relx=0.155, rely=0.54,
+                                    relwidth=0.13, relheight=0.020)
 
-    tk.Label(hd1, text='DESCRIPTION', font=('poppins', 14),
-             bg='#243e54', foreground='white').place(relx=0.28, rely=0.20)
-    phsncode = tk.Entry(hd1).place(relx=0.28, rely=0.25,
-                                   relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
 
-    phsncode1 = tk.Entry(hd1).place(relx=0.28, rely=0.30,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0.20, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode3 = tk.Entry(hd1, bg='#2f516f').place(relx=0.155, rely=0.58,
+                                    relwidth=0.13, relheight=0.020)
+   
 
-    phsncode2 = tk.Entry(hd1).place(relx=0.28, rely=0.35,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    tk.Label(hd1, text='DESCRIPTION', font=('poppins', 13),
+             bg='#243e54', foreground='white').place(relx=0.32, rely=0.42)
+    phsncode = tk.Entry(hd1, bg='#2f516f').place(relx=0.295, rely=0.46,
+                                   relwidth=0.13, relheight=0.020)
 
-    phsncode3 = tk.Entry(hd1).place(relx=0.28, rely=0.40,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
 
-    tk.Label(hd1, text='QTY', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.43, rely=0.20)
-    phsncode = tk.Entry(hd1).place(relx=0.41, rely=0.25,
-                                   relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode1 = tk.Entry(hd1, bg='#2f516f').place(relx=0.295, rely=0.50,
+                                    relwidth=0.13, relheight=0.020)
 
-    phsncode1 = tk.Entry(hd1).place(relx=0.41, rely=0.30,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0.20, rely=0.3, relwidth=0.9, relheight=0.9)
 
-    phsncode2 = tk.Entry(hd1).place(relx=0.41, rely=0.35,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode2 = tk.Entry(hd1, bg='#2f516f').place(relx=0.295, rely=0.54,
+                                    relwidth=0.13, relheight=0.020)
+   
 
-    phsncode3 = tk.Entry(hd1).place(relx=0.41, rely=0.40,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode3 = tk.Entry(hd1, bg='#2f516f').place(relx=0.295, rely=0.58,
+                                    relwidth=0.13, relheight=0.020)
+   
 
-    tk.Label(hd1, text='PRICE', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.56, rely=0.20)
-    phsncode = tk.Entry(hd1).place(relx=0.54, rely=0.25,
-                                   relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    tk.Label(hd1, text='QTY', font=('poppins', 13), bg='#243e54',
+             foreground='white').place(relx=0.45, rely=0.42)
+    phsncode = tk.Entry(hd1, bg='#2f516f').place(relx=0.44, rely=0.46,
+                                   relwidth=0.10, relheight=0.020)
+    
 
-    phsncode1 = tk.Entry(hd1).place(relx=0.54, rely=0.30,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0.20, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode1 = tk.Entry(hd1, bg='#2f516f').place(relx=0.44, rely=0.50,
+                                    relwidth=0.10, relheight=0.020)
+   
+    phsncode2 = tk.Entry(hd1, bg='#2f516f').place(relx=0.44, rely=0.54,
+                                    relwidth=0.10, relheight=0.020)
 
-    phsncode2 = tk.Entry(hd1).place(relx=0.54, rely=0.35,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode3 = tk.Entry(hd1, bg='#2f516f').place(relx=0.44, rely=0.58,
+                                    relwidth=0.10, relheight=0.020)
 
-    phsncode3 = tk.Entry(hd1).place(relx=0.54, rely=0.40,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+
+    tk.Label(hd1, text='PRICE', font=('poppins', 13), bg='#243e54',
+             foreground='white').place(relx=0.55, rely=0.42)
+    phsncode = tk.Entry(hd1, bg='#2f516f').place(relx=0.55, rely=0.46,
+                                   relwidth=0.12, relheight=0.020)
+
+    phsncode1 = tk.Entry(hd1, bg='#2f516f').place(relx=0.55, rely=0.50,
+                                    relwidth=0.12, relheight=0.020)
+
+    phsncode2 = tk.Entry(hd1, bg='#2f516f').place(relx=0.55, rely=0.54,
+                                    relwidth=0.12, relheight=0.020)
+
+    phsncode3 = tk.Entry(hd1, bg='#2f516f').place(relx=0.55, rely=0.58,
+                                    relwidth=0.12, relheight=0.020)
 
 # col-6
     tk.Label(hd1, text='TOTAL', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.69, rely=0.20)
-    phsncode = tk.Entry(hd1).place(relx=0.67, rely=0.25,
-                                   relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+             foreground='white').place(relx=0.70, rely=0.42)
+    phsncode = tk.Entry(hd1, bg='#2f516f').place(relx=0.69, rely=0.46,
+                                   relwidth=0.14, relheight=0.020)
 
-    phsncode1 = tk.Entry(hd1).place(relx=0.67, rely=0.30,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0.20, rely=0.3, relwidth=0.9, relheight=0.9)
 
-    phsncode2 = tk.Entry(hd1).place(relx=0.67, rely=0.35,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+    phsncode1 = tk.Entry(hd1, bg='#2f516f').place(relx=0.69, rely=0.50,
+                                    relwidth=0.14, relheight=0.020)
 
-    phsncode3 = tk.Entry(hd1).place(relx=0.67, rely=0.40,
-                                    relwidth=0.12, relheight=0.035)
-    hd1.place(relx=0, rely=0.3, relwidth=0.9, relheight=0.9)
+
+    phsncode2 = tk.Entry(hd1, bg='#2f516f').place(relx=0.69, rely=0.54,
+                                    relwidth=0.14, relheight=0.020)
+
+
+    phsncode3 = tk.Entry(hd1, bg='#2f516f').place(relx=0.69, rely=0.58,
+                                    relwidth=0.14, relheight=0.020)
+
 
 # ocol-7
-    tk.Label(hd1, text='TAX', font=('poppins', 14), bg='#243e54',
-             foreground='white').place(relx=0.82, rely=0.20)
+    tk.Label(hd1, text='TAX', font=('poppins', 13), bg='#243e54',
+             foreground='white').place(relx=0.85, rely=0.42)
     expaccountvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invexpaccount = ttk.Combobox(hd1, values=expaccountvalues)
     invexpaccount.current(0)
-    invexpaccount.place(relx=0.80, rely=0.25, relheight=0.035, relwidth=0.12)
+    invexpaccount.place(relx=0.84, rely=0.46, relheight=0.020, relwidth=0.15)
 
     expaccountvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invexpaccount = ttk.Combobox(hd1, values=expaccountvalues)
     invexpaccount.current(0)
-    invexpaccount.place(relx=0.80, rely=0.30, relheight=0.035, relwidth=0.12)
+    invexpaccount.place(relx=0.84, rely=0.50, relheight=0.020, relwidth=0.15)
 
     expaccountvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invexpaccount = ttk.Combobox(hd1, values=expaccountvalues)
     invexpaccount.current(0)
-    invexpaccount.place(relx=0.80, rely=0.35, relheight=0.035, relwidth=0.12)
+    invexpaccount.place(relx=0.84, rely=0.54, relheight=0.020, relwidth=0.15)
 
     expaccountvalues = ['CHOOSE', '28.0% GST (28%)', '28.0% IGST (28%)', '18.0% GST (18%)', '18.0% IGST (18%)', '15.0% ST (100%)', '14.5% ST (100%)', '14.00% ST (100%)', '14.0% VAT (100%).36', '12.36% ST (100%)', '12.0% GST (12%)', '12.0% IGST (12%)', '6.0% GST (6%)', '6.0% IGST (6%)',
                         '5.0% GST (5%)', '5.0% IGST (5%)', '5.0% VAT (100%)', '4.0% VAT (100%)', '3.0% GST (3%)', '3.0% IGST (3%)', '2.0% CST (100%)', '25>0.25% GST (0.25%)25', '0.25% IGST (0.25%)', '0% GST (0%)', '0% IGST (0%)', 'Exempt GST (0%)', 'Exempt IGST (0%)', 'Out of Scope(0%)']
     invexpaccount = ttk.Combobox(hd1, values=expaccountvalues)
     invexpaccount.current(0)
-    invexpaccount.place(relx=0.80, rely=0.40, relheight=0.035, relwidth=0.12)
+    invexpaccount.place(relx=0.84, rely=0.58, relheight=0.020, relwidth=0.15)
+    invsubmit = tk.Button(hd1, text='SUBMIT', font=14, bg='#5193e6', foreground='white',
+                          ).place(relx=0.4, rely=0.69,width=250, height=40)
+    hd1.place(relx=0, rely=0.1, relwidth=0.9, relheight=1.2)
 
     B.mainloop()
 
@@ -1185,7 +1148,7 @@ def selectproducttype():
                    bg='#243e54', foreground='white')
     lb5['font'] = f5
     lb5.place(relx=0.25, rely=0.2)
-    head5.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
+    head5.place(relx=0.01, rely=0.05, relwidth=0.95, relheight=0.1)
 
     head6 = tk.LabelFrame(P, borderwidth=0, bg='#243e54')
     head7 = tk.LabelFrame(head6, borderwidth=0, bg='#2f516f')
@@ -1240,7 +1203,7 @@ def selectproducttype():
     lowstock = tk.Label(head10, text='Bundle', bg='#2f516f', font=(
         'poppins', 20), foreground='white').place(relx=0.35, rely=0.1)
 
-    head6.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.8)
+    head6.place(relx=0.01, rely=0.2, relwidth=0.95, relheight=0.8)
 
     P.mainloop()
 
@@ -1337,13 +1300,14 @@ def main():
     treevv.bind('<Double-Button-2>', prfile_image)
 
     #treevv.column(7, minwidth=30, width=120,anchor=CENTER)
+    
     image = Image.open("pubg.jpg")
     resize_image = image.resize((280, 160))
     image = ImageTk.PhotoImage(resize_image)
     treevv.insert('', 'end', values=(
-        'Product pic', 'Inventory', 'Carlo', 'M24', 'M416', '2000'))
+        'double-tap to view', 'Inventory', 'Carlo', 'M24', 'M416', '2000'))
     treevv.insert('', 'end', values=(
-        'Product pic', 'Non inventory', 'Sara', 'AWM', 'M762', '22000'))
+        'double-tap to view', 'Non inventory', 'Sara', 'AWM', 'M762', '22000'))
     treevv.photo = image
     # data=['lowstock.png','Inventory','carlo','M24','m416','2000']
     # treevv.insert('', 'end', text=data, values=(data))

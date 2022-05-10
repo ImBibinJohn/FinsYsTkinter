@@ -5,17 +5,142 @@ from  tkinter import ttk
 import tkinter.font as font
 import mysql.connector
 
-def db_connection():
-    global mydb,mycursor
-    mydb=mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='finsys'
-        )
-    mycursor = mydb.cursor()
+mydb=mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='',
+    database='finsysinfox21',
+    )
+mycursor = mydb.cursor()
+# jan="SELECT SUM(totamt) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Bank Charges')"
+# def fetchdata():
+query="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Advertising/Promotional' "
+mycursor.execute(query)
+table = mycursor.fetchall()
+query1="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Bank Charges' "
+mycursor.execute(query1)
+table1 = mycursor.fetchall()
+query2="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Business Licenses and Permits' "
+mycursor.execute(query2)
+table2 = mycursor.fetchall()
+query3="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Charitable Contributions' "
+mycursor.execute(query3)
+table3 = mycursor.fetchall()
+query4="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Computer and Internet Expense' "
+mycursor.execute(query4)
+table4 = mycursor.fetchall()
+query5="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Continuing Education' "
+mycursor.execute(query5)
+table5 = mycursor.fetchall()
+query6="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Depreciation Expense' "
+mycursor.execute(query6)
+table6 = mycursor.fetchall()
+query7="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Dues and Subscriptions' "
+mycursor.execute(query7)
+table7 = mycursor.fetchall()
+query8="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Housekeeping Charges' "
+mycursor.execute(query8)
+table8 = mycursor.fetchall()
+query9="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense' "
+mycursor.execute(query9)
+table9 = mycursor.fetchall()
+query10="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-General Liability Insurance' "
+mycursor.execute(query10)
+table10 = mycursor.fetchall()
+query11="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Health Insurance' "
+mycursor.execute(query11)
+table11 = mycursor.fetchall()
+query12="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability Insurance' "
+mycursor.execute(query12)
+table12 = mycursor.fetchall()
+query13="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability IInsurance Expense-Professional Liabilitynsurance' "
+mycursor.execute(query13)
+table13 = mycursor.fetchall()
+query14="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Interest Expense' "
+mycursor.execute(query14)
+table14 = mycursor.fetchall()
+query15="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Meals and entertainment' "
+mycursor.execute(query15)
+table15 = mycursor.fetchall()
+query16="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Office Supplies' "
+mycursor.execute(query16)
+table16 = mycursor.fetchall()
+query17="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Postage and Delivery' "
+mycursor.execute(query17)
+table17 = mycursor.fetchall()
+query18="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Printing and Reproduction' "
+mycursor.execute(query18)
+table18 = mycursor.fetchall()
+query19="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Professional Fees' "
+mycursor.execute(query19)
+table19 = mycursor.fetchall()
+query20="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases' "
+mycursor.execute(query20)
+table20 = mycursor.fetchall()
+query21="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Rent Expense' "
+mycursor.execute(query21)
+table21 = mycursor.fetchall()
+query22="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Repair and maintenance' "
+mycursor.execute(query22)
+table22 = mycursor.fetchall()
+query23="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Small Tools and Equipment' "
+mycursor.execute(query23)
+table23 = mycursor.fetchall()
+query24="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Expense' "
+mycursor.execute(query24)
+table24 = mycursor.fetchall()
+query25="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Taxes - Property' "
+mycursor.execute(query25)
+table25 = mycursor.fetchall()
+query26="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Telephone Expense' "
+mycursor.execute(query26)
+table26 = mycursor.fetchall()
+query27="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Travel Expense' "
+mycursor.execute(query27)
+table27 = mycursor.fetchall()
+query28="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Expense' "
+mycursor.execute(query28)
+table28 = mycursor.fetchall()
+query29="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Utilities' "
+mycursor.execute(query29)
+table29 = mycursor.fetchall()
+query30="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Cash and cash equivalents' "
+mycursor.execute(query30)
+table30 = mycursor.fetchall()
+query31="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Accounts Receivable (Debtors)' "
+mycursor.execute(query31)
+table31 = mycursor.fetchall()
+query32="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred CGST' "
+mycursor.execute(query32)
+table32 = mycursor.fetchall()
+query33="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred GST Input Credit' "
+mycursor.execute(query33)
+table33 = mycursor.fetchall()
+query34="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred IGST' "
+mycursor.execute(query34)
+table34 = mycursor.fetchall()
+query35="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+mycursor.execute(query35)
+table35 = mycursor.fetchall()
 
-# comment
+
+# for row in table:
+#     print(row[0], end=" ")
+#     print(row[1], end="\n")
+#     print(row[2], end="\n")
+#     print(row[3], end="\n")
+#     print(row[4], end="\n")
+#     print(row[5], end="\n")
+#     print(row[6], end="\n")
+#     print(row[7], end="\n")
+
+
+mycursor.close()
+mydb.close()
+
+
+
+
 window = tk.Tk()
 window.title("finsYs")
 width=window.winfo_screenwidth()
@@ -38,8 +163,8 @@ mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 heading_frame=Frame(mycanvas)
 mycanvas.create_window((40,40),window=heading_frame,anchor="nw")
 headingfont=font.Font(family='Arial', size=25,)
-cash_heading = tk.Label(heading_frame, text="CASH FLOW ANALYZER",fg='#fff',bg='#243e55',height=2,bd=1,relief="raised",font=headingfont,width=76)
-cash_heading.pack()
+addcustomer_heading= tk.Label(heading_frame, text="CASH FLOW ANALYZER",fg='#fff',bg='#243e55',height=2,bd=1,relief="raised",font=headingfont,width=76)
+addcustomer_heading.pack()
 
 #form fields
 sub_headingfont=font.Font(family='Times New Roman', size=26)
@@ -48,19 +173,19 @@ mycanvas.create_window((40,140),window=form_frame,anchor="nw")
 
 
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[JANUARY]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=395,y=160)
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[FEBRUARY]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=525,y=160)
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[MARCH]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=655,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[APRIL]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=785,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[MAY]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=915,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="[JUNE]",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=1045,y=160)
 label=Label(form_frame,text="TOTAL",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=1175,y=160)
@@ -72,10 +197,85 @@ drop.config(bg='#243e55', fg="white",font=('Arial',18))
 drop['menu'].config(bg='#2f516a',fg="white",font=('Arial',18))
 drop.place(x=1250,y=50,)
 wrappen.pack(fill='both',expand='yes',)
+# sub_frame1=Frame(mycanvas,width=120,height=37,bg='#2f516a')
+# mycanvas.create_window((420,370),window=sub_frame1,anchor="nw")
+# l1=Label(sub_frame1,text=table,bg='#243e55' ,fg="white",font=('Arial',16))
+# l1.place(x=10,y=10)
+# total=font.Font(family="Helvetica",26,"bold")
 
-
-
-r1=Label(form_frame,text="Beginning Cash\nBalance",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
+total=tk.StringVar()
+total.set(table)
+total1=tk.StringVar()
+total1.set(table1)
+total2=tk.StringVar()
+total2.set(table2)
+total3=tk.StringVar()
+total3.set(table3)
+total4=tk.StringVar()
+total4.set(table4)
+total5=tk.StringVar()
+total5.set(table5)
+total6=tk.StringVar()
+total6.set(table6)
+total7=tk.StringVar()
+total7.set(table7)
+total8=tk.StringVar()
+total8.set(table8)
+total9=tk.StringVar()
+total9.set(table9)
+total10=tk.StringVar()
+total10.set(table10)
+total11=tk.StringVar()
+total11.set(table11)
+total12=tk.StringVar()
+total12.set(table12)
+total13=tk.StringVar()
+total13.set(table13)
+total14=tk.StringVar()
+total14.set(table14)
+total15=tk.StringVar()
+total15.set(table15)
+total16=tk.StringVar()
+total16.set(table16)
+total17=tk.StringVar()
+total17.set(table17)
+total18=tk.StringVar()
+total18.set(table18)
+total19=tk.StringVar()
+total19.set(table19)
+total20=tk.StringVar()
+total20.set(table20)
+total21=tk.StringVar()
+total21.set(table21)
+total22=tk.StringVar()
+total22.set(table22)
+total23=tk.StringVar()
+total23.set(table23)
+total24=tk.StringVar()
+total24.set(table24)
+total25=tk.StringVar()
+total25.set(table25)
+total26=tk.StringVar()
+total26.set(table26)
+total27=tk.StringVar()
+total27.set(table27)
+total28=tk.StringVar()
+total28.set(table28)
+total29=tk.StringVar()
+total29.set(table29)
+total30=tk.StringVar()
+total30.set(table30)
+total31=tk.StringVar()
+total31.set(table31)
+total32=tk.StringVar()
+total32.set(table32)
+total33=tk.StringVar()
+total33.set(table33)
+total34=tk.StringVar()
+total34.set(table34)
+total35=tk.StringVar()
+total35.set(table35)
+r1=Label(form_frame,text="Beginning Cash\nBalance",bg='#243e55' ,fg="white",font=('Arial',16))
 r1.place(x=70,y=220)
 
 input1=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=395,y=225,height=40)
@@ -159,10 +359,10 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=855,heig
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=855,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=855,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=855,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=855,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total,fg='white',width=16,justify='center').place(x=1155,y=855,height=40)
 
 
-r10=Label(form_frame,text="Bank Charges",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
+r10=Label(form_frame,text="Bank Charges",bg='#243e55',fg="white",font=('Arial',16),justify='left')
 r10.place(x=80,y=939)
 
 input1=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=395,y=935,height=40)
@@ -171,7 +371,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=935,heig
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=935,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=935,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=935,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=935,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total1,fg='white',width=16,justify='center').place(x=1155,y=935,height=40)
 
 r11=Label(form_frame,text="Business Licenses \nand Permits",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r11.place(x=80,y=1019)
@@ -182,9 +382,9 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1025,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1025,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1025,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1025,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1025,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total2,fg='white',width=16,justify='center').place(x=1155,y=1025,height=40)
 
-r12=Label(form_frame,text="Charitable Contributions",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
+r12=Label(form_frame,text="Charitable Contributions",bg='#243e55',fg="white",font=('Arial',16),justify='left')
 r12.place(x=80,y=1119)
 
 input1=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=395,y=1115,height=40)
@@ -193,7 +393,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1115,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1115,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1115,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1115,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1115,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total3,fg='white',width=16,justify='center').place(x=1155,y=1115,height=40)
 
 r13=Label(form_frame,text="Computer and \nInternet Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r13.place(x=80,y=1199)
@@ -204,7 +404,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1205,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1205,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1205,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1205,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1205,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total4,fg='white',width=16,justify='center').place(x=1155,y=1205,height=40)
 
 r14=Label(form_frame,text="Continuing Education",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r14.place(x=80,y=1289)
@@ -215,7 +415,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1285,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1285,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1285,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1285,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1285,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total5,fg='white',width=16,justify='center').place(x=1155,y=1285,height=40)
 
 r15=Label(form_frame,text="Depreciation Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r15.place(x=80,y=1379)
@@ -226,7 +426,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1375,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1375,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1375,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1375,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1375,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total6,fg='white',width=16,justify='center').place(x=1155,y=1375,height=40)
 
 r16=Label(form_frame,text="Dues and Subscriptions",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r16.place(x=80,y=1469)
@@ -237,7 +437,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1465,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1465,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1465,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1465,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1465,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total7,fg='white',width=16,justify='center').place(x=1155,y=1465,height=40)
 
 r17=Label(form_frame,text="Housekeeping Charges",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r17.place(x=80,y=1555)
@@ -248,7 +448,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1555,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1555,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1555,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1555,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1555,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total8,fg='white',width=16,justify='center').place(x=1155,y=1555,height=40)
 
 r18=Label(form_frame,text="Insurance Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r18.place(x=80,y=1649)
@@ -259,7 +459,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1645,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1645,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1645,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1645,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1645,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total9,fg='white',width=16,justify='center').place(x=1155,y=1645,height=40)
 
 r19=Label(form_frame,text="Insurance Expense-General\nLiability Insurance",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r19.place(x=80,y=1739)
@@ -270,7 +470,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1735,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1735,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1735,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1735,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1735,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total10,fg='white',width=16,justify='center').place(x=1155,y=1735,height=40)
 
 r20=Label(form_frame,text="Insurance Expense-Health\nInsurance",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r20.place(x=80,y=1825)
@@ -281,7 +481,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1825,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1825,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1825,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1825,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1825,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total11,fg='white',width=16,justify='center').place(x=1155,y=1825,height=40)
 
 
 r21=Label(form_frame,text="Insurance Expense-Life\nand Disability Insurance",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
@@ -293,7 +493,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=1919,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=1919,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=1919,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=1919,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=1919,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total12,fg='white',width=16,justify='center').place(x=1155,y=1919,height=40)
 
 r22=Label(form_frame,text="Insurance Expense-Professional\nLiability",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r22.place(x=80,y=2009)
@@ -304,7 +504,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2009,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2009,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2009,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2009,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2009,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total13,fg='white',width=16,justify='center').place(x=1155,y=2009,height=40)
 
 r23=Label(form_frame,text="Interest Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r23.place(x=80,y=2099)
@@ -315,7 +515,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2099,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2099,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2099,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2099,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2099,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total14,fg='white',width=16,justify='center').place(x=1155,y=2099,height=40)
 
 r24=Label(form_frame,text="Meals and entertainment",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r24.place(x=80,y=2189)
@@ -326,7 +526,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2189,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2189,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2189,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2189,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2189,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total15,fg='white',width=16,justify='center').place(x=1155,y=2189,height=40)
 
 r25=Label(form_frame,text="Office Supplies",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r25.place(x=80,y=2279)
@@ -337,7 +537,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2279,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2279,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2279,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2279,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2279,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total16,fg='white',width=16,justify='center').place(x=1155,y=2279,height=40)
 
 r26=Label(form_frame,text="Postage and Delivery",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r26.place(x=80,y=2369)
@@ -348,7 +548,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2369,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2369,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2369,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2369,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2369,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total17,fg='white',width=16,justify='center').place(x=1155,y=2369,height=40)
 
 r27=Label(form_frame,text="Printing and Reproduction",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r27.place(x=80,y=2459)
@@ -359,7 +559,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2455,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2455,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2455,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2455,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2455,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total18,fg='white',width=16,justify='center').place(x=1155,y=2455,height=40)
 
 r28=Label(form_frame,text="Professional Fees",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r28.place(x=80,y=2549)
@@ -370,7 +570,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2549,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2549,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2549,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2549,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2549,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total19,fg='white',width=16,justify='center').place(x=1155,y=2549,height=40)
 
 r29=Label(form_frame,text="Purchases",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r29.place(x=80,y=2639)
@@ -381,7 +581,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2639,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2639,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2639,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2639,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2639,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total20,fg='white',width=16,justify='center').place(x=1155,y=2639,height=40)
 
 
 
@@ -394,7 +594,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2729,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2729,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2729,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2729,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2729,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total21,fg='white',width=16,justify='center').place(x=1155,y=2729,height=40)
 
 r31=Label(form_frame,text="Repair and maintenance",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r31.place(x=80,y=2819)
@@ -405,7 +605,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2819,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2819,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2819,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2819,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2819,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total22,fg='white',width=16,justify='center').place(x=1155,y=2819,height=40)
 
 r32=Label(form_frame,text="Small Tools and Equipment",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r32.place(x=80,y=2909)
@@ -416,7 +616,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2909,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2909,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2909,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2909,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2909,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total23,fg='white',width=16,justify='center').place(x=1155,y=2909,height=40)
 
 r33=Label(form_frame,text="Swachh Bharat Cess Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r33.place(x=80,y=2999)
@@ -427,7 +627,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=2999,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=2999,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=2999,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=2999,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=2999,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total24,fg='white',width=16,justify='center').place(x=1155,y=2999,height=40)
 
 r34=Label(form_frame,text="Taxes - Property",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r34.place(x=80,y=3089)
@@ -438,7 +638,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3089,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3089,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3089,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3089,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3089,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total25,fg='white',width=16,justify='center').place(x=1155,y=3089,height=40)
 
 r35=Label(form_frame,text="Telephone Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r35.place(x=80,y=3179)
@@ -449,7 +649,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3179,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3179,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3179,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3179,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3179,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total26,fg='white',width=16,justify='center').place(x=1155,y=3179,height=40)
 
 r36=Label(form_frame,text="Travel Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r36.place(x=80,y=3267)
@@ -460,7 +660,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3267,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3267,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3267,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3267,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3267,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total27,fg='white',width=16,justify='center').place(x=1155,y=3267,height=40)
 
 r37=Label(form_frame,text="Uncategorised Expense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r37.place(x=80,y=3357)
@@ -471,7 +671,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3357,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3357,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3357,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3357,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3357,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total28,fg='white',width=16,justify='center').place(x=1155,y=3357,height=40)
 
 r38=Label(form_frame,text="Utilities",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r38.place(x=80,y=3447)
@@ -482,7 +682,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3447,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3447,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3447,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3447,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3447,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total29,fg='white',width=16,justify='center').place(x=1155,y=3447,height=40)
 
 r39=Label(form_frame,text="Cash and cash\n equivalents",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r39.place(x=80,y=3537)
@@ -493,7 +693,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3537,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3537,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3537,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3537,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3537,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total30,fg='white',width=16,justify='center').place(x=1155,y=3537,height=40)
 
 r40=Label(form_frame,text="Accounts Receivable \n(Debtors)",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r40.place(x=80,y=3627)
@@ -504,7 +704,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3627,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3627,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3627,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3627,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3627,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total31,fg='white',width=16,justify='center').place(x=1155,y=3627,height=40)
 
 
 r41=Label(form_frame,text="Deferred CGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
@@ -516,7 +716,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3717,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3717,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3717,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3717,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3717,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total32,fg='white',width=16,justify='center').place(x=1155,y=3717,height=40)
 
 r42=Label(form_frame,text="Deferred GST\n Input Credit",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r42.place(x=80,y=3807)
@@ -527,7 +727,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3807,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3807,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3807,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3807,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3807,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total33,fg='white',width=16,justify='center').place(x=1155,y=3807,height=40)
 
 r43=Label(form_frame,text="Deferred IGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r43.place(x=80,y=3897)
@@ -538,7 +738,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3897,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3897,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3897,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3897,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3897,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total34,fg='white',width=16,justify='center').place(x=1155,y=3897,height=40)
 
 r44=Label(form_frame,text="Deferred Krishi Kalyan \nCess Input Credit",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r44.place(x=80,y=3987)
@@ -549,7 +749,7 @@ input3=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=645,y=3987,hei
 input4=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=775,y=3987,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=895,y=3987,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1025,y=3987,height=40)
-input7=Entry(form_frame,bg='#2f516a',fg='white',width=16).place(x=1155,y=3987,height=40)
+input7=Entry(form_frame,bg='#2f516a',textvariable=total35,fg='white',width=16,justify='center').place(x=1155,y=3987,height=40)
 
 r45=Label(form_frame,text="Deferred Service \nTax Input Credit",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r45.place(x=80,y=4077)
