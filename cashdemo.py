@@ -3,13 +3,30 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+import mysql.connector
 
 
-credit_form = tk.Tk()
-credit_form.title("finsYs")
-credit_form.geometry("1000x1000")
-credit_form['bg']='#2f516a'
-wrappen=ttk.LabelFrame(credit_form)
+#database connects here 
+def db_connection():
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='finsys_tkinter'
+        )
+    mycursor = mydb.cursor()
+
+
+
+def add_custom():
+    import add_new_customer
+
+cash_demo_form = tk.Tk()
+cash_demo_form.title("finsYs")
+cash_demo_form.geometry("1000x1000")
+cash_demo_form['bg']='#2f516a'
+wrappen=ttk.LabelFrame(cash_demo_form)
 mycanvas=Canvas(wrappen)
 mycanvas.pack(side=LEFT,fill="both",expand="yes")
 yscrollbar=ttk.Scrollbar(wrappen,orient='vertical',command=mycanvas.yview)
@@ -46,12 +63,14 @@ drop2['values']=("SELECT_CUSTOMER")
 title_lab.place(x=10,y=100,height=15,width=100)
 drop2.place(x=30,y=130,height=40,width=450)
 wrappen.pack(fill='both',expand='yes',)
+add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_custom)
+add_custom.place(x=505,y=130)
 
 
 email=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
-email.place(x=530,y=100,)
+email.place(x=630,y=100,)
 email_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
-email_input.place(x=530,y=130,height=40)
+email_input.place(x=630,y=130,height=40)
 
 billing_ad=Label(form_frame,text="BILLING ADDRESS",bg='#243e55',fg='#fff')
 billing_ad.place(x=30,y=200,)
@@ -59,13 +78,13 @@ billing_input=Entry(form_frame,width=75,bg='#243e55',fg='#fff')
 billing_input.place(x=30,y=230,height=90)
 
 sales_reciept_date=Label(form_frame,text="SALES RECIEPT DATE",bg='#243e55',fg='#fff')
-sales_reciept_date.place(x=530,y=200,)
+sales_reciept_date.place(x=630,y=200,)
 sales_reciept_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
-sales_reciept_input.place(x=530,y=230,height=40)
+sales_reciept_input.place(x=630,y=230,height=40)
 
 place_of_supp=tk.Label(form_frame,text="PLACE OF SUPPLY",bg='#243e55',fg='#fff')
 place_drop=ttk.Combobox(form_frame)
-place_drop['values']=("KERALA","TAMILNADU","ANDHRA PRADESH","KARNATAKA")
+place_drop['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
 place_of_supp.place(x=30,y=330,height=15,width=100)
 place_drop.place(x=30,y=360,height=40,width=450)
 
@@ -214,4 +233,4 @@ grand_input.place(x=1000,y=200,height=40,width=200)
 button=tk.Button(form3_frame, text="SAVE",) 
 button.place(x=1050,y=280,width=100)
 
-credit_note_form.mainloop()
+cash_demo_form.mainloop()

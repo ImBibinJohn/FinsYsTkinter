@@ -1,65 +1,115 @@
-import os
 from re import L
-import shutil
 import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
 from tkinter import filedialog
 import tkinter.font as font
-from turtle import bgcolor
-from click import command, style
+from tokenize import Name
 from regex import P
-from tkcalendar import DateEntry,Calendar
+from tkcalendar import DateEntry
 from PIL import Image,ImageTk
 
 
-def upload_file():
-        # global filename,img, b2
-        f_types =[('Png files','.png'),('Jpg Files', '.jpg')]
-        filename = filedialog.askopenfilename(filetypes=f_types)
-        # shutil.copyfile(filename, os.getcwd()+'/images/'+filename.split('/')[-1])
-        # image = Image.open(filename)
-        # resize_image = image.resize((350, 350))
-        # img = ImageTk.PhotoImage(resize_image)
-        # b2 = Button(imageFrame,image=img)
-        # b2.place(x=130, y=80)
+def uploadimage():
 
-def suplus():
-    C=tk.Toplevel(B)
-    C.title('account create')
-    C.geometry('1400x700')
-    C['bg'] = '#2f516f'
+        f_types=[('Png files','.png'),('Jpg Files', '.jpg')]
+        imagename= filedialog.askopenfilename(filetypes=f_types)
 
-    frame1 = tk.LabelFrame(C,borderwidth=0,bg='#243e54')
-    l1=tk.Label(frame1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
-    l1.place(relx=0.35,rely=0.1)
-    frame1.place(relx=0.1,rely=0.05,relwidth=0.8,relheight=0.1)
 
-    frame2=tk.Frame(C,bg='#243e54')
-    l2=tk.Label(frame2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14))
-    l2.place(relx=0.04,rely=0.05)
-    acc=['Cost of goods sold']
-    cm1=ttk.Combobox(frame2,values=acc)
-    cm1.current(0)
-    cm1.place(relx=0.04,rely=0.15,relwidth=0.4,relheight=0.065)
+def expenseaccount():
+        EXP=tk.Toplevel(B)
+        EXP.title('account create')
+        EXP.geometry('1400x700')
+        EXP['bg'] = '#2f516f'
+
+        expframe1= tk.LabelFrame(EXP,borderwidth=0,bg='#243e54')
+        explabel1=tk.Label(expframe1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
+        explabel1.place(relx=0.35,rely=0.1)
+        expframe1.place(relx=0.02,rely=0.05,relwidth=0.95,relheight=0.1)
+
+        expframe2=tk.Frame(EXP,bg='#243e54')
+        explabel2=tk.Label(expframe2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14))
+        explabel2.place(relx=0.01,rely=0.05)
+        expaccounttypevalues=['Cost of goods sold']
+        expaccountypecombo=ttk.Combobox(expframe2,values=expaccounttypevalues)
+        expaccountypecombo.current(0)
+        expaccountypecombo.place(relx=0.01,rely=0.15,relwidth=0.47,relheight=0.08)
     
-    l3=tk.Label(frame2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
-    e3=tk.Entry(frame2).place(relx=0.5,rely=0.15,relwidth=0.4,relheight=0.065)
+        explabel3=tk.Label(expframe2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
+        expname=tk.Entry(expframe2,bg='#2f516f').place(relx=0.5,rely=0.15,relwidth=0.47,relheight=0.08)
 
-    l4=tk.Label(frame2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.04,rely=0.25)
-    cont2=['Suppliers and materials cost']
-    cmb=ttk.Combobox(frame2,values=cont2).place(relx=0.04,rely=0.35,relwidth=0.4,relheight=0.065)
+        explabel4=tk.Label(expframe2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.01,rely=0.25)
+        expdetailtype=['Suppliers and materials cost']
+        expdetailtypecombo=ttk.Combobox(expframe2,values=expdetailtype).place(relx=0.01,rely=0.35,relwidth=0.47,relheight=0.08)
     
-    l5=tk.Label(frame2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
-    e5=tk.Entry(frame2).place(relx=0.5,rely=0.35,relwidth=0.4,relheight=0.065)
+        explabel5=tk.Label(expframe2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
+        expdescription=tk.Entry(expframe2,bg='#2f516f').place(relx=0.5,rely=0.35,relwidth=0.47,relheight=0.08)
+
+        message='''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
+        text_box=Text(expframe2,bg='#2f516f')
+        text_box.place(relx=0.01,rely=0.5,relwidth=0.47,relheight=0.3)
+        text_box.insert('end',message)
+        text_box.config(state='disabled')
+        Checkbutton(expframe2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
+        expsubaccountvalues=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
+             'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
+            'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
+            'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
+            'CGST Payable','CST Payable','CST Suspense','GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM',
+            'Input IGST','Input IGST Tax RCM','Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax',
+            'Input Service Tax RCM','Input VAT 14%','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense',
+            'Output CGST','Output CGST Tax RCM','Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess',
+            'Output Krishi Kalyan Cess DCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM',
+            'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
+            'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
+
+        expsubaccountcombo=ttk.Combobox(expframe2,values=expsubaccountvalues).place(relx=0.5,rely=0.55,relwidth=0.47,relheight=0.08)
+        exptaxcode=tk.Label(expframe2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
+  
+        exptaxvalues=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
+            '3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST','3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST']
+        e6=ttk.Combobox(expframe2,values=exptaxvalues).place(relx=0.5,rely=0.7,relwidth=0.47,relheight=0.08)
+        sub1=tk.Button(expframe2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
+        expframe2.place(relx=0.02,rely=0.2,relwidth=0.95,relheight=0.6)
+        EXP.mainloop()
+
+
+def incomeaccount():
+    INC=tk.Toplevel(B)
+    INC.title('account create')
+    INC.geometry('1400x700')
+    INC['bg'] = '#2f516f'
+
+    incframe1 = tk.LabelFrame(INC,borderwidth=0,bg='#243e54')
+    incl1=tk.Label(incframe1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
+    incl1.place(relx=0.35,rely=0.1)
+    incframe1.place(relx=0.02,rely=0.05,relwidth=0.95,relheight=0.1)
+
+    incframe2=tk.Frame(INC,bg='#243e54')
+    incl2=tk.Label(incframe2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14))
+    incl2.place(relx=0.01,rely=0.05)
+    incaccountypevalues=['Income']
+    incaccounttypecombo=ttk.Combobox(incframe2,values=incaccountypevalues)
+    incaccounttypecombo.current(0)
+    incaccounttypecombo.place(relx=0.01,rely=0.15,relwidth=0.47,relheight=0.08)
+    
+    incl3=tk.Label(incframe2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
+    incname=tk.Entry(incframe2,bg='#2f516f').place(relx=0.5,rely=0.15,relwidth=0.47,relheight=0.08)
+
+    incl4=tk.Label(incframe2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.01,rely=0.25)
+    incdetailtypevalues=['Sales of product income']
+    incdetailtypecomb0=ttk.Combobox(incframe2,values=incdetailtypevalues).place(relx=0.01,rely=0.35,relwidth=0.47,relheight=0.08)
+    
+    incl5=tk.Label(incframe2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
+    incdescription=tk.Entry(incframe2,bg='#2f516f').place(relx=0.5,rely=0.35,relwidth=0.47,relheight=0.08)
 
     message='''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-    text_box=Text(frame2)
-    text_box.place(relx=0.04,rely=0.55,relwidth=0.4,relheight=0.2)
+    text_box=Text(incframe2)
+    text_box.place(relx=0.01,rely=0.55,relwidth=0.47,relheight=0.3)
     text_box.insert('end',message)
     text_box.config(state='disabled')
-    Checkbutton(frame2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
-    bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
+    Checkbutton(incframe2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
+    incsubaccountvalues=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
          'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
         'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
         'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
@@ -71,53 +121,49 @@ def suplus():
         'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
         'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
 
-    cb=ttk.Combobox(frame2,values=bal).place(relx=0.5,rely=0.55,relwidth=0.4,relheight=0.065)
-    l6=tk.Label(frame2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
+    incsubaccountcombo=ttk.Combobox(incframe2,values=incsubaccountvalues).place(relx=0.5,rely=0.55,relwidth=0.7,relheight=0.08)
+    incl6=tk.Label(incframe2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
   
-    val=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
+    inctaxvalues=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
     '3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST','3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST']
-    e6=ttk.Combobox(frame2,values=val).place(relx=0.5,rely=0.7,relwidth=0.4,relheight=0.065)
-    sub1=tk.Button(frame2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
-    frame2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.6)
-    C.mainloop()
-
-
-def stplus():
-    C=tk.Toplevel(B)
-    C.title('account create')
-    C.geometry('1400x700')
-    C['bg'] = '#2f516f'
-
-    frame1 = tk.LabelFrame(C,borderwidth=0,bg='#243e54')
-    l1=tk.Label(frame1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
-    l1.place(relx=0.35,rely=0.1)
-    frame1.place(relx=0.1,rely=0.05,relwidth=0.8,relheight=0.1)
-
-    frame2=tk.Frame(C,bg='#243e54')
-    l2=tk.Label(frame2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14))
-    l2.place(relx=0.04,rely=0.05)
-    acc=['Income']
-    cm1=ttk.Combobox(frame2,values=acc)
-    cm1.current(0)
-    cm1.place(relx=0.04,rely=0.15,relwidth=0.4,relheight=0.065)
+    inctaxcombo=ttk.Combobox(incframe2,values=inctaxvalues).place(relx=0.5,rely=0.7,relwidth=0.47,relheight=0.08)
+    sub1=tk.Button(incframe2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
+    incframe2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.6)
+    INC.mainloop()
     
-    l3=tk.Label(frame2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
-    e3=tk.Entry(frame2).place(relx=0.5,rely=0.15,relwidth=0.4,relheight=0.065)
+def inventoryasset():
+    INV=tk.Toplevel(B)
+    INV.title('account create')
+    INV.geometry('1400x700')
+    INV['bg'] = '#2f516f'
 
-    l4=tk.Label(frame2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.04,rely=0.25)
-    cont2=['Sales of product income']
-    cmb=ttk.Combobox(frame2,values=cont2).place(relx=0.04,rely=0.35,relwidth=0.4,relheight=0.065)
+    expframe1= tk.LabelFrame(INV,borderwidth=0,bg='#243e54')
+    explabel1=tk.Label(expframe1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
+    explabel1.place(relx=0.35,rely=0.1)
+    expframe1.place(relx=0.02,rely=0.05,relwidth=0.95,relheight=0.1)
+
+    invframe2=tk.Frame(INV,bg='#243e54')
+    invlabel2=tk.Label(invframe2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.01,rely=0.05)
+    currentassetvalues=['Current Assets']
+    invaccounttypecombo=ttk.Combobox(invframe2,values=currentassetvalues).place(relx=0.01,rely=0.15,relwidth=0.47,relheight=0.08)
     
-    l5=tk.Label(frame2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
-    e5=tk.Entry(frame2).place(relx=0.5,rely=0.35,relwidth=0.4,relheight=0.065)
+    invlabel3=tk.Label(invframe2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
+    invname=tk.Entry(invframe2,bg='#2f516f').place(relx=0.5,rely=0.15,relwidth=0.47,relheight=0.08)
+
+    invlabel4=tk.Label(invframe2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.01,rely=0.25)
+    invdetailtypevalues=['Inventory']
+    invdetailtypecombo=ttk.Combobox(invframe2,values=invdetailtypevalues).place(relx=0.01,rely=0.35,relwidth=0.47,relheight=0.080)
+    
+    invlabel5=tk.Label(invframe2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
+    invdescription=tk.Entry(invframe2,bg='#243e54').place(relx=0.5,rely=0.35,relwidth=0.47,relheight=0.08)
 
     message='''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-    text_box=Text(frame2)
-    text_box.place(relx=0.04,rely=0.55,relwidth=0.4,relheight=0.2)
+    text_box=Text(invframe2)
+    text_box.place(relx=0.01,rely=0.55,relwidth=0.47,relheight=0.3)
     text_box.insert('end',message)
     text_box.config(state='disabled')
-    Checkbutton(frame2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
-    bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
+    Checkbutton(invframe2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
+    invsubaccountvalues=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
          'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
         'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
         'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
@@ -129,72 +175,15 @@ def stplus():
         'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
         'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
 
-    cb=ttk.Combobox(frame2,values=bal).place(relx=0.5,rely=0.55,relwidth=0.4,relheight=0.065)
-    l6=tk.Label(frame2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
+    invsubaccountcombo=ttk.Combobox(invframe2,values=invsubaccountvalues).place(relx=0.5,rely=0.55,relwidth=0.47,relheight=0.08)
+    invlabel6=tk.Label(invframe2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
   
-    val=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
+    invtaxcodevalue=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
     '3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST','3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST']
-    e6=ttk.Combobox(frame2,values=val).place(relx=0.5,rely=0.7,relwidth=0.4,relheight=0.065)
-    sub1=tk.Button(frame2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
-    frame2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.6)
-    C.mainloop()
-    
-def splus():
-    C=tk.Toplevel(B)
-    C.title('account create')
-    C.geometry('1400x700')
-    C['bg'] = '#2f516f'
-
-    frame1 = tk.LabelFrame(C,borderwidth=0,bg='#243e54')
-    l1=tk.Label(frame1,text='ACCOUNT CREATE',bg='#243e54',foreground='white',font=('poppins',30))
-    l1.place(relx=0.35,rely=0.1)
-    frame1.place(relx=0.1,rely=0.05,relwidth=0.8,relheight=0.1)
-
-    frame2=tk.Frame(C,bg='#243e54')
-    l2=tk.Label(frame2,text='Account Type',bg='#243e54',foreground='white',font=('poppins', 14))
-    l2.place(relx=0.04,rely=0.05)
-    acc=['Current Assets']
-    cm1=ttk.Combobox(frame2,values=acc)
-    cm1.current(0)
-    cm1.place(relx=0.04,rely=0.15,relwidth=0.4,relheight=0.065)
-    
-    l3=tk.Label(frame2,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.05)
-    e3=tk.Entry(frame2).place(relx=0.5,rely=0.15,relwidth=0.4,relheight=0.065)
-
-    l4=tk.Label(frame2,text='Detail Type',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.04,rely=0.25)
-    cont2=['Inventory']
-    cmb=ttk.Combobox(frame2,values=cont2).place(relx=0.04,rely=0.35,relwidth=0.4,relheight=0.065)
-    
-    l5=tk.Label(frame2,text='Description',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.25)
-    e5=tk.Entry(frame2).place(relx=0.5,rely=0.35,relwidth=0.4,relheight=0.065)
-
-    message='''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-    text_box=Text(frame2)
-    text_box.place(relx=0.04,rely=0.55,relwidth=0.4,relheight=0.2)
-    text_box.insert('end',message)
-    text_box.config(state='disabled')
-    Checkbutton(frame2, text = "Is sub-account ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.5,rely=0.45)
-    bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
-         'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
-        'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
-        'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
-        'CGST Payable','CST Payable','CST Suspense','GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM',
-        'Input IGST','Input IGST Tax RCM','Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax',
-        'Input Service Tax RCM','Input VAT 14%','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense',
-        'Output CGST','Output CGST Tax RCM','Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess',
-         'Output Krishi Kalyan Cess DCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM',
-        'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
-        'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
-
-    cb=ttk.Combobox(frame2,values=bal).place(relx=0.5,rely=0.55,relwidth=0.4,relheight=0.065)
-    l6=tk.Label(frame2,text='Default Tax Code',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.5,rely=0.63)
-  
-    val=['18.0% IGST',' 14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST','15.0% ST','28.0% GST','12.0% GST','18.0% GST',
-    '3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST','3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST']
-    e6=ttk.Combobox(frame2,values=val).place(relx=0.5,rely=0.7,relwidth=0.4,relheight=0.065)
-    sub1=tk.Button(frame2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
-    frame2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.6)
-    C.mainloop()
+    invtax=ttk.Combobox(invframe2,values=invtaxcodevalue).place(relx=0.5,rely=0.7,relwidth=0.47,relheight=0.08)
+    sub1=tk.Button(invframe2,text='CREATE',font=15,bg='#5193e6',foreground='white').place(relx=0.45,rely=0.9)
+    invframe2.place(relx=0.02,rely=0.2,relwidth=0.95,relheight=0.6)
+    INV.mainloop()
     
     
 def select_product():
@@ -245,7 +234,7 @@ def select_product():
     f3 = font.Font(family='poppins',size=18)#font
     hd1.place(relx=0,rely=0.06,relwidth=1,relheight=0.1)
     
-    but2 = Button(hd1,text = "UPLOAD IMAGE",command=upload_file,bg="black",fg="#fff",font=('mali', 10, 'bold'))  
+    but2 = Button(hd1,text = "UPLOAD IMAGE",command=uploadimage,bg="black",fg="#fff",font=('mali', 10, 'bold'))  
     but2.place(relx=0.8,rely=0.02,width=250,height=30) 
 
     tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
@@ -306,6 +295,7 @@ def select_product():
 
     tk.Label(hd1,text='Income account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.68,rely=0.35)
     incometaxvalues=['Billable Expense Income','Product Sales','Sales','Sales-Hardware','Sales-Software','Sales-Support and Maintanance','Sales of Product Income','Uncategorised Income']
+    tk.Button(hd1,text='+',font=(14),command=incomeaccount).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
     inctax_in=ttk.Combobox(hd1,values=incometaxvalues)
     inctax_in.current(0)
     inctax_in
@@ -314,7 +304,7 @@ def select_product():
 
     date=tk.Label(hd1,text='As of date',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
     edate=DateEntry(hd1,bg='#2f516f').place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
-    tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
+    
     
     defexp=tk.Label(hd1,text='Inventory asset account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.42)
     defvalues=['Inventory Assets']
@@ -322,7 +312,7 @@ def select_product():
     edefexp.current(0)
     edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
-    tk.Button(hd1,text='+',font=(14),command=splus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
+    tk.Button(hd1,text='+',font=(14),command=inventoryasset).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
     
     
 
@@ -331,7 +321,7 @@ def select_product():
     etds=ttk.Combobox(hd1,values=defvalue)
     etds.current(0)
     etds.place(relx=0.68,rely=0.45,relwidth=0.27,relheight=0.035) 
-    tk.Button(hd1,text='+',font=(14),command=suplus).place(relx=0.955,rely=0.45,relwidth=0.025,relheight=0.035)
+    tk.Button(hd1,text='+',font=(14),command=expenseaccount).place(relx=0.955,rely=0.45,relwidth=0.025,relheight=0.035)
     
     
 
@@ -667,9 +657,6 @@ def select_product2():
     inctax_in.place(relx=0.68,rely=0.31,relwidth=0.27,relheight=0.035)  
     
 
-    # date=tk.Label(hd1,text='As of date',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
-    # edate=DateEntry(hd1).place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
-    # tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
     
     defexp=tk.Label(hd1,text='Service Type',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.28)
     defvalues=['Stock Broking','General Insurance','Courier','Advertising Agency','Consulting Engineer','Custom House Agent','Steamer Agent','Clearing and Forwarding','Man power Recruiting','Air Travel Agent','Tour operator','Rent a Cab','Architect','Interior Director','Management Consultment','Chartered Accountant'
@@ -681,7 +668,7 @@ def select_product2():
     edefexp.current(0)
     edefexp.place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)  
 
-    tk.Button(hd1,text='+',font=(14),command=splus).place(relx=0.955,rely=0.31,relwidth=0.025,relheight=0.035)
+    tk.Button(hd1,text='+',font=(14),command=inventoryasset).place(relx=0.955,rely=0.31,relwidth=0.025,relheight=0.035)
     
     tk.Label(hd1,text='Purchasing information',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
     Checkbutton(frame, text = "I Purchase this product/service from Supplier. ",bg='#243e54',foreground='white',font=('poppins', 12)).place(relx=0.01,rely=0.7)
@@ -802,7 +789,7 @@ def select_product1():
     inctax_in=ttk.Combobox(hd1,values=incometaxvalues)
     inctax_in.current(0)
     inctax_in.place(relx=0.68,rely=0.16,relwidth=0.27,relheight=0.035)  
-    tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.16,relwidth=0.025,relheight=0.035)
+    tk.Button(hd1,text='+',font=(14),command=incomeaccount).place(relx=0.955,rely=0.16,relwidth=0.025,relheight=0.035)
     
 
 
@@ -980,7 +967,7 @@ def main():
 
 
     def edit_product():
-    
+        
         selected_item = treevv.selection()[0]
         global B
         B=tk.Toplevel(A)
@@ -1029,7 +1016,7 @@ def main():
         f3 = font.Font(family='poppins',size=18)#font
         hd1.place(relx=0,rely=0.06,relwidth=1,relheight=0.1)
     
-        but2 = Button(hd1,text = "UPLOAD IMAGE",command=upload_file,bg="black",fg="#fff",font=('mali', 10, 'bold'))  
+        but2 = Button(hd1,text = "UPLOAD IMAGE",command=uploadimage,bg="black",fg="#fff",font=('mali', 10, 'bold'))  
         but2.place(relx=0.8,rely=0.02,width=250,height=30) 
 
         tk.Label(hd1,text='Name',bg='#243e54',foreground='white',font=('poppins', 14)).place(relx=0.02,rely=0.05)
@@ -1098,7 +1085,7 @@ def main():
 
         date=tk.Label(hd1,text='As of date',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.02,rely=0.42)
         edate=DateEntry(hd1,bg='#2f516f').place(relx=0.02,rely=0.45,relwidth=0.3,relheight=0.035)
-        tk.Button(hd1,text='+',font=(14),command=stplus).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
+        tk.Button(hd1,text='+',font=(14),command=incomeaccount).place(relx=0.955,rely=0.38,relwidth=0.025,relheight=0.035)
     
         defexp=tk.Label(hd1,text='Inventory asset account',font=('poppins', 14),bg='#243e54',foreground='white').place(relx=0.35,rely=0.42)
         defvalues=['Inventory Assets']
@@ -1106,7 +1093,7 @@ def main():
         edefexp.current(0)
         edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
-        tk.Button(hd1,text='+',font=(14),command=splus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
+        tk.Button(hd1,text='+',font=(14),command=inventoryasset).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
 
     
 
@@ -1115,7 +1102,7 @@ def main():
         etds=ttk.Combobox(hd1,values=defvalue)
         etds.current(0)
         etds.place(relx=0.68,rely=0.45,relwidth=0.27,relheight=0.035) 
-        tk.Button(hd1,text='+',font=(14),command=suplus).place(relx=0.955,rely=0.45,relwidth=0.025,relheight=0.035)
+        tk.Button(hd1,text='+',font=(14),command=expenseaccount).place(relx=0.955,rely=0.45,relwidth=0.025,relheight=0.035)
     
     
 

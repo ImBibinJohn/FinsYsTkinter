@@ -4,6 +4,11 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 
+
+def add_custom():
+    import add_new_customer_form
+
+
 #ihsdjrifjsiof
 credit_form = tk.Tk()
 credit_form.title("finsYs")
@@ -47,6 +52,8 @@ title_lab.place(x=10,y=100,height=15,width=100)
 drop2.place(x=30,y=130,height=40,width=450)
 wrappen.pack(fill='both',expand='yes',)
 
+add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_custom)
+add_custom.place(x=335,y=230)
 
 email=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
 email.place(x=530,y=100,)
@@ -193,7 +200,7 @@ grand_input.place(x=1000,y=200,height=40,width=200)
 button=tk.Button(form3_frame, text="SAVE",) 
 button.place(x=1050,y=280,width=100)
 
-credit_note_form.mainloop()
+credit_form.mainloop()
 
 
 
