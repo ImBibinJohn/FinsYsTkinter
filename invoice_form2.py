@@ -61,11 +61,10 @@ format_date = f"{date:%a, %b %d %Y}"
 today_date = Label(form_frame, text=format_date, fg="white", bg="black", font=("helvetica", 40))
 
 #company details
-cmp1=1
+# cmp1=1
 
-mycursor.execute('select * from app1_inventory where cid_id=%s',(cmp1))
-inventory_data=mycursor.fetchone()
-print("inventory_data",inventory_data)
+# inventory_data=mycursor.fetchone()
+# print("inventory_data",inventory_data)
 
 global select_customer,email,invoice_date,terms,Due_date
 
