@@ -159,7 +159,8 @@ def addsuppliers():
                 if r is not None and rr is not None:
                     messagebox.showerror('Already Exist','User exists,Try another Name',parent=B)
             
-                else:    
+                else:  
+                #xxxxx  
                     chk_b4.config(text='checked',fg='green')                                                  
                     tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
                     gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
