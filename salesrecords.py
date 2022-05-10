@@ -3,10 +3,22 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 from tkinter import messagebox as MessageBox
+import tkinter.messagebox
 import mysql.connector as mysql
 from PIL import Image,ImageTk
 from tkinter.ttk import Combobox
 from tkcalendar import Calendar, DateEntry
+
+def fun():#db connection
+    global mydb,mycursor
+    mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='finsYs_tkinter'
+        )
+    mycursor = mydb.cursor()
+
 def add_custom():
     import addcustomer_form
 
@@ -84,6 +96,21 @@ datas = ["22-10-2022","artist","1","Alen","12-10-2022","500000","235600","25","7
 item = tree.insert("", "end", values=(datas))
 
 tree.grid(row=1,column=0,padx=5,pady=5)
+
+def delete_customer():
+    focus_data = tree.focus()
+    values=tree.item(focus_data,'values')
+    customer_id=[values[-1]]
+    tree.execute("DELETE FROM app1_customer WHERE customerid=%s",(customer_id))
+    mydb.commit()
+    tkinter.messagebox.messagebox.showinfo('successfully Delated')
+    print('sucessfully deleted')
+    tree.delete(focus_data)
+
+edit_btn = ttk.Button(F, text="Edit", command='')
+edit_btn.place(relx=0.35, rely=0.88, relheight=0.1, relwidth=0.1)
+del_btn = ttk.Button(F, text="Delete", command=delete_customer)
+del_btn.place(relx=0.5, rely=0.88, relheight=0.1, relwidth=0.1)
 
 wrappen.pack(fill='both',expand='yes',)
 
