@@ -7,7 +7,7 @@ import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
 
-from tkcalendar import DateEntry, Calendar
+# from tkcalendar import DateEntry, Calendar
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")
@@ -112,7 +112,7 @@ wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_date.place(x=30, y=200,)
-payment_input = DateEntry(expense_form, width=16, bg="#2f516f", bd=2)
+payment_input = Entry(form_frame, width=50, bg='#243e55', fg='#fff')
 payment_input.place(x=30, y=230, height=40)
 
 
