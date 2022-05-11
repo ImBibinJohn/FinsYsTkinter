@@ -15,6 +15,16 @@ import tkinter.font as font
 #         import debitnote
 #     else:
 #         import expensemain
+import mysql.connector
+
+my_connect = mysql.connector.connect(
+    host="127.0.0.1",
+    user="root",
+    passwd="",
+    database="fynsystkinter",
+    port="3307"
+)
+my_conn = my_connect.cursor()
 
 
 def main():
@@ -69,10 +79,16 @@ def main():
     treevv.column(5, minwidth=30, width=140, anchor=CENTER)
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     # treevv.column(7, minwidth=30, width=120,anchor=CENTER)
-    data = ['22/03/22', 'Payment', 'Dhyan Kumar',
-            '0.0', '100000', '']
-    data1 = ['12/04/22', 'Payment', 'Dhyan Kumar',
-             '0.0', '300000', '']
+
+    r_set = my_conn.execute(
+        "SELECT 'date','type','payee','tax','amount' FROM expenses")
+    i = 0
+    for i in r_set:
+        for j in range(len(r_set)):
+            e = Entry(A, width=10, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, r_set[j])
+        i = i+1
     treevv.insert('', 'end', text=data, values=(data))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
