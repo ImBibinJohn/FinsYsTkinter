@@ -320,7 +320,8 @@ price3=StringVar()
 price_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price3)
 price_input3.place(x=950,y=930,height=40)
 
-price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
+price4=StringVar()
+price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price4)
 price_input4.place(x=950,y=1000,height=40)
 
 #col-6
