@@ -42,12 +42,12 @@ def save_invoice():
     grand=grand.get()
     amt_received=amt_received.get()
     balance=balance.get()
-    sql="INSERT INTO app1_invoice (customername,email,invoiceno ,terms,invoicedate,duedate,bname ,placosupply ,product ,hsn,description,qty ,price ,total,tax ,subtotal ,grandtotal ,product2 ,shipstate,shippincode ,shipcountry,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry,cid_id)
-            mycursor.execute(sql,val)
-            mydb.commit()
-            mydb.close()
-            messagebox.showinfo('New Customer Added')
+    sql="INSERT INTO app1_invoice (customername,email,invoiceno ,terms,invoicedate,duedate,bname ,placosupply ,product ,hsn,description,qty ,price ,total,tax ,subtotal ,grandtotal ,product2 ,hsn2,description2 ,qty2,price2,total2,tax2,product3,hsn3,description3,qty3,price3,total3,tax3,product4,hsn4,description4,qty4,price4,total4,tax4,amtrecvd,taxamount,baldue) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    val=(select_customer,email,invno,terms,invoice_date,Due_date,billto,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,grand,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,amt_received,taxamount,balance)
+    mycursor.execute(sql,val)
+    mydb.commit()
+    mydb.close()
+    messagebox.showinfo('New Customer Added')
 
 
 
@@ -95,39 +95,35 @@ customers=mycursor.fetchall()
 
 #set today date 
 date = dt.datetime.now()
-format_date = f"{date:%a, %b %d %Y}"
+format_date = f"{date:%Y - %d - %m }"
 today_date = Label(form_frame, text=format_date, fg="white", bg="black", font=("helvetica", 40))
 
 #company details
 user_id=[2]
 mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
 cmp1=mycursor.fetchone()
-print("company_data",cmp1)
+
 # cmp1=[1]
 
-mycursor.execute("SELECT cname,cemail FROM app1_company WHERE id_id=%s",(user_id))
+mycursor.execute("SELECT cname,cemail,state FROM app1_company WHERE id_id=%s",(user_id))
 cmp_data=mycursor.fetchone()
 
 
 #invetory data
 mycursor.execute("SELECT * FROM app1_inventory WHERE cid_id=%s",(cmp1))
 inventory_data=mycursor.fetchall()
-print("inventory_data",inventory_data)
 
 #bundle data
 mycursor.execute("SELECT * FROM app1_bundle WHERE cid_id=%s",(cmp1))
 bundle_data=mycursor.fetchall()
-print("bundle_data",bundle_data)
 
 #noninventor data
 mycursor.execute("SELECT * FROM app1_noninventory WHERE cid_id=%s",(cmp1))
 noninventory_data=mycursor.fetchall()
-print("noninventory_data",noninventory_data)
 
 #service data
 mycursor.execute("SELECT * FROM app1_service WHERE cid_id=%s",(cmp1))
 services_data=mycursor.fetchall()
-print("services_data",services_data)
 
 
 
@@ -149,7 +145,7 @@ price=StringVar()
 total=StringVar()
 tax=StringVar()
 subtotal=StringVar()
-tax2=StringVar()
+taxamount=StringVar()
 grand=StringVar()
 amt_received=StringVar()
 balance=StringVar()
@@ -190,33 +186,38 @@ email_input.place(x=500,y=230,height=40)
 
 invoice_date_lab=Label(form_frame,text="Invoice Date",bg='#243e55',fg='#fff')
 invoice_date_lab.place(x=30,y=300,)
-invoice_date_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=email)
+invoice_date.set(format_date)
+invoice_date_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invoice_date)
 invoice_date_input.place(x=30,y=330,height=40)
 
 terms_lab=Label(form_frame,text="Terms",bg='#243e55',fg='#fff')
 terms_lab.place(x=500,y=300,)
-terms_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=email)
-terms_input.place(x=500,y=330,height=40)
+terms_input=ttk.Combobox(form_frame,textvariable = terms)
+terms_input['values']=("Due on Receipt","NET15","NET30","NET60","Add New Term")
+# terms_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=terms)
+terms_input.place(x=500,y=330,height=40,width=335)
 
 Due_date_lab=Label(form_frame,text="Due Date",bg='#243e55',fg='#fff')
 Due_date_lab.place(x=970,y=300,height=40)
-Due_date_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=email)
+Due_date_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=Due_date)
 Due_date_input.place(x=970,y=330,height=40)
 
 billto_lab=Label(form_frame,text="Bill To",bg='#243e55',fg='#fff')
 billto_lab.place(x=30,y=400,)
-billto_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=email)
+billto_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=billto)
 billto_input.place(x=30,y=430,height=150)
+
 
 invno_lab=Label(form_frame,text="Invoice No",bg='#243e55',fg='#fff')
 invno_lab.place(x=500,y=400,)
-invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=email)
+invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
 invno_input.place(x=500,y=430,height=40)
 
 place_of_supply_lab=Label(form_frame,text="Place Of Supply",bg='#243e55',fg='#fff')
 
-drop2=ttk.Combobox(form_frame,textvariable=email)
-drop2['values']=("Kerala","Karnataka","Tamilnadu")
+drop2=ttk.Combobox(form_frame,textvariable=place_of_supply)
+drop2['values']=(cmp_data[2],"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
+ 
 place_of_supply_lab.place(x=30,y=600,)
 drop2.place(x=30,y=630,height=40,width=335)
 
@@ -226,6 +227,9 @@ drop2.place(x=30,y=630,height=40,width=335)
 product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
 product_lab.place(x=100,y=730,)
 
+for proinv in inv:
+    if proinv.cid_id == cmp1.cid :
+        pass
 product_drop1=ttk.Combobox(form_frame,textvariable = product)
 product_drop1['values']=(" ")
 product_drop1.place(x=70,y=780,height=40,width=200)
@@ -331,36 +335,39 @@ total_lab.place(x=1200,y=730,)
 total_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
 total_input1.place(x=1150,y=780,height=40)
 
-total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
+total2=StringVar()
+total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total2)
 total_input2.place(x=1150,y=850,height=40)
 
-total_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
+total3=StringVar()
+total_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total3)
 total_input3.place(x=1150,y=930,height=40)
 
-total_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
+total4=StringVar()
+total_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total4)
 total_input4.place(x=1150,y=1000,height=40)
 
 #ocol-7
 tax_lab=Label(form_frame,text="TAX (%)",bg='#243e55',fg='#fff')
 tax_lab.place(x=1400,y=730,)
 
-tax_input1=StringVar()
+tax1=StringVar()
 tax_drop1=ttk.Combobox(form_frame,textvariable = tax)
 tax_drop1['values']=(" ")
 tax_drop1.place(x=1350,y=780,height=40,width=200)
 
-tax_input2=StringVar()
-tax_drop2=ttk.Combobox(form_frame,textvariable = tax)
+tax2=StringVar()
+tax_drop2=ttk.Combobox(form_frame,textvariable = tax2)
 tax_drop2['values']=(" ")
 tax_drop2.place(x=1350,y=850,height=40,width=200)
 
-tax_input3=StringVar()
-tax_drop3=ttk.Combobox(form_frame,textvariable = tax)
+tax3=StringVar()
+tax_drop3=ttk.Combobox(form_frame,textvariable = tax3)
 tax_drop3['values']=(" ")
 tax_drop3.place(x=1350,y=930,height=40,width=200)
 
-tax_input4=StringVar()
-tax_drop4=ttk.Combobox(form_frame,textvariable = tax)
+tax4=StringVar()
+tax_drop4=ttk.Combobox(form_frame,textvariable = tax4)
 tax_drop4['values']=(" ")
 tax_drop4.place(x=1350,y=1000,height=40,width=200)
 
@@ -373,14 +380,14 @@ subtotal_lab.place(x=970,y=1200,height=40)
 subtotal_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = subtotal)
 subtotal_input.place(x=1100,y=1200,height=40)
 
-tax2_lab=Label(form_frame,text="Tax Amount",bg='#243e55',fg='#fff')
-tax2_lab.place(x=970,y=1300,height=40)
-tax2_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = tax2)
-tax2_input.place(x=1100,y=1300,height=40)
+taxamount_lab=Label(form_frame,text="Tax Amount",bg='#243e55',fg='#fff')
+taxamount_lab.place(x=970,y=1300,height=40)
+taxamount_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = taxamount)
+taxamount_input.place(x=1100,y=1300,height=40)
 
 grand_lab=Label(form_frame,text="Grand Total",bg='#243e55',fg='#fff')
 grand_lab.place(x=970,y=1400,height=40)
-grand_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = tax2)
+grand_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = grand)
 grand_input.place(x=1100,y=1400,height=40)
 
 amt_received_lab=Label(form_frame,text="Amount Received",bg='#243e55',fg='#fff')
