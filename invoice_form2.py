@@ -1,9 +1,11 @@
+
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 import datetime as dt
 import mysql.connector
+from tkinter import messagebox
 
 
 def fun():#db connection
@@ -40,7 +42,13 @@ def save_invoice():
     grand=grand.get()
     amt_received=amt_received.get()
     balance=balance.get()
-    
+    sql="INSERT INTO app1_invoice (customername,email,invoiceno ,terms,invoicedate,duedate,bname ,placosupply ,product ,hsn,description,qty ,price ,total,tax ,subtotal ,grandtotal ,product2 ,shipstate,shippincode ,shipcountry,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry,cid_id)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            mydb.close()
+            messagebox.showinfo('New Customer Added')
+
 
 
 
@@ -160,8 +168,13 @@ company_email_lab.place(x=50,y=120,)
 select_customer_lab=tk.Label(form_frame,text="Select Customer",bg='#243e55',fg='#fff')
 
 drop2=ttk.Combobox(form_frame,textvariable = select_customer)
-
-drop2['values']=("Select-Options")
+customer_values=customers[0]
+for cust in  customers:
+    if customer_values[-1]==cmp1[0]:
+        
+        drop2['values']=(cust[2]+cust[3])
+    else:
+        messagebox.showerror('error', 'invalid data')
 
 select_customer_lab.place(x=30,y=200,height=15)
 drop2.place(x=30,y=230,height=40,width=335)
@@ -217,18 +230,18 @@ product_drop1=ttk.Combobox(form_frame,textvariable = product)
 product_drop1['values']=(" ")
 product_drop1.place(x=70,y=780,height=40,width=200)
 
-product_input2=StringVar()
-product_drop2=ttk.Combobox(form_frame,textvariable = product)
+product2=StringVar()
+product_drop2=ttk.Combobox(form_frame,textvariable = product2)
 product_drop2['values']=(" ")
 product_drop2.place(x=70,y=850,height=40,width=200)
 
-product_input3=StringVar()
-product_drop3=ttk.Combobox(form_frame,textvariable = product)
+product3=StringVar()
+product_drop3=ttk.Combobox(form_frame,textvariable = product3)
 product_drop3['values']=(" ")
 product_drop3.place(x=70,y=930,height=40,width=200)
 
-product_input4=StringVar()
-product_drop4=ttk.Combobox(form_frame,textvariable = product)
+product4=StringVar()
+product_drop4=ttk.Combobox(form_frame,textvariable = product4)
 product_drop4['values']=(" ")
 product_drop4.place(x=70,y=1000,height=40,width=200)
 
@@ -240,13 +253,16 @@ hsn_lab.place(x=350,y=730,)
 hsn_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn)
 hsn_input1.place(x=300,y=780,height=40)
 
-hsn_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn)
+hsn2=StringVar()
+hsn_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn2)
 hsn_input2.place(x=300,y=850,height=40)
 
-hsn_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn)
+hsn3=StringVar()
+hsn_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn3)
 hsn_input3.place(x=300,y=930,height=40)
 
-hsn_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn)
+hsn4=StringVar()
+hsn_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn4)
 hsn_input4.place(x=300,y=1000,height=40)
 
 #col-3
@@ -254,16 +270,20 @@ hsn_input4.place(x=300,y=1000,height=40)
 desc_lab=Label(form_frame,text="DESCRIPTION",bg='#243e55',fg='#fff')
 desc_lab.place(x=550,y=730,)
 
+
 desc_input1=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc)
 desc_input1.place(x=500,y=780,height=40)
 
-desc_input2=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc)
+desc2=StringVar()
+desc_input2=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc2)
 desc_input2.place(x=500,y=850,height=40)
 
-desc_input3=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc)
+desc3=StringVar()
+desc_input3=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc3)
 desc_input3.place(x=500,y=930,height=40)
 
-desc_input4=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc)
+desc4=StringVar()
+desc_input4=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc4)
 desc_input4.place(x=500,y=1000,height=40)
 
 #col-4
@@ -273,13 +293,16 @@ qty_lab.place(x=800,y=730,)
 qty_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
 qty_input1.place(x=750,y=780,height=40)
 
-qty_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
+qty2=StringVar()
+qty_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty2)
 qty_input2.place(x=750,y=850,height=40)
 
-qty_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
+qty3=StringVar()
+qty_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty3)
 qty_input3.place(x=750,y=930,height=40)
 
-qty_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
+qty4=StringVar()
+qty_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty4)
 qty_input4.place(x=750,y=1000,height=40)
 
 #col-5
@@ -289,13 +312,16 @@ price_lab.place(x=1000,y=730,)
 price_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
 price_input1.place(x=950,y=780,height=40)
 
-price_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
+price2=StringVar()
+price_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price2)
 price_input2.place(x=950,y=850,height=40)
 
-price_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
+price3=StringVar()
+price_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price3)
 price_input3.place(x=950,y=930,height=40)
 
-price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
+price4=StringVar()
+price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price4)
 price_input4.place(x=950,y=1000,height=40)
 
 #col-6
