@@ -2,7 +2,9 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+from tkinter.tix import Select
 import mysql.connector
+from tkcalendar import DateEntry
 
 #importing customer page to select the customer
 def add_custom():
@@ -20,7 +22,6 @@ mydb=mysql.connector.connect(
         )
 mycursor = mydb.cursor()
 cus_name= []
-email=[]
 #fetching customer data
 customer_query="SELECT firstname FROM `app1_customer`"
 mycursor.execute(customer_query)
@@ -29,16 +30,49 @@ for a in table:
     data = (a[0])
     cus_name.append(data)
     print(data)
-mail_query="SELECT email FROM `app1_customer`"
-mycursor.execute(mail_query)
-table2=mycursor.fetchone()
-if cus_name==email:
-    print('enter email')
-else:
-    for a in table2:
-     datas=(a[0])
-     email.append(datas)
-     print(datas)
+
+def get_email(event):
+    option=drop2.get()
+    mail_query="SELECT * FROM `app1_customer`"
+    mycursor.execute(mail_query,option)
+    table2=mycursor.fetchall()
+    for i in table2:
+        email.set(i[9])
+        biladdress.set(i[12:16])
+    print(email)
+# def get_bilad(event):
+#     options=drop2.get()
+#     address_query="SELECT * FROM `app1_customer`"
+#     mycursor.execute(options,address_query)
+#     table3=mycursor.fetchall()
+#     for i in table3:
+#         biladdress.set(i[12]+i[13]+i[14]+i[15],i[16])
+#     print(biladdress)
+
+
+
+# def select_cus():
+#     if cus_name is not None:
+#         get_email()
+
+# email=[]
+# def get_email():
+#     mail_query="SELECT email FROM `app1_customer`"
+#     mycursor.execute(mail_query)
+#     table2=mycursor.fetchall()
+#     if cus_name is exists:
+#         for a in table2:
+#             datas = (a[0:2])
+#             cus_name.append(datas)
+#             print(datas)
+# email=['0:-1']
+# mail_query="SELECT email FROM `app1_customer`"
+# mycursor.execute(mail_query)
+# table2=mycursor.fetchall()
+# if cus_name is exists:      
+#     for a in table2:
+#         datas=(a[0])
+#         email.append(datas)
 
 # for a in table:
 #     data = (a[0])
@@ -63,7 +97,7 @@ def save_credit_data():
         # db_connection()
         customer=cust.get()      
         mail=email.get()
-        biladdr=biladdress.get()
+        biladdr=biladdress.get() 
         creditno=creditnumber.get()
         place=placeofsup.get()
         invnum=invnumb.get()
@@ -131,7 +165,7 @@ form_heading.pack()
 #declaring global variables
 
 email=tk.StringVar()
-email.set(table2)
+# email.set(table2)
 biladdress=tk.StringVar()
 creditnumber=tk.StringVar()
 placeofsup=tk.StringVar()
@@ -164,6 +198,7 @@ place_input=StringVar()
 drop2=ttk.Combobox(form_frame)
 drop2.set("SELECT CUSTOMER")
 drop2['values']=(cus_name)
+drop2.bind("<<ComboboxSelected>>",get_email)
 drop2.place(x=30,y=130,height=40,width=450)
 wrappen.pack(fill='both',expand='yes',)
 
@@ -180,9 +215,9 @@ biladdrLab.place(x=30,y=200,)
 biladdr=Entry(form_frame,width=75,bg='#243e55',fg='#fff',textvariable=biladdress)
 biladdr.place(x=30,y=230,height=90)
 
-credit_note=Label(form_frame,text="CREDIT NOTE",bg='#243e55',fg='#fff')
+credit_note=Label(form_frame,text="CREDIT NOTE DATE",bg='#243e55',fg='#fff')
 credit_note.place(x=560,y=200,)
-creditno=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
+creditno=DateEntry(form_frame,width=55,bg='#243e55',fg='#fff')
 creditno.place(x=560,y=230,height=40)
 
 place_of_supp=tk.Label(form_frame,text="PLACE OF SUPPLY",bg='#243e55',fg='#fff')
@@ -193,7 +228,7 @@ place.place(x=30,y=360,height=40,width=450)
 
 invoice_period=tk.Label(form_frame,text="INVOICE PERIOD",bg='#243e55',fg='#fff')
 invoice_drop=ttk.Combobox(form_frame,textvariable=inv_period)
-invoice_drop['values']=("OCT2022-DEC2022","","","")
+invoice_drop['values']=("OCT2022-DEC2022","july2022-sept2022","april2022-june2022","jan2022-march2022","oct2021-dec20221","july2021-sept2021","april2021-june2021,jan2021-march2022")
 invoice_period.place(x=20,y=440,height=15,width=100)
 invoice_drop.place(x=30,y=460,height=40,width=450)
 
