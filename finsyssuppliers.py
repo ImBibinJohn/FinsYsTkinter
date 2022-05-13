@@ -156,11 +156,7 @@ def addsuppliers():
                 cur.execute(ss,[lname])
                 rr=cur.fetchall()
                 print(rr)
-                if r is not None and rr is not None:
-                    messagebox.showerror('Already Exist','User exists,Try another Name',parent=B)
-            
-                else:  
-                #xxxxx  
+                if r==[] and rr==[]:
                     chk_b4.config(text='checked',fg='green')                                                  
                     tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
                     gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
@@ -168,7 +164,9 @@ def addsuppliers():
                     cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
                     (tds),(street),(city),(state),(pin),(contry),(note)])
                     mydata.commit()
-                    messagebox.showinfo('Sucessfull','Supplier added sucessfully')     
+                    messagebox.showinfo('Sucessfull','Supplier added sucessfully')    
+                elif r is not None and rr is not None:
+                    messagebox.showerror('Already Exist','User exists,Try another Name',parent=B)     
     global B
     B=tk.Toplevel(A)
     B.title('Add suppliers')
@@ -537,8 +535,8 @@ def sherrymain():
             note=enotes.get()
            # bn=bm.get()
             print(title,fname,lname,comp,mail,mob,open1,acc,webs,bill,terms,gst,gst_in,tax,date,defexp,tds,street,city,state,pin,contry,note,b)
-            cur.execute("""UPDATE supplier SET title =%s, firstname =%s, lastname =%s, company =%s, mobile =%s, email =%s, website =%s, billingrate =%s, terms =%s, openingbalance =%s,accountno =%s, gsttype =%s,gstin =%s, taxregisterationno =%s, effectivedate =%s, defaultexpenceaccount =%s, tds =%s, street =%s, city =%s, state =%s, pincode =%s, country =%s, notes =%s WHERE supplier_id =%s"""
-            ,(title, fname, lname, comp, mob, mail, webs, bill, terms, open1, acc, gst, gst_in, tax, date, defexp, tds, street, city, state, pin, contry, note, b[0],))
+            cur.execute("""UPDATE supplier SET title =%s, firstname =%s, lastname =%s, company =%s, mobile =%s, email =%s, website =%s, billingrate =%s, terms =%s, openingbalance =%s,accountno =%s, gsttype =%s,gstin =%s, taxregisterationno =%s, effectivedate =%s, defaultexpenceaccount =%s, tds =%s, street =%s, city =%s, state =%s, pincode =%s, country =%s, notes =%s WHERE supplier_id =%s""",
+            (title, fname, lname, comp, mob, mail, webs, bill, terms, open1, acc, gst, gst_in, tax, date, defexp, tds, street, city, state, pin, contry, note, b[0],))
             mydata.commit()
             D.destroy()
 
