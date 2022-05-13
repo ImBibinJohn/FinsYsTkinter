@@ -10,6 +10,14 @@ import matplotlib.cm as cm
 import matplotlib.figure
 import matplotlib.patches
 
+mydb=mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='',
+    database='finsystkinter',
+    )
+mycursor = mydb.cursor()
+
 def clear_frame():
    form_frame.destroy()
 

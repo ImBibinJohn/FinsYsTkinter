@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -8,7 +7,7 @@ from unicodedata import category
 import mysql.connector as mysql
 
 
-from tkcalendar import DateEntry, Calendar
+# from tkcalendar import DateEntry, Calendar
 
 payment_form = tk.Tk()
 payment_form.title("finsYs")

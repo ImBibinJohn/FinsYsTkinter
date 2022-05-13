@@ -1,86 +1,131 @@
-
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+from tkinter.tix import Select
 import mysql.connector
+from tkcalendar import DateEntry
 
+#importing customer page to select the customer
 def add_custom():
     import add_new_customer
 
-#db connects here ****
-def db_connection():
-    global mydb,mycursor
-    mydb=mysql.connector.connect(
+#db connects here **
+# def db_connection():
+# global mydb,mycursor
+mydb=mysql.connector.connect(
         host='localhost',
         user='root',
         password='',
+        port='3308',
         database='finsys_tkinter'
         )
-    mycursor = mydb.cursor()
+mycursor = mydb.cursor()
+cus_name= []
+#fetching customer data
+customer_query="SELECT firstname FROM `app1_customer`"
+mycursor.execute(customer_query)
+table=mycursor.fetchall()
+for a in table:
+    data = (a[0])
+    cus_name.append(data)
+    print(data)
+
+def get_email(event):
+    option=drop2.get()
+    mail_query="SELECT * FROM `app1_customer`"
+    mycursor.execute(mail_query,option)
+    table2=mycursor.fetchall()
+    for i in table2:
+        email.set(i[9])
+        biladdress.set(i[12:16])
+    print(email)
+# def get_bilad(event):
+#     options=drop2.get()
+#     address_query="SELECT * FROM `app1_customer`"
+#     mycursor.execute(options,address_query)
+#     table3=mycursor.fetchall()
+#     for i in table3:
+#         biladdress.set(i[12]+i[13]+i[14]+i[15],i[16])
+#     print(biladdress)
+
+
+
+# def select_cus():
+#     if cus_name is not None:
+#         get_email()
+
+# email=[]
+# def get_email():
+#     mail_query="SELECT email FROM `app1_customer`"
+#     mycursor.execute(mail_query)
+#     table2=mycursor.fetchall()
+#     if cus_name is exists:
+#         for a in table2:
+#             datas = (a[0:2])
+#             cus_name.append(datas)
+#             print(datas)
+# email=['0:-1']
+# mail_query="SELECT email FROM `app1_customer`"
+# mycursor.execute(mail_query)
+# table2=mycursor.fetchall()
+# if cus_name is exists:      
+#     for a in table2:
+#         datas=(a[0])
+#         email.append(datas)
+
+# for a in table:
+#     data = (a[0])
+#     email.append(data)
+#     print(data)
+# email=[]
+# mail_query="SELECT email FROM `app1_customer`"
+# mycursor.execute(mail_query)
+# table2=mycursor.fetchone()
+# if customer_query == cus_name:   
+#     for a in table:
+#         data = (a[0])
+#         email.append(data)
+
+
+
+
 
 
 #to save credit formdata
 def save_credit_data():
-        db_connection()      
-        mail=mail.get("1.0","end")
-        biladdr=biladdr.get()
-        creditno=creditno.get()
-        place=place.get()
-        invnum=invnum.get()
-        invperiod=invperiod.get()
-        product1=product1.get()
-        product2=product2.get()
-        product3=product3.get()
-        descrip1=descrip1.get()
-        descrip2=descrip2.get()
-        descrip3=descrip3.get()
-        qty1=qty1.get()
-        qty2=qty2.get()
-        qty3=qty3.get()
-        price1=price1.get()
-        price2=price2.get()
-        price3=price3.get()
-        total1=total1.get()
-        total2=total2.get()
-        total3=total3.get()
-        tax1=tax1.get()
-        tax2=tax2.get()
-        tax3=tax3.get()
-        sql="INSERT INTO credit (mail,biladdr,creditdate,creditno,place,invnum,invperiod,product,descrip,qty,price,tax,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%S,%S)" #adding values into db
-        # val=(sql,mail,biladdr,,creditno,place,invnum,invperiod,product,descrip,qty,price,tax,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3)
-        mycursor.execute(sql,[(mail),(biladdr),(creditno),(place),(invnum),(product1),(product2),(product3),(descrip1),(descrip2),(descrip3),(price1),(price2),(price3),(total1),(total2),(total3),(tax1),(tax2),(tax3)])
+        # db_connection()
+        customer=cust.get()      
+        mail=email.get()
+        biladdr=biladdress.get() 
+        creditno=creditnumber.get()
+        place=placeofsup.get()
+        invnum=invnumb.get()
+        invperiod=inv_period.get()
+        product1=pro1.get()
+        product2=pro2.get()
+        product3=pro3.get()
+        descrip1=descript1.get()
+        descrip2=descript2.get()
+        descrip3=descript3.get()
+        qty1=qnty1.get()
+        qty2=qnty2.get()
+        qty3=qnty3.get()
+        price1=pricee1.get()
+        price2=pricee2.get()
+        price3=pricee3.get()
+        total1=totall1.get()
+        total2=totall2.get()
+        total3=totall3.get()
+        tax1=tax_1.get()
+        tax2=tax_2.get()
+        tax3=tax_3.get()
+        sql= '''INSERT INTO app1_credit (customer,mail,biladdr,creditdate,creditno,place,invnum,invperiod,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%S,%S)''' #adding values into db
+        val=(customer,mail,biladdr,creditno,place,invnum,invperiod,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3)
+        # mycursor.execute(sql,[(mail),(biladdr),(creditno),(place),(invnum),(product1),(product2),(product3),(descrip1),(descrip2),(descrip3),(price1),(price2),(price3),(total1),(total2),(total3),(tax1),(tax2),(tax3)])
+        mycursor.execute(sql,val)
         mydb.commit()
         mydb.close()
-
-
-#declaring global variables
-# global  email,billingad,creditnote,placeofsup,invoiceperiod,invoicedate,pro1,pro2,pro3,descrip1,descrip2,descrip3,qty1,qty2,qty3,price1,price2,price3,total1,total2,total3,tax1,tax2,tax3
-# email=StringVar(form_frame,email)
-# billingad=StringVar()
-# creditnote=StringVar()
-# placeofsup=StringVar()
-# invoiceperiod=StringVar()
-# invoicedate=StringVar()
-# pro1=StringVar()
-# pro2=StringVar()
-# pro3=StringVar()
-# descrip1=StringVar()
-# descrip2=StringVar()
-# descrip3=StringVar()
-# qty1=StringVar()
-# qty2=StringVar()
-# qty3=StringVar()
-# price1=StringVar()
-# price2=StringVar()
-# price3=StringVar()
-# total1=StringVar()
-# total2=StringVar()
-# total3=StringVar()
-# tax1=StringVar()
-# tax2=StringVar()
-# tax3=StringVar()
-
 
 
 #ihsdjrifjsiof
@@ -107,64 +152,98 @@ headingfont=font.Font(family='Times New Roman', size=25,)
 credit_heading=Label(heading_frame, text="CREDIT NOTE",fg='#fff',bg='#243e55',height=2,bd=5,relief="groove",font=headingfont,width=70)
 credit_heading.pack()
 
+
 #form fields
 sub_headingfont=font.Font(family='Times New Roman', size=20,)
-form_frame=Frame(mycanvas,width=1600,height=500,bg='#243e55')
+form_frame=Frame(mycanvas,width=1600,height=700,bg='#243e55')
 mycanvas.create_window((0,150),window=form_frame,anchor="nw")
 form_lable=tk.Label(form_frame,bg='#243e55',width=100)
 form_lable.place(x=0,y=0)
 form_heading=tk.Label(form_lable, text="fin sYs",fg='#fff',bg='#243e55',height=2,bd=1,relief="groove",font=sub_headingfont,width=80)
 form_heading.pack()
 
+#declaring global variables
+
+email=tk.StringVar()
+# email.set(table2)
+biladdress=tk.StringVar()
+creditnumber=tk.StringVar()
+placeofsup=tk.StringVar()
+invnumb=tk.StringVar()
+inv_period=tk.StringVar()
+pro1=tk.StringVar()
+pro2=tk.StringVar()
+pro3=tk.StringVar()
+descript1=tk.StringVar()
+descript2=tk.StringVar()
+descript3=tk.StringVar()
+qnty1=tk.StringVar()
+qnty2=tk.StringVar()
+qnty3=tk.StringVar()
+pricee1=tk.StringVar()
+pricee2=tk.StringVar()
+pricee3=tk.StringVar()
+totall1=tk.StringVar()
+totall2=tk.StringVar()
+totall3=tk.StringVar()
+tax_1=tk.StringVar()
+tax_2=tk.StringVar()
+tax_3=tk.StringVar() 
+
 title_lab=tk.Label(form_frame,text="CUSTOMER",bg='#243e55',fg='#fff')
-place_input=StringVar()
-drop2=ttk.Combobox(form_frame,textvariable = place_input)
-
-drop2['values']=("SELECT_CUSTOMER")
-
 title_lab.place(x=10,y=100,height=15,width=100)
+cust=tk.StringVar()
+cust.set(table)
+place_input=StringVar()
+drop2=ttk.Combobox(form_frame)
+drop2.set("SELECT CUSTOMER")
+drop2['values']=(cus_name)
+drop2.bind("<<ComboboxSelected>>",get_email)
 drop2.place(x=30,y=130,height=40,width=450)
 wrappen.pack(fill='both',expand='yes',)
 
-add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_custom)
-add_custom.place(x=335,y=230)
+add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_custom,)
+add_custom.place(x=505,y=130)
 
 mailLab=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
-mailLab.place(x=530,y=100,)
-mail=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
-mail.place(x=530,y=130,height=40)
+mailLab.place(x=560,y=100,)
+mail=Entry(form_frame,width=55,bg='#243e55',fg='#fff',textvariable=email)
+mail.place(x=560,y=130,height=40)
 
 biladdrLab=Label(form_frame,text="BILLING ADDRESS",bg='#243e55',fg='#fff')
 biladdrLab.place(x=30,y=200,)
-biladdr=Entry(form_frame,width=75,bg='#243e55',fg='#fff')
+biladdr=Entry(form_frame,width=75,bg='#243e55',fg='#fff',textvariable=biladdress)
 biladdr.place(x=30,y=230,height=90)
 
-credit_note=Label(form_frame,text="CREDIT NOTE",bg='#243e55',fg='#fff')
-credit_note.place(x=530,y=200,)
-creditno=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
-creditno.place(x=530,y=230,height=40)
+credit_note=Label(form_frame,text="CREDIT NOTE DATE",bg='#243e55',fg='#fff')
+credit_note.place(x=560,y=200,)
+creditno=DateEntry(form_frame,width=55,bg='#243e55',fg='#fff')
+creditno.place(x=560,y=230,height=40)
 
 place_of_supp=tk.Label(form_frame,text="PLACE OF SUPPLY",bg='#243e55',fg='#fff')
-place=ttk.Combobox(form_frame)
-place['values']=("KERALA","TAMILNADU","ANDHRA PRADESH","KARNATAKA")
+place=ttk.Combobox(form_frame,textvariable=placeofsup)
+place['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
 place_of_supp.place(x=20,y=330,height=15,width=100)
 place.place(x=30,y=360,height=40,width=450)
 
 invoice_period=tk.Label(form_frame,text="INVOICE PERIOD",bg='#243e55',fg='#fff')
-invoice_drop=ttk.Combobox(form_frame)
-invoice_drop['values']=("OCT2022-DEC2022","","","")
-invoice_period.place(x=20,y=330,height=15,width=100)
-invoice_drop.place(x=30,y=620,height=40,width=450)
+invoice_drop=ttk.Combobox(form_frame,textvariable=inv_period)
+invoice_drop['values']=("OCT2022-DEC2022","july2022-sept2022","april2022-june2022","jan2022-march2022","oct2021-dec20221","july2021-sept2021","april2021-june2021,jan2021-march2022")
+invoice_period.place(x=20,y=440,height=15,width=100)
+invoice_drop.place(x=30,y=460,height=40,width=450)
 
-# invoice_no=tk.Label(form_frame,text="SELECT INVOICE NO",bg='#243e55',fg='#fff')=ttk.Combobox(form_frame)
-# invnum['values']=("SELECT INVOICE NO","","","")
-# invoice_no.place(x=530,y=330,height=15,width=100)
-# invoice_no_drop.place(x=530,y=360,height=40,width=450)
+invoice_no=tk.Label(form_frame,text="SELECT INVOICE NO",bg='#243e55',fg='#fff')
+invnum=ttk.Combobox(form_frame,textvariable=invnumb)
+invnum['values']=("SELECT INVOICE NO","","","")
+invoice_no.place(x=560,y=330,height=15,width=100)
+invnum.place(x=560,y=360,height=40,width=450)
+
+
 
 #Billing session
 sub_headingfont=font.Font(family='Times New Roman', size=18,)
 form2_frame=Frame(mycanvas,width=1600,height=500,bg='#243e55',bd=1,relief="groove")
-mycanvas.create_window((0,650),window=form2_frame,anchor="nw")
+mycanvas.create_window((0,750),window=form2_frame,anchor="nw")
 
 bill_heading=tk.Label(form2_frame, text="",fg='#fff',bg='#243e55',height=2,font=sub_headingfont,width=15)
 bill_heading.place(x=30,y=10,)
@@ -174,80 +253,80 @@ label.place(x=5,y=20)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro1_drop=ttk.Combobox(form2_frame)
-pro1_drop['values']=("","","","")
+product1=ttk.Combobox(form2_frame,textvariable=pro1)
+product1['values']=("","","","")
 pro.place(x=10,y=120,height=15,width=100)
-pro1_drop.place(x=10,y=150,height=40,width=150)
+product1.place(x=10,y=150,height=40,width=150)
 #2
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro2_drop=ttk.Combobox(form2_frame,)
-pro2_drop['values']=("","","","")
+product2=ttk.Combobox(form2_frame,textvariable=pro2)
+product2['values']=("","","","")
 pro.place(x=10,y=210,height=15,width=100)
-pro2_drop.place(x=10,y=240,height=40,width=150)
+product2.place(x=10,y=240,height=40,width=150)
 #3
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro3_drop=ttk.Combobox(form2_frame,)
-pro3_drop['values']=("","","","")
+product3=ttk.Combobox(form2_frame,textvariable=pro3)
+product3['values']=("","","","")
 pro.place(x=10,y=280,height=15,width=100)
-pro3_drop.place(x=10,y=310,height=40,width=150)
+product3.place(x=10,y=310,height=40,width=150)
 
 
 
 #row 1
-discription1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription1_input.place(x=260,y=150,height=40,width=180)
+descrip1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descript1)
+descrip1.place(x=260,y=150,height=40,width=180)
 #row2
-discription2_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription2_input.place(x=260,y=240,height=40,width=180)
+descrip2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descript2)
+descrip2.place(x=260,y=240,height=40,width=180)
 #row3
-discription3_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription3_input.place(x=260,y=310,height=40,width=180)
+descrip3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descript3)
+descrip3.place(x=260,y=310,height=40,width=180)
 
 #row 1
-quantity1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity1_input.place(x=480,y=150,height=40,width=150)
+qty1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=qnty1)
+qty1.place(x=480,y=150,height=40,width=150)
 #row2
-quantity2_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity2_input.place(x=480,y=240,height=40,width=150)
+qty2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=qnty2)
+qty2.place(x=480,y=240,height=40,width=150)
 #row3
-quantity3_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity3_input.place(x=480,y=310,height=40,width=150)
+qty3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=qnty3)
+qty3.place(x=480,y=310,height=40,width=150)
 
 
 #row 1
-price1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price1_input.place(x=680,y=150,height=40,width=150)
+price1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=pricee1)
+price1.place(x=680,y=150,height=40,width=150)
 #row2
-price2_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price2_input.place(x=680,y=240,height=40,width=150)
+price2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=pricee3)
+price2.place(x=680,y=240,height=40,width=150)
 #row3
-price3_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price3_input.place(x=680,y=310,height=40,width=150)
+price3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=pricee3)
+price3.place(x=680,y=310,height=40,width=150)
 
 #row 1
-total1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total1_input.place(x=850,y=150,height=40,width=100)
+total1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=totall1)
+total1.place(x=850,y=150,height=40,width=100)
 #row2
-total2_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total2_input.place(x=850,y=240,height=40,width=100)
+total2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=totall2)
+total2.place(x=850,y=240,height=40,width=100)
 #row3
-total3_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total3_input.place(x=850,y=310,height=40,width=100)
+total3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=totall3)
+total3.place(x=850,y=310,height=40,width=100)
 #row1
-tax_drop=ttk.Combobox(form2_frame)
-tax_drop['values']=("","","","")
-tax_drop.place(x=1250,y=150,height=15,width=150)
-tax_drop.place(x=1000,y=150,height=40,width=150)
+tax1=ttk.Combobox(form2_frame,textvariable=tax_1)
+tax1['values']=("","","","")
+tax1.place(x=1250,y=150,height=15,width=150)
+tax1.place(x=1000,y=150,height=40,width=150)
 #row2
-tax2_drop=ttk.Combobox(form2_frame)
-tax2_drop['values']=("","","","")
-pro.place(x=1110,y=240,height=15,width=150)
-tax2_drop.place(x=1000,y=240,height=40,width=150)
+tax2=ttk.Combobox(form2_frame,textvariable=tax_2)
+tax2['values']=("","","","")
+tax2.place(x=1110,y=240,height=15,width=150)
+tax2.place(x=1000,y=240,height=40,width=150)
 #row3
-tax3_drop=ttk.Combobox(form2_frame)
-tax3_drop['values']=("","","","")
-pro.place(x=1000,y=310,height=15,width=150)
-tax3_drop.place(x=1000,y=310,height=40,width=150)
+tax3=ttk.Combobox(form2_frame,textvariable=tax_3)
+tax3['values']=("","","","")
+tax3.place(x=1000,y=310,height=15,width=150)
+tax3.place(x=1000,y=310,height=40,width=150)
 
 ##################
 
@@ -270,10 +349,10 @@ grand_total.place(x=900,y=210)
 grand_input=Entry(form3_frame,width=40,bg='#243e55',fg='#fff')
 grand_input.place(x=1000,y=200,height=40,width=200)
 
+
+
+
 button=tk.Button(form3_frame, text="SAVE",command=save_credit_data) 
 button.place(x=1050,y=280,width=100)
 
 credit_form.mainloop()
-
-
-
