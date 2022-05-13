@@ -257,7 +257,6 @@ table79 = mycursor.fetchall()
 query80="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Krishi Kalyan Cess RCM' "
 mycursor.execute(query80)
 table80 = mycursor.fetchall()
-
 query81="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Service Tax' "
 mycursor.execute(query81)
 table81 = mycursor.fetchall()
