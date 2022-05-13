@@ -227,9 +227,9 @@ drop2.place(x=30,y=630,height=40,width=335)
 product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
 product_lab.place(x=100,y=730,)
 
-for proinv in inv:
-    if proinv.cid_id == cmp1.cid :
-        pass
+# for proinv in inv:
+#     if proinv.cid_id == cmp1.cid :
+#         pass
 product_drop1=ttk.Combobox(form_frame,textvariable = product)
 product_drop1['values']=(" ")
 product_drop1.place(x=70,y=780,height=40,width=200)
