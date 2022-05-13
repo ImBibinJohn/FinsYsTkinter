@@ -227,11 +227,25 @@ drop2.place(x=30,y=630,height=40,width=335)
 product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
 product_lab.place(x=100,y=730,)
 
-for proinv in inv:
-    if proinv.cid_id == cmp1.cid :
-        pass
 product_drop1=ttk.Combobox(form_frame,textvariable = product)
-product_drop1['values']=(" ")
+for proinv in inventory_data: 
+    if proinv[-1] == cmp1[0] :
+        inv_data=proinv[2]
+
+for proinv in noninventory_data: 
+    if proinv[-1] == cmp1[0] :
+        noninv_data=proinv[2]
+        print("noninv=",noninv_data)
+
+for proinv in bundle_data: 
+    if proinv[-1] == cmp1[0] :
+        bundleinv_data=proinv[2]
+        print("noninv=",bundleinv_data)
+
+
+
+product_drop1['values']=(inv_data,noninv_data,bundleinv_data)
+        
 product_drop1.place(x=70,y=780,height=40,width=200)
 
 product2=StringVar()
