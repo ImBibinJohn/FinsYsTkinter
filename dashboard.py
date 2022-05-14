@@ -7,7 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import mysql.connector
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
 cursor=mydata.cursor()
-
+#cc
 def dashboard():
     dash=tk.Tk()
     dash.title('Dashboard')
