@@ -86,7 +86,7 @@ def get_invno():
 # for a in table:
 #     data = (a[0])
 #     email.append(data)
-#     print(data)
+#     print(data)dfu
 # email=[]
 # mail_query="SELECT email FROM `app1_customer`"
 # mycursor.execute(mail_query)
@@ -107,8 +107,14 @@ for a in table3:
     inv_no.append(data)
     print(data)
 
-
-
+inventory=[]
+inventory_query="SELECT name FROM `app1_inventory`"
+mycursor.execute(inventory_query)
+table4=mycursor.fetchall()
+for a in table4:
+    data = (a[0])
+    inventory.append(data)
+    print(data)
 
 #to save credit formdata
 def save_credit_data():
@@ -189,6 +195,7 @@ creditnumber=tk.StringVar()
 placeofsup=tk.StringVar()
 invnumb=tk.StringVar()
 inv_period=tk.StringVar()
+product1=tk.StringVar()
 pro1=tk.StringVar()
 pro2=tk.StringVar()
 pro3=tk.StringVar()
@@ -272,8 +279,9 @@ label.place(x=5,y=20)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-product1=ttk.Combobox(form2_frame,textvariable=pro1)
-product1['values']=("","","","")
+product1=ttk.Combobox(form2_frame,textvariable=product1)
+product1['values']=(inventory)
+product1.set("SELECT PRODUCT")
 pro.place(x=10,y=120,height=15,width=100)
 product1.place(x=10,y=150,height=40,width=150)
 #2
