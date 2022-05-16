@@ -81,9 +81,14 @@ def dashboard():
     for i in datazz:
       if (i[0]==cid and i[1]!=0):
         p+=i[1]
+
     #heading frame
+    #fetching company name from company
+    comname="SELECT id,cname FROM company WHERE id= %s"
+    cursor.execute(comname,[cid])
+    datz=cursor.fetchone()
     headdash=tk.Frame(dashframe,bg='#243e54')
-    tk.Label(headdash,text='Company Name',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.1)
+    tk.Label(headdash,text=f'{datz[1]}',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.1)
     headdash.place(relx=0.05,rely=0.03,relwidth=0.9,relheight=0.1)
 
     #profit and loss frame
@@ -146,6 +151,14 @@ def dashboard():
       #Income frame
     incframe=tk.Frame(dashframe,bg='#243e54')
     tk.Label(incframe,text='INCOME: ₹'f'{inc}',font=('Times New Roman',20),bg='#243e54').place(relx=0.05,rely=0.05)
+    figg = matplotlib.figure.Figure(figsize=(2,2))
+    ai = figg.add_subplot(111)
+    ai.pie([inc],radius=1.4,labels=[inc]) 
+    figg.set_facecolor("#243e55")
+
+    canvasi = FigureCanvasTkAgg(figg, master=incframe)
+    canvasi.get_tk_widget().place(relx=0,rely=0.15,relwidth=1,relheight=0.8)
+    canvasi.draw()
     incframe.place(relx=0.05,rely=0.55,relwidth=0.27,relheight=0.3)
 
       #Invoice frame
@@ -179,8 +192,7 @@ def dashboard():
      #Sales frame
     dict={} 
     for x in range(0,len(label3)):
-      dict[label3[x]]=data3[x] 
-    print(dict)    
+      dict[label3[x]]=data3[x]     
     salesframe=tk.Frame(dashframe,bg='#243e54')
     tk.Label(salesframe,text='SALES: ₹'f'{s}',font=('Times New Roman',20),bg='#243e54').place(relx=0.05,rely=0.05)
     salframe=tk.Frame(salesframe,bg='#243e54')
