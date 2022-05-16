@@ -3,6 +3,7 @@ import tkinter.font as font
 from  tkinter import ttk
 import tkinter as tk
 import mysql.connector
+from tkinter import messagebox
 
 def fun():#db connection
     global mydb,mycursor
@@ -279,8 +280,19 @@ def edit_customer():
 
 
 
-def delete_customer():
-    pass
+#Delete constomer
+def delete_invoice():
+    focus_data = set.focus()
+    values=set.item(focus_data,'values')
+    invoic_id=[values[-1]]
+    mycursor.execute("DELETE FROM app1_invoice WHERE invoiceid=%s",(invoic_id))
+    mydb.commit()
+    messagebox.showinfo('successfully Delated')
+    print('sucessfully deleted')
+    set.delete(focus_data)
+
+
+
 fun ()
 invoice =tk.Tk()
 invoice.title('fynsYs')
@@ -334,7 +346,7 @@ for data in invoice_data:
 edit=Button(content_label,text="Edit",background='#243e55', foreground="white",command=edit_customer)
 edit.place(x=850,y=450)
 
-delete=Button(content_label,text="Delete",background='#243e55', foreground="white",command=delete_customer)
+delete=Button(content_label,text="Delete",background='#243e55', foreground="white",command=delete_invoice)
 
 delete.place(x=950,y=450)
 
