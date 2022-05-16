@@ -12,7 +12,7 @@ mydb=mysql.connector.connect(
     database='finsystkinter',
     )
 mycursor = mydb.cursor()
-# jan="SELECT SUM(totamt) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Bank Charges')"
+jan="SELECT SUM(totamt) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Bank Charges')"
 # def fetchdata():
 query="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Advertising/Promotional' "
 mycursor.execute(query)
