@@ -30,7 +30,7 @@ for a in table:
     data = (a[0])
     cus_name.append(data)
     print(data)
-
+#select emails
 def get_email(event):
     option=drop2.get()
     mail_query="SELECT * FROM `app1_customer`"
@@ -39,7 +39,16 @@ def get_email(event):
     for i in table2:
         email.set(i[9])
         biladdress.set(i[12:16])
+        invnumb.set()
     print(email)
+
+def get_invno():
+    option=drop2.get()
+    invquery="SELECT * FROM `app1_invoice` Where cid=%s"
+    mycursor.execute(invquery,option)
+    table3=mycursor.fetchall()
+    for i in table3:
+        invnumb.set(table3)
 # def get_bilad(event):
 #     options=drop2.get()
 #     address_query="SELECT * FROM `app1_customer`"
@@ -77,7 +86,7 @@ def get_email(event):
 # for a in table:
 #     data = (a[0])
 #     email.append(data)
-#     print(data)
+#     print(data)dfu
 # email=[]
 # mail_query="SELECT email FROM `app1_customer`"
 # mycursor.execute(mail_query)
@@ -86,11 +95,26 @@ def get_email(event):
 #     for a in table:
 #         data = (a[0])
 #         email.append(data)
+#select invoice no from backend
 
+inv_no= []
+#fetching invoice no
+inv_query="SELECT invoiceno FROM `app1_invoice`"
+mycursor.execute(inv_query)
+table3=mycursor.fetchall()
+for a in table3:
+    data = (a[0])
+    inv_no.append(data)
+    print(data)
 
-
-
-
+inventory=[]
+inventory_query="SELECT name FROM `app1_inventory`"
+mycursor.execute(inventory_query)
+table4=mycursor.fetchall()
+for a in table4:
+    data = (a[0])
+    inventory.append(data)
+    print(data)
 
 #to save credit formdata
 def save_credit_data():
@@ -171,6 +195,7 @@ creditnumber=tk.StringVar()
 placeofsup=tk.StringVar()
 invnumb=tk.StringVar()
 inv_period=tk.StringVar()
+product1=tk.StringVar()
 pro1=tk.StringVar()
 pro2=tk.StringVar()
 pro3=tk.StringVar()
@@ -234,7 +259,8 @@ invoice_drop.place(x=30,y=460,height=40,width=450)
 
 invoice_no=tk.Label(form_frame,text="SELECT INVOICE NO",bg='#243e55',fg='#fff')
 invnum=ttk.Combobox(form_frame,textvariable=invnumb)
-invnum['values']=("SELECT INVOICE NO","","","")
+invnum['values']=(inv_no)
+invnum.set("SELECT INVOICE NO")
 invoice_no.place(x=560,y=330,height=15,width=100)
 invnum.place(x=560,y=360,height=40,width=450)
 
@@ -253,8 +279,9 @@ label.place(x=5,y=20)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-product1=ttk.Combobox(form2_frame,textvariable=pro1)
-product1['values']=("","","","")
+product1=ttk.Combobox(form2_frame,textvariable=product1)
+product1['values']=(inventory)
+product1.set("SELECT PRODUCT")
 pro.place(x=10,y=120,height=15,width=100)
 product1.place(x=10,y=150,height=40,width=150)
 #2
