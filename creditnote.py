@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -108,13 +109,21 @@ for a in table3:
     print(data)
 
 inventory=[]
-inventory_query="SELECT name FROM `app1_inventory`"
+inventory_query="SELECT * FROM `app1_inventory`"
 mycursor.execute(inventory_query)
 table4=mycursor.fetchall()
 for a in table4:
-    data = (a[0])
+    data = (a[2])
     inventory.append(data)
     print(data)
+
+def ProSelect(event):
+    option3=product1.get()
+    inventory_query2="SELECT * FROM `app1_inventory` WHERE name=id"
+    mycursor.execute(option3,inventory_query2)
+    table5=mycursor.fetchall()
+    for a in table5:
+        descript1.set(a[11])
 
 #to save credit formdata
 def save_credit_data():
@@ -281,6 +290,8 @@ label.place(x=5,y=20)
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
 product1=ttk.Combobox(form2_frame,textvariable=product1)
 product1['values']=(inventory)
+product1.bind("<<ComboboxSelected>>",ProSelect)
+# product1.set(a[2])
 product1.set("SELECT PRODUCT")
 pro.place(x=10,y=120,height=15,width=100)
 product1.place(x=10,y=150,height=40,width=150)
