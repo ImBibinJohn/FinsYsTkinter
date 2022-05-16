@@ -4,6 +4,7 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 import datetime as dt
+from webbrowser import get
 import mysql.connector
 from tkinter import messagebox
 
@@ -17,8 +18,35 @@ def fun():#db connection
         database='finsYs_tkinter'
         )
     mycursor = mydb.cursor()
+# def get_product(*args):
+#     print("selected product is")
+
+def get_email(event):
+    option=drop2.get()
+    print("option is ",option)
+    mail_query="SELECT * FROM app1_customer "
+    mycursor.execute(mail_query,option)
+    table2=mycursor.fetchall()
+    for i in table2:
+        email.set(i[9])
+        billto.set(i[12:17])
+        # invno.set()
+
+
+
 def add_custom():
     import addcustomer_form
+
+def get_terms(event):
+    options=terms_input.get()
+    if options=="Add New Term":
+        invno_lab=Label(form_frame,text="Invoice No",bg='#243e55',fg='#fff')
+        invno_lab.place(x=500,y=400,)
+        invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
+        invno_input.place(x=500,y=430,height=40)
+    elif options=="Add New Term":
+        invno_input.place_remove()
+
 
 def save_invoice():
     global select_customer,email,invoice_date,terms,Due_date,billto,invno,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,tax2,grand,amt_received,balance
@@ -171,7 +199,7 @@ for cust in  customers:
         drop2['values']=(cust[2]+cust[3])
     else:
         messagebox.showerror('error', 'invalid data')
-
+drop2.bind("<<ComboboxSelected>>",get_email)
 select_customer_lab.place(x=30,y=200,height=15)
 drop2.place(x=30,y=230,height=40,width=335)
 wrappen.pack(fill='both',expand='yes',)
@@ -195,6 +223,7 @@ terms_lab.place(x=500,y=300,)
 terms_input=ttk.Combobox(form_frame,textvariable = terms)
 terms_input['values']=("Due on Receipt","NET15","NET30","NET60","Add New Term")
 # terms_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=terms)
+terms_input.bind("<<ComboboxSelected>>",get_terms)
 terms_input.place(x=500,y=330,height=40,width=335)
 
 Due_date_lab=Label(form_frame,text="Due Date",bg='#243e55',fg='#fff')
@@ -208,10 +237,10 @@ billto_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=billt
 billto_input.place(x=30,y=430,height=150)
 
 
-invno_lab=Label(form_frame,text="Invoice No",bg='#243e55',fg='#fff')
-invno_lab.place(x=500,y=400,)
-invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
-invno_input.place(x=500,y=430,height=40)
+# invno_lab=Label(form_frame,text="Invoice No",bg='#243e55',fg='#fff')
+# invno_lab.place(x=500,y=400,)
+# invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
+# invno_input.place(x=500,y=430,height=40)
 
 place_of_supply_lab=Label(form_frame,text="Place Of Supply",bg='#243e55',fg='#fff')
 
@@ -245,7 +274,16 @@ for proinv in bundle_data:
 
 
 product_drop1['values']=(inv_data,noninv_data,bundleinv_data)
-        
+value=product_drop1.bind(product)
+# value=product_drop1.focus('values')
+print("Product is",value)
+# value=product.trace('r',get_product)
+
+# product_drop1['postcommand']=getSelection(product_drop1)
+# spro=product_drop1.
+# spro=product_drop1.get()
+
+
 product_drop1.place(x=70,y=780,height=40,width=200)
 
 product2=StringVar()
