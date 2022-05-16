@@ -19,7 +19,7 @@ cur = mydata.cursor()
 
 def selected(event):
     if menu.get() == 'Chart Of Accounts':
-        import chart0faccounts
+        import test
     elif menu.get() == 'Reconcile':
         import reconcile
 
@@ -115,10 +115,10 @@ def main():
     def editcoa():
         def changeedit():
 
-            type = typeinput.get()
-            name = nameinput.get()
-            detail_type = detailtypeinput.get()
-            description = descriptioninput.get()
+            type = cm1.get()
+            name = f.get()
+            detail_type = l.get()
+            description = co.get()
             sub_account = cb.get()
             deftaxcode = nb.get()
             finsys_amt = balanceinput.get()
