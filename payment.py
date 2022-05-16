@@ -130,8 +130,8 @@ wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_date.place(x=30, y=300,)
-payment_input = DateEntry(payment_form, width=16, bg="#2f516f", bd=2)
-# Entry(form_frame, width=49, bg='#243e55', fg='#fff')
+# DateEntry(payment_form, width=16, bg="#2f516f", bd=2)
+payment_input = Entry(form_frame, width=49, bg='#243e55', fg='#fff')
 payment_input.place(x=30, y=330, height=40)
 
 
