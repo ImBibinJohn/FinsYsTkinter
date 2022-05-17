@@ -21,9 +21,9 @@ def fun():#db connection
 # def get_product(*args):
 #     print("selected product is")
 
+#getting selected customer's email 
 def get_email(event):
     option=drop2.get()
-    print("option is ",option)
     mail_query="SELECT * FROM app1_customer "
     mycursor.execute(mail_query,option)
     table2=mycursor.fetchall()
@@ -37,6 +37,7 @@ def get_email(event):
 def add_custom():
     import addcustomer_form
 
+#getting terms from dropdown
 def get_terms(event):
     options=terms_input.get()
     if options=="Add New Term":
@@ -46,6 +47,68 @@ def get_terms(event):
         invno_input.place(x=500,y=430,height=40)
     elif options=="Add New Term":
         invno_input.place_remove()
+
+#getting selected product1 and set some entry feild value
+def get_selected_product(event):
+    
+    selected_product=[]
+    product=product_drop1.get()
+    selected_product.append(product)
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[11])
+            price.set(i[12])
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[7])
+            price.set(i[8]) 
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[7])
+            price.set(i[8])    
+
+#getting selected product2 and set some entry feild value
+def get_selected_product2(event):
+    
+    selected_product=[]
+    product=product_drop2.get()
+    selected_product.append(product)
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[11])
+            price2.set(i[12])
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[7])
+            price2.set(i[8]) 
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[7])
+            price2.set(i[8])    
 
 
 def save_invoice():
@@ -257,38 +320,53 @@ product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
 product_lab.place(x=100,y=730,)
 
 product_drop1=ttk.Combobox(form_frame,textvariable = product)
+product1=[]
 for proinv in inventory_data: 
     if proinv[-1] == cmp1[0] :
         inv_data=proinv[2]
+        product1.append(inv_data)
+        print("inner if loop",inv_data)
 
 for proinv in noninventory_data: 
     if proinv[-1] == cmp1[0] :
         noninv_data=proinv[2]
+        product1.append(noninv_data)
         print("noninv=",noninv_data)
 
 for proinv in bundle_data: 
     if proinv[-1] == cmp1[0] :
         bundleinv_data=proinv[2]
-        print("noninv=",bundleinv_data)
-
-
-
-product_drop1['values']=(inv_data,noninv_data,bundleinv_data)
-value=product_drop1.bind(product)
-# value=product_drop1.focus('values')
-print("Product is",value)
-# value=product.trace('r',get_product)
-
-# product_drop1['postcommand']=getSelection(product_drop1)
-# spro=product_drop1.
-# spro=product_drop1.get()
-
+        product1.append(bundleinv_data)
+        
+product_drop1['values']=product1
+product_drop1.bind("<<ComboboxSelected>>",get_selected_product)
 
 product_drop1.place(x=70,y=780,height=40,width=200)
 
 product2=StringVar()
 product_drop2=ttk.Combobox(form_frame,textvariable = product2)
-product_drop2['values']=(" ")
+
+product2_data=[]
+for proinv in inventory_data: 
+    if proinv[-1] == cmp1[0] :
+        inv_data=proinv[2]
+        product2_data.append(inv_data)
+        print("inner if loop",inv_data)
+
+for proinv in noninventory_data: 
+    if proinv[-1] == cmp1[0] :
+        noninv_data=proinv[2]
+        product2_data.append(noninv_data)
+        print("noninv=",noninv_data)
+
+for proinv in bundle_data: 
+    if proinv[-1] == cmp1[0] :
+        bundleinv_data=proinv[2]
+        product2_data.append(bundleinv_data)
+        
+product_drop2['values']=product2_data
+product_drop2.bind("<<ComboboxSelected>>",get_selected_product2)
+
 product_drop2.place(x=70,y=850,height=40,width=200)
 
 product3=StringVar()
