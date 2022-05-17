@@ -73,7 +73,7 @@ def dashboard():
         data3.append(i[1])
         s+=i[1] 
 
-    #fetching data from payment table   
+    #fetching data from payment table x  
     p=0.0 
     ahhhh="SELECT cid,amtreceived FROM payment WHERE cid= %s"
     cursor.execute(ahhhh,[cid])
