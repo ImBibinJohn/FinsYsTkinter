@@ -7,8 +7,6 @@ from unicodedata import category
 import mysql.connector as mysql
 
 
-# from tkcalendar import DateEntry, Calendar
-
 payment_form = tk.Tk()
 payment_form.title("finsYs")
 payment_form.geometry("1500x1000")

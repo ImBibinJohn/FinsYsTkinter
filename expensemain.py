@@ -5,7 +5,6 @@ import tkinter.font as font
 import tkinter.messagebox as MessageBox
 
 # import click
-# from requests import options
 import mysql.connector
 
 mydata = mysql.connector.connect(

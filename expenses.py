@@ -7,7 +7,6 @@ import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
 
-# from tkcalendar import DateEntry, Calendar
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")

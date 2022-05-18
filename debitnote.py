@@ -6,7 +6,6 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
-# from tkcalendar import DateEntry
 
 
 debit_form = tk.Tk()
