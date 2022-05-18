@@ -82,7 +82,7 @@ def dashboard():
       if (i[0]==cid and i[1]!=0):
         p+=i[1]
 
-    #heading frame
+    #heading frame bb
     #fetching company name from company
     comname="SELECT id,cname FROM company WHERE id= %s"
     cursor.execute(comname,[cid])
