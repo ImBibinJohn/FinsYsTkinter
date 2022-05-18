@@ -21,6 +21,8 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
+    etype = "Debit Note"
+
     supplier = drop2.get()
     mailaddress = billing_input.get()
     payment_date = payment_drop.get()
@@ -68,9 +70,9 @@ def submit():
     con = mysql.connect(host="127.0.0.1", user="root",
                         password="", database="fynsystkinter", port='3307')
     cur = con.cursor()
-    d = '''INSERT INTO debit_form(supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
+    d = '''INSERT INTO expensesmain(etype,supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
                     , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-    cur.execute(d, [(supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+    cur.execute(d, [(etype), (supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                 (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
     con.commit()
     MessageBox.showinfo("Insert Status", "Inserted Successfully")

@@ -1,4 +1,5 @@
 
+from multiprocessing.sharedctypes import Value
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -21,9 +22,9 @@ def fun():#db connection
 # def get_product(*args):
 #     print("selected product is")
 
+#getting selected customer's email 
 def get_email(event):
     option=drop2.get()
-    print("option is ",option)
     mail_query="SELECT * FROM app1_customer "
     mycursor.execute(mail_query,option)
     table2=mycursor.fetchall()
@@ -37,6 +38,7 @@ def get_email(event):
 def add_custom():
     import addcustomer_form
 
+#getting terms from dropdown
 def get_terms(event):
     options=terms_input.get()
     if options=="Add New Term":
@@ -47,6 +49,181 @@ def get_terms(event):
     elif options=="Add New Term":
         invno_input.place_remove()
 
+#getting selected product1 and quantity and set some entry feild value
+
+def get_selected_product(event):
+    global createsubtotal
+    createsubtotal=0
+    selected_product=[]
+    product=product_drop1.get()
+    quantity=qty_input1.get()
+    selected_product.append(product)
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[11])
+            price.set(i[12])
+            sale_price=i[12]
+            tota_price=int(sale_price)*int(quantity)
+            total.set(tota_price)
+    createsubtotal=createsubtotal+tota_price    
+    subtotal.set(createsubtotal)
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[7])
+            price.set(i[8])
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity)
+            total.set(tota_price) 
+    # createsubtotal=createsubtotal+tota_price
+    # subtotal.set(createsubtotal)
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn.set(i[4])
+            desc.set(i[7])
+            price.set(i[8])
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity)
+            total.set(tota_price)   
+    createsubtotal=createsubtotal+tota_price
+    subtotal.set(createsubtotal) 
+
+#getting selected product2 and set some entry feild value
+def get_selected_product2(event):
+    
+    selected_product=[]
+    product=product_drop2.get()
+    selected_product.append(product)
+    quantity2=qty_input2.get()
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[11])
+            price2.set(i[12])
+            sale_price=i[12]
+            tota_price=int(sale_price)*int(quantity2)
+            total2.set(tota_price)
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[7])
+            price2.set(i[8]) 
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity2)
+            total2.set(tota_price)
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn2.set(i[4])
+            desc2.set(i[7])
+            price2.set(i[8])    
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity2)
+            total2.set(tota_price)
+
+def get_selected_product3(event):
+    selected_product=[]
+    product=product_drop3.get()
+    selected_product.append(product)
+    quantity3=qty_input3.get()
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn3.set(i[4])
+            desc3.set(i[11])
+            price3.set(i[12])
+            sale_price=i[12]
+            tota_price=int(sale_price)*int(quantity3)
+            total3.set(tota_price)
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn3.set(i[4])
+            desc3.set(i[7])
+            price3.set(i[8])
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity3)
+            total3.set(tota_price)
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn3.set(i[4])
+            desc3.set(i[7])
+            price3.set(i[8])    
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity3)
+            total3.set(tota_price)
+
+def get_selected_product4(event):
+    selected_product=[]
+    product=product_drop4.get()
+    selected_product.append(product)
+    quantity4=qty_input4.get()
+    for product in inv_data:
+        product_details="SELECT * FROM app1_inventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn4.set(i[4])
+            desc4.set(i[11])
+            price4.set(i[12])
+            sale_price=i[12]
+            tota_price=int(sale_price)*int(quantity4)
+            total4.set(tota_price)
+    for product in noninv_data:
+        product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn4.set(i[4])
+            desc4.set(i[7])
+            price4.set(i[8]) 
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity4)
+            total4.set(tota_price)
+    for product in bundleinv_data:
+        product_details="SELECT * FROM app1_bundle WHERE name=%s"
+        mycursor.execute(product_details,selected_product)
+        data=mycursor.fetchall()
+        for i in data:
+            hsn4.set(i[4])
+            desc4.set(i[7])
+            price4.set(i[8])  
+            sale_price=i[8]
+            tota_price=int(sale_price)*int(quantity4)
+            total4.set(tota_price)  
+
+#get total  and set subtotal 
+def get_total(event):
+    total1=total_input1.get()
+    print("total1",total1)
+    # price=price_input1.get()
+    # total_price=int(price)*int(quantity)
+    # total.set(total_price)
 
 def save_invoice():
     global select_customer,email,invoice_date,terms,Due_date,billto,invno,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,tax2,grand,amt_received,balance
@@ -257,48 +434,79 @@ product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
 product_lab.place(x=100,y=730,)
 
 product_drop1=ttk.Combobox(form_frame,textvariable = product)
+product1=[]
 for proinv in inventory_data: 
     if proinv[-1] == cmp1[0] :
         inv_data=proinv[2]
+        product1.append(inv_data)
 
 for proinv in noninventory_data: 
     if proinv[-1] == cmp1[0] :
         noninv_data=proinv[2]
-        print("noninv=",noninv_data)
+        product1.append(noninv_data)
 
 for proinv in bundle_data: 
     if proinv[-1] == cmp1[0] :
         bundleinv_data=proinv[2]
-        print("noninv=",bundleinv_data)
-
-
-
-product_drop1['values']=(inv_data,noninv_data,bundleinv_data)
-value=product_drop1.bind(product)
-# value=product_drop1.focus('values')
-print("Product is",value)
-# value=product.trace('r',get_product)
-
-# product_drop1['postcommand']=getSelection(product_drop1)
-# spro=product_drop1.
-# spro=product_drop1.get()
-
+        product1.append(bundleinv_data)
+        
+product_drop1['values']=product1
+product_drop1.bind("<<ComboboxSelected>>",get_selected_product)
 
 product_drop1.place(x=70,y=780,height=40,width=200)
 
 product2=StringVar()
 product_drop2=ttk.Combobox(form_frame,textvariable = product2)
-product_drop2['values']=(" ")
+
+# product2_data=[]
+# for proinv in inventory_data: 
+#     if proinv[-1] == cmp1[0] :
+#         inv_data=proinv[2]
+#         product2_data.append(inv_data)
+       
+# for proinv in noninventory_data: 
+#     if proinv[-1] == cmp1[0] :
+#         noninv_data=proinv[2]
+#         product2_data.append(noninv_data)
+
+
+# for proinv in bundle_data: 
+#     if proinv[-1] == cmp1[0] :
+#         bundleinv_data=proinv[2]
+#         product2_data.append(bundleinv_data)
+        
+product_drop2['values']=product1
+product_drop2.bind("<<ComboboxSelected>>",get_selected_product2)
+
 product_drop2.place(x=70,y=850,height=40,width=200)
 
 product3=StringVar()
 product_drop3=ttk.Combobox(form_frame,textvariable = product3)
-product_drop3['values']=(" ")
+# product3_data=[]
+# for proinv in inventory_data: 
+#     if proinv[-1] == cmp1[0] :
+#         inv_data=proinv[2]
+#         product3_data.append(inv_data)
+       
+# for proinv in noninventory_data: 
+#     if proinv[-1] == cmp1[0] :
+#         noninv_data=proinv[2]
+#         product3_data.append(noninv_data)
+
+
+# for proinv in bundle_data: 
+#     if proinv[-1] == cmp1[0] :
+#         bundleinv_data=proinv[2]
+#         product3_data.append(bundleinv_data)
+        
+product_drop3['values']=product1
+product_drop3.bind("<<ComboboxSelected>>",get_selected_product3)
 product_drop3.place(x=70,y=930,height=40,width=200)
 
 product4=StringVar()
 product_drop4=ttk.Combobox(form_frame,textvariable = product4)
-product_drop4['values']=(" ")
+product_drop4['values']=product1
+product_drop4.bind("<<ComboboxSelected>>",get_selected_product4)
 product_drop4.place(x=70,y=1000,height=40,width=200)
 
 #col-2
@@ -349,17 +557,26 @@ qty_lab.place(x=800,y=730,)
 qty_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
 qty_input1.place(x=750,y=780,height=40)
 
+qty_input1.bind("<KeyRelease>",get_selected_product)
+
+
 qty2=StringVar()
 qty_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty2)
 qty_input2.place(x=750,y=850,height=40)
+qty_input2.bind("<KeyRelease>",get_selected_product2)
+
 
 qty3=StringVar()
 qty_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty3)
 qty_input3.place(x=750,y=930,height=40)
+qty_input3.bind("<KeyRelease>",get_selected_product3)
+
 
 qty4=StringVar()
 qty_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty4)
 qty_input4.place(x=750,y=1000,height=40)
+qty_input4.bind("<KeyRelease>",get_selected_product4)
+
 
 #col-5
 price_lab=Label(form_frame,text="PRICE",bg='#243e55',fg='#fff')
@@ -367,6 +584,7 @@ price_lab.place(x=1000,y=730,)
 
 price_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price)
 price_input1.place(x=950,y=780,height=40)
+# price_input1.bind("<KeyRelease>",get_qty)
 
 price2=StringVar()
 price_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price2)
@@ -384,8 +602,12 @@ price_input4.place(x=950,y=1000,height=40)
 total_lab=Label(form_frame,text="TOTAL",bg='#243e55',fg='#fff')
 total_lab.place(x=1200,y=730,)
 
+
+
 total_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
+total_input1.bind("<KeyRelease>",get_total)
 total_input1.place(x=1150,y=780,height=40)
+
 
 total2=StringVar()
 total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total2)
