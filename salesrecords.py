@@ -24,17 +24,50 @@ def add_custom():
     import addcustomer_form
 
 
+#edir customer 
+def edit_sale():
+    #update data
+    def chan_data():
+        fun()
+        global custom,emal,amount,billaddress,date,salerecno,place,paymethod,refno,deposit
+        custom=custom_name.get()
+        emal=email_id.get()
+        amount=gamount.get()
+        billaddress=billing_address.get()
+        date=saledate.get()
+        salerecno=saleno.get()
+        place=salesplace.get()
+        paymethod=salepay.get()
+        refno=salerefno.get()
+        deposit=saledeposit.get()
+
+        mycursor.execute("UPDATE app1_salesrecpts SET salename =%s, saleemail =%s, saleaddress =%s, saledate =%s, saleno =%s, salesplace =%s, salepay =%s, salerefno =%s, saledeposit =%s where salesrecptsid=%s"
+            ,(custom, emal, amount, billaddress,date, salerecno, place, paymethod, refno, deposit,data[0]))
+        mydb1.commit()
+        messagebox.showinfo('successfully Updated')
+        mydb1.close()
+
+# selected_item = tree_data.selection()[0]
+    global customer_name
+    focus_data = tree_data.focus()
+    values=tree_data.item(focus_data,'values')
+    salesrecpts_id=[values[-1]]
+    mycursor.execute("SELECT * FROM app1_salesrecpts WHERE salesrecptsid=%s",(salesrecpts_id))
+    data=mycursor.fetchone()
+
+
+
 
 #Delete salerecords
 def delete_salerecords():
-    focus_data = trees_data.focus()
-    values=trees_data.item(focus_data,'values')
+    focus_data = tree_data.focus()
+    values=tree_data.item(focus_data,'values')
     salesrecpts_id=[values[-1]]
     mycursor.execute("DELETE FROM app1_salesrecpts WHERE salesrecptsid=%s",(salesrecpts_id))
     mydb1.commit()
     messagebox.showinfo('successfully Deleted')
     print('sucessfully deleted')
-    trees_data.delete(focus_data)
+    tree_data.delete(focus_data)
 
 
 
