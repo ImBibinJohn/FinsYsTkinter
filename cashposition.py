@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+from turtle import bgcolor
 from matplotlib.pyplot import xcorr
 import mysql.connector
 import  numpy as np
@@ -26,7 +27,7 @@ def selected(event):
     if menu.get() == 'Pie':
         clear_frame()
         form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-        mycanvas.create_window((200,240),window=form_frame,anchor="nw")
+        mycanvas.create_window((200,260),window=form_frame,anchor="nw")
         fig = Figure(figsize=(11,6))
         ax = fig.add_subplot(111) 
         fig.set_facecolor("#243e55")
@@ -42,23 +43,22 @@ def selected(event):
     elif  menu.get() == 'Bubble':
         clear_frame()
         form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-        mycanvas.create_window((200,240),window=form_frame,anchor="nw")
-        # np.random.seed(19680801)
-        x = name(i[0])
-        y = bala(i[0])
-        z = np.random.rand(40)
-        colors = cm.rainbow()
+        mycanvas.create_window((200,260),window=form_frame,anchor="nw")
+        x = bala
+        y = name
         fig = Figure(figsize=(11,6), dpi=100)
         ax = fig.add_subplot(111) 
         fig.set_facecolor("#243e55")
-        ax.scatter(x,y,z,c=colors)
-        ax.set_facecolor("#60a1d1")
+        ax.scatter(x, y,s=300,c="#6CB4EE")
+        ax.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+        ax.tick_params(axis='y', colors='white')
+        ax.set_facecolor("#2f516a")
         chart1 = FigureCanvasTkAgg(fig,master=form_frame)
         chart1.get_tk_widget().pack()
     elif  menu.get() == 'Doughnut':
         clear_frame()
         form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-        mycanvas.create_window((200,240),window=form_frame,anchor="nw")
+        mycanvas.create_window((200,260),window=form_frame,anchor="nw")
         fig = matplotlib.figure.Figure(figsize=(11,6))
         colors = ( "#45BDEE", "#28A7EA", "#006CBB", "#034698") 
         ax = fig.add_subplot()
@@ -68,7 +68,6 @@ def selected(event):
         for autotext in autotexts:
             autotext.set_color('white')
         ax.legend(name,loc="center left",bbox_to_anchor=(1, 0, 0, 1.9))
-        # loc=
         fig.set_facecolor("#243e55")
         circle=matplotlib.patches.Circle( (0,0), 0.7, color='#243e55')
         ax.add_artist(circle)
@@ -78,15 +77,13 @@ def selected(event):
     elif menu.get()=='Bar':
         clear_frame()
         form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-        mycanvas.create_window((200,240),window=form_frame,anchor="nw")
+        mycanvas.create_window((200,260),window=form_frame,anchor="nw")
 
         f = Figure(figsize=(11,6))
         ax = f.add_subplot(111)
-
-        # data = (name,bala)
-
-        # ind = np.arange(5) 
-        width = .5
+        ax.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+        ax.tick_params(axis='y', colors='white')
+        width = .3
         rects1 = ax.bar(name,bala, width)
         f.set_facecolor("#243e55")
         ax.set_facecolor("#2f516a")
@@ -96,14 +93,13 @@ def selected(event):
     else :
         clear_frame()
         form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-        mycanvas.create_window((200,240),window=form_frame,anchor="nw")
+        mycanvas.create_window((200,260),window=form_frame,anchor="nw")
         fig = Figure(figsize=(11, 6))
-        # t = np.arange(0, 10, .5)
-        fig.add_subplot(111).plot(name,bala)
-        canvas = FigureCanvasTkAgg(fig, master=form_frame)  # A tk.DrawingArea.
+        fig.set_facecolor("#243e55")
+        fig.add_subplot(111).plot(bala,name)
+        canvas = FigureCanvasTkAgg(fig, master=form_frame)  
         canvas.draw()
         canvas.get_tk_widget().pack()
-        fig.set_facecolor("#243e55")
     
 
 #query to fetch
@@ -173,7 +169,7 @@ drop.place(x=950,y=110)
 wrappen.pack(fill='both',expand='yes',)
 
 form_frame=Frame(mycanvas,width=1450,height=13200,bg='#243e55')
-mycanvas.create_window((200,240),window=form_frame,anchor="nw")
+mycanvas.create_window((200,260),window=form_frame,anchor="nw")
 
 f = Figure(figsize=(11,6))
 ax = f.add_subplot(111)
@@ -197,11 +193,10 @@ for i in r:
    
     bala.append(i[0])
    
-#     print(bala)
-
-# ind = np.arange(5)  # the x locations for the groups
-width = .5
+width = .3
 rects1 = ax.bar(name,bala, width)
+ax.tick_params(axis='x', colors='white')    #setting up X-axis tick color to red
+ax.tick_params(axis='y', colors='white')
 f.set_facecolor("#243e55")
 ax.set_facecolor("#2f516a")
 canvas = FigureCanvasTkAgg(f, master=form_frame)
