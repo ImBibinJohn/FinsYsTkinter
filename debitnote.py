@@ -6,7 +6,6 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
-# from tkcalendar import DateEntry
 
 
 debit_form = tk.Tk()
@@ -21,6 +20,8 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
+    etype = "Debit Note"
+
     supplier = drop2.get()
     mailaddress = billing_input.get()
     payment_date = payment_drop.get()
@@ -68,9 +69,9 @@ def submit():
     con = mysql.connect(host="127.0.0.1", user="root",
                         password="", database="fynsystkinter", port='3307')
     cur = con.cursor()
-    d = '''INSERT INTO debit_form(supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
+    d = '''INSERT INTO expensesmain(etype,supplier , payment_date , mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
                     , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-    cur.execute(d, [(supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+    cur.execute(d, [(etype), (supplier), (payment_date), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                 (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
     con.commit()
     MessageBox.showinfo("Insert Status", "Inserted Successfully")
@@ -124,8 +125,8 @@ payment_period = tk.Label(
 payment_period.place(x=30, y=330, height=15, width=100)
 
 # payment_drop = ttk.Combobox(form_frame)
-payment_drop = DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
-# Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+#  DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
+payment_drop = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
 payment_drop.place(x=30, y=360, height=40)
 
 

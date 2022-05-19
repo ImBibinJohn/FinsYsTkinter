@@ -7,8 +7,6 @@ from unicodedata import category
 import mysql.connector as mysql
 
 
-# from tkcalendar import DateEntry, Calendar
-
 payment_form = tk.Tk()
 payment_form.title("finsYs")
 payment_form.geometry("1500x1000")
@@ -21,6 +19,8 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
+    etype = "Payment"
+
     refno = drop2.get()
     payee = payee_input.get()
     payment_date = payment_input.get()
@@ -70,9 +70,9 @@ def submit():
     con = mysql.connect(host="127.0.0.1", user="root",
                         password="", database="fynsystkinter", port='3307')
     cur = con.cursor()
-    d = '''INSERT INTO payment_form(refno ,payee, payment_date ,payment_account, payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
+    d = '''INSERT INTO expensesmain(etype,refno ,payee, payment_date ,payment_account, payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
                     , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-    cur.execute(d, [(refno), (payee), (payment_date), (payment_account), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+    cur.execute(d, [(etype), (refno), (payee), (payment_date), (payment_account), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                 (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
     con.commit()
     MessageBox.showinfo("Insert Status", "Inserted Successfully")
@@ -130,8 +130,8 @@ wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_date.place(x=30, y=300,)
-payment_input = DateEntry(payment_form, width=16, bg="#2f516f", bd=2)
-# Entry(form_frame, width=49, bg='#243e55', fg='#fff')
+# DateEntry(payment_form, width=16, bg="#2f516f", bd=2)
+payment_input = Entry(form_frame, width=49, bg='#243e55', fg='#fff')
 payment_input.place(x=30, y=330, height=40)
 
 

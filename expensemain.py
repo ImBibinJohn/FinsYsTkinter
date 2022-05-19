@@ -4,8 +4,7 @@ from tkinter import VERTICAL, ttk
 import tkinter.font as font
 import tkinter.messagebox as MessageBox
 
-import click
-# from requests import options
+# import click
 import mysql.connector
 
 mydata = mysql.connector.connect(
@@ -84,20 +83,24 @@ def main():
     treevv.column(5, minwidth=30, width=140, anchor=CENTER)
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     cur.execute(
-        "SELECT payment_date,payee,tax,grandtotal FROM expenses")
+        "SELECT payment_date,etype,payee,tax,grandtotal FROM expensesmain")
     val = cur.fetchall()
     if val:
         for x in val:
             treevv.insert('', 'end', values=(
-                x[0], "Expenses", x[1], x[2], x[3]))
+                x[0], x[1], x[2], x[3], x[4]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
     def edit():
         def changeedit():
             global D, bm
+            refno = drop2.get()
             payee = drop2.get()
             payment_date = payment_input.get()
             payment_method = drop3.get()
+            payment_account = drop3.get()
+            supplier = drop2.get()
+            mailaddress = billing_input.get()
             category1 = cpro_drop1.get()
             category2 = cpro_drop2.get()
             category3 = cpro_drop3.get()
@@ -140,12 +143,12 @@ def main():
             tax = tax_input.get()
             grandtotal = grand_input.get()
 
-            con = mysql.connect(host="127.0.0.1", user="root",
-                                password="", database="fynsystkinter", port='3307')
-            cur = con.cursor()
-            d = '''INSERT INTO expenses(payee , payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
-                                , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(d, [(payee), (payment_date), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+            print(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2,
+                  categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal)
+
+            d = '''UPDATE INTO expensesmain(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
+                                , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) WHERE id =%s"""'''
+            cur.execute(d, [(refno), (payee), (payment_date), (payment_method), (payment_account), (supplier), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                         (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
@@ -164,7 +167,7 @@ def main():
         values = treevv.item(str, 'values')
         print(values)
         b = [values[0]]
-        cur.execute("SELECT * FROM expenses WHERE payee=%s", (b))
+        cur.execute("SELECT * FROM expensesmain WHERE id=%s", (b))
         s = cur.fetchone()
         D = tk.Toplevel(A)
 
@@ -186,6 +189,17 @@ def main():
         sub_headingfont = font.Font(family='Times New Roman', size=20,)
         form_frame = Frame(mycanvas, width=1600, height=500, bg='#243e55')
         mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
+
+        title_lab = tk.Label(
+            form_frame, text="Choose Ref No", bg='#243e55', fg='#fff')
+        place_input = StringVar()
+        drop2 = ttk.Combobox(form_frame, textvariable=place_input)
+
+        drop2['values'] = ("REF1 REF2 REF3 REF4")
+
+        title_lab.place(x=20, y=100, height=15, width=100)
+        drop2.place(x=30, y=130, height=40, width=450)
+        wrappen.pack(fill='both', expand='yes',)
 
         title_lab = tk.Label(form_frame, text="PAYEE",
                              bg='#243e55', fg='#fff')
@@ -212,8 +226,36 @@ def main():
 
         drop3['values'] = ("Cash Cheque Debit_Card Credit_Card")
 
+        title_lab = tk.Label(form_frame, text="Supplier",
+                             bg='#243e55', fg='#fff')
+        place_input = StringVar()
+        drop2 = ttk.Combobox(form_frame, textvariable=place_input)
+        drop2['values'] = ("Select Supplier")
+
+        title_lab.place(x=30, y=100, height=15, width=60)
+        drop2.place(x=30, y=130, height=40, width=450)
+        wrappen.pack(fill='both', expand='yes',)
+
+        billing_ad = Label(form_frame, text="Maling Address",
+                           bg='#243e55', fg='#fff')
+        billing_ad.place(x=30, y=200,)
+        billing_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+        billing_input.place(x=30, y=230, height=90)
+
         payment_method_lab.place(x=530, y=200, height=15, width=100)
         drop3.place(x=530, y=230, height=40, width=450)
+        wrappen.pack(fill='both', expand='yes',)
+
+        payment_account_lab = tk.Label(
+            form_frame, text="Payment account", bg='#243e55', fg='#fff')
+        place_input = StringVar()
+        drop3 = ttk.Combobox(form_frame, textvariable=place_input)
+
+        drop3['values'] = ("Acc1 Acc2 Acc3 Acc4")
+
+        payment_account_lab.place(x=530, y=200, height=15, width=120)
+        drop3.place(x=530, y=230, height=40, width=450)
+
         wrappen.pack(fill='both', expand='yes',)
 
         amount = Label(form_frame, text="AMOUNT", bg='#243e55', fg='#fff')

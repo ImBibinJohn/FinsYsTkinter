@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -30,6 +31,7 @@ for a in table:
     data = (a[0])
     cus_name.append(data)
     print(data)
+
 #select emails
 def get_email(event):
     option=drop2.get()
@@ -49,54 +51,9 @@ def get_invno():
     table3=mycursor.fetchall()
     for i in table3:
         invnumb.set(table3)
-# def get_bilad(event):
-#     options=drop2.get()
-#     address_query="SELECT * FROM `app1_customer`"
-#     mycursor.execute(options,address_query)
-#     table3=mycursor.fetchall()
-#     for i in table3:
-#         biladdress.set(i[12]+i[13]+i[14]+i[15],i[16])
-#     print(biladdress)
 
 
-
-# def select_cus():
-#     if cus_name is not None:
-#         get_email()
-
-# email=[]
-# def get_email():
-#     mail_query="SELECT email FROM `app1_customer`"
-#     mycursor.execute(mail_query)
-#     table2=mycursor.fetchall()
-#     if cus_name is exists:
-#         for a in table2:
-#             datas = (a[0:2])
-#             cus_name.append(datas)
-#             print(datas)
-# email=['0:-1']
-# mail_query="SELECT email FROM `app1_customer`"
-# mycursor.execute(mail_query)
-# table2=mycursor.fetchall()
-# if cus_name is exists:      
-#     for a in table2:
-#         datas=(a[0])
-#         email.append(datas)
-
-# for a in table:
-#     data = (a[0])
-#     email.append(data)
-#     print(data)dfu
-# email=[]
-# mail_query="SELECT email FROM `app1_customer`"
-# mycursor.execute(mail_query)
-# table2=mycursor.fetchone()
-# if customer_query == cus_name:   
-#     for a in table:
-#         data = (a[0])
-#         email.append(data)
 #select invoice no from backend
-
 inv_no= []
 #fetching invoice no
 inv_query="SELECT invoiceno FROM `app1_invoice`"
@@ -107,14 +64,28 @@ for a in table3:
     inv_no.append(data)
     print(data)
 
+#fetching product from backend
 inventory=[]
-inventory_query="SELECT name FROM `app1_inventory`"
+inventory_query="SELECT * FROM `app1_inventory`"
 mycursor.execute(inventory_query)
 table4=mycursor.fetchall()
 for a in table4:
-    data = (a[0])
+    data = (a[2])
     inventory.append(data)
     print(data)
+
+#selecting and fetching from products
+def ProSelect(event):
+    selected_data=[]
+    option3=product1.get()
+    selected_data.append(option3)
+    inventory_query2="SELECT * FROM `app1_inventory` WHERE name=%s"
+    mycursor.execute(inventory_query2,selected_data)
+    table5=mycursor.fetchall()
+    for a in table5:
+        descrip1.set(a[11])
+        pricee1.set(a[12])
+        print(descrip1.set())
 
 #to save credit formdata
 def save_credit_data():
@@ -199,7 +170,7 @@ product1=tk.StringVar()
 pro1=tk.StringVar()
 pro2=tk.StringVar()
 pro3=tk.StringVar()
-descript1=tk.StringVar()
+descrip1=tk.StringVar()
 descript2=tk.StringVar()
 descript3=tk.StringVar()
 qnty1=tk.StringVar()
@@ -281,6 +252,8 @@ label.place(x=5,y=20)
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
 product1=ttk.Combobox(form2_frame,textvariable=product1)
 product1['values']=(inventory)
+product1.bind("<<ComboboxSelected>>",ProSelect)
+# product1.set(a[2])
 product1.set("SELECT PRODUCT")
 pro.place(x=10,y=120,height=15,width=100)
 product1.place(x=10,y=150,height=40,width=150)
@@ -300,8 +273,8 @@ product3.place(x=10,y=310,height=40,width=150)
 
 
 #row 1
-descrip1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descript1)
-descrip1.place(x=260,y=150,height=40,width=180)
+descript1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descrip1)
+descript1.place(x=260,y=150,height=40,width=180)
 #row2
 descrip2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descript2)
 descrip2.place(x=260,y=240,height=40,width=180)

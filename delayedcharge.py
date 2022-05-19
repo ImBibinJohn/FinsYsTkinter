@@ -3,13 +3,13 @@ import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
+from tkcalendar import DateEntry
 
-
-credit_form = tk.Tk()
-credit_form.title("finsYs")
-credit_form.geometry("1000x1000")
-credit_form['bg']='#2f516a'
-wrappen=ttk.LabelFrame(credit_form)
+delay_form = tk.Tk()
+delay_form.title("finsYs")
+delay_form.geometry("1000x1000")
+delay_form['bg']='#2f516a'
+wrappen=ttk.LabelFrame(delay_form)
 mycanvas=Canvas(wrappen)
 mycanvas.pack(side=LEFT,fill="both",expand="yes")
 yscrollbar=ttk.Scrollbar(wrappen,orient='vertical',command=mycanvas.yview)
@@ -50,7 +50,7 @@ wrappen.pack(fill='both',expand='yes',)
 
 delayed_charge_date=Label(form_frame,text="DELAYED CHARGE DATE",bg='#243e55',fg='#fff')
 delayed_charge_date.place(x=30,y=300,)
-delayed_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
+delayed_input=DateEntry(form_frame,width=55,bg='#243e55',fg='#fff')
 delayed_input.place(x=30,y=330,height=40,width=450)
 
 
@@ -174,4 +174,4 @@ grand_input.place(x=1000,y=200,height=40,width=200)
 button=tk.Button(form3_frame, text="SAVE",) 
 button.place(x=1050,y=280,width=100)
 
-credit_note_form.mainloop()
+delay_form.mainloop()
