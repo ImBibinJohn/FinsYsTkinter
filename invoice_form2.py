@@ -46,14 +46,18 @@ def get_terms(event):
         invno_lab.place(x=500,y=400,)
         invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
         invno_input.place(x=500,y=430,height=40)
-    elif options=="Add New Term":
-        invno_input.place_remove()
+    else:
+        invno=0
 
 #getting selected product1 and quantity and set some entry feild value
-
+createsubtotal =0
+finding_tax1=0
+finding_tax2=0
+finding_tax3=0
+finding_tax4=0
+final_total=0
 def get_selected_product(event):
-    global createsubtotal
-    createsubtotal=0
+    global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
     selected_product=[]
     product=product_drop1.get()
     quantity=qty_input1.get()
@@ -69,8 +73,6 @@ def get_selected_product(event):
             sale_price=i[12]
             tota_price=int(sale_price)*int(quantity)
             total.set(tota_price)
-    createsubtotal=createsubtotal+tota_price    
-    subtotal.set(createsubtotal)
     for product in noninv_data:
         product_details="SELECT * FROM app1_noninventory WHERE name=%s"
         mycursor.execute(product_details,selected_product)
@@ -82,8 +84,7 @@ def get_selected_product(event):
             sale_price=i[8]
             tota_price=int(sale_price)*int(quantity)
             total.set(tota_price) 
-    # createsubtotal=createsubtotal+tota_price
-    # subtotal.set(createsubtotal)
+    
     for product in bundleinv_data:
         product_details="SELECT * FROM app1_bundle WHERE name=%s"
         mycursor.execute(product_details,selected_product)
@@ -95,12 +96,57 @@ def get_selected_product(event):
             sale_price=i[8]
             tota_price=int(sale_price)*int(quantity)
             total.set(tota_price)   
-    createsubtotal=createsubtotal+tota_price
-    subtotal.set(createsubtotal) 
+    createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
+    subtotal.set(createsubtotal)
+    #get selected gst then find tax amount thenset it 
+    gst=tax_drop1.get()
+    print("seslscted gst",gst)
+    if gst=="18.0% GST(18%)":
+        print("totla",tota_price)
+        finding_tax1=int(tota_price)*(18/100)
+    elif gst=="28.0% GST(28%)":
+        finding_tax1=int(tota_price)*(28/100)
+        
+    elif gst=="12.0% GST(12%)":
+        finding_tax1=int(tota_price)*(12/100)
+        
+    elif gst=="06.0% GST(06%)":
+        finding_tax1=int(tota_price)*(6/100)
+        
+    elif gst=="05.0% GST(05%)":
+        finding_tax1=int(tota_price)*(5/100)
+        
+    elif gst=="03.0% GST(03%)":
+        finding_tax1=int(tota_price)*(3/100)
+        
+    elif gst=="0.25% GST(0.25%)":
+        finding_tax1=int(tota_price)*(.25/100)
+        
+    else:
+        finding_tax1=0
+    finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+    taxamount.set(finding_tax)
+
+    print("taxamount=",(finding_tax))
+    print("createsubtotal=",createsubtotal)
+    
+    if taxamount==None:
+        final_total=0
+        grand.set(final_total)
+    else:
+        final_total=0
+        total_amount=createsubtotal+finding_tax
+        final_total=final_total+total_amount
+        print("final_total=",final_total)
+        grand.set(final_total)
+    amount_recieved=amt_received_input.get()
+    balancedue=final_total-int(amount_recieved)
+    balance.set(balancedue)
 
 #getting selected product2 and set some entry feild value
 def get_selected_product2(event):
-    
+    global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
+    print("subtotal",createsubtotal)
     selected_product=[]
     product=product_drop2.get()
     selected_product.append(product)
@@ -137,9 +183,54 @@ def get_selected_product2(event):
             price2.set(i[8])    
             sale_price=i[8]
             tota_price=int(sale_price)*int(quantity2)
-            total2.set(tota_price)
+    createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
+    subtotal.set(createsubtotal) 
+
+
+    gst=tax_drop2.get()
+    print("seslscted gst",gst)
+    if gst=="18.0% GST(18%)":
+        print("totla",tota_price)
+        finding_tax2=int(tota_price)*(18/100)
+    elif gst=="28.0% GST(28%)":
+        finding_tax2=int(tota_price)*(28/100)
+        
+    elif gst=="12.0% GST(12%)":
+        finding_tax2=int(tota_price)*(12/100)
+        
+    elif gst=="06.0% GST(06%)":
+        finding_tax2=int(tota_price)*(6/100)
+        
+    elif gst=="05.0% GST(05%)":
+        finding_tax2=int(tota_price)*(5/100)
+        
+    elif gst=="03.0% GST(03%)":
+        finding_tax2=int(tota_price)*(3/100)
+        
+    elif gst=="0.25% GST(0.25%)":
+        finding_tax2=int(tota_price)*(.25/100)
+        
+    else:
+        finding_tax2=0
+    finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+    taxamount.set(finding_tax)
+ 
+    if taxamount==None:
+        final_total=0
+        grand.set(final_total)
+    else:
+        final_total=0
+        total_amount=createsubtotal+finding_tax
+        final_total=final_total+total_amount
+        print("final_total=",final_total)
+        grand.set(final_total)
+    amount_recieved=amt_received_input.get()
+    balancedue=final_total-int(amount_recieved)
+    balance.set(balancedue)
+
 
 def get_selected_product3(event):
+    global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
     selected_product=[]
     product=product_drop3.get()
     selected_product.append(product)
@@ -176,9 +267,55 @@ def get_selected_product3(event):
             price3.set(i[8])    
             sale_price=i[8]
             tota_price=int(sale_price)*int(quantity3)
-            total3.set(tota_price)
+    createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
+    subtotal.set(createsubtotal) 
+
+
+    gst=tax_drop3.get()
+    print("seslscted gst",gst)
+    if gst=="18.0% GST(18%)":
+        print("totla",tota_price)
+        finding_tax3=int(tota_price)*(18/100)
+    elif gst=="28.0% GST(28%)":
+        finding_tax3=int(tota_price)*(28/100)
+        
+    elif gst=="12.0% GST(12%)":
+        finding_tax3=int(tota_price)*(12/100)
+        
+    elif gst=="06.0% GST(06%)":
+        finding_tax3=int(tota_price)*(6/100)
+        
+    elif gst=="05.0% GST(05%)":
+        finding_tax3=int(tota_price)*(5/100)
+        
+    elif gst=="03.0% GST(03%)":
+        finding_tax3=int(tota_price)*(3/100)
+        
+    elif gst=="0.25% GST(0.25%)":
+        finding_tax3=int(tota_price)*(.25/100)
+        
+    else:
+        finding_tax3=0
+    finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+    taxamount.set(finding_tax)
+ 
+    if taxamount==None:
+        final_total=0
+        grand.set(final_total)
+    else:
+        final_total=0
+        total_amount=createsubtotal+finding_tax
+        final_total=final_total+total_amount
+        print("final_total=",final_total)
+        grand.set(final_total)
+    amount_recieved=amt_received_input.get()
+    balancedue=final_total-int(amount_recieved)
+    balance.set(balancedue)
+
+
 
 def get_selected_product4(event):
+    global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
     selected_product=[]
     product=product_drop4.get()
     selected_product.append(product)
@@ -215,18 +352,90 @@ def get_selected_product4(event):
             price4.set(i[8])  
             sale_price=i[8]
             tota_price=int(sale_price)*int(quantity4)
-            total4.set(tota_price)  
+    createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
+    subtotal.set(createsubtotal)
 
-#get total  and set subtotal 
-def get_total(event):
-    total1=total_input1.get()
-    print("total1",total1)
-    # price=price_input1.get()
-    # total_price=int(price)*int(quantity)
-    # total.set(total_price)
+
+    gst=tax_drop4.get()
+    print("seslscted gst",gst)
+    if gst=="18.0% GST(18%)":
+        print("totla",tota_price)
+        finding_tax4=int(tota_price)*(18/100)
+    elif gst=="28.0% GST(28%)":
+        finding_tax4=int(tota_price)*(28/100)
+        
+    elif gst=="12.0% GST(12%)":
+        finding_tax4=int(tota_price)*(12/100)
+        
+    elif gst=="06.0% GST(06%)":
+        finding_tax4=int(tota_price)*(6/100)
+        
+    elif gst=="05.0% GST(05%)":
+        finding_tax4=int(tota_price)*(5/100)
+        
+    elif gst=="03.0% GST(03%)":
+        finding_tax4=int(tota_price)*(3/100)
+        
+    elif gst=="0.25% GST(0.25%)":
+        finding_tax4=int(tota_price)*(.25/100)
+        
+    else:
+        finding_tax4=0
+    taxamount.set(finding_tax1+finding_tax2+finding_tax3+finding_tax4)
+    finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+    taxamount.set(finding_tax)
+ 
+    if taxamount==None:
+        final_total=0
+        grand.set(final_total)
+    else:
+        final_total=0
+        total_amount=createsubtotal+finding_tax
+        final_total=final_total+total_amount
+        print("final_total=",final_total)
+        grand.set(final_total)
+    amount_recieved=amt_received_input.get()
+    balancedue=final_total-int(amount_recieved)
+    balance.set(balancedue)
+
+
+#get selected gst then find tax amount thenset it 
+
+# def get_selected_gst(event):
+    
+#     total1=total.get()
+    
+    # gst=tax_drop1.get()
+    # print("seslscted gst",gst)
+    # if gst=="18.0% GST(18%)":
+    #     print("totla",total1)
+    #     finding_tax1=int(total1)*(18/100)
+    # elif gst=="28.0% GST(28%)":
+    #     finding_tax1=int(total1)*(28/100)
+        
+    # elif gst=="12.0% GST(12%)":
+    #     finding_tax1=int(total1)*(12/100)
+        
+    # elif gst=="06.0% GST(06%)":
+    #     finding_tax1=int(total1)*(6/100)
+        
+    # elif gst=="05.0% GST(05%)":
+    #     finding_tax1=int(total1)*(5/100)
+        
+    # elif gst=="03.0% GST(03%)":
+    #     finding_tax1=int(total1)*(3/100)
+        
+    # elif gst=="0.25% GST(0.25%)":
+    #     finding_tax1=int(total1)*(.25/100)
+        
+    # else:
+    #     finding_tax1=0
+    # taxamount.set(finding_tax1)
 
 def save_invoice():
-    global select_customer,email,invoice_date,terms,Due_date,billto,invno,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,tax2,grand,amt_received,balance
+    global select_customer,email,invoice_date,terms,Due_date,billto,invno,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,taxamount,grand,amt_received,balance,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,cid_id
+
+
     select_customer=select_customer.get()
     email=email.get()
     invoice_date=invoice_date.get()
@@ -234,6 +443,8 @@ def save_invoice():
     Due_date=Due_date.get()
     billto=billto.get()
     invno=invno.get()
+    if invno=="":
+        invno=0
     place_of_supply=place_of_supply.get()
     product=product.get()
     hsn=hsn.get()
@@ -243,12 +454,39 @@ def save_invoice():
     total=total.get()
     tax=tax.get()
     subtotal=subtotal.get()
-    tax2=tax2.get()
     grand=grand.get()
+
+    product2=product2.get()
+    hsn2=hsn2.get()
+    desc2=desc2.get()
+    qty2=qty2.get()
+    price2=price2.get()
+    total2=total2.get()
+    tax2=tax2.get()
+    
+    product3=product3.get()
+    hsn3=hsn3.get()
+    desc3=desc3.get()
+    qty3=qty3.get()
+    price3=price3.get()
+    total3=total3.get()
+    tax3=tax3.get()
+    
+    product4=product4.get()
+    hsn4=hsn4.get()
+    desc4=desc4.get()
+    qty4=qty4.get()
+    price4=price4.get()
+    total4=total4.get()
+    tax4=tax4.get()
+
     amt_received=amt_received.get()
+    taxamount=taxamount.get()
     balance=balance.get()
-    sql="INSERT INTO app1_invoice (customername,email,invoiceno ,terms,invoicedate,duedate,bname ,placosupply ,product ,hsn,description,qty ,price ,total,tax ,subtotal ,grandtotal ,product2 ,hsn2,description2 ,qty2,price2,total2,tax2,product3,hsn3,description3,qty3,price3,total3,tax3,product4,hsn4,description4,qty4,price4,total4,tax4,amtrecvd,taxamount,baldue) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    val=(select_customer,email,invno,terms,invoice_date,Due_date,billto,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,grand,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,amt_received,taxamount,balance)
+    cid_id=cmp1[0]
+
+    sql="INSERT INTO app1_invoice (customername,email,invoiceno ,terms,invoicedate,duedate,bname ,placosupply ,product ,hsn,description,qty ,price ,total,tax ,subtotal ,grandtotal ,product2 ,hsn2,description2 ,qty2,price2,total2,tax2,product3,hsn3,description3,qty3,price3,total3,tax3,product4,hsn4,description4,qty4,price4,total4,tax4,amtrecvd,taxamount,baldue,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    val=(select_customer,email,invno,terms,invoice_date,Due_date,billto,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,grand,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,amt_received,taxamount,balance,cid_id)
     mycursor.execute(sql,val)
     mydb.commit()
     mydb.close()
@@ -348,10 +586,13 @@ desc=StringVar()
 qty=StringVar()
 price=StringVar()
 total=StringVar()
+total.set("0")
 tax=StringVar()
 subtotal=StringVar()
 taxamount=StringVar()
+taxamount.set("0")
 grand=StringVar()
+grand.set("0")
 amt_received=StringVar()
 balance=StringVar()
 
@@ -605,19 +846,22 @@ total_lab.place(x=1200,y=730,)
 
 
 total_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total)
-total_input1.bind("<KeyRelease>",get_total)
+# total_input1.bind("<KeyRelease>",get_total)
 total_input1.place(x=1150,y=780,height=40)
 
 
 total2=StringVar()
+total2.set("0")
 total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total2)
 total_input2.place(x=1150,y=850,height=40)
 
 total3=StringVar()
+total3.set("0")
 total_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total3)
 total_input3.place(x=1150,y=930,height=40)
 
 total4=StringVar()
+total4.set("0")
 total_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total4)
 total_input4.place(x=1150,y=1000,height=40)
 
@@ -625,24 +869,32 @@ total_input4.place(x=1150,y=1000,height=40)
 tax_lab=Label(form_frame,text="TAX (%)",bg='#243e55',fg='#fff')
 tax_lab.place(x=1400,y=730,)
 
-tax1=StringVar()
+# tax1=StringVar()
 tax_drop1=ttk.Combobox(form_frame,textvariable = tax)
-tax_drop1['values']=(" ")
+tax_values=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
+tax_drop1['values']=tax_values
+tax_drop1.bind("<<ComboboxSelected>>",get_selected_product)
+
+
+
 tax_drop1.place(x=1350,y=780,height=40,width=200)
 
 tax2=StringVar()
 tax_drop2=ttk.Combobox(form_frame,textvariable = tax2)
-tax_drop2['values']=(" ")
+tax_drop2['values']=tax_values
+tax_drop2.bind("<<ComboboxSelected>>",get_selected_product2)
 tax_drop2.place(x=1350,y=850,height=40,width=200)
 
 tax3=StringVar()
 tax_drop3=ttk.Combobox(form_frame,textvariable = tax3)
-tax_drop3['values']=(" ")
+tax_drop3['values']=tax_values
+tax_drop3.bind("<<ComboboxSelected>>",get_selected_product3)
 tax_drop3.place(x=1350,y=930,height=40,width=200)
 
 tax4=StringVar()
 tax_drop4=ttk.Combobox(form_frame,textvariable = tax4)
-tax_drop4['values']=(" ")
+tax_drop4['values']=tax_values
+tax_drop4.bind("<<ComboboxSelected>>",get_selected_product4)
 tax_drop4.place(x=1350,y=1000,height=40,width=200)
 
 
@@ -662,16 +914,19 @@ taxamount_input.place(x=1100,y=1300,height=40)
 grand_lab=Label(form_frame,text="Grand Total",bg='#243e55',fg='#fff')
 grand_lab.place(x=970,y=1400,height=40)
 grand_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = grand)
+
 grand_input.place(x=1100,y=1400,height=40)
 
 amt_received_lab=Label(form_frame,text="Amount Received",bg='#243e55',fg='#fff')
 amt_received_lab.place(x=970,y=1500,height=40)
 amt_received_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = amt_received)
+amt_received_input.bind("<KeyRelease>",get_selected_product)
 amt_received_input.place(x=1100,y=1500,height=40)
 
 balance_lab=Label(form_frame,text="Balance Due",bg='#243e55',fg='#fff')
 balance_lab.place(x=970,y=1600,height=40)
 balance_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable = balance)
+
 balance_input.place(x=1100,y=1600,height=40)
 
 submit_button=Button(form_frame,text="Save",background="#2f516a",command=save_invoice, foreground="white",width=20,height=2)
