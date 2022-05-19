@@ -20,9 +20,10 @@ def time():
         endtime=eh.get()+':'+em.get()
         ttime=timeh.get()+':'+timem.get()
         text=timetext.get("1.0","end")
-        tg='''INSERT INTO timeactivity (timdate,timname,timcus,timcheck,timebill,timecheckk,timestart,timeend,tyme,timedes) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(tg,[(date),(name),(cus),(checkbill),(bill),(timecheck),(starttime),(endtime),(ttime),(text)])
+        cid=2
+        tg='''INSERT INTO timeactivity (timdate,timname,timcus,timcheck,timebill,timecheckk,timestart,timeend,tyme,timedes,cid) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(tg,[(date),(name),(cus),(checkbill),(bill),(timecheck),(starttime),(endtime),(ttime),(text),(cid)])
         #print(date,name,cus,checkbill,bill,timecheck,starttime,endtime,ttime,text)
         mydata.commit()
         win.destroy()

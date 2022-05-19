@@ -16,7 +16,7 @@ def advance():
         date=dte.get()
         ref=refno.get()
         memo=memo1.get("1.0","end")
-        print(maill)
+        cid=2
         if acc=='':
             acn_bl.config(text='Choose account',fg='red')  
         elif len(maill)<=5:
@@ -28,9 +28,9 @@ def advance():
         elif len(memo)<=1:
             mm_bl.config(text='Enter memo',fg='red')       
         else:
-            ad='''INSERT INTO advancepayment (payee,account,address,amount,paymentdate,refno,memo) 
-            VALUES (%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(ad,[(payy),(acc),(maill),(amountt),(date),(ref),(memo)])
+            ad='''INSERT INTO advancepayment (payee,account,address,amount,paymentdate,refno,memo,cid) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'''
+            cur.execute(ad,[(payy),(acc),(maill),(amountt),(date),(ref),(memo),(cid)])
             mydata.commit()
             print('sucessfully added')
             wn.destroy()

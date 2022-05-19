@@ -4,7 +4,7 @@ from tkinter import VERTICAL, ttk
 from tkinter import messagebox
 import tkinter.font as font
 from tkcalendar import DateEntry,Calendar
-from datetime import datetime, date, timedelta
+import datetime as dt
 import re
 #database connection
 import mysql.connector
@@ -18,11 +18,28 @@ def sherryplus():
         desc=e5.get()
         gtype=cb.get()
         gstval=e6.get()
-        d='''INSERT INTO accounts (acctype,detype,name,description,gst,deftaxcode) 
-        VALUES (%s,%s,%s,%s,%s,%s)'''
-        cur.execute(d,[(ac),(dtype),(n),(desc),(gtype),(gstval),])
+        cid=2
+        bal=0
+        balance=float(bal)
+        d='''INSERT INTO accounts (acctype,detype,name,description,gst,deftaxcode,cid,balance) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(d,[(ac),(dtype),(n),(desc),(gtype),(gstval),(cid),(balance)])
+        dd='''INSERT INTO accounttype (cid,accountbal,accountname) 
+        VALUES (%s,%s,%s)'''
+        cur.execute(dd,[(cid),(balance),(dtype)])
         mydata.commit()
-        print('sucessfully added')
+        jj='''SELECT name,balance FROM accounts1 WHERE cid= %s'''
+        cur.execute(jj,[cid])
+        cc=cur.fetchall()
+        for i in cc:
+            if i[0]=='Opening Balance Equity':
+                a=i[0]
+                b=i[1]
+                b=b+balance
+                cur.execute("""UPDATE accounts1 SET balance=%s WHERE name= %s""",(b,a))
+            mydata.commit()
+
+        print(cc)
         C.destroy()
 
     C=tk.Toplevel(B)
@@ -151,20 +168,48 @@ def addsuppliers():
                 ds="SELECT firstname FROM supplier WHERE firstname= %s"
                 cur.execute(ds,[fname])
                 r=cur.fetchall()
-                print(r) 
                 ss="SELECT lastname FROM supplier WHERE lastname= %s"
                 cur.execute(ss,[lname])
                 rr=cur.fetchall()
-                print(rr)
                 if r==[] and rr==[]:
-                    chk_b4.config(text='checked',fg='green')                                                  
+                    chk_b4.config(text='checked',fg='green')           
+                    #inserting to supplier table                                       
                     tg='''INSERT INTO supplier (title,firstname,lastname,company,mobile,email,website,billingrate,terms,addterms,openingbalance,accountno,gsttype,
                     gstin,taxregisterationno,effectivedate,defaultexpenceaccount,tds,street,city,state ,pincode,country,notes) 
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                     cur.execute(tg,[(title),(fname),(lname),(comp),(mob),(mail),(webs),(bill),(terms),(bn),(open),(acc),(gst),(gst_in),(tax),(date),(defexp),
-                    (tds),(street),(city),(state),(pin),(contry),(note)])
+                    (tds),(street),(city),(state),(pin),(contry),(note)]) 
+                    toda = dt.datetime.now()
+                    tod = toda.strftime("%Y-%m-%d") 
+                    cid=2
+                    bx=fname+lname
+                    #inserting to bills table
+                    billg='''INSERT INTO bills (cid,grandtotal,paydate,payee) VALUES (%s,%s,%s,%s)'''
+                    cur.execute(billg,[(cid),(open),(tod),(bx)])
                     mydata.commit()
-                    messagebox.showinfo('Sucessfull','Supplier added sucessfully')    
+                    #inserting balance into accounts
+                    billg='''SELECT balance,name FROM accounts WHERE cid= %s'''
+                    cur.execute(billg,[cid])
+                    cc=cur.fetchall()
+                    xx=float(open)
+                    for i in cc:
+                        if i[1]=='Accounts Payable(Creditors)':
+                            a=i[1]
+                            b=i[0]
+                            print(a)
+                            if xx!=0:
+                                b=b+xx
+                                cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s""",(b,a))
+                            mydata.commit()
+                        if i[1]=='Ask Your Accountant':
+                            a=i[1]
+                            b=i[0]
+                            print(a)
+                            if xx!=0:
+                                b=b+xx
+                                cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s""",(b,a))
+                            mydata.commit()   
+                    messagebox.showinfo('Sucessfull','Supplier added sucessfully')  
                 elif r is not None and rr is not None:
                     messagebox.showerror('Already Exist','User exists,Try another Name',parent=B)     
     global B
