@@ -1,4 +1,5 @@
 
+
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -19,7 +20,7 @@ mydb=mysql.connector.connect(
         user='root',
         password='',
         port='3308',
-        database='finsys_tkinter'
+        database='finsYs_tkinter'
         )
 mycursor = mydb.cursor()
 cus_name= []
@@ -159,14 +160,14 @@ add_custom.place(x=505,y=130)
 
 emailL=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
 emailL.place(x=550,y=100,)
-email=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
+email_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff',textvariable = email)
 # email.set()
-email.place(x=550,y=130,height=40)
+email_input.place(x=550,y=130,height=40)
 
 billing_ad=Label(form_frame,text="BILLING ADDRESS",bg='#243e55',fg='#fff')
 billing_ad.place(x=30,y=200,)
-biladdress=Entry(form_frame,width=75,bg='#243e55',fg='#fff')
-biladdress.place(x=30,y=230,height=90)
+biladdress_input=Entry(form_frame,width=75,bg='#243e55',fg='#fff',textvariable = biladdress)
+biladdress_input.place(x=30,y=230,height=90)
 
 estimate_date=Label(form_frame,text="ESTIMATE DATE",bg='#243e55',fg='#fff')
 estimate_date.place(x=550,y=200,)
