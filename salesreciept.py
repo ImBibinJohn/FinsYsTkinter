@@ -4,19 +4,71 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 import mysql.connector
+from tkcalendar import DateEntry
 
-
-#database connects here 
-def db_connection():
-    global mydb,mycursor
-    mydb=mysql.connector.connect(
+mydb=mysql.connector.connect(
         host='localhost',
         user='root',
         password='',
-        database='finsys_tkinter'
+        port='3308',
+        database='finsYs_tkinter'
         )
-    mycursor = mydb.cursor()
+mycursor = mydb.cursor()
+cus_name= []
+#fetching customer data
+customer_query="SELECT firstname FROM `app1_customer`"
+mycursor.execute(customer_query)
+table=mycursor.fetchall()
+for a in table:
+    data = (a[0])
+    cus_name.append(data)
+    print(data)
 
+def cusSelect(event):
+    fname=[]
+    option2=drop2.get()
+    fname.append(option2)
+    cus_query="SELECT * FROM `app1_customer` WHERE firstname=%s"
+    mycursor.execute(cus_query,fname)
+    table1=mycursor.fetchall()
+    for a in table1:
+        email.set(a[10])
+        biladdress.set(a[12:17])
+        # print(descrip1.set())
+
+#to save estimate formdata
+def save_estimate_data():
+        # customer=cust.get()
+        # mail=email.get()    
+        # biladdr=biladdress.get() 
+        # creditno=creditnumber.get()
+        # place=placeofsup.get()
+        # invnum=invnumb.get()
+        # invperiod=inv_period.get()
+        # product1=pro1.get()
+        # product2=pro2.get()
+        # product3=pro3.get()
+        # descrip1=descript1.get()
+        # descrip2=descript2.get()
+        # descrip3=descript3.get()
+        # qty1=qnty1.get()
+        # qty2=qnty2.get()
+        # qty3=qnty3.get()
+        # price1=pricee1.get()
+        # price2=pricee2.get()
+        # price3=pricee3.get()
+        # total1=totall1.get()
+        # total2=totall2.get()
+        # total3=totall3.get()
+        # tax1=tax_1.get()
+        # tax2=tax_2.get()
+        # tax3=tax_3.get()
+        # sql= '''INSERT INTO app1_credit (customer,mail,biladdr,creditdate,creditno,place,invnum,invperiod,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%S,%S)''' #adding values into db
+        # val=(customer,mail,biladdr,creditno,place,invnum,invperiod,product1,descrip1,qty1,price1,tax1,total1,product2,descrip2,qty2,price2,tax2,total2,product3,descrip3,qty3,price3,total3,tax3)
+        # # mycursor.execute(sql,[(mail),(biladdr),(creditno),(place),(invnum),(product1),(product2),(product3),(descrip1),(descrip2),(descrip3),(price1),(price2),(price3),(total1),(total2),(total3),(tax1),(tax2),(tax3)])
+        # mycursor.execute(sql,val)
+        mydb.commit()
+        mydb.close()
 
 
 def add_custom():
@@ -54,11 +106,39 @@ form_lable.place(x=0,y=0)
 form_heading=tk.Label(form_lable, text="fin sYs",fg='#fff',bg='#243e55',height=2,bd=1,relief="groove",font=sub_headingfont,width=80)
 form_heading.pack()
 
+email=tk.StringVar()
+# email.set(table2)
+biladdress=tk.StringVar()
+creditnumber=tk.StringVar()
+estimate_input=tk.StringVar()
+estimate_input=tk.StringVar()
+placeofsup=tk.StringVar()
+product1=tk.StringVar()
+pro1=tk.StringVar()
+pro2=tk.StringVar()
+pro3=tk.StringVar()
+descrip1=tk.StringVar()
+descript2=tk.StringVar()
+descript3=tk.StringVar()
+qnty1=tk.StringVar()
+qnty2=tk.StringVar()
+qnty3=tk.StringVar()
+pricee1=tk.StringVar()
+pricee2=tk.StringVar()
+pricee3=tk.StringVar()
+totall1=tk.StringVar()
+totall2=tk.StringVar()
+totall3=tk.StringVar()
+tax_1=tk.StringVar()
+tax_2=tk.StringVar()
+tax_3=tk.StringVar() 
+
 title_lab=tk.Label(form_frame,text="CUSTOMER",bg='#243e55',fg='#fff')
 place_input=StringVar()
 drop2=ttk.Combobox(form_frame,textvariable = place_input)
-
-drop2['values']=("SELECT_CUSTOMER")
+drop2.set("SELECT CUSTOMER")
+drop2['values']=(cus_name)
+drop2.bind("<<ComboboxSelected>>",cusSelect)
 
 title_lab.place(x=10,y=100,height=15,width=100)
 drop2.place(x=30,y=130,height=40,width=450)
@@ -67,19 +147,19 @@ add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid"
 add_custom.place(x=505,y=130)
 
 
-email=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
-email.place(x=630,y=100,)
-email_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
+emailL=Label(form_frame,text="EMAIL",bg='#243e55',fg='#fff')
+emailL.place(x=630,y=100,)
+email_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff',textvariable=email)
 email_input.place(x=630,y=130,height=40)
 
 billing_ad=Label(form_frame,text="BILLING ADDRESS",bg='#243e55',fg='#fff')
 billing_ad.place(x=30,y=200,)
-billing_input=Entry(form_frame,width=75,bg='#243e55',fg='#fff')
+billing_input=Entry(form_frame,width=75,bg='#243e55',fg='#fff',textvariable=biladdress)
 billing_input.place(x=30,y=230,height=90)
 
 sales_reciept_date=Label(form_frame,text="SALES RECIEPT DATE",bg='#243e55',fg='#fff')
 sales_reciept_date.place(x=630,y=200,)
-sales_reciept_input=Entry(form_frame,width=55,bg='#243e55',fg='#fff')
+sales_reciept_input=DateEntry(form_frame,width=55,bg='#243e55',fg='#fff')
 sales_reciept_input.place(x=630,y=230,height=40)
 
 place_of_supp=tk.Label(form_frame,text="PLACE OF SUPPLY",bg='#243e55',fg='#fff')
