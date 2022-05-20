@@ -1,11 +1,9 @@
 
-from multiprocessing.sharedctypes import Value
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 import datetime as dt
-from webbrowser import get
 import mysql.connector
 from tkinter import messagebox
 
@@ -92,15 +90,16 @@ def get_selected_product(event):
         for i in data:
             hsn.set(i[4])
             desc.set(i[7])
-            price.set(i[8])
-            sale_price=i[8]
+            sale_price=(i[21]+i[22]+i[23]+i[24])
+            price.set(sale_price)
+            
             tota_price=int(sale_price)*int(quantity)
             total.set(tota_price)   
     createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
     subtotal.set(createsubtotal)
     #get selected gst then find tax amount thenset it 
     gst=tax_drop1.get()
-    print("seslscted gst",gst)
+
     if gst=="18.0% GST(18%)":
         print("totla",tota_price)
         finding_tax1=int(tota_price)*(18/100)
@@ -126,9 +125,6 @@ def get_selected_product(event):
         finding_tax1=0
     finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
     taxamount.set(finding_tax)
-
-    print("taxamount=",(finding_tax))
-    print("createsubtotal=",createsubtotal)
     
     if taxamount==None:
         final_total=0
@@ -137,7 +133,6 @@ def get_selected_product(event):
         final_total=0
         total_amount=createsubtotal+finding_tax
         final_total=final_total+total_amount
-        print("final_total=",final_total)
         grand.set(final_total)
     amount_recieved=amt_received_input.get()
     balancedue=final_total-int(amount_recieved)
@@ -180,9 +175,10 @@ def get_selected_product2(event):
         for i in data:
             hsn2.set(i[4])
             desc2.set(i[7])
-            price2.set(i[8])    
-            sale_price=i[8]
+            sale_price=(i[21]+i[22]+i[23]+i[24])
+            price2.set(sale_price)
             tota_price=int(sale_price)*int(quantity2)
+            total2.set(tota_price)
     createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
     subtotal.set(createsubtotal) 
 
@@ -264,9 +260,10 @@ def get_selected_product3(event):
         for i in data:
             hsn3.set(i[4])
             desc3.set(i[7])
-            price3.set(i[8])    
-            sale_price=i[8]
+            sale_price=(i[21]+i[22]+i[23]+i[24])
+            price3.set(sale_price)
             tota_price=int(sale_price)*int(quantity3)
+            total3.set(tota_price)
     createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
     subtotal.set(createsubtotal) 
 
@@ -349,9 +346,10 @@ def get_selected_product4(event):
         for i in data:
             hsn4.set(i[4])
             desc4.set(i[7])
-            price4.set(i[8])  
-            sale_price=i[8]
+            sale_price=(i[21]+i[22]+i[23]+i[24])
+            price4.set(sale_price)
             tota_price=int(sale_price)*int(quantity4)
+            total4.set(tota_price)
     createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
     subtotal.set(createsubtotal)
 
@@ -397,40 +395,6 @@ def get_selected_product4(event):
     amount_recieved=amt_received_input.get()
     balancedue=final_total-int(amount_recieved)
     balance.set(balancedue)
-
-
-#get selected gst then find tax amount thenset it 
-
-# def get_selected_gst(event):
-    
-#     total1=total.get()
-    
-    # gst=tax_drop1.get()
-    # print("seslscted gst",gst)
-    # if gst=="18.0% GST(18%)":
-    #     print("totla",total1)
-    #     finding_tax1=int(total1)*(18/100)
-    # elif gst=="28.0% GST(28%)":
-    #     finding_tax1=int(total1)*(28/100)
-        
-    # elif gst=="12.0% GST(12%)":
-    #     finding_tax1=int(total1)*(12/100)
-        
-    # elif gst=="06.0% GST(06%)":
-    #     finding_tax1=int(total1)*(6/100)
-        
-    # elif gst=="05.0% GST(05%)":
-    #     finding_tax1=int(total1)*(5/100)
-        
-    # elif gst=="03.0% GST(03%)":
-    #     finding_tax1=int(total1)*(3/100)
-        
-    # elif gst=="0.25% GST(0.25%)":
-    #     finding_tax1=int(total1)*(.25/100)
-        
-    # else:
-    #     finding_tax1=0
-    # taxamount.set(finding_tax1)
 
 def save_invoice():
     global select_customer,email,invoice_date,terms,Due_date,billto,invno,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,taxamount,grand,amt_received,balance,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,cid_id
@@ -491,11 +455,6 @@ def save_invoice():
     mydb.commit()
     mydb.close()
     messagebox.showinfo('New Customer Added')
-
-
-
-
-
 
 
 
@@ -663,7 +622,7 @@ billto_input.place(x=30,y=430,height=150)
 place_of_supply_lab=Label(form_frame,text="Place Of Supply",bg='#243e55',fg='#fff')
 
 drop2=ttk.Combobox(form_frame,textvariable=place_of_supply)
-drop2['values']=(cmp_data[2],"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
+drop2['values']=(cmp_data[2],"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Prede1sh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
  
 place_of_supply_lab.place(x=30,y=600,)
 drop2.place(x=30,y=630,height=40,width=335)
