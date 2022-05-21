@@ -35,6 +35,37 @@ def cusSelect(event):
         email.set(a[10])
         biladdress.set(a[12:17])
         # print(descrip1.set())
+#fetching product from backend
+inventory=[]
+inventory_query="SELECT * FROM `app1_inventory`"
+mycursor.execute(inventory_query)
+table4=mycursor.fetchall()
+for a in table4:
+    data = (a[2])
+    inventory.append(data)
+    print(data)
+
+
+
+def ProSelect(event):
+    selected_data=[]
+    option3=product1.get()
+    selected_data.append(option3)
+    qty1=quantity1_input.get()
+    inventory_query2="SELECT * FROM `app1_inventory` WHERE name=%s"
+    mycursor.execute(inventory_query2,selected_data)
+    table5=mycursor.fetchall()
+    for a in table5:
+        descrip1.set(a[11])
+        pricee1.set(a[12])
+        hsn1.set(a[3])
+        saleprice=a[12]
+        total1=int(saleprice)*int(qty1)
+        totall1.set(total1)
+        print(descrip1.set())
+
+
+
 
 #to save estimate formdata
 def save_estimate_data():
@@ -117,6 +148,9 @@ product1=tk.StringVar()
 pro1=tk.StringVar()
 pro2=tk.StringVar()
 pro3=tk.StringVar()
+hsn1=tk.StringVar()
+hsn2=tk.StringVar()
+hsn3=tk.StringVar()
 descrip1=tk.StringVar()
 descript2=tk.StringVar()
 descript3=tk.StringVar()
@@ -127,6 +161,7 @@ pricee1=tk.StringVar()
 pricee2=tk.StringVar()
 pricee3=tk.StringVar()
 totall1=tk.StringVar()
+totall1.set("0")
 totall2=tk.StringVar()
 totall3=tk.StringVar()
 tax_1=tk.StringVar()
@@ -173,6 +208,7 @@ place_drop.place(x=30,y=360,height=40,width=450)
 #invoice_drop['values']=("OCT2022-DEC2022","","","")
 #invoice_period.place(x=20,y=330,height=15,width=100)
 #invoice_drop.place(x=30,y=360,height=40,width=450)
+#
 
 payment=tk.Label(form_frame,text="PAYMENT",bg='#243e55',fg='#fff')
 payment_drop=ttk.Combobox(form_frame)
@@ -204,10 +240,12 @@ label.place(x=60,y=60)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product1=ttk.Combobox(form2_frame)
+product1['values']=(inventory)
+product1.bind("<<ComboboxSelected>>",ProSelect)
+product1.set("SELECT PRODUCT")
 pro.place(x=10,y=120,height=15,width=100)
-pro_drop.place(x=60,y=150,height=40,width=150)
+product1.place(x=60,y=150,height=40,width=150)
 #2
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
 pro_drop=ttk.Combobox(form2_frame)
@@ -222,7 +260,7 @@ pro.place(x=10,y=280,height=15,width=100)
 pro_drop.place(x=60,y=310,height=40,width=150)
 
 #row 1
-hsn_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+hsn_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=hsn1)
 hsn_input.place(x=230,y=150,height=40,width=150)
 #row2
 hsn_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
@@ -234,18 +272,18 @@ hsn_input.place(x=230,y=310,height=40,width=150)
 
 
 #row 1
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=400,y=150,height=40,width=150)
+description_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=descrip1)
+description_input.place(x=400,y=150,height=40,width=150)
 #row2
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=400,y=240,height=40,width=150)
+description_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+description_input.place(x=400,y=240,height=40,width=150)
 #row3
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=400,y=310,height=40,width=150)
+description_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+description_input.place(x=400,y=310,height=40,width=150)
 
 #row 1
-quantity_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity_input.place(x=600,y=150,height=40,width=150)
+quantity1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=qnty1)
+quantity1_input.place(x=600,y=150,height=40,width=150)
 #row2
 quantity_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
 quantity_input.place(x=600,y=240,height=40,width=150)
@@ -255,7 +293,7 @@ quantity_input.place(x=600,y=310,height=40,width=150)
 
 
 #row 1
-price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=pricee1)
 price_input.place(x=780,y=150,height=40,width=150)
 #row2
 price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
@@ -265,7 +303,7 @@ price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
 price_input.place(x=780,y=310,height=40,width=150)
 
 #row 1
-total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=totall1)
 total_input.place(x=950,y=150,height=40,width=150)
 #row2
 total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
@@ -274,20 +312,17 @@ total_input.place(x=950,y=240,height=40,width=150)
 total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
 total_input.place(x=950,y=310,height=40,width=150)
 #row1
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1250,y=150,height=15,width=150)
-pro_drop.place(x=1130,y=150,height=40,width=150)
+tax_drop=ttk.Combobox(form2_frame)
+tax_drop['values']=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
+tax_drop.place(x=1130,y=150,height=40,width=150)
 #row2
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1110,y=240,height=15,width=150)
-pro_drop.place(x=1130,y=240,height=40,width=150)
+tax_drop=ttk.Combobox(form2_frame)
+tax_drop['values']=("","","","")
+tax_drop.place(x=1130,y=240,height=40,width=150)
 #row3
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1000,y=310,height=15,width=150)
-pro_drop.place(x=1130,y=310,height=40,width=150)
+tax_drop=ttk.Combobox(form2_frame)
+tax_drop['values']=("","","","")
+tax_drop.place(x=1130,y=310,height=40,width=150)
 
 ##################
 
