@@ -74,81 +74,78 @@ label.place(x=60,y=60)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product1=ttk.Combobox(form2_frame)
+product1['values']=("","","","")
 pro.place(x=10,y=120,height=15,width=100)
-pro_drop.place(x=60,y=150,height=40,width=150)
+product1.place(x=60,y=150,height=40,width=150)
 #2
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product2=ttk.Combobox(form2_frame)
+product2['values']=("","","","")
 pro.place(x=10,y=210,height=15,width=100)
-pro_drop.place(x=60,y=240,height=40,width=150)
+product2.place(x=60,y=240,height=40,width=150)
 #3
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product3=ttk.Combobox(form2_frame)
+product3['values']=("","","","")
 pro.place(x=10,y=280,height=15,width=100)
-pro_drop.place(x=60,y=310,height=40,width=150)
+product3.place(x=60,y=310,height=40,width=150)
 
 
 
 
 #row 1
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=320,y=150,height=40,width=150)
+description_input1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+description_input1.place(x=320,y=150,height=40,width=150)
 #row2
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=320,y=240,height=40,width=150)
+description_input2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+description_input2.place(x=320,y=240,height=40,width=150)
 #row3
-discription_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-discription_input.place(x=320,y=310,height=40,width=150)
+description_input3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+description_input3.place(x=320,y=310,height=40,width=150)
 
 #row 1
-quantity_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity_input.place(x=530,y=150,height=40,width=150)
+quantity_input1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+quantity_input1.place(x=530,y=150,height=40,width=150)
 #row2
-quantity_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity_input.place(x=530,y=240,height=40,width=150)
+quantity_input2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+quantity_input2.place(x=530,y=240,height=40,width=150)
 #row3
-quantity_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-quantity_input.place(x=530,y=310,height=40,width=150)
+quantity_input3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+quantity_input3.place(x=530,y=310,height=40,width=150)
 
 
 #row 1
-price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price_input.place(x=720,y=150,height=40,width=150)
+price_input1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+price_input1.place(x=720,y=150,height=40,width=150)
 #row2
-price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price_input.place(x=720,y=240,height=40,width=150)
+price_input2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+price_input2.place(x=720,y=240,height=40,width=150)
 #row3
-price_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-price_input.place(x=720,y=310,height=40,width=150)
+price_input3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+price_input3.place(x=720,y=310,height=40,width=150)
 
 #row 1
-total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total_input.place(x=890,y=150,height=40,width=150)
+total_input1=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+total_input1.place(x=890,y=150,height=40,width=150)
 #row2
-total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total_input.place(x=890,y=240,height=40,width=150)
+total_input2=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+total_input2.place(x=890,y=240,height=40,width=150)
 #row3
-total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
-total_input.place(x=890,y=310,height=40,width=150)
+total_input3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
+total_input3.place(x=890,y=310,height=40,width=150)
 #row1
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1250,y=150,height=15,width=150)
-pro_drop.place(x=1050,y=150,height=40,width=150)
+tax1=ttk.Combobox(form2_frame)
+tax1['values']=("","","","")
+tax1.place(x=1050,y=150,height=40,width=150)
 #row2
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1110,y=240,height=15,width=150)
-pro_drop.place(x=1050,y=240,height=40,width=150)
+tax2=ttk.Combobox(form2_frame)
+tax2['values']=("","","","")
+tax2.place(x=1050,y=240,height=40,width=150)
 #row3
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
-pro.place(x=1000,y=310,height=15,width=150)
-pro_drop.place(x=1050,y=310,height=40,width=150)
+tax3=ttk.Combobox(form2_frame)
+tax3['values']=("","","","")
+tax3.place(x=1050,y=310,height=40,width=150)
 
 ##################
 
