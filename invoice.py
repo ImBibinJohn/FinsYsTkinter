@@ -6,6 +6,7 @@ import mysql.connector
 from tkinter import messagebox
 import datetime as dt
 
+
 def fun():#db connection
     global mydb,mycursor
     mydb=mysql.connector.connect(
@@ -21,21 +22,24 @@ def fun():#db connection
 def add_invoice():
 
     def get_email(event):
-        option=drop2.get()
-        print("option",option)
-        mail_query="SELECT * FROM app1_customer "
-        mycursor.execute(mail_query,option)
+        name=[]
+        option=drop1.get()
+        name.append(option)
+        for custm in customers_data:
+            full_name=custm[2]+custm[3]
+            if full_name==name[0]:
+                first_name=custm[2]
+                last_name=custm[3]
+        mycursor.execute("SELECT * FROM app1_customer where firstname=%s and lastname=%s",(first_name,last_name))
         table2=mycursor.fetchall()
         for i in table2:
             email.set(i[9])
             billto.set(i[12:17])
-        # invno.set()
 
 
 
     def add_custom():
-        import addcustomer_form
-
+        import customer
     #getting terms from dropdown
     def get_terms(event):
         global invno
@@ -45,7 +49,8 @@ def add_invoice():
             invno_lab.place(x=500,y=400,)
             invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=invno)
             invno_input.place(x=500,y=430,height=40)
-        
+        else:
+            invno.set(0)
     #getting selected product1 and quantity and set some entry feild value
     
     def get_selected_product(event):
@@ -489,6 +494,9 @@ def add_invoice():
     #get customer datas from customer table
     mycursor.execute('select * from app1_customer ')
     customers=mycursor.fetchall()
+    customers_data=[]
+    for cus in customers:
+        customers_data.append(cus)
 
 
     #set today date 
@@ -564,17 +572,22 @@ def add_invoice():
 
     select_customer_lab=tk.Label(form_frame,text="Select Customer",bg='#243e55',fg='#fff')
 
-    drop2=ttk.Combobox(form_frame,textvariable = select_customer)
-    customer_values=customers[0]
-    for cust in  customers:
-        if customer_values[-1]==cmp1[0]:
+    drop1=ttk.Combobox(form_frame,textvariable = select_customer)
+
+    value=[]
+    for cust in  customers_data:
+        customer_values=cust[-1]
+        
+        if customer_values==cmp1[0]:
+            value.append((cust[2]+cust[3]))
+            drop1['values']=value
             
-            drop2['values']=(cust[2]+cust[3])
         else:
             messagebox.showerror('error', 'invalid data')
-    drop2.bind("<<ComboboxSelected>>",get_email)
+
+    drop1.bind("<<ComboboxSelected>>",get_email)
     select_customer_lab.place(x=30,y=200,height=15)
-    drop2.place(x=30,y=230,height=40,width=335)
+    drop1.place(x=30,y=230,height=40,width=335)
     wrappen.pack(fill='both',expand='yes',)
 
     add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=2,command=add_custom)
@@ -898,16 +911,19 @@ def edit_customer():
         name=[]
         options=drop1.get()
         name.append(options)
-        print("option",name[-1])
-        # last_name=name.split(-1)
-        print("last_nameaaaaaaaaaaaaaaaaaaaaaaaaaaaa",options)
-
-        e_mail_query="SELECT * FROM app1_customer where firstname=%s"
-        mycursor.execute(e_mail_query,name)
+        for custm in customers_data:
+            full_name=custm[2]+custm[3]
+            if full_name==name[0]:
+                first_name=custm[2]
+                last_name=custm[3]
+        mycursor.execute("SELECT * FROM app1_customer where firstname=%s and lastname=%s",(first_name,last_name))
         table2=mycursor.fetchall()
         for i in table2:
             e_email.set(i[9])
             e_billto.set(i[12:17])
+
+
+
 
     def get_e_terms(event):
         global e_invno
@@ -917,6 +933,8 @@ def edit_customer():
             invno_lab.place(x=500,y=400,)
             invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=e_invno)
             invno_input.place(x=500,y=430,height=40)
+        else:
+            e_invno.set(0)
 
     def get_selected_e_product(event):
         global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
@@ -1364,9 +1382,12 @@ def edit_customer():
 
 
     #get customer datas from customer table
+    
     mycursor.execute('select * from app1_customer ')
     customers=mycursor.fetchall()
-
+    customers_data=[]
+    for cus in customers:
+        customers_data.append(cus)
 
     #set today date 
     date = dt.datetime.now()
@@ -1404,7 +1425,7 @@ def edit_customer():
 
 
 
-    global e_select_customer,e_email,e_invoice_date,e_terms,e_Due_date,e_billto,e_invno,cmpname,cpmemail,e_place_of_supply,e_product,e_hsn,e_desc,e_qty,e_price,e_total,e_tax,e_subtotal,e_taxamount,e_grand,e_amt_received,e_balance
+    global e_select_customer,e_email,e_invoice_date,e_terms,e_Due_date,e_billto,e_invno,cmpname,cpmemail,e_place_of_supply,e_product,e_hsn,e_desc,e_qty,e_price,e_total,e_tax,e_subtotal,e_taxamount,e_grand,e_amt_received,e_balance,e_product2,e_product3,e_product4,e_hsn2,e_hsn3,e_hsn4,e_desc2,e_desc3,e_desc4,e_qty2,e_qty3,e_qty4,e_price2,e_price3,e_price4, e_total2,e_total3,e_total4,e_tax2,e_tax3,e_tax4
 
     e_select_customer=StringVar(form_frame)
     e_email=StringVar(form_frame)
@@ -1429,13 +1450,155 @@ def edit_customer():
     e_grand.set("0")
     e_amt_received=StringVar()
     e_balance=StringVar()
+    e_product2=StringVar()
+    e_product3=StringVar()
+    e_product4=StringVar()
+    e_hsn2=StringVar()
+    e_hsn3=StringVar()
+    e_hsn4=StringVar()
+    e_desc2=StringVar()
+    e_desc3=StringVar()
+    e_desc4=StringVar()
+    e_qty2=StringVar()
+    e_qty3=StringVar()
+    e_qty4=StringVar()
+    e_price2=StringVar()
+    e_price3=StringVar()
+    e_price4=StringVar()
+    e_total2=StringVar()
+    e_total3=StringVar()
+    e_total4=StringVar()
+    e_tax2=StringVar()
+    e_tax3=StringVar()
+    e_tax4=StringVar()
+    
 
+    print("dataaaaaaaaaa",data)
     existing_customer=data[1]
     e_select_customer.set(existing_customer)
 
+    existing_email=data[2]
+    e_email.set(existing_email)
+
+    existing_terms=data[4]
+    e_terms.set(existing_terms)
+    if existing_terms=="Add New Term":
+        existing_invno=data[3]
+        e_invno.set(existing_invno)
+
+    existing_invoice_date=data[5]
+    e_invoice_date.set(existing_invoice_date)
+
+    existing_Due_date=data[6]
+    e_Due_date.set(existing_Due_date)
+
+    existing_billto=data[7]
+    e_billto.set(existing_billto)
+
+    existing_place_of_supply=data[8]
+    e_place_of_supply.set(existing_place_of_supply)
+
+    existing_product=data[9]
+    e_product.set(existing_product)
+
+    existing_han=data[10]
+    e_hsn.set(existing_han)
+
+    existing_desc=data[11]
+    e_desc.set(existing_desc)
+
+    existing_qty=data[12]
+    e_qty.set(existing_qty)
+
+    existing_price=data[13]
+    e_price.set(existing_price)
+
+    existing_total=data[14]
+    e_total.set(existing_total)
+
+    existing_tax=data[15]
+    e_tax.set(existing_tax)
+
+    existing_product2=data[18]
+    e_product2.set(existing_product2)
+
+    existing_hsn2=data[19]
+    e_hsn2.set(existing_hsn2)
+
+    existing_desc2=data[20]
+    e_desc2.set(existing_desc2)
+
+    existing_qty2=data[21]
+    e_qty2.set(existing_qty2)
+
+    existing_price2=data[22]
+    e_price2.set(existing_price2)
+
+    existing_total2=data[23]
+    e_total2.set(existing_total2)
+
+    existing_tax2=data[24]
+    e_tax2.set(existing_tax2)
+
+    existing_product3=data[25]
+    e_product3.set(existing_product3)
+
+    existing_hsn3=data[26]
+    e_hsn3.set(existing_hsn3)
+
+    existing_desc3=data[27]
+    e_desc3.set(existing_desc3)
+
+    existing_qty3=data[28]
+    e_qty3.set(existing_qty3)
+
+    existing_price3=data[29]
+    e_price3.set(existing_price3)
+
+    existing_total3=data[30]
+    e_total3.set(existing_total3)
+
+    existing_tax3=data[31]
+    e_tax3.set(existing_tax3)
+
+    existing_product4=data[32]
+    e_product4.set(existing_product4)
+
+    existing_hsn4=data[33]
+    e_hsn4.set(existing_hsn4)
+
+    existing_desc4=data[34]
+    e_desc4.set(existing_desc4)
+
+    existing_qty4=data[35]
+    e_qty4.set(existing_qty4)
+
+    existing_price4=data[36]
+    e_price4.set(existing_price4)
+
+    existing_total4=data[37]
+    e_total4.set(existing_total4)
+
+    existing_tax4=data[38]
+    e_tax4.set(existing_tax4)
 
 
 
+
+    existing_subtotal=data[16]
+    e_subtotal.set(existing_subtotal)
+
+    existing_taxamount=data[40]
+    e_taxamount.set(existing_taxamount)
+
+    existing_grand=data[17]
+    e_grand.set(existing_grand)
+
+    existing_amt_received=data[39]
+    e_amt_received.set(existing_amt_received)
+
+    existing_balance=data[41]
+    e_balance.set(existing_balance)
 
 
 
@@ -1449,11 +1612,13 @@ def edit_customer():
     select_customer_lab=tk.Label(form_frame,text="Select Customer",bg='#243e55',fg='#fff')
 
     drop1=ttk.Combobox(form_frame,textvariable = e_select_customer)
-    customer_values=customers[0]
-    for cust in  customers:
-        if customer_values[-1]==cmp1[0]:
-            
-            drop1['values']=(cust[2])
+    value=[]
+    for cust in  customers_data:
+        customer_values=cust[-1]
+        
+        if customer_values==cmp1[0]:
+            value.append((cust[2]+cust[3]))
+            drop1['values']=value
         else:
             messagebox.showerror('error', 'invalid data')
     drop1.bind("<<ComboboxSelected>>",get_email)
@@ -1535,8 +1700,6 @@ def edit_customer():
 
     product_drop1.place(x=70,y=780,height=40,width=200)
 
-    global e_product2,e_product3,e_product4,e_hsn2,e_hsn3,e_hsn4,e_desc2,e_desc3,e_desc4,e_qty2,e_qty3,e_qty4
-    e_product2=StringVar()
     product_drop2=ttk.Combobox(form_frame,textvariable = e_product2)
 
    
@@ -1545,14 +1708,14 @@ def edit_customer():
 
     product_drop2.place(x=70,y=850,height=40,width=200)
 
-    e_product3=StringVar()
+   
     product_drop3=ttk.Combobox(form_frame,textvariable = e_product3)
             
     product_drop3['values']=product1
     product_drop3.bind("<<ComboboxSelected>>",get_selected_e_product3)
     product_drop3.place(x=70,y=930,height=40,width=200)
 
-    e_product4=StringVar()
+   
     product_drop4=ttk.Combobox(form_frame,textvariable = e_product4)
     product_drop4['values']=product1
     product_drop4.bind("<<ComboboxSelected>>",get_selected_e_product4)
@@ -1566,15 +1729,13 @@ def edit_customer():
     hsn_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_hsn)
     hsn_input1.place(x=300,y=780,height=40)
 
-    e_hsn2=StringVar()
+    
     hsn_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_hsn2)
     hsn_input2.place(x=300,y=850,height=40)
 
-    e_hsn3=StringVar()
     hsn_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_hsn3)
     hsn_input3.place(x=300,y=930,height=40)
 
-    e_hsn4=StringVar()
     hsn_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_hsn4)
     hsn_input4.place(x=300,y=1000,height=40)
 
@@ -1587,15 +1748,12 @@ def edit_customer():
     desc_input1=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = e_desc)
     desc_input1.place(x=500,y=780,height=40)
 
-    e_desc2=StringVar()
     desc_input2=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = e_desc2)
     desc_input2.place(x=500,y=850,height=40)
 
-    e_desc3=StringVar()
     desc_input3=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = e_desc3)
     desc_input3.place(x=500,y=930,height=40)
 
-    e_desc4=StringVar()
     desc_input4=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = e_desc4)
     desc_input4.place(x=500,y=1000,height=40)
 
@@ -1609,19 +1767,16 @@ def edit_customer():
     qty_input1.bind("<KeyRelease>",get_selected_e_product)
 
 
-    e_qty2=StringVar()
     qty_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_qty2)
     qty_input2.place(x=750,y=850,height=40)
     qty_input2.bind("<KeyRelease>",get_selected_e_product2)
 
 
-    e_qty3=StringVar()
     qty_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_qty3)
     qty_input3.place(x=750,y=930,height=40)
     qty_input3.bind("<KeyRelease>",get_selected_e_product3)
 
 
-    e_qty4=StringVar()
     qty_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_qty4)
     qty_input4.place(x=750,y=1000,height=40)
     qty_input4.bind("<KeyRelease>",get_selected_e_product4)
@@ -1635,16 +1790,13 @@ def edit_customer():
     price_input1.place(x=950,y=780,height=40)
     # price_input1.bind("<KeyRelease>",get_qty)
 
-    global e_price2,e_price3,e_price4
-    e_price2=StringVar()
+    
     price_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_price2)
     price_input2.place(x=950,y=850,height=40)
 
-    e_price3=StringVar()
     price_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_price3)
     price_input3.place(x=950,y=930,height=40)
 
-    e_price4=StringVar()
     price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_price4)
     price_input4.place(x=950,y=1000,height=40)
 
@@ -1656,19 +1808,16 @@ def edit_customer():
     # total_input1.bind("<KeyRelease>",get_total)
     total_input1.place(x=1150,y=780,height=40)
 
-    global e_total2,e_total3,e_total4
-    e_total2=StringVar()
-    e_total2.set("0")
+   
+   
     total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_total2)
     total_input2.place(x=1150,y=850,height=40)
 
-    e_total3=StringVar()
-    e_total3.set("0")
+    
     total_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_total3)
     total_input3.place(x=1150,y=930,height=40)
 
-    e_total4=StringVar()
-    e_total4.set("0")
+    
     total_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = e_total4)
     total_input4.place(x=1150,y=1000,height=40)
 
@@ -1682,20 +1831,19 @@ def edit_customer():
     tax_drop1['values']=tax_values
     tax_drop1.bind("<<ComboboxSelected>>",get_selected_e_product)
     tax_drop1.place(x=1350,y=780,height=40,width=200)
-    global e_tax2,e_tax3,e_tax4
-    e_tax2=StringVar()
+    
     tax_drop2=ttk.Combobox(form_frame,textvariable = e_tax2)
     tax_drop2['values']=tax_values
     tax_drop2.bind("<<ComboboxSelected>>",get_selected_e_product2)
     tax_drop2.place(x=1350,y=850,height=40,width=200)
 
-    e_tax3=StringVar()
+   
     tax_drop3=ttk.Combobox(form_frame,textvariable = e_tax3)
     tax_drop3['values']=tax_values
     tax_drop3.bind("<<ComboboxSelected>>",get_selected_e_product3)
     tax_drop3.place(x=1350,y=930,height=40,width=200)
 
-    e_tax4=StringVar()
+   
     tax_drop4=ttk.Combobox(form_frame,textvariable = e_tax4)
     tax_drop4['values']=tax_values
     tax_drop4.bind("<<ComboboxSelected>>",get_selected_e_product4)
