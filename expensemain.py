@@ -50,10 +50,11 @@ def main():
 
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-    f = font.Font(family='Times New Roman', size=30)  # font
-    lb = tk.Label(head, text='EXPENSES', bg='#243e54')
+    f = font.Font(family='Times New Roman', size=25)  # font
+    lb = tk.Label(head, text='EXPENSES', bg="#243e55", height=2,
+                  bd=5, relief="groove", font=f, width=106)
     lb['font'] = f
-    lb.place(relx=0.4, rely=0.2)
+    lb.place(relx=0.05, rely=0.2)
     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
 
     # contents frame
@@ -328,23 +329,6 @@ def main():
             form2_frame, width=40, bg='#2f516f', fg='#fff')
         quantity_input3.place(x=650, y=310, height=40, width=200)
 
-        # def mulc(self, event):
-        #     ctotal_input1.delete(0, 'end')
-        #     price_input1 = int(price_input1.get())
-        #     quantity_input1 = int(quantity_input1.get())
-        #     resultc1 = price_input1*quantity_input1
-        #     ctotal_input2.insert(END, str(resultc1))
-        #     ctotal_input2.delete(0, 'end')
-        #     price_input2 = int(price_input2.get())
-        #     quantity_input2 = int(quantity_input2.get())
-        #     resultc2 = price_input2*quantity_input2
-        #     ctotal_input2.insert(END, str(resultc2))
-        #     ctotal_input3.delete(0, 'end')
-        #     price_input3 = int(price_input3.get())
-        #     quantity_input3 = int(quantity_input3.get())
-        #     resultc3 = price_input3*quantity_input3
-        #     ctotal_input3.insert(END, str(resultc3))
-
         # row 1
         price_input1 = Entry(form2_frame, width=40, bg='#2f516f',
                              fg='#fff')
@@ -457,25 +441,6 @@ def main():
         pprice_input3 = Entry(form4_frame, width=40,
                               bg='#2f516f', fg='#fff')
         pprice_input3.place(x=840, y=310, height=40, width=150)
-
-        # def mulc(self, event):
-        #     ptotal_input1.delete(0, 'end')
-        #     pprice_input1 = int(pprice_input1.get())
-        #     pquantity_input1 = int(pquantity_input1.get())
-        #     resultp1 = pprice_input1*pquantity_input1
-        #     ptotal_input1.insert(END, str(resultp1))
-
-        #     ptotal_input2.delete(0, 'end')
-        #     pprice_input2 = int(pprice_input2.get())
-        #     pquantity_input2 = int(pquantity_input2.get())
-        #     resultp2 = pprice_input2*pquantity_input2
-        #     ptotal_input2.insert(END, str(resultp2))
-
-        #     ptotal_input3.delete(0, 'end')
-        #     pprice_input3 = int(pprice_input3.get())
-        #     pquantity_input3 = int(pquantity_input3.get())
-        #     resultp3 = pprice_input3*pquantity_input3
-        #     ptotal_input3.insert(END, str(resultp3))
 
         # row 1
         ptotal_input1 = Entry(form4_frame, width=40, bg='#2f516f',
