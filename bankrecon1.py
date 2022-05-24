@@ -6,8 +6,31 @@ from tkinter import messagebox
 from PIL import Image,ImageTk
 from tkinter.ttk import Combobox
 from tkcalendar import Calendar, DateEntry
+import mysql.connector as mysql
+
+def fun():#db connection
+    global mydb2,mycursor
+    mydb2=mysql.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='finsYs_tkinter'
+        )
+    mycursor = mydb2.cursor()
+
 def add_custom():
     import addcustomer_form
+
+    print("hellboy111")   
+    global recon_data
+    # global tree_data
+    focus_data = tree_data.focus()
+    values=tree_data.item(focus_data,'values')
+    recon1_id=[values[-1]]
+    mycursor.execute("SELECT * FROM app1_recon1 WHERE recon1id=%s",(recon1_id))
+    data=mycursor.fetchone()
+    print("hellboy")
+
 
 root = tk.Tk()
 root.title("finsYs")
@@ -34,7 +57,7 @@ form_frame=Frame(mycanvas,width=1300,height=1900,bg='#243e55')
 mycanvas.create_window((20,60),window=form_frame,anchor="nw")
 form_lable=tk.Label(form_frame,bg="#243e55",width=100)
 form_lable.place(x=0,y=0)
-
+fun()
 san_lbl = Label(form_frame, text="Reconcile Inventory Asset", font=('times new roman', 20, 'bold'), bg="#243e55", fg="#fff")
 san_lbl.place(x=500)
 san_lbl = Label(form_frame, text="Statement ending date : 2022-04-07", font=('times new roman', 11, 'bold'),width=26, bg="#243e55", fg="#fff")
@@ -100,39 +123,80 @@ b.place(x=900,y=5,width=100,height=40)
 F1 = LabelFrame(F, font=('times new roman', 15, 'bold'),fg="Black", bg="#243e55")
 F1.place(x=0, y=50, width=1235, height=300)
 
-tree = ttk.Treeview(F1,height=10)
-tree['show'] = 'headings'
+# tree = ttk.Treeview(F1,height=10)
+# tree['show'] = 'headings'
 
-sb = ttk.Scrollbar(F1, orient="vertical", command=tree.yview)
+# sb = ttk.Scrollbar(F1, orient="vertical", command=tree.yview)
+# sb.grid(row=3,column=1,sticky="NS",pady=5)
+
+# tree.configure(yscrollcommand=sb.set)
+
+# tree["columns"]=("1","2","3","4","5","6","7","8")
+
+# tree.column("1", width=130)
+# tree.column("2", width=150)
+# tree.column("3", width=150)
+# tree.column("4", width=155)
+# tree.column("5", width=155)
+# tree.column("6", width=155)
+# tree.column("7", width=155)
+# tree.column("8", width=155)
+
+
+# tree.heading("1", text="DATE")
+# tree.heading("2", text="TYPE")
+# tree.heading("3", text="REF NO.")
+# tree.heading("4", text="ACCOUNT")
+# tree.heading("5", text="PAYEE")
+# tree.heading("6", text="MEMO")
+# tree.heading("7", text="DEPOSIT(INR)")
+# tree.heading("8", text="PAYMENT(INR)")
+
+# tree.grid(row=3,column=0,padx=5,pady=5)
+# data=['21-04-2022','Journel','4','4554 1236 8585 1221','100000','service charge','5000000','100000']
+# item1 = tree.insert("", "end", values=(data))
+
+
+
+global tree_data
+tree_data = ttk.Treeview(F1,height=10)
+tree_data['show'] = 'headings'
+
+sb = ttk.Scrollbar(F1, orient="vertical", command=tree_data.yview)
 sb.grid(row=3,column=1,sticky="NS",pady=5)
 
-tree.configure(yscrollcommand=sb.set)
+tree_data.configure(yscrollcommand=sb.set)
 
-tree["columns"]=("1","2","3","4","5","6","7","8")
+tree_data["columns"]=("1","2","3","4","5","6","7","8")
 
-tree.column("1", width=130)
-tree.column("2", width=150)
-tree.column("3", width=150)
-tree.column("4", width=155)
-tree.column("5", width=155)
-tree.column("6", width=155)
-tree.column("7", width=155)
-tree.column("8", width=155)
+tree_data.column("1", width=130)
+tree_data.column("2", width=150)
+tree_data.column("3", width=150)
+tree_data.column("4", width=155)
+tree_data.column("5", width=155)
+tree_data.column("6", width=155)
+tree_data.column("7", width=155)
+tree_data.column("8", width=155)
 
 
-tree.heading("1", text="DATE")
-tree.heading("2", text="TYPE")
-tree.heading("3", text="REF NO.")
-tree.heading("4", text="ACCOUNT")
-tree.heading("5", text="PAYEE")
-tree.heading("6", text="MEMO")
-tree.heading("7", text="DEPOSIT(INR)")
-tree.heading("8", text="PAYMENT(INR)")
+tree_data.heading("1", text="DATE")
+tree_data.heading("2", text="TYPE")
+tree_data.heading("3", text="REF NO.")
+tree_data.heading("4", text="ACCOUNT")
+tree_data.heading("5", text="PAYEE")
+tree_data.heading("6", text="MEMO")
+tree_data.heading("7", text="DEPOSIT(INR)")
+tree_data.heading("8", text="PAYMENT(INR)")
 
-tree.grid(row=3,column=0,padx=5,pady=5)
-data=['21-04-2022','Journel','4','4554 1236 8585 1221','100000','service charge','5000000','100000']
-item1 = tree.insert("", "end", values=(data))
+sql = 'SELECT edat,accounttype,recon1id,expacc,beginningbalance,serchar,beginningbalance,endingbalance,recon1id from app1_recon1'
+mycursor.execute(sql)
+treed_data=mycursor.fetchall()
+total=mycursor.rowcount
 
+for data in treed_data:
+    tree_data.insert("", 'end',values=data)
+    
+tree_data.grid(row=3,column=0,padx=5,pady=5)
 
 
 wrappen.pack(fill='both',expand='yes',)
