@@ -302,6 +302,7 @@ description_input.place(x=400,y=310,height=40,width=150)
 #row 1
 quantity1_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=qnty1)
 quantity1_input.place(x=600,y=150,height=40,width=150)
+quantity1_input.bind("<KeyRelease>",ProSelect)
 #row2
 quantity2_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
 quantity2_input.place(x=600,y=240,height=40,width=150)
