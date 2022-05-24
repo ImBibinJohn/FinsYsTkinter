@@ -4,6 +4,141 @@ from tkinter import *
 from  tkinter import ttk
 import tkinter.font as font
 from tkcalendar import DateEntry
+import mysql.connector
+
+
+#importing customer page to select the customer
+def add_custom():
+    import add_new_customer
+#db connects here **
+# def db_connection():
+# global mydb,mycursor
+mydb=mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        port='3308',
+        database='finsYs_tkinter'
+        )
+mycursor = mydb.cursor()
+cus_name= []
+#fetching customer data
+customer_query="SELECT firstname FROM `app1_customer`"
+mycursor.execute(customer_query)
+table=mycursor.fetchall()
+for a in table:
+    data = (a[0])
+    cus_name.append(data)
+    print(data)
+
+
+#invetory data
+mycursor.execute("SELECT * FROM app1_inventory WHERE cid_id=%s")
+inventory_data=mycursor.fetchall()
+
+#bundle data
+mycursor.execute("SELECT * FROM app1_bundle WHERE cid_id=%s")
+bundle_data=mycursor.fetchall()
+
+#noninventor data
+mycursor.execute("SELECT * FROM app1_noninventory WHERE cid_id=%s")
+noninventory_data=mycursor.fetchall()
+
+#service data
+mycursor.execute("SELECT * FROM app1_service WHERE cid_id=%s")
+services_data=mycursor.fetchall()
+
+#fetching product datas from database
+def get_selected_product(event):
+        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
+        createsubtotal =0
+        finding_tax1=0
+        finding_tax2=0
+        finding_tax3=0
+        finding_tax4=0
+        final_total=0
+        selected_product=[]
+        product=product1.get()
+        quantity=quantity_input1.get()
+        selected_product.append(product)
+        for product in inventory_data:
+            product_details="SELECT * FROM app1_inventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                hsn.set(i[4])
+                desc.set(i[11])
+                price.set(i[12])
+                sale_price=i[12]
+                tota_price=int(sale_price)*int(quantity)
+                total.set(tota_price)
+        for product in noninventory_data:
+            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                hsn.set(i[4])
+                desc.set(i[7])
+                price.set(i[8])
+                sale_price=i[8]
+                tota_price=int(sale_price)*int(quantity)
+                total.set(tota_price) 
+        
+        for product in bundle_data:
+            product_details="SELECT * FROM app1_bundle WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                hsn.set(i[4])
+                desc.set(i[7])
+                sale_price=(i[21]+i[22]+i[23]+i[24])
+                price.set(sale_price)
+                
+                tota_price=int(sale_price)*int(quantity)
+                total.set(tota_price)   
+        createsubtotal=int(total.get())+int(total2.get())+int(total3.get())
+        subtotal.set(createsubtotal)
+        #get selected gst then find tax amount thenset it 
+        gst=tax_drop1.get()
+
+        if gst=="18.0% GST(18%)":
+            print("totla",tota_price)
+            finding_tax1=int(tota_price)*(18/100)
+        elif gst=="28.0% GST(28%)":
+            finding_tax1=int(tota_price)*(28/100)
+            
+        elif gst=="12.0% GST(12%)":
+            finding_tax1=int(tota_price)*(12/100)
+            
+        elif gst=="06.0% GST(06%)":
+            finding_tax1=int(tota_price)*(6/100)
+            
+        elif gst=="05.0% GST(05%)":
+            finding_tax1=int(tota_price)*(5/100)
+            
+        elif gst=="03.0% GST(03%)":
+            finding_tax1=int(tota_price)*(3/100)
+            
+        else:
+            finding_tax1=0
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        taxamount.set(finding_tax)
+        
+        if taxamount==None:
+            final_total=0
+            grand.set(final_total)
+        else:
+            final_total=0
+            total_amount=createsubtotal+finding_tax
+            final_total=final_total+total_amount
+            grand.set(final_total)
+        # amount_recieved=amt_received_input.get()
+        # balancedue=final_total-int(amount_recieved)
+        # balance.set(balancedue)
+
+mydb.commit()
+mydb.close()
+
 
 delay_form = tk.Tk()
 delay_form.title("finsYs")
@@ -37,12 +172,31 @@ form_lable.place(x=0,y=0)
 form_heading=tk.Label(form_lable, text="fin sYs",fg='#fff',bg='#243e55',height=2,bd=1,relief="groove",font=sub_headingfont,width=80)
 form_heading.pack()
 
+
+#declaring global variables
+
+global select_customer,email,invoice_date,terms,Due_date,billto,invno,cmpname,cpmemail,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,taxamount,grand,amt_received,balance
+
+select_customer=StringVar()
+email=StringVar()
+product=StringVar()
+desc=StringVar()
+qty=StringVar()
+price=StringVar()
+total=StringVar()
+total.set("0")
+tax=StringVar()
+subtotal=StringVar()
+taxamount=StringVar()
+taxamount.set("0")
+grand=StringVar()
+grand.set("0")
+
 title_lab=tk.Label(form_frame,text="CUSTOMER",bg='#243e55',fg='#fff')
 place_input=StringVar()
 drop2=ttk.Combobox(form_frame,textvariable = place_input)
-
-drop2['values']=("SELECT_CUSTOMER")
-
+drop2.set("SELECT CUSTOMER")
+drop2['values']=(cus_name)
 title_lab.place(x=10,y=200,height=15,width=100)
 drop2.place(x=30,y=230,height=40,width=450)
 wrappen.pack(fill='both',expand='yes',)
@@ -74,8 +228,24 @@ label.place(x=60,y=60)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-product1=ttk.Combobox(form2_frame)
-product1['values']=("","","","")
+product_drop1=ttk.Combobox(form2_frame)
+product1=[]
+for proinv in inventory_data: 
+    if proinv[-1] == cmp1[0] :
+        inv_data=proinv[2]
+        product1.append(inv_data)
+
+for proinv in noninventory_data: 
+    if proinv[-1] == cmp1[0] :
+        noninv_data=proinv[2]
+        product1.append(noninv_data)
+
+for proinv in bundle_data: 
+    if proinv[-1] == cmp1[0] :
+        bundleinv_data=proinv[2]
+        product1.append(bundleinv_data)
+            
+product_drop1['values']=product1
 pro.place(x=10,y=120,height=15,width=100)
 product1.place(x=60,y=150,height=40,width=150)
 #2
@@ -135,9 +305,9 @@ total_input2.place(x=890,y=240,height=40,width=150)
 total_input3=Entry(form2_frame,width=40,bg='#243e55',fg='#fff')
 total_input3.place(x=890,y=310,height=40,width=150)
 #row1
-tax1=ttk.Combobox(form2_frame)
-tax1['values']=("","","","")
-tax1.place(x=1050,y=150,height=40,width=150)
+tax_drop1=ttk.Combobox(form2_frame)
+tax_drop1['values']=()
+tax_drop1.place(x=1050,y=150,height=40,width=150)
 #row2
 tax2=ttk.Combobox(form2_frame)
 tax2['values']=("","","","")
