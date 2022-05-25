@@ -68,126 +68,7 @@ def edit_sale():
     data=mycursor.fetchone()
     
     
-# edit product all table
-    
-def edit_customer():
-    
-    def get_email(event):
-        name=[]
-        options=drop2.get()
-        name.append(options)
-        for custm in customers_data:
-            full_name=custm[2]+custm[3]
-            if full_name==name[0]:
-                first_name=custm[2]
-                last_name=custm[3]
-        mycursor.execute("SELECT * FROM app1_customer where firstname=%s and lastname=%s",(first_name,last_name))
-        table2=mycursor.fetchall()
-        for i in table2:
-            email_id.set(i[9])
-            saleaddress.set(i[12:17])
 
-
-
-
-    def get_e_terms(event):
-        global e_invno
-        options=terms_input.get()
-        if options=="Add New Term":
-            invno_lab=Label(form_frame,text="Invoice No",bg='#243e55',fg='#fff')
-            invno_lab.place(x=500,y=400,)
-            invno_input=Entry(form_frame,width=40,bg='#2f516a',fg='#fff',textvariable=e_invno)
-            invno_input.place(x=500,y=430,height=40)
-        else:
-            e_invno.set(0)
-
-    def get_selected_e_product(event):
-        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
-        createsubtotal =0
-        finding_tax1=0
-        finding_tax2=0
-        finding_tax3=0
-        finding_tax4=0
-        final_total=0
-        selected_product=[]
-        product=product_drop1.get()
-        quantity=qty_input1.get()
-        selected_product.append(product)
-        for product in inv_data:
-            product_details="SELECT * FROM app1_inventory WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                e_hsn.set(i[4])
-                e_desc.set(i[11])
-                e_price.set(i[12])
-                e_sale_price=i[12]
-                tota_price=int(e_sale_price)*int(quantity)
-                e_total.set(tota_price)
-        for product in noninv_data:
-            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                e_hsn.set(i[4])
-                e_desc.set(i[7])
-                e_price.set(i[8])
-                e_sale_price=i[8]
-                tota_price=int(e_sale_price)*int(quantity)
-                e_total.set(tota_price) 
-        
-        for product in bundleinv_data:
-            product_details="SELECT * FROM app1_bundle WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                e_hsn.set(i[4])
-                e_desc.set(i[7])
-                sale_price=(i[21]+i[22]+i[23]+i[24])
-                e_price.set(sale_price)
-                
-                tota_price=int(sale_price)*int(quantity)
-                e_total.set(tota_price)   
-        createsubtotal=int(e_total.get())+int(e_total2.get())+int(e_total3.get())+int(e_total4.get())
-        e_subtotal.set(createsubtotal)
-        #get selected gst then find tax amount thenset it 
-        gst=tax_drop1.get() 
-
-        if gst=="18.0% GST(18%)":
-            print("totla",tota_price)
-            finding_tax1=int(tota_price)*(18/100)
-        elif gst=="28.0% GST(28%)":
-            finding_tax1=int(tota_price)*(28/100)
-            
-        elif gst=="12.0% GST(12%)":
-            finding_tax1=int(tota_price)*(12/100)
-            
-        elif gst=="06.0% GST(06%)":
-            finding_tax1=int(tota_price)*(6/100)
-            
-        elif gst=="05.0% GST(05%)":
-            finding_tax1=int(tota_price)*(5/100)
-            
-        elif gst=="03.0% GST(03%)":
-            finding_tax1=int(tota_price)*(3/100)
-            
-        else:
-            finding_tax1=0
-        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
-        e_taxamount.set(finding_tax)
-        
-        if e_taxamount==None:
-            final_total=0
-            e_grand.set(final_total)
-        else:
-            final_total=0
-            total_amount=createsubtotal+finding_tax
-            final_total=final_total+total_amount
-            e_grand.set(final_total)
-        amount_recieved=amt_received_input.get()
-        balancedue=final_total-int(amount_recieved)
-        e_balance.set(balancedue)
-    
     
     
     
@@ -225,123 +106,7 @@ def edit_customer():
     invoice_heading.pack()
 
 
-def get_selected_product(event):
-        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
-        createsubtotal =0
-        finding_tax1=0
-        finding_tax2=0
-        finding_tax3=0
-        finding_tax4=0
-        final_total=0
-        selected_product=[]
-        product=product_drop1.get()
-        quantity=qty_input1.get()
-        selected_product.append(product)
-        for product in inv_data:
-            product_details="SELECT * FROM app1_inventory WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                hsn.set(i[4])
-                desc.set(i[11])
-                price.set(i[12])
-                sale_price=i[12]
-                tota_price=int(sale_price)*int(quantity)
-                total.set(tota_price)
-        for product in noninv_data:
-            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                hsn.set(i[4])
-                desc.set(i[7])
-                price.set(i[8])
-                sale_price=i[8]
-                tota_price=int(sale_price)*int(quantity)
-                total.set(tota_price) 
-        
-        for product in bundleinv_data:
-            product_details="SELECT * FROM app1_bundle WHERE name=%s"
-            mycursor.execute(product_details,selected_product)
-            data=mycursor.fetchall()
-            for i in data:
-                hsn.set(i[4])
-                desc.set(i[7])
-                sale_price=(i[21]+i[22]+i[23]+i[24])
-                price.set(sale_price)
-                
-                tota_price=int(sale_price)*int(quantity)
-                total.set(tota_price)   
-        createsubtotal=int(total.get())+int(total2.get())+int(total3.get())+int(total4.get())
-        subtotal.set(createsubtotal)
-        #get selected gst then find tax amount thenset it 
-        gst=tax_drop1.get()
 
-        if gst=="18.0% GST(18%)":
-            print("totla",tota_price)
-            finding_tax1=int(tota_price)*(18/100)
-        elif gst=="28.0% GST(28%)":
-            finding_tax1=int(tota_price)*(28/100)
-            
-        elif gst=="12.0% GST(12%)":
-            finding_tax1=int(tota_price)*(12/100)
-            
-        elif gst=="06.0% GST(06%)":
-            finding_tax1=int(tota_price)*(6/100)
-            
-        elif gst=="05.0% GST(05%)":
-            finding_tax1=int(tota_price)*(5/100)
-            
-        elif gst=="03.0% GST(03%)":
-            finding_tax1=int(tota_price)*(3/100)
-            
-        else:
-            finding_tax1=0
-        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
-        taxamount.set(finding_tax)
-        
-        if taxamount==None:
-            final_total=0
-            grand.set(final_total)
-        else:
-            final_total=0
-            total_amount=createsubtotal+finding_tax
-            final_total=final_total+total_amount
-            grand.set(final_total)
-        amount_recieved=amt_received_input.get()
-        balancedue=final_total-int(amount_recieved)
-        balance.set(balancedue)
-
-    
-    
-    
-
-    #company details
-    user_id=[2]
-    mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
-    cmp1=mycursor.fetchone()
-
-    # cmp1=[1]
-
-    mycursor.execute("SELECT cname,cemail,state FROM app1_company WHERE id_id=%s",(user_id))
-    cmp_data=mycursor.fetchone()
-
-
-    #invetory data
-    mycursor.execute("SELECT * FROM app1_inventory WHERE cid_id=%s",(cmp1))
-    inventory_data=mycursor.fetchall()
-
-    #bundle data
-    mycursor.execute("SELECT * FROM app1_bundle WHERE cid_id=%s",(cmp1))
-    bundle_data=mycursor.fetchall()
-
-    #noninventor data
-    mycursor.execute("SELECT * FROM app1_noninventory WHERE cid_id=%s",(cmp1))
-    noninventory_data=mycursor.fetchall()
-
-    #service data
-    mycursor.execute("SELECT * FROM app1_service WHERE cid_id=%s",(cmp1))
-    services_data=mycursor.fetchall()
 
 
 
@@ -449,9 +214,6 @@ def get_selected_product(event):
     drop2.place(x=30,y=180,height=40,width=300)
     wrappen.pack(fill='both',expand='yes',)
 
-    # add_custom=Button(form_frame,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_custom)
-    # add_custom.place(x=335,y=230)
-
     email_lab=Label(form_frame,text="Email",bg='#243e55',fg='#fff')
     email_lab.place(x=500,y=150,)
     email_input=Entry(form_frame,bg='#2f516a',fg='#fff', textvariable=email_id)
@@ -507,6 +269,7 @@ def get_selected_product(event):
     place_of_supply.place(x=970,y=590,)
     drop2.place(x=970,y=620,height=40,width=300)
     
+   
     # table form
     h_lab=Label(form_frame,text="#",bg='#243e55',fg='#fff')
     h_lab.place(x=30,y=730)
@@ -528,60 +291,9 @@ def get_selected_product(event):
     product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
     product_lab.place(x=90,y=730,)
     product_input1=StringVar()
-    product_drop1=ttk.Combobox(form_frame,textvariable = product)
-    product1=[]
-    for proinv in inventory_data: 
-        if proinv[-1] == cmp1[0] :
-            inv_data=proinv[2]
-            product1.append(inv_data)
-
-    for proinv in noninventory_data: 
-        if proinv[-1] == cmp1[0] :
-            noninv_data=proinv[2]
-            product1.append(noninv_data)
-
-    for proinv in bundle_data: 
-        if proinv[-1] == cmp1[0] :
-            bundleinv_data=proinv[2]
-            product1.append(bundleinv_data)
-            
-    product_drop1['values']=product1
-    product_drop1.bind("<<ComboboxSelected>>",get_selected_product)
-
-    product_drop1.place(x=70,y=780,height=40,width=200)
+    product_drop1=ttk.Combobox(form_frame,textvariable = product_input1)
+    product_drop1['values']=(" ")
     product_drop1.place(x=90,y=780,height=40,width=180)
-    
-    
-    
-    product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
-    product_lab.place(x=100,y=730,)
-
-    product_drop1=ttk.Combobox(form_frame,textvariable = product)
-    product1=[]
-    for proinv in inventory_data: 
-        if proinv[-1] == cmp1[0] :
-            inv_data=proinv[2]
-            product1.append(inv_data)
-
-    for proinv in noninventory_data: 
-        if proinv[-1] == cmp1[0] :
-            noninv_data=proinv[2]
-            product1.append(noninv_data)
-
-    for proinv in bundle_data: 
-        if proinv[-1] == cmp1[0] :
-            bundleinv_data=proinv[2]
-            product1.append(bundleinv_data)
-            
-    product_drop1['values']=product1
-    product_drop1.bind("<<ComboboxSelected>>",get_selected_product)
-
-    product_drop1.place(x=70,y=780,height=40,width=200)
-    
-    
-    
-    
-    
 
     product_input2=StringVar()
     product_drop2=ttk.Combobox(form_frame,textvariable = product_input1)
@@ -728,7 +440,6 @@ def get_selected_product(event):
 
     submit_button.place(x=1100,y=1500)
     font=('Times', 15)
-
 
 
 #Delete salerecords
