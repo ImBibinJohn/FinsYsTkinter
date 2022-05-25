@@ -3,7 +3,7 @@ from tkinter import *
 import tkinter.font as font
 from  tkinter import ttk
 import tkinter as tk
-
+import re
 import mysql.connector
 from tkinter import messagebox
 # from addcustomer_form import CheckVar2,CheckVar1
@@ -19,7 +19,12 @@ def fun():#db connection
     mycursor = mydb.cursor()
 
 def add_customer():
-    def save_customdata():
+
+    
+
+
+
+    def save_customdata(value):
         if CheckVar1.get()==1:
             fun()
             global title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry
@@ -29,13 +34,57 @@ def add_customer():
             company=company.get()
             location=location.get()
             gst=gst.get()
-
-
             gstin=gstin.get()
+            if gst!="Consumer"or gst!="Overseas":
+                if gst!="GST unregistered":
+                    if gst!="Overseas":
+                        if re.search(gstregexp, gstin):
+                            wdgLst_gst.configure(text='GST no. is valid')
+                            
+                        else:
+                            wdgLst_gst.configure(text='Please provide a valid GST Number',fg='#FF0000')
+                            return False
+            else:
+                pass
+
+
             pan_no=pan_no.get()
+            if re.search(panregexp, pan_no):
+                wdgLst_pan.configure(text='pan number')
+                
+            else:
+                wdgLst_pan.configure(text='Please provide a valid PAN Number',fg='#FF0000')
+                return False
+                
             email=email.get()
+
+            if re.search(regex, email):
+                wdgLst_email.configure(text='Email')
+                
+            else:
+                wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+                return False
+
+
             website=website.get()
+            if re.search(webregexp, website):
+                wdgLst_web.configure(text='website')
+                
+            else:
+                wdgLst_web.configure(text='Please provide a valid website',fg='#FF0000')
+                return False
+
+
             mobile=mobile.get()
+            if re.search(mobregexp, mobile):
+                wdgLst_mob.configure(text='mobile')
+                
+            else:
+                wdgLst_mob.configure(text='Please provide a valid phone Number',fg='#FF0000')
+                return False
+
+
+
             street=street.get()
             city=city.get()
             state=state.get()
@@ -59,7 +108,7 @@ def add_customer():
                 mycursor.execute(sql,val)
                 mydb.commit()
                 mydb.close()
-                messagebox.showinfo('New Customer Added')
+                messagebox.showinfo(title='Success',message='New Customer Added')
         else:
             messagebox.showerror('error', 'Accept terms and conditions')
 
@@ -143,8 +192,12 @@ def add_customer():
 
 
 
-
-
+#email,gst and pannumber formates
+    regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    gstregexp = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
+    panregexp = "[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+    webregexp = "www."
+    mobregexp = "[0-9]{10}"
     title_lab=tk.Label(form_frame,text="Title",bg='#243e55',fg='#fff')
 
     drop2=ttk.Combobox(form_frame,textvariable = title)
@@ -177,37 +230,53 @@ def add_customer():
     location_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = location)
     location_input.place(x=530,y=230,height=40)
 
+    
     GST_lab=tk.Label(form_frame,text="GST Type",bg='#243e55',fg='#fff')
     GST_drop=ttk.Combobox(form_frame,textvariable = gst)
     GST_drop['values']=("Consumer","GST Registered-Regular","GST unregistered","GST Registered-Composition","Overseas", "Deemed exports - EOU's STP's EHTP's")
     GST_lab.place(x=20,y=300,height=15,width=100)
     GST_drop.place(x=30,y=330,height=40,width=450)
 
-
+    reggst = customer.register(save_customdata)
     gstin_lab=Label(form_frame,text="GSTIN",bg='#243e55',fg='#fff')
     gstin_lab.place(x=530,y=300,)
     gstin_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = gstin)
+    gstin_input.config(validate="focusout", validatecommand=(reggst, '%P'))
+    wdgLst_gst = gstin_lab
     gstin_input.place(x=530,y=330,height=40)
 
+    regpan = customer.register(save_customdata)
     pan_no_lab=Label(form_frame,text="PAN NO",bg='#243e55',fg='#fff')
     pan_no_lab.place(x=1060,y=300,)
     pan_no_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = pan_no)
+    pan_no_input.config(validate="focusout", validatecommand=(regpan, '%P'))
+    wdgLst_pan = pan_no_lab
     pan_no_input.place(x=1060,y=330,height=40)
-
+     
+    regEmail = customer.register(save_customdata)
     email_lab=Label(form_frame,text="Email",bg='#243e55',fg='#fff')
     email_lab.place(x=30,y=400,)
     email_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = email)
+    email_input.config(validate="focusout", validatecommand=(regEmail, '%P'))
+    wdgLst_email = email_lab
     email_input.place(x=30,y=430,height=40)
 
+    
+
+    regweb = customer.register(save_customdata)
     web_lab=Label(form_frame,text="Website",bg='#243e55',fg='#fff')
     web_lab.place(x=530,y=400,)
     web_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = website)
+    web_input.config(validate="focusout", validatecommand=(regweb, '%P'))
+    wdgLst_web = web_lab
     web_input.place(x=530,y=430,height=40)
 
-
+    regmob = customer.register(save_customdata)
     mobile_lab=Label(form_frame,text="Mobile",bg='#243e55',fg='#fff')
     mobile_lab.place(x=1060,y=400,)
     mobile_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = mobile)
+    mobile_input.config(validate="focusout", validatecommand=(regmob, '%P'))
+    wdgLst_mob = mobile_lab
     mobile_input.place(x=1060,y=430,height=40)
 
     #Billing session
@@ -623,7 +692,7 @@ def delete_customer():
     customer_id=[values[-1]]
     mycursor.execute("DELETE FROM app1_customer WHERE customerid=%s",(customer_id))
     mydb.commit()
-    messagebox.showinfo('successfully Delated')
+    messagebox.showinfo(title="Title",message ="Sucessfully Deleted")
     print('sucessfully deleted')
     custom_data.delete(focus_data)
 
