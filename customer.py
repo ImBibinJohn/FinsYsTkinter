@@ -24,7 +24,7 @@ def add_customer():
 
 
 
-    def save_customdata(value):
+    def save_customdata():
         if CheckVar1.get()==1:
             fun()
             global title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry
@@ -35,53 +35,54 @@ def add_customer():
             location=location.get()
             gst=gst.get()
             gstin=gstin.get()
-            if gst!="Consumer"or gst!="Overseas":
-                if gst!="GST unregistered":
-                    if gst!="Overseas":
-                        if re.search(gstregexp, gstin):
-                            wdgLst_gst.configure(text='GST no. is valid')
+            # gstin=gstin.get()
+            # if gst!="Consumer"or gst!="Overseas":
+            #     if gst!="GST unregistered":
+            #         if gst!="Overseas":
+            #             if re.search(gstregexp, gstin):
+            #                 wdgLst_gst.configure(text='GST no. is valid')
                             
-                        else:
-                            wdgLst_gst.configure(text='Please provide a valid GST Number',fg='#FF0000')
-                            return False
-            else:
-                pass
+            #             else:
+            #                 wdgLst_gst.configure(text='Please provide a valid GST Number',fg='#FF0000')
+            #                 return False
+            # else:
+            #     pass
 
 
             pan_no=pan_no.get()
-            if re.search(panregexp, pan_no):
-                wdgLst_pan.configure(text='pan number')
+            # if re.search(panregexp, pan_no):
+            #     wdgLst_pan.configure(text='pan number')
                 
-            else:
-                wdgLst_pan.configure(text='Please provide a valid PAN Number',fg='#FF0000')
-                return False
+            # else:
+            #     wdgLst_pan.configure(text='Please provide a valid PAN Number',fg='#FF0000')
+            #     return False
                 
             email=email.get()
 
-            if re.search(regex, email):
-                wdgLst_email.configure(text='Email')
+            # if re.search(regex, email):
+            #     wdgLst_email.configure(text='Email')
                 
-            else:
-                wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
-                return False
+            # else:
+            #     wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            #     return False
 
 
             website=website.get()
-            if re.search(webregexp, website):
-                wdgLst_web.configure(text='website')
+            # if re.search(webregexp, website):
+            #     wdgLst_web.configure(text='website')
                 
-            else:
-                wdgLst_web.configure(text='Please provide a valid website',fg='#FF0000')
-                return False
+            # else:
+            #     wdgLst_web.configure(text='Please provide a valid website',fg='#FF0000')
+            #     return False
 
 
             mobile=mobile.get()
-            if re.search(mobregexp, mobile):
-                wdgLst_mob.configure(text='mobile')
+            # if re.search(mobregexp, mobile):
+            #     wdgLst_mob.configure(text='mobile')
                 
-            else:
-                wdgLst_mob.configure(text='Please provide a valid phone Number',fg='#FF0000')
-                return False
+            # else:
+            #     wdgLst_mob.configure(text='Please provide a valid phone Number',fg='#FF0000')
+            #     return False
 
 
 
@@ -237,44 +238,107 @@ def add_customer():
     GST_lab.place(x=20,y=300,height=15,width=100)
     GST_drop.place(x=30,y=330,height=40,width=450)
 
-    reggst = customer.register(save_customdata)
+    def gst_validation(event):
+        gstin=gstin_input.get()
+        if gst!="Consumer"or gst!="Overseas":
+            if gst!="GST unregistered":
+                if gst!="Overseas":
+                    if re.search(gstregexp, gstin):
+                        wdgLst_gst.configure(text='GST',fg='#4BB543')
+                        
+                    else:
+                        wdgLst_gst.configure(text='Please provide a valid GST Number',fg='#FF0000')
+                        return False
+        else:
+            pass
+
+
+
+    reggst = customer.register(gst_validation)
     gstin_lab=Label(form_frame,text="GSTIN",bg='#243e55',fg='#fff')
     gstin_lab.place(x=530,y=300,)
     gstin_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = gstin)
+    gstin_input.bind("<KeyRelease>",gst_validation)
     gstin_input.config(validate="focusout", validatecommand=(reggst, '%P'))
     wdgLst_gst = gstin_lab
     gstin_input.place(x=530,y=330,height=40)
 
-    regpan = customer.register(save_customdata)
+    def pan_validation(event):
+        pan_no=pan_no_input.get()
+        if re.search(panregexp, pan_no):
+                wdgLst_pan.configure(text='pan number',fg='#4BB543')
+                
+        else:
+            wdgLst_pan.configure(text='Please provide a valid PAN Number',fg='#FF0000')
+            return False
+            
+
+
+
+
+    regpan = customer.register(pan_validation)
     pan_no_lab=Label(form_frame,text="PAN NO",bg='#243e55',fg='#fff')
     pan_no_lab.place(x=1060,y=300,)
     pan_no_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = pan_no)
+    pan_no_input.bind("<KeyRelease>",pan_validation)
     pan_no_input.config(validate="focusout", validatecommand=(regpan, '%P'))
     wdgLst_pan = pan_no_lab
     pan_no_input.place(x=1060,y=330,height=40)
      
-    regEmail = customer.register(save_customdata)
+    def email_validation(event):
+        email=email_input.get()
+
+        if re.search(regex, email):
+            wdgLst_email.configure(text='Email',fg='#4BB543')
+            
+        else:
+            wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            return False
+
+
+
+
+    regEmail = customer.register(email_validation)
     email_lab=Label(form_frame,text="Email",bg='#243e55',fg='#fff')
     email_lab.place(x=30,y=400,)
     email_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = email)
+    email_input.bind("<KeyRelease>",email_validation)
     email_input.config(validate="focusout", validatecommand=(regEmail, '%P'))
     wdgLst_email = email_lab
     email_input.place(x=30,y=430,height=40)
 
-    
+    def web_validation(event):
+        website=web_input.get()
+        if re.search(webregexp, website):
+            wdgLst_web.configure(text='website',fg='#4BB543')
+            
+        else:
+            wdgLst_web.configure(text='Please provide a valid website',fg='#FF0000')
+            return False
 
-    regweb = customer.register(save_customdata)
+    regweb = customer.register(web_validation)
     web_lab=Label(form_frame,text="Website",bg='#243e55',fg='#fff')
     web_lab.place(x=530,y=400,)
     web_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = website)
+    web_input.bind("<KeyRelease>",web_validation)
     web_input.config(validate="focusout", validatecommand=(regweb, '%P'))
     wdgLst_web = web_lab
     web_input.place(x=530,y=430,height=40)
 
-    regmob = customer.register(save_customdata)
+    def mob_validation(event):
+        mobile=mobile_input.get()
+        if re.search(mobregexp, mobile):
+            wdgLst_mob.configure(text='mobile',fg='#4BB543')
+            
+        else:
+            wdgLst_mob.configure(text='Please provide a valid phone Number',fg='#FF0000')
+            return False
+
+    regmob = customer.register(mob_validation)
     mobile_lab=Label(form_frame,text="Mobile",bg='#243e55',fg='#fff')
     mobile_lab.place(x=1060,y=400,)
     mobile_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = mobile)
+    mobile_input.bind("<KeyRelease>",mob_validation)
     mobile_input.config(validate="focusout", validatecommand=(regmob, '%P'))
     wdgLst_mob = mobile_lab
     mobile_input.place(x=1060,y=430,height=40)
