@@ -10,6 +10,7 @@ import mysql.connector as mysql
 from PIL import Image,ImageTk
 from tkinter.ttk import Combobox
 from tkcalendar import Calendar, DateEntry
+import datetime as dt
 
 def fun():#db connection
     global mydb1,mycursor
@@ -25,12 +26,359 @@ def add_custom():
     import addcustomer_form
 
 
+
 #edir customer 
 def edit_sale():
     #update data
+    def get_selected_e_product(event):
+        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4,final_total
+        createsubtotal =0
+        finding_tax1=0
+        finding_tax2=0
+        finding_tax3=0
+        finding_tax4=0
+        final_total=0
+        selected_product=[]
+        product=product_drop1.get()
+        quantity=qty_input1.get()
+        selected_product.append(product)
+        for product in inv_data:
+            product_details="SELECT * FROM app1_inventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn.set(i[4])
+                e_desc.set(i[11])
+                e_price.set(i[12])
+                e_sale_price=i[12]
+                tota_price=int(e_sale_price)*int(quantity)
+                e_total.set(tota_price)
+        for product in noninv_data:
+            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn.set(i[4])
+                e_desc.set(i[7])
+                e_price.set(i[8])
+                e_sale_price=i[8]
+                tota_price=int(e_sale_price)*int(quantity)
+                e_total.set(tota_price) 
+        
+        for product in bundleinv_data:
+            product_details="SELECT * FROM app1_bundle WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn.set(i[4])
+                e_desc.set(i[7])
+                sale_price=(i[21]+i[22]+i[23]+i[24])
+                e_price.set(sale_price)
+                
+                tota_price=int(sale_price)*int(quantity)
+                e_total.set(tota_price)   
+        createsubtotal=int(e_total.get())+int(e_total2.get())+int(e_total3.get())+int(e_total4.get())
+        e_subtotal.set(createsubtotal)
+        #get selected gst then find tax amount thenset it 
+        gst=tax_drop1.get() 
+
+        if gst=="18.0% GST(18%)":
+            print("totla",tota_price)
+            finding_tax1=int(tota_price)*(18/100)
+        elif gst=="28.0% GST(28%)":
+            finding_tax1=int(tota_price)*(28/100)
+            
+        elif gst=="12.0% GST(12%)":
+            finding_tax1=int(tota_price)*(12/100)
+            
+        elif gst=="06.0% GST(06%)":
+            finding_tax1=int(tota_price)*(6/100)
+            
+        elif gst=="05.0% GST(05%)":
+            finding_tax1=int(tota_price)*(5/100)
+            
+        elif gst=="03.0% GST(03%)":
+            finding_tax1=int(tota_price)*(3/100)
+            
+        else:
+            finding_tax1=0
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        e_taxamount.set(finding_tax)
+        
+        if e_taxamount==None:
+            final_total=0
+            e_grand.set(final_total)
+        else:
+            final_total=0
+            total_amount=createsubtotal+finding_tax
+            final_total=final_total+total_amount
+            e_grand.set(final_total)
+        # amount_recieved=amt_received_input.get()
+        # balancedue=final_total-int(amount_recieved)
+        # e_balance.set(balancedue)
+
+
+
+
+    def get_selected_e_product2(event):
+        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
+        print("subtotal",createsubtotal)
+        selected_product=[]
+        product=product_drop2.get()
+        selected_product.append(product)
+        quantity2=qty_input2.get()
+        for product in inv_data:
+            product_details="SELECT * FROM app1_inventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn2.set(i[4])
+                e_desc2.set(i[11])
+                e_price2.set(i[12])
+                e_sale_price=i[12]
+                tota_price=int(e_sale_price)*int(quantity2)
+                e_total2.set(tota_price)
+        for product in noninv_data:
+            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn2.set(i[4])
+                e_desc2.set(i[7])
+                e_price2.set(i[8]) 
+                e_sale_price=i[8]
+                tota_price=int(e_sale_price)*int(quantity2)
+                e_total2.set(tota_price)
+        for product in bundleinv_data:
+            product_details="SELECT * FROM app1_bundle WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn2.set(i[4])
+                e_desc2.set(i[7])
+                sale_price=(i[21]+i[22]+i[23]+i[24])
+                e_price2.set(sale_price)
+                tota_price=int(sale_price)*int(quantity2)
+                e_total2.set(tota_price)
+        createsubtotal=int(e_total.get())+int(e_total2.get())+int(e_total3.get())+int(e_total4.get())
+        e_subtotal.set(createsubtotal) 
+
+
+        gst=tax_drop2.get()
+        print("seslscted gst",gst)
+        if gst=="18.0% GST(18%)":
+            print("totla",tota_price)
+            finding_tax2=int(tota_price)*(18/100)
+        elif gst=="28.0% GST(28%)":
+            finding_tax2=int(tota_price)*(28/100)
+            
+        elif gst=="12.0% GST(12%)":
+            finding_tax2=int(tota_price)*(12/100)
+            
+        elif gst=="06.0% GST(06%)":
+            finding_tax2=int(tota_price)*(6/100)
+            
+        elif gst=="05.0% GST(05%)":
+            finding_tax2=int(tota_price)*(5/100)
+            
+        elif gst=="03.0% GST(03%)":
+            finding_tax2=int(tota_price)*(3/100)
+            
+        elif gst=="0.25% GST(0.25%)":
+            finding_tax2=int(tota_price)*(.25/100)
+            
+        else:
+            finding_tax2=0
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        e_taxamount.set(finding_tax)
+    
+        if e_taxamount==None:
+            final_total=0
+            e_grand.set(final_total)
+        else:
+            final_total=0
+            total_amount=createsubtotal+finding_tax
+            final_total=final_total+total_amount
+            print("final_total=",final_total)
+            e_grand.set(final_total)
+        # amount_recieved=amt_received_input.get()
+        # balancedue=final_total-int(amount_recieved)
+        # e_balance.set(balancedue)
+
+
+
+    def get_selected_e_product3(event):
+        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
+        selected_product=[]
+        product=product_drop3.get()
+        selected_product.append(product)
+        quantity3=qty_input3.get()
+        for product in inv_data:
+            product_details="SELECT * FROM app1_inventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn3.set(i[4])
+                e_desc3.set(i[11])
+                e_price3.set(i[12])
+                e_sale_price=i[12]
+                tota_price=int(e_sale_price)*int(quantity3)
+                e_total3.set(tota_price)
+        for product in noninv_data:
+            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn3.set(i[4])
+                e_desc3.set(i[7])
+                e_price3.set(i[8])
+                e_sale_price=i[8]
+                tota_price=int(e_sale_price)*int(quantity3)
+                e_total3.set(tota_price)
+        for product in bundleinv_data:
+            product_details="SELECT * FROM app1_bundle WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn3.set(i[4])
+                e_desc3.set(i[7])
+                sale_price=(i[21]+i[22]+i[23]+i[24])
+                e_price3.set(sale_price)
+                tota_price=int(sale_price)*int(quantity3)
+                e_total3.set(tota_price)
+        createsubtotal=int(e_total.get())+int(e_total2.get())+int(e_total3.get())+int(e_total4.get())
+        e_subtotal.set(createsubtotal) 
+
+
+        gst=tax_drop3.get()
+        print("seslscted gst",gst)
+        if gst=="18.0% GST(18%)":
+            print("totla",tota_price)
+            finding_tax3=int(tota_price)*(18/100)
+        elif gst=="28.0% GST(28%)":
+            finding_tax3=int(tota_price)*(28/100)
+            
+        elif gst=="12.0% GST(12%)":
+            finding_tax3=int(tota_price)*(12/100)
+            
+        elif gst=="06.0% GST(06%)":
+            finding_tax3=int(tota_price)*(6/100)
+            
+        elif gst=="05.0% GST(05%)":
+            finding_tax3=int(tota_price)*(5/100)
+            
+        elif gst=="03.0% GST(03%)":
+            finding_tax3=int(tota_price)*(3/100)
+            
+        elif gst=="0.25% GST(0.25%)":
+            finding_tax3=int(tota_price)*(.25/100)
+            
+        else:
+            finding_tax3=0
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        e_taxamount.set(finding_tax)
+    
+        if e_taxamount==None:
+            final_total=0
+            e_grand.set(final_total)
+        else:
+            final_total=0
+            total_amount=createsubtotal+finding_tax
+            final_total=final_total+total_amount
+            e_grand.set(final_total)
+        # amount_recieved=amt_received_input.get()
+        # balancedue=final_total-int(amount_recieved)
+        # e_balance.set(balancedue)
+
+
+    def get_selected_e_product4(event):
+        global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
+        selected_product=[]
+        product=product_drop4.get()
+        selected_product.append(product)
+        quantity4=qty_input4.get()
+        for product in inv_data:
+            product_details="SELECT * FROM app1_inventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn4.set(i[4])
+                e_desc4.set(i[11])
+                e_price4.set(i[12])
+                e_sale_price=i[12]
+                tota_price=int(e_sale_price)*int(quantity4)
+                e_total4.set(tota_price)
+        for product in noninv_data:
+            product_details="SELECT * FROM app1_noninventory WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn4.set(i[4])
+                e_desc4.set(i[7])
+                e_price4.set(i[8]) 
+                e_sale_price=i[8]
+                tota_price=int(e_sale_price)*int(quantity4)
+                e_total4.set(tota_price)
+        for product in bundleinv_data:
+            product_details="SELECT * FROM app1_bundle WHERE name=%s"
+            mycursor.execute(product_details,selected_product)
+            data=mycursor.fetchall()
+            for i in data:
+                e_hsn4.set(i[4])
+                e_desc4.set(i[7])
+                sale_price=(i[21]+i[22]+i[23]+i[24])
+                e_price4.set(sale_price)
+                tota_price=int(sale_price)*int(quantity4)
+                e_total4.set(tota_price)
+        createsubtotal=int(e_total.get())+int(e_total2.get())+int(e_total3.get())+int(e_total4.get())
+        e_subtotal.set(createsubtotal)
+
+
+        gst=tax_drop4.get()
+        print("seslscted gst",gst)
+        if gst=="18.0% GST(18%)":
+            print("totla",tota_price)
+            finding_tax4=int(tota_price)*(18/100)
+        elif gst=="28.0% GST(28%)":
+            finding_tax4=int(tota_price)*(28/100)
+            
+        elif gst=="12.0% GST(12%)":
+            finding_tax4=int(tota_price)*(12/100)
+            
+        elif gst=="06.0% GST(06%)":
+            finding_tax4=int(tota_price)*(6/100)
+            
+        elif gst=="05.0% GST(05%)":
+            finding_tax4=int(tota_price)*(5/100)
+            
+        elif gst=="03.0% GST(03%)":
+            finding_tax4=int(tota_price)*(3/100)
+            
+        elif gst=="0.25% GST(0.25%)":
+            finding_tax4=int(tota_price)*(.25/100)
+            
+        else:
+            finding_tax4=0
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        e_taxamount.set(finding_tax)
+    
+        if e_taxamount==None:
+            final_total=0
+            e_grand.set(final_total)
+        else:
+            final_total=0
+            total_amount=createsubtotal+finding_tax
+            final_total=final_total+total_amount
+            print("final_total=",final_total)
+            e_grand.set(final_total)
+        # amount_recieved=amt_received_input.get()
+        # balancedue=final_total-int(amount_recieved)
+        # e_balance.set(balancedue)
+    
+    
     def chan_data():
         fun()
-        global custom,emal,amount,billaddress,date,salerecno,place,paymethod,refno,deposit,product,hsn,desc,qty,price,total,tax,subtotal,tax2,grand
+        global custom,emal,amount,billaddress,date,salerecno,place,paymethod,refno,deposit,product,hsn,desc,qty,price,total,tax,subtotal,tax2,grand,product,hsn,desc,qty,price,total,tax,subtotal,taxamount,grand,amt_received,balance,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,cid_id
         custom=custom_name.get()
         emal=email_id.get()
         amount=gamount.get()
@@ -49,14 +397,41 @@ def edit_sale():
         total=e_total.get()
         tax=e_tax.get()
         subtotal=e_subtotal.get()
-        tax2=e_tax2.get()
         grand=e_grand.get()
-        mycursor.execute(("UPDATE app1_inventory SET name =%s, hsn =%s, category =%s, initialqty =%s, salesprice =%s, cxq =%s"))
-        mycursor.execute("UPDATE app1_salesrecpts SET salename =%s, saleemail =%s, saleaddress =%s, saledate =%s, saleno =%s, salesplace =%s, salepay =%s, salerefno =%s, saledeposit =%s, e_product =%s, e_hsn =%s, e_desc =%s, e_qty =%s, e_price =%s, e_total =%s, e_tax =%s, e_grand =%s where salesrecptsid=%s"
-            ,(custom, emal, amount, billaddress,date, salerecno, place, paymethod, refno, deposit, product, hsn, desc, qty, price, total, tax, subtotal, tax2, grand,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,amt_received,taxamount,balance,cid_id, data[0]))
+        product2=e_product2.get()
+        hsn2=e_hsn2.get()
+        desc2=e_desc2.get()
+        qty2=e_qty2.get()
+        price2=e_price2.get()
+        total2=e_total2.get()
+        tax2=e_tax2.get()
+        
+        product3=e_product3.get()
+        hsn3=e_hsn3.get()
+        desc3=e_desc3.get()
+        qty3=e_qty3.get()
+        price3=e_price3.get()
+        total3=e_total3.get()
+        tax3=e_tax3.get()
+        
+        product4=e_product4.get()
+        hsn4=e_hsn4.get()
+        desc4=e_desc4.get()
+        qty4=e_qty4.get()
+        price4=e_price4.get()
+        total4=e_total4.get()
+        tax4=e_tax4.get()
+
+        amt_received=e_amt_received.get()
+        taxamount=e_taxamount.get()
+        balance=e_balance.get()
+        cid_id=cmp1[0]
+        mycursor.execute("UPDATE app1_invoice SET customername =%s, email =%s, invoiceno =%s, terms =%s, invoicedate =%s, duedate =%s, bname =%s, placosupply =%s, product =%s, hsn =%s,description =%s, qty =%s,price =%s, total =%s, tax =%s, subtotal=%s, grandtotal =%s, product2 =%s, hsn2 =%s, description2 =%s, qty2 =%s, price2 =%s, total2 =%s, tax2 =%s, product3 =%s, hsn3 =%s, description3 =%s, qty3 =%s, price3 =%s, total3 =%s, tax3 =%s, product4 =%s, hsn4 =%s, description4 =%s, qty4 =%s, price4 =%s, total4 =%s, tax4 =%s, amtrecvd =%s, taxamount =%s, baldue =%s, cid_id =%s where invoiceid=%s"
+        ,(custom,emal,amount,date,salerecno,place,paymethod,refno,deposit,product,hsn,desc,qty,price,total,tax,subtotal,grand,product2,hsn2,desc2,qty2,price2,total2,tax2,product3,hsn3,desc3,qty3,price3,total3,tax3,product4,hsn4,desc4,qty4,price4,total4,tax4,amt_received,taxamount,balance,cid_id,data[0]))
         mydb1.commit()
-        messagebox.showinfo('successfully Updated')
         mydb1.close()
+        messagebox.showinfo('invoice edited Added')
+        
         
 
 # selected_item = tree_data.selection()[0]
@@ -99,12 +474,13 @@ def edit_sale():
     full_frame=Frame(mycanvas,width=1345,height=2500,bg='#2f516a')
     mycanvas.create_window((0,0),window=full_frame,anchor="nw")
 
-
+   
     heading_frame=Frame(mycanvas)
     mycanvas.create_window((0,40),window=heading_frame,anchor="nw")
     invoice_heading= tk.Label(heading_frame, text="CASH MEMO NO. 1003",fg='#fff',bg='#243e55',height=2,bd=5,relief="groove",font=('Times', 25),width=74)
     invoice_heading.pack()
-
+    invoice_heading= tk.Label(heading_frame, textvariable="saleno",fg='#fff',bg='#243e55',height=2,bd=5,relief="groove",font=('Times', 25),width=74)
+    invoice_heading.pack()
 
 
 
@@ -120,6 +496,7 @@ def edit_sale():
     form_heading.pack()
 
 
+    
     #get customer datas from customer table
     mycursor.execute('select * from app1_customer ')
     customers=mycursor.fetchall()
@@ -128,7 +505,39 @@ def edit_sale():
         customers_data.append(cus)
 
 
-    global custom_name,email_id,gamount,saleaddress,saledate,saleno,salesplace,salepay,salerefno,saledeposit,e_product,e_hsn,e_desc,e_qty,e_price,e_total,e_tax,e_subtotal,e_tax2,e_grand,e_product2,e_product3,e_product4,e_hsn2,e_hsn3,e_hsn4,e_desc2,e_desc3,e_desc4,e_qty2,e_qty3,e_qty4,e_price2,e_price3,e_price4, e_total2,e_total3,e_total4,e_tax2,e_tax3,e_tax4
+    #set today date 
+    date = dt.datetime.now()
+    format_date = f"{date:%Y - %d - %m }"
+    today_date = Label(form_frame, text=format_date, fg="white", bg="black", font=("helvetica", 40))
+
+    #company details
+    user_id=[6]
+    mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
+    cmp1=mycursor.fetchone()
+
+    # cmp1=[1]
+
+    mycursor.execute("SELECT cname,cemail,state FROM app1_company WHERE id_id=%s",(user_id))
+    cmp_data=mycursor.fetchone()
+    print(cmp1)
+    #invetory data
+    mycursor.execute("SELECT name FROM app1_inventory WHERE cid_id =%s",(cmp1))
+    inventory_data=mycursor.fetchall()
+    print(cmp1)
+    #bundle data
+    mycursor.execute("SELECT * FROM app1_bundle WHERE cid_id=%s",(cmp1))
+    bundle_data=mycursor.fetchall()
+
+    #noninventor data
+    mycursor.execute("SELECT * FROM app1_noninventory WHERE cid_id=%s",(cmp1))
+    noninventory_data=mycursor.fetchall()
+
+    #service data
+    mycursor.execute("SELECT * FROM app1_service WHERE cid_id=%s",(cmp1))
+    services_data=mycursor.fetchall()
+
+
+    global custom_name,email_id,gamount,saleaddress,saledate,saleno,salesplace,salepay,salerefno,saledeposit,e_product,e_hsn,e_desc,e_qty,e_price,e_total,e_tax,e_subtotal,e_taxamount,e_grand,e_amt_received,e_balance,e_product2,e_product3,e_product4,e_hsn2,e_hsn3,e_hsn4,e_desc2,e_desc3,e_desc4,e_qty2,e_qty3,e_qty4,e_price2,e_price3,e_price4, e_total2,e_total3,e_total4,e_tax2,e_tax3,e_tax4
     custom_name=StringVar(form_frame) 
     email_id=StringVar(form_frame)
     gamount=StringVar(form_frame)
@@ -139,16 +548,21 @@ def edit_sale():
     salepay=StringVar(form_frame)
     salerefno=StringVar(form_frame)
     saledeposit=StringVar(form_frame)
-    e_product=StringVar(form_frame)
-    e_hsn=StringVar(form_frame)
-    e_desc=StringVar(form_frame)
-    e_qty=StringVar(form_frame)
-    e_price=StringVar(form_frame)
-    e_total=StringVar(form_frame)
-    e_tax=StringVar(form_frame)
-    e_subtotal=StringVar(form_frame)
-    e_tax2=StringVar(form_frame)
-    e_grand=StringVar(form_frame)
+    e_product=StringVar()
+    e_hsn=StringVar()
+    e_desc=StringVar()
+    e_qty=StringVar()
+    e_price=StringVar()
+    e_total=StringVar()
+    e_total.set("0")
+    e_tax=StringVar()
+    e_subtotal=StringVar()
+    e_taxamount=StringVar()
+    e_taxamount.set("0")
+    e_grand=StringVar()
+    e_grand.set("0")
+    e_amt_received=StringVar()
+    e_balance=StringVar()
     e_product2=StringVar()
     e_product3=StringVar()
     e_product4=StringVar()
@@ -203,6 +617,108 @@ def edit_sale():
     existing_deposit=data[10]
     saledeposit.set(existing_deposit)
 
+    existing_product=data[9]
+    e_product.set(existing_product)
+
+    existing_han=data[10]
+    e_hsn.set(existing_han)
+
+    existing_desc=data[11]
+    e_desc.set(existing_desc)
+
+    existing_qty=data[12]
+    e_qty.set(existing_qty)
+
+    existing_price=data[13]
+    e_price.set(existing_price)
+
+    existing_total=data[14]
+    e_total.set(existing_total)
+
+    existing_tax=data[15]
+    e_tax.set(existing_tax)
+
+    existing_product2=data[18]
+    e_product2.set(existing_product2)
+
+    existing_hsn2=data[19]
+    e_hsn2.set(existing_hsn2)
+
+    existing_desc2=data[20]
+    e_desc2.set(existing_desc2)
+
+    existing_qty2=data[21]
+    e_qty2.set(existing_qty2)
+
+    existing_price2=data[22]
+    e_price2.set(existing_price2)
+
+    existing_total2=data[23]
+    e_total2.set(existing_total2)
+
+    existing_tax2=data[24]
+    e_tax2.set(existing_tax2)
+
+    existing_product3=data[25]
+    e_product3.set(existing_product3)
+
+    existing_hsn3=data[26]
+    e_hsn3.set(existing_hsn3)
+
+    existing_desc3=data[27]
+    e_desc3.set(existing_desc3)
+
+    existing_qty3=data[28]
+    e_qty3.set(existing_qty3)
+
+    existing_price3=data[29]
+    e_price3.set(existing_price3)
+
+    existing_total3=data[30]
+    e_total3.set(existing_total3)
+
+    existing_tax3=data[31]
+    e_tax3.set(existing_tax3)
+
+    existing_product4=data[32]
+    e_product4.set(existing_product4)
+
+    existing_hsn4=data[33]
+    e_hsn4.set(existing_hsn4)
+
+    existing_desc4=data[34]
+    e_desc4.set(existing_desc4)
+
+    existing_qty4=data[35]
+    e_qty4.set(existing_qty4)
+
+    existing_price4=data[36]
+    e_price4.set(existing_price4)
+
+    existing_total4=data[37]
+    e_total4.set(existing_total4)
+
+    existing_tax4=data[38]
+    e_tax4.set(existing_tax4)
+
+
+
+
+    existing_subtotal=data[16]
+    e_subtotal.set(existing_subtotal)
+
+    existing_taxamount=data[40]
+    e_taxamount.set(existing_taxamount)
+
+    existing_grand=data[17]
+    e_grand.set(existing_grand)
+
+    existing_amt_received=data[39]
+    e_amt_received.set(existing_amt_received)
+
+    existing_balance=data[41]
+    e_balance.set(existing_balance)
+    
 
     select_customer_lab=tk.Label(form_frame,text="Select Customer",bg='#243e55',fg='#fff')
     select_customer_input=StringVar()
@@ -287,28 +803,54 @@ def edit_sale():
     h_input4.place(x=30,y=1000,height=40,width=40)
 
 
+   
     #col-1
     product_lab=Label(form_frame,text="PRODUCT / SERVICES",bg='#243e55',fg='#fff')
-    product_lab.place(x=90,y=730,)
-    product_input1=StringVar()
-    product_drop1=ttk.Combobox(form_frame,textvariable = product_input1)
-    product_drop1['values']=(" ")
-    product_drop1.place(x=90,y=780,height=40,width=180)
+    product_lab.place(x=100,y=730,)
 
-    product_input2=StringVar()
-    product_drop2=ttk.Combobox(form_frame,textvariable = product_input1)
-    product_drop2['values']=(" ")
-    product_drop2.place(x=90,y=850,height=40,width=180)
+    product_drop1=ttk.Combobox(form_frame,textvariable = e_product)
+    product1=[]
+    for proinv in inventory_data: 
+        if proinv[-1] == cmp1[0] :
+            inv_data=proinv[2]
+            product1.append(inv_data)
 
-    product_input3=StringVar()
-    product_drop3=ttk.Combobox(form_frame,textvariable = product_input1)
-    product_drop3['values']=(" ")
-    product_drop3.place(x=90,y=930,height=40,width=180)
+    for proinv in noninventory_data: 
+        if proinv[-1] == cmp1[0] :
+            noninv_data=proinv[2]
+            product1.append(noninv_data)
 
-    product_input4=StringVar()
-    product_drop4=ttk.Combobox(form_frame,textvariable = product_input1)
-    product_drop4['values']=(" ")
-    product_drop4.place(x=90,y=1000,height=40,width=180)
+    for proinv in bundle_data: 
+        if proinv[-1] == cmp1[0] :
+            bundleinv_data=proinv[2]
+            product1.append(bundleinv_data)
+            
+    product_drop1['values']=product1
+    product_drop1.bind("<<ComboboxSelected>>",get_selected_e_product)
+
+    product_drop1.place(x=70,y=780,height=40,width=200)
+
+    product_drop2=ttk.Combobox(form_frame,textvariable = e_product2)
+
+   
+    product_drop2['values']=product1
+    product_drop2.bind("<<ComboboxSelected>>",get_selected_e_product2)
+
+    product_drop2.place(x=70,y=850,height=40,width=200)
+
+   
+    product_drop3=ttk.Combobox(form_frame,textvariable = e_product3)
+            
+    product_drop3['values']=product1
+    product_drop3.bind("<<ComboboxSelected>>",get_selected_e_product3)
+    product_drop3.place(x=70,y=930,height=40,width=200)
+
+   
+    product_drop4=ttk.Combobox(form_frame,textvariable = e_product4)
+    product_drop4['values']=product1
+    product_drop4.bind("<<ComboboxSelected>>",get_selected_e_product4)
+    product_drop4.place(x=70,y=1000,height=40,width=200)
+
 
     #col-2
 
