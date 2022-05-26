@@ -59,12 +59,12 @@ form_lable.place(x=0,y=0)
 fun()
 mycursor.execute('select * from app1_recon1 ')
 customers=mycursor.fetchall()
-customers_data=[]
+customers_data=[-1]
 for cus in customers:
     customers_data.append(cus)
 
 fun()
-global accounttype,endingdate,endingbalance,beginningbalance,serchar,intear,Clearbalance,difference
+# global accounttype,endingdate,endingbalance,beginningbalance,serchar,intear,Clearbalance,difference
 
 accounttype=StringVar(form_frame) 
 endingdate=StringVar(form_frame) 
@@ -75,7 +75,9 @@ intear=StringVar(form_frame)
 Clearbalance=StringVar(form_frame)
 difference=StringVar(form_frame)
 
-data=customers_data[1]
+data=customers_data[-1]
+print(data)
+
 
 existing_accounttype=data[1]
 accounttype.set(existing_accounttype)
@@ -95,7 +97,11 @@ serchar.set(existing_serchar)
 existing_intear=data[9]
 intear.set(existing_intear)
 
-findbalance = int(existing_beginningbalance) - int(existing_serchar) + int(existing_intear)
+begbal = int(data[2])
+ser = int(data[6])
+inte = int(data[9])
+
+findbalance = begbal - ser + inte
 Clearbalance.set(findbalance)
 
 difference1 = int(existing_endingbalance) - int(findbalance)
@@ -106,9 +112,9 @@ san_lbl.place(x=500)
 san_lbl = Label(form_frame, text="", font=('times new roman', 20, 'bold'), bg="#243e55", fg="#fff",textvariable=accounttype)
 san_lbl.place(x=620)
 san_lbl = Label(form_frame, text="Statement ending date", font=('times new roman', 11, 'bold'),width=26, bg="#243e55", fg="#fff")
-san_lbl.place(x=535,y=70)
+san_lbl.place(x=500,y=55)
 san_lbl = Label(form_frame, textvariable=endingdate, font=('times new roman', 11, 'bold'),width=26, bg="#243e55", fg="#fff")
-san_lbl.place(x=535,y=90)
+san_lbl.place(x=500,y=75)
 
 # Label Widget
 a = Label(form_frame, bg="#243e55", fg="#fff",font=('times new roman', 10, 'bold'))
@@ -169,7 +175,7 @@ b.place(x=900,y=5,width=100,height=40)
 F1 = LabelFrame(F, font=('times new roman', 15, 'bold'),fg="Black", bg="#243e55")
 F1.place(x=0, y=47, width=1235, height=325)
 
-global tree_data
+# global tree_data
 tree_data = ttk.Treeview(F1,height=13)
 tree_data['show'] = 'headings'
 
@@ -215,5 +221,8 @@ wrappen.pack(fill='both',expand='yes',)
 wrappen.pack(fill='both',expand='yes',)
 
 root.mainloop()
+
+
+
 
 
