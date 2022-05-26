@@ -10,7 +10,7 @@ import mysql.connector as mysql
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")
-expense_form.geometry("1500x1000")
+expense_form.geometry("1400x1000")
 expense_form['bg'] = '#2f516a'
 wrappen = ttk.LabelFrame(expense_form)
 mycanvas = Canvas(wrappen)
@@ -71,9 +71,9 @@ def submit():
     con = mysql.connect(host="127.0.0.1", user="root",
                         password="", database="fynsystkinter", port='3307')
     cur = con.cursor()
-    d = '''INSERT INTO expensesmain(payee , etype, payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
+    d = '''INSERT INTO expensesmain(etype,payee , payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
                     , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-    cur.execute(d, [(payee), (payment_date), (etype), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+    cur.execute(d, [(etype), (payee), (payment_date),  (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                 (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
     con.commit()
     MessageBox.showinfo("Insert Status", "Inserted Successfully")

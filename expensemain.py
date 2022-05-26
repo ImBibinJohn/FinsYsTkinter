@@ -50,10 +50,11 @@ def main():
 
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-    f = font.Font(family='Times New Roman', size=30)  # font
-    lb = tk.Label(head, text='EXPENSES', bg='#243e54')
+    f = font.Font(family='Times New Roman', size=25)  # font
+    lb = tk.Label(head, text='EXPENSES', bg="#243e55", height=2,
+                  bd=5, relief="groove", font=f, width=106)
     lb['font'] = f
-    lb.place(relx=0.4, rely=0.2)
+    lb.place(relx=0.05, rely=0.2)
     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
 
     # contents frame
@@ -91,7 +92,7 @@ def main():
                 x[0], x[1], x[2], x[3], x[4]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
-    def edit():
+    def editexp():
         def changeedit():
             global D, bm
             refno = drop2.get()
@@ -146,10 +147,8 @@ def main():
             print(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2,
                   categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal)
 
-            d = '''UPDATE INTO expensesmain(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1 ,category2, category3, categorydescription1  , categorydescription2 
-                                , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) WHERE id =%s"""'''
-            cur.execute(d, [(refno), (payee), (payment_date), (payment_method), (payment_account), (supplier), (mailaddress), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
-                        (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
+            cur.execute("""UPDATE expensesmain SET refno =%s, payee =%s, payment_date =%s, payment_method =%s, payment_account =%s, supplier =%s, mailaddress =%s, category1 =%s, category2 =%s, category3 =%s,categorydescription1 =%s, categorydescription2 =%s,categorydescription3 =%s, categoryquantity1 =%s, categoryquantity2 =%s, categoryquantity3 =%s, categoryprice1 =%s, categoryprice2 =%s, categoryprice3 =%s, state =%s, categorytotal1 =%s, categorytotal2 =%s, categorytotal3 =%s, product1 =%s, product2 =%s, product3 =%s,productdescription1 =%s, productdescription2 =%s,productdescription3 =%s, hsn1 =%s, hsn2 =%s, hsn3 =%s, productquantity1 =%s, productquantity2 =%s, productquantity3 =%s, productprice1 =%s, productprice2 =%s, productprice3 =%s, producttotal1=%s  , producttotal2=%s , producttotal3=%s, producttax1=%s  ,  producttax2=%s ,producttax3=%s, subtotal=%s,tax =%s,grandtotal=%s WHERE id =%s""",
+                        (refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1,  producttax2, producttax3, subtotal, tax, grandtotal, b[0],))
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             expense_form.destroy()
@@ -163,6 +162,7 @@ def main():
             D.destroy()
 
         # Get selected item to Edit
+
         str = treevv.focus()
         values = treevv.item(str, 'values')
         print(values)
@@ -328,23 +328,6 @@ def main():
             form2_frame, width=40, bg='#2f516f', fg='#fff')
         quantity_input3.place(x=650, y=310, height=40, width=200)
 
-        # def mulc(self, event):
-        #     ctotal_input1.delete(0, 'end')
-        #     price_input1 = int(price_input1.get())
-        #     quantity_input1 = int(quantity_input1.get())
-        #     resultc1 = price_input1*quantity_input1
-        #     ctotal_input2.insert(END, str(resultc1))
-        #     ctotal_input2.delete(0, 'end')
-        #     price_input2 = int(price_input2.get())
-        #     quantity_input2 = int(quantity_input2.get())
-        #     resultc2 = price_input2*quantity_input2
-        #     ctotal_input2.insert(END, str(resultc2))
-        #     ctotal_input3.delete(0, 'end')
-        #     price_input3 = int(price_input3.get())
-        #     quantity_input3 = int(quantity_input3.get())
-        #     resultc3 = price_input3*quantity_input3
-        #     ctotal_input3.insert(END, str(resultc3))
-
         # row 1
         price_input1 = Entry(form2_frame, width=40, bg='#2f516f',
                              fg='#fff')
@@ -458,25 +441,6 @@ def main():
                               bg='#2f516f', fg='#fff')
         pprice_input3.place(x=840, y=310, height=40, width=150)
 
-        # def mulc(self, event):
-        #     ptotal_input1.delete(0, 'end')
-        #     pprice_input1 = int(pprice_input1.get())
-        #     pquantity_input1 = int(pquantity_input1.get())
-        #     resultp1 = pprice_input1*pquantity_input1
-        #     ptotal_input1.insert(END, str(resultp1))
-
-        #     ptotal_input2.delete(0, 'end')
-        #     pprice_input2 = int(pprice_input2.get())
-        #     pquantity_input2 = int(pquantity_input2.get())
-        #     resultp2 = pprice_input2*pquantity_input2
-        #     ptotal_input2.insert(END, str(resultp2))
-
-        #     ptotal_input3.delete(0, 'end')
-        #     pprice_input3 = int(pprice_input3.get())
-        #     pquantity_input3 = int(pquantity_input3.get())
-        #     resultp3 = pprice_input3*pquantity_input3
-        #     ptotal_input3.insert(END, str(resultp3))
-
         # row 1
         ptotal_input1 = Entry(form4_frame, width=40, bg='#2f516f',
                               fg='#fff')
@@ -541,7 +505,7 @@ def main():
         selected_item = treevv.selection()[0]
         treevv.delete(selected_item)
 
-    edit_btn = ttk.Button(hd, text="Edit", command=edit)
+    edit_btn = ttk.Button(hd, text="Edit", command=editexp)
     edit_btn.place(relx=0.35, rely=0.8, relheight=0.1, relwidth=0.1)
     del_btn = ttk.Button(hd, text="Delete", command=delete)
     del_btn.place(relx=0.5, rely=0.8, relheight=0.1, relwidth=0.1)
