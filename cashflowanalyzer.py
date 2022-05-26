@@ -1,4 +1,5 @@
 from multiprocessing.sharedctypes import Value
+from pydoc import apropos
 import tkinter as tk
 from tkinter import *
 from  tkinter import ttk
@@ -12,460 +13,478 @@ mydb=mysql.connector.connect(
     database='finsystkinter',
     )
 mycursor = mydb.cursor()
-jan="SELECT SUM(totamt) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Bank Charges')"
+jan="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Advertising/Promotional')"
+mycursor.execute(jan)
+tab1 = mycursor.fetchall()
+feb="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Advertising/Promotional')"
+mycursor.execute(feb)
+tab2 = mycursor.fetchall()
+mar="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Advertising/Promotional')"
+mycursor.execute(mar)
+tab3 = mycursor.fetchall()
+apr="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Advertising/Promotional')"
+mycursor.execute(apr)
+tab4 = mycursor.fetchall()
+may="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Advertising/Promotional')"
+mycursor.execute(may)
+tab5 = mycursor.fetchall()
+jun="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Advertising/Promotional')"
+mycursor.execute(jun)
+tab6 = mycursor.fetchall()
+
 # def fetchdata():
-query="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Advertising/Promotional' "
+query="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Advertising/Promotional' "
 mycursor.execute(query)
 table = mycursor.fetchall()
-query1="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Bank Charges' "
+query1="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Bank Charges' "
 mycursor.execute(query1)
 table1 = mycursor.fetchall()
-query2="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Business Licenses and Permits' "
+query2="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Business Licenses and Permits' "
 mycursor.execute(query2)
 table2 = mycursor.fetchall()
-query3="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Charitable Contributions' "
+query3="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Charitable Contributions' "
 mycursor.execute(query3)
 table3 = mycursor.fetchall()
-query4="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Computer and Internet Expense' "
+query4="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Computer and Internet Expense' "
 mycursor.execute(query4)
 table4 = mycursor.fetchall()
-query5="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Continuing Education' "
+query5="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Continuing Education' "
 mycursor.execute(query5)
 table5 = mycursor.fetchall()
-query6="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Depreciation Expense' "
+query6="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Depreciation Expense' "
 mycursor.execute(query6)
 table6 = mycursor.fetchall()
-query7="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Dues and Subscriptions' "
+query7="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Dues and Subscriptions' "
 mycursor.execute(query7)
 table7 = mycursor.fetchall()
-query8="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Housekeeping Charges' "
+query8="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Housekeeping Charges' "
 mycursor.execute(query8)
 table8 = mycursor.fetchall()
-query9="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense' "
+query9="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense' "
 mycursor.execute(query9)
 table9 = mycursor.fetchall()
-query10="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-General Liability Insurance' "
+query10="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-General Liability Insurance' "
 mycursor.execute(query10)
 table10 = mycursor.fetchall()
-query11="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Health Insurance' "
+query11="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Health Insurance' "
 mycursor.execute(query11)
 table11 = mycursor.fetchall()
-query12="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability Insurance' "
+query12="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability Insurance' "
 mycursor.execute(query12)
 table12 = mycursor.fetchall()
-query13="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability IInsurance Expense-Professional Liabilitynsurance' "
+query13="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Expense-Life and Disability IInsurance Expense-Professional Liabilitynsurance' "
 mycursor.execute(query13)
 table13 = mycursor.fetchall()
-query14="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Interest Expense' "
+query14="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Interest Expense' "
 mycursor.execute(query14)
 table14 = mycursor.fetchall()
-query15="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Meals and entertainment' "
+query15="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Meals and entertainment' "
 mycursor.execute(query15)
 table15 = mycursor.fetchall()
-query16="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Office Supplies' "
+query16="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Office Supplies' "
 mycursor.execute(query16)
 table16 = mycursor.fetchall()
-query17="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Postage and Delivery' "
+query17="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Postage and Delivery' "
 mycursor.execute(query17)
 table17 = mycursor.fetchall()
-query18="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Printing and Reproduction' "
+query18="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Printing and Reproduction' "
 mycursor.execute(query18)
 table18 = mycursor.fetchall()
-query19="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Professional Fees' "
+query19="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Professional Fees' "
 mycursor.execute(query19)
 table19 = mycursor.fetchall()
-query20="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases' "
+query20="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases' "
 mycursor.execute(query20)
 table20 = mycursor.fetchall()
-query21="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Rent Expense' "
+query21="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Rent Expense' "
 mycursor.execute(query21)
 table21 = mycursor.fetchall()
-query22="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Repair and maintenance' "
+query22="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Repair and maintenance' "
 mycursor.execute(query22)
 table22 = mycursor.fetchall()
-query23="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Small Tools and Equipment' "
+query23="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Small Tools and Equipment' "
 mycursor.execute(query23)
 table23 = mycursor.fetchall()
-query24="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Expense' "
+query24="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Expense' "
 mycursor.execute(query24)
 table24 = mycursor.fetchall()
-query25="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Taxes - Property' "
+query25="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Taxes - Property' "
 mycursor.execute(query25)
 table25 = mycursor.fetchall()
-query26="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Telephone Expense' "
+query26="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Telephone Expense' "
 mycursor.execute(query26)
 table26 = mycursor.fetchall()
-query27="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Travel Expense' "
+query27="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Travel Expense' "
 mycursor.execute(query27)
 table27 = mycursor.fetchall()
-query28="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Expense' "
+query28="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Expense' "
 mycursor.execute(query28)
 table28 = mycursor.fetchall()
-query29="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Utilities' "
+query29="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Utilities' "
 mycursor.execute(query29)
 table29 = mycursor.fetchall()
-query30="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Cash and cash equivalents' "
+query30="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Cash and cash equivalents' "
 mycursor.execute(query30)
 table30 = mycursor.fetchall()
-query31="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Accounts Receivable (Debtors)' "
+query31="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Accounts Receivable (Debtors)' "
 mycursor.execute(query31)
 table31 = mycursor.fetchall()
-query32="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred CGST' "
+query32="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred CGST' "
 mycursor.execute(query32)
 table32 = mycursor.fetchall()
-query33="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred GST Input Credit' "
+query33="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred GST Input Credit' "
 mycursor.execute(query33)
 table33 = mycursor.fetchall()
-query34="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred IGST' "
+query34="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred IGST' "
 mycursor.execute(query34)
 table34 = mycursor.fetchall()
-query35="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+query35="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 mycursor.execute(query35)
 table35 = mycursor.fetchall()
-query36="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Service Tax Input Credit' "
+query36="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Service Tax Input Credit' "
 mycursor.execute(query36)
 table36 = mycursor.fetchall()
-query37="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred SGST' "
+query37="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred SGST' "
 mycursor.execute(query37)
 table37 = mycursor.fetchall()
-query38="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred VAT Input Credit' "
+query38="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred VAT Input Credit' "
 mycursor.execute(query38)
 table38 = mycursor.fetchall()
-query39="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Refund' "
+query39="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Refund' "
 mycursor.execute(query39)
 table39 = mycursor.fetchall()
-query40="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Inventory Asset' "
+query40="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Inventory Asset' "
 mycursor.execute(query40)
 table40 = mycursor.fetchall()
-query41="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Refund' "
+query41="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Refund' "
 mycursor.execute(query41)
 table41 = mycursor.fetchall()
-query42="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Prepaid Insurance' "
+query42="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Prepaid Insurance' "
 mycursor.execute(query42)
 table42 = mycursor.fetchall()
-query43="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Refund' "
+query43="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Refund' "
 mycursor.execute(query43)
 table43 = mycursor.fetchall()
-query44="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='TDS Receivable' "
+query44="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='TDS Receivable' "
 mycursor.execute(query44)
 table44 = mycursor.fetchall()
-query45="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Asset' "
+query45="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Asset' "
 mycursor.execute(query45)
 table45 = mycursor.fetchall()
-query46="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Undeposited Funds' "
+query46="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Undeposited Funds' "
 mycursor.execute(query46)
 table46 = mycursor.fetchall()
-query47="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Accumulated Depreciation' "
+query47="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Accumulated Depreciation' "
 mycursor.execute(query47)
 table47 = mycursor.fetchall()
-query48="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Buildings and Improvements' "
+query48="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Buildings and Improvements' "
 mycursor.execute(query48)
 table48 = mycursor.fetchall()
-query49="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Furniture and Equipment' "
+query49="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Furniture and Equipment' "
 mycursor.execute(query49)
 table49 = mycursor.fetchall()
-query50="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Land' "
+query50="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Land' "
 mycursor.execute(query50)
 table50 = mycursor.fetchall()
-query51="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Leasehold Improvements' "
+query51="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Leasehold Improvements' "
 mycursor.execute(query51)
 table51 = mycursor.fetchall()
-query52="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Vehicles' "
+query52="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Vehicles' "
 mycursor.execute(query52)
 table52 = mycursor.fetchall()
-query53="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CGST Payable' "
+query53="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CGST Payable' "
 mycursor.execute(query53)
 table53 = mycursor.fetchall()
-query54="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CST Payable' "
+query54="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CST Payable' "
 mycursor.execute(query54)
 table54 = mycursor.fetchall()
-query55="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CST Suspense' "
+query55="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CST Suspense' "
 mycursor.execute(query55)
 table55 = mycursor.fetchall()
-query56="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Payable' "
+query56="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Payable' "
 mycursor.execute(query56)
 table56 = mycursor.fetchall()
-query57="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Suspense' "
+query57="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST Suspense' "
 mycursor.execute(query57)
 table57 = mycursor.fetchall()
-query58="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='IGST Payable' "
+query58="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='IGST Payable' "
 mycursor.execute(query58)
 table58 = mycursor.fetchall()
-query59="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input CGST' "
+query59="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input CGST' "
 mycursor.execute(query59)
 table59 = mycursor.fetchall()
-query60="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input CGST Tax RCM' "
+query60="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input CGST Tax RCM' "
 mycursor.execute(query60)
 table60 = mycursor.fetchall()
-query61="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input IGST' "
+query61="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input IGST' "
 mycursor.execute(query61)
 table61 = mycursor.fetchall()
-query62="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input IGST Tax RCM' "
+query62="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input IGST Tax RCM' "
 mycursor.execute(query62)
 table62 = mycursor.fetchall()
-query63="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Krishi Kalyan Cess' "
+query63="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Krishi Kalyan Cess' "
 mycursor.execute(query63)
 table63 = mycursor.fetchall()
-query64="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Krishi Kalyan Cess RCM' "
+query64="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Krishi Kalyan Cess RCM' "
 mycursor.execute(query64)
 table64 = mycursor.fetchall()
-query65="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Service Tax' "
+query65="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Service Tax' "
 mycursor.execute(query65)
 table65 = mycursor.fetchall()
-query66="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Service Tax RCM' "
+query66="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input Service Tax RCM' "
 mycursor.execute(query66)
 table66 = mycursor.fetchall()
-query67="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input SGST' "
+query67="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input SGST' "
 mycursor.execute(query67)
 table67 = mycursor.fetchall()
-query68="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input SGST Tax RCM' "
+query68="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input SGST Tax RCM' "
 mycursor.execute(query68)
 table68 = mycursor.fetchall()
-query69="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 14%' "
+query69="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 14%' "
 mycursor.execute(query69)
 table69 = mycursor.fetchall()
-query70="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 4%' "
+query70="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 4%' "
 mycursor.execute(query70)
 table70 = mycursor.fetchall()
-query71="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 5%' "
+query71="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Input VAT 5%' "
 mycursor.execute(query71)
 table71 = mycursor.fetchall()
-query72="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Payable' "
+query72="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Payable' "
 mycursor.execute(query72)
 table72 = mycursor.fetchall()
-query73="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Suspense' "
+query73="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Krishi Kalyan Cess Suspense' "
 mycursor.execute(query73)
 table73 = mycursor.fetchall()
-query74="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CGST' "
+query74="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CGST' "
 mycursor.execute(query74)
 table74 = mycursor.fetchall()
-query75="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CGST Tax RCM' "
+query75="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CGST Tax RCM' "
 mycursor.execute(query75)
 table75 = mycursor.fetchall()
-query76="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CST 2%' "
+query76="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output CST 2%' "
 mycursor.execute(query76)
 table76 = mycursor.fetchall()
-query77="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output IGST' "
+query77="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output IGST' "
 mycursor.execute(query77)
 table77 = mycursor.fetchall()
-query78="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output IGST Tax RCM' "
+query78="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output IGST Tax RCM' "
 mycursor.execute(query78)
 table78 = mycursor.fetchall()
-query79="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Krishi Kalyan Cess' "
+query79="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Krishi Kalyan Cess' "
 mycursor.execute(query79)
 table79 = mycursor.fetchall()
-query80="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Krishi Kalyan Cess RCM' "
+query80="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Krishi Kalyan Cess RCM' "
 mycursor.execute(query80)
 table80 = mycursor.fetchall()
-query81="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Service Tax' "
+query81="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Service Tax' "
 mycursor.execute(query81)
 table81 = mycursor.fetchall()
-query82="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Service Tax RCM' "
+query82="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output Service Tax RCM' "
 mycursor.execute(query82)
 table82 = mycursor.fetchall()
-query83="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output SGST' "
+query83="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output SGST' "
 mycursor.execute(query83)
 table83 = mycursor.fetchall()
-query84="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output SGST Tax RCM' "
+query84="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output SGST Tax RCM' "
 mycursor.execute(query84)
 table84 = mycursor.fetchall()
-query85="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 14%' "
+query85="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 14%' "
 mycursor.execute(query85)
 table85 = mycursor.fetchall()
-query86="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 4%' "
+query86="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 4%' "
 mycursor.execute(query86)
 table86 = mycursor.fetchall()
-query87="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 5%' "
+query87="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Output VAT 5%' "
 mycursor.execute(query87)
 table87 = mycursor.fetchall()
-query88="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Payable' "
+query88="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Payable' "
 mycursor.execute(query88)
 table88 = mycursor.fetchall()
-query89="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Suspense' "
+query89="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Service Tax Suspense' "
 mycursor.execute(query89)
 table89 = mycursor.fetchall()
-query90="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='SGST Payable' "
+query90="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='SGST Payable' "
 mycursor.execute(query90)
 table90 = mycursor.fetchall()
-query91="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Payable' "
+query91="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Payable' "
 mycursor.execute(query91)
 table91 = mycursor.fetchall()
-query92="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Suspense' "
+query92="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Swachh Bharat Cess Suspense' "
 mycursor.execute(query92)
 table92 = mycursor.fetchall()
-query93="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='TDS Payable' "
+query93="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='TDS Payable' "
 mycursor.execute(query93)
 table93 = mycursor.fetchall()
-query94="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='VAT Suspense' "
+query94="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='VAT Suspense' "
 mycursor.execute(query94)
 table94 = mycursor.fetchall()
-query95="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Opening Balance Equity' "
+query95="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Opening Balance Equity' "
 mycursor.execute(query95)
 table95 = mycursor.fetchall()
-query96="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Retained Earnings' "
+query96="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Retained Earnings' "
 mycursor.execute(query96)
 table96 = mycursor.fetchall()
-query97="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Billable Expense Income' "
+query97="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Billable Expense Income' "
 mycursor.execute(query97)
 table97 = mycursor.fetchall()
-query98="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Consulting Income' "
+query98="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Consulting Income' "
 mycursor.execute(query98)
 table98 = mycursor.fetchall()
-query99="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Product Sales' "
+query99="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Product Sales' "
 mycursor.execute(query99)
 table99 = mycursor.fetchall()
-query100="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales' "
+query100="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales' "
 mycursor.execute(query100)
 table100 = mycursor.fetchall()
-query101="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Hardware' "
+query101="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Hardware' "
 mycursor.execute(query101)
 table101 = mycursor.fetchall()
-query102="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Software' "
+query102="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Software' "
 mycursor.execute(query102)
 table102 = mycursor.fetchall()
-query103="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Support and Maintenance' "
+query103="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales - Support and Maintenance' "
 mycursor.execute(query103)
 table103 = mycursor.fetchall()
-query104="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales Discounts' "
+query104="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales Discounts' "
 mycursor.execute(query104)
 table104 = mycursor.fetchall()
-query105="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales of Product Income' "
+query105="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Sales of Product Income' "
 mycursor.execute(query105)
 table105 = mycursor.fetchall()
-query106="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Income' "
+query106="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Uncategorised Income' "
 mycursor.execute(query106)
 table106 = mycursor.fetchall()
 
-query107="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Cost of sales' "
+query107="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Cost of sales' "
 mycursor.execute(query107)
 table107 = mycursor.fetchall()
-query108="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Equipment Rental for Jobs' "
+query108="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Equipment Rental for Jobs' "
 mycursor.execute(query108)
 table108 = mycursor.fetchall()
-query109="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Freight and Shipping Costs' "
+query109="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Freight and Shipping Costs' "
 mycursor.execute(query109)
 table109 = mycursor.fetchall()
-query110="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Merchant Account Fees' "
+query110="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Merchant Account Fees' "
 mycursor.execute(query110)
 table110 = mycursor.fetchall()
-query111="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases - Hardware for Resale' "
+query111="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases - Hardware for Resale' "
 mycursor.execute(query111)
 table111 = mycursor.fetchall()
-query112="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases - Software for Resale' "
+query112="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Purchases - Software for Resale' "
 mycursor.execute(query112)
 table112 = mycursor.fetchall()
-query113="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Subcontracted Services' "
+query113="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Subcontracted Services' "
 mycursor.execute(query113)
 table113 = mycursor.fetchall()
-query114="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Tools and Craft Supplies' "
+query114="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Tools and Craft Supplies' "
 mycursor.execute(query114)
 table114 = mycursor.fetchall()
-query115="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Finance Charge Income' "
+query115="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Finance Charge Income' "
 mycursor.execute(query115)
 table115 = mycursor.fetchall()
-query116="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Proceeds Received' "
+query116="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Insurance Proceeds Received' "
 mycursor.execute(query116)
 table116 = mycursor.fetchall()
-query117="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Interest Income' "
+query117="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Interest Income' "
 mycursor.execute(query117)
 table117 = mycursor.fetchall()
-query118="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Proceeds from Sale of Assets' "
+query118="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Proceeds from Sale of Assets' "
 mycursor.execute(query118)
 table118 = mycursor.fetchall()
-query119="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Shipping and Delivery Income' "
+query119="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Shipping and Delivery Income' "
 mycursor.execute(query119)
 table119 = mycursor.fetchall()
-query120="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Ask My Accountant' "
+query120="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Ask My Accountant' "
 mycursor.execute(query120)
 table120 = mycursor.fetchall()
-query121="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CGST write-off' "
+query121="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='CGST write-off' "
 mycursor.execute(query121)
 table121 = mycursor.fetchall()
-query122="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST write-off' "
+query122="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='GST write-off' "
 mycursor.execute(query122)
 table122 = mycursor.fetchall()
-query123="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='IGST write-off' "
+query123="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='IGST write-off' "
 mycursor.execute(query123)
 table123 = mycursor.fetchall()
-query124="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Miscellaneous Expense' "
+query124="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Miscellaneous Expense' "
 mycursor.execute(query124)
 table124 = mycursor.fetchall()
-query125="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Political Contributions' "
+query125="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Political Contributions' "
 mycursor.execute(query125)
 table125 = mycursor.fetchall()
-query126="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='SGST write-off' "
+query126="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='SGST write-off' "
 mycursor.execute(query126)
 table126 = mycursor.fetchall()
-query127="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Tax write-of' "
+query127="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Tax write-of' "
 mycursor.execute(query127)
 table127 = mycursor.fetchall()
-query128="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Vehicle Expenses' "
+query128="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Vehicle Expenses' "
 mycursor.execute(query128)
 table128 = mycursor.fetchall()
-# query129="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='' "
+# query129="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='' "
 # mycursor.execute(query129)
 # table129 = mycursor.fetchall()
-# query130="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='' "
+# query130="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='' "
 # mycursor.execute(query130)
 # table130 = mycursor.fetchall()
-# query131="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query131="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query131)
 # table131 = mycursor.fetchall()
-# query132="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query132="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query132)
 # table132 = mycursor.fetchall()
-# query133="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query133="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query133)
 # table133 = mycursor.fetchall()
-# query134="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query134="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query134)
 # table134 = mycursor.fetchall()
-# query135="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query135="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query135)
 # table135 = mycursor.fetchall()
-# query136="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query136="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query136)
 # table136 = mycursor.fetchall()
-# query137="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query137="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query137)
 # table137 = mycursor.fetchall()
-# query138="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query138="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query138)
 # table138 = mycursor.fetchall()
-# query139="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query139="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query139)
 # table139 = mycursor.fetchall()
-# query140="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query140="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query140)
 # table140 = mycursor.fetchall()
-# query141="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query141="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query141)
 # table141 = mycursor.fetchall()
-# query142="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query142="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query142)
 # table142 = mycursor.fetchall()
-# query143="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query143="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query143)
 # table143 = mycursor.fetchall()
-# query144="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query144="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query144)
 # table144 = mycursor.fetchall()
-# query145="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query145="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query145)
 # table145 = mycursor.fetchall()
-# query146="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query146="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query146)
 # table146 = mycursor.fetchall()
-# query147="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query147="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query147)
 # table147 = mycursor.fetchall()
-# query148="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query148="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query148)
 # table148 = mycursor.fetchall()
-# query149="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query149="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query149)
 # table149 = mycursor.fetchall()
-# query150="SELECT ROUND(SUM(totamt),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
+# query150="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Deferred Krishi Kalyan Cess Input Credit' "
 # mycursor.execute(query150)
 # table150 = mycursor.fetchall()
 
@@ -840,7 +859,18 @@ total127.set(table35)
 total128=tk.StringVar()
 total128.set(table35)
 
-
+tot1=tk.StringVar()
+tot1.set(tab1)
+tot2=tk.StringVar()
+tot2.set(tab2)
+tot3=tk.StringVar()
+tot3.set(tab3)
+tot4=tk.StringVar()
+tot4.set(tab4)
+tot5=tk.StringVar()
+tot5.set(tab5)
+tot6=tk.StringVar()
+tot6.set(tab6)
 
 # total129=tk.StringVar()
 # total129.set(table35)
@@ -924,12 +954,12 @@ r8.place(x=80,y=769)
 r9=Label(form_frame,text="Advertising\nPromotional",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r9.place(x=80,y=849)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=855,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=855,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=855,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=855,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=855,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=855,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot1,fg='white',width=16,justify='center').place(x=395,y=855,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot2,fg='white',width=16,justify='center').place(x=515,y=855,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot3,fg='white',width=16,justify='center').place(x=645,y=855,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot4,fg='white',width=16,justify='center').place(x=775,y=855,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot5,fg='white',width=16,justify='center').place(x=895,y=855,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot6,fg='white',width=16,justify='center').place(x=1025,y=855,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total,fg='white',width=16,justify='center').place(x=1155,y=855,height=40)
 
 
