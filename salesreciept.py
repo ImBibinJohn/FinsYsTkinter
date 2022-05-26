@@ -62,7 +62,7 @@ def ProSelect(event):
         saleprice=a[12]
         total1=int(saleprice)*int(qty1)
         totall1.set(total1)
-        print(descrip1.set())
+
 #for the row of product2
 def ProSelect2(event):
     selected_data=[]

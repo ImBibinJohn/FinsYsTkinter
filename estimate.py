@@ -185,11 +185,7 @@ place_drop['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunac
 place_of_supp.place(x=30,y=330,height=15,width=100)
 place_drop.place(x=30,y=360,height=40,width=450)
 
-#invoice_period=tk.Label(form_frame,text="INVOICE PERIOD",bg='#243e55',fg='#fff')
-#invoice_drop=ttk.Combobox(form_frame)
-#invoice_drop['values']=("OCT2022-DEC2022","","","")
-#invoice_period.place(x=20,y=330,height=15,width=100)
-#invoice_drop.place(x=30,y=360,height=40,width=450)
+
 
 #Billing session
 sub_headingfont=font.Font(family='Times New Roman', size=18,)
@@ -204,16 +200,16 @@ label.place(x=60,y=60)
 
 #row1
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product1=ttk.Combobox(form2_frame)
+product1['values']=("","","","")
 pro.place(x=10,y=120,height=15,width=100)
-pro_drop.place(x=60,y=150,height=40,width=150)
+product1.place(x=60,y=150,height=40,width=150)
 #2
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
-pro_drop=ttk.Combobox(form2_frame)
-pro_drop['values']=("","","","")
+product2=ttk.Combobox(form2_frame)
+product2['values']=("","","","")
 pro.place(x=10,y=210,height=15,width=100)
-pro_drop.place(x=60,y=240,height=40,width=150)
+product2.place(x=60,y=240,height=40,width=150)
 #3
 pro=tk.Label(form2_frame,text="",bg='#243e55',fg='#fff')
 pro_drop=ttk.Combobox(form2_frame)
