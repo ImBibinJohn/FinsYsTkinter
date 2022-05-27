@@ -7,7 +7,7 @@ from xml.etree.ElementInclude import include
 import mysql.connector
 from tkinter import messagebox
 import datetime as dt
-
+import re
  
 
 
@@ -71,7 +71,7 @@ def add_invoice():
                 shipstate=shipstate.get()
                 shippin=shippin.get()
                 shipcountry=shipcountry.get()
-                cid_id=1
+                cid_id=cmp1[0]
                 sql='SELECT * FROM app1_customer WHERE firstname=%s AND lastname=%s'# selecting entire table from db,taking username , nd check the existance
                 val=(first_name,last_name)
                 mycursor.execute(sql,val)
@@ -83,8 +83,9 @@ def add_invoice():
                     val=(title,first_name,last_name,company,location,gst,gstin,pan_no,email,website,mobile,street,city,state,pin,country,shipstreet,shipcity,shipstate,shippin,shipcountry,cid_id)
                     mycursor.execute(sql,val)
                     mydb.commit()
+                    messagebox.showinfo(title='Success',message='New Customer Added')
                     mydb.close()
-                    messagebox.showinfo('New Customer Added')
+                    
             else:
                 messagebox.showerror('error', 'Accept terms and conditions')
 
@@ -169,7 +170,11 @@ def add_invoice():
 
 
 
-
+        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        gstregexp = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
+        panregexp = "[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+        webregexp = "www."
+        mobregexp = "[0-9]{10}"
         title_lab=tk.Label(form_frame,text="Title",bg='#243e55',fg='#fff')
 
         drop2=ttk.Combobox(form_frame,textvariable = title)
@@ -208,31 +213,109 @@ def add_invoice():
         GST_lab.place(x=20,y=300,height=15,width=100)
         GST_drop.place(x=30,y=330,height=40,width=450)
 
+        def gst_validation(event):
+                gstin=gstin_input.get()
+                if gst!="Consumer"or gst!="Overseas":
+                    if gst!="GST unregistered":
+                        if gst!="Overseas":
+                            if re.search(gstregexp, gstin):
+                                wdgLst_gst.configure(text='GST',fg='#4BB543')
+                                
+                            else:
+                                wdgLst_gst.configure(text='Please provide a valid GST Number',fg='#FF0000')
+                                return False
+                else:
+                    pass
 
+
+
+        reggst = invoice.register(gst_validation)
         gstin_lab=Label(form_frame,text="GSTIN",bg='#243e55',fg='#fff')
         gstin_lab.place(x=530,y=300,)
         gstin_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = gstin)
+        gstin_input.bind("<KeyRelease>",gst_validation)
+        gstin_input.config(validate="focusout", validatecommand=(reggst, '%P'))
+        wdgLst_gst = gstin_lab
         gstin_input.place(x=530,y=330,height=40)
 
+        def pan_validation(event):
+            pan_no=pan_no_input.get()
+            if re.search(panregexp, pan_no):
+                    wdgLst_pan.configure(text='pan number',fg='#4BB543')
+                    
+            else:
+                wdgLst_pan.configure(text='Please provide a valid PAN Number',fg='#FF0000')
+                return False
+                
+
+
+
+
+        regpan = invoice.register(pan_validation)
         pan_no_lab=Label(form_frame,text="PAN NO",bg='#243e55',fg='#fff')
         pan_no_lab.place(x=1060,y=300,)
         pan_no_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = pan_no)
+        pan_no_input.bind("<KeyRelease>",pan_validation)
+        pan_no_input.config(validate="focusout", validatecommand=(regpan, '%P'))
+        wdgLst_pan = pan_no_lab
         pan_no_input.place(x=1060,y=330,height=40)
+        
+        def email_validation(event):
+            email=email_input.get()
 
+            if re.search(regex, email):
+                wdgLst_email.configure(text='Email',fg='#4BB543')
+                
+            else:
+                wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+                return False
+
+
+
+
+        regEmail = invoice.register(email_validation)
         email_lab=Label(form_frame,text="Email",bg='#243e55',fg='#fff')
         email_lab.place(x=30,y=400,)
         email_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = email)
+        email_input.bind("<KeyRelease>",email_validation)
+        email_input.config(validate="focusout", validatecommand=(regEmail, '%P'))
+        wdgLst_email = email_lab
         email_input.place(x=30,y=430,height=40)
 
+        def web_validation(event):
+            website=web_input.get()
+            if re.search(webregexp, website):
+                wdgLst_web.configure(text='website',fg='#4BB543')
+                
+            else:
+                wdgLst_web.configure(text='Please provide a valid website',fg='#FF0000')
+                return False
+
+        regweb = invoice.register(web_validation)
         web_lab=Label(form_frame,text="Website",bg='#243e55',fg='#fff')
         web_lab.place(x=530,y=400,)
         web_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = website)
+        web_input.bind("<KeyRelease>",web_validation)
+        web_input.config(validate="focusout", validatecommand=(regweb, '%P'))
+        wdgLst_web = web_lab
         web_input.place(x=530,y=430,height=40)
 
+        def mob_validation(event):
+            mobile=mobile_input.get()
+            if re.search(mobregexp, mobile):
+                wdgLst_mob.configure(text='mobile',fg='#4BB543')
+                
+            else:
+                wdgLst_mob.configure(text='Please provide a valid phone Number',fg='#FF0000')
+                return False
 
+        regmob = invoice.register(mob_validation)
         mobile_lab=Label(form_frame,text="Mobile",bg='#243e55',fg='#fff')
         mobile_lab.place(x=1060,y=400,)
         mobile_input=Entry(form_frame,width=55,bg='#2f516a',fg='#fff',textvariable = mobile)
+        mobile_input.bind("<KeyRelease>",mob_validation)
+        mobile_input.config(validate="focusout", validatecommand=(regmob, '%P'))
+        wdgLst_mob = mobile_lab
         mobile_input.place(x=1060,y=430,height=40)
 
         #Billing session
@@ -1314,7 +1397,7 @@ def edit_customer():
 
     def get_selected_e_product2(event):
         global createsubtotal,finding_tax1,finding_tax2,finding_tax3,finding_tax4
-        print("subtotal",createsubtotal)
+        # print("subtotal",createsubtotal)
         selected_product=[]
         product=product_drop2.get()
         selected_product.append(product)
