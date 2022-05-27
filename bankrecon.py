@@ -253,7 +253,7 @@ def add_recon1():
     tree_data.heading("7", text="DEPOSIT(INR)")
     tree_data.heading("8", text="PAYMENT(INR)")
 
-    sql = 'SELECT edat,accounttype,recon1id,expacc,beginningbalance,serchar,intear,serchar,recon1id from app1_recon1'
+    sql = 'SELECT edat,accounttype,recon1id,expacc,beginningbalance,endingbalance,intear,serchar,recon1id from app1_recon1'
     mycursor.execute(sql)
     treed_data=mycursor.fetchall()
     total=mycursor.rowcount
