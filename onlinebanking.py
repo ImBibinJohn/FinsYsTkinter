@@ -6,7 +6,7 @@ from tkcalendar import DateEntry
 from tkinter import StringVar, ttk
 
 win=tk.Tk()
-win.title('BANKING')
+win.title('ONLINE BANKING')
 win.geometry('1500x1000')
 win['bg'] = '#2f516f'
 mycanvas=tk.Canvas(win,width=1800,height=1200)
@@ -42,12 +42,59 @@ def bank(event):
     elif z=='Axis Bank':
         webbrowser.open('www.axisbank.com')    
     elif z=='Bank of Baharin and Kuwait':
-        webbrowser.open('https://www.bbkonline.com/Pages/default.aspx')          
+        webbrowser.open('https://www.bbkonline.com/Pages/default.aspx')
+    elif z=='Canara Bank':
+        webbrowser.open('http://www.canarabank.com/')  
+    elif z=='Central Bank of India':
+        webbrowser.open('http://www.centralbankofindia.co.in/')
+    elif z=='City Union Bank':
+        webbrowser.open('http://www.cityunionbank.com/')  
+    elif z=='Corporation Bank':
+        webbrowser.open('https://corpnetbanking.com/')  
+    elif z=='Development Credit Bank':
+        webbrowser.open('http://www.dcbbank.com/')
+    elif z=='Dhanlaxmi Bank':
+        webbrowser.open('http://www.dhanbank.com/')
+    elif z=='IDBI Bank':
+        webbrowser.open('https://www.idbibank.in/index.asp')
+    elif z=='Indian Overseas Bank':
+        webbrowser.open('http://www.iob.in/')  
+    elif z=='IndusInd Bank':
+        webbrowser.open('http://www.indusind.com/')  
+    elif z=='Jammu and Kashmir Bank':
+        webbrowser.open('http://www.jkbank.com/')  
+    elif z=='Karnataka Bank Ltd':
+        webbrowser.open('http://karnatakabank.com/')  
+    elif z=='Karur Vysya Bank':
+        webbrowser.open('http://www.kvb.co.in/')   
+    elif z=='Kotak Bank':
+        webbrowser.open('https://www.kotak.com/en.html')
+    elif z=='Laxmi Vilas Bank':
+        webbrowser.open('http://www.lvbank.com/')
+    elif z=='Oriental Bank of Commerce':
+        webbrowser.open('https://www.obcindia.co.in/')
+    elif z=='Punjab National Bank':
+        webbrowser.open('http://www.pnbindia.in/')
+    elif z=='South Indian Bank':
+        webbrowser.open('www.southindianbank.com/') 
+    elif z=='State Bank of India':
+        webbrowser.open('https://www.onlinesbi.com/')
+    elif z=='Syndicate Bank':
+        webbrowser.open('http://www.syndicatebank.in/')
+    elif z=='UCO Bank':
+        webbrowser.open('http://www.ucobank.com/')
+    elif z=='United Bank of India':
+        webbrowser.open('https://www.unitedbank.co.in/')
+    elif z=='Vijaya Bank':
+        webbrowser.open('https://evijaya.bankofbaroda.in/')
+    elif z=='Yes Bank Ltd':
+        webbrowser.open('http://www.yesbank.in/')                                                                     
+           
 
 values=['select bank','Allahabad Bank','Andhra Bank','Axis Bank','Bank of Baharin and Kuwait','Bank of Baroda','Bank of India','Canara Bank',
 'Central Bank of India','City Union Bank','Corporation Bank','Development Credit Bank','Dhanlaxmi Bank','Federal Bank','ICICI Bank','IDBI Bank','Indian Overseas Bank','IndusInd Bank',
 'Jammu and Kashmir Bank','Karnataka Bank Ltd','Karur Vysya Bank','Kotak Bank','Laxmi Vilas Bank','Oriental Bank of Commerce','Punjab National Bank','South Indian Bank','State Bank of India',
-'Syndicate Bank','UCO Bank','United Bank of India','Vijaya Bank']
+'Syndicate Bank','UCO Bank','United Bank of India','Vijaya Bank','Yes Bank Ltd']
 combobank=ttk.Combobox(hf2,values=values,font=14)
 combobank.bind('<<ComboboxSelected>>',bank)
 combobank.current(0) 
