@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import webbrowser
 import mysql.connector
+from datetime import datetime, date, timedelta
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
 cursor=mydata.cursor()
 
@@ -60,16 +61,108 @@ def statements():
       #table view
     style=ttk.Style()
     style.theme_use('default')
-    style.configure('Treeview',background='silver',foreground='black',fieldbackground='#243e54')
+    style.configure('Treeview',background='silver',foreground='black',fieldbackground='#243e54',rowheight=25)
     style.map('Treeview',background=[('selected','green')])
-    stattree = ttk.Treeview(sthframe, height=7, columns=(1,2,3,4,5), show='headings') 
+    stattree = ttk.Treeview(sthframe, height=9, columns=(1,2,3,4,5), show='headings') 
     stattree.heading(1, text='ID')
     stattree.heading(2, text='DATE')#headings
     stattree.heading(3, text='DESCRIPTION')
     stattree.heading(4, text='DEBIT')
     stattree.heading(5, text='CREDIT')
 
-    sthframe.place(relx=0.1,rely=0.25,relwidth=0.8,relheight=0.7)
+    stattree.column(1, minwidth=10, width=40,anchor=CENTER)#coloumns
+    stattree.column(2, minwidth=30, width=140,anchor=CENTER)
+    stattree.column(3, minwidth=30, width=140,anchor=CENTER)
+    stattree.column(4, minwidth=30, width=140,anchor=CENTER)
+    stattree.column(5, minwidth=30, width=140,anchor=CENTER)
+
+    cursor.execute("SELECT bankstatementid,date,description,debit,credit FROM bankstatements")
+    val=cursor.fetchall()
+    if val:
+        for x in val:
+            stattree.insert('', 'end',values=(x[0],x[1],x[2],x[3],x[4]))
+    def statementadd():
+        global D,bm
+        str = stattree.focus()
+        values=stattree.item(str,'values')
+        id=values[0]
+        cid=2
+        offwin=tk.Toplevel(off)
+        offwin.title('ADD BANKDATA')
+        offwin.geometry('1500x800')
+        offwin['bg'] = '#2f516f'
+        addframe=tk.Frame(offwin,bg='#243e54')
+
+        def offlinevalues():#adding bankdata
+            try:
+                pay=payy.get()
+                catgy=cat.get()
+                catamt=float(catamount.get())
+                debit=float(values[3])
+                credit=float(values[4])
+                if debit==0.0:#checking and assigning crdecheck
+                    crdecheck='credit'
+                if credit==0.0:
+                    crdecheck='debit'
+                toda = date.today()
+                tod = toda.strftime("%Y-%m-%d")    
+                #checking credit or debit
+                ww='debit'
+                if crdecheck=='debit':
+                    deb="INSERT INTO bills (cid,paydate,paymacnt,grandtotal,payornot,payee) values(%s,%s,%s,%s,%s,%s)"
+                    cursor.execute(deb,[cid, tod, catgy, catamt, ww, pay])
+                    mydata.commit()
+                    nam='Accounts Payable(Creditors)'
+                    cursor.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([nam,cid]))
+                    ard=cursor.fetchone()
+                    amt=ard[0]-catamt
+                    print(amt)
+                    cursor.execute("""UPDATE accounts1 SET balance =%s WHERE name =%s and cid =%s""",([amt,nam,cid])) 
+                    mydata.commit()
+                              
+            except:
+                pass        
+
+                
+             
+        tk.Label(addframe,text='Payee',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.05)
+        payy=tk.Entry(addframe,font=('Times New Roman',16))
+        payy.place(relx=0.05,rely=0.12,relwidth=0.9,relheight=0.08)
+
+        tk.Label(addframe,text='Category*',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.28)
+
+        def categoryvalues():
+            cursor.execute("SELECT name FROM accounts WHERE cid=%s",([cid]))
+            val=cursor.fetchall()         
+            for row in val:
+                catval.append(row[0])
+            cursor.execute("SELECT name FROM accounts1 WHERE cid=%s",([cid]))
+            vl=cursor.fetchall()         
+            for i in vl:
+                catval.append(i[0])  
+            cursor.execute("SELECT name FROM accounts WHERE cid=%s",([cid]))
+            val=cursor.fetchall()       
+        catval=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit'
+        ,'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+        'Krishi Kalyan Cess Refund','Prepaid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Undeposited Fund']
+        categoryvalues()
+        cat=ttk.Combobox(addframe,font=('Times New Roman',12),values=catval)
+        cat.place(relx=0.05,rely=0.35,relwidth=0.9,relheight=0.08)
+
+        tk.Label(addframe,text='Amount',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.51)
+        catamount=tk.Entry(addframe,font=('Times New Roman',16))
+        catamount.place(relx=0.05,rely=0.59,relwidth=0.9,relheight=0.08)
+
+        tk.Button(addframe,text='ADD',font=('Times New Roman',16),bg='#243e54',command=offlinevalues).place(relx=0.4,rely=0.8,relwidth=0.2)
+
+        addframe.place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.6)
+        offwin.mainloop()
+        
+    edit_btn = Button(sthframe, text="ADD",command=statementadd)
+    edit_btn.place(relx=0.45,rely=0.75,relheight=0.1,relwidth=0.1)        
+    stattree.place(relx=0,rely=0.05,relwidth=1,relheight=0.6)
+
+    sthframe.place(relx=0.1,rely=0.25,relwidth=0.8,relheight=0.5)
     st.mainloop()
 tk.Button(fra2,text='Uploaded Statements',font=('Times New Roman',16),bg='#243e54',command=statements).place(relx=0.6,rely=0.52,relwidth=0.3)
 
