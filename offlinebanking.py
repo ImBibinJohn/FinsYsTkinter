@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import webbrowser
 import mysql.connector
+from tkinter import messagebox
 from datetime import datetime, date, timedelta
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
 cursor=mydata.cursor()
@@ -81,7 +82,7 @@ def statements():
     if val:
         for x in val:
             stattree.insert('', 'end',values=(x[0],x[1],x[2],x[3],x[4]))
-    def statementadd():
+    def statementadd():#statement adding tkinter page
         global D,bm
         str = stattree.focus()
         values=stattree.item(str,'values')
@@ -116,22 +117,126 @@ def statements():
                     cursor.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([nam,cid]))
                     ard=cursor.fetchone()
                     amt=ard[0]-catamt
-                    print(amt)
                     cursor.execute("""UPDATE accounts1 SET balance =%s WHERE name =%s and cid =%s""",([amt,nam,cid])) 
                     mydata.commit()
-                              
+                    try:
+                        cursor.execute("SELECT balance FROM accounts WHERE name =%s and cid =%s",([catgy,cid]))
+                        ardd=cursor.fetchone()
+                        amt0=ardd[0]-catamt
+                        cursor.execute("""UPDATE accounts SET balance =%s WHERE name =%s and cid =%s""",([amt0,catgy,cid])) 
+                        mydata.commit()
+                    except:
+                        pass    
+                    try:
+                        cursor.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([catgy,cid]))
+                        ardd=cursor.fetchone()
+                        amt1=ardd[0]-catamt
+                        cursor.execute("""UPDATE accounts1 SET balance =%s WHERE name =%s and cid =%s""",([amt1,catgy,cid])) 
+                        mydata.commit()
+                        
+                    except:
+                        pass    
+                elif crdecheck=='credit':  
+                    wx='True'
+                    sales="INSERT INTO salesrecpts (cid,saledate,saledeposit,salegrandtotal,offline,salename) values(%s,%s,%s,%s,%s,%s)" 
+                    cursor.execute(sales,[cid, tod, catgy, catamt, wx, pay])
+                    mydata.commit()
+                    namm='Account Receivable(Debtors)'
+                    cursor.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([namm,cid]))
+                    ard=cursor.fetchone()
+                    amtt=ard[0]+catamt
+                    cursor.execute("""UPDATE accounts1 SET balance =%s WHERE name =%s and cid =%s""",([amtt,namm,cid])) 
+                    mydata.commit()
+                    try:
+                        cursor.execute("SELECT balance FROM accounts WHERE name =%s and cid =%s",([catgy,cid]))
+                        ardd=cursor.fetchone()
+                        amtt0=ardd[0]+catamt
+                        cursor.execute("""UPDATE accounts SET balance =%s WHERE name =%s and cid =%s""",([amtt0,catgy,cid])) 
+                        mydata.commit()
+                    except:
+                        pass    
+                    try:
+                        cursor.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([catgy,cid]))
+                        ardd=cursor.fetchone()
+                        amtt1=ardd[0]+catamt
+                        cursor.execute("""UPDATE accounts1 SET balance =%s WHERE name =%s and cid =%s""",([amtt1,catgy,cid])) 
+                        mydata.commit()
+                        
+                    except:
+                        pass    
+
             except:
                 pass        
 
-                
-             
+        def getsuppcusdata(event):#getting payee and checking database
+            pay=payy.get()
+            x=pay.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cursor.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cursor.fetchone()
+                    if supplier:
+                        list=[]
+                        cursor.execute("SELECT supplier_id,title,firstname,lastname,company,state,defaultexpenceaccount FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        sup=cursor.fetchone()
+                        dict = {'id': sup[0], 'title': sup[1], 'firstname': sup[2],
+                        'lastname': sup[3], 'company': sup[4], 'state': sup[5],
+                        'defaultexpenceaccount': sup[6]}
+                        list.append(dict)
+                        print(list)
+                except:
+                    pass   
+                try:
+                    cursor.execute("SELECT firstname,lastname FROM customer WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    customer=cursor.fetchone()
+                    if customer:
+                        list=[]
+                        cursor.execute("SELECT customer_id,title,firstname,lastname,company,state FROM customer WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        cus=cursor.fetchone()
+                        dict = {'id': cus[0], 'title': cus[1], 'firstname': cus[2],
+                        'lastname': cus[3], 'company': cus[4], 'state': cus[5],}
+                        list.append(dict)
+                        print(list)
+                except:
+                    pass         
+            else:
+                try:
+                    cursor.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cursor.fetchone()
+                    if supplier:
+                        list=[]
+                        cursor.execute("SELECT supplier_id,title,firstname,lastname,company,state,defaultexpenceaccount FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        sup=cursor.fetchone()
+                        dict = {'id': sup[0], 'title': sup[1], 'firstname': sup[2],
+                        'lastname': sup[3], 'company': sup[4], 'state': sup[5],
+                        'defaultexpenceaccount': sup[6]}
+                        list.append(dict)
+                except:
+                    pass
+                try:
+                    cursor.execute("SELECT firstname,lastname FROM customer WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    customer=cursor.fetchone()
+                    if customer:
+                        list=[]
+                        cursor.execute("SELECT customer_id,title,firstname,lastname,company,state FROM customer WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        cus=cursor.fetchone()
+                        dict = {'id': cus[0], 'title': cus[1], 'firstname': cus[2],
+                        'lastname': cus[3], 'company': cus[4], 'state': cus[5],}
+                        list.append(dict)
+                except:
+                    pass    
+                 
         tk.Label(addframe,text='Payee',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.05)
         payy=tk.Entry(addframe,font=('Times New Roman',16))
+        payy.bind('<FocusOut>',getsuppcusdata)
         payy.place(relx=0.05,rely=0.12,relwidth=0.9,relheight=0.08)
 
         tk.Label(addframe,text='Category*',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.28)
 
-        def categoryvalues():
+        def categoryvalues():#combobox values
             cursor.execute("SELECT name FROM accounts WHERE cid=%s",([cid]))
             val=cursor.fetchall()         
             for row in val:
