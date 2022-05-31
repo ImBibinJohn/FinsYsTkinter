@@ -291,6 +291,7 @@ def upload():
         ff="INSERT INTO bankstatements (cid,name,date,description,debit,credit) values(%s,%s,%s,%s,%s,%s)"
         cursor.execute(ff,[cid, row[0], row[1], row[2], row[3], row[4]])
         mydata.commit()
+    messagebox.showinfo('SUCESSFULL','Excel sheet uploaded',parent=off)     
 
 tk.Button(fra2,text = "Select Excel File",font=('Times New Roman',16),command=open_file,bg='#243e54').place(relx=0.5,rely=0.65,relwidth=0.2)
 tk.Button(fra2,text='Upload',font=('Times New Roman',16),bg='#243e54',command=upload).place(relx=0.73,rely=0.65,relwidth=0.2)
