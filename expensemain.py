@@ -191,14 +191,14 @@ def main():
         mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
 
         title_lab = tk.Label(
-            form_frame, text="Choose Ref No", bg='#243e55', fg='#fff')
+            form_frame, text="", bg='#243e55', fg='#fff')
         place_input = StringVar()
         drop2 = ttk.Combobox(form_frame, textvariable=place_input)
 
         drop2['values'] = ("REF1 REF2 REF3 REF4")
 
         title_lab.place(x=20, y=100, height=15, width=100)
-        drop2.place(x=30, y=130, height=40, width=450)
+        drop2.place(x=530, y=130, height=40, width=450)
         wrappen.pack(fill='both', expand='yes',)
 
         title_lab = tk.Label(form_frame, text="PAYEE",
@@ -209,7 +209,7 @@ def main():
         drop2['values'] = ("PAYEE1 PAYEE2 PAYEE3 PAYEE4")
 
         title_lab.place(x=0, y=100, height=15, width=100)
-        drop2.place(x=30, y=130, height=40, width=450)
+        drop2.place(x=530, y=130, height=40, width=450)
         wrappen.pack(fill='both', expand='yes',)
 
         payment_date = Label(
@@ -232,15 +232,15 @@ def main():
         drop2 = ttk.Combobox(form_frame, textvariable=place_input)
         drop2['values'] = ("Select Supplier")
 
-        title_lab.place(x=30, y=100, height=15, width=60)
+        title_lab.place(x=530, y=100, height=15, width=60)
         drop2.place(x=30, y=130, height=40, width=450)
         wrappen.pack(fill='both', expand='yes',)
 
         billing_ad = Label(form_frame, text="Maling Address",
                            bg='#243e55', fg='#fff')
-        billing_ad.place(x=30, y=200,)
+        billing_ad.place(x=30, y=290,)
         billing_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
-        billing_input.place(x=30, y=230, height=90)
+        billing_input.place(x=30, y=320, height=90)
 
         payment_method_lab.place(x=530, y=200, height=15, width=100)
         drop3.place(x=530, y=230, height=40, width=450)

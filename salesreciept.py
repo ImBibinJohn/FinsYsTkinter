@@ -48,6 +48,12 @@ for a in table4:
 
 
 def ProSelect(event):
+    createsubtotal =0
+    finding_tax1=0
+    finding_tax2=0
+    finding_tax3=0
+    finding_tax4=0
+    final_total=0
     selected_data=[]
     option3=product1.get()
     selected_data.append(option3)
@@ -62,6 +68,38 @@ def ProSelect(event):
         saleprice=a[12]
         total1=int(saleprice)*int(qty1)
         totall1.set(total1)
+        sub_total.set(total1)
+    
+    gst=tax_drop1.get()
+    print("seslscted gst",gst)
+    if gst=="18.0% GST(18%)":
+        print("totla",total1)
+        finding_tax1=int(total1)*(18/100)
+    elif gst=="28.0% GST(28%)":
+        finding_tax1=int(total1)*(28/100)
+            
+    elif gst=="12.0% GST(12%)":
+        finding_tax1=int(total1)*(12/100)
+            
+    elif gst=="06.0% GST(06%)":
+        finding_tax1=int(total1)*(6/100)
+            
+    elif gst=="05.0% GST(05%)":
+        finding_tax1=int(total1)*(5/100)
+            
+    elif gst=="03.0% GST(03%)":
+        finding_tax1=int(total1)*(3/100)
+            
+    elif gst=="0.25% GST(0.25%)":
+        finding_tax1=int(total1)*(.25/100)
+            
+    else:
+        finding_tax4=0
+        taxamount.set(finding_tax1+finding_tax2+finding_tax3+finding_tax4)
+        finding_tax=finding_tax1+finding_tax2+finding_tax3+finding_tax4
+        taxamount.set(finding_tax)
+
+    
 
 #for the row of product2
 def ProSelect2(event):
@@ -77,8 +115,10 @@ def ProSelect2(event):
         pricee2.set(a[12])
         hsn2.set(a[3])
         saleprice=a[12]
-        total1=int(saleprice)*int(qty2)
-        totall2.set(total1)
+        total2=int(saleprice)*int(qty2)
+        totall2.set(total2)
+        sub_total.set(total2)
+
 def ProSelect3(event):
     selected_data=[]
     option5=product3.get()
@@ -92,8 +132,10 @@ def ProSelect3(event):
         pricee3.set(a[12])
         hsn3.set(a[3])
         saleprice=a[12]
-        total1=int(saleprice)*int(qty3)
-        totall3.set(total1)
+        total3=int(saleprice)*int(qty3)
+        totall3.set(total3)
+        sub_total.set(total3)
+
 
 
 #to save estimate formdata
@@ -197,7 +239,9 @@ totall3=tk.StringVar()
 totall3.set("0")
 tax_1=tk.StringVar()
 tax_2=tk.StringVar()
-tax_3=tk.StringVar() 
+tax_3=tk.StringVar()
+sub_total=tk.StringVar()
+taxamount=tk.StringVar() 
 
 title_lab=tk.Label(form_frame,text="CUSTOMER",bg='#243e55',fg='#fff')
 place_input=StringVar()
@@ -349,17 +393,21 @@ total_input.place(x=950,y=240,height=40,width=150)
 total_input=Entry(form2_frame,width=40,bg='#243e55',fg='#fff',textvariable=totall3)
 total_input.place(x=950,y=310,height=40,width=150)
 #row1
-tax_drop=ttk.Combobox(form2_frame)
-tax_drop['values']=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
-tax_drop.place(x=1130,y=150,height=40,width=150)
+tax_drop1=ttk.Combobox(form2_frame)
+tax_values=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
+tax_drop1['values']=tax_values
+tax_drop1.bind("<<ComboboxSelected>>",ProSelect)
+tax_drop1.place(x=1130,y=150,height=40,width=150)
 #row2
-tax_drop=ttk.Combobox(form2_frame)
-tax_drop['values']=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
-tax_drop.place(x=1130,y=240,height=40,width=150)
+tax_drop2=ttk.Combobox(form2_frame)
+tax_drop2['values']=tax_values
+tax_drop2.bind("<<ComboboxSelected>>",ProSelect2)
+tax_drop2.place(x=1130,y=240,height=40,width=150)
 #row3
-tax_drop=ttk.Combobox(form2_frame)
-tax_drop['values']=("Choose","28.0% GST(28%)","18.0% GST(18%)","12.0% GST(12%)","06.0% GST(06%)","05.0% GST(05%)","03.0% GST(03%)","0.25% GST(0.25%)","0.0% GST(0%)","Exempt GST(0%)","Out of Scope(0%)")
-tax_drop.place(x=1130,y=310,height=40,width=150)
+tax_drop3=ttk.Combobox(form2_frame)
+tax_drop3['values']=tax_values
+tax_drop3.bind("<<ComboboxSelected>>",ProSelect3)
+tax_drop3.place(x=1130,y=310,height=40,width=150)
 
 ##################
 
@@ -367,14 +415,14 @@ sub_headingfont=font.Font(family='Times New Roman', size=18,)
 form3_frame=Frame(mycanvas,width=1600,height=500,bg='#243e55',bd=1,relief="groove")
 mycanvas.create_window((0,1100),window=form3_frame,anchor="nw")
 
-sub_total=Label(form3_frame,text="SUB TOTAL",bg='#243e55',fg='#fff')
-sub_total.place(x=900,y=110)
-sub_input=Entry(form3_frame,width=40,bg='#243e55',fg='#fff')
+sub_label=Label(form3_frame,text="SUB TOTAL",bg='#243e55',fg='#fff')
+sub_label.place(x=900,y=110)
+sub_input=Entry(form3_frame,width=40,bg='#243e55',fg='#fff',textvariable=sub_total)
 sub_input.place(x=1000,y=100,height=40,width=200)
 
 tax_amount=Label(form3_frame,text="TAX AMOUNT",bg='#243e55',fg='#fff')
 tax_amount.place(x=900,y=160)
-tax_input=Entry(form3_frame,width=40,bg='#243e55',fg='#fff')
+tax_input=Entry(form3_frame,width=40,bg='#243e55',fg='#fff',textvariable=taxamount)
 tax_input.place(x=1000,y=150,height=40,width=200)
 
 grand_total=Label(form3_frame,text="GRAND TOTAL",bg='#243e55',fg='#fff')
