@@ -163,11 +163,13 @@ def statements():
                         mydata.commit()
                         
                     except:
-                        pass    
-
+                        pass 
+                messagebox.showinfo('SUCESSFULL','Datas entered sucessfully',parent=offwin) 
+                offwin.destroy()    
+                          
             except:
-                pass        
-
+                pass  
+            
         def getsuppcusdata(event):#getting payee and checking database
             pay=payy.get()
             x=pay.split()
@@ -227,7 +229,8 @@ def statements():
                         'lastname': cus[3], 'company': cus[4], 'state': cus[5],}
                         list.append(dict)
                 except:
-                    pass    
+                    pass   
+                   
                  
         tk.Label(addframe,text='Payee',font=('Times New Roman',16),bg='#243e54').place(relx=0.05,rely=0.05)
         payy=tk.Entry(addframe,font=('Times New Roman',16))
