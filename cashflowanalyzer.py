@@ -31,7 +31,78 @@ tab5 = mycursor.fetchall()
 jun="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Advertising/Promotional')"
 mycursor.execute(jun)
 tab6 = mycursor.fetchall()
-
+jan1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Bank Charges')"
+mycursor.execute(jan)
+tab7 = mycursor.fetchall()
+feb1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Bank Charges')"
+mycursor.execute(feb1)
+tab8 = mycursor.fetchall()
+mar1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Bank Charges')"
+mycursor.execute(mar1)
+tab9 = mycursor.fetchall()
+apr1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Bank Charges')"
+mycursor.execute(apr1)
+tab10 = mycursor.fetchall()
+may1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Bank Charges')"
+mycursor.execute(may1)
+tab11 = mycursor.fetchall()
+jun1="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Bank Charges')"
+mycursor.execute(jun)
+tab12 = mycursor.fetchall()
+jan2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Business Licenses and Permits')"
+mycursor.execute(jan2)
+tab13 = mycursor.fetchall()
+feb2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Business Licenses and Permits')"
+mycursor.execute(feb2)
+tab14 = mycursor.fetchall()
+mar2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Business Licenses and Permits')"
+mycursor.execute(mar2)
+tab15 = mycursor.fetchall()
+apr2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Business Licenses and Permits')"
+mycursor.execute(apr2)
+tab16 = mycursor.fetchall()
+may2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Business Licenses and Permits')"
+mycursor.execute(may2)
+tab17 = mycursor.fetchall()
+jun2="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Business Licenses and Permits')"
+mycursor.execute(jun2)
+tab18 = mycursor.fetchall()
+jan3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Charitable Contributions')"
+mycursor.execute(jan3)
+tab19 = mycursor.fetchall()
+feb3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Charitable Contributions')"
+mycursor.execute(feb3)
+tab20 = mycursor.fetchall()
+mar3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Charitable Contributions')"
+mycursor.execute(mar3)
+tab21 = mycursor.fetchall()
+apr3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Charitable Contributions')"
+mycursor.execute(apr3)
+tab22 = mycursor.fetchall()
+may3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Charitable Contributions')"
+mycursor.execute(may3)
+tab23 = mycursor.fetchall()
+jun3="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Charitable Contributions')"
+mycursor.execute(jun3)
+tab24 = mycursor.fetchall()
+jan4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Computer and Internet Expense')"
+mycursor.execute(jan4)
+tab25 = mycursor.fetchall()
+feb4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Computer and Internet Expense')"
+mycursor.execute(feb4)
+tab26 = mycursor.fetchall()
+mar4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Computer and Internet Expense')"
+mycursor.execute(mar4)
+tab27 = mycursor.fetchall()
+apr4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Computer and Internet Expense')"
+mycursor.execute(apr4)
+tab28 = mycursor.fetchall()
+may4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Computer and Internet Expense')"
+mycursor.execute(may4)
+tab29 = mycursor.fetchall()
+jun4="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Computer and Internet Expense')"
+mycursor.execute(jun4)
+tab30 = mycursor.fetchall()
 # def fetchdata():
 query="SELECT ROUND(SUM(grandtotal),3) FROM `app1_expences` WHERE paymmethod='cash' AND category1='Advertising/Promotional' "
 mycursor.execute(query)
@@ -862,7 +933,7 @@ total128.set(table35)
 tot1=tk.StringVar()
 tot1.set(tab1)
 tot2=tk.StringVar()
-tot2.set(tab2)
+tot2.set(tab8)
 tot3=tk.StringVar()
 tot3.set(tab3)
 tot4=tk.StringVar()
@@ -871,11 +942,30 @@ tot5=tk.StringVar()
 tot5.set(tab5)
 tot6=tk.StringVar()
 tot6.set(tab6)
-
-# total129=tk.StringVar()
-# total129.set(table35)
-# total130=tk.StringVar()
-# total130.set(table35)
+tot7=tk.StringVar()
+tot7.set(tab7)
+tot8=tk.StringVar()
+tot8.set(tab8)
+tot9=tk.StringVar()
+tot9.set(tab7)
+tot10=tk.StringVar()
+tot10.set(tab8)
+tot11=tk.StringVar()
+tot11.set(tab7)
+tot12=tk.StringVar()
+tot12.set(tab8)
+tot13=tk.StringVar()
+tot13.set(tab7)
+tot14=tk.StringVar()
+tot14.set(tab8)
+tot15=tk.StringVar()
+tot15.set(tab7)
+tot15=tk.StringVar()
+tot15.set(tab8)
+tot16=tk.StringVar()
+tot16.set(tab7)
+tot17=tk.StringVar()
+tot17.set(tab8)
 r1=Label(form_frame,text="Beginning Cash\nBalance",bg='#243e55' ,fg="white",font=('Arial',16))
 r1.place(x=70,y=220)
 
@@ -966,21 +1056,21 @@ input7=Entry(form_frame,bg='#2f516a',textvariable=total,fg='white',width=16,just
 r10=Label(form_frame,text="Bank Charges",bg='#243e55',fg="white",font=('Arial',16),justify='left')
 r10.place(x=80,y=939)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=935,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=935,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=935,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=935,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=935,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=935,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot7,fg='white',width=16,justify='center').place(x=395,y=935,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot8,fg='white',width=16,justify='center').place(x=515,y=935,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot9,fg='white',width=16,justify='center').place(x=645,y=935,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot10,fg='white',width=16,justify='center').place(x=775,y=935,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot11,fg='white',width=16,justify='center').place(x=895,y=935,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot12,fg='white',width=16,justify='center').place(x=1025,y=935,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total1,fg='white',width=16,justify='center').place(x=1155,y=935,height=40)
 
 r11=Label(form_frame,text="Business Licenses \nand Permits",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r11.place(x=80,y=1019)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=1025,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=1025,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=1025,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=1025,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot14,fg='white',width=16,justify='center').place(x=395,y=1025,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot15,fg='white',width=16,justify='center').place(x=515,y=1025,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot16,fg='white',width=16,justify='center').place(x=645,y=1025,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot17,fg='white',width=16,justify='center').place(x=775,y=1025,height=40)
 input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=1025,height=40)
 input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=1025,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total2,fg='white',width=16,justify='center').place(x=1155,y=1025,height=40)
