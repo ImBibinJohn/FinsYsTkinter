@@ -1,57 +1,4 @@
 
-# from tkinter import *
-# import tkinter as tk
-# from tkinter import *
-# from  tkinter import ttk
-# import tkinter.font as font
-# from tkinter import messagebox as MessageBox
-# import tkinter.messagebox
-# from PIL import Image,ImageTk
-# from tkinter.ttk import Combobox
-# from requests import get
-# from tkcalendar import Calendar, DateEntry
-# import mysql.connector as mysql
-# import pymysql
-
-# def bankrecon():
-    
-#     import bankrecon
-    
-
-# window = Tk()
-# window.geometry('320x150')
-# menubar = Menu(window)
-# Sale = Menu(menubar, tearoff=False)
-# Sale.add_command(label="Online Banking")
-# Sale.add_command(label="Offline Banking")
-# Sale.add_command(label="Bank Reconcilation", command=bankrecon)
-# menubar.add_cascade(label="Banking", menu=Sale)
-
-# def salesrecords():
-    
-#     import salesrecords
-    
-
-# Sale = Menu(menubar, tearoff=False)
-# Sale.add_command(label="Sales Records",command=salesrecords)
-# Sale.add_command(label="Invoices")
-# Sale.add_command(label="Customers")
-# Sale.add_command(label="Product and Services")
-# menubar.add_cascade(label="Sales", menu=Sale)
-# window.config(menu=menubar)
-# window.mainloop() 
-
-
-
-
-
-
-
-
-
-
-
-
 
 import tkinter.font as font
 from  tkinter import ttk
@@ -60,7 +7,8 @@ from tkinter.filedialog import askopenfilename
 
 from tkinter import *
 import tkinter
-from PIL import ImageTk
+from PIL import Image, ImageTk
+
 from tkinter import messagebox
 import mysql.connector
 
@@ -275,7 +223,7 @@ class Login:
                     # print("hlo")
                     mydb.commit()
                     mycursor.close()
-                    messagebox.showinfo("Success", "Register Successfull",parent=self.root)
+                    # messagebox.showinfo("Success", "Register Successfull",parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error",f"Error due to :{str(es)}",parent=self.root)
                 
@@ -303,37 +251,37 @@ class Login:
         center_frame.place(y=50,x=600,width=800,height=800)
         Label(center_frame, text="We're Happy you're Here!", font=('Times', 30),bg="#fff").place(x=150,y=30)
 
-        combany_name = Entry(center_frame, font=('Times', 14))
-        combany_name.insert(0, 'Combany Name')
-        combany_name.place(x=30,y=100,height=50,width=700)
-        combany_address = Entry(center_frame, font=('Times', 14))
-        combany_address.place(x=30,y=170,height=50,width=700)
-        combany_address.insert(0, 'Combany Address')
-        city = Entry(center_frame, font=('Times', 14))
-        city.place(x=30,y=240,height=50,width=700)
-        city.insert(0, 'City')
+        self.combany_name = Entry(center_frame, font=('Times', 14))
+        self.combany_name.insert(0, 'Combany Name')
+        self.combany_name.place(x=30,y=100,height=50,width=700)
+        self.combany_address = Entry(center_frame, font=('Times', 14))
+        self.combany_address.place(x=30,y=170,height=50,width=700)
+        self.combany_address.insert(0, 'Combany Address')
+        self.city = Entry(center_frame, font=('Times', 14))
+        self.city.place(x=30,y=240,height=50,width=700)
+        self.city.insert(0, 'City')
 
-        state =ttk.Combobox(center_frame)
-        state['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
+        self.state =ttk.Combobox(center_frame)
+        self.state['values']=("" ,"Andaman and Nicobar Islads","Andhra Predhesh","Arunachal Predesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli","Damn anad Diu","Delhi","Goa","Gujarat","Haryana","Himachal Predesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Predesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Predesh","Uttarakhand","West Bengal","Other Territory")
 
 
 
-        state.place(x=30,y=310,height=50,width=700)
-        state.insert(0, 'Choose')
-        pin = Entry(center_frame, font=('Times', 14))
-        pin.place(x=30,y=380,height=50,width=700)
-        pin.insert(0, 'Pincode')
-        email = Entry(center_frame, font=('Times', 14))
-        email.place(x=30,y=450,height=50,width=700)
-        email.insert(0, 'Email')
+        self.state.place(x=30,y=310,height=50,width=700)
+        self.state.insert(0, 'Choose')
+        self.pin = Entry(center_frame, font=('Times', 14))
+        self.pin.place(x=30,y=380,height=50,width=700)
+        self.pin.insert(0, 'Pincode')
+        self.cemail = Entry(center_frame, font=('Times', 14))
+        self.cemail.place(x=30,y=450,height=50,width=700)
+        self.cemail.insert(0, 'Email')
 
-        Phone = Entry(center_frame, font=('Times', 14))
-        Phone.place(x=30,y=520,height=50,width=700)
-        Phone.insert(0, 'Phone Numer')
+        self.Phone = Entry(center_frame, font=('Times', 14))
+        self.Phone.place(x=30,y=520,height=50,width=700)
+        self.Phone.insert(0, 'Phone Numer')
 
-        file_choose=Entry(center_frame,font=40)
-        file_choose.place(x=130,y=590,height=50,width=600)
-        file_choose.insert(0, 'No file Selected')
+        self.file_choose=Entry(center_frame,font=40)
+        self.file_choose.place(x=130,y=590,height=50,width=600)
+        self.file_choose.insert(0, 'No file Selected')
 
         reg_ch = Button(center_frame, width=15, text='Browse...', font=('Times', 14), command=self.select_file)
         reg_ch.place(x=30,y=590,height=50,width=100)
@@ -347,42 +295,42 @@ class Login:
         advce_details_frame.place(y=50,x=600,width=800,height=800)
         Label(advce_details_frame, text="Let's Start Building Your FinsYs", font=('Times', 30),bg="#fff").place(x=150,y=30)
 
-        combany_name = Entry(advce_details_frame, font=('Times', 14))
-        combany_name.insert(0, 'Legal Business Name')
-        combany_name.place(x=30,y=100,height=50,width=700)
+        self.business_name = Entry(advce_details_frame, font=('Times', 14))
+        self.business_name.insert(0, 'Legal Business Name')
+        self.business_name.place(x=30,y=100,height=50,width=700)
 
-        your_industry=Label(advce_details_frame,text="Your Industry",background="white", foreground="black",font=14)
-        your_industry.place(x=30,y=170)
+        self.your_industry=Label(advce_details_frame,text="Your Industry",background="white", foreground="black",font=14)
+        self.your_industry.place(x=30,y=170)
 
-        your_industry_input =ttk.Combobox(advce_details_frame)
-        your_industry_input['values']=("Accounting Services" ,"Consultants, doctors, Lawyers and similar","Information Tecnology","Manufacturing","Professional Scientific and Technical Services","Restaurant/Bar and similar","Retail and Smilar","Other Finanacial Services")
-        your_industry_input.place(x=30,y=200,height=50,width=700)
-        your_industry_input.current(0)
+        self.your_industry_input =ttk.Combobox(advce_details_frame)
+        self.your_industry_input['values']=("Accounting Services" ,"Consultants, doctors, Lawyers and similar","Information Tecnology","Manufacturing","Professional Scientific and Technical Services","Restaurant/Bar and similar","Retail and Smilar","Other Finanacial Services")
+        self.your_industry_input.place(x=30,y=200,height=50,width=700)
+        self.your_industry_input.current(0)
 
-        cmp_type=Label(advce_details_frame,text="Company type",background="white", foreground="black",font=14)
-        cmp_type.place(x=30,y=270)
+        self.cmp_type=Label(advce_details_frame,text="Company type",background="white", foreground="black",font=14)
+        self.cmp_type.place(x=30,y=270)
 
-        cmp_type_input =ttk.Combobox(advce_details_frame)
-        cmp_type_input['values']=("Private Limited Company" ,"Public Limited Company","Joint-Venture Company","Partnership Firm Company","One Person Company","Branch Office Company","Non Government Organization")
-        cmp_type_input.place(x=30,y=300,height=50,width=700)
-        cmp_type_input.current(0)
+        self.cmp_type_input =ttk.Combobox(advce_details_frame)
+        self.cmp_type_input['values']=("Private Limited Company" ,"Public Limited Company","Joint-Venture Company","Partnership Firm Company","One Person Company","Branch Office Company","Non Government Organization")
+        self.cmp_type_input.place(x=30,y=300,height=50,width=700)
+        self.cmp_type_input.current(0)
 
-        radio=IntVar()            
+        self.radio=IntVar()            
         workers= Label(advce_details_frame,text = "Do you have an Accountant, Bookkeeper or Tax Pro ?",font=14,background='#fff') 
         workers.place(x=30,y=370)
-        yes_input = Radiobutton(advce_details_frame, text="yes", variable=radio, value=1,font=14,background='#fff')  
-        yes_input.place(x=30, y=400)
-        no_input = Radiobutton(advce_details_frame, text="No", variable=radio, value=2,font=14,background='#fff')  
+        self.yes_input = Radiobutton(advce_details_frame, text="yes", variable=self.radio, value=1,font=14,background='#fff')  
+        self.yes_input.place(x=30, y=400)
+        self.no_input = Radiobutton(advce_details_frame, text="No", variable=self.radio, value=2,font=14,background='#fff')  
 
-        no_input.place(x=130, y=400)
+        self.no_input.place(x=130, y=400)
 
         paid_type=Label(advce_details_frame,text="How do you like to get paid?",background="white", foreground="black",font=14)
         paid_type.place(x=30,y=470)
 
-        paid_type_input =ttk.Combobox(advce_details_frame)
-        paid_type_input['values']=("Cash" ,"Cheque","Credit card/Debit card","Bank Transfer","Paypal/Other service")
-        paid_type_input.place(x=30,y=500,height=50,width=700)
-        paid_type_input.current(0)
+        self.paid_type_input =ttk.Combobox(advce_details_frame)
+        self.paid_type_input['values']=("Cash" ,"Cheque","Credit card/Debit card","Bank Transfer","Paypal/Other service")
+        self.paid_type_input.place(x=30,y=500,height=50,width=700)
+        self.paid_type_input.current(0)
 
 
         pre_btn = Button(advce_details_frame, width=15, text='Previous', font=('Times', 14), command=self.company_datails,bg='#2f516a',fg='#fff')
@@ -393,9 +341,56 @@ class Login:
 
 
     def company_save(self):
-        pass
+        if self.combany_name.get()=="" or self.combany_address.get()=="" or self.city.get()=="" or self.state.get()=="" or self.pin.get()=="" or self.cemail.get()=="" or self.Phone.get()=="" or self.business_name.get()=="" or self.your_industry_input.get()=="" or self.cmp_type_input.get()=="" or self.radio.get()=="" or self.paid_type_input.get()=="" :
+            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+        
+        else:
+        
+                self.database()
+                if self.file_choose.get()!=	'No file Selected':
+                    file_data=self.file_choose.get()
+                else:
+                    file_data='/var/www/python/infox_works/fynsYs-master/media/images/default.png'
+
+
+                if self.radio.get()==1:
+                    preworkers='Yes'
+                else:
+                    preworkers='No'
+                
+                
+
+
+                id=[]
+                email_id=self.email_entry.get()
+                id.append(email_id)
+
+                sql='SELECT * FROM register WHERE email=%s'# selecting entire table from db,taking username , nd check the existance
+                
+                mycursor.execute(sql,id)
+
+                user_id=mycursor.fetchone()
+                print("emaillllllll",user_id)
+
+
+                
+                sqll="INSERT INTO app1_company (cname,caddress,city,state,pincode,cemail,phone,cimg,bname,industry,ctype,abt,paid,id_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+                val=(self.combany_name.get(),self.combany_address.get(),self.city.get(),self.state.get(),self.pin.get(),self.cemail.get(),self.Phone.get(),file_data,self.business_name.get(),self.your_industry_input.get(),self.cmp_type_input.get(),preworkers,self.paid_type_input.get(),user_id[0])
+                mycursor.execute(sqll,val)
+                # mycursor.execute("insert into register((first_name,last_name,password,username,email) values(%s,%s,%s,%s,%s)",(self.fname_entry.get(),self.lname_entry.get(),self.password_entry.get(),self.username_entry.get(),self.email_entry.get()))
+                # print("hlo")
+                mydb.commit()
+                mycursor.close()
                     
 
 root=Tk()
+image1 = Image.open("</var/www/python/infox_works/FinsYsTkinter/lowstock.png>")
+test = ImageTk.PhotoImage(image1)
+
+label1 = tkinter.Label(image=test)
+label1.image = test
+
+# Position image
+label1.place(x=400,y=500)
 ob = Login(root)
 root.mainloop()
