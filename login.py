@@ -1,5 +1,6 @@
 
 
+from textwrap import fill
 import tkinter.font as font
 from  tkinter import ttk
 import tkinter as tk
@@ -7,10 +8,13 @@ from tkinter.filedialog import askopenfilename
 
 from tkinter import *
 import tkinter
+import PIL
 from PIL import Image, ImageTk
 
 from tkinter import messagebox
 import mysql.connector
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF, renderPM
 
 #create the class
 class Login:
@@ -34,6 +38,36 @@ class Login:
         
         btn2=Button(Frame_login,command=self.Register,text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
         btn2.place(x=330,y=120)
+
+
+
+        
+
+
+
+
+
+
+
+        def get_svg(svg_file):
+            drawing = svg2rlg(svg_file)
+            renderPM.drawToFile(drawing, "temp.png",fmt="png")
+
+    
+        get_svg("log.svg")
+
+        pimg =PIL.ImageTk.PhotoImage(Image.open("temp.png"))
+        # size = img.size
+        # frame = tk.Label(Frame_login, image=pimg)
+        frame = tk.Canvas(Frame_login, width=800, height=700,background="#213e57")
+        frame.place(x=350,y=300)
+        frame.create_image(0,0,anchor='nw',image=pimg)
+        
+        
+
+
+
+
         # self.img=ImageTk.PhotoImage(Image.open("log.svg").resize(size))
         # self.img=Label(Frame_login,Image=self.img).place(relx=0.00,rely=-0,relheight=1,relwidth=1)
         # size=(500,700)
@@ -59,6 +93,14 @@ class Login:
         
         #email_txt
         self.username_txt=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
+
+        # self.username_txt.image = ImageTk.PhotoImage(Image.open("defaultimage.jpeg"))
+        # imageLabel = tk.Label(frame, image=self.username_txt.image,width=80, height=70)
+        # imageLabel.pack(side="right", fill="y")
+
+
+
+
         self.username_txt.place(x=30,y=145,width=270,height=35)
         
         log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
@@ -73,6 +115,11 @@ class Login:
         btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="orangered",bd=0,width=15,height=1)
         btn2.place(x=80,y=330)
         
+        
+
+
+
+
         # btn3=Button(frame_input,command=self.Register,text="Not Registered?register",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
         # btn3.place(x=110,y=380)
         
@@ -94,6 +141,11 @@ class Login:
                 messagebox.showerror("Error",f'Error Due to : {str(es)}',parent=self.root)
                 
                 
+    def create_canvas(self):
+        canvas=Canvas(self,bg="blue",)
+        coord=210,10
+        arc=canvas.create_arc(coord,start=200,end=50,fill="red")
+        canvas.pack()
     def Register(self):
         
         Frame_login1=Frame(self.root,bg="white")
@@ -101,9 +153,12 @@ class Login:
         
         frame_input2=Frame(self.root,bg="white")
         frame_input2.place(x=200,y=0,height=950,width=950)
+
+
         
         label1=Label(frame_input2,text="Sign up",font=('times in roman',32,'bold'),fg="Black",bg="white")
         label1.place(x=45,y=50)
+        
         
         # fname_label=Label(frame_input2,text="Firstname",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # fname_label.place(x=0,y=150)
@@ -175,6 +230,25 @@ class Login:
         
         btn2=Button(frame_input3,command=self.loginform,text="SIGN IN",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
         btn2.place(x=400,y=200)
+
+
+        def get_svg2(svg_file):
+
+            drawing = svg2rlg(svg_file)
+            renderPM.drawToFile(drawing, "temp.png", fmt="PNG")
+
+        get_svg2("register.svg")
+        img = Image.open("temp.png")
+        pimg = ImageTk.PhotoImage(img)
+        # size = img.size
+        frame = tk.Canvas(frame_input3, width=800, height=800)
+        frame.place(x=0,y=250)
+        frame.create_image(0,0,anchor='nw',image=pimg)
+        
+
+
+
+
 
     def database(self):
         global mydb,mycursor
@@ -381,16 +455,25 @@ class Login:
                 # print("hlo")
                 mydb.commit()
                 mycursor.close()
-                    
+
+
+
+    def images(self,image_name):
+        pass
+
+# class Root:
+#     def __init__(self,image_name):
+#         root = tk.Tk()
+#         img = Image.open(image_name)
+#         pimg = ImageTk.PhotoImage(img)
+#         size = img.size
+#         frame = tk.Canvas(root, width=size[0], height=size[1])
+#         frame.pack()
+#         frame.create_image(0,0,anchor='nw',image=pimg)
+#         root.mainloop()
+# root = Root("temp.png")
 
 root=Tk()
-image1 = Image.open("</var/www/python/infox_works/FinsYsTkinter/lowstock.png>")
-test = ImageTk.PhotoImage(image1)
 
-label1 = tkinter.Label(image=test)
-label1.image = test
-
-# Position image
-label1.place(x=400,y=500)
 ob = Login(root)
 root.mainloop()
