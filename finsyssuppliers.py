@@ -384,11 +384,20 @@ def addsuppliers():
     eterms.bind('<FocusOut>',addnewterms)
     eterms.place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.025)
 
+    def gstfn(ent):
+        cc=egst.get()
+        if cc=='GST-unregistered':
+            egst_in['state']='disabled'
+            etaxreg['state']='disabled'
+        else:
+            egst_in['state']='normal'
+            etaxreg['state']='normal'    
 
     tk.Label(hd1,text='GST Type',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.35)
     gstvalues=['GST registered-Regular','GST registered-Composition','GST-unregistered']
     egst=ttk.Combobox(hd1,values=gstvalues)
     egst.current(0)
+    egst.bind('<<ComboboxSelected>>',gstfn)
     egst.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.025)
 
     def checkgst(event):
@@ -430,7 +439,8 @@ def addsuppliers():
     tk.Button(hd1,text='+',font=(14),command=sherryplus).place(relx=0.625,rely=0.44,relwidth=0.025,relheight=0.025)
 
     tk.Label(hd1,text='Apply TDS for Supplier',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.41)
-    etds=tk.Entry(hd1)
+    fg=['Yes','No']
+    etds=ttk.Combobox(hd1,values=fg)
     etds.place(relx=0.68,rely=0.44,relwidth=0.3,relheight=0.025)  
     
     label2=tk.Label(hd1,text='Address',bg='#243e54')
@@ -571,7 +581,7 @@ def sherrymain():
             tax=etaxreg.get()
             date=ddate.get()
             defexp=edefexp.get()
-            tds=etds.get()
+            tdss=tds.get()
             street=estreet.get()
             city=ecity.get()
             state=estat.get()
@@ -581,7 +591,7 @@ def sherrymain():
            # bn=bm.get()
             print(title,fname,lname,comp,mail,mob,open1,acc,webs,bill,terms,gst,gst_in,tax,date,defexp,tds,street,city,state,pin,contry,note,b)
             cur.execute("""UPDATE supplier SET title =%s, firstname =%s, lastname =%s, company =%s, mobile =%s, email =%s, website =%s, billingrate =%s, terms =%s, openingbalance =%s,accountno =%s, gsttype =%s,gstin =%s, taxregisterationno =%s, effectivedate =%s, defaultexpenceaccount =%s, tds =%s, street =%s, city =%s, state =%s, pincode =%s, country =%s, notes =%s WHERE supplier_id =%s""",
-            (title, fname, lname, comp, mob, mail, webs, bill, terms, open1, acc, gst, gst_in, tax, date, defexp, tds, street, city, state, pin, contry, note, b[0],))
+            (title, fname, lname, comp, mob, mail, webs, bill, terms, open1, acc, gst, gst_in, tax, date, defexp, tdss, street, city, state, pin, contry, note, b[0],))
             mydata.commit()
             D.destroy()
 
@@ -694,9 +704,19 @@ def sherrymain():
         #bm=StringVar()
         #tk.Entry(hd1).place(relx=0.68,rely=0.31,relwidth=0.3,relheight=0.035)
 
+        def gsttfn(ent):
+            cc=egst.get()
+            if cc=='GST-unregistered':
+                egst_in['state']='disabled'
+                tx['state']='disabled'
+            else:
+                egst_in['state']='normal'
+                tx['state']='normal' 
+
         tk.Label(hd1,text='GST Type',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.35)
-        gstvalues=['CHOOSE','GST registered-Regular','GST registered-Composition','GST-unregistered']
+        gstvalues=['GST registered-Regular','GST registered-Composition','GST-unregistered']
         egst=ttk.Combobox(hd1,values=gstvalues)
+        egst.bind('<<ComboboxSelected>>',gsttfn)
         egst.insert(0,s[13])
         egst.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.035)
 
@@ -729,10 +749,10 @@ def sherrymain():
         tk.Button(hd1,text='+',font=(14),command=sherryplus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
 
         tk.Label(hd1,text='Apply TDS for Supplier',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.42)
-        etds=StringVar()
-        a=tk.Entry(hd1,textvariable=etds)
-        a.insert(0,s[18])
-        a.place(relx=0.68,rely=0.45,relwidth=0.3,relheight=0.035)  
+        fg=['Yes','No']
+        tds=ttk.Combobox(hd1,values=fg)
+        tds.insert(0,s[18])
+        tds.place(relx=0.68,rely=0.45,relwidth=0.3,relheight=0.035)  
         
         label2=tk.Label(hd1,text='Address',bg='#243e54')
         label2['font']=f2
