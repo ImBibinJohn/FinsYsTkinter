@@ -280,7 +280,7 @@ def edit_payslip():
     existing_netsal=data[40]
     netsal.set(existing_netsal)
 
-    empname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal
+    
 
     F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'),padx=30, pady=30, bd=0, fg="Black", bg="#243e55")
     F.place(x=30, y=30, width=1270, height=1950)
