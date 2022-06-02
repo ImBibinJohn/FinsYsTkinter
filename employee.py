@@ -36,60 +36,62 @@ def edit_employee():
         mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
         cmp1=mycursor.fetchone()
         
-        global name,joiningdate,employeenumber,designation,department,branch,location,gender,age,mobile,gmail,address,providebankdetails,totalrentpaid,hrareceived,livein,applicabletaxregime,pannumber,aadhaarnumber,universalaccountnumber,pfaccountnumber,epsaccountnumber,praccountnumber,esinumber,esidispensaryname,basic,da,othincome1,othamount1,othincome2,othamount2,othincome3,othamount3,othincome4,othamount4,othincome5,othamount5,provifund,proftax,esi,deduc1,deduc2,deduc3,deduc4,deducamt1,deducamt2,deducamt3,deducamt4,cid_id
+        global Name,Joiningdate,Employeenumber,Designation,Department,Branch,Location,Gender,Age,Mobile,Gmail,Address,Providebankdetails,Bankaccountnumber,Ifsccode,Totalrentpaid,Hrareceived,Livein,Applicabletaxregime,Pannumber,Aadhaarnumber,Universalaccountnumber,Pfaccountnumber,Epsaccountnumber,Praccountnumber,Esinumber,Esidispensaryname,Basic,Da,Othincome1,Othamount1,Othincome2,Othamount2,Othincome3,Othamount3,Othincome4,Othamount4,Othincome5,Othamount5,Provifund,Proftax,Esi,Deduc1,Deduc2,Deduc3,Deduc4,Deducamt1,Deducamt2,Deducamt3,Deducamt4,cid_id
         
-        name=name.get()
-        joiningdate=joiningdate.get()
-        employeenumber=employeenumber.get()
-        designation=designation.get()
-        department=department.get()
-        branch=branch.get()
-        location=location.get()
-        gender=gender.get()
-        age=age.get()
-        mobile=mobile.get()
-        gmail=gmail.get()
-        address=address.get()
-        providebankdetails=providebankdetails.get()
-        totalrentpaid=totalrentpaid.get()
-        hrareceived=hrareceived.get()
-        livein=livein.get()
-        applicabletaxregime=applicabletaxregime.get()
-        pannumber=pannumber.get()
-        aadhaarnumber=aadhaarnumber.get()
-        universalaccountnumber=universalaccountnumber.get()
-        pfaccountnumber=pfaccountnumber.get()
-        epsaccountnumber=epsaccountnumber.get()
-        praccountnumber=praccountnumber.get()
-        esinumber=esinumber.get()
-        esidispensaryname=esidispensaryname.get()
-        basic=basic.get()
-        da=da.get()
-        othincome1=othincome1.get()
-        othamount1=othamount1.get()
-        othincome2=othincome2.get()
-        othamount2=othamount2.get()
-        othincome3=othincome3.get()
-        othamount3=othamount3.get()
-        othincome4=othincome4.get()
-        othamount4=othamount4.get()
-        othincome5=othincome5.get()
-        othamount5=othamount5.get()
-        provifund=provifund.get()
-        proftax=proftax.get()
-        esi=esi.get()
-        deduc1=deduc1.get()
-        deduc2=deduc2.get()
-        deduc3=deduc3.get()
-        deduc4=deduc4.get()
-        deducamt1=deducamt1.get()
-        deducamt2=deducamt2.get()
-        deducamt3=deducamt3.get()
-        deducamt4=deducamt4.get()
+        Name=name.get()
+        Joiningdate=joiningdate.get()
+        Employeenumber=employeenumber.get()
+        Designation=designation.get()
+        Department=department.get()
+        Branch=branch.get()
+        Location=location.get()
+        Gender=gender.get()
+        Age=age.get()
+        Mobile=mobile.get()
+        Gmail=gmail.get()
+        Address=address.get()
+        # Providebankdetails=providebankdetails.get()
+        Bankaccountnumber=bankaccountnumber.get()
+        Ifsccode=ifsccode.get()
+        Totalrentpaid=totalrentpaid.get()
+        Hrareceived=hrareceived.get()
+        Livein=livein.get()
+        Applicabletaxregime=applicabletaxregime.get()
+        Pannumber=pannumber.get()
+        Aadhaarnumber=aadhaarnumber.get()
+        Universalaccountnumber=universalaccountnumber.get()
+        Pfaccountnumber=pfaccountnumber.get()
+        Epsaccountnumber=epsaccountnumber.get()
+        Praccountnumber=praccountnumber.get()
+        Esinumber=esinumber.get()
+        Esidispensaryname=esidispensaryname.get()
+        Basic=basic.get()
+        Da=da.get()
+        Othincome1=othincome1.get()
+        Othamount1=othamount1.get()
+        Othincome2=othincome2.get()
+        Othamount2=othamount2.get()
+        Othincome3=othincome3.get()
+        Othamount3=othamount3.get()
+        Othincome4=othincome4.get()
+        Othamount4=othamount4.get()
+        Othincome5=othincome5.get()
+        Othamount5=othamount5.get()
+        Provifund=provifund.get()
+        Proftax=proftax.get()
+        Esi=esi.get()
+        Deduc1=deduc1.get()
+        Deduc2=deduc2.get()
+        Deduc3=deduc3.get()
+        Deduc4=deduc4.get()
+        Deducamt1=deducamt1.get()
+        Deducamt2=deducamt2.get()
+        Deducamt3=deducamt3.get()
+        Deducamt4=deducamt4.get()
         cid_id=cmp1[0]
     
-        mycursor.execute("UPDATE app1_employee SET name =%s, joiningdate =%s, employeenumber =%s, designation =%s, department =%s, branch =%s, location =%s, gender =%s,age =%s, mobile =%s, gmail =%s, address =%s, providebankdetails =%s,totalrentpaid =%s, hrareceived =%s, livein =%s, applicabletaxregime=%s, pannumber =%s, aadhaarnumber =%s, universalaccountnumber =%s, pfaccountnumber =%s, epsaccountnumber =%s, praccountnumber =%s, esinumber =%s, esidispensaryname =%s, basic =%s, da =%s, othincome1 =%s, othamount1 =%s, othincome2 =%s, othamount2 =%s, othincome3 =%s, othamount3 =%s, othincome4 =%s, othamount4 =%s, othincome5 =%s, othamount5 =%s, provifund =%s, proftax =%s, esi =%s,deduc1 =%s,deduc2 =%s,deduc3 =%s,deduc4 =%s,deducamt1 =%s,deducamt2 =%s,deducamt3 =%s,deducamt4 =%s, cid_id =%s WHERE employeeid=%s"
-        ,(name,joiningdate,employeenumber,designation,department,branch,location,gender,age,mobile,gmail,address,providebankdetails,totalrentpaid,hrareceived,livein,applicabletaxregime,pannumber,aadhaarnumber,universalaccountnumber,pfaccountnumber,epsaccountnumber,praccountnumber,esinumber,esidispensaryname,basic,da,othincome1,othamount1,othincome2,othamount2,othincome3,othamount3,othincome4,othamount4,othincome5,othamount5,provifund,proftax,esi,deduc1,deduc2,deduc3,deduc4,deducamt1,deducamt2,deducamt3,deducamt4,cid_id,data[0]))
+        mycursor.execute("UPDATE app1_employee SET name =%s, joiningdate =%s, employeenumber =%s, designation =%s, department =%s, branch =%s, location =%s, gender =%s,age =%s, mobile =%s, gmail =%s, address =%s, providebankdetails =%s,bankaccountnumber =%s,ifsccode =%s,totalrentpaid =%s, hrareceived =%s, livein =%s, applicabletaxregime=%s, pannumber =%s, aadhaarnumber =%s, universalaccountnumber =%s, pfaccountnumber =%s, epsaccountnumber =%s, praccountnumber =%s, esinumber =%s, esidispensaryname =%s, basic =%s, da =%s, othincome1 =%s, othamount1 =%s, othincome2 =%s, othamount2 =%s, othincome3 =%s, othamount3 =%s, othincome4 =%s, othamount4 =%s, othincome5 =%s, othamount5 =%s, provifund =%s, proftax =%s, esi =%s,deduc1 =%s,deduc2 =%s,deduc3 =%s,deduc4 =%s,deducamt1 =%s,deducamt2 =%s,deducamt3 =%s,deducamt4 =%s, cid_id =%s WHERE employeeid=%s"
+        ,(Name,Joiningdate,Employeenumber,Designation,Department,Branch,Location,Gender,Age,Mobile,Gmail,Address,providebankdetails,Bankaccountnumber,Ifsccode,Totalrentpaid,Hrareceived,Livein,Applicabletaxregime,Pannumber,Aadhaarnumber,Universalaccountnumber,Pfaccountnumber,Epsaccountnumber,Praccountnumber,Esinumber,Esidispensaryname,Basic,Da,Othincome1,Othamount1,Othincome2,Othamount2,Othincome3,Othamount3,Othincome4,Othamount4,Othincome5,Othamount5,Provifund,Proftax,Esi,Deduc1,Deduc2,Deduc3,Deduc4,Deducamt1,Deducamt2,Deducamt3,Deducamt4,cid_id,data[0]))
         mydb1.commit()
         mydb1.close()
         messagebox.showinfo('employee edited Added')
@@ -132,7 +134,7 @@ def edit_employee():
     tit = Label(heading_frame, text="EDIT EMPLOYEE", font=('times new roman', 25, 'bold'),padx=527, pady=2, bd=5, bg="#243e55", fg="#fff", relief=GROOVE)
     tit.pack()
 
-    global name,joiningdate,employeenumber,designation,department,branch,location,gender,age,mobile,gmail,address,providebankdetails,totalrentpaid,hrareceived,livein,applicabletaxregime,pannumber,aadhaarnumber,universalaccountnumber,pfaccountnumber,epsaccountnumber,praccountnumber,esinumber,esidispensaryname,basic,da,othincome1,othamount1,othincome2,othamount2,othincome3,othamount3,othincome4,othamount4,othincome5,othamount5,provifund,proftax,esi,deduc1,deduc2,deduc3,deduc4,deducamt1,deducamt2,deducamt3,deducamt4
+    global name,joiningdate,employeenumber,designation,department,branch,location,gender,age,mobile,gmail,address,providebankdetails,bankaccountnumber,ifsccode,totalrentpaid,hrareceived,livein,applicabletaxregime,pannumber,aadhaarnumber,universalaccountnumber,pfaccountnumber,epsaccountnumber,praccountnumber,esinumber,esidispensaryname,basic,da,othincome1,othamount1,othincome2,othamount2,othincome3,othamount3,othincome4,othamount4,othincome5,othamount5,provifund,proftax,esi,deduc1,deduc2,deduc3,deduc4,deducamt1,deducamt2,deducamt3,deducamt4
 
     name=StringVar()
     joiningdate=StringVar()
@@ -146,7 +148,9 @@ def edit_employee():
     mobile=StringVar()
     gmail=StringVar()
     address=StringVar()
-    providebankdetails=StringVar()
+    # providebankdetails=StringVar()
+    bankaccountnumber=StringVar()
+    ifsccode=StringVar()
     totalrentpaid=StringVar()
     hrareceived=StringVar()
     livein=StringVar()
@@ -219,9 +223,15 @@ def edit_employee():
     existing_address=data[12]
     address.set(existing_address)
 
-    existing_providebankdetails=data[13]
-    providebankdetails.set(existing_providebankdetails)
-
+    # existing_providebankdetails=data[13]
+    # providebankdetails.set(existing_providebankdetails)
+    
+    existing_bankaccountnumber=data[14]
+    bankaccountnumber.set(existing_bankaccountnumber)
+    
+    existing_ifsccode=data[15]
+    ifsccode.set(existing_ifsccode)
+    
     existing_totalrentpaid=data[17]
     totalrentpaid.set(existing_totalrentpaid)
 
@@ -432,14 +442,38 @@ def edit_employee():
     label1=Label(F, text="Bank Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=600)
 
+    def red():
+        global providebankdetails
+        Choice = label1radio.get()
+        if Choice == 1:
+            output = "Yes"
+            
+            lab2=Label(F, text="Bank Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab2.place(x=400,y=690)
+            lab=Entry(F,bg='#2f516a',fg='#fff',textvariable=bankaccountnumber)
+            lab.place(x=400,y=730,height=40,width=360)
+
+            lab3=Label(F, text="IFSC Code", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab3.place(x=790,y=690)
+            lab1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ifsccode)
+            lab1.place(x=790,y=730,height=40,width=360)
+            providebankdetails="Yes"
+        elif Choice == 2:
+            output = "No"
+            providebankdetails ="No"
+        else:
+            output = "Invalid"
+    
     #radio button
-    label1.radio=IntVar()
+    label1radio=IntVar()
     label20=Label(F, text="Provide Bank Details :", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label20.place(x=400,y=680)
-    label1.yes_input=Radiobutton(F,text="Yes",variable=label1.radio,value=1,font=('times new roman', 12, 'bold'),bg="#243e55",textvariable=providebankdetails)
-    label1.yes_input.place(x=600,y=680)
-    label1.yes_input=Radiobutton(F,text="No",variable=label1.radio,value=2,font=('times new roman', 12, 'bold'),bg="#243e55",textvariable=providebankdetails)
-    label1.yes_input.place(x=660,y=680)
+    label20.place(x=400,y=660)
+    yes_entry=Radiobutton(F,text="Yes",variable=label1radio,value=1,font=('times new roman', 12, 'bold'),bg="#243e55",command=red)
+    yes_entry.place(x=600,y=660,)
+    No_entry=Radiobutton(F,text="No",variable=label1radio,value=2,font=('times new roman', 12, 'bold'),bg="#243e55",command=red)
+    No_entry.place(x=660,y=660)
+    print(label1radio)
+
 
     label1=Label(F, text="HRA Declaration", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=670,y=760)
@@ -454,10 +488,12 @@ def edit_employee():
     label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=hrareceived)
     label3.place(x=675,y=880,height=40,width=200)
 
-    label4=Label(F, text="Do you live in metro cities? ", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label4.place(x=950,y=840)
-    label4=Entry(F,bg='#2f516a',fg='#fff',textvariable=livein)
-    label4.place(x=950,y=880,height=40,width=200)
+    CheckVar1 = IntVar()
+    sanitizer1_lbl=tk.Label(F,text="Do you live in metro cities? ",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    drop1=ttk.Combobox(F2,textvariable=livein)
+    drop1['values']=("Yes","No")
+    sanitizer1_lbl.place(x=950,y=840)
+    drop1.place(x=950,y=880,height=40,width=200)
 
     label1=Label(F, text="Statutory Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=670,y=960)

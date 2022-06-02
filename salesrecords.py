@@ -235,17 +235,6 @@ def edit_sale():
         product=product_drop3.get()
         selected_product.append(product)
         quantity3=qty_input3.get()
-        # for product in sal_data:
-        #     product_details="SELECT * FROM app1_salesrecpts WHERE name=%s"
-        #     mycursor.execute(product_details,selected_product)
-        #     data=mycursor.fetchall()
-        #     for i in data:
-        #         e_hsn3.set(i[11])
-        #         e_desc3.set(i[12])
-        #         e_price3.set(i[14])
-        #         e_sale_price=i[14]
-        #         tota_price=int(e_sale_price)*int(quantity3)
-        #         e_total3.set(tota_price)
         for product in inv_data:
             product_details="SELECT * FROM app1_inventory WHERE name=%s"
             mycursor.execute(product_details,selected_product)

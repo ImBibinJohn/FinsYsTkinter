@@ -24,7 +24,23 @@ def fun():#db connection
         )
     mycursor = mydb1.cursor()
 
-def edit_payslip():    
+def edit_payslip():  
+    def get_selected_e_product(event):
+        
+        gros = label1_gros.get()
+        tded = label1_tded.get()
+        netsal = label1_netsal.get()
+        
+        earn1 = int(basic) + int(da) + int(earr1) + int(earr2) + int(earr3) + int(earr4) + int(earr5)
+        x = earr6;
+        y = earr7;
+        # var dedu1=parseFloat(provi)+parseFloat(prof)+parseInt(esi)+dedu1+dedu2+dedu3+dedu4;
+        # var gp1=parseFloat(earn1)-parseFloat(dedu1);
+        
+        gros = earn1 + x + y;
+        gros.set()
+       
+            
     def changing_data():
         mycursor = mydb1.cursor()
         user_id=[6]
@@ -398,18 +414,19 @@ def edit_payslip():
 
     label1=Label(F, text="Gross Pay", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1080)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros)
-    label1.place(x=900,y=1080,height=40,width=270)
-
+    label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros)
+    label1_gros.place(x=900,y=1080,height=40,width=270)
+    label1_gros.bind("<KeyRelease>",get_selected_e_product)
+    
     label1=Label(F, text="Total Deduction", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1140)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded)
-    label1.place(x=900,y=1140,height=40,width=270)
+    label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded)
+    label1_tded.place(x=900,y=1140,height=40,width=270)
 
     label1=Label(F, text="Net Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1200)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal)
-    label1.place(x=900,y=1200,height=40,width=270)
+    label1_netsal=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal)
+    label1_netsal.place(x=900,y=1200,height=40,width=270)
 
     b1 = Button(F,text = "Update Payslip",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_data)  
     b1.place(x=470,y=1350,width=300,height=40) 
