@@ -7,7 +7,7 @@ framee.pack()
 drop = ['Expenses','Suppliers']
 variable = StringVar(framee)
 variable.set("Expenses")
-def bn(event):
+def bn(n):
     v=variable.get()
     if v=='Suppliers':
         import finsyssuppliers
