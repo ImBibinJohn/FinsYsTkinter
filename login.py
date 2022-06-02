@@ -31,39 +31,26 @@ class Login:
         Frame_login.place(x=0,y=0,height=950,width=950)
         
         label10=Label(Frame_login,text="New here ?",font=('times new roman',25,'bold'),fg="white",bg="#213e57")
-        label10.place(x=330,y=40)
+        # label10.place(x=330,y=40)
+        label10.place(x=430,y=40)
         
         label11=Label(Frame_login,text="Join here to start a business with FinsYs!",font=('times new roman',10,'bold'),fg="white",bg="#213e57")
-        label11.place(x=290,y=90)
+        # label11.place(x=290,y=90)
+        label11.place(x=390,y=90)
         
         btn2=Button(Frame_login,command=self.Register,text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
-        btn2.place(x=330,y=120)
+        btn2.place(x=430,y=120)
+
+        # canvas = Canvas()
+        # canvas.create_oval(0,000, 900, 400, outline = "black", fill = "white",width = 2)
+        # canvas.pack()
 
 
 
-        
-
-
-
-
-
-
-
-        def get_svg(svg_file):
-            drawing = svg2rlg(svg_file)
-            renderPM.drawToFile(drawing, "temp.png",fmt="png")
-
-    
-        get_svg("log.svg")
-
-        pimg =PIL.ImageTk.PhotoImage(Image.open("temp.png"))
-        # size = img.size
-        # frame = tk.Label(Frame_login, image=pimg)
-        frame = tk.Canvas(Frame_login, width=800, height=700,background="#213e57")
-        frame.place(x=350,y=300)
-        frame.create_image(0,0,anchor='nw',image=pimg)
-        
-        
+        size=(700,900)
+        self.ax=ImageTk.PhotoImage(Image.open("log.png").resize(size))
+       
+        tk.Label(Frame_login,image=self.ax,bg='#213e57').place(x=150,y=200)
 
 
 
@@ -83,11 +70,14 @@ class Login:
         frame_input=Frame(self.root,bg="white")
         frame_input.place(x=1250,y=200,height=400,width=300)
         
-        label1=Label(frame_input,text="Sign in",font=('times in romen',32,'bold'),fg="black",bg="white")
-        label1.place(x=75,y=20)
+        label1=Label(frame_input,text="Sign in",font=('times in romen',30,'bold'),fg="black",bg="white")
+        label1.place(x=75,y=100)
         
-        username=Label(frame_input,text="Username",font=('Goudy old style',20),fg="black",bg="white")
-        username.place(x=30,y=95)
+        # username=Label(frame_input,text="Username",font=('Goudy old style',20),fg="black",bg="white")
+        # username.place(x=30,y=95)
+
+        
+
 
         
         
@@ -101,18 +91,34 @@ class Login:
 
 
 
-        self.username_txt.place(x=30,y=145,width=270,height=35)
+        self.username_txt.place(x=45,y=200,width=300,height=50)
+        size=(42,46)
+        self.logo=ImageTk.PhotoImage(Image.open("default.jpeg").resize(size))
+       
+        tk.Label(frame_input,image=self.logo,bg='#213e57').place(x=1,y=200)
+
+
+
+
         
-        log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
-        log_password.place(x=30,y=190)
+        # log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
+        # log_password.place(x=30,y=210)
         
         self.log_password_entry=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
-        self.log_password_entry.place(x=30,y=240,width=270,height=35)
+        self.log_password_entry.place(x=45,y=270,width=300,height=50)
+
+
+
+        size=(42,46)
+        self.passimage=ImageTk.PhotoImage(Image.open("lockimg.jpeg").resize(size))
+       
+        tk.Label(frame_input,image=self.passimage,bg='#213e57').place(x=1,y=270)
+
         
         # btn1=Button(frame_input,text="forgot password?",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
         # btn1.place(x=125,y=300)
         
-        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="orangered",bd=0,width=15,height=1)
+        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="#213e57",bd=0,width=10,height=1)
         btn2.place(x=80,y=330)
         
         
@@ -141,11 +147,7 @@ class Login:
                 messagebox.showerror("Error",f'Error Due to : {str(es)}',parent=self.root)
                 
                 
-    def create_canvas(self):
-        canvas=Canvas(self,bg="blue",)
-        coord=210,10
-        arc=canvas.create_arc(coord,start=200,end=50,fill="red")
-        canvas.pack()
+    
     def Register(self):
         
         Frame_login1=Frame(self.root,bg="white")
@@ -232,18 +234,11 @@ class Login:
         btn2.place(x=400,y=200)
 
 
-        def get_svg2(svg_file):
+        size=(700,600)
+        self.ax=ImageTk.PhotoImage(Image.open("register.png").resize(size))
+       
+        tk.Label(frame_input3,image=self.ax,bg='#213e57').place(x=0,y=300)
 
-            drawing = svg2rlg(svg_file)
-            renderPM.drawToFile(drawing, "temp.png", fmt="PNG")
-
-        get_svg2("register.svg")
-        img = Image.open("temp.png")
-        pimg = ImageTk.PhotoImage(img)
-        # size = img.size
-        frame = tk.Canvas(frame_input3, width=800, height=800)
-        frame.place(x=0,y=250)
-        frame.create_image(0,0,anchor='nw',image=pimg)
         
 
 
