@@ -6,6 +6,8 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
+from tkcalendar import Calendar, DateEntry
+
 
 
 debit_form = tk.Tk()
@@ -82,7 +84,7 @@ mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
 
-full_frame = Frame(mycanvas, width=2000, height=1600, bg='#2f516a')
+full_frame = Frame(mycanvas, width=2000, height=2000, bg='#2f516a')
 mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
 
@@ -126,7 +128,7 @@ payment_period.place(x=30, y=330, height=15, width=100)
 
 # payment_drop = ttk.Combobox(form_frame)
 #  DateEntry(debit_form, width=16, bg="#2f516f", bd=2)
-payment_drop = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+payment_drop = DateEntry(form_frame, width=49, bg="#2f516f", bd=2)
 payment_drop.place(x=30, y=360, height=40)
 
 
