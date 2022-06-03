@@ -15,6 +15,7 @@ from tkinter import messagebox
 import mysql.connector
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF, renderPM
+import re
 
 #create the class
 class Login:
@@ -179,10 +180,28 @@ class Login:
         #  email_label=Label(frame_input2,text="Email",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # email_label.place(x=0,y=450)
         #entry2
+
+        
+
+        
+
+
+
+
+        self.regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        
+
+        # self.email_entry.insert(0,"Email")
+        email_lab=Label(frame_input2,text="Email",bg='#243e55',fg='#fff')
         self.email_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
         self.email_entry.place(x=100,y=440,width=400,height=45)
-        self.email_entry.insert(0,"Email")
+       
+        regEmail = root.register(self.email_validation)
+        # self.email_entry.bind("<KeyRelease>",self.email_validation)
+        self.email_entry.config(validate="focusout", validatecommand=(regEmail, '%P'))
+        self.wdgLst_email = email_lab
 
+        
         size=(42,43)
         self.emailimg=ImageTk.PhotoImage(Image.open("emailing.png").resize(size))
        
@@ -205,7 +224,7 @@ class Login:
         # password_lab.place(x=0,y=350)
         
         #entry3
-        self.password_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
+        self.password_entry=Entry(frame_input2,show="*",font=('times new roman',12,'bold'),bg="lightgray")
         self.password_entry.place(x=100,y=580,width=400,height=45)
         self.password_entry.insert(1,"Password")
 
@@ -220,7 +239,7 @@ class Login:
         # cpass_label=Label(frame_input2,text="Confirm Password",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # cpass_label.place(x=300,y=350)
          #entry-4
-        self.cpass_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
+        self.cpass_entry=Entry(frame_input2,show="*",font=('times new roman',12,'bold'),bg="lightgray")
         self.cpass_entry.place(x=100,y=650,width=400,height=45)
         self.cpass_entry.insert(1,"Conform Password")
 
@@ -254,7 +273,27 @@ class Login:
        
         tk.Label(frame_input3,image=self.ax,bg='#213e57').place(x=0,y=300)
 
-        
+    def email_validation(self):
+            
+        get_email=self.email_entry.get()
+        if re.search(self.regex,get_email):
+
+            self.wdgLst_email.configure(text='Email',fg='#4BB543')
+            return True
+        else:
+            self.wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            return False
+    def cemail_validation(self):
+            
+        get_email=self.cemail.get()
+        if re.search(self.regex,get_email):
+
+            self.wdgLst_email.configure(text='Email',fg='#4BB543')
+            return True
+        else:
+            self.wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            return False
+
 
 
 
@@ -273,8 +312,9 @@ class Login:
         
     def register(self):
 
-        
-        if self.fname_entry.get()=="" or self.email_entry.get()=="" or self.lname_entry.get()=="" or self.password_entry.get()=="" or self.username_entry.get()=="" or self.cpass_entry.get()=="":
+        if not self.email_validation():
+            messagebox.showerror("Error","Invalid Email",parent=self.root)
+        elif self.fname_entry.get()=="" or self.email_entry.get()=="" or self.lname_entry.get()=="" or self.password_entry.get()=="" or self.username_entry.get()=="" or self.cpass_entry.get()=="":
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         elif self.password_entry.get()!=self.cpass_entry.get():
             messagebox.showerror("Error","password and Confirm Password Should Be Same",parent=self.root)
@@ -294,9 +334,9 @@ class Login:
                 val=user
                 mycursor.execute(sql,val)
 
-                exc_email=mycursor.fetchone()
+                exc_username=mycursor.fetchone()
 
-                if exc_email is not None:
+                if exc_username is not None:
                     self.loginform()
                     messagebox.showerror("Error","This username already exists. Sign up again",parent=self.root)
                     
@@ -358,8 +398,14 @@ class Login:
         self.pin = Entry(center_frame, font=('Times', 14))
         self.pin.place(x=30,y=380,height=50,width=700)
         self.pin.insert(0, 'Pincode')
+
+        cemail_lab=Label(center_frame,text="Email",bg='#243e55',fg='#fff')
         self.cemail = Entry(center_frame, font=('Times', 14))
         self.cemail.place(x=30,y=450,height=50,width=700)
+        regsEmail = root.register(self.cemail_validation)
+        # self.email_entry.bind("<KeyRelease>",self.email_validation)
+        self.cemail.config(validate="focusout", validatecommand=(regsEmail, '%P'))
+        self.wdgLst_email = cemail_lab
         self.cemail.insert(0, 'Email')
 
         self.Phone = Entry(center_frame, font=('Times', 14))
@@ -428,7 +474,10 @@ class Login:
 
 
     def company_save(self):
-        if self.combany_name.get()=="" or self.combany_address.get()=="" or self.city.get()=="" or self.state.get()=="" or self.pin.get()=="" or self.cemail.get()=="" or self.Phone.get()=="" or self.business_name.get()=="" or self.your_industry_input.get()=="" or self.cmp_type_input.get()=="" or self.radio.get()=="" or self.paid_type_input.get()=="" :
+        if not self.cemail_validation():
+            messagebox.showerror("Error","Invalid Email",parent=self.root)
+            
+        elif self.combany_name.get()=="" or self.combany_address.get()=="" or self.city.get()=="" or self.state.get()=="" or self.pin.get()=="" or self.cemail.get()=="" or self.Phone.get()=="" or self.business_name.get()=="" or self.your_industry_input.get()=="" or self.cmp_type_input.get()=="" or self.radio.get()=="" or self.paid_type_input.get()=="" :
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         
         else:
