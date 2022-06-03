@@ -76,8 +76,19 @@ def profitloss():
     tk.Label(imageframe,text=h[0], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
     imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
     #contents
-    contframe=tk.Frame(tableframe,bg='white')
-    contframe.place(relx=0.05,rely=0.17,relwidth=0.9,relheight=0.7)
+    conttframe=tk.Frame(tableframe,bg='white')
+    conttframe.place(relx=0.05,rely=0.17,relwidth=0.9,relheight=0.7)
+    mycanvass=tk.Canvas(conttframe,width=1200,height=1200)
+    mycanvass.place(relx=0,rely=0,relwidth=1,relheight=1)
+    yscrollbar =ttk.Scrollbar(conttframe,orient='vertical',command=mycanvass.yview)
+    yscrollbar.pack(side=RIGHT,fill=Y)
+    mycanvass.configure(yscrollcommand=yscrollbar.set)
+    mycanvass.bind('<Configure>',lambda e:mycanvass.configure(scrollregion=mycanvass.bbox('all')))
+    contframe=tk.Frame(mycanvass)
+    contframe['bg']='white'
+    mycanvass.create_window((0,0),window=contframe,anchor='nw',width=1100,height=1200)
+    set = ttk.Treeview(contframe,height=0)
+    set.place(relx=0,rely=0,relwidth=1)
     set = ttk.Treeview(contframe,height=0)
     set.place(relx=0,rely=0,relwidth=1)
     

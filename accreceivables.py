@@ -69,32 +69,56 @@ def accrecivabales():
     tk.Label(imageframe,text="INFOX", font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
     imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
     #contents
-    contframe=tk.Frame(tableframe,bg='white')
-    contframe.place(relx=0.05,rely=0.17,relwidth=0.9,relheight=0.7)
-    set = ttk.Treeview(contframe,height=0)
-    set.place(relx=0,rely=0,relwidth=1)
+    conttframe=tk.Frame(tableframe,bg='white')
+    conttframe.place(relx=0.05,rely=0.17,relwidth=0.9,relheight=0.7)
+    mycanvass=tk.Canvas(conttframe,width=1200,height=800)
+    mycanvass.place(relx=0,rely=0,relwidth=1,relheight=1)
+    yscrollbar =ttk.Scrollbar(conttframe,orient='vertical',command=mycanvass.yview)
+    yscrollbar.pack(side=RIGHT,fill=Y)
+    mycanvass.configure(yscrollcommand=yscrollbar.set)
+    mycanvass.bind('<Configure>',lambda e:mycanvass.configure(scrollregion=mycanvass.bbox('all')))
+    contframe=tk.Frame(mycanvass)
+    contframe['bg']='white'
+    mycanvass.create_window((0,0),window=contframe,anchor='nw',width=1100,height=2200)
+    #table view
+    style=ttk.Style()
+    style.theme_use('default')
+    style.configure('Treeview',background='silver',foreground='white',fieldbackground='white')
+    treevv = ttk.Treeview(contframe, height=10, columns=(1,2,3,4,5,6,7,8), show='headings') 
+    treevv.heading(1, text='CUSTOMER NAME')
+    treevv.heading(2, text='TRANSACTION TYPE')#headings
+    treevv.heading(3, text='CURRENT')
+    treevv.heading(4, text='0-30')
+    treevv.heading(5, text='30-60')
+    treevv.heading(6, text='60-90')
+    treevv.heading(7, text='90 AND OVER')
+    treevv.heading(8, text='TOTAL')
 
-    set['columns']= ('CUSTOMER NAME', 'TRANSACTION TYPE','CURRENT','0-30','30-60','60-90','90 AND OVER','TOTAL')
-    set.column("#0", width=0,  stretch=NO)
-    set.column("CUSTOMER NAME",width=120,anchor=CENTER )
-    set.column("TRANSACTION TYPE",width=130,anchor=CENTER, )
-    set.column("CURRENT",width=100,anchor=CENTER,)
-    set.column("0-30",width=100,anchor=CENTER,)
-    set.column("30-60",width=100,anchor=CENTER,)
-    set.column("60-90",width=100,anchor=CENTER)
-    set.column("90 AND OVER",width=100,anchor=CENTER)
-    set.column("TOTAL",width=198,anchor=CENTER)
-
-
-    #set.heading("#0",text="",anchor=CENTER)
-    set.heading("CUSTOMER NAME",text="CUSTOMER NAME",anchor=CENTER )
-    set.heading("TRANSACTION TYPE",text="TRANSACTION TYPE",anchor=CENTER, )
-    set.heading("CURRENT",text="CURRENT",anchor=CENTER,)
-    set.heading("0-30",text="0-30",anchor=CENTER,)
-    set.heading("30-60",text="30-60",anchor=CENTER,)
-    set.heading("60-90",text="60-90",anchor=CENTER)
-    set.heading("90 AND OVER",text="90 AND OVER",anchor=CENTER)
-    set.heading("TOTAL",text="TOTAL",anchor=CENTER)
+    treevv.column(1, minwidth=10, width=120,anchor=CENTER)#coloumns
+    treevv.column(2, minwidth=30, width=130,anchor=CENTER)
+    treevv.column(3, minwidth=30, width=100,anchor=CENTER)
+    treevv.column(4, minwidth=30, width=100,anchor=CENTER)
+    treevv.column(5, minwidth=30, width=100,anchor=CENTER)
+    treevv.column(6, minwidth=30, width=100,anchor=CENTER)
+    treevv.column(7, minwidth=30, width=100,anchor=CENTER)
+    treevv.column(8, minwidth=30, width=100,anchor=CENTER)
+    cursor.execute("SELECT customername,baldue FROM invoice WHERE cid =%s",([cid]))
+    vall=cursor.fetchall()
+    trans='Invoice Balance Due'
+    try:
+        for i in vall:
+            treevv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+    except:
+        pass 
+    transs='Credit Note' 
+    cursor.execute("SELECT customer,grndtot FROM credit WHERE cid =%s",([cid]))
+    val=cursor.fetchall()   
+    try:
+        for j in val:
+            treevv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+    except:
+        pass             
+    treevv.place(relx=0,rely=0,relwidth=1)        
     tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
    
     prlframe.mainloop()
