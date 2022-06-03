@@ -4,7 +4,7 @@ from tkinter import VERTICAL, ttk
 import tkinter.font as font
 import tkinter.messagebox as MessageBox
 import click
-import mysql.connector
+import mysql.connector 
 from tkcalendar import Calendar, DateEntry
 
 
@@ -77,12 +77,12 @@ def main():
 
     treevv = ttk.Treeview(hd, height=7, columns=(
         1, 2, 3, 4, 5, 6), show='headings')
-    treevv.heading(1, text='DATE')  # headings
-    treevv.heading(2, text='TYPE')
-    treevv.heading(3, text='PAYEE')
-    treevv.heading(4, text='TAX')
-    treevv.heading(5, text='AMOUNT')
-    treevv.heading(6, text='ACTION')
+    treevv.heading(1, text='ID')  # headings
+    treevv.heading(2, text='DATE')  # headings
+    treevv.heading(3, text='TYPE')
+    treevv.heading(4, text='PAYEE')
+    treevv.heading(5, text='TAX')
+    treevv.heading(6, text='AMOUNT')
     # treevv.heading(7, text='Actions')
     treevv.column(1, minwidth=10, width=40, anchor=CENTER)  # coloumns
     treevv.column(2, minwidth=30, width=140, anchor=CENTER)
@@ -91,19 +91,18 @@ def main():
     treevv.column(5, minwidth=30, width=140, anchor=CENTER)
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     cur.execute(
-        "SELECT payment_date,etype,payee,tax,grandtotal FROM expensesmain")
+        "SELECT id,payment_date,etype,payee,tax,grandtotal FROM expensesmain")
     val = cur.fetchall()
     if val:
         for x in val:
             treevv.insert('', 'end', values=(
-                x[0], x[1], x[2], x[3], x[4]))
+                x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
     def editexp():
         def changeedit():
 
-            mydata = mysql.connector.connect(
-                host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
+            mydata = mysql.connector.connect(host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
             cur = mydata.cursor()
             global D, refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal
             refno = drop1.get()
@@ -155,33 +154,32 @@ def main():
             tax = tax_input.get()
             grandtotal = grand_input.get()
 
+            # con = mysql.connector.connect(host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
+            # cur = con.cursor()
+            # d = '''UPDATE expensesmain SET(id,refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress,category1 ,category2, category3, categorydescription1  , categorydescription2 
+            #                 , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)  WHERE id=%d'''
+            # cur.execute(d, [(id),(refno), (payee), (payment_date),  (payment_method),(payment_account),(supplier),(mailaddress) (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+            #             (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
+            # con.commit()
+            
+            
             print(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2,
                   categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal)
 
-            cur.execute("""UPDATE expensesmain SET refno =%s, payee =%s, payment_date =%s, payment_method =%s, payment_account =%s, supplier =%s, mailaddress =%s, category1 =%s, category2 =%s, category3 =%s,categorydescription1 =%s, categorydescription2 =%s,categorydescription3 =%s, categoryquantity1 =%s, categoryquantity2 =%s, categoryquantity3 =%s, categoryprice1 =%s, categoryprice2 =%s, categoryprice3 =%s, state =%s, categorytotal1 =%s, categorytotal2 =%s, categorytotal3 =%s, product1 =%s, product2 =%s, product3 =%s,productdescription1 =%s, productdescription2 =%s,productdescription3 =%s, hsn1 =%s, hsn2 =%s, hsn3 =%s, productquantity1 =%s, productquantity2 =%s, productquantity3 =%s, productprice1 =%s, productprice2 =%s, productprice3 =%s, producttotal1=%s  , producttotal2=%s , producttotal3=%s, producttax1=%s  ,  producttax2=%s ,producttax3=%s, subtotal=%s,tax =%s,grandtotal=%s WHERE id =%s""",
-                        (refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1,  producttax2, producttax3, subtotal, tax, grandtotal, b[0],))
+            cur.execute("""UPDATE expensesmain SET refno =%s, payee =%s, payment_date =%s, payment_method =%s, payment_account =%s, supplier =%s, mailaddress =%s, category1 =%s, category2 =%s, category3 =%s,categorydescription1 =%s, categorydescription2 =%s,categorydescription3 =%s, categoryquantity1 =%s, categoryquantity2 =%s, categoryquantity3 =%s, categoryprice1 =%s, categoryprice2 =%s, categoryprice3 =%s, categorytotal1 =%s, categorytotal2 =%s, categorytotal3 =%s, product1 =%s, product2 =%s, product3 =%s,productdescription1 =%s, productdescription2 =%s,productdescription3 =%s, hsn1 =%s, hsn2 =%s, hsn3 =%s, productquantity1 =%s, productquantity2 =%s, productquantity3 =%s, productprice1 =%s, productprice2 =%s, productprice3 =%s, producttotal1=%s  , producttotal2=%s , producttotal3=%s, producttax1=%s  ,  producttax2=%s ,producttax3=%s, subtotal=%s,tax =%s,grandtotal=%s WHERE id=%d""",
+                        ( refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1,  producttax2, producttax3, subtotal, tax, grandtotal, b[0],))
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()
-            # expense_form.destroy()
+            expense_form.destroy()
 
-            # mycanvas.configure(yscrollcommand=yscrollbar.set)
-            # mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
-            #     scrollregion=mycanvas.bbox('all')))
-
-            # full_frame = Frame(mycanvas, width=2000, height=1600, bg='#2f516a')
-            # mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
-            # D.destroy()
+      
 
         # Get selected item to Edit
 
-        # str = treevv.focus()
-        # values = treevv.item(str, 'values')
-        # print(values)
-        # b = (values[0])
-        b = treevv.item(treevv.focus())["values"][2]
-        # cur.execute("SELECT * FROM expensesmain WHERE id=%s", (b))
-        sql='SELECT * FROM expensesmain WHERE payee=%s'
+   
+        b = treevv.item(treevv.focus())["values"][0]
+        sql='SELECT * FROM expensesmain WHERE id=%s'
         val=(b,)
         cur.execute(sql,val)
         s = cur.fetchone()
@@ -284,8 +282,17 @@ def main():
             pass
         
         
+        idll = tk.Label(
+            form_frame, text="ID", bg='#243e55', fg='#fff')
+        idl = Entry(form_frame, width=10, bg='#2f516f', fg='#fff')
+        try:
+            idl.insert(0, s[0])
+        except:
+            pass
+        idll.place(x=480, y=290, height=15, width=120)
+        idl.place(x=530, y=320, height=40, width=50)
         
-        
+
         drop5.place(x=530, y=40, height=40, width=450)
         wrappen.pack(fill='both', expand='yes',)
 
