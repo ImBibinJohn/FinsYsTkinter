@@ -68,62 +68,52 @@ class Login:
         # img=Label(Frame_login,image=self.img).place(x=0,y=0,width950,height=700)
         
         frame_input=Frame(self.root,bg="white")
-        frame_input.place(x=1250,y=200,height=400,width=300)
+        frame_input.place(x=1150,y=200,height=400,width=600)
         
         label1=Label(frame_input,text="Sign in",font=('times in romen',30,'bold'),fg="black",bg="white")
-        label1.place(x=75,y=100)
+        label1.place(x=190,y=100)
+
+        self.username_txt=Entry(frame_input,font=('times new roman',10,'bold'),bg="lightgray")
+        self.username_txt.place(x=95,y=200,width=400,height=50)
+        size=(42,46)
+        self.logo=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input,image=self.logo).place(x=50,y=200)
+
+        self.log_password_entry=Entry(frame_input,show="*",font=('times new roman',10,'bold'),bg="lightgray")
+        self.log_password_entry.place(x=95,y=270,width=400,height=50)
+
+
+
+        size=(42,46)
+        self.passimage=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
+       
+        tk.Label(frame_input,image=self.passimage).place(x=50,y=270)
+
+        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=200,y=350)
+        
+
+
         
         # username=Label(frame_input,text="Username",font=('Goudy old style',20),fg="black",bg="white")
         # username.place(x=30,y=95)
-
-        
-
-
-        
-        
+ 
         #email_txt
-        self.username_txt=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
+        
 
         # self.username_txt.image = ImageTk.PhotoImage(Image.open("defaultimage.jpeg"))
         # imageLabel = tk.Label(frame, image=self.username_txt.image,width=80, height=70)
         # imageLabel.pack(side="right", fill="y")
 
-
-
-
-        self.username_txt.place(x=45,y=200,width=300,height=50)
-        size=(42,46)
-        self.logo=ImageTk.PhotoImage(Image.open("default.jpeg").resize(size))
-       
-        tk.Label(frame_input,image=self.logo,bg='#213e57').place(x=1,y=200)
-
-
-
-
         
         # log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
         # log_password.place(x=30,y=210)
         
-        self.log_password_entry=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
-        self.log_password_entry.place(x=45,y=270,width=300,height=50)
-
-
-
-        size=(42,46)
-        self.passimage=ImageTk.PhotoImage(Image.open("lockimg.jpeg").resize(size))
-       
-        tk.Label(frame_input,image=self.passimage,bg='#213e57').place(x=1,y=270)
-
+        
         
         # btn1=Button(frame_input,text="forgot password?",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
         # btn1.place(x=125,y=300)
-        
-        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="#213e57",bd=0,width=10,height=1)
-        btn2.place(x=80,y=330)
-        
-        
-
-
 
 
         # btn3=Button(frame_input,command=self.Register,text="Not Registered?register",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
@@ -159,50 +149,70 @@ class Login:
 
         
         label1=Label(frame_input2,text="Sign up",font=('times in roman',32,'bold'),fg="Black",bg="white")
-        label1.place(x=45,y=50)
+        label1.place(x=200,y=200)
         
         
         # fname_label=Label(frame_input2,text="Firstname",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # fname_label.place(x=0,y=150)
         
         self.fname_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.fname_entry.place(x=0,y=190,width=300,height=35)
+        self.fname_entry.place(x=100,y=300,width=400,height=45)
         self.fname_entry.insert(0,"First Name")
+       
+        size=(42,43)
+        self.fnameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.fnameimg,bg="#d3d3d3").place(x=56,y=300)
         
         # lname_label=Label(frame_input2,text="Lastname",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # lname_label.place(x=00,y=250)
         
         self.lname_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.lname_entry.place(x=0,y=250,width=300,height=35)
+        self.lname_entry.place(x=100,y=370,width=400,height=45)
         self.lname_entry.insert(0,"Last Name")
+
+        size=(42,43)
+        self.lnameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.lnameimg,bg="#d3d3d3").place(x=56,y=370)
 
         #  email_label=Label(frame_input2,text="Email",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # email_label.place(x=0,y=450)
         #entry2
         self.email_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.email_entry.place(x=0,y=300,width=300,height=35)
+        self.email_entry.place(x=100,y=440,width=400,height=45)
         self.email_entry.insert(0,"Email")
 
+        size=(42,43)
+        self.emailimg=ImageTk.PhotoImage(Image.open("emailing.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.emailimg,bg="#d3d3d3").place(x=56,y=440)
 
 
         # username_label=Label(frame_input2,text="Username",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # username_label.place(x=300,y=250)
         
         self.username_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.username_entry.place(x=0,y=350,width=300,height=35)
+        self.username_entry.place(x=100,y=510,width=400,height=45)
         self.username_entry.insert(1,"UserName")
 
-
+        size=(42,43)
+        self.unameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.unameimg,bg="#d3d3d3").place(x=56,y=510)
 
         # password_lab=Label(frame_input2,text="Password",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # password_lab.place(x=0,y=350)
         
         #entry3
         self.password_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.password_entry.place(x=0,y=400,width=300,height=35)
+        self.password_entry.place(x=100,y=580,width=400,height=45)
         self.password_entry.insert(1,"Password")
 
+        size=(42,43)
+        self.passimg=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
        
+        tk.Label(frame_input2,image=self.passimg,bg="#d3d3d3").place(x=56,y=580)
         #entry5
         
         
@@ -211,11 +221,16 @@ class Login:
         # cpass_label.place(x=300,y=350)
          #entry-4
         self.cpass_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.cpass_entry.place(x=00,y=450,width=300,height=35)
+        self.cpass_entry.place(x=100,y=650,width=400,height=45)
         self.cpass_entry.insert(1,"Conform Password")
 
-        btn2=Button(frame_input2,command=lambda:[self.register(),self.company_datails()],text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=80,y=500)
+        size=(42,43)
+        self.cpassimg=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.cpassimg,bg="#d3d3d3").place(x=56,y=650)
+
+        btn2=Button(frame_input2,command=lambda:[self.register()],text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=200,y=740)
         
         # btn3=Button(frame_input2,command=self.loginform,text="Already Registered?Login",cursor="hand2",font=("calibri",10),bg="white",fg="black",bd=0)
         # btn3.place(x=170,y=500)
@@ -225,13 +240,13 @@ class Login:
         frame_input3.place(x=950,y=0,height=950,width=975)
         
         label15=Label(frame_input3,text="One of us ?",font=('times new roman',20,'bold'),fg="#fff",bg="#213e57")
-        label15.place(x=400,y=120)
+        label15.place(x=500,y=120)
         
-        label16=Label(frame_input3,text="click here for work with FinsYs.",font=('Goudy old style',14,'bold'),fg="#fff",bg="#213e57")
-        label16.place(x=350,y=160)
+        label16=Label(frame_input3,text="click here for work with FinsYs.",font=('Goudy old style',10),fg="#fff",bg="#213e57")
+        label16.place(x=450,y=160)
         
-        btn2=Button(frame_input3,command=self.loginform,text="SIGN IN",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=400,y=200)
+        btn2=Button(frame_input3,command=self.loginform,text="SIGN IN",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=500,y=200)
 
 
         size=(700,600)
@@ -266,23 +281,25 @@ class Login:
         else:
             try:
                 self.database()
-                id=[]
-                email_id=self.email_entry.get()
-                id.append(email_id)
+                user=[]
+                username=self.username_entry.get()
+                user.append(username)
                
                 # # con=mysql.connect(host="localhost",user="root",password="root",database="finsYs_tkinter")
                 # # cur=con.cursor()
                 # # mycursor.execute("select * from register where email=%s",email) 
                 # # row=mycursor.fetchone()
 
-                sql='SELECT id FROM register WHERE email=%s'# selecting entire table from db,taking username , nd check the existance
-                val=id
-                mycursor.execute(sql,id)
+                sql='SELECT id FROM register WHERE username=%s'# selecting entire table from db,taking username , nd check the existance
+                val=user
+                mycursor.execute(sql,val)
 
                 exc_email=mycursor.fetchone()
 
                 if exc_email is not None:
-                    messagebox.showerror("Error","User already Exist,Please try with another Email",parent=self.root)
+                    self.loginform()
+                    messagebox.showerror("Error","This username already exists. Sign up again",parent=self.root)
+                    
                 else:
 
                     sql="INSERT INTO register (first_name,last_name,password,username,email) VALUES(%s,%s,%s,%s,%s)" #adding values into db
@@ -292,19 +309,20 @@ class Login:
                     # print("hlo")
                     mydb.commit()
                     mycursor.close()
+                    self.company_datails()
                     # messagebox.showinfo("Success", "Register Successfull",parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error",f"Error due to :{str(es)}",parent=self.root)
                 
     def appscreen(self):
         
-        Frame_login=Frame(self.root,bg="white")
-        Frame_login.place(x=0,y=0,height=700,width=1000)
+        Frame_login=Frame(self.root,bg="#2f516a")
+        Frame_login.place(x=0,y=0,height=1000,width=2000)
         label1=Label(Frame_login,text="Hi! Welcome To Seek coding", font=("times new roman",32,'bold'),fg="black",bg="white")
         label1.place(x=375,y=100)
         
-        btn2=Button(Frame_login,command=self.loginform,text="Logout",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=700,y=20)   
+        # btn2=Button(Frame_login,command=self.loginform,text="Logout",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
+        # btn2.place(x=700,y=20)   
 
     def select_file(self):
     
