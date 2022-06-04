@@ -601,6 +601,7 @@ def sherrymain():
         values=treevv.item(str,'values')
         print(values)
         b=[values[0]]
+        print(b)
         cur.execute("SELECT * FROM supplier WHERE supplier_id=%s",(b))
         s=cur.fetchone()
         D=tk.Toplevel(A)
@@ -637,68 +638,101 @@ def sherrymain():
         #title.grid(row=3,column=2,padx=20,pady=20)
         cont=['Mr','Mrs','Miss','Ms']
         cmb=ttk.Combobox(hd1,values=cont)
-        cmb.insert(0,s[1])
+        try:
+            cmb.insert(0,s[1])
+        except:
+            pass    
         cmb.place(relx=0.02,rely=0.08,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='First Name',bg='#243e54',font=('times new roman', 14)).place(relx=0.35,rely=0.05)
         efname=StringVar()
         f=tk.Entry(hd1,textvariable=efname)
-        f.insert(0,s[2])
+        try:
+            f.insert(0,s[2])
+        except:
+            pass       
         f.place(relx=0.35,rely=0.08,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Last Name',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.05)
         elname=StringVar()
         l=tk.Entry(hd1,textvariable=elname)
-        l.insert(0,s[3])
+        try:
+            l.insert(0,s[3])
+        except:
+            pass        
         l.place(relx=0.68,rely=0.08,relwidth=0.3,relheight=0.035)
         
         tk.Label(hd1,text='Company',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.13)
         ecomp=StringVar()
         co=tk.Entry(hd1,textvariable=ecomp)
-        co.insert(0,s[4])
+        try:
+            co.insert(0,s[4])
+        except:
+            pass        
         co.place(relx=0.02,rely=0.16,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Email',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.13)
         e_mail=StringVar()
         eemail=tk.Entry(hd1,textvariable=e_mail)
-        eemail.insert(0,s[6])
+        try:
+            eemail.insert(0,s[6])
+        except:
+            pass    
         eemail.place(relx=0.35,rely=0.16,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Mobile',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.13)
         emobile=StringVar()
         x=tk.Entry(hd1,textvariable=emobile)
-        x.insert(0,s[5])
+        try:
+            x.insert(0,s[5])
+        except:
+            pass        
         x.place(relx=0.68,rely=0.16,relwidth=0.3,relheight=0.035)
         
         tk.Label(hd1,text='Opening Balance',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.20)
         eopen=StringVar()
         o=tk.Entry(hd1,textvariable=eopen)
-        o.insert(0,s[11])
+        try:
+            o.insert(0,s[11])
+        except:
+            pass
         o.place(relx=0.02,rely=0.24,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Account No:',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.20)
         e_accno=StringVar()
         ac=tk.Entry(hd1,textvariable=e_accno)
-        ac.insert(0,s[12])
+        try:
+            ac.insert(0,s[12])
+        except:
+            pass    
         ac.place(relx=0.35,rely=0.24,relwidth=0.3,relheight=0.035)
 
         web=tk.Label(hd1,text='Website',font=('times new roman', 14),bg='#243e54')
         web.place(relx=0.68,rely=0.20)
         webb=StringVar()
         eweb=tk.Entry(hd1,textvariable=webb)
-        eweb.insert(0,s[7])
+        try:
+            eweb.insert(0,s[7])
+        except:
+            pass    
         eweb.place(relx=0.68,rely=0.24,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Billing Rate',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.28)
         ebill=StringVar()
         bl=tk.Entry(hd1,textvariable=ebill)
-        bl.insert(0,s[8])
+        try:
+            bl.insert(0,s[8])
+        except:
+            pass
         bl.place(relx=0.02,rely=0.31,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Term',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.28)
         termvalues=['DUE ON RECEIPT','NET15','NET30','NET60','ADD NEW TERMS']
         eterms=ttk.Combobox(hd1,values=termvalues)
-        eterms.insert(0,s[9])
+        try:
+            eterms.insert(0,s[9])
+        except:
+            pass    
         eterms.place(relx=0.35,rely=0.31,relwidth=0.3,relheight=0.035)
 
         #bm=StringVar()
@@ -717,19 +751,28 @@ def sherrymain():
         gstvalues=['GST registered-Regular','GST registered-Composition','GST-unregistered']
         egst=ttk.Combobox(hd1,values=gstvalues)
         egst.bind('<<ComboboxSelected>>',gsttfn)
-        egst.insert(0,s[13])
+        try:
+            egst.insert(0,s[13])
+        except:
+            pass    
         egst.place(relx=0.02,rely=0.38,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='GST IN',font=('times new roman', 14),bg='#243e54').place(relx=0.35,rely=0.35)
         gstin=StringVar()
         egst_in=tk.Entry(hd1,textvariable=gstin)
-        egst_in.insert(0,s[14])
+        try:
+            egst_in.insert(0,s[14])
+        except:
+            pass    
         egst_in.place(relx=0.35,rely=0.38,relwidth=0.3,relheight=0.035)
 
         taxreg=tk.Label(hd1,text='Tax Registeration N0',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.35)
         etaxreg=StringVar()
         tx=tk.Entry(hd1,textvariable=etaxreg)
-        tx.insert(0,s[15])
+        try:
+            tx.insert(0,s[15])
+        except:
+            pass    
         tx.place(relx=0.68,rely=0.38,relwidth=0.3,relheight=0.035)  
 
         tk.Label(hd1,text='Effective Date',font=('times new roman', 14),bg='#243e54').place(relx=0.02,rely=0.42)
@@ -743,7 +786,10 @@ def sherrymain():
         'wachh Barath Cess Expense','Taxes-Property','Telephone Expense','Travel Expense','Uncategorised Expense','Utilities','Ask My Accountant','CGST write-off','GST write-off','IGST write-off','Miscellaneous Expense','Political Contributions',
         'Reconciliation Discrepancies','SGST Write-off','Tax Write-off','Vehicle Expenses','Cost of Sales','Equipment Rental for Jobs','Freight and Shipping Cost','Merchant Account Fees','Purchases-Hardware For Resale','Purchases-Software For Resale','Subcontracted Services','Tools and Craft Suppliers']
         edefexp=ttk.Combobox(hd1,values=defvalues)
-        edefexp.insert(0,s[17])
+        try:
+            edefexp.insert(0,s[17])
+        except:
+            pass    
         edefexp.place(relx=0.35,rely=0.45,relwidth=0.27,relheight=0.035)  
 
         tk.Button(hd1,text='+',font=(14),command=sherryplus).place(relx=0.625,rely=0.45,relwidth=0.025,relheight=0.035)
@@ -751,7 +797,10 @@ def sherrymain():
         tk.Label(hd1,text='Apply TDS for Supplier',font=('times new roman', 14),bg='#243e54').place(relx=0.68,rely=0.42)
         fg=['Yes','No']
         tds=ttk.Combobox(hd1,values=fg)
-        tds.insert(0,s[18])
+        try:
+            tds.insert(0,s[18])
+        except:
+            pass    
         tds.place(relx=0.68,rely=0.45,relwidth=0.3,relheight=0.035)  
         
         label2=tk.Label(hd1,text='Address',bg='#243e54')
@@ -761,13 +810,19 @@ def sherrymain():
         tk.Label(hd1,text='Street',bg='#243e54',font=('times new roman', 14)).place(relx=0.02,rely=0.53)
         estreet=StringVar()
         st=tk.Entry(hd1,textvariable=estreet)
-        st.insert(0,s[19])
+        try:
+            st.insert(0,s[19])
+        except:
+            pass
         st.place(relx=0.02,rely=0.57,relwidth=0.63,relheight=0.035)  
         
         tk.Label(hd1,text='City',bg='#243e54',font=('times new roman', 14)).place(relx=0.68,rely=0.53)
         ecity=StringVar()
         cy=tk.Entry(hd1,textvariable=ecity)
-        cy.insert(0,s[20])
+        try:
+            cy.insert(0,s[20])
+        except:
+            pass    
         cy.place(relx=0.68,rely=0.57,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='State',bg='#243e54',font=('times new roman', 14)).place(relx=0.02,rely=0.61)
@@ -777,13 +832,19 @@ def sherrymain():
         'Meghalaya','Mizoram','Nagaland','Odisha','Puducherry','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura',
         'Uttar Predesh','Uttarakhand','West Bengal','Other Territory']
         estat=ttk.Combobox(hd1,values=stvalues)
-        estat.insert(0,s[21])
+        try:
+            estat.insert(0,s[21])
+        except:
+            pass    
         estat.place(relx=0.02,rely=0.64,relwidth=0.3,relheight=0.035) 
 
         tk.Label(hd1,text='Pin Code',bg='#243e54',font=('times new roman', 14)).place(relx=0.35,rely=0.61)
         epin=StringVar()
         pin=tk.Entry(hd1,textvariable=epin)
-        pin.insert(0,s[22])
+        try:
+            pin.insert(0,s[22])
+        except:
+            pass
         pin.place(relx=0.35,rely=0.64,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Country',bg='#243e54',font=('times new roman', 14)).place(relx=0.68,rely=0.61)
@@ -798,13 +859,19 @@ def sherrymain():
         'Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Macau','Macedonia','Madagascar','Malaysia','Malawi','Malidives','Mali','Malta',
         'Marshall Island','Martinique','Mauritania','Mauritius','Mayotte']
         cont=ttk.Combobox(hd1,values=ctvalues)
-        cont.insert(0,s[23])
+        try:
+            cont.insert(0,s[23])
+        except:
+            pass    
         cont.place(relx=0.68,rely=0.64,relwidth=0.3,relheight=0.035)
 
         tk.Label(hd1,text='Notes',bg='#243e54',font=('times new roman', 14)).place(relx=0.02,rely=0.68)
         enotes=StringVar()
         no=tk.Entry(hd1,textvariable=enotes)
-        no.insert(0,s[24])
+        try:
+            no.insert(0,s[24])
+        except:
+            pass    
         no.place(relx=0.02,rely=0.71,relwidth=0.8,relheight=0.045) 
 
         Checkbutton(hd1, text = "Agree to Terms and Conditions",bg='#243e54',font=('times new roman', 12)).place(relx=0.02,rely=0.76)  
