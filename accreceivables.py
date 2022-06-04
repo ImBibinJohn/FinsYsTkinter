@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-import zlib
-import matplotlib.figure
-import matplotlib.patches
+from datetime import datetime, date, timedelta
 from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import mysql.connector
@@ -34,19 +32,32 @@ def accrecivabales():
     form_frame=tk.Frame(profitlossframe,bg='#243e54')
 
     def menuuu(e):
+        global dte,dtee,fromdate,todate
+        toda = date.today()
+        tod = toda.strftime("%Y-%m-%d")
         dropp=drop.get()
-        def datedateee():
-            fdate=dte.get()
-            ldate=dtee.get()   
         if dropp=='Custom':            
             tk.Label(form_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.45,rely=0.1)
             dte=StringVar()
-            DateEntry(form_frame,textvariable=dte).place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
+            DateEntry(form_frame,textvariable=dte,date_pattern='y-mm-dd').place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
             tk.Label(form_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.70,rely=0.1)
             dtee=StringVar()
-            DateEntry(form_frame,textvariable=dtee).place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
-            datedateee()
-
+            DateEntry(form_frame,textvariable=dtee,date_pattern='y-mm-dd').place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
+        elif dropp=='Today':
+            fromdate = tod
+            todate = tod 
+        elif dropp=='This month':
+            fromdate = toda.strftime("%Y-%m-01")
+            todate = toda.strftime("%Y-%m-31")
+        elif dropp=='This financial year':
+            if int(toda.strftime("%m")) >= 1 and int(toda.strftime("%m")) <= 3:
+                pyear = int(toda.strftime("%Y")) - 1
+                fromdate = f'{pyear}-03-01'
+                todate = f'{toda.strftime("%Y")}-03-31'
+            else:
+                pyear = int(toda.strftime("%Y")) + 1
+                fromdate = f'{toda.strftime("%Y")}-03-01'
+                todate = f'{pyear}-03-31'
     tk.Label(form_frame,text="Report Period",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.1)
     options=["All dates", "Custom","Today","This month","This financial year"]
     drop= ttk.Combobox(form_frame,values=options,font=16)
@@ -54,7 +65,30 @@ def accrecivabales():
     drop.bind('<<ComboboxSelected>>',menuuu)
     drop.place(relx=0.05,rely=0.23,relwidth=0.3,relheight=0.15)
      #buttons
-    tk.Button(form_frame,text = "Run Report",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold')).place(relx=0.55,rely=0.5,relwidth=0.15)
+    def cleartree():#to clear treeview
+        for item in treevv.get_children():
+            treevv.delete(item) 
+    def accrecifetch():
+        period=drop.get()
+        if period=='All dates':
+            cleartree()
+            accrevalldates()  
+        elif period=='Today':
+            cleartree()
+            accrevtoday() 
+        elif period=='Custom':
+            global fromdate,todate
+            fromdate=dte.get()
+            todate=dtee.get()
+            cleartree()
+            customvalues()   
+        elif period=='This month':
+            cleartree()
+            customvalues()    
+        elif period=='This financial year':
+            cleartree()
+            customvalues()      
+    tk.Button(form_frame,text = "Run Report",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=accrecifetch).place(relx=0.55,rely=0.5,relwidth=0.15)
     tk.Button(form_frame,text = "Back",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold')).place(relx=0.75,rely=0.5,relwidth=0.15)
     form_frame.place(relx=0.1,rely=0.08,relwidth=0.8,relheight=0.1)
 
@@ -101,25 +135,60 @@ def accrecivabales():
     treevv.column(5, minwidth=30, width=100,anchor=CENTER)
     treevv.column(6, minwidth=30, width=100,anchor=CENTER)
     treevv.column(7, minwidth=30, width=100,anchor=CENTER)
-    treevv.column(8, minwidth=30, width=100,anchor=CENTER)
-    cursor.execute("SELECT customername,baldue FROM invoice WHERE cid =%s",([cid]))
-    vall=cursor.fetchall()
-    trans='Invoice Balance Due'
-    try:
-        for i in vall:
-            treevv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
-    except:
-        pass 
-    transs='Credit Note' 
-    cursor.execute("SELECT customer,grndtot FROM credit WHERE cid =%s",([cid]))
-    val=cursor.fetchall()   
-    try:
-        for j in val:
-            treevv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
-    except:
-        pass             
-    treevv.place(relx=0,rely=0,relwidth=1)        
+    treevv.column(8, minwidth=30, width=100,anchor=CENTER)         
+    treevv.place(relx=0,rely=0,relwidth=1)  
+    def accrevalldates():#all dates
+        cursor.execute("SELECT customername, SUM(baldue) FROM invoice WHERE cid=%s GROUP BY customername",([cid]))
+        vall=cursor.fetchall()
+        trans='Invoice Balance Due'
+        try:
+            for i in vall:
+                treevv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+        except:
+            pass 
+        transs='Credit Note' 
+        cursor.execute("SELECT customer,SUM(grndtot) FROM credit WHERE cid =%s GROUP BY customer",([cid]))
+        val=cursor.fetchall()   
+        try:
+            for j in val:
+                treevv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+        except:
+            pass          
     tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
+    def accrevtoday():#today values
+        cursor.execute("SELECT customername,SUM(baldue) FROM invoice WHERE invoicedate =%s and cid =%s GROUP BY customername",(fromdate,cid))
+        vall=cursor.fetchall()
+        trans='Invoice Balance Due'
+        try:
+            for i in vall:
+                treevv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+        except:
+            pass 
+        transs='Credit Note' 
+        cursor.execute("SELECT customer,SUM(grndtot) FROM credit WHERE creditdate =%s and cid =%s GROUP BY customer",(fromdate,cid))
+        val=cursor.fetchall()   
+        try:
+            for j in val:
+                treevv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+        except:
+            pass 
+    def customvalues():#other values
+        cursor.execute("SELECT customername,SUM(baldue) FROM invoice WHERE invoicedate BETWEEN %s and %s and cid =%s GROUP BY customername",(fromdate,todate,cid))
+        vall=cursor.fetchall()
+        trans='Invoice Balance Due'
+        try:
+            for i in vall:
+                    treevv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+        except:
+            pass  
+        transs='Credit Note' 
+        cursor.execute("SELECT customer,SUM(grndtot) FROM credit WHERE creditdate BETWEEN %s and %s and cid =%s GROUP BY customer",(fromdate,todate,cid))
+        val=cursor.fetchall()   
+        try:
+            for j in val:
+                treevv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+        except:
+            pass          
    
     prlframe.mainloop()
 accrecivabales()   

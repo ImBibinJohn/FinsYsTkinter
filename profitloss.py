@@ -7,6 +7,7 @@ from wsgiref.validate import validator
 import matplotlib.figure
 import matplotlib.patches
 from tkcalendar import DateEntry
+from datetime import datetime, date, timedelta
 from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.pyplot import xcorr, yscale
@@ -37,10 +38,10 @@ def profitloss():
     form_frame=tk.Frame(profitlossframe,bg='#243e54')
 
     def menu(e):
+        global dte,dtee
+        toda = date.today()
+        tod = toda.strftime("%Y-%m-%d")
         dropp=drop.get()
-        def datedate():
-            fdate=dte.get()
-            ldate=dtee.get()   
         if dropp=='Custom':            
             tk.Label(form_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.45,rely=0.1)
             dte=StringVar()
@@ -48,9 +49,45 @@ def profitloss():
             tk.Label(form_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.70,rely=0.1)
             dtee=StringVar()
             DateEntry(form_frame,textvariable=dtee).place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
-            datedate()
+        elif dropp=='Today':
+            fromdate = tod
+            todate = tod 
+        elif dropp=='This month':
+            fromdate = toda.strftime("%Y-%m-01")
+            todate = toda.strftime("%Y-%m-31")
+        elif dropp=='This financial year':
+            if int(toda.strftime("%m")) >= 1 and int(toda.strftime("%m")) <= 3:
+                pyear = int(toda.strftime("%Y")) - 1
+                fromdate = f'{pyear}-03-01'
+                todate = f'{toda.strftime("%Y")}-03-31'
+            else:
+                pyear = int(toda.strftime("%Y")) + 1
+                fromdate = f'{toda.strftime("%Y")}-03-01'
+                todate = f'{pyear}-03-31'    
 
-
+    def cleartree():#to clear treeview
+        for item in set.get_children():
+            set.delete(item) 
+    def accrecifetch():
+        period=drop.get()
+        if period=='All dates':
+            cleartree()
+            alldates() 
+        elif period=='Today':
+            cleartree()
+            betweendates() 
+        elif period=='Custom':
+            global fromdate,todate
+            fromdate=dte.get()
+            todate=dtee.get()
+            cleartree()
+            betweendates()  
+        elif period=='This month':
+            cleartree()
+            betweendates()  
+        elif period=='This financial year':
+            cleartree()
+            betweendates()    
     tk.Label(form_frame,text="Report Period",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.1)
     options=["All dates", "Custom","Today","This month","This financial year"]
     drop= ttk.Combobox(form_frame,values=options,font=16)
@@ -58,7 +95,7 @@ def profitloss():
     drop.bind('<<ComboboxSelected>>',menu)
     drop.place(relx=0.05,rely=0.23,relwidth=0.3,relheight=0.15)
      #buttons
-    tk.Button(form_frame,text = "Run Report",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold')).place(relx=0.55,rely=0.5,relwidth=0.15)
+    tk.Button(form_frame,text = "Run Report",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=accrecifetch).place(relx=0.55,rely=0.5,relwidth=0.15)
     tk.Button(form_frame,text = "Back",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold')).place(relx=0.75,rely=0.5,relwidth=0.15)
     form_frame.place(relx=0.1,rely=0.08,relwidth=0.8,relheight=0.1)
 
@@ -253,9 +290,13 @@ def profitloss():
         incc=gros+tot2
         vml=incc-expp  
         tk.Label(contframe,text = "PROFIT OR LOSS",bg="#FFFFFF",font=('times new roman', 16)).place(relx=0.03,rely=v+0.04)
-        tk.Label(contframe,text = vml,bg="#FFFFFF",font=('times new roman', 12)).place(relx=0.88,rely=v+0.04) 
-    alldates()    
-    
+        tk.Label(contframe,text = vml,bg="#FFFFFF",font=('times new roman', 12)).place(relx=0.88,rely=v+0.04)   
+    alldates()
+    def betweendates():
+        totalama = 0.0
+        cursor.execute("SELECT grandtotal,payornot FROM bills where paymdate between %s and %s and cid =%s",[fromdate, todate,cid ])
+        bill=cursor.fetchall()
+        print(bill)
     tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
    
     prlframe.mainloop()
