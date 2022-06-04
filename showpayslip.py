@@ -38,7 +38,6 @@ def edit_payslip():
         print(gros)
         gros.set(gros_pay)
        
-        # var dedu1=parseFloat(provi)+parseFloat(prof)+parseInt(esi)+dedu1+dedu2+dedu3+dedu4;
         dedu1 = int(provi.get()) + int(prof.get()) + int(esi.get()) 
         print(dedu1)
         total_deduction = dedu1 + int(label1_dedu5.get()) + int(label1_dedu6.get())
@@ -49,8 +48,7 @@ def edit_payslip():
         net_salary = gio + int(label1_earr6.get()) + int(label1_earr7.get()) - int(label1_dedu5.get()) - int(label1_dedu6.get()) 
         netsal.set(net_salary)
         
-        # var gp1=parseFloat(earn1)-parseFloat(dedu1);
-        # document.getElementById('grandtotal').value = gp1 + x + y - a - b;
+    
         
     def changing_data():
         mycursor = mydb1.cursor()
