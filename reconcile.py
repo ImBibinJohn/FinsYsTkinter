@@ -1,4 +1,5 @@
 
+
 # import tkinter as tk
 # from tkinter import *
 # from tkinter import ttk
@@ -136,6 +137,7 @@
 
 
 
+
 import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
@@ -143,12 +145,14 @@ import tkinter.font as font
 from tkcalendar import DateEntry, Calendar
 
 
-from xml.dom.minicompat import StringTypes
+
 
 from tkinter import StringVar
 import mysql.connector
 mydata = mysql.connector.connect(
+
     host='localhost', user='root', password='root', database='finsYs_tkinter')
+
 cur = mydata.cursor()
 
 
@@ -294,4 +298,6 @@ def time():
     win.mainloop()
 
 
+
 time()
+

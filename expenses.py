@@ -6,12 +6,13 @@ import tkinter.messagebox as MessageBox
 import tkinter.font as font
 from unicodedata import category
 import mysql.connector as mysql
+from tkcalendar import Calendar, DateEntry
 
-# from tkcalendar import DateEntry, Calendar
+
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")
-expense_form.geometry("1500x1000")
+expense_form.geometry("1400x1000")
 expense_form['bg'] = '#2f516a'
 wrappen = ttk.LabelFrame(expense_form)
 mycanvas = Canvas(wrappen)
@@ -21,9 +22,12 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 
 def submit():
+    etype = "Expenses"
+
     payee = drop2.get()
     payment_date = payment_input.get()
     payment_method = drop3.get()
+
     category1 = cpro_drop1.get()
     category2 = cpro_drop2.get()
     category3 = cpro_drop3.get()
@@ -69,9 +73,9 @@ def submit():
     con = mysql.connect(host="127.0.0.1", user="root",
                         password="", database="fynsystkinter", port='3307')
     cur = con.cursor()
-    d = '''INSERT INTO expenses(payee , payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
-                    , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-    cur.execute(d, [(payee), (payment_date), (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
+    d = '''INSERT INTO expensesmain(etype,payee , payment_date , payment_method, category1 ,category2, category3, categorydescription1  , categorydescription2 
+                    , categorydescription3, categoryquantity1 , categoryquantity2 ,categoryquantity3, categoryprice1 , categoryprice2 , categoryprice3, categorytotal1 , categorytotal2 , categorytotal3, product1 , product2 , product3, productdescription1 , productdescription2 , productdescription3, hsn1 , hsn2 , hsn3, productquantity1 , productquantity2 , productquantity3, productprice1  , productprice2 ,productprice3, producttotal1  , producttotal2 , producttotal3, producttax1  ,  producttax2 ,producttax3, subtotal,tax,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+    cur.execute(d, [(etype), (payee), (payment_date),  (payment_method), (category1), (category2), (category3), (categorydescription1), (categorydescription2), (categorydescription3), (categoryquantity1), (categoryquantity2), (categoryquantity3), (categoryprice1), (categoryprice2), (categoryprice3), (categorytotal1), (categorytotal2), (categorytotal3), (product1), (product2),
                 (product3), (productdescription1), (productdescription2), (productdescription3), (hsn1), (hsn2), (hsn3), (productquantity1), (productquantity2), (productquantity3), (productprice1), (productprice2), (productprice3), (producttotal1), (producttotal2), (producttotal3), (producttax1),  (producttax2), (producttax3), (subtotal),  (tax), (grandtotal)])
     con.commit()
     MessageBox.showinfo("Insert Status", "Inserted Successfully")
@@ -82,7 +86,7 @@ mycanvas.configure(yscrollcommand=yscrollbar.set)
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
     scrollregion=mycanvas.bbox('all')))
 
-full_frame = Frame(mycanvas, width=2000, height=1600, bg='#2f516a')
+full_frame = Frame(mycanvas, width=2000, height=2000, bg='#2f516a')
 mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
 
@@ -112,7 +116,7 @@ wrappen.pack(fill='both', expand='yes',)
 
 payment_date = Label(form_frame, text="Payment Date", bg='#243e55', fg='#fff')
 payment_date.place(x=30, y=200,)
-payment_input = Entry(form_frame, width=50, bg='#243e55', fg='#fff')
+payment_input = DateEntry(form_frame, width=49, bg="#2f516f", bd=2)
 payment_input.place(x=30, y=230, height=40)
 
 

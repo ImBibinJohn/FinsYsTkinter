@@ -83,6 +83,7 @@ from tkinter import VERTICAL, ttk
 import tkinter.font as font
 from tkcalendar import DateEntry, Calendar
 
+
 # import click
 # from requests import options
 # from xml.dom.minicompat import StringTypes
@@ -90,7 +91,9 @@ from tkcalendar import DateEntry, Calendar
 from tkinter import StringVar
 import mysql.connector
 mydata = mysql.connector.connect(
+
     host='localhost', user='root', password='root', database='finsYs_tkinter')
+
 cur = mydata.cursor()
 
 # yyyyy
@@ -104,6 +107,7 @@ def selected(event):
 
     else:
         import chart0faccounts
+
 def add_account():
     print("hiiiiiiiiiiiiiii")
     def sub_check():
@@ -259,13 +263,14 @@ def add_account():
 
 
 
-
 def main():
 
     global A, data, menu
     A = tk.Tk()
     A.title('chartofaccounts')
+
     A.geometry('2000x2000')
+
     A['bg'] = '#2f516f'
 
     menu = StringVar()
@@ -275,7 +280,9 @@ def main():
     drop.config(bg='#243e55', fg="white", font=('Arial', 18))
     drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
 
+
     drop.place(x=1400, y=140)
+
 
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
