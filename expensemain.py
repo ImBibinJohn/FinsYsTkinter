@@ -107,7 +107,7 @@ def main():
             global D, refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal
             refno = drop1.get()
             payee = drop2.get()
-            payment_date = payment_input.get()
+            payment_date = paymentdate_input.get()
             payment_method = drop3.get()
             payment_account = drop4.get()
             supplier = drop5.get()
@@ -166,8 +166,8 @@ def main():
             print(refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2,
                   categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1, producttax2, producttax3, subtotal, tax, grandtotal)
 
-            cur.execute("""UPDATE expensesmain SET refno =%s, payee =%s, payment_date =%s, payment_method =%s, payment_account =%s, supplier =%s, mailaddress =%s, category1 =%s, category2 =%s, category3 =%s,categorydescription1 =%s, categorydescription2 =%s,categorydescription3 =%s, categoryquantity1 =%s, categoryquantity2 =%s, categoryquantity3 =%s, categoryprice1 =%s, categoryprice2 =%s, categoryprice3 =%s, categorytotal1 =%s, categorytotal2 =%s, categorytotal3 =%s, product1 =%s, product2 =%s, product3 =%s,productdescription1 =%s, productdescription2 =%s,productdescription3 =%s, hsn1 =%s, hsn2 =%s, hsn3 =%s, productquantity1 =%s, productquantity2 =%s, productquantity3 =%s, productprice1 =%s, productprice2 =%s, productprice3 =%s, producttotal1=%s  , producttotal2=%s , producttotal3=%s, producttax1=%s  ,  producttax2=%s ,producttax3=%s, subtotal=%s,tax =%s,grandtotal=%s WHERE id=%d""",
-                        ( refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1,  producttax2, producttax3, subtotal, tax, grandtotal, b[0],))
+            cur.execute("""UPDATE expensesmain SET refno =%s, payee =%s, payment_date =%s, payment_method =%s, payment_account =%s, supplier =%s, mailaddress =%s, category1 =%s, category2 =%s, category3 =%s,categorydescription1 =%s, categorydescription2 =%s,categorydescription3 =%s, categoryquantity1 =%s, categoryquantity2 =%s, categoryquantity3 =%s, categoryprice1 =%s, categoryprice2 =%s, categoryprice3 =%s, categorytotal1 =%s, categorytotal2 =%s, categorytotal3 =%s, product1 =%s, product2 =%s, product3 =%s,productdescription1 =%s, productdescription2 =%s,productdescription3 =%s, hsn1 =%s, hsn2 =%s, hsn3 =%s, productquantity1 =%s, productquantity2 =%s, productquantity3 =%s, productprice1 =%s, productprice2 =%s, productprice3 =%s, producttotal1=%s  , producttotal2=%s , producttotal3=%s, producttax1=%s  ,  producttax2=%s ,producttax3=%s, subtotal=%s,tax =%s,grandtotal=%s WHERE id=%s""",
+                        ( refno, payee, payment_date, payment_method, payment_account, supplier, mailaddress, category1, category2, category3, categorydescription1, categorydescription2, categorydescription3, categoryquantity1, categoryquantity2, categoryquantity3, categoryprice1, categoryprice2, categoryprice3, categorytotal1, categorytotal2, categorytotal3, product1, product2, product3, productdescription1, productdescription2, productdescription3, hsn1, hsn2, hsn3, productquantity1, productquantity2, productquantity3, productprice1, productprice2, productprice3, producttotal1, producttotal2, producttotal3, producttax1,  producttax2, producttax3, subtotal, tax, grandtotal, b[0]))
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()
@@ -179,6 +179,7 @@ def main():
 
    
         b = treevv.item(treevv.focus())["values"][0]
+        print(b)
         sql='SELECT * FROM expensesmain WHERE id=%s'
         val=(b,)
         cur.execute(sql,val)
@@ -233,15 +234,15 @@ def main():
         drop2.place(x=30, y=130, height=40, width=450)
         wrappen.pack(fill='both', expand='yes',)
 
-        payment_date = Label(
+        pd = Label(
             form_frame, text="Payment Date", bg='#243e55', fg='#fff')
-        payment_date.place(x=30, y=200,)
-        payment_input = DateEntry(form_frame, width=49, bg="#2f516f")
+        pd.place(x=30, y=200,)
+        paymentdate_input = StringVar()
+        payment_input = DateEntry(form_frame, width=49, bg="#2f516f", textvariable=paymentdate_input)
         payment_input.place(x=30, y=230, height=40)
-        try:
-            payment_input.insert(0, s[4])
-        except:
-            pass
+
+        payment_input.insert(0, s[4])
+
     
         payment_method_lab = tk.Label(
             form_frame, text="Payment Method", bg='#243e55', fg='#fff')
