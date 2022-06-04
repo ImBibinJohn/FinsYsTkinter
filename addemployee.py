@@ -24,8 +24,13 @@ def fun():#db connection
         )
     mycursor = mydb1.cursor()
 
+def get_selected_add(event):
+
 
 def add_Employee():
+    
+    
+    
     fun()
     mycursor = mydb1.cursor()
     user_id=[6]
