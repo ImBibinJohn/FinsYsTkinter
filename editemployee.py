@@ -220,8 +220,8 @@ def changing_data():
 
     label3=Label(F, text="Joining Date", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=675,y=90)
-    cal2 = DateEntry(F, width= 22, font=('times new roman', 12, 'bold'),bg="#243e55",fg="#243e55", bd=5, relief=GROOVE,textvariable=joiningdate)
-    cal2.place(x=675,y=130,height=40,width=200)
+    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=joiningdate)
+    label3.place(x=675,y=130,height=40,width=200)
 
     label4=Label(F, text="Employee No", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label4.place(x=950,y=90)
@@ -257,12 +257,13 @@ def changing_data():
 
     place_of_supply1=Label(F,text="Age",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     place_input=StringVar()
-    drop3=ttk.Combobox(F,textvariable =age)
-    drop3['values']=("18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45",
+    drop3_age=ttk.Combobox(F,textvariable =age)
+    drop3_age['values']=("18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45",
                     "46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73",
                     "74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100")
     place_of_supply1.place(x=950,y=270)
-    drop3.place(x=950,y=310,height=40,width=200)
+    drop3_age.place(x=950,y=310,height=40,width=200)
+    # drop3_age.bind("<KeyRelease>",get_selected)
 
 
     label2=Label(F, text="Mobile", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -316,30 +317,29 @@ def changing_data():
     print(label1radio)
 
 
-
     label1=Label(F, text="HRA Declaration", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label1.place(x=670,y=790)
+    label1.place(x=670,y=760)
 
     label2=Label(F, text="Actual Rent Paid", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label2.place(x=400,y=860)
+    label2.place(x=400,y=840)
     label2=Entry(F,bg='#2f516a',fg='#fff',textvariable=totalrentpaid)
-    label2.place(x=400,y=900,height=40,width=200)
+    label2.place(x=400,y=880,height=40,width=200)
 
     label3=Label(F, text="HRA Received", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label3.place(x=675,y=860)
+    label3.place(x=675,y=840)
     label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=hrareceived)
-    label3.place(x=675,y=900,height=40,width=200)
+    label3.place(x=675,y=880,height=40,width=200)
 
     CheckVar1 = IntVar()
     sanitizer1_lbl=tk.Label(F,text="Do you live in metro cities? ",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    drop1=ttk.Combobox(F,textvariable=livein)
-    drop1['values']=("Yes","No")
-    sanitizer1_lbl.place(x=950,y=860)
-    drop1.place(x=950,y=900,height=40,width=200)
-
+    drop1_livein=ttk.Combobox(F,textvariable=livein)
+    drop1_livein['values']=("Yes","No")
+    sanitizer1_lbl.place(x=950,y=840)
+    drop1_livein.place(x=950,y=880,height=40,width=200)
+    # drop1_livein.bind("<KeyRelease>",get_selected)
 
     label1=Label(F, text="Statutory Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label1.place(x=670,y=970)
+    label1.place(x=670,y=960)
 
     label2=Label(F, text="Applicable Tax Regime", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=1030)
@@ -402,18 +402,21 @@ def changing_data():
 
     label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=1700)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic)
-    label1.place(x=280,y=1700,height=40,width=230)
+    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic)
+    label1_basic.place(x=280,y=1700,height=40,width=230)
+    # label1_basic.bind("<KeyRelease>",get_selected)
 
     label1=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=1760)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=da)
-    label1.place(x=280,y=1760,height=40,width=230)
+    label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable=da)
+    label1_da.place(x=280,y=1760,height=40,width=230)
+    # label1_da.bind("<KeyRelease>",get_selected)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othincome1)
     label1.place(x=40,y=1820,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othamount1)
-    label1.place(x=280,y=1820,height=40,width=230)
+    label1_othamount1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othamount1)
+    label1_othamount1.place(x=280,y=1820,height=40,width=230)
+    # label1_othamount1.bind("<KeyRelease>",get_selected)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othincome2)
     label1.place(x=40,y=1880,height=40,width=230)
@@ -448,18 +451,21 @@ def changing_data():
 
     label1=Label(F, text="Provident Fund", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1700)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=provifund)
-    label1.place(x=940,y=1700,height=40,width=230)
+    label1_provifund=Entry(F,bg='#2f516a',fg='#fff',textvariable=provifund)
+    label1_provifund.place(x=940,y=1700,height=40,width=230)
+    # label1_provifund.bind("<KeyRelease>",get_selected)
 
     label1=Label(F, text="Profession Tax", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1760)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=proftax)
-    label1.place(x=940,y=1760,height=40,width=230)
+    label1_proftax=Entry(F,bg='#2f516a',fg='#fff',textvariable=proftax)
+    label1_proftax.place(x=940,y=1760,height=40,width=230)
+    # label1_proftax.bind("<KeyRelease>",get_selected)
 
     label1=Label(F, text="ESI", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1820)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=esi)
-    label1.place(x=940,y=1820,height=40,width=230)
+    label1_esi=Entry(F,bg='#2f516a',fg='#fff',textvariable=esi)
+    label1_esi.place(x=940,y=1820,height=40,width=230)
+    # label1_esi.bind("<KeyRelease>",get_selected)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=deduc1)
     label1.place(x=700,y=1880,height=40,width=230)
@@ -544,7 +550,7 @@ def edit_employee():
         print("bruh")
         print(age)
         age= int(age)
-        basicda = float(basicda)
+        # basicda = float(basicda)
         if (age < 60): 
             if (basicda <= (250000 / 12)) :
                 pt = 0;
