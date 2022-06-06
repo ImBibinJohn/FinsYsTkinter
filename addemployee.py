@@ -24,7 +24,7 @@ def fun():#db connection
         )
     mycursor = mydb1.cursor()
 
-def get_selected_add(event):
+
 
 
 def add_Employee():
