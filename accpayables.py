@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import mysql.connector
 from tkcalendar import DateEntry
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
 cursor=mydata.cursor()
 #cc
 def accpayables():

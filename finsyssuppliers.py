@@ -8,7 +8,7 @@ import datetime as dt
 import re
 #database connection
 import mysql.connector
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
 cur=mydata.cursor()
 def sherryplus():
     def valueget():
@@ -184,7 +184,7 @@ def addsuppliers():
                     cid=2
                     bx=fname+lname
                     #inserting to bills table
-                    billg='''INSERT INTO bills (cid,grandtotal,paydate,payee) VALUES (%s,%s,%s,%s)'''
+                    billg='''INSERT INTO bills (cid,grandtotal,paymdate,payee) VALUES (%s,%s,%s,%s)'''
                     cur.execute(billg,[(cid),(open),(tod),(bx)])
                     mydata.commit()
                     #inserting balance into accounts
