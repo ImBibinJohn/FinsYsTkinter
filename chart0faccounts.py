@@ -77,13 +77,15 @@
 
 
 
+from cgitb import text
+from faulthandler import disable
 import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
 from tkcalendar import DateEntry, Calendar
-
-
+from tkinter import messagebox
+import datetime as dt
 # import click
 # from requests import options
 # from xml.dom.minicompat import StringTypes
@@ -109,110 +111,9 @@ def selected(event):
         import chart0faccounts
 
 def add_account():
-    print("hiiiiiiiiiiiiiii")
     def sub_check():
-        yes=sub_account_input.get()
-        print("yes",yes)
-
-
-
-    def save_data():
-            print("yes inside")
-            type = cm1.get()
-            name = f.get()
-            detail_type = l.get()
-            description = co.get()
-            sub_account = cb.get()
-            deftaxcode = nb.get()
-            finsys_amt = balanceinput.get()
-
-           # bn=bm.get()
-
-            print(b)
-            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
-            #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
-
-            cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
-                        (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
-            mydata.commit()
-            D.destroy()
-
-    cur.execute('select Pname from producttable')
-    product_data=cur.fetchall()
-    cur.execute('select Itemname from itemstable')
-    item_data=cur.fetchall()
-    
-
-    global add, bm
-    add = tk.Toplevel(A)
-    add.title('Add Account')
-    add.geometry('2000x2000')
-    mycanvas = tk.Canvas(add, width=2000, height=1200)
-    mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-    yscrollbar = ttk.Scrollbar(
-        add, orient='vertical', command=mycanvas.yview)
-    yscrollbar.pack(side=RIGHT, fill=Y)
-    mycanvas.configure(yscrollcommand=yscrollbar.set)
-    mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
-        scrollregion=mycanvas.bbox('all')))
-    frame = tk.Frame(mycanvas)
-    frame['bg'] = '#2f516f'
-    mycanvas.create_window((0, 0), window=frame,
-                            anchor='nw', width=2000, height=1000)
-
-    # contents frame
-    hd1 = tk.Frame(frame)
-    hd1['bg'] = '#243e54'
-    f2 = font.Font(family='Times New Roman', size=20)  # font
-
-    tk.Label(hd1, text='Account Type', bg='#243e54', fg="#fff",font=(
-        'times new roman', 14)).place(relx=0.04, rely=0.05)
-    typeinput = StringVar()
-    cm1 =ttk.Combobox(hd1,textvariable = typeinput)
-    value=[]
-    for pro_data in product_data:
-        value.append(pro_data)
-        cm1['values']=value
-    cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
-
-    tk.Label(hd1, text='Name', bg='#243e54', fg="#fff",font=(
-        'times new roman', 14)).place(relx=0.5, rely=0.05)
-    nameinput = StringVar()
-    f = tk.Entry(hd1, textvariable=nameinput)
- 
-    f.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
-
-    tk.Label(hd1, text='Detail Type',fg="#fff", font=('times new roman', 14),
-                bg='#243e54').place(relx=0.04, rely=0.25)
-    detailtypeinput = StringVar()
-    l =ttk.Combobox(hd1,textvariable = detailtypeinput)
-    itemvalue=[]
-    for it_data in item_data:
-        itemvalue.append(it_data)
-        l['values']=itemvalue
-   
-    l.place(relx=0.04, rely=0.30, relwidth=0.4, relheight=0.065)
-
-    tk.Label(hd1, text='Description',fg="#fff", font=('times new roman', 14),
-                bg='#243e54').place(relx=0.5, rely=0.25)
-    descriptioninput = StringVar()
-    co = tk.Entry(hd1, textvariable=descriptioninput)
-    #co.insert(1, s[4])
-    co.place(relx=0.5, rely=0.30, relwidth=0.4, relheight=0.065)
-
-    message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-    text_box = Text(hd1)
-    text_box.place(relx=0.04, rely=0.40, relwidth=0.4, relheight=0.2)
-    text_box.insert('end', message)
-    text_box.config(state='disabled')
-    sub_account= IntVar()
-    sub_account_input=Checkbutton(hd1,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54',command=sub_check).place(relx=0.5, rely=0.45)
-   
-
-    tk.Label(hd1, text='Is sub-account', fg="#fff",font=('times new roman', 14),
-                bg='#243e54').place(relx=0.52, rely=0.45)
-    subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
+        if sub_account.get()==1:
+            subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
                         'Input Credit', 'Deferred Service Tax Input Credit', 'Deferred SGST', 'Deferred VAT Input Credit',
                         'GST Refund', 'Inventory Asset', 'Paid Insurance', 'Service Tax Refund', 'TDS Receivable', 'Uncategorised Asset',
                         'Accumulated Depreciation', 'Buildings and Improvements', 'Furniture and Equipment', 'Land', 'Leasehold Improvements',
@@ -224,33 +125,209 @@ def add_account():
                         'Output VAT 14%', 'Output VAT 4%', 'Output VAT 5%', 'Service Tax Payable', 'Service Tax Suspense', 'SGST Payable', 'Swachh Bharat Cess Payable',
                         'TDS Payable', 'VAT Payable', 'VAT Suspense', 'Opening Balance', 'Equity']
 
-    cb = ttk.Combobox(hd1, values=subaccountinput)
+            cb = ttk.Combobox(hd1, values=subaccountinput)
+            cb.current(0)
+            cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
+        else:
+           
+            cb = Entry(hd1)
 
-    cb.place(relx=0.5, rely=0.50, relwidth=0.4, relheight=0.065)
+            cb.insert(0, " Deffered CGST")
+            cb.config(state='disabled')
+
+            cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
+    def cancel():
+        add.destroy()
+        
+
+    def save_data():
+            print("yes inside")
+            # acctype=[]
+            # for prod in product_data:
+            #     acctype.append(prod)
+            typelist=[]
+            type = typeinput.get()
+            typelist.append(type)
+            # print("(typelist[0](typelist[0]",typelist[0])
+            
+            cur.execute("select * from app1_accountype where accountname=%s",(typelist[0]))
+
+            pro=cur.fetchone()
+            # print("typeeeeeeeeeeeeeeeeeeeeeeeeeeee",pro)
+
+
+            
+            print("(typelist[0](typelist[0]",typelist[0])
+            
+            cur.execute("select Pid from producttable where Pname=%s",(typelist[0]))
+            product_id=cur.fetchone()
+            print("typeeeeeeeeeeeeeeeeeeeeeeeeeeee",product_id)
+
+
+
+
+            # cur.execute("select cid from app1_company where id_id=%s",(uid))
+            # cmp1=cur.fetchone()
+
+            name = f.get()
+            detail_type = l.get()
+            description = co.get()
+            sub_account = cb.get()
+            deftaxcode = nb.get()
+            finsys_amt = balanceinput.get()
+            cmp=cmp1
+            print("cmpvvvvvvvvvvvvvvvvv",cmp)
+            asof=asof_input.get()
+
+
+
+            sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,balance,asof,balfordisp,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(type,detail_type,name,description,sub_account,deftaxcode,finsys_amt,asof,finsys_amt,cmp[0],pro,product_id)
+            cur.execute(sql,val)
+            mydata.commit()
+            # D.destroy()
+            messagebox.showinfo(title='Success',message='New Account Added')
+
+
+
+
+
+
+           
+            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
+            #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
+
+            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
+            #             (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
+            # mydata.commit()
+            # D.destroy()
+
+    cur.execute('select Pname,Pid from producttable')
+    product_data=cur.fetchall()
+    cur.execute('select Itemname from itemstable')
+    item_data=cur.fetchall()
+    print("dataaaaaaaaaa",product_data)
+
+    global add, bm
+    add = tk.Toplevel(A)
+    add.title('Add Account')
+    add.geometry('1000x800')
+    
+    # mycanvas = tk.Canvas(add, width=2000, height=1200)
+    # mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+    # yscrollbar = ttk.Scrollbar(
+    #     add, orient='vertical', command=mycanvas.yview)
+    # yscrollbar.pack(side=RIGHT, fill=Y)
+    # mycanvas.configure(yscrollcommand=yscrollbar.set)
+    # mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
+    #     scrollregion=mycanvas.bbox('all')))
+    # frame = tk.Frame(mycanvas)
+    f2 = font.Font(family='Times New Roman', size=30)
+    add['bg'] = '#2f516f'
+    
+    # mycanvas.create_window((0, 0), window=frame,
+    #                         anchor='nw', width=2000, height=1000)
+
+    # # contents frame
+    uid=[4]
+    cur.execute("select cid from app1_company where id_id=%s",(uid))
+    cmp1=cur.fetchone()
+    acc_heading= Label(add, text="Account",bd=0,relief="groove",bg='#2f516f',font=f2, fg='#fff',height=2,pady=2,width=100)
+    acc_heading.pack()
+    hd1 = tk.Frame(add,width=900,height=650)
+    hd1['bg'] = '#243e54'
+    hd1.place(relx=0.05, rely=0.1)
+
+      # font
+
+    tk.Label(hd1, text='Account Type', bg='#243e54', fg="#fff",font=(
+        'times new roman', 14)).place(relx=0.04, rely=0.05)
+    typeinput = StringVar()
+    cm1 =ttk.Combobox(hd1,textvariable = typeinput)
+    value=[]
+    for pro_data in product_data:
+        value.append(pro_data[0])
+        cm1['values']=value
+    cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
+
+    tk.Label(hd1, text='Name', bg='#243e54', fg="#fff",font=(
+        'times new roman', 14)).place(relx=0.5, rely=0.05)
+    nameinput = StringVar()
+    f = tk.Entry(hd1, textvariable=nameinput,bg="#3E505C",fg="#fff")
+ 
+    f.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+
+    tk.Label(hd1, text='Detail Type',fg="#fff", font=('times new roman', 14),
+                bg='#243e54').place(relx=0.04, rely=0.2)
+    detailtypeinput = StringVar()
+    l =ttk.Combobox(hd1,textvariable = detailtypeinput)
+    itemvalue=[]
+    for it_data in item_data:
+        itemvalue.append(it_data)
+        l['values']=itemvalue
+   
+    l.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
+
+    tk.Label(hd1, text='Description',fg="#fff", font=('times new roman', 14),
+                bg='#243e54').place(relx=0.5, rely=0.2)
+    descriptioninput = StringVar()
+    co = tk.Entry(hd1, textvariable=descriptioninput,bg="#3E505C",fg="#fff")
+    #co.insert(1, s[4])
+    co.place(relx=0.5, rely=0.25, relwidth=0.4, relheight=0.065)
+
+    message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
+    text_box = Text(hd1,bg="#3E505C",fg="#fff")
+    text_box.place(relx=0.04, rely=0.35, relwidth=0.4, relheight=0.4)
+    text_box.insert('end', message)
+    text_box.config(state='disabled')
+    sub_account= IntVar()
+    sub_account_input=Checkbutton(hd1,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54',command=sub_check).place(relx=0.5, rely=0.35)
+   
+
+    tk.Label(hd1, text='Is sub-account', fg="#fff",font=('times new roman', 14),
+                bg='#243e54').place(relx=0.55, rely=0.35)
+    # subaccountinput="Deffered_CGST"
+    
+    cb = Entry(hd1,text="Deffered CGST",bg="#3E505C",fg="#fff")
+    cb.insert(0, " Deffered CGST")
+    # cb.config(state='disabled')
+
+    cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
 
     tk.Label(hd1, text='Default Tax Code', font=('times new roman', 14),fg="#fff",
-                bg='#243e54').place(relx=0.5, rely=0.63)
+                bg='#243e54').place(relx=0.5, rely=0.5)
     defaulttaxcodeinput = ['18.0% IGST', ' 14.00% ST', '0% IGST', 'Out of Scope', '0% GST', '14.5% ST', '14.0% VAT', '6.0% IGST', '28.0% IGST', '15.0% ST', '28.0% GST', '12.0% GST', '18.0% GST',
                             '3.0% GST', '0.2% IGST', '5.0% GST', '6.0% GST', '0.2% GST', 'Exempt IGST', '3.0% IGST', '4.0% VAT', '5.0% IGST', '12.36% ST', '5.0% VAT', 'Exempt GST', '12.0% IGST', '2.0% CST']
     nb = ttk.Combobox(hd1, values=defaulttaxcodeinput)
  
-    nb.place(relx=0.5, rely=0.7, relwidth=0.4, relheight=0.065)
+    nb.place(relx=0.5, rely=0.55, relwidth=0.4, relheight=0.065)
 
     tk.Label(hd1, text='Balance', font=('times new roman', 14),fg="#fff",
-                bg='#243e54').place(relx=0.05, rely=0.65)
+                bg='#243e54').place(relx=0.5, rely=0.65)
     balanceinput = StringVar()
-    bo = tk.Entry(hd1, textvariable=balanceinput)
+    bo = tk.Entry(hd1, textvariable=balanceinput,bg="#3E505C",fg="#fff")
 
-    bo.place(relx=0.05, rely=0.70, relwidth=0.4, relheight=0.065)
+    bo.place(relx=0.5, rely=0.70, relwidth=0.19, relheight=0.065)
+
+    tk.Label(hd1, text='as of', font=('times new roman', 14),fg="#fff",
+                bg='#243e54').place(relx=0.71, rely=0.65)
+
+    date = dt.datetime.now()
+    formated_date = f"{date:%Y-%m-%d }"
+    asof_input = StringVar()
+    asof = tk.Entry(hd1, text=formated_date,textvariable=asof_input,bg="#3E505C",fg="#fff")
+    asof.insert(0,formated_date)
+    asof.place(relx=0.71, rely=0.70, relwidth=0.19 ,relheight=0.065)
+    cancel_butt = tk.Button(hd1, text='Cancel', font=15, bg='#243e54',fg="#fff",
+                    command=cancel).place(relx=0.1, rely=0.8)
 
     sub = tk.Button(hd1, text='SUBMIT', font=15, bg='#243e54',fg="#fff",
-                    command=save_data).place(relx=0.5, rely=0.79)
+                    command=save_data).place(relx=0.2, rely=0.8)
 
-    hd1.place(relx=0.1, rely=0.15, relwidth=0.8, relheight=0.9)
-
-    tk.Frame(frame, bg='#2f516f').place(
-        relx=0, rely=0.92, relwidth=1, relheight=0.08)
-    add.mainloop()
+    
+    # tk.Frame(add, bg='#2f516f',width=100,height=500).place(x=100,y=92)
+    # add.mainloop()
 
 
 
