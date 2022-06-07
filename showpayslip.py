@@ -24,7 +24,32 @@ def fun():#db connection
         )
     mycursor = mydb1.cursor()
 
-def edit_payslip():    
+def edit_payslip():  
+    def get_selected_e_product(event):
+        global earn1,dedu1
+        earr6= label1_earr6.get()
+        earr7= label1_earr7.get()
+        print(earr6)
+        print(label1_basic.get())
+        earn1 = int(basic.get()) + int(da.get()) + int(earr1.get()) + int(earr2.get()) + int(earr3.get()) + int(earr4.get())
+       
+        print(earn1)
+        gros_pay = earn1 + int(label1_earr6.get()) + int(label1_earr7.get());
+        print(gros)
+        gros.set(gros_pay)
+       
+        dedu1 = int(provi.get()) + int(prof.get()) + int(esi.get()) 
+        print(dedu1)
+        total_deduction = dedu1 + int(label1_dedu5.get()) + int(label1_dedu6.get())
+        tded.set(total_deduction)
+        print(tded)
+        
+        gio = earn1 - dedu1;
+        net_salary = gio + int(label1_earr6.get()) + int(label1_earr7.get()) - int(label1_dedu5.get()) - int(label1_dedu6.get()) 
+        netsal.set(net_salary)
+        
+    
+        
     def changing_data():
         mycursor = mydb1.cursor()
         user_id=[6]
@@ -58,7 +83,7 @@ def edit_payslip():
         prof=prof.get()
         esi=esi.get()
         ded1=ded1.get()
-        dedu1=dedu1.get()
+        # dedu1=dedu1.get()
         ded2=ded2.get()
         dedu2=dedu2.get()
         ded3=ded3.get()
@@ -78,7 +103,7 @@ def edit_payslip():
         ,(empname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal,cid_id,data[0]))
         mydb1.commit()
         mydb1.close()
-        messagebox.showinfo('invoice edited Added')   
+        messagebox.showinfo('PaySlip edited Added')   
 
     fun()
     focus_data = tree_data.focus()
@@ -326,44 +351,53 @@ def edit_payslip():
 
     label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=580)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic)
-    label1.place(x=280,y=580,height=40,width=230)
+    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic)
+    label1_basic.place(x=280,y=580,height=40,width=230)
+    label1_basic.configure(state='disabled')
 
-    label1=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label1.place(x=40,y=640)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=da)
-    label1.place(x=280,y=640,height=40,width=230)
-
+    label1_da=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1_da.place(x=40,y=640)
+    label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable=da)
+    label1_da.place(x=280,y=640,height=40,width=230)
+    label1_da.configure(state='disabled')
+    
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear1)
     label1.place(x=40,y=700,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr1)
-    label1.place(x=280,y=700,height=40,width=230)
+    label1_earr1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr1)
+    label1_earr1.place(x=280,y=700,height=40,width=230)
+    label1_earr1.configure(state='disabled')
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear2)
     label1.place(x=40,y=760,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr2)
-    label1.place(x=280,y=760,height=40,width=230)
+    label1_earr2=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr2)
+    label1_earr2.place(x=280,y=760,height=40,width=230)
+    label1_earr2.configure(state='disabled')
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear3)
     label1.place(x=40,y=820,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr3)
-    label1.place(x=280,y=820,height=40,width=230)
+    label1_earr3=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr3)
+    label1_earr3.place(x=280,y=820,height=40,width=230)
+    label1_earr3.configure(state='disabled')
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear4)
     label1.place(x=40,y=880,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr4)
-    label1.place(x=280,y=880,height=40,width=230)
+    label1_earr4=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr4)
+    label1_earr4.place(x=280,y=880,height=40,width=230)
+    label1_earr4.configure(state='disabled')
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear6)
     label1.place(x=40,y=940,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr6)
-    label1.place(x=280,y=940,height=40,width=230)
+    earr6.set("0")
+    label1_earr6=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr6)
+    label1_earr6.place(x=280,y=940,height=40,width=230)
+    label1_earr6.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear7)
     label1.place(x=40,y=1000,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr7)
-    label1.place(x=280,y=1000,height=40,width=230)
-
+    earr7.set('0')
+    label1_earr7=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr7)
+    label1_earr7.place(x=280,y=1000,height=40,width=230)
+    label1_earr7.bind("<KeyRelease>",get_selected_e_product)
 
 
 
@@ -374,43 +408,52 @@ def edit_payslip():
     label1.place(x=700,y=580)
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=provi)
     label1.place(x=940,y=580,height=40,width=230)
-
+    label1.configure(state='disabled')
+    
     label1=Label(F, text="Profession Tax", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=640)
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=prof)
     label1.place(x=940,y=640,height=40,width=230)
+    label1.configure(state='disabled')
 
     label1=Label(F, text="ESI", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label1.place(x=700,y=640)
+    label1.place(x=700,y=700)
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=esi)
     label1.place(x=940,y=700,height=40,width=230)
+    label1.configure(state='disabled')
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded5)
     label1.place(x=700,y=760,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu5)
-    label1.place(x=940,y=760,height=40,width=230)
+    dedu5.set("0")
+    label1_dedu5=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu5)
+    label1_dedu5.place(x=940,y=760,height=40,width=230)
+    label1_dedu5.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded6)
     label1.place(x=700,y=820,height=40,width=230)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu6)
-    label1.place(x=940,y=820,height=40,width=230)
-
+    dedu6.set('0')
+    label1_dedu6=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu6)
+    label1_dedu6.place(x=940,y=820,height=40,width=230)
+    label1_dedu6.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Label(F, text="Gross Pay", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1080)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros)
-    label1.place(x=900,y=1080,height=40,width=270)
-
+    label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros)
+    label1_gros.place(x=900,y=1080,height=40,width=270)
+    label1_gros.bind("<KeyRelease>",get_selected_e_product)
+    
     label1=Label(F, text="Total Deduction", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1140)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded)
-    label1.place(x=900,y=1140,height=40,width=270)
+    label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded)
+    label1_tded.place(x=900,y=1140,height=40,width=270)
+    label1_tded.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Label(F, text="Net Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1200)
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal)
-    label1.place(x=900,y=1200,height=40,width=270)
-
+    label1_netsal=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal)
+    label1_netsal.place(x=900,y=1200,height=40,width=270)
+    label1_netsal.bind("<KeyRelease>",get_selected_e_product)
+    
     b1 = Button(F,text = "Update Payslip",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_data)  
     b1.place(x=470,y=1350,width=300,height=40) 
 
@@ -473,7 +516,7 @@ tree_data = ttk.Treeview(F,height=15)
 tree_data['show'] = 'headings'
 
 sb = ttk.Scrollbar(F, orient="vertical", command=tree_data.yview)
-sb.grid(row=0,column=1,sticky="NS",pady=30)
+sb.grid(row=0,column=1,sticky="NS",pady=10)
 
 tree_data.configure(yscrollcommand=sb.set)
 

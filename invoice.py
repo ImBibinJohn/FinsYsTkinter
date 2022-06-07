@@ -874,7 +874,7 @@ def add_invoice():
     today_date = Label(form_frame, text=format_date, fg="white", bg="black", font=("helvetica", 40))
 
     #company details
-    user_id=[2]
+    user_id=[4]
     mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
     cmp1=mycursor.fetchone()
 

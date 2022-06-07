@@ -15,6 +15,7 @@ from tkinter import messagebox
 import mysql.connector
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF, renderPM
+import re
 
 #create the class
 class Login:
@@ -31,39 +32,26 @@ class Login:
         Frame_login.place(x=0,y=0,height=950,width=950)
         
         label10=Label(Frame_login,text="New here ?",font=('times new roman',25,'bold'),fg="white",bg="#213e57")
-        label10.place(x=330,y=40)
+        # label10.place(x=330,y=40)
+        label10.place(x=430,y=40)
         
         label11=Label(Frame_login,text="Join here to start a business with FinsYs!",font=('times new roman',10,'bold'),fg="white",bg="#213e57")
-        label11.place(x=290,y=90)
+        # label11.place(x=290,y=90)
+        label11.place(x=390,y=90)
         
         btn2=Button(Frame_login,command=self.Register,text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
-        btn2.place(x=330,y=120)
+        btn2.place(x=430,y=120)
+
+        # canvas = Canvas()
+        # canvas.create_oval(0,000, 900, 400, outline = "black", fill = "white",width = 2)
+        # canvas.pack()
 
 
 
-        
-
-
-
-
-
-
-
-        def get_svg(svg_file):
-            drawing = svg2rlg(svg_file)
-            renderPM.drawToFile(drawing, "temp.png",fmt="png")
-
-    
-        get_svg("log.svg")
-
-        pimg =PIL.ImageTk.PhotoImage(Image.open("temp.png"))
-        # size = img.size
-        # frame = tk.Label(Frame_login, image=pimg)
-        frame = tk.Canvas(Frame_login, width=800, height=700,background="#213e57")
-        frame.place(x=350,y=300)
-        frame.create_image(0,0,anchor='nw',image=pimg)
-        
-        
+        size=(700,900)
+        self.ax=ImageTk.PhotoImage(Image.open("log.png").resize(size))
+       
+        tk.Label(Frame_login,image=self.ax,bg='#213e57').place(x=150,y=200)
 
 
 
@@ -81,43 +69,52 @@ class Login:
         # img=Label(Frame_login,image=self.img).place(x=0,y=0,width950,height=700)
         
         frame_input=Frame(self.root,bg="white")
-        frame_input.place(x=1250,y=200,height=400,width=300)
+        frame_input.place(x=1150,y=200,height=400,width=600)
         
-        label1=Label(frame_input,text="Sign in",font=('times in romen',32,'bold'),fg="black",bg="white")
-        label1.place(x=75,y=20)
+        label1=Label(frame_input,text="Sign in",font=('times in romen',30,'bold'),fg="black",bg="white")
+        label1.place(x=190,y=100)
+
+        self.username_txt=Entry(frame_input,font=('times new roman',10,'bold'),bg="lightgray")
+        self.username_txt.place(x=95,y=200,width=400,height=50)
+        size=(42,46)
+        self.logo=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input,image=self.logo).place(x=50,y=200)
+
+        self.log_password_entry=Entry(frame_input,show="*",font=('times new roman',10,'bold'),bg="lightgray")
+        self.log_password_entry.place(x=95,y=270,width=400,height=50)
+
+
+
+        size=(42,46)
+        self.passimage=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
+       
+        tk.Label(frame_input,image=self.passimage).place(x=50,y=270)
+
+        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=200,y=350)
         
-        username=Label(frame_input,text="Username",font=('Goudy old style',20),fg="black",bg="white")
-        username.place(x=30,y=95)
+
 
         
-        
+        # username=Label(frame_input,text="Username",font=('Goudy old style',20),fg="black",bg="white")
+        # username.place(x=30,y=95)
+ 
         #email_txt
-        self.username_txt=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
+        
 
         # self.username_txt.image = ImageTk.PhotoImage(Image.open("defaultimage.jpeg"))
         # imageLabel = tk.Label(frame, image=self.username_txt.image,width=80, height=70)
         # imageLabel.pack(side="right", fill="y")
 
-
-
-
-        self.username_txt.place(x=30,y=145,width=270,height=35)
         
-        log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
-        log_password.place(x=30,y=190)
+        # log_password=Label(frame_input,text="Password",font=('Goudy old style',20),fg="black",bg="white")
+        # log_password.place(x=30,y=210)
         
-        self.log_password_entry=Entry(frame_input,font=('times new roman',15,'bold'),bg="lightgray")
-        self.log_password_entry.place(x=30,y=240,width=270,height=35)
+        
         
         # btn1=Button(frame_input,text="forgot password?",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
         # btn1.place(x=125,y=300)
-        
-        btn2=Button(frame_input,text="Login",command=self.login,cursor='hand2',font=('times new roman',15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=80,y=330)
-        
-        
-
-
 
 
         # btn3=Button(frame_input,command=self.Register,text="Not Registered?register",cursor='hand2',font=('calibri',10),bg="white",fg="black",bd=0)
@@ -141,11 +138,7 @@ class Login:
                 messagebox.showerror("Error",f'Error Due to : {str(es)}',parent=self.root)
                 
                 
-    def create_canvas(self):
-        canvas=Canvas(self,bg="blue",)
-        coord=210,10
-        arc=canvas.create_arc(coord,start=200,end=50,fill="red")
-        canvas.pack()
+    
     def Register(self):
         
         Frame_login1=Frame(self.root,bg="white")
@@ -157,50 +150,88 @@ class Login:
 
         
         label1=Label(frame_input2,text="Sign up",font=('times in roman',32,'bold'),fg="Black",bg="white")
-        label1.place(x=45,y=50)
+        label1.place(x=200,y=200)
         
         
         # fname_label=Label(frame_input2,text="Firstname",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # fname_label.place(x=0,y=150)
         
         self.fname_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.fname_entry.place(x=0,y=190,width=300,height=35)
+        self.fname_entry.place(x=100,y=300,width=400,height=45)
         self.fname_entry.insert(0,"First Name")
+       
+        size=(42,43)
+        self.fnameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.fnameimg,bg="#d3d3d3").place(x=56,y=300)
         
         # lname_label=Label(frame_input2,text="Lastname",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # lname_label.place(x=00,y=250)
         
         self.lname_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.lname_entry.place(x=0,y=250,width=300,height=35)
+        self.lname_entry.place(x=100,y=370,width=400,height=45)
         self.lname_entry.insert(0,"Last Name")
+
+        size=(42,43)
+        self.lnameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.lnameimg,bg="#d3d3d3").place(x=56,y=370)
 
         #  email_label=Label(frame_input2,text="Email",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # email_label.place(x=0,y=450)
         #entry2
-        self.email_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.email_entry.place(x=0,y=300,width=300,height=35)
-        self.email_entry.insert(0,"Email")
 
+        
+
+        
+
+
+
+
+        self.regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        
+
+        # self.email_entry.insert(0,"Email")
+        email_lab=Label(frame_input2,text="Email",bg='#243e55',fg='#fff')
+        self.email_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
+        self.email_entry.place(x=100,y=440,width=400,height=45)
+       
+        regEmail = root.register(self.email_validation)
+        # self.email_entry.bind("<KeyRelease>",self.email_validation)
+        self.email_entry.config(validate="focusout", validatecommand=(regEmail, '%P'))
+        self.wdgLst_email = email_lab
+
+        
+        size=(42,43)
+        self.emailimg=ImageTk.PhotoImage(Image.open("emailing.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.emailimg,bg="#d3d3d3").place(x=56,y=440)
 
 
         # username_label=Label(frame_input2,text="Username",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # username_label.place(x=300,y=250)
         
         self.username_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.username_entry.place(x=0,y=350,width=300,height=35)
+        self.username_entry.place(x=100,y=510,width=400,height=45)
         self.username_entry.insert(1,"UserName")
 
-
+        size=(42,43)
+        self.unameimg=ImageTk.PhotoImage(Image.open("de.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.unameimg,bg="#d3d3d3").place(x=56,y=510)
 
         # password_lab=Label(frame_input2,text="Password",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # password_lab.place(x=0,y=350)
         
         #entry3
-        self.password_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.password_entry.place(x=0,y=400,width=300,height=35)
+        self.password_entry=Entry(frame_input2,show="*",font=('times new roman',12,'bold'),bg="lightgray")
+        self.password_entry.place(x=100,y=580,width=400,height=45)
         self.password_entry.insert(1,"Password")
 
+        size=(42,43)
+        self.passimg=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
        
+        tk.Label(frame_input2,image=self.passimg,bg="#d3d3d3").place(x=56,y=580)
         #entry5
         
         
@@ -208,12 +239,17 @@ class Login:
         # cpass_label=Label(frame_input2,text="Confirm Password",font=('Goudy old style',15,'bold'),fg="orangered",bg="white")
         # cpass_label.place(x=300,y=350)
          #entry-4
-        self.cpass_entry=Entry(frame_input2,font=('times new roman',12,'bold'),bg="lightgray")
-        self.cpass_entry.place(x=00,y=450,width=300,height=35)
+        self.cpass_entry=Entry(frame_input2,show="*",font=('times new roman',12,'bold'),bg="lightgray")
+        self.cpass_entry.place(x=100,y=650,width=400,height=45)
         self.cpass_entry.insert(1,"Conform Password")
 
-        btn2=Button(frame_input2,command=lambda:[self.register(),self.company_datails()],text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=80,y=500)
+        size=(42,43)
+        self.cpassimg=ImageTk.PhotoImage(Image.open("passw.png").resize(size))
+       
+        tk.Label(frame_input2,image=self.cpassimg,bg="#d3d3d3").place(x=56,y=650)
+
+        btn2=Button(frame_input2,command=lambda:[self.register()],text="Register",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=200,y=740)
         
         # btn3=Button(frame_input2,command=self.loginform,text="Already Registered?Login",cursor="hand2",font=("calibri",10),bg="white",fg="black",bd=0)
         # btn3.place(x=170,y=500)
@@ -223,28 +259,41 @@ class Login:
         frame_input3.place(x=950,y=0,height=950,width=975)
         
         label15=Label(frame_input3,text="One of us ?",font=('times new roman',20,'bold'),fg="#fff",bg="#213e57")
-        label15.place(x=400,y=120)
+        label15.place(x=500,y=120)
         
-        label16=Label(frame_input3,text="click here for work with FinsYs.",font=('Goudy old style',14,'bold'),fg="#fff",bg="#213e57")
-        label16.place(x=350,y=160)
+        label16=Label(frame_input3,text="click here for work with FinsYs.",font=('Goudy old style',10),fg="#fff",bg="#213e57")
+        label16.place(x=450,y=160)
         
-        btn2=Button(frame_input3,command=self.loginform,text="SIGN IN",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=400,y=200)
+        btn2=Button(frame_input3,command=self.loginform,text="SIGN IN",cursor="hand2",font=("times new roman",15),fg="white",bg="#213e57",bd=0,width=10,height=1)
+        btn2.place(x=500,y=200)
 
 
-        def get_svg2(svg_file):
+        size=(700,600)
+        self.ax=ImageTk.PhotoImage(Image.open("register.png").resize(size))
+       
+        tk.Label(frame_input3,image=self.ax,bg='#213e57').place(x=0,y=300)
 
-            drawing = svg2rlg(svg_file)
-            renderPM.drawToFile(drawing, "temp.png", fmt="PNG")
+    def email_validation(self):
+            
+        get_email=self.email_entry.get()
+        if re.search(self.regex,get_email):
 
-        get_svg2("register.svg")
-        img = Image.open("temp.png")
-        pimg = ImageTk.PhotoImage(img)
-        # size = img.size
-        frame = tk.Canvas(frame_input3, width=800, height=800)
-        frame.place(x=0,y=250)
-        frame.create_image(0,0,anchor='nw',image=pimg)
-        
+            self.wdgLst_email.configure(text='Email',fg='#4BB543')
+            return True
+        else:
+            self.wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            return False
+    def cemail_validation(self):
+            
+        get_email=self.cemail.get()
+        if re.search(self.regex,get_email):
+
+            self.wdgLst_email.configure(text='Email',fg='#4BB543')
+            return True
+        else:
+            self.wdgLst_email.configure(text='Please provide a valid email',fg='#FF0000')
+            return False
+
 
 
 
@@ -263,31 +312,34 @@ class Login:
         
     def register(self):
 
-        
-        if self.fname_entry.get()=="" or self.email_entry.get()=="" or self.lname_entry.get()=="" or self.password_entry.get()=="" or self.username_entry.get()=="" or self.cpass_entry.get()=="":
+        if not self.email_validation():
+            messagebox.showerror("Error","Invalid Email",parent=self.root)
+        elif self.fname_entry.get()=="" or self.email_entry.get()=="" or self.lname_entry.get()=="" or self.password_entry.get()=="" or self.username_entry.get()=="" or self.cpass_entry.get()=="":
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         elif self.password_entry.get()!=self.cpass_entry.get():
             messagebox.showerror("Error","password and Confirm Password Should Be Same",parent=self.root)
         else:
             try:
                 self.database()
-                id=[]
-                email_id=self.email_entry.get()
-                id.append(email_id)
+                user=[]
+                username=self.username_entry.get()
+                user.append(username)
                
                 # # con=mysql.connect(host="localhost",user="root",password="root",database="finsYs_tkinter")
                 # # cur=con.cursor()
                 # # mycursor.execute("select * from register where email=%s",email) 
                 # # row=mycursor.fetchone()
 
-                sql='SELECT id FROM register WHERE email=%s'# selecting entire table from db,taking username , nd check the existance
-                val=id
-                mycursor.execute(sql,id)
+                sql='SELECT id FROM register WHERE username=%s'# selecting entire table from db,taking username , nd check the existance
+                val=user
+                mycursor.execute(sql,val)
 
-                exc_email=mycursor.fetchone()
+                exc_username=mycursor.fetchone()
 
-                if exc_email is not None:
-                    messagebox.showerror("Error","User already Exist,Please try with another Email",parent=self.root)
+                if exc_username is not None:
+                    self.loginform()
+                    messagebox.showerror("Error","This username already exists. Sign up again",parent=self.root)
+                    
                 else:
 
                     sql="INSERT INTO register (first_name,last_name,password,username,email) VALUES(%s,%s,%s,%s,%s)" #adding values into db
@@ -297,19 +349,20 @@ class Login:
                     # print("hlo")
                     mydb.commit()
                     mycursor.close()
+                    self.company_datails()
                     # messagebox.showinfo("Success", "Register Successfull",parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error",f"Error due to :{str(es)}",parent=self.root)
                 
     def appscreen(self):
         
-        Frame_login=Frame(self.root,bg="white")
-        Frame_login.place(x=0,y=0,height=700,width=1000)
+        Frame_login=Frame(self.root,bg="#2f516a")
+        Frame_login.place(x=0,y=0,height=1000,width=2000)
         label1=Label(Frame_login,text="Hi! Welcome To Seek coding", font=("times new roman",32,'bold'),fg="black",bg="white")
         label1.place(x=375,y=100)
         
-        btn2=Button(Frame_login,command=self.loginform,text="Logout",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-        btn2.place(x=700,y=20)   
+        # btn2=Button(Frame_login,command=self.loginform,text="Logout",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
+        # btn2.place(x=700,y=20)   
 
     def select_file(self):
     
@@ -345,8 +398,14 @@ class Login:
         self.pin = Entry(center_frame, font=('Times', 14))
         self.pin.place(x=30,y=380,height=50,width=700)
         self.pin.insert(0, 'Pincode')
+
+        cemail_lab=Label(center_frame,text="Email",bg='#243e55',fg='#fff')
         self.cemail = Entry(center_frame, font=('Times', 14))
         self.cemail.place(x=30,y=450,height=50,width=700)
+        regsEmail = root.register(self.cemail_validation)
+        # self.email_entry.bind("<KeyRelease>",self.email_validation)
+        self.cemail.config(validate="focusout", validatecommand=(regsEmail, '%P'))
+        self.wdgLst_email = cemail_lab
         self.cemail.insert(0, 'Email')
 
         self.Phone = Entry(center_frame, font=('Times', 14))
@@ -415,7 +474,10 @@ class Login:
 
 
     def company_save(self):
-        if self.combany_name.get()=="" or self.combany_address.get()=="" or self.city.get()=="" or self.state.get()=="" or self.pin.get()=="" or self.cemail.get()=="" or self.Phone.get()=="" or self.business_name.get()=="" or self.your_industry_input.get()=="" or self.cmp_type_input.get()=="" or self.radio.get()=="" or self.paid_type_input.get()=="" :
+        if not self.cemail_validation():
+            messagebox.showerror("Error","Invalid Email",parent=self.root)
+            
+        elif self.combany_name.get()=="" or self.combany_address.get()=="" or self.city.get()=="" or self.state.get()=="" or self.pin.get()=="" or self.cemail.get()=="" or self.Phone.get()=="" or self.business_name.get()=="" or self.your_industry_input.get()=="" or self.cmp_type_input.get()=="" or self.radio.get()=="" or self.paid_type_input.get()=="" :
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         
         else:
