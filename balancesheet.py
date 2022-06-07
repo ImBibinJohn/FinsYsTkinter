@@ -41,10 +41,10 @@ def balancesheet():
         if dropp=='Custom':            
             tk.Label(form_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.45,rely=0.1)
             dte=StringVar()
-            DateEntry(form_frame,textvariable=dte).place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
+            DateEntry(form_frame,textvariable=dte,date_pattern='y-mm-dd').place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
             tk.Label(form_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.70,rely=0.1)
             dtee=StringVar()
-            DateEntry(form_frame,textvariable=dtee).place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
+            DateEntry(form_frame,textvariable=dtee,date_pattern='y-mm-dd').place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
         elif dropp=='Today':
             fromdate = tod
             todate = tod 
@@ -78,7 +78,9 @@ def balancesheet():
             filterbalancevalues() 
         elif period=='This financial year':
             contframe.destroy()
-            filterbalancevalues()       
+            filterbalancevalues()  
+    def back():
+        allbalancevalues()            
 
     tk.Label(form_frame,text="Report Period",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.1)
     options=["All dates", "Custom","Today","This month","This financial year"]
@@ -95,11 +97,15 @@ def balancesheet():
     #image
     imageframe=tk.Frame(tableframe,bg='#add8e6')
     size=(200,200)
-    cv=Image.open('timeact.png').resize(size)
+    cc='barath'
+    cursor.execute("SELECT image,cname FROM company WHERE cname =%s and id =%s",([cc,cid]))
+    image=cursor.fetchone()
+    img=image[0]
+    cv=Image.open(img).resize(size)
     ax=ImageTk.PhotoImage(cv,master=prlframe)
     ay=tk.Label(imageframe,image=ax,bg='#243e54')
     ay.place(relx=0.02,rely=0.08,relheight=0.8,relwidth=0.2)
-    tk.Label(imageframe,text="INFOX", font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
+    tk.Label(imageframe,text=image[1], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
     imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
     #contents
     conttframe=tk.Frame(tableframe,bg='white')
@@ -380,9 +386,11 @@ def balancesheet():
             tlande = tcurrentliabilties + totequity
             tk.Label(contframe,text =tlande,bg="grey",font=('times new roman', 12)).place(relx=0.88,rely=w+0.08)       
         equity() 
+    allbalancevalues()
     def filterbalancevalues():
         global contframe1
         totalnoincome=0.0
+        lis=[]
         totalinventincome=0.0
         totalinventasset=0.0
         totalnonexpence=0.0

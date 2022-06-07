@@ -11,7 +11,7 @@ cursor=mydata.cursor()
 #cc
 def accrecivabales():
     prlframe=tk.Tk()
-    prlframe.title('Balance Sheet')
+    prlframe.title('Account Receivables')
     prlframe.geometry('1500x1000')
     #dash['bg'] = '#2f516f'
     cid=2
@@ -96,11 +96,15 @@ def accrecivabales():
     #image
     imageframe=tk.Frame(tableframe,bg='#add8e6')
     size=(200,200)
-    cv=Image.open('timeact.png').resize(size)
+    cc='barath'
+    cursor.execute("SELECT image,cname FROM company WHERE cname =%s and id =%s",([cc,cid]))
+    image=cursor.fetchone()
+    img=image[0]
+    cv=Image.open(img).resize(size)
     ax=ImageTk.PhotoImage(cv,master=prlframe)
     ay=tk.Label(imageframe,image=ax,bg='#243e54')
     ay.place(relx=0.02,rely=0.08,relheight=0.8,relwidth=0.2)
-    tk.Label(imageframe,text="INFOX", font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
+    tk.Label(imageframe,text=image[1], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
     imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
     #contents
     conttframe=tk.Frame(tableframe,bg='white')

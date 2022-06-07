@@ -12,7 +12,7 @@ cursor=mydata.cursor()
 #cc
 def accpayables():
     prlframe=tk.Tk()
-    prlframe.title('Balance Sheet')
+    prlframe.title('Account Payables')
     prlframe.geometry('1500x1000')
     #dash['bg'] = '#2f516f'
     cid=2
@@ -99,11 +99,15 @@ def accpayables():
     #image
     imageframe=tk.Frame(tableframe,bg='#add8e6')
     size=(200,200)
-    cv=Image.open('timeact.png').resize(size)
+    cc='barath'
+    cursor.execute("SELECT image,cname FROM company WHERE cname =%s and id =%s",([cc,cid]))
+    image=cursor.fetchone()
+    img=image[0]
+    cv=Image.open(img).resize(size)
     ax=ImageTk.PhotoImage(cv,master=prlframe)
     ay=tk.Label(imageframe,image=ax,bg='#243e54')
     ay.place(relx=0.02,rely=0.08,relheight=0.8,relwidth=0.2)
-    tk.Label(imageframe,text="INFOX", font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
+    tk.Label(imageframe,text=image[1], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
     imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
     #contents
     contframe=tk.Frame(tableframe,bg='white')
@@ -166,7 +170,7 @@ def accpayables():
         except:
             pass  
         transs='Debit Note'
-        cursor.execute("SELECT supplier,SUM(creditamount) FROM suplrcredit cid =%s GROUP BY supplier",([cid]))
+        cursor.execute("SELECT supplier,SUM(creditamount) FROM suplrcredit WHERE cid =%s GROUP BY supplier",([cid]))
         cre=cursor.fetchall()   
         try:
             for j in cre:
@@ -174,7 +178,7 @@ def accpayables():
         except:
             pass 
     def paytoday():#today value
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM expenses WHERE paydate =%s and cid =%s GROUP BY payee",(fromdate,cid))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM expenses WHERE paymdate =%s and cid =%s GROUP BY payee",(fromdate,cid))
             ex=cursor.fetchall()
             trans='Expense Balance Due'
             try:
@@ -184,7 +188,7 @@ def accpayables():
                 pass  
             transs='Opening Balance'
             txx='openbalance'
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and paydate =%s and cid =%s GROUP BY payee",(txx,fromdate,cid))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and paymdate =%s and cid =%s GROUP BY payee",(txx,fromdate,cid))
             op=cursor.fetchall()   
             try:
                 for j in op:
@@ -193,7 +197,7 @@ def accpayables():
                 pass
             transs1='Payment'
             txx1='debit'
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paydate =%s GROUP BY payee",(txx1,cid,fromdate))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paymdate =%s GROUP BY payee",(txx1,cid,fromdate))
             bi=cursor.fetchall()   
             try:
                 for j in bi:
@@ -201,7 +205,7 @@ def accpayables():
             except:
                 pass  
             txx2=''
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paydate =%s GROUP BY payee",(txx2,cid,fromdate))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paymdate =%s GROUP BY payee",(txx2,cid,fromdate))
             bi1=cursor.fetchall()   
             try:
                 for j in bi1:
@@ -217,7 +221,7 @@ def accpayables():
             except:
                 pass 
     def payablecustomvalues():#two dates
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM expenses WHERE paydate BETWEEN %s and %s and cid =%s GROUP BY payee",(fromdate,todate,cid))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM expenses WHERE paymdate BETWEEN %s and %s and cid =%s GROUP BY payee",(fromdate,todate,cid))
             ex=cursor.fetchall()
             trans='Expense Balance Due'
             try:
@@ -227,7 +231,7 @@ def accpayables():
                 pass  
             transs='Opening Balance'
             txx='openbalance'
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and paydate BETWEEN %s and %s and cid =%s GROUP BY payee",(txx,fromdate,todate,cid))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and paymdate BETWEEN %s and %s and cid =%s GROUP BY payee",(txx,fromdate,todate,cid))
             op=cursor.fetchall()   
             try:
                 for j in op:
@@ -236,7 +240,7 @@ def accpayables():
                 pass
             transs1='Payment'
             txx1='debit'
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paydate =%s GROUP BY payee",(txx1,cid,fromdate))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paymdate =%s GROUP BY payee",(txx1,cid,fromdate))
             bi=cursor.fetchall()   
             try:
                 for j in bi:
@@ -244,7 +248,7 @@ def accpayables():
             except:
                 pass  
             txx2=''
-            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paydate BETWEEN %s and %s GROUP BY payee",(txx2,cid,fromdate,todate))
+            cursor.execute("SELECT payee,SUM(grandtotal) FROM bills WHERE payornot =%s and cid =%s and paymdate BETWEEN %s and %s GROUP BY payee",(txx2,cid,fromdate,todate))
             bi1=cursor.fetchall()   
             try:
                 for j in bi1:
