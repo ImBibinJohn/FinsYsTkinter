@@ -29,9 +29,434 @@ def fun():#db connection
         )
     mycursor = mydb1.cursor()
 
+def chnce_data():
+     
+    def get_selected_e(event):
+        global earn1,dedu1
+        earr6= label1_earr6.get()
+        earr7= label1_earr7.get()
+        print(earr6)
+        print(label1_basic.get())
+        earn1 = int(basic.get()) + int(da.get()) + int(earr1.get()) + int(earr2.get()) + int(earr3.get()) + int(earr4.get())
+       
+        print(earn1)
+        gros_pay = earn1 + int(label1_earr6.get()) + int(label1_earr7.get());
+        print(gros)
+        gros.set(gros_pay)
+       
+        dedu1 = int(provi.get()) + int(prof.get()) + int(esi.get()) 
+        print(dedu1)
+        total_deduction = dedu1 + int(label1_dedu5.get()) + int(label1_dedu6.get())
+        tded.set(total_deduction)
+        print(tded)
+        
+        gio = earn1 - dedu1;
+        net_salary = gio + int(label1_earr6.get()) + int(label1_earr7.get()) - int(label1_dedu5.get()) - int(label1_dedu6.get()) 
+        netsal.set(net_salary)
+        
+        
+    
+        
+    def changing_data():
+        mycursor = mydb1.cursor()
+        user_id=[6]
+        mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
+        cmp1=mycursor.fetchone()      
+        
+        global emname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal,cid_id
+        emname=empname.get()
+        employeenumber=employeenumber.get()
+        desig=desig.get()
+        fper=fper.get()
+        tper=tper.get()
+        paydate=paydate.get()
+        basic=basic.get()
+        da=da.get()
+        ear1=ear1.get()
+        earr1=earr1.get()
+        ear2=ear2.get()
+        earr2=earr2.get()
+        ear3=ear3.get()
+        earr3=earr3.get()
+        ear4=ear4.get()
+        earr4=earr4.get()
+        ear5=ear5.get()
+        earr5=earr5.get()
+        ear6=ear6.get()
+        earr6=earr6.get()
+        ear7=ear7.get()
+        earr7=earr7.get()
+        provi=provi.get()
+        prof=prof.get()
+        esi=esi.get()
+        ded1=ded1.get()
+        # dedu1=dedu1.get()
+        ded2=ded2.get()
+        dedu2=dedu2.get()
+        ded3=ded3.get()
+        dedu3=dedu3.get()
+        ded4=ded4.get()
+        dedu4=dedu4.get()
+        ded5=ded5.get()
+        dedu5=dedu5.get()
+        ded6=ded6.get()
+        dedu6=dedu6.get()
+        gros=gros.get()
+        tded=tded.get()
+        netsal=netsal.get()
+        cid_id=cmp1[0]
+          
+        
+        sql="INSERT INTO app1_payslip (empname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal,cid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+        val=(emname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal,cid_id)
+        mycursor.execute(sql, val)
+        mydb1.commit()
+        mydb1.close()
+        tkinter.messagebox.showinfo("ADD", "Record entered successfully")
+        
+
+    fun()
+    focus_data = tree_data.focus()
+    values = tree_data.item(focus_data,'values')
+    employee_id=[values[-1]]
+    mycursor.execute("SELECT * FROM app1_employee WHERE employeeid=%s",(employee_id))
+    data=mycursor.fetchone()
+
+
+    sher = tk.Toplevel(root)
+    sher.title("finsYs")
+    width=sher.winfo_screenwidth()
+    height=sher.winfo_screenheight()
+    sher.geometry("%dx%d" %(width,height))
+    sher.configure(bg="#2f516f")
+    wrappen=ttk.LabelFrame(sher)
+    mycanvas=Canvas(wrappen)
+    mycanvas.pack(side=LEFT,fill="both",expand="yes")
+    yscrollbar=ttk.Scrollbar(wrappen,orient='vertical',command=mycanvas.yview)
+    yscrollbar.pack(side=RIGHT,fill='y')
+
+    mycanvas.configure(yscrollcommand=yscrollbar.set)
+    mycanvas.bind('<Configure>',lambda e:mycanvas.configure(scrollregion=mycanvas.bbox('all')))
+
+    full_frame=Frame(mycanvas,width=1345,height=2500,bg='#2f516a')
+    mycanvas.create_window((0,0),window=full_frame,anchor="nw")
+
+    heading_frame=Frame(mycanvas)
+    mycanvas.create_window((0,50),window=heading_frame,anchor="nw")
+
+    form_frame=Frame(mycanvas,width=1345,height=2400,bg='#2f516f')
+    mycanvas.create_window((3,150),window=form_frame,anchor="nw")
+    form_lable=tk.Label(form_frame,bg="#2f516f",width=100)
+    form_lable.place(x=0,y=0)
+
+    tit = Label(heading_frame, text="EDIT PAY SLIP", font=('times new roman', 28, 'bold'),padx=525, pady=2, bd=12, bg="#243e55", fg="#fff", relief=GROOVE)
+    tit.pack()
+
+
+    global empname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal
+    empname=StringVar() 
+    employeenumber=StringVar() 
+    desig=StringVar() 
+    fper=StringVar() 
+    tper=StringVar() 
+    paydate=StringVar() 
+    basic=StringVar() 
+    da=StringVar() 
+    ear1=StringVar() 
+    earr1=StringVar() 
+    ear2=StringVar() 
+    earr2=StringVar() 
+    ear3=StringVar() 
+    earr3=StringVar() 
+    ear4=StringVar() 
+    earr4=StringVar() 
+    ear5=StringVar() 
+    earr5=StringVar() 
+    ear6=StringVar() 
+    earr6=StringVar() 
+    ear7=StringVar() 
+    earr7=StringVar() 
+    provi=StringVar() 
+    prof=StringVar() 
+    esi=StringVar() 
+    ded1=StringVar() 
+    dedu1=StringVar() 
+    ded2=StringVar() 
+    dedu2=StringVar() 
+    ded3=StringVar() 
+    dedu3=StringVar() 
+    ded4=StringVar() 
+    dedu4=StringVar() 
+    ded5=StringVar() 
+    dedu5=StringVar() 
+    ded6=StringVar() 
+    dedu6=StringVar() 
+    gros=StringVar() 
+    tded=StringVar() 
+    netsal=StringVar() 
+
+    existing_empname=data[1]
+    empname.set(existing_empname)
+
+    existing_employeenumber=data[3]
+    employeenumber.set(existing_employeenumber)
+
+    existing_desig=data[4]
+    desig.set(existing_desig)
+
+    # existing_fper=data[4]
+    # fper.set(existing_fper)
+
+    # existing_tper=data[5]
+    # tper.set(existing_tper)
+
+    # existing_paydate=data[6]
+    # paydate.set(existing_paydate)
+
+    existing_basic=data[28]
+    basic.set(existing_basic)
+
+    existing_da=data[29]
+    da.set(existing_da)
+
+    existing_ear1=data[30]
+    ear1.set(existing_ear1)
+
+    existing_earr1=data[35]
+    earr1.set(existing_earr1)
+
+    existing_ear2=data[31]
+    ear2.set(existing_ear2)
+
+    existing_earr2=data[36]
+    earr2.set(existing_earr2)
+
+    existing_ear3=data[32]
+    ear3.set(existing_ear3)
+
+    existing_earr3=data[37]
+    earr3.set(existing_earr3)
+
+    existing_ear4=data[33]
+    ear4.set(existing_ear4)
+
+    existing_earr4=data[38]
+    earr4.set(existing_earr4)
+
+    # existing_ear5=data[17]
+    # ear5.set(existing_ear5)
+
+    # existing_earr5=data[18]
+    # earr5.set(existing_earr5)
+
+    # existing_ear6=data[35]
+    # ear6.set(existing_ear6)
+
+    # existing_earr6=data[40]
+    # earr6.set(existing_earr6)
+
+    # existing_ear7=data[36]
+    # ear7.set(existing_ear7)
+
+    existing_earr7=data[41]
+    earr7.set(existing_earr7)
+
+    existing_provi=data[40]
+    provi.set(existing_provi)
+
+    existing_prof=data[41]
+    prof.set(existing_prof)
+
+    existing_esi=data[42]
+    esi.set(existing_esi)
+
+    
+
+    
+
+    
+
+    
+
+    F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'),padx=30, pady=30, bd=0, fg="Black", bg="#243e55")
+    F.place(x=30, y=30, width=1270, height=1950)
+
+    label1=Label(F, text="MAP Creations", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=500,y=1)
+
+    label2=Label(F, text="Employee Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label2.place(x=100,y=90)
+    label2=Entry(F,bg='#2f516a',fg='#fff',textvariable=empname)
+    label2.place(x=100,y=130,height=40,width=300)
+
+    label3=Label(F, text="Employee Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label3.place(x=450,y=90)
+    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=employeenumber)
+    label3.place(x=450,y=130,height=40,width=300)
+
+    label4=Label(F, text="Designation", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label4.place(x=800,y=90)
+    label4=Entry(F,bg='#2f516a',fg='#fff',textvariable=desig)
+    label4.place(x=800,y=130,height=40,width=300)
+
+    label2=Label(F, text="Pay Peried - From", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label2.place(x=100,y=190)
+    label2 =Entry(F,bg="#2f516a",fg="#fff",textvariable=fper)
+    label2.place(x=100,y=230,height=40,width=300)
+    # label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=joiningdate)
+    # label3.place(x=675,y=130,height=40,width=200)
+    
+    label3=Label(F, text="To", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label3.place(x=450,y=190)
+    label3 =Entry(F,bg="#2f516a",fg="#fff",textvariable=tper)
+    label3.place(x=450,y=230,height=40,width=300)
+
+    label4=Label(F, text="Date of Payment", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label4.place(x=800,y=190)
+    label4 =Entry(F,bg="#2f516a",fg="#fff",textvariable=paydate)
+    label4.place(x=800,y=230,height=40,width=300)
+
+    label1=Label(F, text="Salary Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=500,y=400)
+
+    label1=Label(F, text="Earnings", font=('times new roman', 17, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=200,y=500)
+
+    label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=40,y=580)
+    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic)
+    label1_basic.place(x=280,y=580,height=40,width=230)
+    label1_basic.configure(state='disabled')
+    label1_basic.bind("<KeyRelease>",get_selected_e)
+
+    label1_da=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1_da.place(x=40,y=640)
+    label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable=da)
+    label1_da.place(x=280,y=640,height=40,width=230)
+    label1_da.configure(state='disabled')
+    label1_da.bind("<KeyRelease>",get_selected_e)
+    
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear1)
+    label1.place(x=40,y=700,height=40,width=230)
+    label1_earr1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr1)
+    label1_earr1.place(x=280,y=700,height=40,width=230)
+    label1_earr1.configure(state='disabled')
+    label1_earr1.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear2)
+    label1.place(x=40,y=760,height=40,width=230)
+    label1_earr2=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr2)
+    label1_earr2.place(x=280,y=760,height=40,width=230)
+    label1_earr2.configure(state='disabled')
+    label1_earr2.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear3)
+    label1.place(x=40,y=820,height=40,width=230)
+    label1_earr3=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr3)
+    label1_earr3.place(x=280,y=820,height=40,width=230)
+    label1_earr3.configure(state='disabled')
+    label1_earr3.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear4)
+    label1.place(x=40,y=880,height=40,width=230)
+    label1_earr4=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr4)
+    label1_earr4.place(x=280,y=880,height=40,width=230)
+    label1_earr4.configure(state='disabled')
+    label1_earr4.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear6)
+    label1.place(x=40,y=940,height=40,width=230)
+    earr6.set("0")
+    label1_earr6=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr6)
+    label1_earr6.place(x=280,y=940,height=40,width=230)
+    label1_earr6.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear7)
+    label1.place(x=40,y=1000,height=40,width=230)
+    earr7.set('0')
+    label1_earr7=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr7)
+    label1_earr7.place(x=280,y=1000,height=40,width=230)
+    label1_earr7.bind("<KeyRelease>",get_selected_e)
+
+
+
+    label1=Label(F, text="Deduction", font=('times new roman', 17, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=850,y=500)
+
+    label1=Label(F, text="Provident Fund", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=580)
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=provi)
+    label1.place(x=940,y=580,height=40,width=230)
+    label1.configure(state='disabled')
+    label1_earr6.bind("<KeyRelease>",get_selected_e)
+    
+    label1=Label(F, text="Profession Tax", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=640)
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=prof)
+    label1.place(x=940,y=640,height=40,width=230)
+    label1.configure(state='disabled')
+    label1_earr6.bind("<KeyRelease>",get_selected_e)
+
+    label1=Label(F, text="ESI", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=700)
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=esi)
+    label1.place(x=940,y=700,height=40,width=230)
+    label1.configure(state='disabled')
+    label1_earr6.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded5)
+    label1.place(x=700,y=760,height=40,width=230)
+    dedu5.set("0")
+    label1_dedu5=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu5)
+    label1_dedu5.place(x=940,y=760,height=40,width=230)
+    label1_dedu5.bind("<KeyRelease>",get_selected_e)
+
+    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded6)
+    label1.place(x=700,y=820,height=40,width=230)
+    dedu6.set('0')
+    label1_dedu6=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu6)
+    label1_dedu6.place(x=940,y=820,height=40,width=230)
+    label1_dedu6.bind("<KeyRelease>",get_selected_e)
+
+    label1=Label(F, text="Gross Pay", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=1080)
+    label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros)
+    label1_gros.place(x=900,y=1080,height=40,width=270)
+    label1_gros.bind("<KeyRelease>",get_selected_e)
+    
+    label1=Label(F, text="Total Deduction", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=1140)
+    label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded)
+    label1_tded.place(x=900,y=1140,height=40,width=270)
+    label1_tded.bind("<KeyRelease>",get_selected_e)
+
+    label1=Label(F, text="Net Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+    label1.place(x=700,y=1200)
+    label1_netsal=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal)
+    label1_netsal.place(x=900,y=1200,height=40,width=270)
+    label1_netsal.bind("<KeyRelease>",get_selected_e)
+    
+    b1 = Button(F,text = "Update Payslip",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_data)  
+    b1.place(x=470,y=1350,width=300,height=40) 
+
+    wrappen.pack(fill='both',expand='yes',)
+
+
+
+
+    sher.mainloop()
+
+
+
+
+
+
+
+
 
 
 def changing_data():
+    
     def getting_data(event):
         global pf,pj,est,pt,da,hra,hra1,hra2,hra3,basic
         da.set(0)
@@ -100,19 +525,19 @@ def changing_data():
         print(age)
         pt=0;
         age= int(age)
-        basicda = float(basicda)
+        # basicda = float(basicda)
         if (age < 60): 
             if (basicda <= (250000 / 12)) :
                 pt = 0;
-            elif (basicda <= (500000 / 12) & basicda > (250000 / 12)) :
+            elif (basicda <= (500000 / 12) and basicda > (250000 / 12)) :
                 pt = int(float(basicda) * 5) / 100;
-            elif (basicda <= (1000000 / 12) & basicda > (500000 / 12)) :
+            elif (basicda <= (1000000 / 12) and basicda > (500000 / 12)) :
                 pt = int(float(basicda) * 20) / 100;
             else :
                 pt = int(float(basicda) * 30) / 100;
             
         
-        elif (age < 80) & (age >= 60) :
+        elif (age < 80) and (age >= 60) :
             if (basicda <= (300000 / 12)) :
                 pt = 0;
             elif (basicda <= (500000 / 12) and basicda > (300000 / 12)) :
@@ -229,7 +654,7 @@ def changing_data():
     form_lable=tk.Label(form_frame,bg="#2f516f",width=100)
     form_lable.place(x=0,y=0)
 
-    tit = Label(heading_frame, text="ADD EMPLOYEE", font=('times new roman', 25, 'bold'),padx=527, pady=2, bd=5, bg="#243e55", fg="#fff", relief=GROOVE)
+    tit = Label(heading_frame, text="ADD EMPLOYEE", font=('times new roman', 25, 'bold'),padx=535, pady=2, bd=5, bg="#243e55", fg="#fff", relief=GROOVE)
     tit.pack()
 
     global name,joiningdate,employeenumber,designation,department,branch,location,gender,age,mobile,gmail,address,providebankdetails,bankaccountnumber,ifsccode,totalrentpaid,hrareceived,livein,applicabletaxregime,pannumber,aadhaarnumber,universalaccountnumber,pfaccountnumber,epsaccountnumber,praccountnumber,esinumber,esidispensaryname,confirm,basic,da,othincome1,othamount1,othincome2,othamount2,othincome3,othamount3,othincome4,othamount4,othincome5,othamount5,provifund,proftax,esi,deduc1,deduc2,deduc3,deduc4,deducamt1,deducamt2,deducamt3,deducamt4
@@ -312,11 +737,32 @@ def changing_data():
 
     # #Add image to the Canvas Items
     # canvas.create_image(10,10, anchor=NW, image=new_image)
+   
+    
+    
+    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
+    # F2.place(x=0.0, y=100, width=500, height=800)
+    # size=(400,700)
+    # aax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
+    # tk.Label(F2,image=aax,bg='#243e54').place(relx=-0.18,rely=-0,relheight=1,relwidth=1)
+    
+    
+    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
+    # F2.place(x=0.0, y=100, width=500, height=800)
+    # img = PhotoImage(file="emp.png")
+    # Label(F2,image=img).pack()
+    
     F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
-    F2.place(x=0.0, y=100, width=500, height=800)
-    size=(400,700)
-    aax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
-    tk.Label(F2,image=aax,bg='#243e54').place(relx=-0.18,rely=-0,relheight=1,relwidth=1)
+    F2.place(x=0.0, y=100, width=500, height=1100)
+    load = Image.open("emp.png")
+    render = ImageTk.PhotoImage(load)
+    img = Label(F2,image=render,bg="#243e55")
+    img.image = render
+    img.place(x=0,y=0)
+    
+    
+    
+    
 
     label2=Label(F, text="Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=90)
@@ -391,8 +837,9 @@ def changing_data():
 
     def red():
         global providebankdetails
-        Choice = label1radio.get()
-        if Choice == 1:
+        # Choice = label1radio.get()
+        # if Choice == 1:
+        if label1radio.get()==1:
             output = "Yes"
             
             lab2=Label(F, text="Bank Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -405,11 +852,20 @@ def changing_data():
             lab1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ifsccode)
             lab1.place(x=790,y=730,height=40,width=360)
             providebankdetails="Yes"
-        elif Choice == 2:
+        else: 
             output = "No"
             providebankdetails ="No"
-        else:
-            output = "Invalid"
+            lab2=Label(F, text="Bank Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab2.place(x=400,y=690)
+            lab=Entry(F,bg='#2f516a',fg='#fff',textvariable=bankaccountnumber,state='disabled')
+            bankaccountnumber.set("")
+            lab.place(x=400,y=730,height=40,width=360)
+
+            lab3=Label(F, text="IFSC Code", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab3.place(x=790,y=690)
+            lab1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ifsccode,state='disabled')
+            ifsccode.set("")
+            lab1.place(x=790,y=730,height=40,width=360)
     
     #radio button
     label1radio=IntVar()
@@ -423,30 +879,36 @@ def changing_data():
 
 
     label1=Label(F, text="HRA Declaration", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label1.place(x=670,y=760)
+    label1.place(x=670,y=780)
 
     label2=Label(F, text="Actual Rent Paid", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label2.place(x=400,y=840)
+    label2.place(x=400,y=850)
     label2_totalrentpaid=Entry(F,bg='#2f516a',fg='#fff',textvariable=totalrentpaid)
-    label2_totalrentpaid.place(x=400,y=880,height=40,width=200)
+    label2_totalrentpaid.place(x=400,y=890,height=40,width=200)
     label2_totalrentpaid.bind("<KeyRelease>",getting_data)
 
     label3=Label(F, text="HRA Received", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-    label3.place(x=675,y=840)
+    label3.place(x=675,y=850)
     label3_hrareceived=Entry(F,bg='#2f516a',fg='#fff',textvariable=hrareceived)
-    label3_hrareceived.place(x=675,y=880,height=40,width=200)
+    label3_hrareceived.place(x=675,y=890,height=40,width=200)
     label3_hrareceived.bind("<KeyRelease>",getting_data)
 
     CheckVar1 = IntVar()
     sanitizer1_lbl=tk.Label(F,text="Do you live in metro cities? ",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     drop1_livein=ttk.Combobox(F,textvariable=livein)
     drop1_livein['values']=("Yes","No")
-    sanitizer1_lbl.place(x=950,y=840)
-    drop1_livein.place(x=950,y=880,height=40,width=200)
+    sanitizer1_lbl.place(x=950,y=850)
+    drop1_livein.place(x=950,y=890,height=40,width=200)
     drop1_livein.bind("<KeyRelease>",getting_data)
+    
 
     label1=Label(F, text="Statutory Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=670,y=960)
+    
+    def only_numbers(char):
+        return char.isdigit()
+
+    validation = F.register(only_numbers)
 
     label2=Label(F, text="Applicable Tax Regime", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=1030)
@@ -460,8 +922,9 @@ def changing_data():
 
     label3=Label(F, text="Aadhaar Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=790,y=1120)
-    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=aadhaarnumber)
+    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=aadhaarnumber,validate="key", validatecommand=(validation, '%S'))
     label3.place(x=790,y=1160,height=40,width=360)
+    # entry = Entry(parent, validate="key", validatecommand=(validation, '%S'))
 
     label2=Label(F, text="Universal Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=1210)
@@ -470,7 +933,7 @@ def changing_data():
 
     label3=Label(F, text="PF Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=790,y=1210)
-    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=pfaccountnumber)
+    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=pfaccountnumber,validate="key", validatecommand=(validation, '%S'))
     label3.place(x=790,y=1250,height=40,width=360)
 
     label2=Label(F, text="EPS Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -480,12 +943,12 @@ def changing_data():
 
     label3=Label(F, text="PR Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=790,y=1310)
-    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=praccountnumber)
+    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=praccountnumber,validate="key", validatecommand=(validation, '%S'))
     label3.place(x=790,y=1350,height=40,width=360)
 
     label2=Label(F, text="ESI Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=1410)
-    label2=Entry(F,bg='#2f516a',fg='#fff',textvariable=esinumber)
+    label2=Entry(F,bg='#2f516a',fg='#fff',textvariable=esinumber,validate="key", validatecommand=(validation, '%S'))
     label2.place(x=400,y=1450,height=40,width=360)
 
     label3=Label(F, text="ESI dispensary name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -509,7 +972,7 @@ def changing_data():
     
     label1=Label(F, text="Confirm Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=1700)
-    label1_confirm=Entry(F,bg='#2f516a',fg='#fff',textvariable=confirm)
+    label1_confirm=Entry(F,bg='#2f516a',fg='#fff',textvariable=confirm,validate="key", validatecommand=(validation, '%S'))
     label1_confirm.place(x=280,y=1700,height=40,width=230)
     label1_confirm.bind("<KeyRelease>",getting_data)
 
@@ -674,19 +1137,19 @@ def edit_employee():
         print("bruh")
         print(age)
         age= int(age)
-        basicda = float(basicda)
+        # basicda = float(basicda)
         if (age < 60): 
             if (basicda <= (250000 / 12)) :
                 pt = 0;
-            elif (basicda <= (500000 / 12) & basicda > (250000 / 12)) :
+            elif (basicda <= (500000 / 12) and basicda > (250000 / 12)) :
                 pt = int(float(basicda) * 5) / 100;
-            elif (basicda <= (1000000 / 12) & basicda > (500000 / 12)) :
+            elif (basicda <= (1000000 / 12) and basicda > (500000 / 12)) :
                 pt = int(float(basicda) * 20) / 100;
             else :
                 pt = int(float(basicda) * 30) / 100;
             
         
-        elif (age < 80) & (age >= 60) :
+        elif (age < 80) and (age >= 60) :
             if (basicda <= (300000 / 12)) :
                 pt = 0;
             elif (basicda <= (500000 / 12) and basicda > (300000 / 12)) :
@@ -1053,11 +1516,19 @@ def edit_employee():
 
     # #Add image to the Canvas Items
     # canvas.create_image(10,10, anchor=NW, image=new_image)
+    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
+    # F2.place(x=0.0, y=100, width=500, height=800)
+    # size=(400,700)
+    # ax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
+    # tk.Label(F2,image=ax,bg='#243e54').place(relx=-0.18,rely=-0,relheight=1,relwidth=1)
+    
     F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
-    F2.place(x=0.0, y=100, width=500, height=800)
-    size=(400,700)
-    ax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
-    tk.Label(F2,image=ax,bg='#243e54').place(relx=-0.18,rely=-0,relheight=1,relwidth=1)
+    F2.place(x=0.0, y=100, width=500, height=1100)
+    load = Image.open("emp.png")
+    render = ImageTk.PhotoImage(load)
+    img = Label(F2,image=render,bg="#243e55")
+    img.image = render
+    img.place(x=0,y=0)
 
     label2=Label(F, text="Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=400,y=90)
@@ -1132,8 +1603,9 @@ def edit_employee():
 
     def red():
         global providebankdetails
-        Choice = label1radio.get()
-        if Choice == 1:
+        # Choice = label1radio.get()
+        # if Choice == 1:
+        if label1radio.get()==1:
             output = "Yes"
             
             lab2=Label(F, text="Bank Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1146,11 +1618,20 @@ def edit_employee():
             lab1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ifsccode)
             lab1.place(x=790,y=730,height=40,width=360)
             providebankdetails="Yes"
-        elif Choice == 2:
+        else: 
             output = "No"
             providebankdetails ="No"
-        else:
-            output = "Invalid"
+            lab2=Label(F, text="Bank Account Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab2.place(x=400,y=690)
+            lab=Entry(F,bg='#2f516a',fg='#fff',textvariable=bankaccountnumber,state='disabled')
+            bankaccountnumber.set("")
+            lab.place(x=400,y=730,height=40,width=360)
+
+            lab3=Label(F, text="IFSC Code", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+            lab3.place(x=790,y=690)
+            lab1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ifsccode,state='disabled')
+            ifsccode.set("")
+            lab1.place(x=790,y=730,height=40,width=360)
     
     #radio button
     label1radio=IntVar()
@@ -1175,7 +1656,7 @@ def edit_employee():
     label3.place(x=675,y=840)
     label3_hrareceived=Entry(F,bg='#2f516a',fg='#fff',textvariable=hrareceived)
     label3_hrareceived.place(x=675,y=880,height=40,width=200)
-    # label3_hrareceived.bind("<KeyRelease>",get_selected)
+    label3_hrareceived.bind("<KeyRelease>",get_selected)
 
     CheckVar1 = IntVar()
     sanitizer1_lbl=tk.Label(F,text="Do you live in metro cities? ",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1370,6 +1851,7 @@ def delete_employee():
     messagebox.showinfo('successfully Deleted')
     print('sucessfully deleted')
     tree_data.delete(focus_data)
+    
 
 root = tk.Tk()
 fun()
@@ -1400,15 +1882,22 @@ mycanvas.create_window((3,150),window=form_frame,anchor="nw")
 form_lable=tk.Label(form_frame,bg="#2f516f",width=100)
 form_lable.place(x=0,y=0)
 
-tit = Label(heading_frame, text="EMPLOYEES", font=('times new roman', 28, 'bold'),padx=580, pady=2, bd=12, bg="#243e55", fg="#fff", relief=GROOVE)
+tit = Label(heading_frame, text="EMPLOYEES", font=('times new roman', 28, 'bold'),padx=540, pady=2, bd=12, bg="#243e55", fg="#fff", relief=GROOVE)
 tit.pack()
 
 F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'),padx=50, pady=20, bd=0, fg="Black", bg="#243e55")
 F.place(x=30, y=30, width=1270, height=480)
 
+# def restart(F):
+#     F.refresh()
+#     show_frame("StartPage")
+
 
 b1 = Button(F,text = "Add Employees",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_data)  
 b1.place(x=1000,y=0,width=200,height=40)
+
+# b1 = Button(F,text = "Refresh",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=restart)  
+# b1.place(x=100,y=0,width=200,height=40)
 
 # global tree_data
 tree_data = ttk.Treeview(F,height=10)
@@ -1448,9 +1937,11 @@ tree_data.grid(row=0,column=0,padx=5,pady=60)
 
 
 edit_btn = ttk.Button(F, text="Edit", command=edit_employee)
-edit_btn.place(relx=0.35, rely=0.66, relheight=0.1, relwidth=0.1)
+edit_btn.place(relx=0.30, rely=0.66, relheight=0.1, relwidth=0.1)
 del_btn = ttk.Button(F, text="Delete",command=delete_employee)
-del_btn.place(relx=0.5, rely=0.66, relheight=0.1, relwidth=0.1)
+del_btn.place(relx=0.45, rely=0.66, relheight=0.1, relwidth=0.1)
+del_btn = ttk.Button(F, text="Generate Payslip",command=chnce_data)
+del_btn.place(relx=0.6, rely=0.66, relheight=0.1, relwidth=0.1)
 
 wrappen.pack(fill='both',expand='yes',)
 
