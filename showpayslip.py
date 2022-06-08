@@ -31,21 +31,21 @@ def edit_payslip():
         earr7= label1_earr7.get()
         print(earr6)
         print(label1_basic.get())
-        earn1 = int(basic.get()) + int(da.get()) + int(earr1.get()) + int(earr2.get()) + int(earr3.get()) + int(earr4.get())
+        earn1 = int(float(basic.get())) + int(float(da.get())) + int(float(earr1.get())) + int(float(earr2.get())) + int(float(earr3.get())) + int(float(earr4.get()))
        
         print(earn1)
-        gros_pay = earn1 + int(label1_earr6.get()) + int(label1_earr7.get());
+        gros_pay = earn1 + int(float(label1_earr6.get())) + int(float(label1_earr7.get()));
         print(gros)
         gros.set(gros_pay)
        
-        dedu1 = int(provi.get()) + int(prof.get()) + int(esi.get()) 
+        dedu1 = int(float(provi.get())) + int(float(prof.get())) + int(float(esi.get())) 
         print(dedu1)
-        total_deduction = dedu1 + int(label1_dedu5.get()) + int(label1_dedu6.get())
+        total_deduction = dedu1 + int(float(label1_dedu5.get())) + int(float(label1_dedu6.get()))
         tded.set(total_deduction)
         print(tded)
         
         gio = earn1 - dedu1;
-        net_salary = gio + int(label1_earr6.get()) + int(label1_earr7.get()) - int(label1_dedu5.get()) - int(label1_dedu6.get()) 
+        net_salary = gio + int(float(label1_earr6.get())) + int(float(label1_earr7.get())) - int(float(label1_dedu5.get())) - int(float(label1_dedu6.get()))
         netsal.set(net_salary)
         
     
@@ -217,27 +217,40 @@ def edit_payslip():
 
     existing_ear2=data[11]
     ear2.set(existing_ear2)
-
+    
     existing_earr2=data[12]
-    earr2.set(existing_earr2)
+    if earr2 == "":
+        earr2.set("0")
+    else:
+        earr2.set(existing_earr2)
 
     existing_ear3=data[13]
     ear3.set(existing_ear3)
 
     existing_earr3=data[14]
-    earr3.set(existing_earr3)
+    if earr3 == "":
+        earr3.set("0")
+    else:
+        earr3.set(existing_earr3)
 
     existing_ear4=data[15]
     ear4.set(existing_ear4)
 
     existing_earr4=data[16]
-    earr4.set(existing_earr4)
+    if earr4 == "":
+        earr4.set("0")
+    else:
+        earr4.set(existing_earr4)
 
     existing_ear5=data[17]
     ear5.set(existing_ear5)
 
     existing_earr5=data[18]
-    earr5.set(existing_earr5)
+    if earr5 == "":
+        earr5.set("0")
+    else:
+        
+        earr5.set(existing_earr5)
 
     existing_ear6=data[19]
     ear6.set(existing_ear6)
