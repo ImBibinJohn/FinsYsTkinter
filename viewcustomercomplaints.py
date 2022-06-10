@@ -58,12 +58,12 @@ def main():
         toda = date.today()
         tod = toda.strftime("%Y-%m-%d") 
         if dropp=='Custom':            
-            tk.Label(form2_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.45,rely=0.1)
+            tk.Label(form2_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.3,rely=0.08)
             dte=StringVar()
-            DateEntry(form2_frame,textvariable=dte,date_pattern='y-mm-dd').place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
-            tk.Label(form2_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.70,rely=0.1)
+            DateEntry(form2_frame,textvariable=dte,date_pattern='yyyy-mm-dd').place(relx=0.3,rely=0.5,relwidth=0.2,relheight=0.5)
+            tk.Label(form2_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.55,rely=0.08)
             dtee=StringVar()
-            DateEntry(form2_frame,textvariable=dtee,date_pattern='y-mm-dd').place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
+            DateEntry(form2_frame,textvariable=dtee,date_pattern='yyyy-mm-dd').place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.5)
         elif dropp=='Today':
             fromdate = tod
             todate = tod 
@@ -72,12 +72,12 @@ def main():
             todate = toda.strftime("%Y-%m-31")
           
 
-    tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.1)
+    tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.08)
     options=["All dates", "Custom","Today","This month"]
     drop= ttk.Combobox(form2_frame,values=options,font=16)
     drop.current(0)
     drop.bind('<<ComboboxSelected>>',menuu)
-    drop.place(relx=0.05,rely=0.5,relwidth=0.3,relheight=0.5)
+    drop.place(relx=0.05,rely=0.5,relwidth=0.2,relheight=0.5)
         #buttons
 
     def clearttree():#to clear treeview
@@ -101,16 +101,8 @@ def main():
                 clearttree()
                 payablecustomvalues()    
                 
-    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=accpayablesfetch).place(relx=0.55,rely=0.5,relwidth=0.15)
-    form2_frame.place(relx=0.1,rely=0.075,relwidth=0.8,relheight=0.09)
-
-
-    # pr1 =  "All Dates", "Custom", "Today", "This Month "
-    # product_drop5=ttk.Combobox(hd,font=('times new roman', 10, 'bold'), )
-    # product_drop5.set("All Dates")
-    # product_drop5['values']=pr1
-    # product_drop5.bind("<<ComboboxSelected>>",selected)
-    # product_drop5.place(x=900,y=10,height=40,width=200)
+    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=accpayablesfetch).place(relx=0.8,rely=0.5,relwidth=0.15)
+    form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
 
 
     # table view
