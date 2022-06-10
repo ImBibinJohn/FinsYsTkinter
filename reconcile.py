@@ -142,6 +142,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
+from turtle import width
 from tkcalendar import DateEntry, Calendar
 
 from tkinter import messagebox
@@ -162,19 +163,136 @@ cur = mydata.cursor()
 
 def time():
     def show_result():
+        global expexists
         messagebox.showinfo('successfull render')
         reconcile=Toplevel(win)
         reconcile.geometry('2000x1000')
         reconcile['bg'] = '#2f516f'
-        head_frame = tk.Frame(reconcile, bg='#243e54',height=200,width=1000)
+        head_frame = tk.Frame(reconcile, bg='#243e54',height=380,width=1500)
         head_frame.place(relx=0.1, rely=0.05,)
         tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),
                 bg='#243e54', fg='#fff').place(relx=0.4, rely=0.1)
-        tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),
-                bg='#243e54', fg='#fff').place(relx=0.4, rely=0.3)
-        tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),
-        bg='#243e54', fg='#fff').place(relx=0.4, rely=0.5)
-    
+
+       
+        if expexists[10]==cmp[0]:
+            print("expexists[0]",expexists[6])
+
+
+            tk.Label(head_frame, text=expexists[1], font=('Times New Roman', 30),
+                    bg='#243e54', fg='#fff').place(relx=0.35, rely=0.2)
+            tk.Label(head_frame, text=expexists[4], font=('Times New Roman', 15),
+            bg='#243e54', fg='#fff').place(relx=0.42, rely=0.34)
+
+
+            tk.Label(head_frame, text=expexists[6], font=('Times New Roman', 20),
+                    bg='#243e54', fg='#198fed').place(relx=0.07, rely=0.52)
+            tk.Label(head_frame, text='PAYMENTS', font=('Times New Roman', 20),
+                        bg='#243e54', fg='#198fed').place(relx=0.05, rely=0.6)
+
+        if incomeacc[6]==cmp[0]:
+
+            tk.Label(head_frame, text=incomeacc[2], font=('Times New Roman', 20),
+                    bg='#243e54', fg='#198fed').place(relx=0.23, rely=0.52)
+
+                
+            tk.Label(head_frame, text='DEPOSITS', font=('Times New Roman', 20),
+                    bg='#243e54', fg='#198fed').place(relx=0.2, rely=0.6)
+
+
+
+
+
+
+
+
+
+
+
+
+# var deposit = parseFloat('{{ incom.intear }}');
+#                 var payment = parseFloat('{{ expen.serchar }}');
+#                 var begbal = parseFloat('{{ expen.begbal }}');
+#                 var endbal = parseFloat('{{ expen.endbal }}');
+#                 var cleared = begbal - payment + deposit
+#                 var difference = endbal - cleared
+
+        if expexists[10]==cmp[0]:
+            cleared=int(expexists[2])-(int(expexists[6])+int(incomeacc[2]))
+            tk.Label(head_frame, text=cleared, font=('Times New Roman', 20),
+                    bg='#243e54', fg='#198fed').place(relx=0.35, rely=0.52)
+
+            tk.Label(head_frame, text='DIFFERENCE', font=('Times New Roman', 20),
+            bg='#243e54', fg='#198fed').place(relx=0.3, rely=0.6)
+
+        tk.Button(head_frame, text='Edit info', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+              command="").place(relx=0.65, rely=0.6, relwidth=0.15, relheight=0.1)
+        tk.Button(head_frame, text='save fo later', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+              command="").place(relx=0.8, rely=0.6, relwidth=0.1, relheight=0.1)
+        # tk.Button(head_frame, text='', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+        # command="").place(relx=0.9, rely=0.6, relwidth=0.05, relheight=0.1)
+        saveop=["Finish Now","Save Later","Close without saving"]
+        save_mode=StringVar()
+        save = ttk.Combobox(head_frame, values=saveop,textvariable=save_mode)
+        # account.current(0)
+        save.place(relx=0.9, rely=0.6, relwidth=0.07, relheight=0.1)
+
+
+
+
+
+
+        content_frame = tk.Frame(reconcile, bg='#243e54',height=400,width=1500)
+        content_frame.place(relx=0.1, rely=0.5)
+        
+        tk.Button(content_frame, text='Payments', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+              command="").place(relx=0.4, rely=0.15, relwidth=0.1, relheight=0.1)
+        tk.Button(content_frame, text='Deposits', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+              command="").place(relx=0.5, rely=0.15, relwidth=0.1, relheight=0.1)
+        tk.Button(content_frame, text='All', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+        command="").place(relx=0.6, rely=0.15, relwidth=0.05, relheight=0.1)
+
+
+
+        # style=ttk.Style()
+        # style.theme_use('default')
+        # style.configure('Treeview',background='silver',foreground='white',fieldbackground='white')
+
+        # content_label=Label(content_frame,relief="groove",bg='#243e55', fg='#fff',width=500,height=30)
+
+        result = ttk.Treeview(content_frame)
+
+
+        result['columns']= ('date', 'type','ref.no','account','payee','memo','deposite','payment')
+        result.column("#0", width=0,  stretch=NO)
+        result.column("date",anchor=CENTER,width=180)
+        result.column("type",anchor=CENTER,width=180)
+        result.column("ref.no",anchor=CENTER,width=180)
+        result.column("account",anchor=CENTER,width=200)
+        result.column("payee",anchor=CENTER,width=180)
+        result.column("memo",anchor=CENTER,width=200)
+        result.column("deposite",anchor=CENTER,width=200)
+        result.column("payment",anchor=CENTER,width=200)
+
+        result.heading("#0",text="",anchor=CENTER)
+        result.heading("date",text="DATE",anchor=CENTER)
+        result.heading("type",text="TYPE",anchor=CENTER)
+        result.heading("ref.no",text="REF.NO",anchor=CENTER)
+        result.heading("account",text="ACCOUNT",anchor=CENTER)
+        result.heading("payee",text="PAYEE",anchor=CENTER)
+        result.heading("memo",text="MEMO",anchor=CENTER)
+        result.heading("deposite",text="DEPOSITE(INR)",anchor=CENTER)
+        result.heading("payment",text="PAYMENT(INR)",anchor=CENTER)
+
+        result.place(relx=0, rely=0.35)
+
+
+
+
+
+
+
+
+
 
 
     def getdetails():
@@ -191,7 +309,7 @@ def time():
         Iinterest_earned = interest_earned.get()
         Eexpense_account = expense_account.get()
         Iincome_account = income_account.get()
-
+        global expexists,incomeacc
         cur.execute("select * from app1_expenseaccount where account=%s",(acc_list))
         expexists=cur.fetchone()
         if expexists != None:
@@ -236,7 +354,7 @@ def time():
 
             messagebox.showinfo('successfull added')
             show_result()
-            win.destroy()
+            
     win = tk.Tk()
     win.title('Time Activity')
     win.geometry('2000x1000')
