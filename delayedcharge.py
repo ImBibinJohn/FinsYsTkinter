@@ -4,7 +4,7 @@ from tkcalendar import DateEntry
 from tkinter import StringVar, ttk
 import mysql.connector
 from tkinter import *
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
 def delayedcharge():  
     win=tk.Tk()
@@ -52,6 +52,111 @@ def delayedcharge():
     tk.Label(hf2,text='Delayed charge date',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.2) 
     deldate=StringVar()
     DateEntry(hf2,textvariable=deldate,date_pattern='y-mm-dd').place(relx=0.05,rely=0.25,relwidth=0.2,relheight=0.03) 
+    def product1getitems(t):
+        def delayedsupplierstate1():
+            prod1=prod.get()
+            x=prod1.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= delayedsupplierstate1() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = delayedsupplierstate1()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = delayedsupplierstate1()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = delayedsupplierstate1()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass            
+
 
     tk.Label(hf2,text='#',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.3)
     tk.Label(hf2,text='PRODUCT/SERVICES',font=('times new roman', 14),bg='#2f516f').place(relx=0.1,rely=0.3)
@@ -75,27 +180,28 @@ def delayedcharge():
                 pass
             
     prod=ttk.Combobox(hf2,values=pro)
+    prod.bind('<<ComboboxSelected>>',product1getitems)
     prod.place(relx=0.1,rely=0.35,relwidth=0.16,relheight=0.04)
     tk.Label(hf2,text='DESCRIPTION',font=('times new roman', 14),bg='#2f516f').place(relx=0.28,rely=0.3)
     desc=tk.Entry(hf2)
     desc.place(relx=0.28,rely=0.35,relwidth=0.11,relheight=0.04)
         
 
-    def totalvalues(t):
-                global subtot,clear_total,tot
-                def clear_text():
-                    total.delete(0, END) 
-                def clear_total():
-                    sub.delete(0,END)  
-                tot=0.0    
-                q=float(quan1.get())
-                r=float(rate1.get())
-                tot=tot + (q*r)
-                subtot=subtot+tot
-                clear_text()
-                total.insert(0,tot)
-                clear_total()
-                sub.insert(0,subtot) 
+    def totalvalues(t):      
+        global subtot,clear_total,tot
+        def clear_text():
+            total.delete(0, END) 
+        def clear_total():
+            sub.delete(0,END)  
+        tot=0.0    
+        q=float(quan1.get())
+        r=float(rate1.get())
+        tot=tot + (q*r)
+        subtot=subtot+tot
+        clear_text()
+        total.insert(0,tot)
+        clear_total()
+        sub.insert(0,subtot) 
 
     quan1=IntVar()    
     tk.Label(hf2,text='QTY',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.3,relwidth=0.1)
@@ -113,7 +219,7 @@ def delayedcharge():
     total.place(relx=0.66,rely=0.35,relwidth=0.1,relheight=0.04)
 
     def taxxvalue(y):
-        global taxamt,clear_totalamount,taxamt2,taxamt4,taxamt3
+        global taxamt,clear_totalamount,taxamt2,taxamt4,taxamt3,amount
         tx=0.0
         def clear_tax():
             taxamount.delete(0,END)   
@@ -161,7 +267,238 @@ def delayedcharge():
     tax.place(relx=0.78,rely=0.35,relwidth=0.1,relheight=0.04)
         #second row    
     tk.Label(hf2,text='2',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.42)
+    def product2getitems(t):
+        def delayedsupplierstate2():
+            prodd2=prod1.get()
+            x=prodd2.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= delayedsupplierstate2() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = delayedsupplierstate2()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = delayedsupplierstate2()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = delayedsupplierstate2()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass            
+
+
+    tk.Label(hf2,text='#',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.3)
+    tk.Label(hf2,text='PRODUCT/SERVICES',font=('times new roman', 14),bg='#2f516f').place(relx=0.1,rely=0.3)
+            #first row
+    tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.35)
+    pro=['Select Product']
+    try:
+                cur.execute("SELECT name FROM inventory WHERE cid =%s",([cid]))
+                vall=cur.fetchall()         
+                for row in vall:
+                        pro.append(row[0])     
+                cur.execute("SELECT name FROM noninventory WHERE cid =%s",([cid]))
+                valll=cur.fetchall()         
+                for row in valll:
+                    pro.append(row[0])   
+                cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
+                vall1=cur.fetchall()         
+                for row in vall1:
+                    pro.append(row[0])         
+    except:
+                pass
+    def product3getitems(t):
+        def delayedsupplierstate3():
+            prodd3=prod3.get()
+            x=prodd3.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= delayedsupplierstate3() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = delayedsupplierstate3()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = delayedsupplierstate3()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = delayedsupplierstate3()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass                    
     prod1=ttk.Combobox(hf2,values=pro)
+    prod1.bind('<<ComboboxSelected>>',product3getitems)
     prod1.place(relx=0.1,rely=0.42,relwidth=0.16,relheight=0.04)
     desc1=tk.Entry(hf2)
     desc1.place(relx=0.28,rely=0.42,relwidth=0.11,relheight=0.04)
@@ -191,7 +528,7 @@ def delayedcharge():
     total2.place(relx=0.66,rely=0.42,relwidth=0.1,relheight=0.04)
     #tax 2
     def taxxvalue1(y):
-        global taxamt,taxamt2,taxamt3,taxamt4
+        global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx1=0.0
         def clear_tax():
             taxamount.delete(0,END)  
@@ -233,8 +570,9 @@ def delayedcharge():
     tax1.bind('<<ComboboxSelected>>',taxxvalue1)
     tax1.place(relx=0.78,rely=0.42,relwidth=0.1,relheight=0.04)
         #third row 
-    tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.49)
+    tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.49)     
     prod3=ttk.Combobox(hf2,values=pro)
+    prod3.bind('<<ComboboxSelected>>',product3getitems)
     prod3.place(relx=0.1,rely=0.49,relwidth=0.16,relheight=0.04)
     desc3=tk.Entry(hf2)
     desc3.place(relx=0.28,rely=0.49,relwidth=0.11,relheight=0.04)
@@ -265,7 +603,7 @@ def delayedcharge():
 
     #tax 3
     def taxxvalue2(y):
-        global taxamt,taxamt2,taxamt3,taxamt4
+        global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx2=0.0
         def clear_tax():
             taxamount.delete(0,END)
@@ -308,7 +646,112 @@ def delayedcharge():
     tax3.place(relx=0.78,rely=0.49,relwidth=0.1,relheight=0.04)
         #fourth row
     tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.56)
+    def product4getitems(t):
+        def delayedsupplierstate4():
+            prodd4=prod4.get()
+            x=prodd4.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= delayedsupplierstate4() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = delayedsupplierstate4()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = delayedsupplierstate4()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = delayedsupplierstate4()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass       
     prod4=ttk.Combobox(hf2,values=pro)
+    prod4.bind('<<ComboboxSelected>>',product4getitems)
     prod4.place(relx=0.1,rely=0.56,relwidth=0.16,relheight=0.04)
     desc4=tk.Entry(hf2)
     desc4.place(relx=0.28,rely=0.56,relwidth=0.11,relheight=0.04)
@@ -338,7 +781,7 @@ def delayedcharge():
     total4.place(relx=0.66,rely=0.56,relwidth=0.1,relheight=0.04)
         #tax 4
     def taxxvalue3(y):
-        global taxamt,taxamt2,taxamt3,taxamt4
+        global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx3=0.0
         def clear_tax():
             taxamount.delete(0,END)
@@ -391,8 +834,44 @@ def delayedcharge():
     tk.Label(hf2,text='Grand Total',font=('times new roman', 16),bg='#2f516f').place(relx=0.7,rely=0.77,relwidth=0.1,relheight=0.05)
     totalamount=tk.Entry(hf2,font=('times new roman', 16))
     totalamount.place(relx=0.82,rely=0.77,relheight=0.05,relwidth=0.12)
-
-    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f').place(relx=0.8,rely=0.85,relwidth=0.1,relheight=0.05)
+    def delayedchargesave():
+        cust=timecus.get()
+        date=deldate.get()
+        delayedchargeno='1000'
+        prodorser=prod.get()
+        descr=desc.get()
+        qtyy=quan1.get()
+        raty1=rate1.get()
+        tax11=tax.get()
+        taxamount=taxamt+taxamt+taxamt3+taxamt4
+        totaly=total.get()
+        prodoser1=prod1.get()
+        descr1=desc1.get()
+        qtyy2=quan2.get()
+        raty2=rate2.get()
+        tax22=tax1.get()
+        totaly2=total2.get()
+        prodorser2=prod3.get()
+        descp2=desc3.get()
+        qtyy3=quan3.get()
+        raty3=rate3.get()
+        totaly3=total3.get()
+        tax33=tax3.get()
+        prodorser3=prod4.get()
+        descp3=desc4.get()
+        qtyy4=quan4.get()
+        raty4=rate4.get()
+        totaly4=total4.get()
+        tax44=tax4.get()
+        dlych='''INSERT INTO delayedcharge (cid,customer,delayedchargedate,delayedchargeno,prodorser,description,qty,rate,tax,total,prodorser1,
+        description1,qty1,rate1,total1,tax1,prodorser2,description2,qty2,rate2,total2,tax2,prodorser3,description3,qty3,rate3,total3,tax3,
+        taxamount,subtotal,grandtotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(dlych,[(cid),(cust),(date),(delayedchargeno),(prodorser),(descr),(qtyy),(raty1),(tax11),(totaly),(prodoser1),
+        (descr1),(qtyy2),(raty2),(totaly2),(tax22),(prodorser2),(descp2),(qtyy3),(raty3),(totaly3),(tax33),(prodorser3),(descp3),(qtyy4),(raty4),(totaly4),(tax44),
+        (taxamount),(subtot),(amount)])
+        mydata.commit()
+        win.destroy()
+    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=delayedchargesave).place(relx=0.8,rely=0.85,relwidth=0.1,relheight=0.05)
     hf2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)
     win.mainloop()   
 delayedcharge()    

@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 from tkcalendar import DateEntry
 from tkinter import StringVar, ttk
 import mysql.connector
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
 #sherryag
 def saletimeactivity():
@@ -22,7 +22,7 @@ def saletimeactivity():
         text=timetext.get("1.0","end")
         cid=2
         try:
-            tg='''INSERT INTO timeactivity (timdate,timname,timcus,timcheck,timebill,timecheckk,timestart,timeend,tyme,timedes,cid) 
+            tg='''INSERT INTO timeactsale (timdatesale,timenamesale,timecustsale,timechecksale,timebillsale,timecheckksale,timestartsale,timeendsale,tymesale,timedessale,cid) 
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
             cur.execute(tg,[(date),(name),(cus),(checkbill),(bill),(timecheck),(starttime),(endtime),(ttime),(text),(cid)])
             #print(date,name,cus,checkbill,bill,timecheck,starttime,endtime,ttime,text)
