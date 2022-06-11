@@ -4,6 +4,7 @@ from tkcalendar import DateEntry
 from tkinter import StringVar, ttk
 import mysql.connector
 from tkinter import *
+from datetime import datetime, date, timedelta
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
 def salesestimate():  
@@ -28,6 +29,32 @@ def salesestimate():
             #customer
     tk.Label(hf2,text='Fin sYs',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.02)      
     tk.Label(hf2,text='Customer',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.11) 
+    def estimateinsertentry(y):
+        global custo
+        custo=estcus.get()
+        x=custo.split()
+        a=x[0]
+        b=x[1]
+        if len(x) == 3:
+            b = x[1] + " " + x[2] 
+            cur.execute("SELECT email,shipstreet,shipcity,shipstate,shippincode,shipcountry FROM customer WHERE firstname =%s and lastname =%s and cid =%s",([a,b,cid]))
+            cust=cur.fetchone()
+        else:
+            cur.execute("SELECT email,shipstreet,shipcity,shipstate,shippincode,shipcountry FROM customer WHERE firstname =%s and lastname =%s and cid =%s",([a,b,cid]))
+            cust=cur.fetchone()
+        email.insert(0,cust[0])  
+        estplace.insert(0,cust[3]) 
+        bill.insert(1.0,custo)   
+        bill.insert(2.0,'\n')
+        bill.insert(3.0,[cust[1]])
+        bill.insert(4.0,'\n')
+        bill.insert(5.0,[cust[2]])
+        bill.insert(6.0,'\n')
+        bill.insert(7.0,[cust[3]])
+        bill.insert(8.0,'\n')
+        bill.insert(9.0,[cust[4]])
+        bill.insert(10.0,'\n')
+        bill.insert(11.0,[cust[5]])
     def estimatecusinput():
         try:
                 cur.execute("SELECT firstname,lastname FROM customer")
@@ -38,22 +65,26 @@ def salesestimate():
             pass              
     tm=['Select Customer']
     estimatecusinput()     
-    estcus=ttk.Combobox(hf2,values=tm)
+    estcus=ttk.Combobox(hf2,values=tm,font=('times new roman', 12))
+    estcus.bind('<<ComboboxSelected>>',estimateinsertentry)
     estcus.current(0)  
     estcus.place(relx=0.05,rely=0.15,relwidth=0.2,relheight=0.03)
     tk.Button(hf2,text='+',font=(14)).place(relx=0.26,rely=0.15,relwidth=0.025,relheight=0.03)
     tk.Label(hf2,text='Email',font=('times new roman', 14),bg='#2f516f').place(relx=0.30,rely=0.11)
     email=tk.Entry(hf2)
     email.place(relx=0.3,rely=0.15,relwidth=0.2,relheight=0.03)
-    tk.Label(hf2,text='Billing Address',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.2) 
-    bill=tk.Entry(hf2)
+    tk.Label(hf2,text='Billing Address',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.2)
+    bill=tk.Text(hf2,font=('times new roman', 12))
     bill.place(relx=0.05,rely=0.24,relwidth=0.2,relheight=0.12)
+    toda = date.today()
+    tod = toda.strftime("%Y-%m-%d") 
     tk.Label(hf2,text='Estimate Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.2)
     estdate=tk.Entry(hf2)
+    estdate.insert(0,tod)
     estdate.place(relx=0.3,rely=0.24,relwidth=0.2,relheight=0.03) 
     tk.Label(hf2,text='Expiration Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.55,rely=0.2) 
-    expdate=DateEntry(hf2)
-    expdate.place(relx=0.55,rely=0.24,relwidth=0.2,relheight=0.03)
+    expdate=StringVar()
+    DateEntry(hf2,textvariable=expdate).place(relx=0.55,rely=0.24,relwidth=0.2,relheight=0.03)
     tk.Label(hf2,text='Place of Supply',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.29)
     estplace=tk.Entry(hf2)
     estplace.place(relx=0.3,rely=0.33,relwidth=0.2,relheight=0.03) 
@@ -92,14 +123,120 @@ def salesestimate():
                     pro.append(row[0])         
     except:
                 pass
-    tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.43)     
+    tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.43)   
+    def estimateproduct1getitems(t):
+        def estimatedsupplierstate1():
+            prod11=prod.get()
+            x=prod11.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= estimatedsupplierstate1() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = estimatedsupplierstate1()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = estimatedsupplierstate1()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = estimatedsupplierstate1()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass            
+
+
     prod=ttk.Combobox(hf2,values=pro)
-    prod.bind('<<ComboboxSelected>>',)
+    prod.bind('<<ComboboxSelected>>',estimateproduct1getitems)
     prod.place(relx=0.1,rely=0.43,relwidth=0.16,relheight=0.03)
     desc=tk.Entry(hf2)
     desc.place(relx=0.28,rely=0.43,relwidth=0.11,relheight=0.03)
     def salesestimatetotal(t):      
-        global subtot,clear_total,tot,tot2,tot3
+        global subtot,tot,tot2,tot3
         def clear_text():
             total.delete(0, END) 
         def clear_total():
@@ -170,8 +307,112 @@ def salesestimate():
 
     #row22
     tk.Label(hf2,text='2',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.48)   
+    def estimateproduct2getitems(t):
+        def estimatedsupplierstate2():
+            prod22=prod1.get()
+            x=prod22.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= estimatedsupplierstate2() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = estimatedsupplierstate2()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = estimatedsupplierstate2()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = estimatedsupplierstate2()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass   
     prod1=ttk.Combobox(hf2,values=pro)
-    prod1.bind('<<ComboboxSelected>>',)
+    prod1.bind('<<ComboboxSelected>>',estimateproduct2getitems)
     prod1.place(relx=0.1,rely=0.48,relwidth=0.16,relheight=0.03)
     desc1=tk.Entry(hf2)
     desc1.place(relx=0.28,rely=0.48,relwidth=0.11,relheight=0.03)
@@ -179,13 +420,15 @@ def salesestimate():
             global tot2,subtot,tot,tot4,tot3
             def clear_text1():
                 total2.delete(0, END) 
+            def clear_total1():
+                sub.delete(0,END)      
             q2=float(quan2.get())
             r2=float(rate22.get())
             tot2=(q2*r2)
             subtot=tot+tot2+tot3+tot4
             clear_text1()
             total2.insert(0,tot2) 
-            clear_total()
+            clear_total1()
             sub.insert(0,subtot) 
     quan2=IntVar()  
     qty1=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan2,font=(8))
@@ -241,9 +484,113 @@ def salesestimate():
     tax1.bind('<<ComboboxSelected>>',salesestimatetax1)
     tax1.place(relx=0.78,rely=0.48,relwidth=0.1,relheight=0.03)
     #third row
-    tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.53)   
+    tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.53)  
+    def estimateproduct3getitems(t):
+        def estimatedsupplierstate3():
+            prod33=prod2.get()
+            x=prod33.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= estimatedsupplierstate3() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = estimatedsupplierstate3()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = estimatedsupplierstate3()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = estimatedsupplierstate3()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass    
     prod2=ttk.Combobox(hf2,values=pro)
-    prod2.bind('<<ComboboxSelected>>',)
+    prod2.bind('<<ComboboxSelected>>',estimateproduct3getitems)
     prod2.place(relx=0.1,rely=0.53,relwidth=0.16,relheight=0.03)
     desc2=tk.Entry(hf2)
     desc2.place(relx=0.28,rely=0.53,relwidth=0.11,relheight=0.03)
@@ -251,13 +598,15 @@ def salesestimate():
             global tot3,subtot,tot,tot2,tot4
             def clear_text3():
                 total3.delete(0, END)
+            def clear_total2():
+                sub.delete(0,END)      
             q3=float(quan3.get())
             r3=float(rate33.get())
             tot3=(q3*r3)
             subtot=tot+tot2+tot3+tot4
             clear_text3()
             total3.insert(0,tot3) 
-            clear_total()
+            clear_total2()
             sub.insert(0,subtot) 
     quan3=IntVar()  
     qty2=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan3,font=(8))
@@ -313,8 +662,112 @@ def salesestimate():
     tax2.place(relx=0.78,rely=0.53,relwidth=0.1,relheight=0.03)
     #forth row
     tk.Label(hf2,text='4',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.58)   
+    def estimateproduct4getitems(t):
+        def estimatedsupplierstate4():
+            prod44=prod3.get()
+            x=prod44.split()
+            a=x[0]
+            b=x[1]
+            if len(x) == 3:
+                b = x[1] + " " + x[2] 
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+            else:
+                try:
+                    cur.execute("SELECT firstname,lastname FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                    supplier=cur.fetchone()
+                    if supplier:
+                        cur.execute("SELECT state FROM supplier WHERE firstname =%s and lastname =%s and cid =%s ",([a,b,cid]))
+                        supobject=cur.fetchone()
+                        payeeplace=supobject[0]
+                except:
+                    pass
+        list=[] 
+        try:
+            cur.execute("SELECT * FROM bundle WHERE name =%s and cid =%s",([prod1,cid]))
+            bundleobject=cur.fetchone() 
+            if bundleobject:
+                bundledict={'item':'bundle','bundleid':bundleobject[0],'name':bundleobject[3],'hsn':bundleobject[4],'description':bundleobject[3],
+                'salesprice':bundleobject[34],'cost':0,'tax':0,'product1':bundleobject[6],'product2':bundleobject[7],'product3':bundleobject[8],'product4':bundleobject[39],
+                'hsn1':bundleobject[10],'hsn2':bundleobject[11],'hsn3':bundleobject[12],'hsn4':bundleobject[31],'description1':bundleobject[14],'description2':bundleobject[15],
+                'description3':bundleobject[16],'description4':bundleobject[17],'qty1':bundleobject[18],'qty2':bundleobject[19],'qty3':bundleobject[20],'qty4':bundleobject[21],
+                'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
+                ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
+                try:
+                    bundledict['place']= estimatedsupplierstate4() 
+                except:
+                    pass 
+                list.append(bundledict)   
+            cur.execute("SELECT * FROM inventory WHERE name =%s and cid =%s",([prod1,cid]))
+            inventoryobject=cur.fetchone() 
+            if inventoryobject:
+                inventorydict = {'item': 'inventory', 'inventoryid': inventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],
+                         'date': inventoryobject[9], 'stockalrt': inventoryobject[10],
+                         'invacnt': inventoryobject[11],
+                         'description': inventoryobject[12], 'salesprice': inventoryobject[13],
+                         'incomeacnt': inventoryobject[14],
+                         'tax': inventoryobject[15], 'purchaseinfo': inventoryobject[16],
+                         'cost': inventoryobject[17],
+                         'expacnt': inventoryobject[18], 'purtax': inventoryobject[19],
+                         'revcharge': inventoryobject[20],
+                         'presupplier': inventoryobject[21]}
+                try:
+                    inventorydict['place'] = estimatedsupplierstate4()
+                except:
+                    pass 
+                list.append(inventorydict)
+            cur.execute("SELECT * FROM noninventory WHERE name =%s and cid =%s",([prod1,cid]))
+            noninventoryobject=cur.fetchone() 
+            if noninventoryobject:
+                noninventorydict = {'item': 'noninventory', 'inventoryid': noninventoryobject[0],
+                         'name': inventoryobject[3], 'sku': inventoryobject[4], 'hsn': inventoryobject[5],
+                         'unit': inventoryobject[6], 'category': inventoryobject[7],
+                         'initialqty': inventoryobject[8],'description': inventoryobject[9],
+                          'salesprice': inventoryobject[10],'tax': inventoryobject[12],
+                          'cost': inventoryobject[14],'purtax': inventoryobject[16],}
+                try:
+                    noninventorydict['place'] = estimatedsupplierstate4()
+                except:
+                    pass
+                list.append(noninventorydict)      
+            cur.execute("SELECT * FROM service WHERE name =%s and cid =%s",([prod1,cid]))
+            serviceobject=cur.fetchone() 
+            if serviceobject:
+                servicedict = {'item': 'service', 'serviceid': serviceobject[0],
+                       'name': serviceobject[3], 'sku': serviceobject[4],
+                       'hsn': serviceobject[5], 'unit': serviceobject[6], 'categ': serviceobject[7],
+                       'description': serviceobject[8], 'salesprice': serviceobject[9],
+                       'income': serviceobject[10], 'initialqty': '',
+                       'tax': serviceobject[11], 'abatement': serviceobject[12],
+                       'sertype': serviceobject[14]}  
+                try:
+                    servicedict['place'] = estimatedsupplierstate4()
+                except:
+                     pass
+                list.append(servicedict)  
+            else:
+                notany = {'item': 'notany', 'name': ' ',
+                  'sku': ' ', 'hsn': ' ',
+                  'unit': 0,
+                  'category': ' ', 'initialqty': 0,
+                  'description': ' ', 'cost': 0,
+                  'salesprice': 0,
+                  'tax': 0, 'purtax': 0}
+                list.append(notany)               
+        except:
+            pass   
     prod3=ttk.Combobox(hf2,values=pro)
-    prod3.bind('<<ComboboxSelected>>',)
+    prod3.bind('<<ComboboxSelected>>',estimateproduct4getitems)
     prod3.place(relx=0.1,rely=0.58,relwidth=0.16,relheight=0.03)
     desc3=tk.Entry(hf2)
     desc3.place(relx=0.28,rely=0.58,relwidth=0.11,relheight=0.03)
@@ -322,13 +775,15 @@ def salesestimate():
             global tot4,subtot,tot,tot2,tot3
             def clear_text4():
                 total4.delete(0, END)
+            def clear_total4():
+                sub.delete(0,END)      
             q4=float(quan4.get())
             r4=float(rate55.get())
             tot4=(q4*r4)
             subtot=tot+tot2+tot3+tot4
             clear_text4()
             total4.insert(0,tot4) 
-            clear_total()
+            clear_total4()
             sub.insert(0,subtot) 
     quan4=IntVar()  
     qty3=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan4,font=(8))
@@ -392,7 +847,51 @@ def salesestimate():
     tk.Label(hf2,text='Grand Total',font=('times new roman', 16),bg='#2f516f').place(relx=0.7,rely=0.77,relwidth=0.1,relheight=0.04)
     totalamount=tk.Entry(hf2,font=('times new roman', 16))
     totalamount.place(relx=0.82,rely=0.77,relheight=0.04,relwidth=0.12)
-    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f').place(relx=0.8,rely=0.85,relwidth=0.1,relheight=0.04)
+    def estimatesavevalues():
+        sestcus=estcus.get()
+        sestemail=email.get()
+        sestbill=bill.get(1.0,END)
+        sestdate=estdate.get()
+        sexpdate=expdate.get()
+        sestplace=estplace.get()
+        prodorser=prod.get()
+        descr=desc.get()
+        qtyy=quan1.get()
+        raty1=rate11.get()
+        tax11=tax.get()
+        taxamount=taxamt+taxamt+taxamt3+taxamt4
+        totaly=total.get()
+        prodoser1=prod1.get()
+        descr1=desc1.get()
+        qtyy2=quan2.get()
+        raty2=rate22.get()
+        tax22=tax1.get()
+        totaly2=total2.get()
+        prodorser2=prod2.get()
+        descp2=desc2.get()
+        qtyy3=quan3.get()
+        raty3=rate33.get()
+        totaly3=total3.get()
+        tax33=tax2.get()
+        prodorser3=prod3.get()
+        descp3=desc3.get()
+        qtyy4=quan4.get()
+        raty4=rate55.get()
+        totaly4=total4.get()
+        tax44=tax3.get()
+        try:
+            estimate='''INSERT INTO estimate (cid,customer,email,estimatedate,expirationdate,billingaddress,placeofsupply,product,description,qty,rate,tax,total,product1,
+            description1,qty1,rate1,total1,tax1,product2,description2,qty2,rate2,total2,tax2,product3,description3,qty3,rate3,total3,tax3,
+            taxamount,subtotal,estimatetotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+            cur.execute(estimate,[(cid),(sestcus),(sestemail),(sestdate),(sexpdate),(sestbill),(sestplace),(prodorser),(descr),(qtyy),(raty1),(tax11),(totaly),(prodoser1),
+            (descr1),(qtyy2),(raty2),(totaly2),(tax22),(prodorser2),(descp2),(qtyy3),(raty3),(totaly3),(tax33),(prodorser3),(descp3),(qtyy4),(raty4),(totaly4),(tax44),
+            (taxamount),(subtot),(amount)])
+            mydata.commit()
+            estwin.destroy()
+        except:
+            pass    
+
+    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=estimatesavevalues).place(relx=0.8,rely=0.85,relwidth=0.1,relheight=0.04)
     hf2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)
     estwin.mainloop()   
 salesestimate() 
