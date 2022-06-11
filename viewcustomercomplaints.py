@@ -10,8 +10,7 @@ import matplotlib.patches
 from datetime import datetime, date, timedelta
 
 
-mydata = mysql.connector.connect(
-    host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
+mydata = mysql.connector.connect(host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
 cur = mydata.cursor()
 
 expense_form = tk.Tk()
@@ -33,12 +32,10 @@ def main():
     A.geometry('1500x1000')
     A['bg'] = '#2f516f'
 
-
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
     f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='VIEW CUSTOMER COMPLAINT', bg="#243e55", height=2,
-                  bd=5, relief="groove", font=f, width=106)
+    lb = tk.Label(head, text='VIEW CUSTOMER COMPLAINT', bg="#243e55", height=2,bd=5, relief="groove", font=f, width=106)
     lb['font'] = f
     lb.place(relx=0.05, rely=0.2)
     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
@@ -48,22 +45,20 @@ def main():
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.8)
     form2_frame=tk.Frame(hd,bg='#243e54')
 
-
-
-
-    
     def menuu(e):
-        global fromdate,todate,dte,dtee
+        global fromdate,todate,date1,date2
         dropp=drop.get()
         toda = date.today()
         tod = toda.strftime("%Y-%m-%d") 
         if dropp=='Custom':            
             tk.Label(form2_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.3,rely=0.08)
-            dte=StringVar()
-            DateEntry(form2_frame,textvariable=dte,date_pattern='yyyy-mm-dd').place(relx=0.3,rely=0.5,relwidth=0.2,relheight=0.5)
+            date1 = StringVar()
+            date1 = DateEntry(form2_frame, width=50, bg="#2f516f",date_pattern='y-mm-dd', textvariable=date1)
+            date1.place(relx=0.3,rely=0.5,relwidth=0.2,relheight=0.5)
             tk.Label(form2_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.55,rely=0.08)
-            dtee=StringVar()
-            DateEntry(form2_frame,textvariable=dtee,date_pattern='yyyy-mm-dd').place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.5)
+            date2 = StringVar()
+            date2 = DateEntry(form2_frame, width=50, bg="#2f516f",date_pattern='y-mm-dd', textvariable=date2)
+            date2.place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.5)        
         elif dropp=='Today':
             fromdate = tod
             todate = tod 
@@ -83,32 +78,31 @@ def main():
     def clearttree():#to clear treeview
             for item in treevv.get_children():
                 treevv.delete(item) 
-    def accpayablesfetch():
+    def dateselect():
             period=drop.get()
             if period=='All dates':
                 clearttree()
-                allpayablesdates()  
+                alldate()  
             elif period=='Today':
                 clearttree()
-                paytoday()
+                todaydate()
             elif period=='Custom':
                 global fromdate,todate
-                fromdate=dte.get()
-                todate=dtee.get()
+                fromdate = date1.get()
+                todate = date2.get()
                 clearttree()
-                payablecustomvalues()   
+                customdate()   
             elif period=='This month':
                 clearttree()
-                payablecustomvalues()    
+                customdate()    
                 
-    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=accpayablesfetch).place(relx=0.8,rely=0.5,relwidth=0.15)
+    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=dateselect).place(relx=0.8,rely=0.5,relwidth=0.15)
     form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
 
 
     # table view
 
-    treevv = ttk.Treeview(hd, height=7, columns=(
-        1, 2, 3, 4, 5, 6,7), show='headings')
+    treevv = ttk.Treeview(hd, height=7, columns=(1, 2, 3, 4, 5, 6,7), show='headings')
     treevv.heading(1, text='ID')  # headings
     treevv.heading(2, text='DATE')  # headings
     treevv.heading(3, text='PRODUCT NAME')
@@ -117,7 +111,6 @@ def main():
     treevv.heading(6, text='DESCRIPTION')
     treevv.heading(7, text='COMPLAINT QTY')
 
-    # treevv.heading(7, text='Actions')
     treevv.column(1, minwidth=10, width=40, anchor=CENTER)  # coloumns
     treevv.column(2, minwidth=30, width=140, anchor=CENTER)
     treevv.column(3, minwidth=30, width=140, anchor=CENTER)
@@ -126,43 +119,42 @@ def main():
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     treevv.column(7, minwidth=30, width=140, anchor=CENTER)
     
-    def allpayablesdates():
-        
-        cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint")
+    def alldate():
+        cur.execute( "SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint ")
         val = cur.fetchall()
         try:
             for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+            pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-    def paytoday():#today value
-        cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint WHERE cdate=%s GROUP BY (fromdate)")
+    def todaydate():#today value
+        print(fromdate)
+        cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint WHERE cdate =%s",[fromdate])
         val = cur.fetchall()
         try:
             for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+            pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-           
-    def payablecustomvalues():#two dates
-        cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint WHERE  cdate=%s BETWEEN %s and %s GROUP BY (fromdate,todate)")
+    def customdate():#two dates
+        cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint WHERE  cdate BETWEEN %s and %s ", [fromdate, todate])
         val = cur.fetchall()
         try:
-            for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                for x in val:
+                    treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+                pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-
-    cur.execute(
-        "SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint")
+    cur.execute("SELECT id,cdate,product_name,invoiceno,skunumber,cdescription,complaint_qty FROM customercomplaint")
     val = cur.fetchall()
     if val:
         for x in val:
-            treevv.insert('', 'end', values=(
-                x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
+            treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
     def editexp():
@@ -176,24 +168,16 @@ def main():
             complaint_qty = complaintqty_input.get()
             cdescription = cdescription_input.get()
            
-
-           
-            
-            
             print(cdate, complaint_qty, cdescription)
 
-            cur.execute("""UPDATE customercomplaint SET cdate =%s, complaint_qty =%s, cdescription =%s  WHERE id=%s""",
-                        (cdate, complaint_qty, cdescription, b))
+            cur.execute("""UPDATE customercomplaint SET cdate =%s, complaint_qty =%s, cdescription =%s  WHERE id=%s""",(cdate, complaint_qty, cdescription, b))
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()
             expense_form.destroy()
 
-      
-
         # Get selected item to Edit
 
-   
         b = treevv.item(treevv.focus())["values"][0]
         print(b)
         sql='SELECT * FROM customercomplaint WHERE id=%s'
@@ -204,8 +188,7 @@ def main():
         print(s)
 
         mycanvas.configure(yscrollcommand=yscrollbar.set)
-        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
-            scrollregion=mycanvas.bbox('all')))
+        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
         full_frame = Frame(mycanvas, width=2000, height=730, bg='#2f516a')
         mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
@@ -213,8 +196,7 @@ def main():
         heading_frame = Frame(mycanvas)
         mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
         headingfont = font.Font(family='Times New Roman', size=25,)
-        credit_heading = Label(heading_frame, text="Edit Customer Complaint", fg='#fff',
-                               bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
+        credit_heading = Label(heading_frame, text="Edit Customer Complaint", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
         credit_heading.pack(padx=0, pady=0)
 
         # form fields
@@ -222,13 +204,10 @@ def main():
         form_frame = Frame(mycanvas, width=1600, height=500, bg='#243e55')
         mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
 
-        
-
-        cd = Label(
-            form_frame, text="Date", bg='#243e55', fg='#fff')
+        cd = Label(form_frame, text="Date", bg='#243e55', fg='#fff')
         cd.place(x=530, y=70,)
         cdate_input = StringVar()
-        cdate_input = DateEntry(form_frame, width=50, bg="#2f516f", textvariable=cdate_input)
+        cdate_input = DateEntry(form_frame, width=50, bg="#2f516f",date_pattern='y-mm-dd', textvariable=cdate_input)
         cdate_input.place(x=530, y=100, height=40)
         try:
             cdate_input.insert(0, s[6])
@@ -240,41 +219,34 @@ def main():
         complaint_lab.place(x=530, y=160, height=15, width=130)
         place_input = StringVar()
         complaintqty_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+        complaintqty_input.place(x=530, y=190, height=40)
+        wrappen.pack(fill='both', expand='yes',)
         try:
             complaintqty_input.insert(0, s[4])
         except:
             pass
-        complaintqty_input.place(x=530, y=190, height=40)
-        wrappen.pack(fill='both', expand='yes',)
+      
 
-
-        
-        idll = tk.Label(
-            form_frame, text="ID", bg='#243e55', fg='#fff')
+        idll = tk.Label(form_frame, text="ID", bg='#243e55', fg='#fff')
         idl = Entry(form_frame, width=10, bg='#2f516f', fg='#fff')
+        idll.place(x=530, y=380, height=15, width=20)
+        idl.place(x=530, y=400, height=40, width=50)
         try:
             idl.insert(0, s[0])
         except:
             pass
-        idll.place(x=530, y=380, height=15, width=20)
-        idl.place(x=530, y=400, height=40, width=50)
-    
-
-        cdescription = Label(form_frame, text="Description",
-                           bg='#243e55', fg='#fff')
+       
+        cdescription = Label(form_frame, text="Description",bg='#243e55', fg='#fff')
         cdescription.place(x=530, y=240,)
         cdescription_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
+        cdescription_input.place(x=530, y=280, height=90)
+        wrappen.pack(fill='both', expand='yes',)
         try:
             cdescription_input.insert(0, s[5])
         except:
             pass
         
-        cdescription_input.place(x=530, y=280, height=90)
-        wrappen.pack(fill='both', expand='yes',)
-
         
-
-       
         submit = tk.Button(
             form_frame, text="Save", command=changeedit)
         submit.place(x=700, y=450, width=100)

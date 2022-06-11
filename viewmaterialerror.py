@@ -50,20 +50,20 @@ def main():
 
 
 
-
-    
     def menuu(e):
-        global fromdate,todate,dte,dtee
+        global fromdate,todate,date1,date2
         dropp=drop.get()
         toda = date.today()
         tod = toda.strftime("%Y-%m-%d") 
         if dropp=='Custom':            
-            tk.Label(form2_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.45,rely=0.1)
-            dte=StringVar()
-            DateEntry(form2_frame,textvariable=dte,date_pattern='y-mm-dd').place(relx=0.45,rely=0.23,relwidth=0.2,relheight=0.15)
-            tk.Label(form2_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.70,rely=0.1)
-            dtee=StringVar()
-            DateEntry(form2_frame,textvariable=dtee,date_pattern='y-mm-dd').place(relx=0.70,rely=0.23,relwidth=0.2,relheight=0.15)
+            tk.Label(form2_frame,text='From',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.3,rely=0.08)
+            date1 = StringVar()
+            date1 = DateEntry(form2_frame, width=50, bg="#2f516f",date_pattern='y-mm-dd', textvariable=date1)
+            date1.place(relx=0.3,rely=0.5,relwidth=0.2,relheight=0.5)
+            tk.Label(form2_frame,text='To',bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.55,rely=0.08)
+            date2 = StringVar()
+            date2 = DateEntry(form2_frame, width=50, bg="#2f516f",date_pattern='y-mm-dd', textvariable=date2)
+            date2.place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.5)        
         elif dropp=='Today':
             fromdate = tod
             todate = tod 
@@ -72,37 +72,37 @@ def main():
             todate = toda.strftime("%Y-%m-31")
           
 
-    tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.1)
+    tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.08)
     options=["All dates", "Custom","Today","This month"]
     drop= ttk.Combobox(form2_frame,values=options,font=16)
     drop.current(0)
     drop.bind('<<ComboboxSelected>>',menuu)
-    drop.place(relx=0.05,rely=0.5,relwidth=0.3,relheight=0.5)
+    drop.place(relx=0.05,rely=0.5,relwidth=0.2,relheight=0.5)
         #buttons
 
     def clearttree():#to clear treeview
             for item in treevv.get_children():
                 treevv.delete(item) 
-    def accpayablesfetch():
+    def dateselect():
             period=drop.get()
             if period=='All dates':
                 clearttree()
-                allpayablesdates()  
+                alldate()  
             elif period=='Today':
                 clearttree()
-                paytoday()
+                todaydate()
             elif period=='Custom':
                 global fromdate,todate
-                fromdate=dte.get()
-                todate=dtee.get()
+                fromdate = date1.get()
+                todate = date2.get()
                 clearttree()
-                payablecustomvalues()   
+                customdate()   
             elif period=='This month':
                 clearttree()
-                payablecustomvalues()    
+                customdate()    
                 
-    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=accpayablesfetch).place(relx=0.55,rely=0.5,relwidth=0.15)
-    form2_frame.place(relx=0.1,rely=0.075,relwidth=0.8,relheight=0.09)
+    tk.Button(form2_frame,text = "Search",fg="#000",font=('times new roman', 16, 'bold'),command=dateselect).place(relx=0.8,rely=0.5,relwidth=0.15)
+    form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
 
 
     # pr1 =  "All Dates", "Custom", "Today", "This Month "
@@ -134,36 +134,38 @@ def main():
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     treevv.column(7, minwidth=30, width=140, anchor=CENTER)
     
-    def allpayablesdates():
-        
-        cur.execute("SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror")
+    def alldate():
+        cur.execute( "SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror ")
         val = cur.fetchall()
         try:
             for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+            pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-    def paytoday():#today value
-        cur.execute("SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror WHERE cdate=%s GROUP BY (fromdate)")
+    def todaydate():#today value
+        print(fromdate)
+        cur.execute("SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror WHERE cdate =%s",[fromdate])
         val = cur.fetchall()
         try:
             for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+            pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-           
-    def payablecustomvalues():#two dates
-        cur.execute("SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror WHERE  cdate=%s BETWEEN %s and %s GROUP BY (fromdate,todate)")
+    def customdate():#two dates
+        cur.execute("SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror WHERE  cdate BETWEEN %s and %s ", [fromdate, todate])
         val = cur.fetchall()
         try:
-            for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))        
+                for x in val:
+                    treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5],x[6]))
         except:
-            pass  
+                pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
         
-
+    
     cur.execute(
         "SELECT id,cdate,product_name,skunumber,cdescription,inspected_qty,complaint_qty FROM materialerror")
     val = cur.fetchall()

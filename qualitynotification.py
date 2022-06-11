@@ -33,9 +33,9 @@ def main():
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=1)
 
   
-    def selected1(event):
+    def select(event):
         select_pro=[]
-        menu=product_drop5.get()
+        menu=product_drop4.get()
         select_pro.append(menu)
         print(menu)
         if menu == 'Customer Complaints':
@@ -49,11 +49,11 @@ def main():
     p1 = Label(hd, text="Create Complaints", bg='#243e55', fg='#fff',font=('times new roman', 28, 'bold'))
     p1.place(x=290, y=200,)
     pr1 = "Customer Complaints", "Complaint Against Supplier", "Material Error"
-    product_drop5=ttk.Combobox(hd,font=('times new roman', 28, 'bold'), )
-    product_drop5.set("Create")
-    product_drop5['values']=pr1
-    product_drop5.bind("<<ComboboxSelected>>",selected1)
-    product_drop5.place(x=300,y=300,height=40,width=200)
+    product_drop4=ttk.Combobox(hd,font=('times new roman', 28, 'bold'), )
+    product_drop4.set("Create")
+    product_drop4['values']=pr1
+    product_drop4.bind("<<ComboboxSelected>>",select)
+    product_drop4.place(x=300,y=300,height=40,width=200)
     
     
     def selected2(event):
