@@ -138,6 +138,8 @@
 
 
 
+from ast import Continue
+from os import remove
 import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
@@ -164,7 +166,6 @@ cur = mydata.cursor()
 def time():
     def show_result():
         global expexists
-        messagebox.showinfo('successfull render')
         reconcile=Toplevel(win)
         reconcile.geometry('2000x1000')
         reconcile['bg'] = '#2f516f'
@@ -190,7 +191,7 @@ def time():
                         bg='#243e54', fg='#198fed').place(relx=0.05, rely=0.6)
 
         if incomeacc[6]==cmp[0]:
-
+            print("income data is",incomeacc[6])
             tk.Label(head_frame, text=incomeacc[2], font=('Times New Roman', 20),
                     bg='#243e54', fg='#198fed').place(relx=0.23, rely=0.52)
 
@@ -198,26 +199,11 @@ def time():
             tk.Label(head_frame, text='DEPOSITS', font=('Times New Roman', 20),
                     bg='#243e54', fg='#198fed').place(relx=0.2, rely=0.6)
 
-
-
-
-
-
-
-
-
-
-
-
-# var deposit = parseFloat('{{ incom.intear }}');
-#                 var payment = parseFloat('{{ expen.serchar }}');
-#                 var begbal = parseFloat('{{ expen.begbal }}');
-#                 var endbal = parseFloat('{{ expen.endbal }}');
-#                 var cleared = begbal - payment + deposit
-#                 var difference = endbal - cleared
+        
 
         if expexists[10]==cmp[0]:
             cleared=int(expexists[2])-(int(expexists[6])+int(incomeacc[2]))
+            print("clear data is ",cleared)
             tk.Label(head_frame, text=cleared, font=('Times New Roman', 20),
                     bg='#243e54', fg='#198fed').place(relx=0.35, rely=0.52)
 
@@ -251,39 +237,69 @@ def time():
         tk.Button(content_frame, text='All', font=('times new roman', 16), bg='#243e54',fg='#198fed',
         command="").place(relx=0.6, rely=0.15, relwidth=0.05, relheight=0.1)
 
+        tk.Label(content_frame, text="DATE" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.03, rely=0.3)
+
+        tk.Label(content_frame, text="TYPE" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.13, rely=0.3)
+
+        tk.Label(content_frame, text="REF.NO" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.23, rely=0.3)
+
+        tk.Label(content_frame, text="ACCOUNT" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.35, rely=0.3)
+
+        tk.Label(content_frame, text="PAYEE" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.5, rely=0.3)
+
+        tk.Label(content_frame, text="MEMO" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.59, rely=0.3)
 
 
+        tk.Label(content_frame, text="DEPOSITE(INR)" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.69, rely=0.3)
+
+        tk.Label(content_frame, text="PAYMENT(INR)" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.85, rely=0.3)
+
+        #ssetting values 
+
+        tk.Label(content_frame, text="" ,font=('Times New Roman', 15),
+                    bg='#243e54', fg='#FFF').place(relx=0.85, rely=0.3)
+    
+
+       
         # style=ttk.Style()
         # style.theme_use('default')
         # style.configure('Treeview',background='silver',foreground='white',fieldbackground='white')
 
         # content_label=Label(content_frame,relief="groove",bg='#243e55', fg='#fff',width=500,height=30)
 
-        result = ttk.Treeview(content_frame)
+        # result = ttk.Treeview(content_frame)
 
 
-        result['columns']= ('date', 'type','ref.no','account','payee','memo','deposite','payment')
-        result.column("#0", width=0,  stretch=NO)
-        result.column("date",anchor=CENTER,width=180)
-        result.column("type",anchor=CENTER,width=180)
-        result.column("ref.no",anchor=CENTER,width=180)
-        result.column("account",anchor=CENTER,width=200)
-        result.column("payee",anchor=CENTER,width=180)
-        result.column("memo",anchor=CENTER,width=200)
-        result.column("deposite",anchor=CENTER,width=200)
-        result.column("payment",anchor=CENTER,width=200)
+        # result['columns']= ('date', 'type','ref.no','account','payee','memo','deposite','payment')
+        # result.column("#0", width=0,  stretch=NO)
+        # result.column("date",anchor=CENTER,width=180)
+        # result.column("type",anchor=CENTER,width=180)
+        # result.column("ref.no",anchor=CENTER,width=180)
+        # result.column("account",anchor=CENTER,width=200)
+        # result.column("payee",anchor=CENTER,width=180)
+        # result.column("memo",anchor=CENTER,width=200)
+        # result.column("deposite",anchor=CENTER,width=200)
+        # result.column("payment",anchor=CENTER,width=200)
 
-        result.heading("#0",text="",anchor=CENTER)
-        result.heading("date",text="DATE",anchor=CENTER)
-        result.heading("type",text="TYPE",anchor=CENTER)
-        result.heading("ref.no",text="REF.NO",anchor=CENTER)
-        result.heading("account",text="ACCOUNT",anchor=CENTER)
-        result.heading("payee",text="PAYEE",anchor=CENTER)
-        result.heading("memo",text="MEMO",anchor=CENTER)
-        result.heading("deposite",text="DEPOSITE(INR)",anchor=CENTER)
-        result.heading("payment",text="PAYMENT(INR)",anchor=CENTER)
+        # result.heading("#0",text="",anchor=CENTER)
+        # result.heading("date",text="DATE",anchor=CENTER)
+        # result.heading("type",text="TYPE",anchor=CENTER)
+        # result.heading("ref.no",text="REF.NO",anchor=CENTER)
+        # result.heading("account",text="ACCOUNT",anchor=CENTER)
+        # result.heading("payee",text="PAYEE",anchor=CENTER)
+        # result.heading("memo",text="MEMO",anchor=CENTER)
+        # result.heading("deposite",text="DEPOSITE(INR)",anchor=CENTER)
+        # result.heading("payment",text="PAYMENT(INR)",anchor=CENTER)
 
-        result.place(relx=0, rely=0.35)
+        # result.place(relx=0, rely=0.35)
 
 
 
@@ -296,9 +312,10 @@ def time():
 
 
     def getdetails():
+        global date3
         Ddate1 = date1.get()
         Ddate2 = date2.get()
-        Ddate3 = date3.get()
+        
         acc_list=[]
         Aaccount = selected_account.get()
         acc_list.append(Aaccount)
@@ -306,16 +323,31 @@ def time():
         Bbeginning_balance = beginning_balance.get()
         Eending_balance = ending_balance.get()
         Sservice_charge = service_charge.get()
-        Iinterest_earned = interest_earned.get()
         Eexpense_account = expense_account.get()
-        Iincome_account = income_account.get()
+        if Sservice_charge=='':
+            Sservice_charge="0"
+        if Eexpense_account=='':
+            Eexpense_account=""
+
+        if Aaccount not in selectlist:
+            Iinterest_earned = interest_input.get()       
+            Ddate3 = date3.get()
+            Iincome_account = income_input.get()
+            if Iinterest_earned=='':
+                Iinterest_earned="0"
+        else :
+            Iinterest_earned='0'
+            Ddate3=''
+            Iincome_account=''
         global expexists,incomeacc
         cur.execute("select * from app1_expenseaccount where account=%s",(acc_list))
         expexists=cur.fetchone()
+        print("expexistssssssssssssss",expexists)
         if expexists != None:
-            exp_id=[expexists[10]]
+            exp_id=[expexists[0]]
             cur.execute("select * from app1_incomeaccount where expenceincomeid_id=%s",(exp_id))
             incomeacc=cur.fetchone()
+            print("slected data is ",incomeacc)
         # incomeacc
 
 
@@ -324,6 +356,7 @@ def time():
         # for d in expexists:
         #     print("it iss",d)
         if expexists!= None and expexists[10]==cmp[0] and incomeacc[6]==cmp[0]:
+            print("result=",expexists[10],cmp[0],incomeacc[6])
             show_result()
 
         else:
@@ -333,27 +366,24 @@ def time():
 
         
             #datas added to Expenseaccount
-            tg = '''INSERT INTO app1_expenseaccount (enddate,account,dat,begbal,endbal,serchar,expacc,cid_id,expaccountypid_id) 
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            val=(Ddate1, Aaccount, Ddate2, Bbeginning_balance, Eending_balance, Sservice_charge,Eexpense_account,cmp[0],account_data[0])
+            tg = '''INSERT INTO app1_expenseaccount (enddate,account,dat,begbal,endbal,serchar,expacc,cid_id,expaccountypid_id,type1,memo1) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+            val=(Ddate1, Aaccount, Ddate2, Bbeginning_balance, Eending_balance, Sservice_charge,Eexpense_account,cmp[0],account_data[0],"Journal","Service Charge")
             cur.execute(tg,val)
             mydata.commit()
             cur.execute("select * from app1_expenseaccount where cid_id=%s",cmp)
             expense_data=cur.fetchall()
             last_entry=expense_data[-1]
-            
+            print("last entry is ",last_entry)
             #datas added to income account
-            incomesql = '''INSERT INTO app1_incomeaccount (dat1,intear,incacc,cid_id,expenceincomeid_id) 
-            VALUES (%s,%s,%s,%s,%s)'''
-            val2=(Ddate3, Iinterest_earned, Iincome_account,cmp[0],last_entry[0])
+            incomesql = '''INSERT INTO app1_incomeaccount (dat1,intear,incacc,cid_id,expenceincomeid_id,type2,memo2) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s)'''
+            val2=(Ddate3, Iinterest_earned, Iincome_account,cmp[0],last_entry[0],"Deposit","Interest Earned")
             cur.execute(incomesql,val2)
 
             mydata.commit()
-
-
-
-            messagebox.showinfo('successfull added')
-            show_result()
+            getdetails()
+            
             
     win = tk.Tk()
     win.title('Time Activity')
@@ -390,13 +420,50 @@ def time():
         val = cur.fetchall()
         for row in val:
             tm.append(row[0])
+
+
+    def get_selected_account(event):
+        global date3,income_input,interest_input,selectlist
+        sele_account=account.get()
+        selectlist=['CGST Payable' ,'CST Payable','CST Suspense' ,'GST Payable' , 'GST Suspense','IGST Payable' ,'Input CGST' ,'Input CGST Tax RCM' ,'Input IGST' ,'Input IGST Tax RCM' ,'Input Krishi Kalyan Cess' ,'Input Krishi Kalyan Cess RCM' ,'Input Service Tax','Input Service Tax RCM' ,'Input SGST' ,'Input SGST Tax RCM','Input VAT 14 %','Input VAT 4%' ,'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense' ,'Output CGST' , 'Output CGST Tax RCM' ,'Output CST 2%' ,'Output IGST', 'Output IGST Tax RCM' ,'Output Krishi Kalyan Cess' ,'Output Krishi Kalyan Cess RCM' ,'Output Service Tax','Output Service Tax RCM' ,'Output SGST', 'Output SGST Tax RCM' , 'Output VAT 14%' , 'Output VAT 4%' ,'Output VAT 5%' ,'Service Tax Payable' , 'Service Tax Suspense','SGST Payable','SGST Suspense' ,'Swachh Barath Cess Payable' ,'Swachh Barath Cess Suspense' , 'TDS Payable', 'VAT Payable', 'VAT Suspense']
+        if sele_account not in selectlist:
+            tk.Label(f2, text='Date', font=('times new roman', 15),
+            bg='#243e55', fg='#fff').place(relx=0.23, rely=0.70)
+            date3 = StringVar()
+            DateEntry(f2, textvariable=date3).place(
+                relx=0.23, rely=0.75, relwidth=0.14, relheight=0.05)
+
+            tk.Label(f2, text='Interest Earned', font=('times new roman', 15),
+                    bg='#243e55', fg='#fff').place(relx=0.40, rely=0.70)
+            interest_input=StringVar()
+            interest_earned = tk.Entry(f2,textvariable=interest_input)
+            interest_earned.place(relx=0.40, rely=0.75, relwidth=0.14, relheight=0.05)
+
+            tk.Label(f2, text='Income Account', font=('times new roman', 15),
+                    bg='#243e55', fg='#fff').place(relx=0.57, rely=0.70)
+
+
+
+
+            um=[ "incacc","Finance Charge Income","Insurance Proceeds Received","Interest Income","Proceeds From Sale of Asset","Shipping and Delivery Income","Billable Expense Income","Consulting Income","Product Sales","Sales","Sales-Hardware","Sales-Software","Sales-Support and Maintenance","Sales Discounts","Sales of Product Income","Uncategorised Income","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred Service Tax Input Credit","Deferred SGST","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Accumulated Depreciation","Building and Improvements","Furniture and Equipments","Land","Leasehold Improvements","Vehicles","CGST Payable","CST Payable","CST Suspense","GST Payable","GST Suspense","IGST Payable","Input CGST","Input CGST Tax RCM","Input IGST","Input IGST Tax RCM","Input Krishi Kalyan Cess","Input Krishi Kalyan Cess RCM","Input Service Tax","Input Service Tax RCM","Input SGST","Input SGST Tax RCM","Input VAT 14%","Input VAT 4%","Input VAT 5%","Krishi Kalyan Cess Payable","Krishi Kalyan Cess Suspense","Output CGST","Output CSGT Tax RCM","Output CGST 2%","Output IGST","Output IGST Tax RCM","Output Krishi Kalyan Cess","Output Krishi Kalyan Cess RCM","Output Service Tax","Output Service Tax RCM","Output SGST","Output SGST Tax RCM","Output VAT 14%","Output VAT 4%","Output VAT 5%","Service Tax Payable","Service Tax Suspense","SGST Payable","Swachh Bharat Cess Payable","Swachh Bharat Cess Suspense","TDS Payable","VAT Payable","Retained Earnings","VAT Suspense","Equipment Rental for Jobs","Freight and Shipping Costs","Merchant Account Fees","Purchases-Hardware for Resale","Purchases-Software for Resale","Subcontracted Services","Tools and Craft Supplies","Advertising/Promotional","Bank Charges","Business License and Permits","Charitable Contributions","Computer and Internet Expense","Continuing Education","Depreciation Expense","Dues and Subscriptions","Housekeeping Charges","Insurance Expense","Insurance Expense-General Liability Expenses","Insurance Expense-Health Insurance","Insurance Expense-Life and Disability Insurance","Interest Expense","Meals and Entertainment","Office Supplies","Postage and Delivery","Printing and Reproduction","Professional Fees","Rent Expense","Repair and Maintenance","Small Tools and Equipments","Swachh Bharat Cess Expense","Taxes-Property","Telephone Expense","Travel Expense","Uncategorised Expense","Utilities","Ask My Accountant","CGST write-off","GST write-off","IGST write-off","Miscellaneous Expense","Political Contributions","Reconcilation Discrepancies","SGST write-off","Tax write-off","Vehicle Expenses"]
+            income_input=StringVar()
+            income_account = ttk.Combobox(f2, values=um,textvariable=income_input)
+            income_account.current(0)
+            income_account.place(relx=0.57, rely=0.75, relwidth=0.14, relheight=0.05)
+        
+            
+           
+
+
     global tm
     tm = []
+    date3=' '
     comboinput1()
     
     selected_account=StringVar()
     account = ttk.Combobox(f2, values=tm,textvariable=selected_account)
     # account.current(0)
+    account.bind("<<ComboboxSelected>>",get_selected_account)
     account.place(relx=0.23, rely=0.21, relwidth=0.48, relheight=0.05)
 
     text3 = font.Font(family='Times New Roman', size=20)
@@ -458,38 +525,12 @@ def time():
     expense_account.current(0)
     expense_account.place(relx=0.57, rely=0.60, relwidth=0.14, relheight=0.05)
 
-    tk.Label(f2, text='Date', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.23, rely=0.70)
-    date3 = StringVar()
-    DateEntry(f2, textvariable=date3).place(
-        relx=0.23, rely=0.75, relwidth=0.14, relheight=0.05)
-
-    tk.Label(f2, text='Interest Earned', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.40, rely=0.70)
-    interest_earned = tk.Entry(f2)
-    interest_earned.place(relx=0.40, rely=0.75, relwidth=0.14, relheight=0.05)
-
-    tk.Label(f2, text='Income Account', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.57, rely=0.70)
 
 
 
+   
 
-    um=[ "incacc","Finance Charge Income","Insurance Proceeds Received","Interest Income","Proceeds From Sale of Asset","Shipping and Delivery Income","Billable Expense Income","Consulting Income","Product Sales","Sales","Sales-Hardware","Sales-Software","Sales-Support and Maintenance","Sales Discounts","Sales of Product Income","Uncategorised Income","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred Service Tax Input Credit","Deferred SGST","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Accumulated Depreciation","Building and Improvements","Furniture and Equipments","Land","Leasehold Improvements","Vehicles","CGST Payable","CST Payable","CST Suspense","GST Payable","GST Suspense","IGST Payable","Input CGST","Input CGST Tax RCM","Input IGST","Input IGST Tax RCM","Input Krishi Kalyan Cess","Input Krishi Kalyan Cess RCM","Input Service Tax","Input Service Tax RCM","Input SGST","Input SGST Tax RCM","Input VAT 14%","Input VAT 4%","Input VAT 5%","Krishi Kalyan Cess Payable","Krishi Kalyan Cess Suspense","Output CGST","Output CSGT Tax RCM","Output CGST 2%","Output IGST","Output IGST Tax RCM","Output Krishi Kalyan Cess","Output Krishi Kalyan Cess RCM","Output Service Tax","Output Service Tax RCM","Output SGST","Output SGST Tax RCM","Output VAT 14%","Output VAT 4%","Output VAT 5%","Service Tax Payable","Service Tax Suspense","SGST Payable","Swachh Bharat Cess Payable","Swachh Bharat Cess Suspense","TDS Payable","VAT Payable","Retained Earnings","VAT Suspense","Equipment Rental for Jobs","Freight and Shipping Costs","Merchant Account Fees","Purchases-Hardware for Resale","Purchases-Software for Resale","Subcontracted Services","Tools and Craft Supplies","Advertising/Promotional","Bank Charges","Business License and Permits","Charitable Contributions","Computer and Internet Expense","Continuing Education","Depreciation Expense","Dues and Subscriptions","Housekeeping Charges","Insurance Expense","Insurance Expense-General Liability Expenses","Insurance Expense-Health Insurance","Insurance Expense-Life and Disability Insurance","Interest Expense","Meals and Entertainment","Office Supplies","Postage and Delivery","Printing and Reproduction","Professional Fees","Rent Expense","Repair and Maintenance","Small Tools and Equipments","Swachh Bharat Cess Expense","Taxes-Property","Telephone Expense","Travel Expense","Uncategorised Expense","Utilities","Ask My Accountant","CGST write-off","GST write-off","IGST write-off","Miscellaneous Expense","Political Contributions","Reconcilation Discrepancies","SGST write-off","Tax write-off","Vehicle Expenses"]
-
-    # def comboinput3():
-    #     cur.execute("SELECT variable1 FROM income_account")
-    #     val = cur.fetchall()
-    #     for row in val:
-    #         um.append(row)
-    # global um
-    # um = ['-----']
-    # comboinput3()
-    income_account = ttk.Combobox(f2, values=um)
-    income_account.current(0)
-    income_account.place(relx=0.57, rely=0.75, relwidth=0.14, relheight=0.05)
-
-    tk.Button(f2, text='Start Reconciling', font=('times new roman', 16), bg='#2f516f',
+    tk.Button(f2, text='Start Reconciling', font=('times new roman', 16), fg='#fff',bg='#2f516f',
               command=getdetails).place(relx=0.37, rely=0.85, relwidth=0.2, relheight=0.05)
     f2.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.7)
     win.mainloop()
