@@ -1,4 +1,5 @@
 from ast import Lambda
+from cProfile import label
 from tkinter import *
 import tkinter
 from PIL import ImageTk
@@ -25,26 +26,121 @@ class base:
         
     def main(self):
         
-        Frame_login=Frame(self.root,bg="#213e57")
+        Frame_login=Frame(self.root,bg="#2f516f")
         Frame_login.place(x=0,y=0,height=700,width=1365)
         
         lab = Label(Frame_login,bg="#213b52")
         lab.place(x=0,y=0,width=1365,height=160)
         
-        btn2=Button(lab,command=self.Register,text="Next >>>",cursor="hand2",font=("times new roman",12,'bold'),fg="white",bg="orangered",bd=0,width=13,height=1)
+        btn2=Button(lab,command=self.Register,text=" >>> ",cursor="hand2",font=("times new roman",15,'bold'),fg="white",bg="orangered",bd=0,width=13,height=1)
         btn2.place(x=1210,y=120)
         
         # Load the image
-        image=Image.open('logo-icon.png')
-        img=image.resize((50, 50))
-        my_img1=ImageTk.PhotoImage(img)
-        label=Label(lab, image=my_img1,bg="#fff")
-        label.place(x=10,y=0)
+        # image=Image.open('logo-icon.png')
+        # img=image.resize((50, 50))
+        # my_img1=ImageTk.PhotoImage(img)
+       
+        # my_img = tk.PhotoImage(file = "logo-icon.png") 
+        # l2 = Label(lab,  image=my_img ,bg="#bbb")
+        # l2.grid(row=0,column=0) 
+        
+        # my_img = ImageTk.PhotoImage(Image.open("logo-icon.png"))
+        # b1=tk.Button(lab,image=my_img,bg="black",fg="white")
+        # b1.grid(row=1,column=1)
+        
+        # my_img2 = ImageTk.PhotoImage(Image.open("logo-icon.png"))
+        # bg = tk.Label(lab, image=my_img2)
+        # bg.place(x=0, y=0, relwidth=0.40, relheight=0.60)
+        
+        # img=ImageTk.PhotoImage(Image.open("logo-icon.png"))
+        # img=Label(lab,Image=img)
+        # img.place(x=0,y=0)
+        # size=(50,50)
+        # ax=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
+        # Tk.Label(lab,image=ax,bg='#243e54').place(x=0,y=0)
+        
+        # F3 = LabelFrame(root, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
+        # F3.place(x=100, y=200, width=50, height=50)
+        # size=(200,200)
+        # ax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
+        # v=Label(root,image=ax,bg='#243e54')
+        # v.place(x=10,y=10)
+        # print(ax)
+        
+        size=(50,50)
+        self.ax=ImageTk.PhotoImage(Image.open("logo-icon.png").resize(size))
+       
+        tk.Label(lab,image=self.ax,bg='#213e57').place(x=10,y=10)
         
         
         F2 = LabelFrame(lab,text="Fin sYs", font=('times new roman', 18, 'bold'), bd=0, fg="#fff", bg="#213b52")
         F2.place(x=65, y=20, width=100, height=50)
-    
+        
+        #icon in tkinter title
+        p1 = PhotoImage(file = 'logo-icon.png')
+
+        # Setting icon of master window
+        root.iconphoto(False, p1)
+        
+        
+        # def submenu1():
+        #     # gif icon for submenu1:
+        #     imgvar1 = PhotoImage(file="cogwheel.png")
+        
+        # img12 = PhotoImage(file = "cogwheel.png")
+        # size=(50,50)
+        # img12=ImageTk.PhotoImage(Image.open("cogwheel.png").resize(size))
+        # # Toolbar 
+        # toolbar = Frame(lab, bd=1, relief=RAISED) 
+        # toolbar.pack(side=BOTTOM, fill=X)
+        # btn1 = Button(lab, relief=FLAT, compound= LEFT, text="",image=img12, command=submenu1)
+        # btn1.pack(side=LEFT, padx=0, pady=0)
+        
+        OptionList = [
+        "Accounts and Settings",
+        "Customize Form Style",
+        "Charts of Accounts"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('Settings')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
+        opt.place(x=750,y=20)
+        
+        OptionList = [
+        "Accounts and Settings",
+        "Customize Form Style",
+        "Charts of Accounts"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('Notification')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
+        opt.place(x=900,y=20)
+        
+        labl = Label(lab,bg="#213b52",fg="#fff",text="MAP Creations",font=('Helvetica', 12, 'bold'),width=13,height=1)
+        labl.place(x=1050,y=20)
+        
+        labl = Label(lab,bg="#213b52",fg="#fff",text="Online",font=('Helvetica', 12, 'bold'),width=13,height=1)
+        labl.place(x=1050,y=60)
+        
+        OptionList = [
+        "Profile",
+        "Dashboard",
+        "Logout"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('F')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 15, 'bold'))
+        opt.place(x=1200,y=20)
+        
         btn = Button(lab,text='Dashboard',bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'),width=13,height=1)
         btn.place(x=10,y=120)
         
@@ -143,7 +239,7 @@ class base:
         # Frame_login1=Frame(self.root,bg="white")
         # Frame_login1.place(x=0,y=0,height=700,width=1365)
         
-        frame_input3=Frame(self.root,bg="#213e57")
+        frame_input3=Frame(self.root,bg="#2f516f")
         frame_input3.place(x=0,y=0,height=700,width=1365)
         
         lab = Label(frame_input3,bg="#213b52")
@@ -153,6 +249,61 @@ class base:
         
         btn2=Button(lab,command=self.main,text="<<",cursor="hand2",font=("Helvetica",15,'bold'),fg="white",bg="orangered",bd=0,width=5,height=1)
         btn2.place(x=10,y=120)
+        
+        size=(50,50)
+        self.ax=ImageTk.PhotoImage(Image.open("logo-icon.png").resize(size))
+       
+        tk.Label(lab,image=self.ax,bg='#213e57').place(x=10,y=10)
+        
+        
+        F2 = LabelFrame(lab,text="Fin sYs", font=('times new roman', 18, 'bold'), bd=0, fg="#fff", bg="#213b52")
+        F2.place(x=65, y=20, width=100, height=50)
+        
+        OptionList = [
+        "Accounts and Settings",
+        "Customize Form Style",
+        "Charts of Accounts"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('Settings')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
+        opt.place(x=750,y=20)
+        
+        OptionList = [
+        "Accounts and Settings",
+        "Customize Form Style",
+        "Charts of Accounts"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('Notification')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
+        opt.place(x=900,y=20)
+        
+        labl = Label(lab,bg="#213b52",fg="#fff",text="MAP Creations",font=('Helvetica', 12, 'bold'),width=13,height=1)
+        labl.place(x=1050,y=20)
+        
+        labl = Label(lab,bg="#213b52",fg="#fff",text="Online",font=('Helvetica', 12, 'bold'),width=13,height=1)
+        labl.place(x=1050,y=60)
+        
+        OptionList = [
+        "Profile",
+        "Dashboard",
+        "Logout"
+        ]
+
+        variable = tk.StringVar(lab)
+        variable.set('F')
+
+        opt = tk.OptionMenu(lab, variable, *OptionList)
+        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 15, 'bold'))
+        opt.place(x=1200,y=20)
+        
         
         # 8
         OptionList = [

@@ -60,7 +60,9 @@ OptionList = [
 
 variable = tk.StringVar(label1)
 variable.set('Banking')
-
+image=Image.open('imgtog.png')
+img1=image.resize((40, 40))
+my_img1=ImageTk.PhotoImage(img1)
 opt = tk.OptionMenu(label1, variable, *OptionList)
 opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
 opt.place(x=120,y=120)
