@@ -10,34 +10,30 @@ import matplotlib.patches
 from datetime import datetime, date, timedelta
 
 
-expense_form = tk.Tk()
-wrappen = ttk.LabelFrame(expense_form)
-mycanvas = Canvas(wrappen)
-mycanvas.pack(side=LEFT, fill="both", expand="yes")
 
 
 def main():
-        global A
-
-        global data, menu
+        global A, data, menu
         A = tk.Tk()
         A.title('View')
         A.geometry('1350x800')
         A['bg'] = '#2f516f'
+        wrappen = ttk.LabelFrame(A)
+        mycanvas = Canvas(wrappen)
+        mycanvas.pack(side=LEFT, fill="both", expand="yes")
 
 
         # head frame
         head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
         f = font.Font(family='Times New Roman', size=25)  # font
-        lb = tk.Label(head, text='NEW CUSTOMER COMPLAINT', bg="#243e55", height=2,
-                    bd=5, relief="groove", font=f, width=106)
+        lb = tk.Label(head, text='NEW CUSTOMER COMPLAINT', bg="#243e55", height=3,bd=1, relief="groove", font=f, width=75)
         lb['font'] = f
         lb.place(relx=0.05, rely=0.2)
         head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
 
         # contents frame
         hd = tk.Frame(A, bg='#243e54')
-        hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.8)
+        hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.7)
 
 
 
@@ -65,7 +61,7 @@ def main():
                 
                 con.commit()
                 MessageBox.showinfo("Insert Status", "Inserted Successfully")
-                expense_form.destroy()
+                A.destroy()
 
         # Get selected item to Edit
 

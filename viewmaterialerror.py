@@ -36,9 +36,8 @@ def main():
 
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-    f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='VIEW MATERIAL ERROR', bg="#243e55", height=2,
-                  bd=5, relief="groove", font=f, width=106)
+    f = font.Font(family='Times New Roman', size=40)  # font
+    lb = tk.Label(head, text='VIEW MATERIAL ERROR', bg="#243e55", height=2, bd=7, relief="groove", font=f, width=100)
     lb['font'] = f
     lb.place(relx=0.05, rely=0.2)
     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)

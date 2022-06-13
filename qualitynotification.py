@@ -22,11 +22,10 @@ def main():
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
     f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='QUALITY NOTIFICATION', bg="#243e55", height=2,
-                  bd=5, relief="groove", font=f, width=75)
+    lb = tk.Label(head, text='QUALITY NOTIFICATION', bg="#243e55", height=2,bd=3, relief="groove", font=f, width=75)
     lb['font'] = f
     lb.place(relx=0.05, rely=0.2)
-    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.2)
+    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
 
     # contents frame
     hd = tk.Frame(A, bg='#243e54')
