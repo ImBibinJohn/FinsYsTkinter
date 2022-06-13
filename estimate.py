@@ -65,9 +65,8 @@ def salesestimate():
             pass              
     tm=['Select Customer']
     estimatecusinput()     
-    estcus=ttk.Combobox(hf2,values=tm,font=('times new roman', 12))
-    estcus.bind('<<ComboboxSelected>>',estimateinsertentry)
-    estcus.current(0)  
+    estcus=ttk.Combobox(hf2,values=tm,font=(6))
+    estcus.bind('<<ComboboxSelected>>',estimateinsertentry) 
     estcus.place(relx=0.05,rely=0.15,relwidth=0.2,relheight=0.03)
     tk.Button(hf2,text='+',font=(14)).place(relx=0.26,rely=0.15,relwidth=0.025,relheight=0.03)
     tk.Label(hf2,text='Email',font=('times new roman', 14),bg='#2f516f').place(relx=0.30,rely=0.11)
@@ -91,10 +90,11 @@ def salesestimate():
     tk.Label(hf2,text='#',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.38)
     tk.Label(hf2,text='PRODUCT/SERVICES',font=('times new roman', 14),bg='#2f516f').place(relx=0.1,rely=0.38)
     tk.Label(hf2,text='DESCRIPTION',font=('times new roman', 14),bg='#2f516f').place(relx=0.28,rely=0.38)
-    tk.Label(hf2,text='QTY',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.38,relwidth=0.1)
-    tk.Label(hf2,text='RATE',font=('times new roman', 14),bg='#2f516f').place(relx=0.53,rely=0.38,relwidth=0.1)
-    tk.Label(hf2,text='TOTAL',font=('times new roman', 14),bg='#2f516f').place(relx=0.66,rely=0.38,relwidth=0.1)
-    tk.Label(hf2,text='TAX',font=('times new roman', 14),bg='#2f516f').place(relx=0.78,rely=0.38,relwidth=0.1)
+    tk.Label(hf2,text='HSN',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.38,relwidth=0.1)
+    tk.Label(hf2,text='QTY',font=('times new roman', 14),bg='#2f516f').place(relx=0.53,rely=0.38,relwidth=0.1)
+    tk.Label(hf2,text='RATE',font=('times new roman', 14),bg='#2f516f').place(relx=0.64,rely=0.38,relwidth=0.1)
+    tk.Label(hf2,text='TOTAL',font=('times new roman', 14),bg='#2f516f').place(relx=0.75,rely=0.38,relwidth=0.1)
+    tk.Label(hf2,text='TAX',font=('times new roman', 14),bg='#2f516f').place(relx=0.86,rely=0.38,relwidth=0.1)
     global subtot,amount,taxamt,taxamt2,taxamt3,taxamt4,tot,tot2,tot3,tot4
     estsubtot=0.0
     amount=0.0
@@ -108,23 +108,38 @@ def salesestimate():
     tot4=0.0
    #row1
     pro=['Select Product']
+   
     try:
-                cur.execute("SELECT name FROM inventory WHERE cid =%s",([cid]))
-                vall=cur.fetchall()         
+                cur.execute("SELECT name,hsn,description FROM inventory WHERE cid =%s",([cid]))
+                vall=cur.fetchall() 
+                print(vall)      
                 for row in vall:
-                        pro.append(row[0])     
-                cur.execute("SELECT name FROM noninventory WHERE cid =%s",([cid]))
+                        pro.append(row[0])
+                cur.execute("SELECT name,hsn,descr FROM noninventory WHERE cid =%s",([cid]))
                 valll=cur.fetchall()         
                 for row in valll:
                     pro.append(row[0])   
-                cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
-                vall1=cur.fetchall()         
-                for row in vall1:
-                    pro.append(row[0])         
+                #cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
+                #vall1=cur.fetchall()         
+                #for row in vall1:
+                   # pro.append(row[0]) 
+                   # hs.append(row[1])   
+                    #ds.append(row[2])           
     except:
                 pass
     tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.43)   
     def estimateproduct1getitems(t):
+        prodd=prod.get()
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            hsn1.insert(0,fet[0])
+            desc.insert(0,fet[1])
+        elif fetch:
+            hsn1.insert(0,fetch[0])
+            desc.insert(0,fetch[1])  
         def estimatedsupplierstate1():
             prod11=prod.get()
             x=prod11.split()
@@ -230,11 +245,13 @@ def salesestimate():
             pass            
 
 
-    prod=ttk.Combobox(hf2,values=pro)
+    prod=ttk.Combobox(hf2,values=pro,font=(8))
     prod.bind('<<ComboboxSelected>>',estimateproduct1getitems)
     prod.place(relx=0.1,rely=0.43,relwidth=0.16,relheight=0.03)
-    desc=tk.Entry(hf2)
+    desc=tk.Entry(hf2,font=(8))
     desc.place(relx=0.28,rely=0.43,relwidth=0.11,relheight=0.03)
+    hsn1=tk.Entry(hf2,font=(8))
+    hsn1.place(relx=0.41,rely=0.43,relwidth=0.11,relheight=0.03)
     def salesestimatetotal(t):      
         global subtot,tot,tot2,tot3
         def clear_text():
@@ -252,13 +269,13 @@ def salesestimate():
     quan1=IntVar()  
     qty=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan1,font=(8))
     qty.bind('<FocusIn>',salesestimatetotal)
-    qty.place(relx=0.41,rely=0.43,relwidth=0.1,relheight=0.03)
+    qty.place(relx=0.53,rely=0.43,relwidth=0.1,relheight=0.03)
     rate11=IntVar()
     rate=tk.Spinbox(hf2,textvariable=rate11,from_=0,to=2147483647,font=(8))
     rate.bind('<FocusIn>',salesestimatetotal)
-    rate.place(relx=0.53,rely=0.43,relwidth=0.1,relheight=0.03)
+    rate.place(relx=0.64,rely=0.43,relwidth=0.1,relheight=0.03)
     total=tk.Entry(hf2,font=(8))
-    total.place(relx=0.66,rely=0.43,relwidth=0.1,relheight=0.03)
+    total.place(relx=0.75,rely=0.43,relwidth=0.1,relheight=0.03)
     def salesestimatetax1(y):
         global taxamt,clear_totalamount,taxamt2,taxamt4,taxamt3,amount
         tx=0.0
@@ -297,17 +314,28 @@ def salesestimate():
         clear_tax()
         taxamount.insert(0,taxamt+taxamt2+taxamt3+taxamt4)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     taxval=['28.0% GST(28%)','18.0% GST(18%)','12.0% GST(12%)','06.0% GST(06%)','05.0% GST(05%)','03.0% GST(03%)',
                                                     '0.25% GST(0.25%)','0.0% GST(0%)','Exempt GST(0%)','Out of Scope(0%)']                                           
     tax=ttk.Combobox(hf2,values=taxval)
     tax.bind('<<ComboboxSelected>>',salesestimatetax1)
-    tax.place(relx=0.78,rely=0.43,relwidth=0.1,relheight=0.03)
+    tax.place(relx=0.86,rely=0.43,relwidth=0.1,relheight=0.03)
 
     #row22
     tk.Label(hf2,text='2',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.48)   
     def estimateproduct2getitems(t):
+        prodd=prod1.get()
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            hsn2.insert(0,fet[0])
+            desc1.insert(0,fet[1])
+        elif fetch:
+            hsn2.insert(0,fetch[0])
+            desc1.insert(0,fetch[1])  
         def estimatedsupplierstate2():
             prod22=prod1.get()
             x=prod22.split()
@@ -411,11 +439,13 @@ def salesestimate():
                 list.append(notany)               
         except:
             pass   
-    prod1=ttk.Combobox(hf2,values=pro)
+    prod1=ttk.Combobox(hf2,values=pro,font=(8))
     prod1.bind('<<ComboboxSelected>>',estimateproduct2getitems)
     prod1.place(relx=0.1,rely=0.48,relwidth=0.16,relheight=0.03)
-    desc1=tk.Entry(hf2)
+    desc1=tk.Entry(hf2,font=(8))
     desc1.place(relx=0.28,rely=0.48,relwidth=0.11,relheight=0.03)
+    hsn2=tk.Entry(hf2,font=(8))
+    hsn2.place(relx=0.41,rely=0.48,relwidth=0.11,relheight=0.03)
     def salesestimatetotal1(tt):
             global tot2,subtot,tot,tot4,tot3
             def clear_text1():
@@ -433,13 +463,13 @@ def salesestimate():
     quan2=IntVar()  
     qty1=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan2,font=(8))
     qty1.bind('<FocusIn>',salesestimatetotal1)
-    qty1.place(relx=0.41,rely=0.48,relwidth=0.1,relheight=0.03)
+    qty1.place(relx=0.53,rely=0.48,relwidth=0.1,relheight=0.03)
     rate22=IntVar()
     rate1=tk.Spinbox(hf2,textvariable=rate22,from_=0,to=2147483647,font=(8))
     rate1.bind('<FocusIn>',salesestimatetotal1)
-    rate1.place(relx=0.53,rely=0.48,relwidth=0.1,relheight=0.03)
+    rate1.place(relx=0.64,rely=0.48,relwidth=0.1,relheight=0.03)
     total2=tk.Entry(hf2,font=(8))
-    total2.place(relx=0.66,rely=0.48,relwidth=0.1,relheight=0.03)
+    total2.place(relx=0.75,rely=0.48,relwidth=0.1,relheight=0.03)
     def salesestimatetax1(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx1=0.0
@@ -478,14 +508,25 @@ def salesestimate():
         taxamt2=taxtot1
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     tax1=ttk.Combobox(hf2,values=taxval)
     tax1.bind('<<ComboboxSelected>>',salesestimatetax1)
-    tax1.place(relx=0.78,rely=0.48,relwidth=0.1,relheight=0.03)
+    tax1.place(relx=0.86,rely=0.48,relwidth=0.1,relheight=0.03)
     #third row
     tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.53)  
     def estimateproduct3getitems(t):
+        prodd=prod2.get()
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            hsn3.insert(0,fet[0])
+            desc2.insert(0,fet[1])
+        elif fetch:
+            hsn3.insert(0,fetch[0])
+            desc2.insert(0,fetch[1])  
         def estimatedsupplierstate3():
             prod33=prod2.get()
             x=prod33.split()
@@ -589,11 +630,13 @@ def salesestimate():
                 list.append(notany)               
         except:
             pass    
-    prod2=ttk.Combobox(hf2,values=pro)
+    prod2=ttk.Combobox(hf2,values=pro,font=(8))
     prod2.bind('<<ComboboxSelected>>',estimateproduct3getitems)
     prod2.place(relx=0.1,rely=0.53,relwidth=0.16,relheight=0.03)
-    desc2=tk.Entry(hf2)
+    desc2=tk.Entry(hf2,font=(8))
     desc2.place(relx=0.28,rely=0.53,relwidth=0.11,relheight=0.03)
+    hsn3=tk.Entry(hf2,font=(8))
+    hsn3.place(relx=0.41,rely=0.53,relwidth=0.11,relheight=0.03)
     def salesestimatetotal2(tt):
             global tot3,subtot,tot,tot2,tot4
             def clear_text3():
@@ -611,13 +654,13 @@ def salesestimate():
     quan3=IntVar()  
     qty2=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan3,font=(8))
     qty2.bind('<FocusIn>',salesestimatetotal2)
-    qty2.place(relx=0.41,rely=0.53,relwidth=0.1,relheight=0.03)
+    qty2.place(relx=0.53,rely=0.53,relwidth=0.1,relheight=0.03)
     rate33=IntVar()
     rate2=tk.Spinbox(hf2,textvariable=rate33,from_=0,to=2147483647,font=(8))
     rate2.bind('<FocusIn>',salesestimatetotal2)
-    rate2.place(relx=0.53,rely=0.53,relwidth=0.1,relheight=0.03)
+    rate2.place(relx=0.64,rely=0.53,relwidth=0.1,relheight=0.03)
     total3=tk.Entry(hf2,font=(8))
-    total3.place(relx=0.66,rely=0.53,relwidth=0.1,relheight=0.03)
+    total3.place(relx=0.75,rely=0.53,relwidth=0.1,relheight=0.03)
     def salesestimatetax2(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx2=0.0
@@ -655,14 +698,25 @@ def salesestimate():
         taxamt3=taxtot2
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     tax2=ttk.Combobox(hf2,values=taxval)
     tax2.bind('<<ComboboxSelected>>',salesestimatetax2)
-    tax2.place(relx=0.78,rely=0.53,relwidth=0.1,relheight=0.03)
+    tax2.place(relx=0.86,rely=0.53,relwidth=0.1,relheight=0.03)
     #forth row
     tk.Label(hf2,text='4',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.58)   
     def estimateproduct4getitems(t):
+        prodd=prod3.get()
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            hsn4.insert(0,fet[0])
+            desc3.insert(0,fet[1])
+        elif fetch:
+            hsn4.insert(0,fetch[0])
+            desc3.insert(0,fetch[1])  
         def estimatedsupplierstate4():
             prod44=prod3.get()
             x=prod44.split()
@@ -766,11 +820,13 @@ def salesestimate():
                 list.append(notany)               
         except:
             pass   
-    prod3=ttk.Combobox(hf2,values=pro)
+    prod3=ttk.Combobox(hf2,values=pro,font=(8))
     prod3.bind('<<ComboboxSelected>>',estimateproduct4getitems)
     prod3.place(relx=0.1,rely=0.58,relwidth=0.16,relheight=0.03)
-    desc3=tk.Entry(hf2)
+    desc3=tk.Entry(hf2,font=(8))
     desc3.place(relx=0.28,rely=0.58,relwidth=0.11,relheight=0.03)
+    hsn4=tk.Entry(hf2,font=(8))
+    hsn4.place(relx=0.41,rely=0.58,relwidth=0.11,relheight=0.03)
     def salesestimatetotal3(tt):
             global tot4,subtot,tot,tot2,tot3
             def clear_text4():
@@ -788,13 +844,13 @@ def salesestimate():
     quan4=IntVar()  
     qty3=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan4,font=(8))
     qty3.bind('<FocusIn>',salesestimatetotal3)
-    qty3.place(relx=0.41,rely=0.58,relwidth=0.1,relheight=0.03)
+    qty3.place(relx=0.53,rely=0.58,relwidth=0.1,relheight=0.03)
     rate55=IntVar()
     rate3=tk.Spinbox(hf2,textvariable=rate55,from_=0,to=2147483647,font=(8))
     rate3.bind('<FocusIn>',salesestimatetotal3)
-    rate3.place(relx=0.53,rely=0.58,relwidth=0.1,relheight=0.03)
+    rate3.place(relx=0.64,rely=0.58,relwidth=0.1,relheight=0.03)
     total4=tk.Entry(hf2,font=(8))
-    total4.place(relx=0.66,rely=0.58,relwidth=0.1,relheight=0.03)
+    total4.place(relx=0.75,rely=0.58,relwidth=0.1,relheight=0.03)
     def salesestimatetax3(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx3=0.0
@@ -831,11 +887,11 @@ def salesestimate():
         taxamt4=taxtot3
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     tax3=ttk.Combobox(hf2,values=taxval)
     tax3.bind('<<ComboboxSelected>>',salesestimatetax3)
-    tax3.place(relx=0.78,rely=0.58,relwidth=0.1,relheight=0.03)
+    tax3.place(relx=0.86,rely=0.58,relwidth=0.1,relheight=0.03)
 
     #total
     tk.Label(hf2,text='Sub Total',font=('times new roman', 16),bg='#2f516f').place(relx=0.7,rely=0.65,relwidth=0.1,relheight=0.04)
@@ -879,17 +935,21 @@ def salesestimate():
         raty4=rate55.get()
         totaly4=total4.get()
         tax44=tax3.get()
+        hs1=hsn1.get()
+        hs2=hsn2.get()
+        hs3=hsn3.get()
+        hs4=hsn4.get()
         try:
             estimate='''INSERT INTO estimate (cid,customer,email,estimatedate,expirationdate,billingaddress,placeofsupply,product,description,qty,rate,tax,total,product1,
             description1,qty1,rate1,total1,tax1,product2,description2,qty2,rate2,total2,tax2,product3,description3,qty3,rate3,total3,tax3,
-            taxamount,subtotal,estimatetotal) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+            taxamount,subtotal,estimatetotal,hsn,hsn1,hsn2,hsn3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
             cur.execute(estimate,[(cid),(sestcus),(sestemail),(sestdate),(sexpdate),(sestbill),(sestplace),(prodorser),(descr),(qtyy),(raty1),(tax11),(totaly),(prodoser1),
             (descr1),(qtyy2),(raty2),(totaly2),(tax22),(prodorser2),(descp2),(qtyy3),(raty3),(totaly3),(tax33),(prodorser3),(descp3),(qtyy4),(raty4),(totaly4),(tax44),
-            (taxamount),(subtot),(amount)])
+            (taxamount),(subtot),(amount),(hs1),(hs2),(hs3),(hs4)])
             mydata.commit()
             estwin.destroy()
         except:
-            pass    
+            pass   
 
     tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=estimatesavevalues).place(relx=0.8,rely=0.85,relwidth=0.1,relheight=0.04)
     hf2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)

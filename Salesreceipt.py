@@ -7,7 +7,7 @@ from tkinter import *
 from datetime import datetime, date, timedelta
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
-def salescreditnote():  
+def salessalereceipts():  
     estwin=tk.Tk()
     estwin.title('Sales Records')
     estwin.geometry('1500x1000')
@@ -23,13 +23,13 @@ def salescreditnote():
     frame['bg']='#2f516f'
     mycanvas.create_window((0,0),window=frame,anchor='nw',width=1500,height=1500)
     hf1=tk.Frame(frame,bg='#243e54')
-    tk.Label(hf1,text='CREDIT NOTE',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.1)
+    tk.Label(hf1,text='CASH MEMO',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.1)
     hf1.place(relx=0.1,rely=0.05,relwidth=0.8,relheight=0.1)
     hf2=tk.Frame(frame,bg='#243e54')
             #customer
     tk.Label(hf2,text='Fin sYs',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.02)      
     tk.Label(hf2,text='Customer',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.11) 
-    def creditnoteinsertentry(y):
+    def salesreceiptsinsertentry(y):
         global custo
         custo=estcus.get()
         x=custo.split()
@@ -55,7 +55,7 @@ def salescreditnote():
         bill.insert(9.0,[cust[4]])
         bill.insert(10.0,'\n')
         bill.insert(11.0,[cust[5]])
-    def creditnotecusinput():
+    def salesreceiptscusinput():
         try:
                 cur.execute("SELECT firstname,lastname FROM customer")
                 val=cur.fetchall()         
@@ -64,9 +64,9 @@ def salescreditnote():
         except:
             pass              
     tm=['Select Customer']
-    creditnotecusinput()     
+    salesreceiptscusinput()     
     estcus=ttk.Combobox(hf2,values=tm,font=('times new roman', 12))
-    estcus.bind('<<ComboboxSelected>>',creditnoteinsertentry) 
+    estcus.bind('<<ComboboxSelected>>',salesreceiptsinsertentry)
     estcus.place(relx=0.05,rely=0.15,relwidth=0.2,relheight=0.03)
     tk.Button(hf2,text='+',font=(14)).place(relx=0.26,rely=0.15,relwidth=0.025,relheight=0.03)
     tk.Label(hf2,text='Email',font=('times new roman', 14),bg='#2f516f').place(relx=0.30,rely=0.11)
@@ -79,7 +79,7 @@ def salescreditnote():
     to = toda.strftime("%Y-%m-%d")
     tod = int(toda.strftime("%Y"))
     preyear = int(toda.strftime("%Y")) - 1
-    tk.Label(hf2,text='Credit Note Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.2)
+    tk.Label(hf2,text='Sales receipt Date',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.2)
     estdate=tk.Entry(hf2)
     estdate.insert(0,to)
     estdate.place(relx=0.3,rely=0.24,relwidth=0.2,relheight=0.03) 
@@ -91,31 +91,29 @@ def salescreditnote():
     tk.Label(hf2,text='Place of Supply',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.29)
     estplace=ttk.Combobox(hf2,values=pos)
     estplace.place(relx=0.3,rely=0.33,relwidth=0.2,relheight=0.03) 
-    tk.Label(hf2,text='Invoice Period',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.37)
-    per=['October'f'{tod}' ' -December'f'{ tod }','July'f' { tod }' '-September'f' { tod }','April'f'{ tod }' '-June'f' { tod }','January'f'{ tod }' '-March'f' { tod }','October'f'{ preyear }' '-December'f' { preyear }',
-                'July'f'{ preyear }' '-September'f' { preyear }','April'f'{ preyear }' '-June'f' { preyear }','January'f'{ preyear }' '-March'f' { preyear }']
-    credperiod=ttk.Combobox(hf2,values=per)
-    credperiod.current(0)
-    credperiod.place(relx=0.05,rely=0.40,relwidth=0.2,relheight=0.03) 
-    tk.Label(hf2,text='Invoice No',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.37)
-    inv=['Select InvoiceNo']
-    try:
-        cur.execute("SELECT invoiceno FROM invoice WHERE cid =%s",([cid]))
-        invoi=cur.fetchall()
-        for i in invoi:
-            inv.append(i[0])
-    except:
-            pass
-    credno=ttk.Combobox(hf2,values=inv)
-    credno.current(0)
-    credno.place(relx=0.3,rely=0.40,relwidth=0.2,relheight=0.03) 
+    tk.Label(hf2,text='Payment Method',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.37)
+    met=['Cash','Cheque','Credit Card','Add New']
+    paymet=ttk.Combobox(hf2,values=met)
+    paymet.current(0)
+    paymet.place(relx=0.05,rely=0.40,relwidth=0.2,relheight=0.03) 
+    tk.Label(hf2,text='Reference No',font=('times new roman', 14),bg='#2f516f').place(relx=0.3,rely=0.37)
+    saldep=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
+                    'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+                    'Krishi Kalyan Cess Refund','Prepaid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Undeposited Fund']
+
+    refno=tk.Entry(hf2)
+    refno.place(relx=0.3,rely=0.40,relwidth=0.2,relheight=0.03) 
+    tk.Label(hf2,text='Deposit To',font=('times new roman', 14),bg='#2f516f').place(relx=0.52,rely=0.37)
+    saledep=ttk.Combobox(hf2,values=saldep)
+    saledep.place(relx=0.52,rely=0.40,relwidth=0.2,relheight=0.03)
     tk.Label(hf2,text='#',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.45)
     tk.Label(hf2,text='PRODUCT/SERVICES',font=('times new roman', 14),bg='#2f516f').place(relx=0.1,rely=0.45)
-    tk.Label(hf2,text='DESCRIPTION',font=('times new roman', 14),bg='#2f516f').place(relx=0.28,rely=0.45)
-    tk.Label(hf2,text='QTY',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.45,relwidth=0.1)
-    tk.Label(hf2,text='RATE',font=('times new roman', 14),bg='#2f516f').place(relx=0.53,rely=0.45,relwidth=0.1)
-    tk.Label(hf2,text='TOTAL',font=('times new roman', 14),bg='#2f516f').place(relx=0.66,rely=0.45,relwidth=0.1)
-    tk.Label(hf2,text='TAX',font=('times new roman', 14),bg='#2f516f').place(relx=0.78,rely=0.45,relwidth=0.1)
+    tk.Label(hf2,text='HSN',font=('times new roman', 14),bg='#2f516f').place(relx=0.27,rely=0.45,relwidth=0.12)
+    tk.Label(hf2,text='DESCRIPTION',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.45)
+    tk.Label(hf2,text='QTY',font=('times new roman', 14),bg='#2f516f').place(relx=0.53,rely=0.45,relwidth=0.1)
+    tk.Label(hf2,text='RATE',font=('times new roman', 14),bg='#2f516f').place(relx=0.64,rely=0.45,relwidth=0.1)
+    tk.Label(hf2,text='TOTAL',font=('times new roman', 14),bg='#2f516f').place(relx=0.75,rely=0.45,relwidth=0.1)
+    tk.Label(hf2,text='TAX',font=('times new roman', 14),bg='#2f516f').place(relx=0.86,rely=0.45,relwidth=0.1)
     global subtot,amount,taxamt,taxamt2,taxamt3,taxamt4,tot,tot2,tot3,tot4
     estsubtot=0.0
     amount=0.0
@@ -129,37 +127,41 @@ def salescreditnote():
     tot4=0.0
    #row1
     pro=['Select Product']
+
     try:
-                cur.execute("SELECT name,description FROM inventory WHERE cid =%s",([cid]))
+                cur.execute("SELECT name FROM inventory WHERE cid =%s",([cid]))
                 vall=cur.fetchall() 
                 print(vall)      
                 for row in vall:
                         pro.append(row[0])
-                cur.execute("SELECT name,descr FROM noninventory WHERE cid =%s",([cid]))
+                cur.execute("SELECT name FROM noninventory WHERE cid =%s",([cid]))
                 valll=cur.fetchall()         
                 for row in valll:
                     pro.append(row[0])   
-                #cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
-                #vall1=cur.fetchall()         
-                #for row in vall1:
-                   # pro.append(row[0]) 
-                   # hs.append(row[1])   
-                    #ds.append(row[2])           
+
+                cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
+                vall1=cur.fetchall()         
+                for row in vall1:
+                   pro.append(row[0])      
     except:
                 pass
     tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.50)   
-    def creditnote1getitems(t):
+    def salesreceipts1getitems(t):
         prodd=prod.get()
-        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
         fet=cur.fetchone()
-        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
         fetch=cur.fetchone()
         if fet:
-            desc.insert(0,fet[0])
+            hsn.insert(0,fet[0])
+            desc.insert(0,fet[1])
         elif fetch:
-            desc.insert(0,fetch[0])     
-        def creditnotesupplierstate1():
+            hsn.insert(0,fetch[0])
+            desc.insert(0,fetch[1]) 
+
+        def salesreceiptssupplierstate1():
             prod11=prod.get()
+            cur.execute("SELECT ")
             x=prod11.split()
             a=x[0]
             b=x[1]
@@ -196,7 +198,7 @@ def salescreditnote():
                 'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
                 ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
                 try:
-                    bundledict['place']= creditnotesupplierstate1() 
+                    bundledict['place']= salesreceiptssupplierstate1() 
                 except:
                     pass 
                 list.append(bundledict)   
@@ -217,7 +219,7 @@ def salescreditnote():
                          'revcharge': inventoryobject[20],
                          'presupplier': inventoryobject[21]}
                 try:
-                    inventorydict['place'] = creditnotesupplierstate1()
+                    inventorydict['place'] = salesreceiptssupplierstate1()
                 except:
                     pass 
                 list.append(inventorydict)
@@ -231,7 +233,7 @@ def salescreditnote():
                           'salesprice': inventoryobject[10],'tax': inventoryobject[12],
                           'cost': inventoryobject[14],'purtax': inventoryobject[16],}
                 try:
-                    noninventorydict['place'] = creditnotesupplierstate1()
+                    noninventorydict['place'] = salesreceiptssupplierstate1()
                 except:
                     pass
                 list.append(noninventorydict)      
@@ -246,7 +248,7 @@ def salescreditnote():
                        'tax': serviceobject[11], 'abatement': serviceobject[12],
                        'sertype': serviceobject[14]}  
                 try:
-                    servicedict['place'] = creditnotesupplierstate1()
+                    servicedict['place'] = salesreceiptssupplierstate1()
                 except:
                      pass
                 list.append(servicedict)  
@@ -264,11 +266,13 @@ def salescreditnote():
 
 
     prod=ttk.Combobox(hf2,values=pro,font=(8))
-    prod.bind('<<ComboboxSelected>>',creditnote1getitems)
+    prod.bind('<<ComboboxSelected>>',salesreceipts1getitems)
     prod.place(relx=0.1,rely=0.50,relwidth=0.16,relheight=0.03)
+    hsn=tk.Entry(hf2,font=(8))
+    hsn.place(relx=0.27,rely=0.50,relwidth=0.12,relheight=0.03)
     desc=tk.Entry(hf2,font=(8))
-    desc.place(relx=0.28,rely=0.50,relwidth=0.11,relheight=0.03)
-    def salescreditnotetotal(t):      
+    desc.place(relx=0.41,rely=0.50,relwidth=0.11,relheight=0.03)
+    def salessalesreceiptstotal(t):      
         global subtot,tot,tot2,tot3
         def clear_text():
             total.delete(0, END) 
@@ -284,15 +288,15 @@ def salescreditnote():
         sub.insert(0,subtot) 
     quan1=IntVar()  
     qty=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan1,font=(8))
-    qty.bind('<FocusIn>',salescreditnotetotal)
-    qty.place(relx=0.41,rely=0.50,relwidth=0.1,relheight=0.03)
+    qty.bind('<FocusIn>',salessalesreceiptstotal)
+    qty.place(relx=0.53,rely=0.50,relwidth=0.1,relheight=0.03)
     rate11=IntVar()
     rate=tk.Spinbox(hf2,textvariable=rate11,from_=0,to=2147483647,font=(8))
-    rate.bind('<FocusIn>',salescreditnotetotal)
-    rate.place(relx=0.53,rely=0.50,relwidth=0.1,relheight=0.03)
+    rate.bind('<FocusIn>',salessalesreceiptstotal)
+    rate.place(relx=0.64,rely=0.50,relwidth=0.1,relheight=0.03)
     total=tk.Entry(hf2,font=(8))
-    total.place(relx=0.66,rely=0.50,relwidth=0.1,relheight=0.03)
-    def salescreditnotetax1(y):
+    total.place(relx=0.75,rely=0.50,relwidth=0.1,relheight=0.03)
+    def salessalesreceiptstax1(y):
         global taxamt,clear_totalamount,taxamt2,taxamt4,taxamt3,amount
         tx=0.0
         def clear_tax():
@@ -330,27 +334,29 @@ def salescreditnote():
         clear_tax()
         taxamount.insert(0,taxamt+taxamt2+taxamt3+taxamt4)
         clear_totalamount()
-        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4)
         totalamount.insert(0,amount)
     taxval=['28.0% GST(28%)','18.0% GST(18%)','12.0% GST(12%)','06.0% GST(06%)','05.0% GST(05%)','03.0% GST(03%)',
                                                     '0.25% GST(0.25%)','0.0% GST(0%)','Exempt GST(0%)','Out of Scope(0%)']                                           
     tax=ttk.Combobox(hf2,values=taxval)
-    tax.bind('<<ComboboxSelected>>',salescreditnotetax1)
-    tax.place(relx=0.78,rely=0.50,relwidth=0.1,relheight=0.03)
+    tax.bind('<<ComboboxSelected>>',salessalesreceiptstax1)
+    tax.place(relx=0.86,rely=0.50,relwidth=0.1,relheight=0.03)
 
     #row22
     tk.Label(hf2,text='2',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.55)   
-    def creditnote2getitems(t):
+    def salesreceipts2getitems(t):
         prodd=prod1.get()
-        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
         fet=cur.fetchone()
-        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
         fetch=cur.fetchone()
         if fet:
-            desc1.insert(0,fet[0])
+            hsn1.insert(0,fet[0])
+            desc1.insert(0,fet[1])
         elif fetch:
-            desc1.insert(0,fetch[0])     
-        def creditnotesupplierstate2():
+            hsn1.insert(0,fetch[0])
+            desc1.insert(0,fetch[1])     
+        def salesreceiptssupplierstate2():
             prod22=prod1.get()
             x=prod22.split()
             a=x[0]
@@ -388,7 +394,7 @@ def salescreditnote():
                 'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
                 ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
                 try:
-                    bundledict['place']= creditnotesupplierstate2() 
+                    bundledict['place']= salesreceiptssupplierstate2() 
                 except:
                     pass 
                 list.append(bundledict)   
@@ -409,7 +415,7 @@ def salescreditnote():
                          'revcharge': inventoryobject[20],
                          'presupplier': inventoryobject[21]}
                 try:
-                    inventorydict['place'] = creditnotesupplierstate2()
+                    inventorydict['place'] = salesreceiptssupplierstate2()
                 except:
                     pass 
                 list.append(inventorydict)
@@ -423,7 +429,7 @@ def salescreditnote():
                           'salesprice': inventoryobject[10],'tax': inventoryobject[12],
                           'cost': inventoryobject[14],'purtax': inventoryobject[16],}
                 try:
-                    noninventorydict['place'] = creditnotesupplierstate2()
+                    noninventorydict['place'] = salesreceiptssupplierstate2()
                 except:
                     pass
                 list.append(noninventorydict)      
@@ -438,7 +444,7 @@ def salescreditnote():
                        'tax': serviceobject[11], 'abatement': serviceobject[12],
                        'sertype': serviceobject[14]}  
                 try:
-                    servicedict['place'] = creditnotesupplierstate2()
+                    servicedict['place'] = salesreceiptssupplierstate2()
                 except:
                      pass
                 list.append(servicedict)  
@@ -454,11 +460,13 @@ def salescreditnote():
         except:
             pass   
     prod1=ttk.Combobox(hf2,values=pro,font=(8))
-    prod1.bind('<<ComboboxSelected>>',creditnote2getitems)
+    prod1.bind('<<ComboboxSelected>>',salesreceipts2getitems)
     prod1.place(relx=0.1,rely=0.55,relwidth=0.16,relheight=0.03)
+    hsn1=tk.Entry(hf2,font=(8))
+    hsn1.place(relx=0.27,rely=0.55,relwidth=0.12,relheight=0.03)
     desc1=tk.Entry(hf2,font=(8))
-    desc1.place(relx=0.28,rely=0.55,relwidth=0.11,relheight=0.03)
-    def salescreditnotetotal1(tt):
+    desc1.place(relx=0.41,rely=0.55,relwidth=0.11,relheight=0.03)
+    def salessalesreceiptstotal1(tt):
             global tot2,subtot,tot,tot4,tot3
             def clear_text1():
                 total2.delete(0, END) 
@@ -474,15 +482,15 @@ def salescreditnote():
             sub.insert(0,subtot) 
     quan2=IntVar()  
     qty1=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan2,font=(8))
-    qty1.bind('<FocusIn>',salescreditnotetotal1)
-    qty1.place(relx=0.41,rely=0.55,relwidth=0.1,relheight=0.03)
+    qty1.bind('<FocusIn>',salessalesreceiptstotal1)
+    qty1.place(relx=0.53,rely=0.55,relwidth=0.1,relheight=0.03)
     rate22=IntVar()
     rate1=tk.Spinbox(hf2,textvariable=rate22,from_=0,to=2147483647,font=(8))
-    rate1.bind('<FocusIn>',salescreditnotetotal1)
-    rate1.place(relx=0.53,rely=0.55,relwidth=0.1,relheight=0.03)
+    rate1.bind('<FocusIn>',salessalesreceiptstotal1)
+    rate1.place(relx=0.64,rely=0.55,relwidth=0.1,relheight=0.03)
     total2=tk.Entry(hf2,font=(8))
-    total2.place(relx=0.66,rely=0.55,relwidth=0.1,relheight=0.03)
-    def salescreditnotetax1(y):
+    total2.place(relx=0.75,rely=0.55,relwidth=0.1,relheight=0.03)
+    def salessalesreceiptstax1(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx1=0.0
         print(tot2)
@@ -520,24 +528,26 @@ def salescreditnote():
         taxamt2=taxtot1
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4)
         totalamount.insert(0,amount)
     tax1=ttk.Combobox(hf2,values=taxval)
-    tax1.bind('<<ComboboxSelected>>',salescreditnotetax1)
-    tax1.place(relx=0.78,rely=0.55,relwidth=0.1,relheight=0.03)
+    tax1.bind('<<ComboboxSelected>>',salessalesreceiptstax1)
+    tax1.place(relx=0.86,rely=0.55,relwidth=0.1,relheight=0.03)
     #third row
     tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.60)  
-    def creditnote3getitems(t):
+    def salesreceipts3getitems(t):
         prodd=prod2.get()
-        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
         fet=cur.fetchone()
-        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
         fetch=cur.fetchone()
         if fet:
-            desc2.insert(0,fet[0])
+            hsn2.insert(0,fet[0])
+            desc2.insert(0,fet[1])
         elif fetch:
-            desc2.insert(0,fetch[0]) 
-        def creditnotesupplierstate3():
+            hsn2.insert(0,fetch[0])
+            desc2.insert(0,fetch[1])     
+        def salesreceiptssupplierstate3():
             prod33=prod2.get()
             x=prod33.split()
             a=x[0]
@@ -575,7 +585,7 @@ def salescreditnote():
                 'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
                 ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
                 try:
-                    bundledict['place']= creditnotesupplierstate3() 
+                    bundledict['place']= salesreceiptssupplierstate3() 
                 except:
                     pass 
                 list.append(bundledict)   
@@ -596,7 +606,7 @@ def salescreditnote():
                          'revcharge': inventoryobject[20],
                          'presupplier': inventoryobject[21]}
                 try:
-                    inventorydict['place'] = creditnotesupplierstate3()
+                    inventorydict['place'] = salesreceiptssupplierstate3()
                 except:
                     pass 
                 list.append(inventorydict)
@@ -610,7 +620,7 @@ def salescreditnote():
                           'salesprice': inventoryobject[10],'tax': inventoryobject[12],
                           'cost': inventoryobject[14],'purtax': inventoryobject[16],}
                 try:
-                    noninventorydict['place'] = creditnotesupplierstate3()
+                    noninventorydict['place'] = salesreceiptssupplierstate3()
                 except:
                     pass
                 list.append(noninventorydict)      
@@ -625,7 +635,7 @@ def salescreditnote():
                        'tax': serviceobject[11], 'abatement': serviceobject[12],
                        'sertype': serviceobject[14]}  
                 try:
-                    servicedict['place'] = creditnotesupplierstate3()
+                    servicedict['place'] = salesreceiptssupplierstate3()
                 except:
                      pass
                 list.append(servicedict)  
@@ -641,11 +651,13 @@ def salescreditnote():
         except:
             pass    
     prod2=ttk.Combobox(hf2,values=pro,font=(8))
-    prod2.bind('<<ComboboxSelected>>',creditnote3getitems)
+    prod2.bind('<<ComboboxSelected>>',salesreceipts3getitems)
     prod2.place(relx=0.1,rely=0.60,relwidth=0.16,relheight=0.03)
+    hsn2=tk.Entry(hf2,font=(8))
+    hsn2.place(relx=0.27,rely=0.60,relwidth=0.12,relheight=0.03)
     desc2=tk.Entry(hf2,font=(8))
-    desc2.place(relx=0.28,rely=0.60,relwidth=0.11,relheight=0.03)
-    def salescreditnotetotal2(tt):
+    desc2.place(relx=0.41,rely=0.60,relwidth=0.11,relheight=0.03)
+    def salessalesreceiptstotal2(tt):
             global tot3,subtot,tot,tot2,tot4
             def clear_text3():
                 total3.delete(0, END)
@@ -661,15 +673,15 @@ def salescreditnote():
             sub.insert(0,subtot) 
     quan3=IntVar()  
     qty2=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan3,font=(8))
-    qty2.bind('<FocusIn>',salescreditnotetotal2)
-    qty2.place(relx=0.41,rely=0.60,relwidth=0.1,relheight=0.03)
+    qty2.bind('<FocusIn>',salessalesreceiptstotal2)
+    qty2.place(relx=0.53,rely=0.60,relwidth=0.1,relheight=0.03)
     rate33=IntVar()
     rate2=tk.Spinbox(hf2,textvariable=rate33,from_=0,to=2147483647,font=(8))
-    rate2.bind('<FocusIn>',salescreditnotetotal2)
-    rate2.place(relx=0.53,rely=0.60,relwidth=0.1,relheight=0.03)
+    rate2.bind('<FocusIn>',salessalesreceiptstotal2)
+    rate2.place(relx=0.64,rely=0.60,relwidth=0.1,relheight=0.03)
     total3=tk.Entry(hf2,font=(8))
-    total3.place(relx=0.66,rely=0.60,relwidth=0.1,relheight=0.03)
-    def salescreditnotetax2(y):
+    total3.place(relx=0.75,rely=0.60,relwidth=0.1,relheight=0.03)
+    def salessalesreceiptstax2(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx2=0.0
         def clear_tax():
@@ -706,24 +718,27 @@ def salescreditnote():
         taxamt3=taxtot2
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4)
         totalamount.insert(0,amount)
     tax2=ttk.Combobox(hf2,values=taxval)
-    tax2.bind('<<ComboboxSelected>>',salescreditnotetax2)
-    tax2.place(relx=0.78,rely=0.60,relwidth=0.1,relheight=0.03)
+    tax2.bind('<<ComboboxSelected>>',salessalesreceiptstax2)
+    tax2.place(relx=0.86,rely=0.60,relwidth=0.1,relheight=0.03)
     #forth row
     tk.Label(hf2,text='4',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.65)   
-    def creditnote4getitems(t):
+    def salesreceipts4getitems(t):
         prodd=prod3.get()
-        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
-        fet=cur.fetchone()
-        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        cur.execute("SELECT hsn,descr FROM noninventory WHERE name =%s",([prodd]))
         fetch=cur.fetchone()
+
+        cur.execute("SELECT hsn,description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
         if fet:
-            desc3.insert(0,fet[0])
+            hsn3.insert(0,fet[0])
+            desc3.insert(0,fet[1])
         elif fetch:
-            desc3.insert(0,fetch[0]) 
-        def creditnotesupplierstate4():
+            hsn3.insert(0,fetch[0])
+            desc3.insert(0,fetch[1])     
+        def salesreceiptssupplierstate4():
             prod44=prod3.get()
             x=prod44.split()
             a=x[0]
@@ -761,7 +776,7 @@ def salescreditnote():
                 'price1':bundleobject[22],'price2':bundleobject[23],'price3':bundleobject[24],'price4':bundleobject[25],'total1':bundleobject[26],'total2':bundleobject[27]
                 ,'total3':bundleobject[28],'total4':bundleobject[29],'tax1':bundleobject[30],'tax2':bundleobject[31],'tax3':bundleobject[32],'tax4':bundleobject[33]}
                 try:
-                    bundledict['place']= creditnotesupplierstate4() 
+                    bundledict['place']= salesreceiptssupplierstate4() 
                 except:
                     pass 
                 list.append(bundledict)   
@@ -782,7 +797,7 @@ def salescreditnote():
                          'revcharge': inventoryobject[20],
                          'presupplier': inventoryobject[21]}
                 try:
-                    inventorydict['place'] = creditnotesupplierstate4()
+                    inventorydict['place'] = salesreceiptssupplierstate4()
                 except:
                     pass 
                 list.append(inventorydict)
@@ -796,7 +811,7 @@ def salescreditnote():
                           'salesprice': inventoryobject[10],'tax': inventoryobject[12],
                           'cost': inventoryobject[14],'purtax': inventoryobject[16],}
                 try:
-                    noninventorydict['place'] = creditnotesupplierstate4()
+                    noninventorydict['place'] = salesreceiptssupplierstate4()
                 except:
                     pass
                 list.append(noninventorydict)      
@@ -811,7 +826,7 @@ def salescreditnote():
                        'tax': serviceobject[11], 'abatement': serviceobject[12],
                        'sertype': serviceobject[14]}  
                 try:
-                    servicedict['place'] = creditnotesupplierstate4()
+                    servicedict['place'] = salesreceiptssupplierstate4()
                 except:
                      pass
                 list.append(servicedict)  
@@ -827,11 +842,13 @@ def salescreditnote():
         except:
             pass   
     prod3=ttk.Combobox(hf2,values=pro,font=(8))
-    prod3.bind('<<ComboboxSelected>>',creditnote4getitems)
+    prod3.bind('<<ComboboxSelected>>',salesreceipts4getitems)
     prod3.place(relx=0.1,rely=0.65,relwidth=0.16,relheight=0.03)
+    hsn3=tk.Entry(hf2,font=(8))
+    hsn3.place(relx=0.27,rely=0.65,relwidth=0.12,relheight=0.03)
     desc3=tk.Entry(hf2,font=(8))
-    desc3.place(relx=0.28,rely=0.65,relwidth=0.11,relheight=0.03)
-    def salescreditnotetotal3(tt):
+    desc3.place(relx=0.41,rely=0.65,relwidth=0.11,relheight=0.03)
+    def salessalesreceiptstotal3(tt):
             global tot4,subtot,tot,tot2,tot3
             def clear_text4():
                 total4.delete(0, END)
@@ -847,15 +864,15 @@ def salescreditnote():
             sub.insert(0,subtot) 
     quan4=IntVar()  
     qty3=tk.Spinbox(hf2,from_=0,to=2147483647,textvariable=quan4,font=(8))
-    qty3.bind('<FocusIn>',salescreditnotetotal3)
-    qty3.place(relx=0.41,rely=0.65,relwidth=0.1,relheight=0.03)
+    qty3.bind('<FocusIn>',salessalesreceiptstotal3)
+    qty3.place(relx=0.53,rely=0.65,relwidth=0.1,relheight=0.03)
     rate55=IntVar()
     rate3=tk.Spinbox(hf2,textvariable=rate55,from_=0,to=2147483647,font=(8))
-    rate3.bind('<FocusIn>',salescreditnotetotal3)
-    rate3.place(relx=0.53,rely=0.65,relwidth=0.1,relheight=0.03)
+    rate3.bind('<FocusIn>',salessalesreceiptstotal3)
+    rate3.place(relx=0.64,rely=0.65,relwidth=0.1,relheight=0.03)
     total4=tk.Entry(hf2,font=(8))
-    total4.place(relx=0.66,rely=0.65,relwidth=0.1,relheight=0.03)
-    def salescreditnotetax3(y):
+    total4.place(relx=0.75,rely=0.65,relwidth=0.1,relheight=0.03)
+    def salessalesreceiptstax3(y):
         global taxamt,taxamt2,taxamt3,taxamt4,amount
         tx3=0.0
         def clear_tax():
@@ -891,11 +908,11 @@ def salescreditnote():
         taxamt4=taxtot3
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4)
         totalamount.insert(0,amount)
     tax3=ttk.Combobox(hf2,values=taxval)
-    tax3.bind('<<ComboboxSelected>>',salescreditnotetax3)
-    tax3.place(relx=0.78,rely=0.65,relwidth=0.1,relheight=0.03)
+    tax3.bind('<<ComboboxSelected>>',salessalesreceiptstax3)
+    tax3.place(relx=0.86,rely=0.65,relwidth=0.1,relheight=0.03)
 
     #total
     tk.Label(hf2,text='Sub Total',font=('times new roman', 16),bg='#2f516f').place(relx=0.7,rely=0.72,relwidth=0.1,relheight=0.04)
@@ -907,13 +924,14 @@ def salescreditnote():
     tk.Label(hf2,text='Grand Total',font=('times new roman', 16),bg='#2f516f').place(relx=0.7,rely=0.82,relwidth=0.1,relheight=0.04)
     totalamount=tk.Entry(hf2,font=('times new roman', 16))
     totalamount.place(relx=0.82,rely=0.82,relheight=0.04,relwidth=0.12)
-    def creditnotesavevalues():
+    def salesreceiptssavevalues():
         sestcus=estcus.get()
         sestemail=email.get()
         sestbill=bill.get(1.0,END)
         sestdate=estdate.get()
-        ccredperiod=credperiod.get()
-        ccredno=credno.get()
+        payymet=paymet.get()
+        reffno=refno.get()
+        saaledep=saledep.get()
         sestplace=estplace.get()
         prodorser=prod.get()
         descr=desc.get()
@@ -940,15 +958,19 @@ def salescreditnote():
         raty4=rate55.get()
         totaly4=total4.get()
         tax44=tax3.get()
-        creditnote='''INSERT INTO credit (cid,creditno,invperiod,customer,mail,creditdate,biladdr,place,product,descrip,qty,price,tax,total,product1,
-        descrip1,qty1,price1,total1,tax1,product2,descrip2,qty2,price2,total2,tax2,product3,descrip3,qty3,price3,total3,tax3,
-        taxamnt,subtot,grndtot) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(creditnote,[(cid),(ccredno),(ccredperiod),(sestcus),(sestemail),(sestdate),(sestbill),(sestplace),(prodorser),(descr),(qtyy),(raty1),(tax11),(totaly),(prodoser1),
+        hsnn=hsn.get()
+        hsnn2=hsn1.get()
+        hsnn3=hsn2.get()
+        hsnn4=hsn3.get()
+        salesreceipts='''INSERT INTO salesrecpts (cid,salename,saleemail,saleaddress,saledate,salerefno,salesplace,salepro,saledescription,saleqty,saleprice,tax,saaletotal,category2,
+        descrptin2,catqty2,catprice2,cattotal2,tax1,category3,descrptin3,catqty3,catprice3,cattotal3,tax2,category4,descrptin4,catqty4,catprice4,cattotal4,tax3,
+        saletaxamount,salesubtotal,salegrandtotal,salehsn,categoryhsn2,categoryhsn3,categoryhsn4,salepay,saledeposit) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(salesreceipts,[(cid),(sestcus),(sestemail),(sestbill),(sestdate),(reffno),(sestplace),(prodorser),(descr),(qtyy),(raty1),(tax11),(totaly),(prodoser1),
         (descr1),(qtyy2),(raty2),(totaly2),(tax22),(prodorser2),(descp2),(qtyy3),(raty3),(totaly3),(tax33),(prodorser3),(descp3),(qtyy4),(raty4),(totaly4),(tax44),
-        (taxamount),(subtot),(amount)])
+        (taxamount),(subtot),(amount),(hsnn),(hsnn2),(hsnn3),(hsnn4),(payymet),(saaledep)])
         mydata.commit()
         estwin.destroy()
-    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=creditnotesavevalues).place(relx=0.8,rely=0.9,relwidth=0.1,relheight=0.04)
+    tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=salesreceiptssavevalues).place(relx=0.8,rely=0.9,relwidth=0.1,relheight=0.04)
     hf2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)
     estwin.mainloop()   
-salescreditnote()  
+salessalereceipts()

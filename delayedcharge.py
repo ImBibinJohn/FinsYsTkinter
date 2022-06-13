@@ -44,8 +44,7 @@ def delayedcharge():
             pass              
     tm=['Select Customer']
     delaycusinput()     
-    timecus=ttk.Combobox(hf2,values=tm)
-    timecus.current(0)  
+    timecus=ttk.Combobox(hf2,values=tm,font=(6))
     timecus.place(relx=0.05,rely=0.15,relwidth=0.2,relheight=0.03)
     tk.Button(hf2,text='+',font=(14)).place(relx=0.26,rely=0.15,relwidth=0.025,relheight=0.03)
 
@@ -53,6 +52,15 @@ def delayedcharge():
     deldate=StringVar()
     DateEntry(hf2,textvariable=deldate,date_pattern='y-mm-dd').place(relx=0.05,rely=0.25,relwidth=0.2,relheight=0.03) 
     def product1getitems(t):
+        prodd=prod.get()
+        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            desc.insert(0,fet[0])
+        elif fetch:
+            desc.insert(0,fetch[0])  
         def delayedsupplierstate1():
             prod1=prod.get()
             x=prod1.split()
@@ -164,26 +172,29 @@ def delayedcharge():
     tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.35)
     pro=['Select Product']
     try:
-                cur.execute("SELECT name FROM inventory WHERE cid =%s",([cid]))
-                vall=cur.fetchall()         
+                cur.execute("SELECT name,description FROM inventory WHERE cid =%s",([cid]))
+                vall=cur.fetchall() 
+                print(vall)      
                 for row in vall:
-                        pro.append(row[0])     
-                cur.execute("SELECT name FROM noninventory WHERE cid =%s",([cid]))
+                        pro.append(row[0])
+                cur.execute("SELECT name,descr FROM noninventory WHERE cid =%s",([cid]))
                 valll=cur.fetchall()         
                 for row in valll:
-                    pro.append(row[0])   
-                cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
-                vall1=cur.fetchall()         
-                for row in vall1:
-                    pro.append(row[0])         
+                    pro.append(row[0])    
+                #cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
+                #vall1=cur.fetchall()         
+                #for row in vall1:
+                   # pro.append(row[0]) 
+                   # hs.append(row[1])   
+                    #ds.append(row[2])           
     except:
                 pass
             
-    prod=ttk.Combobox(hf2,values=pro)
+    prod=ttk.Combobox(hf2,values=pro,font=(8))
     prod.bind('<<ComboboxSelected>>',product1getitems)
     prod.place(relx=0.1,rely=0.35,relwidth=0.16,relheight=0.04)
     tk.Label(hf2,text='DESCRIPTION',font=('times new roman', 14),bg='#2f516f').place(relx=0.28,rely=0.3)
-    desc=tk.Entry(hf2)
+    desc=tk.Entry(hf2,font=(8))
     desc.place(relx=0.28,rely=0.35,relwidth=0.11,relheight=0.04)
         
 
@@ -256,7 +267,7 @@ def delayedcharge():
         clear_tax()
         taxamount.insert(0,taxamt+taxamt2+taxamt3+taxamt4)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
 
     tk.Label(hf2,text='TAX',font=('times new roman', 14),bg='#2f516f').place(relx=0.78,rely=0.3,relwidth=0.1)
@@ -268,6 +279,15 @@ def delayedcharge():
         #second row    
     tk.Label(hf2,text='2',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.42)
     def product2getitems(t):
+        prodd=prod1.get()
+        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            desc1.insert(0,fet[0])
+        elif fetch:
+            desc1.insert(0,fetch[0])  
         def delayedsupplierstate2():
             prodd2=prod1.get()
             x=prodd2.split()
@@ -371,29 +391,18 @@ def delayedcharge():
                 list.append(notany)               
         except:
             pass            
-
-
-    tk.Label(hf2,text='#',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.3)
-    tk.Label(hf2,text='PRODUCT/SERVICES',font=('times new roman', 14),bg='#2f516f').place(relx=0.1,rely=0.3)
-            #first row
+            #third row
     tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.35)
-    pro=['Select Product']
-    try:
-                cur.execute("SELECT name FROM inventory WHERE cid =%s",([cid]))
-                vall=cur.fetchall()         
-                for row in vall:
-                        pro.append(row[0])     
-                cur.execute("SELECT name FROM noninventory WHERE cid =%s",([cid]))
-                valll=cur.fetchall()         
-                for row in valll:
-                    pro.append(row[0])   
-                cur.execute("SELECT name FROM bundle WHERE cid =%s",([cid]))
-                vall1=cur.fetchall()         
-                for row in vall1:
-                    pro.append(row[0])         
-    except:
-                pass
     def product3getitems(t):
+        prodd=prod3.get()
+        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            desc3.insert(0,fet[0])
+        elif fetch:
+            desc3.insert(0,fetch[0])  
         def delayedsupplierstate3():
             prodd3=prod3.get()
             x=prodd3.split()
@@ -497,10 +506,10 @@ def delayedcharge():
                 list.append(notany)               
         except:
             pass                    
-    prod1=ttk.Combobox(hf2,values=pro)
-    prod1.bind('<<ComboboxSelected>>',product3getitems)
+    prod1=ttk.Combobox(hf2,values=pro,font=(8))
+    prod1.bind('<<ComboboxSelected>>',product2getitems)
     prod1.place(relx=0.1,rely=0.42,relwidth=0.16,relheight=0.04)
-    desc1=tk.Entry(hf2)
+    desc1=tk.Entry(hf2,font=(8))
     desc1.place(relx=0.28,rely=0.42,relwidth=0.11,relheight=0.04)
     def total1values(tt):
             global tot2,subtot
@@ -564,17 +573,17 @@ def delayedcharge():
         taxamt2=taxtot1
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     tax1=ttk.Combobox(hf2,values=taxval)
     tax1.bind('<<ComboboxSelected>>',taxxvalue1)
     tax1.place(relx=0.78,rely=0.42,relwidth=0.1,relheight=0.04)
         #third row 
     tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.49)     
-    prod3=ttk.Combobox(hf2,values=pro)
+    prod3=ttk.Combobox(hf2,values=pro,font=(8))
     prod3.bind('<<ComboboxSelected>>',product3getitems)
     prod3.place(relx=0.1,rely=0.49,relwidth=0.16,relheight=0.04)
-    desc3=tk.Entry(hf2)
+    desc3=tk.Entry(hf2,font=(8))
     desc3.place(relx=0.28,rely=0.49,relwidth=0.11,relheight=0.04)
     def total3values(tt):
             global tot3,subtot
@@ -639,14 +648,23 @@ def delayedcharge():
         taxamt3=taxtot2
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     tax3=ttk.Combobox(hf2,values=taxval)
     tax3.bind('<<ComboboxSelected>>',taxxvalue2)
     tax3.place(relx=0.78,rely=0.49,relwidth=0.1,relheight=0.04)
         #fourth row
-    tk.Label(hf2,text='3',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.56)
+    tk.Label(hf2,text='4',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.56)
     def product4getitems(t):
+        prodd=prod4.get()
+        cur.execute("SELECT description FROM inventory WHERE name =%s",([prodd]))
+        fet=cur.fetchone()
+        cur.execute("SELECT descr FROM noninventory WHERE name =%s",([prodd]))
+        fetch=cur.fetchone()
+        if fet:
+            desc4.insert(0,fet[0])
+        elif fetch:
+            desc4.insert(0,fetch[0])  
         def delayedsupplierstate4():
             prodd4=prod4.get()
             x=prodd4.split()
@@ -750,10 +768,10 @@ def delayedcharge():
                 list.append(notany)               
         except:
             pass       
-    prod4=ttk.Combobox(hf2,values=pro)
+    prod4=ttk.Combobox(hf2,values=pro,font=(8))
     prod4.bind('<<ComboboxSelected>>',product4getitems)
     prod4.place(relx=0.1,rely=0.56,relwidth=0.16,relheight=0.04)
-    desc4=tk.Entry(hf2)
+    desc4=tk.Entry(hf2,font=(8))
     desc4.place(relx=0.28,rely=0.56,relwidth=0.11,relheight=0.04)
     def total4values(tt):
             global tot4,subtot
@@ -817,7 +835,7 @@ def delayedcharge():
         taxamt4=taxtot3
         taxamount.insert(0,taxamt4+taxamt3+taxamt2+taxamt)
         clear_totalamount()
-        amount=subtot-taxamt-taxamt2-taxamt3-taxamt4
+        amount=round(subtot+taxamt+taxamt2+taxamt3+taxamt4,2)
         totalamount.insert(0,amount)
     
     tax4=ttk.Combobox(hf2,values=taxval)

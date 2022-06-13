@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import mysql.connector
 from tkcalendar import DateEntry
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cursor=mydata.cursor()
 #cc
 def accpayables():
@@ -83,6 +83,7 @@ def accpayables():
             global fromdate,todate
             fromdate=dte.get()
             todate=dtee.get()
+            print(fromdate,todate)
             clearttree()
             payablecustomvalues()   
         elif period=='This month':
@@ -103,6 +104,7 @@ def accpayables():
     cursor.execute("SELECT image,cname FROM company WHERE cname =%s and id =%s",([cc,cid]))
     image=cursor.fetchone()
     img=image[0]
+    
     cv=Image.open(img).resize(size)
     ax=ImageTk.PhotoImage(cv,master=prlframe)
     ay=tk.Label(imageframe,image=ax,bg='#243e54')
