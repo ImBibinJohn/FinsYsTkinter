@@ -38,7 +38,7 @@ class base:
         
         
         size=(60,60)
-        self.img1 = ImageTk.PhotoImage(Image.open("default.png").resize(size))
+        self.img1 = ImageTk.PhotoImage(Image.open("default11.png").resize(size))
         self.img2 = ImageTk.PhotoImage(Image.open("not.png").resize(size))
         self.img3 = ImageTk.PhotoImage(Image.open("cogwheel.png").resize(size))
 
@@ -231,7 +231,7 @@ class base:
         btn2.place(x=10,y=120)
         
         size=(60,60)
-        self.img1 = ImageTk.PhotoImage(Image.open("default.png").resize(size))
+        self.img1 = ImageTk.PhotoImage(Image.open("default11.png").resize(size))
         self.img2 = ImageTk.PhotoImage(Image.open("not.png").resize(size))
         self.img3 = ImageTk.PhotoImage(Image.open("cogwheel.png").resize(size))
 
