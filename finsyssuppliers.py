@@ -8,7 +8,7 @@ import datetime as dt
 import re
 #database connection
 import mysql.connector
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
 def sherryplus():
     def valueget():

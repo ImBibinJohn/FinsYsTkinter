@@ -11,7 +11,7 @@ from matplotlib.pyplot import xcorr, yscale
 import mysql.connector
 
 import base64
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinterr')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cursor=mydata.cursor()
 #cc
 def profitloss():

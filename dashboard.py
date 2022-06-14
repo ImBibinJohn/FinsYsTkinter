@@ -5,7 +5,7 @@ import matplotlib.figure
 import matplotlib.patches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import mysql.connector
-mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter')
+mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cursor=mydata.cursor()
 #cc
 def dashboard():
@@ -67,7 +67,7 @@ def dashboard():
     dataz=cursor.fetchall() 
     for i in dataz:
       if (i[0]==cid and i[2]!=0):
-        up+=i[2]
+        up+=float(i[2])
       if (i[0]==cid and i[2]!=0):
         label3.append(i[3])
         data3.append(i[1])
