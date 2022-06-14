@@ -30,9 +30,9 @@ class base:
         Frame_login.place(x=0,y=0,height=700,width=1365)
         
         lab = Label(Frame_login,bg="#213b52")
-        lab.place(x=0,y=0,width=1365,height=160)
+        lab.place(x=0,y=0,width=1365,height=170)
         
-        btn2=Button(lab,command=self.Register,text=" >>> ",cursor="hand2",font=("times new roman",15,'bold'),fg="white",bg="orangered",bd=0,width=13,height=1)
+        btn2=Button(lab,command=self.Regbase,text=" >>> ",cursor="hand2",font=("haveltica",15,'bold'),fg="white",bg="#213b52",bd=1,width=10,height=1)
         btn2.place(x=1210,y=120)
         
         # Load the image
@@ -106,8 +106,14 @@ class base:
         variable.set('Settings')
 
         opt = tk.OptionMenu(lab, variable, *OptionList)
-        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
-        opt.place(x=750,y=20)
+        opt.config(width=2, bg="#213b52",bd=0,font=('Helvetica', 12, 'bold'))
+        opt.place(x=750,y=20,height=50)
+        
+        
+        size=(40,40)
+        self.av=ImageTk.PhotoImage(Image.open("cogwheel.png").resize(size))
+        tk.Label(lab,image=self.av,bg='#213e57').place(x=756,y=22)
+        
         
         OptionList = [
         "Accounts and Settings",
@@ -138,8 +144,13 @@ class base:
         variable.set('F')
 
         opt = tk.OptionMenu(lab, variable, *OptionList)
-        opt.config(width=8, bg="#213b52",fg="#fff",font=('Helvetica', 15, 'bold'))
-        opt.place(x=1200,y=20)
+        opt.config(width=2, bg="#213b52",fg="#fff",font=('Helvetica', 15, 'bold'))
+        opt.place(x=1245,y=20,height=65)
+        
+        size=(50,50)
+        self.ap=ImageTk.PhotoImage(Image.open("default.png").resize(size))
+        tk.Label(lab,image=self.ap,bg='#213e57').place(x=1250,y=21)
+        
         
         btn = Button(lab,text='Dashboard',bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'),width=13,height=1)
         btn.place(x=10,y=120)
@@ -234,20 +245,18 @@ class base:
         
         
         
-    def Register(self):
+    def Regbase(self):
         
-        # Frame_login1=Frame(self.root,bg="white")
-        # Frame_login1.place(x=0,y=0,height=700,width=1365)
         
         frame_input3=Frame(self.root,bg="#2f516f")
         frame_input3.place(x=0,y=0,height=700,width=1365)
         
         lab = Label(frame_input3,bg="#213b52")
-        lab.place(x=0,y=0,width=1365,height=160)
+        lab.place(x=0,y=0,width=1365,height=170)
         
         
         
-        btn2=Button(lab,command=self.main,text="<<",cursor="hand2",font=("Helvetica",15,'bold'),fg="white",bg="orangered",bd=0,width=5,height=1)
+        btn2=Button(lab,command=self.main,text="<<",cursor="hand2",font=("Helvetica",15,'bold'),fg="white",bg="#213b52",bd=1,width=5,height=1)
         btn2.place(x=10,y=120)
         
         size=(50,50)
@@ -389,37 +398,6 @@ class base:
         opt.place(x=1170,y=120)
         
 
-        
-    # def register(self):
-    #     if self.entry.get()=="" or self.entry2.get()=="" or self.entry3.get()=="" or self.entry4.get()=="":
-    #         messagebox.showerror("Error","All Fields Are Required",parent=self.root)
-    #     elif self.entry2.get()!=self.entry4.get():
-    #         messagebox.showerror("Error","password and Confirm Password Should Be Same",parent=self.root)
-    #     else:
-    #         try:
-    #             con=pymysql.connect(host="localhost",user="root",password="",database="finsys_tkinter")
-    #             cur=con.cursor()
-    #             cur.execute("select * from register where emailid=%s",self.entry3.get()) 
-    #             row=cur.fetchone()
-    #             if row!=None:
-    #                 messagebox.showerror("Error","User already Exist,Please try with another Email",parent=self.root)
-    #             else:
-    #                 cur.execute("insert into register values(%s,%s,%s,%s"),(self.entry.get(),self.entry3.get(),self.entry2.get(),self.entry4.get())
-    #                 con.commit()
-    #                 con.close()
-    #                 messagebox.showinfo("Success", "Register Successfull",parent=self.root)
-    #         except Exception as es:
-    #             messagebox.showerror("Error",f"Error due to :{str(es)}",parent=self.root)
-                
-    # def appscreen(self):
-        
-    #     Frame_login=Frame(self.root,bg="white")
-    #     Frame_login.place(x=0,y=0,height=700,width=1000)
-    #     label1=Label(Frame_login,text="Hi! Welcome To Seek coding", font=("times new roman",32,'bold'),fg="black",bg="white")
-    #     label1.place(x=375,y=100)
-        
-    #     btn2=Button(Frame_login,command=self.loginform,text="Logout",cursor="hand2",font=("times new roman",15),fg="white",bg="orangered",bd=0,width=15,height=1)
-    #     btn2.place(x=700,y=20)                                 
         
         
 
