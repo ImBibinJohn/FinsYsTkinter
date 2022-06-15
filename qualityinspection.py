@@ -58,11 +58,12 @@ def main():
             department = deptl_input.get()
             qualified_products = qualifiedl_input.get()
             nonqualified_products = nonqualifiedl_input.get()
+  
                 
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="fynsystkinter", port='3307')
             cur = con.cursor()
             d='''INSERT INTO qualityinspection(qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(d,[(qdate),(sku),(p_name),(inspected_no),(noninspected_no),(inspected_by),(department),(qualified_products), (nonqualified_products)])
+            cur.execute(d,[(qdate),(sku),(p_name),(inspected_no),(noninspected_no),(inspected_by),(department),(qualified_products),(nonqualified_products)])
                 
             con.commit()
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
