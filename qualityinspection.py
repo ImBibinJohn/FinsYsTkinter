@@ -59,11 +59,10 @@ def main():
             qualified_products = qualifiedl_input.get()
             nonqualified_products = nonqualifiedl_input.get()
   
-                
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="fynsystkinter", port='3307')
             cur = con.cursor()
             d='''INSERT INTO qualityinspection(qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(d,[(qdate),(sku),(p_name),(inspected_no),(noninspected_no),(inspected_by),(department),(qualified_products),(nonqualified_products)])
+            cur.execute(d,([qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products,nonqualified_products]))
                 
             con.commit()
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
@@ -167,12 +166,9 @@ def main():
         submit.place(x=580, y=400, width=100)
 
         D.mainloop()
-
-    
-                
+         
     tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 16, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
     form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
-
 
     # table view
 
@@ -226,7 +222,7 @@ def main():
            
             print(qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products)
 
-            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%s""", (qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b))
+            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%d""", (qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b))
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()

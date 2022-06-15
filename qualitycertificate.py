@@ -59,7 +59,6 @@ def main():
             qc_pname = proname_input.get()
             qc_customername = cusname_input.get()
             qc_inspdate  = insdate_input.get()
-                
                     
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="fynsystkinter", port='3307')
             cur = con.cursor()
@@ -83,10 +82,9 @@ def main():
         headingfont = font.Font(family='Times New Roman', size=25,)
         credit_heading = Label(heading_frame, text="Create Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
         credit_heading.pack(padx=0, pady=0)
-
             # form fields
         sub_headingfont = font.Font(family='Times New Roman', size=20,)
-        form_frame = Frame(mycanvas, width=1600, height=500, bg='#243e55')
+        form_frame = Frame(mycanvas, width=1600, height=300, bg='#243e55')
         mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
 
         datel = Label(form_frame, text="Date", bg='#243e55', fg='#fff')
@@ -94,7 +92,6 @@ def main():
         datel_input = StringVar()
         datel_input = DateEntry(form_frame, width=25, bg="#2f516f",date_pattern='yyyy-mm-dd', textvariable=datel_input)
         datel_input.place(x=30, y=50, height=40)
-        
         
         skul = tk.Label(form_frame, text="SKU Number", bg='#243e55', fg='#fff')
         skul.place(x=300, y=30, height=15, width=80)
@@ -108,15 +105,13 @@ def main():
         proname_input = StringVar()
         proname_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
         proname_input.place(x=600, y=50, height=40)
-        
-        
+         
         cusname = tk.Label(form_frame, text="Customer Name", bg='#243e55', fg='#fff')
         cusname.place(x=30, y=100, height=15, width=120)
         cusname_input = StringVar()
         cusname_input = Entry(form_frame, width=55, bg='#2f516f', fg='#fff')
         cusname_input.place(x=30, y=130, height=40)
         wrappen.pack(fill='both', expand='yes',)
-
 
         insdate = tk.Label(form_frame, text="Inspected Date", bg='#243e55', fg='#fff')
         insdate_input = StringVar()
@@ -126,7 +121,7 @@ def main():
         wrappen.pack(fill='both', expand='yes',)
 
         submit = tk.Button(form_frame, text="Save", command=addit)
-        submit.place(x=580, y=400, width=100)
+        submit.place(x=580, y=200, width=100)
 
         D.mainloop()
 
@@ -142,7 +137,6 @@ def main():
         treevv.heading(5, text='NAME')
         treevv.heading(6, text='INSPECTION DATE')
        
-
         treevv.column(1, minwidth=10, width=40, anchor=CENTER)  # coloumns
         treevv.column(2, minwidth=30, width=140, anchor=CENTER)
         treevv.column(3, minwidth=30, width=140, anchor=CENTER)
@@ -184,7 +178,7 @@ def main():
 
             b = treevv.item(treevv.focus())["values"][0]
             print(b)
-            sql='SELECT * FROM qualityinspection WHERE cid=%s'
+            sql='SELECT * FROM qualitycertificate WHERE cid=%s'
             val=(b,)
             cur.execute(sql,val)
             s = cur.fetchone()
@@ -218,8 +212,7 @@ def main():
             except:
                 pass
         
-        
-            skul = tk.Label(form_frame, text="SKU Number", bg='#243e55', fg='#fff')
+            skul = Label(form_frame, text="SKU Number", bg='#243e55', fg='#fff')
             skul.place(x=300, y=30, height=15, width=80)
             skul_input = StringVar()
             skul_input = Entry(form_frame, width=25, bg='#2f516f', fg='#fff')
@@ -291,11 +284,21 @@ def main():
             treevv.delete(selected_item)
             
         def view():
+            
+            b = treevv.item(treevv.focus())["values"][0]
+            print(b)
+            sql='SELECT * FROM qualitycertificate WHERE cid=%s'
+            val=(b,)
+            cur.execute(sql,val)
+            s = cur.fetchone()
+            D = tk.Toplevel(A)
+            print(s)
+            
             D = tk.Toplevel(A)
             mycanvas.configure(yscrollcommand=yscrollbar.set)
             mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
-            full_frame = Frame(mycanvas, width=2000, height=730, bg='#2f516a')
+            full_frame = Frame(mycanvas, width=1600, height=730, bg='#2f516a')
             mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
             heading_frame = Frame(mycanvas)
@@ -304,121 +307,83 @@ def main():
             credit_heading = Label(heading_frame, text="Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
             credit_heading.pack(padx=0, pady=0)
                 # form fields
-            form_frame = Frame(mycanvas, width=1600, height=1000, bg='#243e55')
+            form_frame = Frame(mycanvas, width=1600, height=800, bg='#e5e9ec')
             mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
-            
-            form2_frame = Frame(mycanvas, width=1400, height=800, bg='#e5e9ec')
-            mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
-            
-                                    
-            tk.Button(form_frame,text = "ADD",fg="#000",font=('times new roman', 16, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
+                                  
+            tk.Button(form_frame,text = "DOWNLOAD",fg="#000",font=('times new roman', 16, 'bold'),command=download).place(relx=0.8,rely=0.5,relwidth=0.15)
             form_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
             
-            gf = GradientFrame(form_frame, colors = ("yellow", "black"), width = 800, height = 600)
-            gf.config(direction = gf.top2bottom)
-            gf.pack()
-
+            datel = Label(form_frame, text="Date", bg='#e5e9ec', fg='#000')
+            datel.place(x=30, y=30,)
+            datel_input = StringVar()
+            datel_input = Entry(form_frame, width=25, bg="#e5e9ec",date_pattern='yyyy-mm-dd', textvariable=datel_input, fg='#000')
+            datel_input.place(x=530, y=30, height=40)
+            try:
+                datel_input.insert(0, s[1])
+            except:
+                pass
             
-            
-            
-            
-            class GradientFrame(Canvas):
+            skul = Label(form_frame, text="SKU Number", bg='#e5e9ec', fg='#000')
+            skul.place(x=30, y=60, height=15, width=80)
+            skul_input = StringVar()
+            skul_input = Entry(form_frame, width=25, bg='#e5e9ec', fg='#000')
+            skul_input.place(x=530, y=60, height=40)
+            wrappen.pack(fill='both', expand='yes',)
+            try:
+                skul_input.insert(0, s[3])
+            except:
+                pass
 
-                __tag = "GradientFrame"
-                __hex_format = "#%04x%04x%04x"
-                
-                top2bottom = 1
-                left2right = 2
+            proname = Label(form_frame, text="Product Name", bg='#e5e9ec', fg='#000')
+            proname.place(x=30, y=90,)
+            proname_input = StringVar()
+            proname_input = Entry(form_frame, width=50, bg='#e5e9ec', fg='#000')
+            proname_input.place(x=30, y=90, height=40)
+            try:
+                proname_input.insert(0, s[2])
+            except:
+                pass
+            
+            idl = Label(form_frame, text="ID", bg='#e5e9ec', fg='#000')
+            idl.place(x=30, y=120,)
+            idl_input = StringVar()
+            idl_input = Entry(form_frame, width=10, bg='#e5e9ec', fg='#000')
+            idl_input.place(x=30, y=120, height=40)
+            try:
+                idl_input.insert(0, s[0])
+            except:
+                pass
+        
+        
+            cusname = tk.Label(form_frame, text="Customer Name", bg='#e5e9ec', fg='#000')
+            cusname.place(x=30, y=150, height=15, width=120)
+            cusname_input = StringVar()
+            cusname_input = Entry(form_frame, width=55, bg='#e5e9ec', fg='#000')
+            cusname_input.place(x=530, y=150, height=40)
+            wrappen.pack(fill='both', expand='yes',)
+            try:
+                idl_input.insert(0, s[4])
+            except:
+                pass
+           
 
-                def __init__(self, parent, colors = ("red", "black"), direction = left2right, **kw):
+            insdate = tk.Label(form_frame, text="Inspected Date", bg='#e5e9ec', fg='#000')
+            place_input = StringVar()
+            insdate.place(x=30, y=210, height=15, width=150)
+            insdate_input = Entry(form_frame, width=25, bg="#e5e9ec",date_pattern='yyyy-mm-dd', textvariable=datel_input,fg='#000')
+            insdate_input.place(x=530, y=210, height=40)
+            wrappen.pack(fill='both', expand='yes',)
+            try:
+                idl_input.insert(0, s[5])
+            except:
+                pass
 
-                    # Caso o usuário não tenha configurado uma geometria, será definido uma geometria padrão.
-                    kw["height"] = kw.get("height", 200)
-                    kw["width"] = kw.get("width", 200)
                     
-                    # Chama o método construtor do Canvas.
-                    super().__init__(parent, **kw)
+            D.mainloop()
 
-                    # Instancia os parâmetros.
-                    self.__geometry = [kw["width"], kw["height"]]
-                    self.__colors = colors
-                    self.__direction = direction
-
-                    # Desenha o degradê no Canvas.
-                    self.__draw_gradient()
-                    
-                def __draw_gradient(self):
-                    
-                    """
-                    Paint the Canvas with gradient colors.
-                    """
-
-                    # Apaga o degradê do Canvas.
-                    self.delete(self.__tag)
-
-                    # Recebe o limite de largura.
-                    limit = self.__geometry[0] if self.__direction == self.left2right else self.__geometry[1]
-                
-                    # Recebe os valores RGB das cores.
-                    red1, green1, blue1 = self.winfo_rgb(self.__colors[0])
-                    red2, green2, blue2 = self.winfo_rgb(self.__colors[1])
-
-                    # Calcula os valores RGB de acréscimo de cores (Ex: while red1 != red2: red1 += r_ratio) 
-                    # dividindo o mesmo pelo limite de largura.
-                    r_ratio = (red2 - red1) / limit
-                    g_ratio = (green2 - green1) / limit
-                    b_ratio = (blue2 - blue1) / limit
-
-                    for pixel in range(limit):
-                        
-                        # Calcula a cor em formato RGB.
-                        red = int(red1 + (r_ratio * pixel))
-                        green = int(green1 + (g_ratio * pixel))
-                        blue = int(blue1 + (b_ratio * pixel))
-
-                        # Converte a cor de RGB para Hex.
-                        color = self.__hex_format % (red, green, blue)
-
-                        # Define as posições (x1, y1, x2, y2) do objeto.
-                        x1 = pixel if self.__direction == self.left2right else 0
-                        y1 = 0 if self.__direction == self.left2right else pixel
-                        x2 = pixel if self.__direction == self.left2right else self.__geometry[0]
-                        y2 = self.__geometry[1] if self.__direction == self.left2right else pixel
-
-                        # Cria uma linha no canvas com uma das cores do degradê.
-                        self.create_line(x1, y1, x2, y2, tag = self.__tag, fill = color)
-
-                    # Coloca o degradê atrás de todos os elementos do Canvas.
-                    self.tag_lower(self.__tag)
-
-                def config(self, cnf = None, **kw):
-
-                    # Configura as cores do degradê.
-                    if "colors" in kw and len(kw["colors"]) > 1:
-                        self.__colors = kw.pop("colors")
-
-                    # Configura a direção do degradê.
-                    if "direction" in kw and kw["direction"] in (self.left2right, self.top2bottom):
-                        self.__direction = kw.pop("direction")
-
-                    # Configura a altura do degradê.  
-                    if "height" in kw:
-                        self.__geometry[1] = kw["height"]
-
-                    # Configura a largura do degradê.
-                    if "width" in kw:
-                        self.__geometry[0] = kw["width"]
-
-                    # Configura o Canvas e desenha o degradê.
-                    super().config(cnf, **kw)
-                    self.__draw_gradient()
-
-                def configure(self, cnf = None, **kw):
-                    self.config(cnf, **kw)
-                    
-                D.mainloop()
-
-            
+    
+        def download():
+            return ('download.js')
             
 
         view_btn = ttk.Button(hd, text="View", command=view)
