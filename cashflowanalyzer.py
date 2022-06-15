@@ -949,6 +949,1022 @@ tab312 = mycursor.fetchall()
 jun51="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Vehicles')"
 mycursor.execute(jun51)
 tab313 = mycursor.fetchall()
+jan52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='CGST Payable')"
+mycursor.execute(jan52)
+tab314 = mycursor.fetchall()
+feb52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='CGST Payable')"
+mycursor.execute(feb52)
+tab315 = mycursor.fetchall()
+mar52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='CGST Payable')"
+mycursor.execute(mar52)
+tab316 = mycursor.fetchall()
+apr52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='CGST Payable')"
+mycursor.execute(apr52)
+tab317 = mycursor.fetchall()
+may52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='CGST Payable')"
+mycursor.execute(may52)
+tab318 = mycursor.fetchall()
+jun52="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='CGST Payable')"
+mycursor.execute(jun52)
+tab319 = mycursor.fetchall()
+
+
+jan53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='CST Payable')"
+mycursor.execute(jan53)
+tab320 = mycursor.fetchall()
+feb53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='CST Payable')"
+mycursor.execute(feb53)
+tab321 = mycursor.fetchall()
+mar53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='CST Payable')"
+mycursor.execute(mar53)
+tab322 = mycursor.fetchall()
+apr53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='CST Payable')"
+mycursor.execute(apr53)
+tab323 = mycursor.fetchall()
+may53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='CST Payable')"
+mycursor.execute(may53)
+tab324 = mycursor.fetchall()
+jun53="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='CST Payable')"
+mycursor.execute(jun53)
+tab325 = mycursor.fetchall()
+
+
+jan54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='CST Suspense')"
+mycursor.execute(jan54)
+tab326 = mycursor.fetchall()
+feb54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='CST Suspense')"
+mycursor.execute(feb54)
+tab327 = mycursor.fetchall()
+mar54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='CST Suspense')"
+mycursor.execute(mar54)
+tab328 = mycursor.fetchall()
+apr54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='CST Suspense')"
+mycursor.execute(apr54)
+tab329 = mycursor.fetchall()
+may54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='CST Suspense')"
+mycursor.execute(may54)
+tab330 = mycursor.fetchall()
+jun54="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='CST Suspense')"
+mycursor.execute(jun54)
+tab331 = mycursor.fetchall()
+
+
+jan55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='GST Payable')"
+mycursor.execute(jan55)
+tab332 = mycursor.fetchall()
+feb55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='GST Payable')"
+mycursor.execute(feb55)
+tab333 = mycursor.fetchall()
+mar55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='GST Payable')"
+mycursor.execute(mar55)
+tab334 = mycursor.fetchall()
+apr55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='GST Payable')"
+mycursor.execute(apr55)
+tab335 = mycursor.fetchall()
+may55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='GST Payable')"
+mycursor.execute(may55)
+tab336 = mycursor.fetchall()
+jun55="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='GST Payable')"
+mycursor.execute(jun55)
+tab337 = mycursor.fetchall()
+
+
+jan56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='GST Suspense')"
+mycursor.execute(jan56)
+tab338 = mycursor.fetchall()
+feb56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='GST Suspense')"
+mycursor.execute(feb56)
+tab339 = mycursor.fetchall()
+mar56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='GST Suspense')"
+mycursor.execute(mar56)
+tab340 = mycursor.fetchall()
+apr56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='GST Suspense')"
+mycursor.execute(apr56)
+tab341 = mycursor.fetchall()
+may56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='GST Suspense')"
+mycursor.execute(may56)
+tab342 = mycursor.fetchall()
+jun56="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='GST Suspense')"
+mycursor.execute(jun56)
+tab343 = mycursor.fetchall()
+
+
+jan57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='IGST Payable')"
+mycursor.execute(jan57)
+tab344 = mycursor.fetchall()
+feb57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='IGST Payable')"
+mycursor.execute(feb57)
+tab345 = mycursor.fetchall()
+mar57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='IGST Payable')"
+mycursor.execute(mar57)
+tab346 = mycursor.fetchall()
+apr57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='IGST Payable')"
+mycursor.execute(apr57)
+tab347 = mycursor.fetchall()
+may57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='IGST Payable')"
+mycursor.execute(may57)
+tab348 = mycursor.fetchall()
+jun57="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='IGST Payable')"
+mycursor.execute(jun57)
+tab349 = mycursor.fetchall()
+
+
+jan58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input CGST')"
+mycursor.execute(jan58)
+tab350 = mycursor.fetchall()
+feb58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input CGST')"
+mycursor.execute(feb58)
+tab351 = mycursor.fetchall()
+mar58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input CGST')"
+mycursor.execute(mar58)
+tab352 = mycursor.fetchall()
+apr58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input CGST')"
+mycursor.execute(apr58)
+tab353 = mycursor.fetchall()
+may58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input CGST')"
+mycursor.execute(may58)
+tab354 = mycursor.fetchall()
+jun58="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input CGST')"
+mycursor.execute(jun58)
+tab355 = mycursor.fetchall()
+
+
+jan59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(jan59)
+tab356 = mycursor.fetchall()
+feb59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(feb59)
+tab357 = mycursor.fetchall()
+mar59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(mar59)
+tab358 = mycursor.fetchall()
+apr59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(apr59)
+tab359 = mycursor.fetchall()
+may59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(may59)
+tab360 = mycursor.fetchall()
+jun59="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input CGST Tax RCM')"
+mycursor.execute(jun59)
+tab361 = mycursor.fetchall()
+
+
+jan60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(jan60)
+tab362 = mycursor.fetchall()
+feb60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(feb60)
+tab363 = mycursor.fetchall()
+mar60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(mar60)
+tab364 = mycursor.fetchall()
+apr60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(apr60)
+tab365 = mycursor.fetchall()
+may60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(may60)
+tab366 = mycursor.fetchall()
+jun60="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input IGST Tax RCM')"
+mycursor.execute(jun60)
+tab367 = mycursor.fetchall()
+
+
+jan61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(jan61)
+tab368 = mycursor.fetchall()
+feb61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(feb61)
+tab369 = mycursor.fetchall()
+mar61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(mar61)
+tab370 = mycursor.fetchall()
+apr61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(apr61)
+tab371 = mycursor.fetchall()
+may61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(may61)
+tab372 = mycursor.fetchall()
+jun61="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input Krishi Kalyan Cess')"
+mycursor.execute(jun61)
+tab373 = mycursor.fetchall()
+
+
+jan62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(jan62)
+tab374 = mycursor.fetchall()
+feb62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(feb62)
+tab375 = mycursor.fetchall()
+mar62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(mar62)
+tab376 = mycursor.fetchall()
+apr62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(apr62)
+tab377 = mycursor.fetchall()
+may62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(may62)
+tab378 = mycursor.fetchall()
+jun62="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input Krishi Kalyan Cess RCM')"
+mycursor.execute(jun62)
+tab379 = mycursor.fetchall()
+
+jan63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input Service Tax')"
+mycursor.execute(jan63)
+tab380 = mycursor.fetchall()
+feb63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input Service Tax')"
+mycursor.execute(feb63)
+tab381 = mycursor.fetchall()
+mar63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input Service Tax')"
+mycursor.execute(mar63)
+tab382 = mycursor.fetchall()
+apr63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input Service Tax')"
+mycursor.execute(apr63)
+tab383 = mycursor.fetchall()
+may63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input Service Tax')"
+mycursor.execute(may63)
+tab384 = mycursor.fetchall()
+jun63="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input Service Tax')"
+mycursor.execute(jun63)
+tab385 = mycursor.fetchall()
+
+jan64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input Service Tax RCM')"
+mycursor.execute(jan64)
+tab386 = mycursor.fetchall()
+feb64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input Service Tax RCM')"
+mycursor.execute(feb64)
+tab387 = mycursor.fetchall()
+mar64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input Service Tax RCM')"
+mycursor.execute(mar64)
+tab388 = mycursor.fetchall()
+apr64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input Service Tax RCM')"
+mycursor.execute(apr64)
+tab389 = mycursor.fetchall()
+may64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input Service Tax RCM')"
+mycursor.execute(may64)
+tab390 = mycursor.fetchall()
+jun64="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input Service Tax RCM')"
+mycursor.execute(jun64)
+tab391 = mycursor.fetchall()
+
+jan65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input SGST')"
+mycursor.execute(jan65)
+tab392 = mycursor.fetchall()
+feb65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input SGST')"
+mycursor.execute(feb65)
+tab393 = mycursor.fetchall()
+mar65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input SGST')"
+mycursor.execute(mar65)
+tab394 = mycursor.fetchall()
+apr65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input SGST')"
+mycursor.execute(apr65)
+tab395 = mycursor.fetchall()
+may65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input SGST')"
+mycursor.execute(may65)
+tab396 = mycursor.fetchall()
+jun65="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input SGST')"
+mycursor.execute(jun65)
+tab397 = mycursor.fetchall()
+
+jan66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(jan66)
+tab398 = mycursor.fetchall()
+feb66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(feb66)
+tab399 = mycursor.fetchall()
+mar66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(mar66)
+tab400 = mycursor.fetchall()
+apr66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(apr66)
+tab401 = mycursor.fetchall()
+may66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(may66)
+tab402 = mycursor.fetchall()
+jun66="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input SGST Tax RCM')"
+mycursor.execute(jun66)
+tab403 = mycursor.fetchall()
+
+jan67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input VAT 14%')"
+mycursor.execute(jan67)
+tab404 = mycursor.fetchall()
+feb67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input VAT 14%')"
+mycursor.execute(feb67)
+tab405 = mycursor.fetchall()
+mar67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input VAT 14%')"
+mycursor.execute(mar67)
+tab406 = mycursor.fetchall()
+apr67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input VAT 14%')"
+mycursor.execute(apr67)
+tab407 = mycursor.fetchall()
+may67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input VAT 14%')"
+mycursor.execute(may67)
+tab408 = mycursor.fetchall()
+jun67="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input VAT 14%')"
+mycursor.execute(jun67)
+tab409 = mycursor.fetchall()
+
+jan68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input VAT 4%')"
+mycursor.execute(jan68)
+tab410 = mycursor.fetchall()
+feb68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input VAT 4%')"
+mycursor.execute(feb68)
+tab411 = mycursor.fetchall()
+mar68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input VAT 4%')"
+mycursor.execute(mar68)
+tab412 = mycursor.fetchall()
+apr68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input VAT 4%')"
+mycursor.execute(apr68)
+tab413 = mycursor.fetchall()
+may68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input VAT 4%')"
+mycursor.execute(may68)
+tab414 = mycursor.fetchall()
+jun68="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input VAT 4%')"
+mycursor.execute(jun68)
+tab415 = mycursor.fetchall()
+
+jan69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Input VAT 5%')"
+mycursor.execute(jan69)
+tab416 = mycursor.fetchall()
+feb69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Input VAT 5%')"
+mycursor.execute(feb69)
+tab417 = mycursor.fetchall()
+mar69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Input VAT 5%')"
+mycursor.execute(mar69)
+tab418 = mycursor.fetchall()
+apr69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Input VAT 5%')"
+mycursor.execute(apr69)
+tab419 = mycursor.fetchall()
+may69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Input VAT 5%')"
+mycursor.execute(may69)
+tab420 = mycursor.fetchall()
+jun69="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Input VAT 5%')"
+mycursor.execute(jun69)
+tab421 = mycursor.fetchall()
+
+jan70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(jan70)
+tab422 = mycursor.fetchall()
+feb70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(feb70)
+tab423 = mycursor.fetchall()
+mar70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(mar70)
+tab424 = mycursor.fetchall()
+apr70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(apr70)
+tab425 = mycursor.fetchall()
+may70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(may70)
+tab426 = mycursor.fetchall()
+jun70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Krishi Kalyan Cess Payable')"
+mycursor.execute(jun70)
+tab427 = mycursor.fetchall()
+
+jan71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(jan71)
+tab428 = mycursor.fetchall()
+feb71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(feb71)
+tab429 = mycursor.fetchall()
+mar71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(mar71)
+tab430 = mycursor.fetchall()
+apr71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(apr71)
+tab431 = mycursor.fetchall()
+may71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(may71)
+tab432 = mycursor.fetchall()
+jun71="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Krishi Kalyan Cess Suspense')"
+mycursor.execute(jun71)
+tab433 = mycursor.fetchall()
+
+jan72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output CGST')"
+mycursor.execute(jan72)
+tab434 = mycursor.fetchall()
+feb72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output CGST')"
+mycursor.execute(feb72)
+tab435 = mycursor.fetchall()
+mar72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output CGST')"
+mycursor.execute(mar72)
+tab436 = mycursor.fetchall()
+apr72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output CGST')"
+mycursor.execute(apr72)
+tab437 = mycursor.fetchall()
+may72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output CGST')"
+mycursor.execute(may72)
+tab438 = mycursor.fetchall()
+jun72="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output CGST')"
+mycursor.execute(jun72)
+tab439 = mycursor.fetchall()
+
+jan73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(jan73)
+tab440 = mycursor.fetchall()
+feb73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(feb73)
+tab441 = mycursor.fetchall()
+mar73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(mar73)
+tab442 = mycursor.fetchall()
+apr73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(apr73)
+tab443 = mycursor.fetchall()
+may73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(may73)
+tab444 = mycursor.fetchall()
+jun73="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output CGST Tax RCM')"
+mycursor.execute(jun73)
+tab445 = mycursor.fetchall()
+
+jan74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output CGST 2%')"
+mycursor.execute(jan74)
+tab446 = mycursor.fetchall()
+feb74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output CGST 2%')"
+mycursor.execute(feb74)
+tab447 = mycursor.fetchall()
+mar74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output CGST 2%')"
+mycursor.execute(mar74)
+tab448 = mycursor.fetchall()
+apr74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output CGST 2%')"
+mycursor.execute(apr74)
+tab449 = mycursor.fetchall()
+may74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output CGST 2%')"
+mycursor.execute(may74)
+tab450 = mycursor.fetchall()
+jun74="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output CGST 2%')"
+mycursor.execute(jun74)
+tab451 = mycursor.fetchall()
+
+jan75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output IGST')"
+mycursor.execute(jan75)
+tab452 = mycursor.fetchall()
+feb75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output IGST')"
+mycursor.execute(feb75)
+tab453 = mycursor.fetchall()
+mar75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output IGST')"
+mycursor.execute(mar75)
+tab454 = mycursor.fetchall()
+apr75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output IGST')"
+mycursor.execute(apr75)
+tab455 = mycursor.fetchall()
+may75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output IGST')"
+mycursor.execute(may75)
+tab456 = mycursor.fetchall()
+jun75="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output IGST')"
+mycursor.execute(jun75)
+tab457 = mycursor.fetchall()
+
+jan76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(jan76)
+tab458 = mycursor.fetchall()
+feb76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(feb76)
+tab459 = mycursor.fetchall()
+mar76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(mar76)
+tab460 = mycursor.fetchall()
+apr76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(apr76)
+tab461 = mycursor.fetchall()
+may76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(may76)
+tab462 = mycursor.fetchall()
+jun76="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output IGST Tax RCM')"
+mycursor.execute(jun76)
+tab463 = mycursor.fetchall()
+
+jan77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(jan77)
+tab464 = mycursor.fetchall()
+feb77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(feb77)
+tab465 = mycursor.fetchall()
+mar77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(mar77)
+tab466 = mycursor.fetchall()
+apr77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(apr77)
+tab467 = mycursor.fetchall()
+may77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(may77)
+tab468 = mycursor.fetchall()
+jun77="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output Krishi Kalyan Cess RCM')"
+mycursor.execute(jun77)
+tab469 = mycursor.fetchall()
+
+jan78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output SGST')"
+mycursor.execute(jan78)
+tab470 = mycursor.fetchall()
+feb78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output SGST')"
+mycursor.execute(feb78)
+tab471 = mycursor.fetchall()
+mar78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output SGST')"
+mycursor.execute(mar78)
+tab472 = mycursor.fetchall()
+apr78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output SGST')"
+mycursor.execute(apr78)
+tab473 = mycursor.fetchall()
+may78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output SGST')"
+mycursor.execute(may78)
+tab474 = mycursor.fetchall()
+jun78="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output SGST')"
+mycursor.execute(jun78)
+tab475 = mycursor.fetchall()
+
+jan79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(jan79)
+tab476 = mycursor.fetchall()
+feb79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(feb79)
+tab477 = mycursor.fetchall()
+mar79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(mar79)
+tab478 = mycursor.fetchall()
+apr79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(apr79)
+tab479 = mycursor.fetchall()
+may79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(may79)
+tab480 = mycursor.fetchall()
+jun79="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output SGST Tax RCM')"
+mycursor.execute(jun79)
+tab481 = mycursor.fetchall()
+
+jan80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output VAT 14%')"
+mycursor.execute(jan80)
+tab482 = mycursor.fetchall()
+feb80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output VAT 14%')"
+mycursor.execute(feb80)
+tab483 = mycursor.fetchall()
+mar80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output VAT 14%')"
+mycursor.execute(mar80)
+tab484 = mycursor.fetchall()
+apr80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output VAT 14%')"
+mycursor.execute(apr80)
+tab485 = mycursor.fetchall()
+may80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output VAT 14%')"
+mycursor.execute(may80)
+tab486 = mycursor.fetchall()
+jun80="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output VAT 14%')"
+mycursor.execute(jun80)
+tab487 = mycursor.fetchall()
+
+jan81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output VAT 4%')"
+mycursor.execute(jan81)
+tab488 = mycursor.fetchall()
+feb81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output VAT 4%')"
+mycursor.execute(feb81)
+tab489 = mycursor.fetchall()
+mar81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output VAT 4%')"
+mycursor.execute(mar81)
+tab490 = mycursor.fetchall()
+apr81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output VAT 4%')"
+mycursor.execute(apr81)
+tab491 = mycursor.fetchall()
+may81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output VAT 4%')"
+mycursor.execute(may81)
+tab492 = mycursor.fetchall()
+jun81="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output VAT 4%')"
+mycursor.execute(jun81)
+tab493 = mycursor.fetchall()
+
+jan82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Output VAT 5%')"
+mycursor.execute(jan82)
+tab494 = mycursor.fetchall()
+feb82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Output VAT 5%')"
+mycursor.execute(feb82)
+tab495 = mycursor.fetchall()
+mar82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Output VAT 5%')"
+mycursor.execute(mar82)
+tab496 = mycursor.fetchall()
+apr82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Output VAT 5%')"
+mycursor.execute(apr82)
+tab497 = mycursor.fetchall()
+may82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Output VAT 5%')"
+mycursor.execute(may82)
+tab498 = mycursor.fetchall()
+jun82="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Output VAT 5%')"
+mycursor.execute(jun82)
+tab499 = mycursor.fetchall()
+jan83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Service Tax Payable')"
+mycursor.execute(jan83)
+tab500 = mycursor.fetchall()
+feb83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Service Tax Payable')"
+mycursor.execute(feb83)
+tab501 = mycursor.fetchall()
+mar83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Service Tax Payable')"
+mycursor.execute(mar83)
+tab502 = mycursor.fetchall()
+apr83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Service Tax Payable')"
+mycursor.execute(apr83)
+tab503 = mycursor.fetchall()
+may83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Service Tax Payable')"
+mycursor.execute(may83)
+tab504 = mycursor.fetchall()
+jun83="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Service Tax Payable')"
+mycursor.execute(jun83)
+tab505 = mycursor.fetchall()
+
+jan84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Service Tax  Suspense')"
+mycursor.execute(jan84)
+tab506 = mycursor.fetchall()
+feb84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Service Tax  Suspense')"
+mycursor.execute(feb84)
+tab507 = mycursor.fetchall()
+mar84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Service Tax  Suspense')"
+mycursor.execute(mar84)
+tab508 = mycursor.fetchall()
+apr84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Service Tax  Suspense')"
+mycursor.execute(apr84)
+tab509 = mycursor.fetchall()
+may84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Service Tax  Suspense')"
+mycursor.execute(may84)
+tab510 = mycursor.fetchall()
+jun84="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Service Tax  Suspense')"
+mycursor.execute(jun84)
+tab511 = mycursor.fetchall()
+
+jan85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='SGST Payable')"
+mycursor.execute(jan85)
+tab512 = mycursor.fetchall()
+feb85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='SGST Payable')"
+mycursor.execute(feb85)
+tab513 = mycursor.fetchall()
+mar85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='SGST Payable')"
+mycursor.execute(mar85)
+tab514 = mycursor.fetchall()
+apr85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='SGST Payable')"
+mycursor.execute(apr85)
+tab515 = mycursor.fetchall()
+may85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='SGST Payable')"
+mycursor.execute(may85)
+tab516 = mycursor.fetchall()
+jun85="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='SGST Payable')"
+mycursor.execute(jun85)
+tab517 = mycursor.fetchall()
+
+jan86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(jan86)
+tab518 = mycursor.fetchall()
+feb86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(feb86)
+tab519 = mycursor.fetchall()
+mar86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(mar86)
+tab520 = mycursor.fetchall()
+apr86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(apr86)
+tab521 = mycursor.fetchall()
+may86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(may86)
+tab522 = mycursor.fetchall()
+jun86="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Swachh Bharat Cess Payable')"
+mycursor.execute(jun86)
+tab523 = mycursor.fetchall()
+
+jan87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(jan87)
+tab524 = mycursor.fetchall()
+feb87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(feb87)
+tab525 = mycursor.fetchall()
+mar87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(mar87)
+tab526 = mycursor.fetchall()
+apr87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(apr87)
+tab527 = mycursor.fetchall()
+may87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(may87)
+tab528 = mycursor.fetchall()
+jun87="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Swachh Bharat Cess Suspense')"
+mycursor.execute(jun87)
+tab529 = mycursor.fetchall()
+
+jan88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='TDS Payable')"
+mycursor.execute(jan88)
+tab530 = mycursor.fetchall()
+feb88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='TDS Payable')"
+mycursor.execute(feb88)
+tab531 = mycursor.fetchall()
+mar88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='TDS Payable')"
+mycursor.execute(mar88)
+tab532 = mycursor.fetchall()
+apr88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='TDS Payable')"
+mycursor.execute(apr88)
+tab533 = mycursor.fetchall()
+may88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='TDS Payable')"
+mycursor.execute(may88)
+tab534 = mycursor.fetchall()
+jun88="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='TDS Payable')"
+mycursor.execute(jun88)
+tab535 = mycursor.fetchall()
+
+jan89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='VAT Suspense')"
+mycursor.execute(jan89)
+tab536 = mycursor.fetchall()
+feb89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='VAT Suspense')"
+mycursor.execute(feb89)
+tab537 = mycursor.fetchall()
+mar89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='VAT Suspense')"
+mycursor.execute(mar89)
+tab538 = mycursor.fetchall()
+apr89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='VAT Suspense')"
+mycursor.execute(apr89)
+tab539 = mycursor.fetchall()
+may89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='VAT Suspense')"
+mycursor.execute(may89)
+tab540 = mycursor.fetchall()
+jun89="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='VAT Suspense')"
+mycursor.execute(jun89)
+tab541 = mycursor.fetchall()
+
+jan90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Opening Balance Equity')"
+mycursor.execute(jan90)
+tab542 = mycursor.fetchall()
+feb90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Opening Balance Equity')"
+mycursor.execute(feb90)
+tab543 = mycursor.fetchall()
+mar90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Opening Balance Equity')"
+mycursor.execute(mar90)
+tab544 = mycursor.fetchall()
+apr90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Opening Balance Equity')"
+mycursor.execute(apr90)
+tab545 = mycursor.fetchall()
+may90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Opening Balance Equity')"
+mycursor.execute(may90)
+tab546 = mycursor.fetchall()
+jun90="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Opening Balance Equity')"
+mycursor.execute(jun90)
+tab547 = mycursor.fetchall()
+
+jan91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Retained Earnings')"
+mycursor.execute(jan91)
+tab548 = mycursor.fetchall()
+feb91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Retained Earnings')"
+mycursor.execute(feb91)
+tab549 = mycursor.fetchall()
+mar91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Retained Earnings')"
+mycursor.execute(mar91)
+tab550 = mycursor.fetchall()
+apr91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Retained Earnings')"
+mycursor.execute(apr91)
+tab551 = mycursor.fetchall()
+may91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Retained Earnings')"
+mycursor.execute(may91)
+tab552 = mycursor.fetchall()
+jun91="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Retained Earnings')"
+mycursor.execute(jun91)
+tab553 = mycursor.fetchall()
+
+jan92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Billable Expense Income')"
+mycursor.execute(jan92)
+tab554 = mycursor.fetchall()
+feb92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Billable Expense Income')"
+mycursor.execute(feb92)
+tab555 = mycursor.fetchall()
+mar92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Billable Expense Income')"
+mycursor.execute(mar92)
+tab556 = mycursor.fetchall()
+apr92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Billable Expense Income')"
+mycursor.execute(apr92)
+tab557 = mycursor.fetchall()
+may92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Billable Expense Income')"
+mycursor.execute(may92)
+tab558 = mycursor.fetchall()
+jun92="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Billable Expense Income')"
+mycursor.execute(jun92)
+tab559 = mycursor.fetchall()
+
+jan93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Consulting Income')"
+mycursor.execute(jan93)
+tab560 = mycursor.fetchall()
+feb93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Consulting Income')"
+mycursor.execute(feb93)
+tab561 = mycursor.fetchall()
+mar93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Consulting Income')"
+mycursor.execute(mar93)
+tab562 = mycursor.fetchall()
+apr93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Consulting Income')"
+mycursor.execute(apr93)
+tab563 = mycursor.fetchall()
+may93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Consulting Income')"
+mycursor.execute(may93)
+tab564 = mycursor.fetchall()
+jun93="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Consulting Income')"
+mycursor.execute(jun93)
+tab565 = mycursor.fetchall()
+
+jan94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Product Sales')"
+mycursor.execute(jan94)
+tab566 = mycursor.fetchall()
+feb94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Product Sales')"
+mycursor.execute(feb94)
+tab567 = mycursor.fetchall()
+mar94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Product Sales')"
+mycursor.execute(mar94)
+tab568 = mycursor.fetchall()
+apr94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Product Sales')"
+mycursor.execute(apr94)
+tab569 = mycursor.fetchall()
+may94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Product Sales')"
+mycursor.execute(may94)
+tab570 = mycursor.fetchall()
+jun94="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Product Sales')"
+mycursor.execute(jun94)
+tab571 = mycursor.fetchall()
+
+jan95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales')"
+mycursor.execute(jan95)
+tab572 = mycursor.fetchall()
+feb95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales')"
+mycursor.execute(feb95)
+tab573 = mycursor.fetchall()
+mar95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales')"
+mycursor.execute(mar95)
+tab574 = mycursor.fetchall()
+apr95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales')"
+mycursor.execute(apr95)
+tab575 = mycursor.fetchall()
+may95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales')"
+mycursor.execute(may95)
+tab576 = mycursor.fetchall()
+jun95="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales')"
+mycursor.execute(jun95)
+tab577 = mycursor.fetchall()
+
+jan96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales - Hardware')"
+mycursor.execute(jan96)
+tab578 = mycursor.fetchall()
+feb96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales - Hardware')"
+mycursor.execute(feb96)
+tab579 = mycursor.fetchall()
+mar96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales - Hardware')"
+mycursor.execute(mar96)
+tab580 = mycursor.fetchall()
+apr96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales - Hardware')"
+mycursor.execute(apr96)
+tab581 = mycursor.fetchall()
+may96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales - Hardware')"
+mycursor.execute(may96)
+tab582 = mycursor.fetchall()
+jun96="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales - Hardware')"
+mycursor.execute(jun96)
+tab583 = mycursor.fetchall()
+
+jan97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales - Software')"
+mycursor.execute(jan97)
+tab584 = mycursor.fetchall()
+feb97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales - Software')"
+mycursor.execute(feb97)
+tab585 = mycursor.fetchall()
+mar97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales - Software')"
+mycursor.execute(mar97)
+tab586 = mycursor.fetchall()
+apr97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales - Software')"
+mycursor.execute(apr97)
+tab587 = mycursor.fetchall()
+may97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales - Software')"
+mycursor.execute(may97)
+tab588 = mycursor.fetchall()
+jun97="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales - Software')"
+mycursor.execute(jun97)
+tab589 = mycursor.fetchall()
+
+jan98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(jan98)
+tab590 = mycursor.fetchall()
+feb98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(feb98)
+tab591 = mycursor.fetchall()
+mar98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(mar98)
+tab592 = mycursor.fetchall()
+apr98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(apr98)
+tab593 = mycursor.fetchall()
+may98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(may98)
+tab594 = mycursor.fetchall()
+jun98="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales - Support and Maintenance')"
+mycursor.execute(jun98)
+tab595 = mycursor.fetchall()
+
+jan99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales  Discounts')"
+mycursor.execute(jan99)
+tab596 = mycursor.fetchall()
+feb99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales  Discounts')"
+mycursor.execute(feb99)
+tab597 = mycursor.fetchall()
+mar99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales  Discounts')"
+mycursor.execute(mar99)
+tab598 = mycursor.fetchall()
+apr99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales  Discounts')"
+mycursor.execute(apr99)
+tab599 = mycursor.fetchall()
+may99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales  Discounts')"
+mycursor.execute(may99)
+tab600 = mycursor.fetchall()
+jun99="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales  Discounts')"
+mycursor.execute(jun99)
+tab601 = mycursor.fetchall()
+
+jan100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Sales  of Product Income')"
+mycursor.execute(jan100)
+tab602 = mycursor.fetchall()
+feb100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Sales  of Product Income')"
+mycursor.execute(feb100)
+tab603 = mycursor.fetchall()
+mar100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Sales  of Product Income')"
+mycursor.execute(mar100)
+tab604 = mycursor.fetchall()
+apr100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Sales  of Product Income')"
+mycursor.execute(apr100)
+tab605 = mycursor.fetchall()
+may100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Sales  of Product Income')"
+mycursor.execute(may100)
+tab606 = mycursor.fetchall()
+jun100="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Sales  of Product Income')"
+mycursor.execute(jun100)
+tab607 = mycursor.fetchall()
+
+jan101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Uncategorised Income')"
+mycursor.execute(jan101)
+tab608 = mycursor.fetchall()
+feb101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Uncategorised Income')"
+mycursor.execute(feb101)
+tab609 = mycursor.fetchall()
+mar101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Uncategorised Income')"
+mycursor.execute(mar101)
+tab610 = mycursor.fetchall()
+apr101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Uncategorised Income')"
+mycursor.execute(apr101)
+tab611 = mycursor.fetchall()
+may101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Uncategorised Income')"
+mycursor.execute(may101)
+tab612 = mycursor.fetchall()
+jun101="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Uncategorised Income')"
+mycursor.execute(jun101)
+tab613 = mycursor.fetchall()
+
+jan102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Cost of sales')"
+mycursor.execute(jan102)
+tab614 = mycursor.fetchall()
+feb102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Cost of sales')"
+mycursor.execute(feb102)
+tab615 = mycursor.fetchall()
+mar102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Cost of sales')"
+mycursor.execute(mar102)
+tab616 = mycursor.fetchall()
+apr102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Cost of sales')"
+mycursor.execute(apr102)
+tab617 = mycursor.fetchall()
+may102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Cost of sales')"
+mycursor.execute(may102)
+tab618 = mycursor.fetchall()
+jun102="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Cost of sales')"
+mycursor.execute(jun102)
+tab619 = mycursor.fetchall()
+
+jan103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(jan103)
+tab620 = mycursor.fetchall()
+feb103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(feb103)
+tab621 = mycursor.fetchall()
+mar103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(mar103)
+tab622 = mycursor.fetchall()
+apr103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(apr103)
+tab623 = mycursor.fetchall()
+may103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(may103)
+tab624 = mycursor.fetchall()
+jun103="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Equipment Rental for Jobs')"
+mycursor.execute(jun103)
+tab625 = mycursor.fetchall()
+
+jan104="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='January' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(jan104)
+tab626 = mycursor.fetchall()
+feb104="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='February' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(feb104)
+tab627 = mycursor.fetchall()
+mar70="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='March' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(mar70)
+tab628 = mycursor.fetchall()
+apr104="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='April' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(apr104)
+tab629 = mycursor.fetchall()
+may104="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='May' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(may104)
+tab630 = mycursor.fetchall()
+jun104="SELECT ROUND(SUM(grandtotal),3) FROM app1_expences WHERE paymmethod='cash'AND monthname(paymdate)='June' AND(category1='Freight and Shipping Costs')"
+mycursor.execute(jun104)
+tab631 = mycursor.fetchall()
+
 
 
 
@@ -1445,20 +2461,20 @@ mycanvas.create_window((40,140),window=form_frame,anchor="nw")
 
 
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
-label.place(x=395,y=160)
+label=Label(form_frame,text="JANUARY",bg='#243e55' ,fg="white",font=('Arial',13))
+label.place(x=396,y=160)
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
+label=Label(form_frame,text="FEBRUARY",bg='#243e55' ,fg="white",font=('Arial',13))
 label.place(x=523,y=160)
 
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
-label.place(x=653,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
-label.place(x=783,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
-label.place(x=913,y=160)
-label=Label(form_frame,text="[MONTH]",bg='#243e55' ,fg="white",font=('Arial',15))
-label.place(x=1043,y=160)
+label=Label(form_frame,text="MARCH",bg='#243e55' ,fg="white",font=('Arial',13))
+label.place(x=656,y=160)
+label=Label(form_frame,text="APRIL",bg='#243e55' ,fg="white",font=('Arial',13))
+label.place(x=788,y=160)
+label=Label(form_frame,text="MAY",bg='#243e55' ,fg="white",font=('Arial',13))
+label.place(x=918,y=160)
+label=Label(form_frame,text="JUNE",bg='#243e55' ,fg="white",font=('Arial',13))
+label.place(x=1047,y=160)
 label=Label(form_frame,text="TOTAL",bg='#243e55' ,fg="white",font=('Arial',15))
 label.place(x=1173,y=160)
 
@@ -2263,9 +3279,583 @@ tot263=tk.StringVar()
 tot263.set(tab263)
 tot264=tk.StringVar()
 tot264.set(tab264)
-# tot265=tk.StringVar()
-# tot265.set(tab265)
+tot266=tk.StringVar()
+tot266.set(tab266)
+tot267=tk.StringVar()
+tot267.set(tab267)
+tot268=tk.StringVar()
+tot268.set(tab268)
+tot269=tk.StringVar()
+tot269.set(tab269)
+tot270=tk.StringVar()
+tot270.set(tab270)
+tot271=tk.StringVar()
+tot271.set(tab271)
+tot272=tk.StringVar()
+tot272.set(tab272)
+tot273=tk.StringVar()
+tot273.set(tab273)
+tot274=tk.StringVar()
+tot274.set(tab274)
+tot275=tk.StringVar()
+tot275.set(tab275)
+tot276=tk.StringVar()
+tot276.set(tab276)
+tot277=tk.StringVar()
+tot277.set(tab277)
+tot278=tk.StringVar()
+tot278.set(tab278)
+tot279=tk.StringVar()
+tot279.set(tab279)
+tot280=tk.StringVar()
+tot280.set(tab280)
+tot281=tk.StringVar()
+tot281.set(tab281)
+tot282=tk.StringVar()
+tot282.set(tab282)
+tot283=tk.StringVar()
+tot283.set(tab283)
+tot284=tk.StringVar()
+tot284.set(tab284)
+tot285=tk.StringVar()
+tot285.set(tab285)
+tot286=tk.StringVar()
+tot286.set(tab286)
+tot287=tk.StringVar()
+tot287.set(tab287)
+tot288=tk.StringVar()
+tot288.set(tab288)
+tot289=tk.StringVar()
+tot289.set(tab289)
+tot290=tk.StringVar()
+tot290.set(tab290)
+tot291=tk.StringVar()
+tot291.set(tab291)
+tot292=tk.StringVar()
+tot292.set(tab292)
+tot293=tk.StringVar()
+tot293.set(tab293)
+tot294=tk.StringVar()
+tot294.set(tab294)
+tot295=tk.StringVar()
+tot295.set(tab295)
+tot296=tk.StringVar()
+tot296.set(tab296)
+tot297=tk.StringVar()
+tot297.set(tab297)
+tot298=tk.StringVar()
+tot298.set(tab298)
+tot299=tk.StringVar()
+tot299.set(tab299)
+tot300=tk.StringVar()
+tot300.set(tab300)
+tot301=tk.StringVar()
+tot301.set(tab301)
+tot302=tk.StringVar()
+tot302.set(tab302)
+tot303=tk.StringVar()
+tot303.set(tab303)
+tot304=tk.StringVar()
+tot304.set(tab304)
+tot305=tk.StringVar()
+tot305.set(tab305)
+tot306=tk.StringVar()
+tot306.set(tab306)
+tot307=tk.StringVar()
+tot307.set(tab307)
+tot308=tk.StringVar()
+tot308.set(tab308)
+tot309=tk.StringVar()
+tot309.set(tab309)
+tot310=tk.StringVar()
+tot310.set(tab310)
+tot311=tk.StringVar()
+tot311.set(tab311)
+tot312=tk.StringVar()
+tot312.set(tab312)
+tot313=tk.StringVar()
+tot313.set(tab313)
+tot314=tk.StringVar()
+tot314.set(tab314)
+tot315=tk.StringVar()
+tot315.set(tab315)
+tot316=tk.StringVar()
+tot316.set(tab316)
+tot317=tk.StringVar()
+tot317.set(tab317)
+tot318=tk.StringVar()
+tot318.set(tab318)
+tot319=tk.StringVar()
+tot319.set(tab319)
+tot320=tk.StringVar()
+tot320.set(tab320)
+tot321=tk.StringVar()
+tot321.set(tab321)
+tot322=tk.StringVar()
+tot322.set(tab322)
+tot323=tk.StringVar()
+tot323.set(tab323)
+tot324=tk.StringVar()
+tot324.set(tab324)
+tot325=tk.StringVar()
+tot325.set(tab325)
+tot326=tk.StringVar()
+tot326.set(tab326)
+tot327=tk.StringVar()
+tot327.set(tab327)
+tot328=tk.StringVar()
+tot328.set(tab328)
+tot329=tk.StringVar()
+tot329.set(tab329)
+tot330=tk.StringVar()
+tot330.set(tab330)
+tot331=tk.StringVar()
+tot331.set(tab331)
+tot332=tk.StringVar()
+tot332.set(tab332)
+tot333=tk.StringVar()
+tot333.set(tab333)
+tot334=tk.StringVar()
+tot334.set(tab334)
+tot335=tk.StringVar()
+tot335.set(tab335)
+tot336=tk.StringVar()
+tot336.set(tab336)
+tot337=tk.StringVar()
+tot337.set(tab337)
+tot338=tk.StringVar()
+tot338.set(tab338)
+tot339=tk.StringVar()
+tot339.set(tab339)
+tot340=tk.StringVar()
+tot340.set(tab340)
+tot341=tk.StringVar()
+tot341.set(tab341)
 
+tot342=tk.StringVar()
+tot342.set(tab342)
+tot343=tk.StringVar()
+tot343.set(tab343)
+tot344=tk.StringVar()
+tot344.set(tab344)
+tot345=tk.StringVar()
+tot345.set(tab345)
+tot346=tk.StringVar()
+tot346.set(tab346)
+tot347=tk.StringVar()
+tot347.set(tab347)
+tot348=tk.StringVar()
+tot348.set(tab348)
+tot349=tk.StringVar()
+tot349.set(tab349)
+tot350=tk.StringVar()
+tot350.set(tab350)
+tot351=tk.StringVar()
+tot351.set(tab351)
+tot352=tk.StringVar()
+tot352.set(tab352)
+tot353=tk.StringVar()
+tot353.set(tab353)
+tot354=tk.StringVar()
+tot354.set(tab354)
+tot355=tk.StringVar()
+tot355.set(tab355)
+tot356=tk.StringVar()
+tot356.set(tab356)
+tot357=tk.StringVar()
+tot357.set(tab357)
+tot358=tk.StringVar()
+tot358.set(tab358)
+tot359=tk.StringVar()
+tot359.set(tab359)
+tot360=tk.StringVar()
+tot360.set(tab360)
+tot361=tk.StringVar()
+tot361.set(tab361)
+tot362=tk.StringVar()
+tot362.set(tab362)
+tot363=tk.StringVar()
+tot363.set(tab363)
+tot364=tk.StringVar()
+tot364.set(tab364)
+tot365=tk.StringVar()
+tot365.set(tab365)
+tot366=tk.StringVar()
+tot366.set(tab366)
+tot367=tk.StringVar()
+tot367.set(tab367)
+tot368=tk.StringVar()
+tot368.set(tab368)
+tot369=tk.StringVar()
+tot369.set(tab369)
+tot370=tk.StringVar()
+tot370.set(tab370)
+tot371=tk.StringVar()
+tot371.set(tab371)
+tot372=tk.StringVar()
+tot372.set(tab372)
+tot373=tk.StringVar()
+tot373.set(tab373)
+tot374=tk.StringVar()
+tot374.set(tab374)
+tot375=tk.StringVar()
+tot375.set(tab375)
+tot376=tk.StringVar()
+tot376.set(tab376)
+tot377=tk.StringVar()
+tot377.set(tab377)
+tot378=tk.StringVar()
+tot378.set(tab378)
+tot379=tk.StringVar()
+tot379.set(tab379)
+tot380=tk.StringVar()
+tot380.set(tab380)
+tot381=tk.StringVar()
+tot381.set(tab381)
+tot382=tk.StringVar()
+tot382.set(tab382)
+tot383=tk.StringVar()
+tot383.set(tab383)
+tot384=tk.StringVar()
+tot384.set(tab384)
+tot385=tk.StringVar()
+tot385.set(tab385)
+tot386=tk.StringVar()
+tot386.set(tab386)
+tot387=tk.StringVar()
+tot387.set(tab387)
+tot388=tk.StringVar()
+tot388.set(tab388)
+tot389=tk.StringVar()
+tot389.set(tab389)
+tot390=tk.StringVar()
+tot390.set(tab390)
+tot391=tk.StringVar()
+tot391.set(tab391)
+tot392=tk.StringVar()
+tot392.set(tab392)
+tot393=tk.StringVar()
+tot393.set(tab393)
+tot394=tk.StringVar()
+tot394.set(tab394)
+tot395=tk.StringVar()
+tot395.set(tab395)
+tot396=tk.StringVar()
+tot396.set(tab396)
+tot397=tk.StringVar()
+tot397.set(tab397)
+tot398=tk.StringVar()
+tot398.set(tab398)
+tot399=tk.StringVar()
+tot399.set(tab399)
+tot400=tk.StringVar()
+tot400.set(tab400)
+tot401=tk.StringVar()
+tot401.set(tab401)
+tot402=tk.StringVar()
+tot402.set(tab402)
+tot403=tk.StringVar()
+tot403.set(tab403)
+tot404=tk.StringVar()
+tot404.set(tab404)
+tot405=tk.StringVar()
+tot405.set(tab405)
+tot406=tk.StringVar()
+tot406.set(tab406)
+tot407=tk.StringVar()
+tot407.set(tab407)
+tot408=tk.StringVar()
+tot408.set(tab408)
+tot409=tk.StringVar()
+tot409.set(tab409)
+tot410=tk.StringVar()
+tot410.set(tab410)
+tot411=tk.StringVar()
+tot411.set(tab411)
+tot412=tk.StringVar()
+tot412.set(tab412)
+tot413=tk.StringVar()
+tot413.set(tab413)
+tot414=tk.StringVar()
+tot414.set(tab414)
+tot415=tk.StringVar()
+tot415.set(tab415)
+tot416=tk.StringVar()
+tot416.set(tab416)
+tot417=tk.StringVar()
+tot417.set(tab417)
+tot418=tk.StringVar()
+tot418.set(tab418)
+tot419=tk.StringVar()
+tot419.set(tab419)
+tot420=tk.StringVar()
+tot420.set(tab420)
+tot421=tk.StringVar()
+tot421.set(tab421)
+tot422=tk.StringVar()
+tot422.set(tab422)
+tot423=tk.StringVar()
+tot423.set(tab423)
+tot424=tk.StringVar()
+tot424.set(tab424)
+tot425=tk.StringVar()
+tot425.set(tab425)
+tot426=tk.StringVar()
+tot426.set(tab426)
+tot427=tk.StringVar()
+tot427.set(tab427)
+tot428=tk.StringVar()
+tot428.set(tab428)
+tot429=tk.StringVar()
+tot429.set(tab429)
+tot430=tk.StringVar()
+tot430.set(tab430)
+tot431=tk.StringVar()
+tot431.set(tab431)
+tot432=tk.StringVar()
+tot432.set(tab432)
+tot433=tk.StringVar()
+tot433.set(tab433)
+tot434=tk.StringVar()
+tot434.set(tab434)
+tot435=tk.StringVar()
+tot435.set(tab435)
+tot436=tk.StringVar()
+tot436.set(tab436)
+tot437=tk.StringVar()
+tot437.set(tab437)
+tot438=tk.StringVar()
+tot438.set(tab438)
+tot439=tk.StringVar()
+tot439.set(tab439)
+tot440=tk.StringVar()
+tot440.set(tab440)
+tot441=tk.StringVar()
+tot441.set(tab441)
+tot442=tk.StringVar()
+tot442.set(tab442)
+tot443=tk.StringVar()
+tot443.set(tab443)
+tot444=tk.StringVar()
+tot444.set(tab444)
+tot445=tk.StringVar()
+tot445.set(tab445)
+tot446=tk.StringVar()
+tot446.set(tab446)
+tot447=tk.StringVar()
+tot447.set(tab447)
+tot448=tk.StringVar()
+tot448.set(tab448)
+tot449=tk.StringVar()
+tot449.set(tab449)
+tot450=tk.StringVar()
+tot450.set(tab450)
+tot451=tk.StringVar()
+tot451.set(tab451)
+tot452=tk.StringVar()
+tot452.set(tab452)
+tot453=tk.StringVar()
+tot453.set(tab453)
+tot454=tk.StringVar()
+tot454.set(tab454)
+tot455=tk.StringVar()
+tot455.set(tab455)
+tot456=tk.StringVar()
+tot456.set(tab456)
+tot457=tk.StringVar()
+tot457.set(tab457)
+tot458=tk.StringVar()
+tot458.set(tab458)
+tot459=tk.StringVar()
+tot459.set(tab459)
+tot460=tk.StringVar()
+tot460.set(tab460)
+tot461=tk.StringVar()
+tot461.set(tab461)
+tot462=tk.StringVar()
+tot462.set(tab462)
+tot463=tk.StringVar()
+tot463.set(tab463)
+tot464=tk.StringVar()
+tot464.set(tab464)
+tot465=tk.StringVar()
+tot465.set(tab465)
+tot466=tk.StringVar()
+tot466.set(tab466)
+tot467=tk.StringVar()
+tot467.set(tab467)
+tot468=tk.StringVar()
+tot468.set(tab468)
+tot469=tk.StringVar()
+tot469.set(tab469)
+tot470=tk.StringVar()
+tot470.set(tab470)
+tot471=tk.StringVar()
+tot471.set(tab471)
+tot472=tk.StringVar()
+tot472.set(tab472)
+tot473=tk.StringVar()
+tot473.set(tab473)
+tot474=tk.StringVar()
+tot474.set(tab474)
+tot475=tk.StringVar()
+tot475.set(tab475)
+tot476=tk.StringVar()
+tot476.set(tab476)
+tot477=tk.StringVar()
+tot477.set(tab477)
+tot478=tk.StringVar()
+tot478.set(tab478)
+tot479=tk.StringVar()
+tot479.set(tab479)
+tot480=tk.StringVar()
+tot480.set(tab480)
+tot481=tk.StringVar()
+tot481.set(tab481)
+tot482=tk.StringVar()
+tot482.set(tab482)
+tot483=tk.StringVar()
+tot483.set(tab483)
+tot484=tk.StringVar()
+tot484.set(tab484)
+tot485=tk.StringVar()
+tot485.set(tab485)
+tot486=tk.StringVar()
+tot486.set(tab486)
+tot487=tk.StringVar()
+tot487.set(tab487)
+tot488=tk.StringVar()
+tot488.set(tab488)
+tot489=tk.StringVar()
+tot489.set(tab489)
+tot490=tk.StringVar()
+tot490.set(tab490)
+tot491=tk.StringVar()
+tot491.set(tab491)
+tot492=tk.StringVar()
+tot492.set(tab492)
+tot493=tk.StringVar()
+tot493.set(tab493)
+tot494=tk.StringVar()
+tot494.set(tab494)
+tot495=tk.StringVar()
+tot495.set(tab495)
+tot496=tk.StringVar()
+tot496.set(tab496)
+tot497=tk.StringVar()
+tot497.set(tab497)
+tot498=tk.StringVar()
+tot498.set(tab498)
+tot499=tk.StringVar()
+tot499.set(tab499)
+tot500=tk.StringVar()
+tot500.set(tab500)
+tot501=tk.StringVar()
+tot501.set(tab501)
+tot502=tk.StringVar()
+tot502.set(tab502)
+tot503=tk.StringVar()
+tot503.set(tab503)
+tot504=tk.StringVar()
+tot504.set(tab504)
+tot505=tk.StringVar()
+tot505.set(tab505)
+tot506=tk.StringVar()
+tot506.set(tab506)
+tot507=tk.StringVar()
+tot507.set(tab507)
+tot508=tk.StringVar()
+tot508.set(tab508)
+tot509=tk.StringVar()
+tot509.set(tab509)
+tot510=tk.StringVar()
+tot510.set(tab510)
+tot511=tk.StringVar()
+tot511.set(tab511)
+tot512=tk.StringVar()
+tot512.set(tab512)
+tot513=tk.StringVar()
+tot513.set(tab513)
+tot514=tk.StringVar()
+tot514.set(tab514)
+tot515=tk.StringVar()
+tot515.set(tab515)
+tot516=tk.StringVar()
+tot516.set(tab516)
+tot517=tk.StringVar()
+tot517.set(tab517)
+tot518=tk.StringVar()
+tot518.set(tab518)
+tot519=tk.StringVar()
+tot519.set(tab519)
+tot520=tk.StringVar()
+tot520.set(tab520)
+tot521=tk.StringVar()
+tot521.set(tab521)
+tot522=tk.StringVar()
+tot522.set(tab522)
+tot523=tk.StringVar()
+tot523.set(tab523)
+tot524=tk.StringVar()
+tot524.set(tab524)
+tot525=tk.StringVar()
+tot525.set(tab525)
+tot526=tk.StringVar()
+tot526.set(tab526)
+tot527=tk.StringVar()
+tot527.set(tab527)
+tot528=tk.StringVar()
+tot528.set(tab528)
+tot529=tk.StringVar()
+tot529.set(tab529)
+tot530=tk.StringVar()
+tot530.set(tab530)
+tot531=tk.StringVar()
+tot531.set(tab531)
+tot532=tk.StringVar()
+tot532.set(tab532)
+tot533=tk.StringVar()
+tot533.set(tab533)
+tot534=tk.StringVar()
+tot534.set(tab534)
+tot535=tk.StringVar()
+tot535.set(tab535)
+tot536=tk.StringVar()
+tot536.set(tab536)
+tot537=tk.StringVar()
+tot537.set(tab537)
+tot538=tk.StringVar()
+tot538.set(tab538)
+tot539=tk.StringVar()
+tot539.set(tab539)
+tot540=tk.StringVar()
+tot540.set(tab540)
+tot541=tk.StringVar()
+tot541.set(tab541)
+tot542=tk.StringVar()
+tot542.set(tab542)
+tot543=tk.StringVar()
+tot543.set(tab543)
+tot544=tk.StringVar()
+tot544.set(tab544)
+tot545=tk.StringVar()
+tot545.set(tab545)
+tot546=tk.StringVar()
+tot546.set(tab546)
+tot547=tk.StringVar()
+tot547.set(tab547)
+tot548=tk.StringVar()
+tot548.set(tab548)
+tot549=tk.StringVar()
+tot549.set(tab549)
+tot550=tk.StringVar()
+tot550.set(tab550)
+tot551=tk.StringVar()
+tot551.set(tab551)
+tot552=tk.StringVar()
+tot552.set(tab552)
+tot553=tk.StringVar()
+tot553.set(tab553)
 
 
 
@@ -2838,36 +4428,36 @@ input7=Entry(form_frame,bg='#2f516a',textvariable=total43,fg='white',width=16,ju
 r53=Label(form_frame,text="TDS Receivable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r53.place(x=80,y=4797)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=4797,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=4797,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=4797,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=4797,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=4797,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=4797,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot266,fg='white',width=16,justify='center').place(x=395,y=4797,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot267,fg='white',width=16,justify='center').place(x=515,y=4797,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot268,fg='white',width=16,justify='center').place(x=645,y=4797,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot269,fg='white',width=16,justify='center').place(x=775,y=4797,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot270,fg='white',width=16,justify='center').place(x=895,y=4797,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot271,fg='white',width=16,justify='center').place(x=1025,y=4797,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total44,fg='white',width=16,justify='center').place(x=1155,y=4797,height=40)
 
 
 r54=Label(form_frame,text="Uncategorised Asset",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r54.place(x=80,y=4887)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=4887,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=4887,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=4887,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=4887,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=4887,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=4887,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot272,fg='white',width=16,justify='center').place(x=395,y=4887,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot273,fg='white',width=16,justify='center').place(x=515,y=4887,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot274,fg='white',width=16,justify='center').place(x=645,y=4887,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot275,fg='white',width=16,justify='center').place(x=775,y=4887,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot276,fg='white',width=16,justify='center').place(x=895,y=4887,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot277,fg='white',width=16,justify='center').place(x=1025,y=4887,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total45,fg='white',width=16,justify='center').place(x=1155,y=4887,height=40)
 
 
 r55=Label(form_frame,text="Undeposited Funds",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r55.place(x=80,y=4977)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=4977,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=4977,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=4977,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=4977,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=4977,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=4977,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot278,fg='white',width=16,justify='center').place(x=395,y=4977,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot279,fg='white',width=16,justify='center').place(x=515,y=4977,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot280,fg='white',width=16,justify='center').place(x=645,y=4977,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot281,fg='white',width=16,justify='center').place(x=775,y=4977,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot282,fg='white',width=16,justify='center').place(x=895,y=4977,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot283,fg='white',width=16,justify='center').place(x=1025,y=4977,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total46,fg='white',width=16,justify='center').place(x=1155,y=4977,height=40)
 
 
@@ -2875,12 +4465,12 @@ input7=Entry(form_frame,bg='#2f516a',textvariable=total46,fg='white',width=16,ju
 r56=Label(form_frame,text="Accumulated Depreciation",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r56.place(x=80,y=5067)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5067,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5067,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5067,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5067,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5067,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5067,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot284,fg='white',width=16,justify='center').place(x=395,y=5067,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot285,fg='white',width=16,justify='center').place(x=515,y=5067,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot286,fg='white',width=16,justify='center').place(x=645,y=5067,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot287,fg='white',width=16,justify='center').place(x=775,y=5067,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot288,fg='white',width=16,justify='center').place(x=895,y=5067,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot289,fg='white',width=16,justify='center').place(x=1025,y=5067,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total47,fg='white',width=16,justify='center').place(x=1155,y=5067,height=40)
 
 
@@ -2888,12 +4478,12 @@ input7=Entry(form_frame,bg='#2f516a',textvariable=total47,fg='white',width=16,ju
 r57=Label(form_frame,text="Buildings and\n Improvements",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r57.place(x=80,y=5157)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5157,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5157,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5157,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5157,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5157,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5157,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot290,fg='white',width=16,justify='center').place(x=395,y=5157,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot291,fg='white',width=16,justify='center').place(x=515,y=5157,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot292,fg='white',width=16,justify='center').place(x=645,y=5157,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot293,fg='white',width=16,justify='center').place(x=775,y=5157,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot294,fg='white',width=16,justify='center').place(x=895,y=5157,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot295,fg='white',width=16,justify='center').place(x=1025,y=5157,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total48,fg='white',width=16,justify='center').place(x=1155,y=5157,height=40)
 
 
@@ -2901,489 +4491,489 @@ input7=Entry(form_frame,bg='#2f516a',textvariable=total48,fg='white',width=16,ju
 r58=Label(form_frame,text="Furniture and \nEquipment",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r58.place(x=80,y=5247)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5247,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5247,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5247,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5247,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5247,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5247,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot296,fg='white',width=16,justify='center').place(x=395,y=5247,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot297,fg='white',width=16,justify='center').place(x=515,y=5247,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot298,fg='white',width=16,justify='center').place(x=645,y=5247,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot299,fg='white',width=16,justify='center').place(x=775,y=5247,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot300,fg='white',width=16,justify='center').place(x=895,y=5247,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot301,fg='white',width=16,justify='center').place(x=1025,y=5247,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total49,fg='white',width=16,justify='center').place(x=1155,y=5247,height=40)
 
 
 r59=Label(form_frame,text="Land",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r59.place(x=80,y=5337)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5337,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5337,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5337,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5337,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5337,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5337,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot302,fg='white',width=16,justify='center').place(x=395,y=5337,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot303,fg='white',width=16,justify='center').place(x=515,y=5337,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot304,fg='white',width=16,justify='center').place(x=645,y=5337,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot305,fg='white',width=16,justify='center').place(x=775,y=5337,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot306,fg='white',width=16,justify='center').place(x=895,y=5337,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot307,fg='white',width=16,justify='center').place(x=1025,y=5337,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total50,fg='white',width=16,justify='center').place(x=1155,y=5337,height=40)
 
 r60=Label(form_frame,text="Leasehold Improvements",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r60.place(x=80,y=5427)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5427,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5427,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5427,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5427,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5427,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5427,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot308,fg='white',width=16,justify='center').place(x=395,y=5427,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot309,fg='white',width=16,justify='center').place(x=515,y=5427,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot310,fg='white',width=16,justify='center').place(x=645,y=5427,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot311,fg='white',width=16,justify='center').place(x=775,y=5427,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot312,fg='white',width=16,justify='center').place(x=895,y=5427,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot313,fg='white',width=16,justify='center').place(x=1025,y=5427,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total51,fg='white',width=16,justify='center').place(x=1155,y=5427,height=40)
 
 r61=Label(form_frame,text="Vehicles",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r61.place(x=80,y=5517)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5517,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5517,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5517,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5517,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5517,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5517,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot314,fg='white',width=16,justify='center').place(x=395,y=5517,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot315,fg='white',width=16,justify='center').place(x=515,y=5517,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot316,fg='white',width=16,justify='center').place(x=645,y=5517,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot317,fg='white',width=16,justify='center').place(x=775,y=5517,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot318,fg='white',width=16,justify='center').place(x=895,y=5517,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot319,fg='white',width=16,justify='center').place(x=1025,y=5517,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total52,fg='white',width=16,justify='center').place(x=1155,y=5517,height=40)
 
 r62=Label(form_frame,text="CGST Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r62.place(x=80,y=5607)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5607,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5607,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5607,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5607,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5607,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5607,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot320,fg='white',width=16,justify='center').place(x=395,y=5607,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot321,fg='white',width=16,justify='center').place(x=515,y=5607,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot322,fg='white',width=16,justify='center').place(x=645,y=5607,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot323,fg='white',width=16,justify='center').place(x=775,y=5607,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot324,fg='white',width=16,justify='center').place(x=895,y=5607,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot325,fg='white',width=16,justify='center').place(x=1025,y=5607,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total53,fg='white',width=16,justify='center').place(x=1155,y=5607,height=40)
 
 r63=Label(form_frame,text="CST Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r63.place(x=80,y=5697)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5697,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5697,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5697,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5697,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5697,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5697,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot326,fg='white',width=16,justify='center').place(x=395,y=5697,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot327,fg='white',width=16,justify='center').place(x=515,y=5697,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot328,fg='white',width=16,justify='center').place(x=645,y=5697,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot329,fg='white',width=16,justify='center').place(x=775,y=5697,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot330,fg='white',width=16,justify='center').place(x=895,y=5697,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot331,fg='white',width=16,justify='center').place(x=1025,y=5697,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total54,fg='white',width=16,justify='center').place(x=1155,y=5697,height=40)
 
 
 r64=Label(form_frame,text="CST Suspense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r64.place(x=80,y=5787)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5787,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5787,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5787,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5787,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5787,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5787,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot332,fg='white',width=16,justify='center').place(x=395,y=5787,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot333,fg='white',width=16,justify='center').place(x=515,y=5787,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot334,fg='white',width=16,justify='center').place(x=645,y=5787,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot335,fg='white',width=16,justify='center').place(x=775,y=5787,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot336,fg='white',width=16,justify='center').place(x=895,y=5787,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot337,fg='white',width=16,justify='center').place(x=1025,y=5787,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total55,fg='white',width=16,justify='center').place(x=1155,y=5787,height=40)
 
 
 r65=Label(form_frame,text="GST Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r65.place(x=80,y=5877)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5877,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5877,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5877,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5877,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5877,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5877,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot338,fg='white',width=16,justify='center').place(x=395,y=5877,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot339,fg='white',width=16,justify='center').place(x=515,y=5877,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot340,fg='white',width=16,justify='center').place(x=645,y=5877,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot341,fg='white',width=16,justify='center').place(x=775,y=5877,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot342,fg='white',width=16,justify='center').place(x=895,y=5877,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot343,fg='white',width=16,justify='center').place(x=1025,y=5877,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total56,fg='white',width=16,justify='center').place(x=1155,y=5877,height=40)
 
 
 r66=Label(form_frame,text="GST Suspense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r66.place(x=80,y=5967)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=5967,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=5967,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=5967,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=5967,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=5967,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=5967,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot344,fg='white',width=16,justify='center').place(x=395,y=5967,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot345,fg='white',width=16,justify='center').place(x=515,y=5967,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot346,fg='white',width=16,justify='center').place(x=645,y=5967,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot347,fg='white',width=16,justify='center').place(x=775,y=5967,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot348,fg='white',width=16,justify='center').place(x=895,y=5967,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot349,fg='white',width=16,justify='center').place(x=1025,y=5967,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total57,fg='white',width=16,justify='center').place(x=1155,y=5967,height=40)
 
 
 r67=Label(form_frame,text="IGST Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r67.place(x=80,y=6057)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6057,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6057,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6057,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6057,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6057,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6057,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot350,fg='white',width=16,justify='center').place(x=395,y=6057,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot351,fg='white',width=16,justify='center').place(x=515,y=6057,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot352,fg='white',width=16,justify='center').place(x=645,y=6057,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot353,fg='white',width=16,justify='center').place(x=775,y=6057,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot354,fg='white',width=16,justify='center').place(x=895,y=6057,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot355,fg='white',width=16,justify='center').place(x=1025,y=6057,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total58,fg='white',width=16,justify='center').place(x=1155,y=6057,height=40)
 
 
 r68=Label(form_frame,text="Input CGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r68.place(x=80,y=6147)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6147,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6147,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6147,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6147,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6147,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6147,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot356,fg='white',width=16,justify='center').place(x=395,y=6147,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot357,fg='white',width=16,justify='center').place(x=515,y=6147,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot358,fg='white',width=16,justify='center').place(x=645,y=6147,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot359,fg='white',width=16,justify='center').place(x=775,y=6147,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot360,fg='white',width=16,justify='center').place(x=895,y=6147,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot361,fg='white',width=16,justify='center').place(x=1025,y=6147,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total59,fg='white',width=16,justify='center').place(x=1155,y=6147,height=40)
 
 
 r69=Label(form_frame,text="Input CGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r69.place(x=80,y=6237)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6237,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6237,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6237,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6237,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6237,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6237,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot362,fg='white',width=16,justify='center').place(x=395,y=6237,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot363,fg='white',width=16,justify='center').place(x=515,y=6237,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot364,fg='white',width=16,justify='center').place(x=645,y=6237,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot365,fg='white',width=16,justify='center').place(x=775,y=6237,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot366,fg='white',width=16,justify='center').place(x=895,y=6237,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot367,fg='white',width=16,justify='center').place(x=1025,y=6237,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total60,fg='white',width=16,justify='center').place(x=1155,y=6237,height=40)
 
 
 r70=Label(form_frame,text="Input IGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r70.place(x=80,y=6327)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6327,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6327,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6327,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6327,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6327,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6327,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot368,fg='white',width=16,justify='center').place(x=395,y=6327,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot369,fg='white',width=16,justify='center').place(x=515,y=6327,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot370,fg='white',width=16,justify='center').place(x=645,y=6327,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot371,fg='white',width=16,justify='center').place(x=775,y=6327,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot372,fg='white',width=16,justify='center').place(x=895,y=6327,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot373,fg='white',width=16,justify='center').place(x=1025,y=6327,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total61,fg='white',width=16,justify='center').place(x=1155,y=6327,height=40)
 
 
 r71=Label(form_frame,text="Input IGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r71.place(x=80,y=6417)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6417,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6417,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6417,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6417,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6417,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6417,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot374,fg='white',width=16,justify='center').place(x=395,y=6417,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot375,fg='white',width=16,justify='center').place(x=515,y=6417,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot376,fg='white',width=16,justify='center').place(x=645,y=6417,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot377,fg='white',width=16,justify='center').place(x=775,y=6417,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot378,fg='white',width=16,justify='center').place(x=895,y=6417,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot379,fg='white',width=16,justify='center').place(x=1025,y=6417,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total62,fg='white',width=16,justify='center').place(x=1155,y=6417,height=40)
 
 
 r72=Label(form_frame,text="Input Krishi \nKalyan Cess",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r72.place(x=80,y=6507)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6507,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6507,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6507,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6507,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6507,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6507,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot380,fg='white',width=16,justify='center').place(x=395,y=6507,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot381,fg='white',width=16,justify='center').place(x=515,y=6507,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot382,fg='white',width=16,justify='center').place(x=645,y=6507,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot383,fg='white',width=16,justify='center').place(x=775,y=6507,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot384,fg='white',width=16,justify='center').place(x=895,y=6507,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot385,fg='white',width=16,justify='center').place(x=1025,y=6507,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total63,fg='white',width=16,justify='center').place(x=1155,y=6507,height=40)
 
 r73=Label(form_frame,text="Input Krishi Kalyan\n Cess RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r73.place(x=80,y=6597)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6597,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6597,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6597,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6597,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6597,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6597,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot386,fg='white',width=16,justify='center').place(x=395,y=6597,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot387,fg='white',width=16,justify='center').place(x=515,y=6597,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot388,fg='white',width=16,justify='center').place(x=645,y=6597,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot389,fg='white',width=16,justify='center').place(x=775,y=6597,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot390,fg='white',width=16,justify='center').place(x=895,y=6597,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot391,fg='white',width=16,justify='center').place(x=1025,y=6597,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total64,fg='white',width=16,justify='center').place(x=1155,y=6597,height=40)
 
 r74=Label(form_frame,text="Input Service Tax",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r74.place(x=80,y=6687)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6687,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6687,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6687,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6687,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6687,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6687,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot392,fg='white',width=16,justify='center').place(x=395,y=6687,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot393,fg='white',width=16,justify='center').place(x=515,y=6687,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot394,fg='white',width=16,justify='center').place(x=645,y=6687,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot395,fg='white',width=16,justify='center').place(x=775,y=6687,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot396,fg='white',width=16,justify='center').place(x=895,y=6687,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot397,fg='white',width=16,justify='center').place(x=1025,y=6687,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total65,fg='white',width=16,justify='center').place(x=1155,y=6687,height=40)
 
 
 r75=Label(form_frame,text="Input Service Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r75.place(x=80,y=6777)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6777,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6777,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6777,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6777,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6777,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6777,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot398,fg='white',width=16,justify='center').place(x=395,y=6777,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot399,fg='white',width=16,justify='center').place(x=515,y=6777,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot400,fg='white',width=16,justify='center').place(x=645,y=6777,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot401,fg='white',width=16,justify='center').place(x=775,y=6777,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot402,fg='white',width=16,justify='center').place(x=895,y=6777,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot403,fg='white',width=16,justify='center').place(x=1025,y=6777,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total66,fg='white',width=16,justify='center').place(x=1155,y=6777,height=40)
 
 
 r76=Label(form_frame,text="Input SGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r76.place(x=80,y=6867)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6867,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6867,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6867,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6867,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6867,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6867,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot404,fg='white',width=16,justify='center').place(x=395,y=6867,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot405,fg='white',width=16,justify='center').place(x=515,y=6867,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot406,fg='white',width=16,justify='center').place(x=645,y=6867,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot407,fg='white',width=16,justify='center').place(x=775,y=6867,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot408,fg='white',width=16,justify='center').place(x=895,y=6867,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot409,fg='white',width=16,justify='center').place(x=1025,y=6867,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total67,fg='white',width=16,justify='center').place(x=1155,y=6867,height=40)
 
 
 r77=Label(form_frame,text="Input SGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r77.place(x=80,y=6957)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=6957,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=6957,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=6957,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=6957,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=6957,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=6957,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot410,fg='white',width=16,justify='center').place(x=395,y=6957,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot411,fg='white',width=16,justify='center').place(x=515,y=6957,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot412,fg='white',width=16,justify='center').place(x=645,y=6957,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot413,fg='white',width=16,justify='center').place(x=775,y=6957,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot414,fg='white',width=16,justify='center').place(x=895,y=6957,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot415,fg='white',width=16,justify='center').place(x=1025,y=6957,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total68,fg='white',width=16,justify='center').place(x=1155,y=6957,height=40)
 
 
 r78=Label(form_frame,text="Input VAT 14%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r78.place(x=80,y=7047)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7047,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7047,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7047,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7047,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7047,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7047,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot416,fg='white',width=16,justify='center').place(x=395,y=7047,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot417,fg='white',width=16,justify='center').place(x=515,y=7047,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot418,fg='white',width=16,justify='center').place(x=645,y=7047,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot419,fg='white',width=16,justify='center').place(x=775,y=7047,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot420,fg='white',width=16,justify='center').place(x=895,y=7047,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot421,fg='white',width=16,justify='center').place(x=1025,y=7047,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total69,fg='white',width=16,justify='center').place(x=1155,y=7047,height=40)
 
 r79=Label(form_frame,text="Input VAT 4%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r79.place(x=80,y=7137)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7137,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7137,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7137,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7137,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7137,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7137,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot422,fg='white',width=16,justify='center').place(x=395,y=7137,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot423,fg='white',width=16,justify='center').place(x=515,y=7137,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot424,fg='white',width=16,justify='center').place(x=645,y=7137,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot425,fg='white',width=16,justify='center').place(x=775,y=7137,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot426,fg='white',width=16,justify='center').place(x=895,y=7137,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot427,fg='white',width=16,justify='center').place(x=1025,y=7137,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total70,fg='white',width=16,justify='center').place(x=1155,y=7137,height=40)
 
 r80=Label(form_frame,text="Input VAT 5%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r80.place(x=80,y=7227)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7227,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7227,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7227,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7227,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7227,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7227,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot428,fg='white',width=16,justify='center').place(x=395,y=7227,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot429,fg='white',width=16,justify='center').place(x=515,y=7227,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot430,fg='white',width=16,justify='center').place(x=645,y=7227,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot431,fg='white',width=16,justify='center').place(x=775,y=7227,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot432,fg='white',width=16,justify='center').place(x=895,y=7227,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot433,fg='white',width=16,justify='center').place(x=1025,y=7227,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total71,fg='white',width=16,justify='center').place(x=1155,y=7227,height=40)
 
 r81=Label(form_frame,text="Krishi Kalyan Cess Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r81.place(x=80,y=7317)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7317,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7317,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7317,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7317,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7317,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7317,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot434,fg='white',width=16,justify='center').place(x=395,y=7317,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot435,fg='white',width=16,justify='center').place(x=515,y=7317,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot436,fg='white',width=16,justify='center').place(x=645,y=7317,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot437,fg='white',width=16,justify='center').place(x=775,y=7317,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot438,fg='white',width=16,justify='center').place(x=895,y=7317,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot439,fg='white',width=16,justify='center').place(x=1025,y=7317,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total72,fg='white',width=16,justify='center').place(x=1155,y=7317,height=40)
 
 r82=Label(form_frame,text="Krishi Kalyan Cess Suspense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r82.place(x=80,y=7407)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7407,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7407,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7407,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7407,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7407,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7407,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot440,fg='white',width=16,justify='center').place(x=395,y=7407,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot441,fg='white',width=16,justify='center').place(x=515,y=7407,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot442,fg='white',width=16,justify='center').place(x=645,y=7407,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot443,fg='white',width=16,justify='center').place(x=775,y=7407,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot444,fg='white',width=16,justify='center').place(x=895,y=7407,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot445,fg='white',width=16,justify='center').place(x=1025,y=7407,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total73,fg='white',width=16,justify='center').place(x=1155,y=7407,height=40)
 
 r83=Label(form_frame,text="Output CGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r83.place(x=80,y=7497)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7497,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7497,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7497,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7497,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7497,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7497,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot446,fg='white',width=16,justify='center').place(x=395,y=7497,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot447,fg='white',width=16,justify='center').place(x=515,y=7497,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot448,fg='white',width=16,justify='center').place(x=645,y=7497,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot449,fg='white',width=16,justify='center').place(x=775,y=7497,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot450,fg='white',width=16,justify='center').place(x=895,y=7497,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot451,fg='white',width=16,justify='center').place(x=1025,y=7497,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total74,fg='white',width=16,justify='center').place(x=1155,y=7497,height=40)
 
 r84=Label(form_frame,text="Output CGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r84.place(x=80,y=7587)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7587,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7587,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7587,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7587,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7587,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7587,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot452,fg='white',width=16,justify='center').place(x=395,y=7587,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot453,fg='white',width=16,justify='center').place(x=515,y=7587,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot454,fg='white',width=16,justify='center').place(x=645,y=7587,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot455,fg='white',width=16,justify='center').place(x=775,y=7587,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot456,fg='white',width=16,justify='center').place(x=895,y=7587,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot457,fg='white',width=16,justify='center').place(x=1025,y=7587,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total75,fg='white',width=16,justify='center').place(x=1155,y=7587,height=40)
 
 r85=Label(form_frame,text="Output CST 2%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r85.place(x=80,y=7677)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7677,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7677,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7677,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7677,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7677,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7677,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot458,fg='white',width=16,justify='center').place(x=395,y=7677,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot459,fg='white',width=16,justify='center').place(x=515,y=7677,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot460,fg='white',width=16,justify='center').place(x=645,y=7677,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot461,fg='white',width=16,justify='center').place(x=775,y=7677,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot462,fg='white',width=16,justify='center').place(x=895,y=7677,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot463,fg='white',width=16,justify='center').place(x=1025,y=7677,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total76,fg='white',width=16,justify='center').place(x=1155,y=7677,height=40)
 
 r86=Label(form_frame,text="Output IGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r86.place(x=80,y=7767)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7767,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7767,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7767,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7767,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7767,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7767,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot464,fg='white',width=16,justify='center').place(x=395,y=7767,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot465,fg='white',width=16,justify='center').place(x=515,y=7767,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot466,fg='white',width=16,justify='center').place(x=645,y=7767,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot467,fg='white',width=16,justify='center').place(x=775,y=7767,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot468,fg='white',width=16,justify='center').place(x=895,y=7767,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot469,fg='white',width=16,justify='center').place(x=1025,y=7767,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total77,fg='white',width=16,justify='center').place(x=1155,y=7767,height=40)
 
 r87=Label(form_frame,text="Output IGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r87.place(x=80,y=7857)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7857,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7857,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7857,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7857,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7857,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7857,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot470,fg='white',width=16,justify='center').place(x=395,y=7857,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot471,fg='white',width=16,justify='center').place(x=515,y=7857,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot472,fg='white',width=16,justify='center').place(x=645,y=7857,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot473,fg='white',width=16,justify='center').place(x=775,y=7857,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot474,fg='white',width=16,justify='center').place(x=895,y=7857,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot475,fg='white',width=16,justify='center').place(x=1025,y=7857,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total78,fg='white',width=16,justify='center').place(x=1155,y=7857,height=40)
 
 r88=Label(form_frame,text="Output Krishi Kalyan Cess",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r88.place(x=80,y=7947)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=7947,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=7947,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=7947,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=7947,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=7947,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=7947,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot476,fg='white',width=16,justify='center').place(x=395,y=7947,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot477,fg='white',width=16,justify='center').place(x=515,y=7947,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot478,fg='white',width=16,justify='center').place(x=645,y=7947,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot479,fg='white',width=16,justify='center').place(x=775,y=7947,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot480,fg='white',width=16,justify='center').place(x=895,y=7947,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot481,fg='white',width=16,justify='center').place(x=1025,y=7947,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total79,fg='white',width=16,justify='center').place(x=1155,y=7947,height=40)
 
 r89=Label(form_frame,text="Output Krishi \nKalyan Cess RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r89.place(x=80,y=8037)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8037,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8037,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8037,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8037,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8037,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8037,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot482,fg='white',width=16,justify='center').place(x=395,y=8037,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot483,fg='white',width=16,justify='center').place(x=515,y=8037,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot484,fg='white',width=16,justify='center').place(x=645,y=8037,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot485,fg='white',width=16,justify='center').place(x=775,y=8037,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot486,fg='white',width=16,justify='center').place(x=895,y=8037,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot487,fg='white',width=16,justify='center').place(x=1025,y=8037,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total80,fg='white',width=16,justify='center').place(x=1155,y=8037,height=40)
 
 r90=Label(form_frame,text="Output Service Tax",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r90.place(x=80,y=8127)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8127,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8127,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8127,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8127,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8127,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8127,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot488,fg='white',width=16,justify='center').place(x=395,y=8127,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot489,fg='white',width=16,justify='center').place(x=515,y=8127,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot490,fg='white',width=16,justify='center').place(x=645,y=8127,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot491,fg='white',width=16,justify='center').place(x=775,y=8127,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot492,fg='white',width=16,justify='center').place(x=895,y=8127,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot493,fg='white',width=16,justify='center').place(x=1025,y=8127,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total81,fg='white',width=16,justify='center').place(x=1155,y=8127,height=40)
 
 r91=Label(form_frame,text="Output Service Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r91.place(x=80,y=8217)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8217,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8217,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8217,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8217,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8217,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8217,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot494,fg='white',width=16,justify='center').place(x=395,y=8217,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot495,fg='white',width=16,justify='center').place(x=515,y=8217,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot496,fg='white',width=16,justify='center').place(x=645,y=8217,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot497,fg='white',width=16,justify='center').place(x=775,y=8217,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot498,fg='white',width=16,justify='center').place(x=895,y=8217,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot499,fg='white',width=16,justify='center').place(x=1025,y=8217,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total82,fg='white',width=16,justify='center').place(x=1155,y=8217,height=40)
 
 r92=Label(form_frame,text="Output SGST",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r92.place(x=80,y=8307)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8307,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8307,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8307,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8307,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8307,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8307,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot500,fg='white',width=16,justify='center').place(x=395,y=8307,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot501,fg='white',width=16,justify='center').place(x=515,y=8307,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot502,fg='white',width=16,justify='center').place(x=645,y=8307,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot503,fg='white',width=16,justify='center').place(x=775,y=8307,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot504,fg='white',width=16,justify='center').place(x=895,y=8307,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot505,fg='white',width=16,justify='center').place(x=1025,y=8307,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total83,fg='white',width=16,justify='center').place(x=1155,y=8307,height=40)
 
 r93=Label(form_frame,text="Output SGST Tax RCM",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r93.place(x=80,y=8397)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8397,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8397,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8397,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8397,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8397,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8397,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot506,fg='white',width=16,justify='center').place(x=395,y=8397,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot507,fg='white',width=16,justify='center').place(x=515,y=8397,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot508,fg='white',width=16,justify='center').place(x=645,y=8397,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot509,fg='white',width=16,justify='center').place(x=775,y=8397,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot510,fg='white',width=16,justify='center').place(x=895,y=8397,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot511,fg='white',width=16,justify='center').place(x=1025,y=8397,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total84,fg='white',width=16,justify='center').place(x=1155,y=8397,height=40)
 
 
 r94=Label(form_frame,text="Output VAT 14%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r94.place(x=80,y=8487)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8487,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8487,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8487,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8487,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8487,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8487,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot512,fg='white',width=16,justify='center').place(x=395,y=8487,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot513,fg='white',width=16,justify='center').place(x=515,y=8487,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot514,fg='white',width=16,justify='center').place(x=645,y=8487,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot515,fg='white',width=16,justify='center').place(x=775,y=8487,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot516,fg='white',width=16,justify='center').place(x=895,y=8487,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot517,fg='white',width=16,justify='center').place(x=1025,y=8487,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total85,fg='white',width=16,justify='center').place(x=1155,y=8487,height=40)
 
 r95=Label(form_frame,text="Output VAT 4%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r95.place(x=80,y=8577)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8577,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8577,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8577,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8577,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8577,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8577,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot518,fg='white',width=16,justify='center').place(x=395,y=8577,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot519,fg='white',width=16,justify='center').place(x=515,y=8577,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot520,fg='white',width=16,justify='center').place(x=645,y=8577,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot521,fg='white',width=16,justify='center').place(x=775,y=8577,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot522,fg='white',width=16,justify='center').place(x=895,y=8577,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot523,fg='white',width=16,justify='center').place(x=1025,y=8577,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total86,fg='white',width=16,justify='center').place(x=1155,y=8577,height=40)
 
 r96=Label(form_frame,text="Output VAT 5%",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r96.place(x=80,y=8667)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8667,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8667,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8667,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8667,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8667,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8667,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot524,fg='white',width=16,justify='center').place(x=395,y=8667,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot525,fg='white',width=16,justify='center').place(x=515,y=8667,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot526,fg='white',width=16,justify='center').place(x=645,y=8667,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot527,fg='white',width=16,justify='center').place(x=775,y=8667,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot528,fg='white',width=16,justify='center').place(x=895,y=8667,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot529,fg='white',width=16,justify='center').place(x=1025,y=8667,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total87,fg='white',width=16,justify='center').place(x=1155,y=8667,height=40)
 
 r97=Label(form_frame,text="Service Tax Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r97.place(x=80,y=8757)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8757,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8757,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8757,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8757,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8757,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8757,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot530,fg='white',width=16,justify='center').place(x=395,y=8757,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot531,fg='white',width=16,justify='center').place(x=515,y=8757,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot532,fg='white',width=16,justify='center').place(x=645,y=8757,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot533,fg='white',width=16,justify='center').place(x=775,y=8757,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot534,fg='white',width=16,justify='center').place(x=895,y=8757,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot535,fg='white',width=16,justify='center').place(x=1025,y=8757,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total88,fg='white',width=16,justify='center').place(x=1155,y=8757,height=40)
 
 r98=Label(form_frame,text="Service Tax Suspense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r98.place(x=80,y=8847)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8847,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8847,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8847,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8847,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8847,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8847,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot536,fg='white',width=16,justify='center').place(x=395,y=8847,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot537,fg='white',width=16,justify='center').place(x=515,y=8847,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot538,fg='white',width=16,justify='center').place(x=645,y=8847,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot539,fg='white',width=16,justify='center').place(x=775,y=8847,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot540,fg='white',width=16,justify='center').place(x=895,y=8847,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot541,fg='white',width=16,justify='center').place(x=1025,y=8847,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total89,fg='white',width=16,justify='center').place(x=1155,y=8847,height=40)
 
 r99=Label(form_frame,text="SGST Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r99.place(x=80,y=8937)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=8937,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=8937,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=8937,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=8937,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=8937,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=8937,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot542,fg='white',width=16,justify='center').place(x=395,y=8937,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot543,fg='white',width=16,justify='center').place(x=515,y=8937,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot544,fg='white',width=16,justify='center').place(x=645,y=8937,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot545,fg='white',width=16,justify='center').place(x=775,y=8937,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot546,fg='white',width=16,justify='center').place(x=895,y=8937,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot547,fg='white',width=16,justify='center').place(x=1025,y=8937,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total89,fg='white',width=16,justify='center').place(x=1155,y=8937,height=40)
 
 r100=Label(form_frame,text="Swachh Bharat\n Cess Payable",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
 r100.place(x=80,y=9027)
 
-input1=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=395,y=9027,height=40)
-input2=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=515,y=9027,height=40)
-input3=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=645,y=9027,height=40)
-input4=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=775,y=9027,height=40)
-input5=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=895,y=9027,height=40)
-input6=Entry(form_frame,bg='#2f516a',fg='white',width=16,justify='center').place(x=1025,y=9027,height=40)
+input1=Entry(form_frame,bg='#2f516a',textvariable=tot548,fg='white',width=16,justify='center').place(x=395,y=9027,height=40)
+input2=Entry(form_frame,bg='#2f516a',textvariable=tot549,fg='white',width=16,justify='center').place(x=515,y=9027,height=40)
+input3=Entry(form_frame,bg='#2f516a',textvariable=tot550,fg='white',width=16,justify='center').place(x=645,y=9027,height=40)
+input4=Entry(form_frame,bg='#2f516a',textvariable=tot551,fg='white',width=16,justify='center').place(x=775,y=9027,height=40)
+input5=Entry(form_frame,bg='#2f516a',textvariable=tot552,fg='white',width=16,justify='center').place(x=895,y=9027,height=40)
+input6=Entry(form_frame,bg='#2f516a',textvariable=tot553,fg='white',width=16,justify='center').place(x=1025,y=9027,height=40)
 input7=Entry(form_frame,bg='#2f516a',textvariable=total91,fg='white',width=16,justify='center').place(x=1155,y=9027,height=40)
 
 r101=Label(form_frame,text="Swachh Bharat\n Cess Suspense",bg='#243e55' ,fg="white",font=('Arial',16),justify='left')
