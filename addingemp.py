@@ -27,7 +27,7 @@ def fun():#db connection
 
 
 
-def changing_data():
+def changing_datas():
     
     def getting_data(event):
         global pf,pj,est,pt,da,hra,hra1,hra2,hra3,basic
@@ -333,7 +333,13 @@ def changing_data():
     img.place(x=0,y=0)
     
     
-    
+    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
+    # F2.place(x=0.0, y=100, width=500, height=1100)
+    # load = Image.open("emp.png")
+    # render = ImageTk.PhotoImage(load)
+    # img = Label(F2,image=render,bg="#243e55")
+    # img.image = render
+    # img.place(x=0,y=0)
     
 
     label2=Label(F, text="Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -652,25 +658,132 @@ def changing_data():
 
 
 def edit_employee():
-    def getting_data(event):
+    
+    def getting_dataq(event):
+        # global pf,pj,est,pt,da,hra,hra1,hra2,hra3,basic
+        # da.set(0)
+        # basic=basic.get()
+        # # basic = label1_basic.get()
+        # livein = drop1_live.get()
+        # age = drop3_ages.get()
+        # basic =int(float(basic))
+        # da_das = int(basic * 10)/100;
+        # da.set(da_das)
+        # print(da_das)
+        # basicda = int(basic) + int(da_das)
+     
+        # pj = int(float(basicda) * 85) / 100;
+        
+        # label1_basic.insert(0,pj)
+        # basic_insert="{:.2f}".format(float(pj))
+        # label1_basic.insert(0,basic_insert )
+        # # label1_basic.set(pj)
+        # basics.set(pj)
+        # print("123")
+        # print(basic)
+        # print(da_das)
+        # print("123")
+        # if (basic <= basic) :
+        #     pf = int(float(basicda) * 12) / 100;
+        # else :
+        #     pf = 0;
+        # provifund.set(pf) 
+            
+        
+        
+        # if (basic <= basic) :
+        #     est = int(float(basicda) * 0.75) / 100;
+        # else :
+        #     est = 0;
+        # esi.set(est)
+        # basicda = float(basicda)
+        # print('every')
+        # hra2 = int(hrareceived.get())
+        # print(hra2)
+        # hra3 = int(totalrentpaid.get()) - int(basicda) * 10 / 100;
+        # print(hra3)
+        # hra1=0
+        # print("hai")
+    
+        # if (livein == "Yes"):
+        #     hra1 = int(float(basicda) * 50) / 100;
+        #     print(hra1)
+        # elif (livein == "No"):
+        #     hra1 = int(float(basicda) * 40) / 100;
+        #     print(hra1)
+        #     print("hello")
+        # hra = min(hra1, hra2, hra3);
+        # print(hra1)
+        # print(hra2)
+        # print(hra3)
+        # print(hra)
+        # othamount1.set(hra)
+        # print("bruh")
+        # print(age)
+        # pt=0;
+        # age= int(age)
+        # # basicda = float(basicda)
+        # if (age < 60): 
+        #     if (basicda <= (250000 / 12)) :
+        #         pt = 0;
+        #     elif (basicda <= (500000 / 12) and basicda > (250000 / 12)) :
+        #         pt = int(float(basicda) * 5) / 100;
+        #     elif (basicda <= (1000000 / 12) and basicda > (500000 / 12)) :
+        #         pt = int(float(basicda) * 20) / 100;
+        #     else :
+        #         pt = int(float(basicda) * 30) / 100;
+            
+        
+        # elif (age < 80) and (age >= 60) :
+        #     if (basicda <= (300000 / 12)) :
+        #         pt = 0;
+        #     elif (basicda <= (500000 / 12) and basicda > (300000 / 12)) :
+        #         pt = int(float(basicda) * 5) / 100;
+        #     elif (basicda <= (1000000 / 12) and basicda > (500000 / 12)) :
+        #         pt = int(float(basicda) * 20) / 100;
+        #     else :
+        #         pt = int(float(basicda) * 30) / 100;
+            
+        # else :
+        #     if (basicda <= (500000 / 12)): 
+        #         pt = 0;
+        #     elif (basicda <= (1000000 / 12) and basicda > (500000 / 12)) :
+        #         pt = int(float(basicda) * 20) / 100;
+        #     else : 
+        #         pt = int(float(basicda) * 30) / 100;
+        # proftax.set(pt)
+        # print("bro")
+        # print(pt)
+        # print(age)
+        
+        
         global pf,pj,est,pt,da,hra,hra1,hra2,hra3,basic
         da.set(0)
-       
-        livein = drop1_livein.get()
-        age = drop3_age.get()
-        da_da = int(float(basic) * 10)/100;
+        basic = "0"
+        basic = str(basic)
+      
+        basic=label1_basic.get()
+        livein = drop1_live.get()
+        age = drop3_ages.get()
+        # basic=int(float(basic))
+        da_da = int(float(basic) * 10) / 100;
         da.set(da_da)
-        basicda = int(basic) + int(da_da)
-     
-        pj = int(float(basicda) * 85) / 100;
+        basicda = int(float(basic) + int(da_da))
         
-        label1_basic.insert(0,pj)
-        basic_insert="{:.2f}".format(float(pj))
-        label1_basic.insert(0,basic_insert )
+        if (basic == basic) :
+            pj = int(float(basicda) * 85) / 100;
+        else :
+            pj = 0;
+        # label1_basic.insert(0,pj)
+        # basic_insert="{:.2f}".format(float(pj))
+        # label1_basic.insert(0,basic_insert )
         # label1_basic.set(pj)
-        basic.set(pj)
+        basics.set(pj)
         print("123")
-        
+        print(pj)
+        print(basicda)
+        print(basic)
+        # print(confirm)
         print("123")
         if (basic <= basic) :
             pf = int(float(basicda) * 12) / 100;
@@ -878,7 +991,7 @@ def edit_employee():
     praccountnumber=StringVar()
     esinumber=StringVar()
     esidispensaryname=StringVar()
-    basic=StringVar()
+    basics=StringVar()
     da=StringVar()
     othincome1=StringVar()
     othamount1=StringVar()
@@ -984,7 +1097,7 @@ def edit_employee():
     esidispensaryname.set(existing_esidispensaryname)
 
     existing_basic=data[28]
-    basic.set(existing_basic)
+    basics.set(existing_basic)
 
     existing_da=data[29]
     da.set(existing_da)
@@ -1139,7 +1252,7 @@ def edit_employee():
                     "74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100")
     place_of_supply1.place(x=950,y=270)
     drop3_ages.place(x=950,y=310,height=40,width=200)
-    drop3_ages.bind("<KeyRelease>",getting_data)
+    drop3_ages.bind("<KeyRelease>",getting_dataq)
 
 
     label2=Label(F, text="Mobile", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1200,13 +1313,13 @@ def edit_employee():
     label2.place(x=400,y=840)
     label2_paid=Entry(F,bg='#2f516a',fg='#fff',textvariable=totalrentpaid, font=('times new roman', 11, 'bold'))
     label2_paid.place(x=400,y=880,height=40,width=200)
-    label2_paid.bind("<KeyRelease>",getting_data)
+    label2_paid.bind("<KeyRelease>",getting_dataq)
 
     label3=Label(F, text="HRA Received", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=675,y=840)
     label3_hrrec=Entry(F,bg='#2f516a',fg='#fff',textvariable=hrareceived, font=('times new roman', 11, 'bold'))
     label3_hrrec.place(x=675,y=880,height=40,width=200)
-    label3_hrrec.bind("<KeyRelease>",getting_data)
+    label3_hrrec.bind("<KeyRelease>",getting_dataq)
 
     CheckVar1 = IntVar()
     sanitizer1_lbl=tk.Label(F,text="Do you live in metro cities? ",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1214,7 +1327,7 @@ def edit_employee():
     drop1_live['values']=("Yes","No")
     sanitizer1_lbl.place(x=950,y=840)
     drop1_live.place(x=950,y=880,height=40,width=200)
-    drop1_live.bind("<KeyRelease>",getting_data)
+    drop1_live.bind("<KeyRelease>",getting_dataq)
 
     label1=Label(F, text="Statutory Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=670,y=960)
@@ -1280,21 +1393,21 @@ def edit_employee():
 
     label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=1700)
-    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic, font=('times new roman', 11, 'bold'))
+    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basics, font=('times new roman', 11, 'bold'))
     label1_basic.place(x=280,y=1700,height=40,width=230)
-    label1_basic.bind("<KeyRelease>",getting_data)
+    label1_basic.bind("<KeyRelease>",getting_dataq)
 
     label1=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=1760)
     label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable=da, font=('times new roman', 11, 'bold'))
     label1_da.place(x=280,y=1760,height=40,width=230)
-    label1_da.bind("<KeyRelease>",getting_data)
+    label1_da.bind("<KeyRelease>",getting_dataq)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othincome1, font=('times new roman', 11, 'bold'))
     label1.place(x=40,y=1820,height=40,width=230)
     label1_othamount1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othamount1, font=('times new roman', 11, 'bold'))
     label1_othamount1.place(x=280,y=1820,height=40,width=230)
-    label1_othamount1.bind("<KeyRelease>",getting_data)
+    label1_othamount1.bind("<KeyRelease>",getting_dataq)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=othincome2, font=('times new roman', 11, 'bold'))
     label1.place(x=40,y=1880,height=40,width=230)
@@ -1331,19 +1444,19 @@ def edit_employee():
     label1.place(x=700,y=1700)
     label1_provifund=Entry(F,bg='#2f516a',fg='#fff',textvariable=provifund, font=('times new roman', 11, 'bold'))
     label1_provifund.place(x=940,y=1700,height=40,width=230)
-    label1_provifund.bind("<KeyRelease>",getting_data)
+    label1_provifund.bind("<KeyRelease>",getting_dataq)
 
     label1=Label(F, text="Profession Tax", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1760)
     label1_proftax=Entry(F,bg='#2f516a',fg='#fff',textvariable=proftax, font=('times new roman', 11, 'bold'))
     label1_proftax.place(x=940,y=1760,height=40,width=230)
-    label1_proftax.bind("<KeyRelease>",getting_data)
+    label1_proftax.bind("<KeyRelease>",getting_dataq)
 
     label1=Label(F, text="ESI", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1820)
     label1_esi=Entry(F,bg='#2f516a',fg='#fff',textvariable=esi, font=('times new roman', 11, 'bold'))
     label1_esi.place(x=940,y=1820,height=40,width=230)
-    label1_esi.bind("<KeyRelease>",getting_data)
+    label1_esi.bind("<KeyRelease>",getting_dataq)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=deduc1, font=('times new roman', 11, 'bold'))
     label1.place(x=700,y=1880,height=40,width=230)
@@ -1979,7 +2092,7 @@ F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'),padx=50, pady=20
 F.place(x=30, y=30, width=1270, height=480)
 
 
-b1 = Button(F,text = "Add Employees",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_data)  
+b1 = Button(F,text = "Add Employees",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=changing_datas)  
 b1.place(x=1000,y=0,width=200,height=40)
 
 # global tree_data
