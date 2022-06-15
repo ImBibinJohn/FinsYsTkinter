@@ -168,9 +168,11 @@ def addsuppliers():
                 ds="SELECT firstname FROM supplier WHERE firstname= %s"
                 cur.execute(ds,[fname])
                 r=cur.fetchall()
+                print(r)
                 ss="SELECT lastname FROM supplier WHERE lastname= %s"
                 cur.execute(ss,[lname])
                 rr=cur.fetchall()
+                print(rr)
                 if r==[] and rr==[]:
                     chk_b4.config(text='checked',fg='green')           
                     #inserting to supplier table                                       

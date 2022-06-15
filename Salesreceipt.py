@@ -938,7 +938,11 @@ def salessalereceipts():
         qtyy=quan1.get()
         raty1=rate11.get()
         tax11=tax.get()
-        taxamount=taxamt+taxamt+taxamt3+taxamt4
+        taxamount=taxamt+taxamt2+taxamt3+taxamt4
+        taxamntlis=[taxamt,taxamt2,taxamt3,taxamt4]
+        qtylis=[qtyy,qtyy2,qtyy3,qtyy4]
+        totalslis=[totaly,totaly2,totaly3,totaly4]
+        productlis=[prodorser,prodoser1,prodorser2,prodorser3]
         totaly=total.get()
         prodoser1=prod1.get()
         descr1=desc1.get()
@@ -969,6 +973,78 @@ def salessalereceipts():
         (descr1),(qtyy2),(raty2),(totaly2),(tax22),(prodorser2),(descp2),(qtyy3),(raty3),(totaly3),(tax33),(prodorser3),(descp3),(qtyy4),(raty4),(totaly4),(tax44),
         (taxamount),(subtot),(amount),(hsnn),(hsnn2),(hsnn3),(hsnn4),(payymet),(saaledep)])
         mydata.commit()
+        try:
+            if amount!=0:
+                cur.execute("SELECT balance FROM accounts1 WHERE name =%s and cid =%s",([saaledep,cid]))
+                bal=cur.fetchone()
+                bala=bal[0]+amount
+                cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s and cid =%s""",([bala,saaledep,cid]))
+                mydata.commit()
+        except:
+            pass
+        try:
+            if amount!=0:
+                cur.execute("SELECT balance FROM accounts WHERE name =%s and cid =%s",([saaledep,cid]))
+                bal=cur.fetchone()
+                bala=bal[0]+amount
+                cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s and cid =%s""",([bala,saaledep,cid]))
+                mydata.commit()
+        except:
+            pass   
+        for (p, q, t, tx) in zip(productlis, qtylis, totalslis, taxamntlis):     
+            try:
+                cur.execute("SELECT initialqty,cost,invacnt,incomeacnt,expacnt FROM inventory WHERE name =%s and cid =%s",([p,cid]))
+                invent=cur.fetchone()
+                if invent:
+                    invent[0] = int(invent[0]) - int(q)
+                    cxq = float(invent[1]) * float(q)
+                    invenacnt = invent[2]
+                    cur.execute("SELECT name,balance FROM accounts1 WHERE name =%s and cid =%s",([invenacnt,cid]))
+                    accoun=cur.fetchone()
+                    cur.execute("SELECT name,balance FROM accounts WHERE name =%s and cid =%s",([invenacnt,cid]))
+                    accoun1=cur.fetchone()
+                    if accoun:
+                        accoun[1] = accoun[1] - cxq
+                        cur.execute("""UPDATE accounts1 SET balance=%s WHERE name= %s and cid =%s""",([accoun[1],saaledep,cid]))
+                        mydata.commit()
+                    elif accoun1:
+                        accoun[1] = accoun[1] - cxq 
+                        cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s and cid =%s""",([accoun[1],saaledep,cid]))
+                        mydata.commit()   
+                    else:
+                        pass   
+                    cur.execute("SELECT name,balance FROM accounts1 WHERE name =%s and cid =%s",([invent[3],cid]))
+                    accoun2=cur.fetchone()
+                    cur.execute("SELECT name,balance FROM accounts WHERE name =%s and cid =%s",([invent[3],cid]))
+                    accoun3=cur.fetchone()
+                    if accoun2:
+                        accoun2[1] = accoun2[1] - cxq
+                        cur.execute("""UPDATE accounts1 SET balance=%s WHERE name= %s and cid =%s""",([accoun2[1],saaledep,cid]))
+                        mydata.commit()
+                    elif accoun3:
+                        accoun3[1] = accoun3[1] - cxq 
+                        cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s and cid =%s""",([accoun2[1],saaledep,cid]))
+                        mydata.commit()   
+                    else:
+                        pass
+                    cur.execute("SELECT name,balance FROM accounts1 WHERE name =%s and cid =%s",([invent[4],cid]))
+                    accoun4=cur.fetchone()
+                    cur.execute("SELECT name,balance FROM accounts WHERE name =%s and cid =%s",([invent[4],cid]))
+                    accoun5=cur.fetchone()
+                    if accoun4:
+                        accoun4[1] = accoun4[1] - cxq
+                        cur.execute("""UPDATE accounts1 SET balance=%s WHERE name= %s and cid =%s""",([accoun4[1],saaledep,cid]))
+                        mydata.commit()
+                    elif accoun5:
+                        accoun5[1] = accoun5[1] - cxq 
+                        cur.execute("""UPDATE accounts SET balance=%s WHERE name= %s and cid =%s""",([accoun5[1],saaledep,cid]))
+                        mydata.commit()   
+                    else:
+                        pass        
+
+
+            except:
+                pass    
         estwin.destroy()
     tk.Button(hf2,text='Save',font=('times new roman', 16),bg='#2f516f',command=salesreceiptssavevalues).place(relx=0.8,rely=0.9,relwidth=0.1,relheight=0.04)
     hf2.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.7)
