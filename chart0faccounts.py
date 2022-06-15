@@ -150,64 +150,97 @@ def add_account():
             type = typeinput.get()
             typelist.append(type)
             
-
-
+            #data fetched from app1_accountype
             sql="select * from app1_accountype where accountname=%s"
-         
             cur.execute(sql,typelist)
-
             pro=cur.fetchone()
 
-
-            
-            print("(typelist[0](typelist[0]",typelist[0])
             sql2="select Pid from producttable where Pname=%s"
             cur.execute(sql2,typelist)
             product_id=cur.fetchone()
 
-
+            
 
 
             # cur.execute("select cid from app1_company where id_id=%s",(uid))
             # cmp1=cur.fetchone()
-
-            name = f.get()
+            detlist=[]
+            accname = f.get()
             detail_type = l.get()
+            detlist.append(detail_type)
             description = co.get()
             sub_account = cb.get()
             deftaxcode = nb.get()
             finsys_amt = balanceinput.get()
             cmp=cmp1
             asof=asof_input.get()
-            if detail_type in pro:
-                messagebox.showerror('error', 'Accept terms and conditions')
 
+             #fetch data from app1_accountype
+            prosql="select * from app1_accountype where accountname=%s"
+            cur.execute(prosql,detlist)
+            prodetdata=cur.fetchone()
+            
+
+
+            # fetch data from app1_accounts
+            sql3="select *  from app1_accounts "
+            cur.execute(sql3)
+            accounts_data=cur.fetchall()
+            fet_data=[]
+           
+            for data in accounts_data:
+            
+                if data[3]==accname and data[1]==type and data[10]==cmp:
+                    reda=data
+                    fet_data.append(reda)
+
+            # fetch data from app1_accounts1
+            sql3="select *  from app1_accounts1 "
+            cur.execute(sql3)
+            accounts_data=cur.fetchall()
+            fet_data1=[]
+            for data in accounts_data:
+
+                if data[3]==accname and data[1]==type and data[10]==cmp:
+                    reda1=data
+                    fet_data1.append(reda1)
+            
+
+
+
+
+            if  prodetdata!=None :
+                if fet_data!=None or fet_data1!=None:
+                    messagebox.showerror('error',f"Account with {accname} already exists. Please provide another name.")
             else:
                 sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,balance,asof,balfordisp,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-                val=(type,detail_type,name,description,sub_account,deftaxcode,finsys_amt,asof,finsys_amt,cmp[0],product_id[0],pro[0])
+                val=(type,detail_type,accname,description,sub_account,deftaxcode,finsys_amt,asof,finsys_amt,cmp[0],product_id[0],pro[0])
                 cur.execute(sql,val)
-
+                mydata.commit()
 
                 # sql1="INSERT INTO app1_accounts1 (detype,balance,cid_id) VALUES(%s,%s,%s)" #adding values into db
                 # val1=(detail_type,finsys_amt,cmp[0])
                 # cur.execute(sql1,val1)
+               
+
+
+                sql2="INSERT INTO app1_accountype (accountname,accountbal,cid_id) VALUES(%s,%s,%s)" #adding values into db
+                val2=(detail_type,finsys_amt,cmp[0])
+                cur.execute(sql2,val2)
                 mydata.commit()
-                # D.destroy()
+
+                cur.execute("select * from app1_accounts1 where name=%s and cid_id=%s ",("Opening Balance Equity",cmp[0]))
+                balaceeq=cur.fetchone()
+                balance=round(balaceeq[7]+float(finsys_amt),2)
+
+                cur.execute("UPDATE app1_accounts1 SET balance =%s where accounts1id=%s and cid_id=%s",(balance,balaceeq[0],cmp[0]))
+                mydata.commit()
+                
                 messagebox.showinfo(title='Success',message='New Account Added')
+                add.destroy()
 
 
 
-
-
-
-           
-            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
-            #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
-
-            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
-            #             (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
-            # mydata.commit()
-            # D.destroy()
 
     cur.execute('select Pname,Pid from producttable')
     product_data=cur.fetchall()
@@ -979,7 +1012,18 @@ def main():
                     treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
             except:
                 pass          
-    
+        
+
+#find datas for treeview insertion
+
+        uid=[4]
+        cur.execute("select cid from app1_company where id_id=%s",(uid))
+        cmp1=cur.fetchone()
+        cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
+        account=cur.fetchone()
+        balance=account[7]
+        print("account is",account )
+
         prlframe.mainloop()
     # accrecivabales()   
 
