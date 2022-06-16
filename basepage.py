@@ -152,6 +152,10 @@ class base:
             sal=salesvariable.get()
             if sal=='Sales Records':
                 import salesrecords
+            elif sal=='Invoices':
+                import invoice
+            elif sal== 'Customers':
+                import customer
         salesvariable = tk.StringVar(lab)
         salesvariable.set('Sales')
         opt = tk.OptionMenu(lab, salesvariable, *OptionList,command=salesrec)
@@ -166,6 +170,8 @@ class base:
         def exp_supp(n):
             v=expvariable.get()
             print(v)
+            if v=='Expenses':
+                import expenses
             if v=='Suppliers':
                 import finsyssuppliers
         expvariable = tk.StringVar(lab)
