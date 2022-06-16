@@ -1,13 +1,17 @@
+from struct import pack
 import tkinter as tk
 from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
 import tkinter.messagebox as MessageBox
 import click
-import mysql.connector 
+import mysql.connector
+from requests import request 
 from tkcalendar import Calendar, DateEntry
 import matplotlib.patches
 from datetime import datetime, date, timedelta
+from PIL import Image,ImageTk
+
 
 
 
@@ -16,8 +20,8 @@ mydata = mysql.connector.connect(host='127.0.0.1', user='root', password='', dat
 cur = mydata.cursor()
 
 expense_form = tk.Tk()
-expense_form.title("finsYs")
-expense_form.geometry("1500x1000")
+expense_form.title("New")
+expense_form.geometry("1300x800")
 expense_form['bg'] = '#2f516a'
 wrappen = ttk.LabelFrame(expense_form)
 mycanvas = Canvas(wrappen)
@@ -51,27 +55,27 @@ def main():
     form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
     
     def addnew():
+        global D
         def addit():
-            global D, qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate
-                 
-            qc_date = datel_input.get()
-            qc_sku = skul_input.get
-            qc_pname = proname_input.get()
-            qc_customername = cusname_input.get()
-            qc_inspdate  = insdate_input.get()
+            global date1,sku,pname,customername,inspdate
+
+            print('original', datel_input,skul_input,proname_input,cusname_input,insdate_input)
+            date1 = datel_input.get()
+            sku = skul_input.get()
+            pname = proname_input.get()
+            customername = cusname_input.get()
+            inspdate  = insdate_input.get()
                     
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="fynsystkinter", port='3307')
             cur = con.cursor()
-            d='''INSERT INTO qualitycertificate(qc_date,qc_sku,qc_pname,qc_custumername,qc_inspdate) VALUES (%s,%s,%s,%s,%s)'''
-            cur.execute(d,[(qc_date),(qc_sku),(qc_pname),(qc_customername),(qc_inspdate)])
+            print(date1,sku,pname,customername,inspdate)
+            cur.execute('INSERT INTO qualitycertificate(qc_date,qc_sku,qc_pname,qc_custumername,qc_inspdate) VALUES (%s,%s,%s,%s,%s)',(date1,sku,pname,customername,inspdate))
                     
             con.commit()
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
-            expense_form.destroy()
             
             # Get selected item to Edit
         D = tk.Toplevel(A)
-        mycanvas.configure(yscrollcommand=yscrollbar.set)
         mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
         full_frame = Frame(mycanvas, width=2000, height=730, bg='#2f516a')
@@ -80,11 +84,11 @@ def main():
         heading_frame = Frame(mycanvas)
         mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
         headingfont = font.Font(family='Times New Roman', size=25,)
-        credit_heading = Label(heading_frame, text="Create Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
+        credit_heading = Label(heading_frame, text="Create Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=80)
         credit_heading.pack(padx=0, pady=0)
             # form fields
         sub_headingfont = font.Font(family='Times New Roman', size=20,)
-        form_frame = Frame(mycanvas, width=1600, height=300, bg='#243e55')
+        form_frame = Frame(mycanvas, width=1100, height=300, bg='#243e55')
         mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
 
         datel = Label(form_frame, text="Date", bg='#243e55', fg='#fff')
@@ -114,8 +118,8 @@ def main():
         wrappen.pack(fill='both', expand='yes',)
 
         insdate = tk.Label(form_frame, text="Inspected Date", bg='#243e55', fg='#fff')
-        insdate_input = StringVar()
         insdate.place(x=600, y=100, height=15, width=150)
+        insdate_input = StringVar()
         insdate_input = DateEntry(form_frame, width=25, bg="#2f516f",date_pattern='yyyy-mm-dd', textvariable=insdate_input)
         insdate_input.place(x=600, y=130, height=40)
         wrappen.pack(fill='both', expand='yes',)
@@ -149,30 +153,30 @@ def main():
         val = cur.fetchall()
         if val:
             for x in val:
-                treevv.insert('', 'end', values=(x[0], x[1], x[2], x[3], x[4],x[5]))
+                treevv.insert('', 'end', values=(x[0], x[1], x[3], x[2], x[4],x[5]))
         treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
         def editexp():
+            global D
             def changeedit():
-
+    
                 mydata = mysql.connector.connect(host='127.0.0.1', user='root', password='', database='fynsystkinter', port='3307')
                 cur = mydata.cursor()
-                global D, cid,qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate
+                global qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate
                     
                 qc_date = datel_input.get()
-                qc_sku = skul_input.get
+                qc_sku = skul_input.get()
                 qc_pname = proname_input.get()
                 qc_customername = cusname_input.get()
-                qc_inspdate   = insdate.get()
+                qc_inspdate   = insdate_input.get()
                     
             
-                print(cid,qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate)
+                print(qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate)
 
                 cur.execute("""UPDATE qualitycertificate SET qc_date =%s, qc_sku =%s, qc_pname =%s, qc_custumername =%s, qc_inspdate =%s  WHERE cid=%s""",[qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate, b])
                 mydata.commit()
                 MessageBox.showinfo("Insert Status", "Updated Successfully")
                 mydata.close()
-                expense_form.destroy()
 
             # Get selected item to Edit
 
@@ -185,21 +189,20 @@ def main():
             D = tk.Toplevel(A)
             print(s)
 
-            mycanvas.configure(yscrollcommand=yscrollbar.set)
             mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
-            full_frame = Frame(mycanvas, width=2000, height=730, bg='#2f516a')
+            full_frame = Frame(mycanvas, width=1400, height=800, bg='#2f516a')
             mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
             heading_frame = Frame(mycanvas)
             mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
             headingfont = font.Font(family='Times New Roman', size=25,)
-            credit_heading = Label(heading_frame, text="Edit Quality Inspection", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
+            credit_heading = Label(heading_frame, text="Edit Quality Inspection", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=100)
             credit_heading.pack(padx=0, pady=0)
 
             # form fields
             sub_headingfont = font.Font(family='Times New Roman', size=20,)
-            form_frame = Frame(mycanvas, width=1600, height=500, bg='#243e55')
+            form_frame = Frame(mycanvas, width=1400, height=500, bg='#243e55')
             mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
 
             datel = Label(form_frame, text="Date", bg='#243e55', fg='#fff')
@@ -223,8 +226,7 @@ def main():
             except:
                 pass
 
-            proname = Label(
-                form_frame, text="Product Name", bg='#243e55', fg='#fff')
+            proname = Label(form_frame, text="Product Name", bg='#243e55', fg='#fff')
             proname.place(x=600, y=30,)
             proname_input = StringVar()
             proname_input = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
@@ -234,8 +236,7 @@ def main():
             except:
                 pass
             
-            idl = Label(
-                form_frame, text="ID", bg='#243e55', fg='#fff')
+            idl = Label(form_frame, text="ID", bg='#243e55', fg='#fff')
             idl.place(x=1100, y=30,)
             idl_input = StringVar()
             idl_input = Entry(form_frame, width=10, bg='#2f516f', fg='#fff')
@@ -253,26 +254,26 @@ def main():
             cusname_input.place(x=30, y=130, height=40)
             wrappen.pack(fill='both', expand='yes',)
             try:
-                idl_input.insert(0, s[4])
+                cusname_input.insert(0, s[4])
             except:
                 pass
 
 
             insdate = tk.Label(
                 form_frame, text="Inspected Date", bg='#243e55', fg='#fff')
-            place_input = StringVar()
+            insdate_input = StringVar()
             insdate.place(x=600, y=100, height=15, width=150)
-            insdate_input = DateEntry(form_frame, width=25, bg="#2f516f",date_pattern='yyyy-mm-dd', textvariable=datel_input)
+            insdate_input = DateEntry(form_frame, width=25, bg="#2f516f",date_pattern='yyyy-mm-dd', textvariable=insdate_input)
             insdate_input.place(x=600, y=130, height=40)
             wrappen.pack(fill='both', expand='yes',)
             try:
-                idl_input.insert(0, s[5])
+                insdate_input.insert(0, s[5])
             except:
                 pass
 
             
             submit = tk.Button(form_frame, text="Save", command=changeedit)
-            submit.place(x=580, y=400, width=100)
+            submit.place(x=500, y=250, width=100)
             
 
             D.mainloop()
@@ -285,6 +286,9 @@ def main():
             
         def view():
             
+
+            # Get selected item to Edit
+
             b = treevv.item(treevv.focus())["values"][0]
             print(b)
             sql='SELECT * FROM qualitycertificate WHERE cid=%s'
@@ -294,40 +298,59 @@ def main():
             D = tk.Toplevel(A)
             print(s)
             
-            D = tk.Toplevel(A)
+
             mycanvas.configure(yscrollcommand=yscrollbar.set)
             mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
-            full_frame = Frame(mycanvas, width=1600, height=730, bg='#2f516a')
+            full_frame = Frame(mycanvas, width=1500, height=1100, bg='#2f516a')
             mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
 
             heading_frame = Frame(mycanvas)
             mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
             headingfont = font.Font(family='Times New Roman', size=25,)
-            credit_heading = Label(heading_frame, text="Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=106)
+            credit_heading = Label(heading_frame, text="Quality Certificate", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=95)
             credit_heading.pack(padx=0, pady=0)
-                # form fields
-            form_frame = Frame(mycanvas, width=1600, height=800, bg='#e5e9ec')
-            mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
-                                  
-            tk.Button(form_frame,text = "DOWNLOAD",fg="#000",font=('times new roman', 16, 'bold'),command=download).place(relx=0.8,rely=0.5,relwidth=0.15)
-            form_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
+
+            # form fields
+            form2_frame = Frame(mycanvas, width=1200, height=900, bg='#243e55')
+            mycanvas.create_window((20, 150), window=form2_frame, anchor="nw")
             
-            datel = Label(form_frame, text="Date", bg='#e5e9ec', fg='#000')
-            datel.place(x=30, y=30,)
+            form_frame = Frame(mycanvas, width=800, height=700, bg='#e5e9ec')
+            mycanvas.create_window((200, 250), window=form_frame, anchor="nw")
+            
+            
+            tk.Button(form2_frame,text = "DOWNLOAD",fg="#000",font=('times new roman', 16, 'bold'),command=download).place(relx=0.03,rely=0.07,relwidth=0.15)
+
+            
+            
+            F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'), fg="Black", bg="#000")
+            F.place(x=0, y=30, width=1300, height=50 )
+            F1 = LabelFrame(form_frame, font=('times new roman', 15, 'bold'), fg="dodgerblue", bg="dodgerblue")
+            F1.place(x=-0, y=0, width=1300, height=50)
+            
+            F2 = LabelFrame(form_frame, font=('times new roman', 15, ), fg="Black", bg="#e5e9ec")
+            F2.place(x=50, y=30, width=120, height=120)
+            size=(120,120)
+
+            ax=ImageTk.PhotoImage(Image.open('f.jpg').resize(size))
+            tk.Label(F2,image=ax,bg='#e5e9ec', border=0).place(relx=0.00,rely=-0,relheight=1,relwidth=1 )
+            
+            
+            datel = Label(form_frame, text="Date", bg='#e5e9ec',fg='#000')
+            datel.place(x=200, y=130, width=100)
             datel_input = StringVar()
-            datel_input = Entry(form_frame, width=25, bg="#e5e9ec",date_pattern='yyyy-mm-dd', textvariable=datel_input, fg='#000')
-            datel_input.place(x=530, y=30, height=40)
+            datel_input = Entry(form_frame, width=25, bg="#e5e9ec",fg='#000')
+            datel_input.place(x=350, y=130, height=40)
             try:
                 datel_input.insert(0, s[1])
             except:
                 pass
-            
-            skul = Label(form_frame, text="SKU Number", bg='#e5e9ec', fg='#000')
-            skul.place(x=30, y=60, height=15, width=80)
+        
+            skul = Label(form_frame, text="SKU Number", bg='#e5e9ec',fg='#000')
+            skul.place(x=200, y=180, width=100)
             skul_input = StringVar()
             skul_input = Entry(form_frame, width=25, bg='#e5e9ec', fg='#000')
-            skul_input.place(x=530, y=60, height=40)
+            skul_input.place(x=350, y=180, height=40)
             wrappen.pack(fill='both', expand='yes',)
             try:
                 skul_input.insert(0, s[3])
@@ -335,20 +358,20 @@ def main():
                 pass
 
             proname = Label(form_frame, text="Product Name", bg='#e5e9ec', fg='#000')
-            proname.place(x=30, y=90,)
+            proname.place(x=200, y=230, width=100)
             proname_input = StringVar()
-            proname_input = Entry(form_frame, width=50, bg='#e5e9ec', fg='#000')
-            proname_input.place(x=30, y=90, height=40)
+            proname_input = Entry(form_frame, width=25, bg='#e5e9ec', fg='#000')
+            proname_input.place(x=350, y=230, height=40)
             try:
                 proname_input.insert(0, s[2])
             except:
                 pass
             
             idl = Label(form_frame, text="ID", bg='#e5e9ec', fg='#000')
-            idl.place(x=30, y=120,)
+            idl.place(x=200, y=280, width=100)
             idl_input = StringVar()
-            idl_input = Entry(form_frame, width=10, bg='#e5e9ec', fg='#000')
-            idl_input.place(x=30, y=120, height=40)
+            idl_input = Entry(form_frame, width=25, bg='#e5e9ec', fg='#000')
+            idl_input.place(x=350, y=280, height=40)
             try:
                 idl_input.insert(0, s[0])
             except:
@@ -356,34 +379,55 @@ def main():
         
         
             cusname = tk.Label(form_frame, text="Customer Name", bg='#e5e9ec', fg='#000')
-            cusname.place(x=30, y=150, height=15, width=120)
+            cusname.place(x=200, y=330, height=15, width=100)
             cusname_input = StringVar()
-            cusname_input = Entry(form_frame, width=55, bg='#e5e9ec', fg='#000')
-            cusname_input.place(x=530, y=150, height=40)
+            cusname_input = Entry(form_frame, width=25, bg='#e5e9ec', fg='#000')
+            cusname_input.place(x=350, y=330, height=40)
             wrappen.pack(fill='both', expand='yes',)
             try:
-                idl_input.insert(0, s[4])
+                cusname_input.insert(0, s[4])
             except:
                 pass
-           
 
-            insdate = tk.Label(form_frame, text="Inspected Date", bg='#e5e9ec', fg='#000')
+
+            insdate = tk.Label(
+                form_frame, text="Inspected Date", bg='#e5e9ec', fg='#000')
             place_input = StringVar()
-            insdate.place(x=30, y=210, height=15, width=150)
-            insdate_input = Entry(form_frame, width=25, bg="#e5e9ec",date_pattern='yyyy-mm-dd', textvariable=datel_input,fg='#000')
-            insdate_input.place(x=530, y=210, height=40)
+            insdate.place(x=200, y=380, height=15, width=100)
+            insdate_input = Entry(form_frame, width=25, bg="#e5e9ec",fg='#000')
+            insdate_input.place(x=350, y=380, height=40)
             wrappen.pack(fill='both', expand='yes',)
             try:
-                idl_input.insert(0, s[5])
+                insdate_input.insert(0, s[5])
             except:
                 pass
-
-                    
+            
+            refl = Label(form_frame, text="Material Reference", bg='#e5e9ec',fg='#000', font=('times new roman',16,'bold'))
+            refl.place(x=60, y=450, width=160)
+            ref_input = StringVar()
+            ref1_input = Entry(form_frame, width=5, bg='#e5e9ec', fg='#000')
+            ref1_input.place(x=60, y=480, height=40)
+            ref2_input = Entry(form_frame, width=10, bg='#e5e9ec', fg='#000')
+            ref2_input.place(x=110, y=480, height=40)
+            wrappen.pack(fill='both', expand='yes',)
+            try:
+                ref1_input.insert(0, s[3])
+                ref2_input.insert(0, s[2])
+            except:
+                pass
+            
+            note1 = tk.Label(form_frame, text="This Product Was produced In Accordance With The Guidlines And Monitored In Every Manufacturing Stage.", bg='#e5e9ec', fg='#000')
+            note1.place(x=30, y=540, height=20, width=800)
+            note2 = tk.Label(form_frame, text="****END****", bg='#e5e9ec', fg='#000')
+            note2.place(x=30, y=570, height=20, width=800)
+            
+           
             D.mainloop()
+
 
     
         def download():
-            return ('download.js')
+            return (request, 'view_certificate_page.html')
             
 
         view_btn = ttk.Button(hd, text="View", command=view)
