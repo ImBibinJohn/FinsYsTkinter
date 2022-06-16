@@ -21,8 +21,7 @@ def fun():#db connection
         )
     mycursor = mydb2.cursor()
     
-def add_custom():
-    import addcustomer_form
+
 
 
 def add_recon1():
