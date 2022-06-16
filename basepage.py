@@ -145,7 +145,7 @@ class base:
         OptionList = [
         "Sales Records",
         "Invoices",
-        "Customers"
+        "Customers",
         "Product and Services"
         ]
         def salesrec(x):
@@ -171,7 +171,7 @@ class base:
             v=expvariable.get()
             print(v)
             if v=='Expenses':
-                import expenses
+                import expensemain
             if v=='Suppliers':
                 import finsyssuppliers
         expvariable = tk.StringVar(lab)
