@@ -114,8 +114,9 @@ class base:
         
         
         
-        
-        btn = Button(lab,text='Dashboard',bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'),width=13,height=1)
+        def calldashboard():
+            import dashboard
+        btn = Button(lab,text='Dashboard',bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'),width=13,height=1,command=calldashboard)
         btn.place(x=10,y=120)
         
         #dropdown
@@ -144,12 +145,20 @@ class base:
         OptionList = [
         "Sales Records",
         "Invoices",
-        "Customers"
+        "Customers",
         "Product and Services"
         ]
-        variable = tk.StringVar(lab)
-        variable.set('Sales')
-        opt = tk.OptionMenu(lab, variable, *OptionList)
+        def salesrec(x):
+            sal=salesvariable.get()
+            if sal=='Sales Records':
+                import salesrecords
+            elif sal=='Invoices':
+                import invoice
+            elif sal== 'Customers':
+                import customer
+        salesvariable = tk.StringVar(lab)
+        salesvariable.set('Sales')
+        opt = tk.OptionMenu(lab, salesvariable, *OptionList,command=salesrec)
         opt.config(width=10, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
         opt.place(x=310,y=120)
         
@@ -158,9 +167,16 @@ class base:
         "Expenses",
         "Suppliers",
         ]
-        variable = tk.StringVar(lab)
-        variable.set('Expenses')
-        opt = tk.OptionMenu(lab, variable, *OptionList)
+        def exp_supp(n):
+            v=expvariable.get()
+            print(v)
+            if v=='Expenses':
+                import expensemain
+            if v=='Suppliers':
+                import finsyssuppliers
+        expvariable = tk.StringVar(lab)
+        expvariable.set('Expenses')
+        opt = tk.OptionMenu(lab, expvariable, *OptionList,command=exp_supp)
         opt.config(width=10, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
         opt.place(x=460,y=120)
 
@@ -169,9 +185,15 @@ class base:
         "Employee",
         "Payslip"
         ]
-        variable = tk.StringVar(lab)
-        variable.set('Payroll')
-        opt = tk.OptionMenu(lab, variable, *OptionList)
+        def payment_method(p):
+            pay = paymentvariable.get()
+            if pay == 'Employee':
+                import addingemp
+            elif pay == 'Payslip':
+                import showpayslip
+        paymentvariable = tk.StringVar(lab)
+        paymentvariable.set('Payroll')
+        opt = tk.OptionMenu(lab, paymentvariable, *OptionList,command=payment_method)
         opt.config(width=10, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
         opt.place(x=610,y=120)
         
@@ -182,9 +204,19 @@ class base:
         "Accounts receivables",
         "Accounts payables"
         ]
-        variable = tk.StringVar(lab)
-        variable.set('Report')
-        opt = tk.OptionMenu(lab, variable, *OptionList)
+        def reportsec(n):
+            rep=reportvariable.get()
+            if rep=='Profit and loss':
+                import profit_loss
+            elif rep=="Balance sheet":
+                import balancesheet    
+            elif rep=="Accounts receivables":
+                import accreceivables
+            elif rep=="Accounts payables":
+                import accpayables     
+        reportvariable = tk.StringVar(lab)
+        reportvariable.set('Report')
+        opt = tk.OptionMenu(lab, reportvariable, *OptionList, command=reportsec)
         opt.config(width=10, bg="#213b52",fg="#fff",font=('Helvetica', 12, 'bold'))
         opt.place(x=760,y=120)
 

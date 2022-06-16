@@ -31,6 +31,7 @@ def main():
     A.title('View')
     A.geometry('1500x1000')
     A['bg'] = '#2f516f'
+    
 
     # head frame
     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
@@ -50,7 +51,7 @@ def main():
             global D, qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products
                 
             qdate = datel_input.get()
-            sku = skul_input.get
+            sku = skul_input.get()
             p_name = proname_input.get()
             inspected_no = inspectedl_input.get()
             noninspected_no = noninspctqty_input.get()
@@ -66,7 +67,6 @@ def main():
                 
             con.commit()
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
-            expense_form.destroy()
           
         # Get selected item to Edit
         D = tk.Toplevel(A)
@@ -210,7 +210,7 @@ def main():
             global D, qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products
                 
             qdate = datel_input.get()
-            sku = skul_input.get
+            sku = skul_input.get()
             p_name = proname_input.get()
             inspected_no = inspectedl_input.get()
             noninspected_no = noninspctqty_input.get()
@@ -226,7 +226,6 @@ def main():
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()
-            expense_form.destroy()
 
         # Get selected item to Edit
 

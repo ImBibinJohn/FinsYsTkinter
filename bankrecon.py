@@ -17,7 +17,7 @@ def fun():#db connection
         host='localhost',
         user='root',
         password='',
-        database='finsYs_tkinter'
+        database='finsys_tkinter'
         )
     mycursor = mydb2.cursor()
     
@@ -313,8 +313,13 @@ head_label.pack()
 F2 = LabelFrame(form_frame, font=('times new roman', 15, 'bold'), bd=10, fg="Black", bg="#243e55")
 F2.place(x=5, y=100, width=500, height=700)
 size=(500,700)
-ax=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
-tk.Label(F2,image=ax,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+ax1=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
+tk.Label(F2,image=ax1,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+
+# image3 = tk.PhotoImage(file="bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg")
+# Label(F2, text="", image = image3).grid(row=0, column=0)
+
+
 
 wrappen.pack(fill='both',expand='yes',)
 

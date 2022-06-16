@@ -355,7 +355,7 @@ def add_invoice():
         country_input=Entry(form2_frame,width=40,bg='#2f516a',fg='#fff',textvariable = country)
         country_input.place(x=370,y=380,height=40)
 
-        CheckVar1 = IntVar()
+        CheckVar1 = IntVar(form2_frame)
         terms_condition=Checkbutton(form2_frame, variable = CheckVar1,onvalue = 1, offvalue = 0,bg='#243e55')
         terms_condition.place(x=30,y=450,)   
         terms_condition_lab= Label(form2_frame,text = " Agree to Terms and Conditions",bg='#243e55',fg='#fff') 
@@ -366,7 +366,7 @@ def add_invoice():
         shipping_heading=tk.Label(form2_frame, text="Shipping Address",fg='#fff',bg='#243e55',height=2,width=15)
         shipping_heading.place(x=850,y=10,)
 
-        CheckVar2 = IntVar()
+        CheckVar2 = IntVar(form2_frame)
         same_address=Checkbutton(form2_frame, variable = CheckVar2,onvalue = 1, offvalue = 0,bg='#243e55',command=sameaddress)
         same_address.place(x=1100,y=30,)   
         same_address_lab= Label(form2_frame,text = "Same as Billing Address",bg='#243e55',fg='#fff') 
@@ -433,6 +433,7 @@ def add_invoice():
         selected_product=[]
         product=product_drop1.get()
         quantity=qty_input1.get()
+        print("qtyyyy=",quantity)
         selected_product.append(product)
         for product in inv_data:
             product_details="SELECT * FROM app1_inventory WHERE name=%s"
@@ -443,6 +444,7 @@ def add_invoice():
                 desc.set(i[11])
                 price.set(i[12])
                 sale_price=i[12]
+                print("sale_price=",sale_price)
                 tota_price=int(sale_price)*int(quantity)
                 total.set(tota_price)
         for product in noninv_data:
@@ -506,6 +508,8 @@ def add_invoice():
             final_total=final_total+total_amount
             grand.set(final_total)
         amount_recieved=amt_received_input.get()
+        if amount_recieved=='':
+            amount_recieved='0'
         balancedue=final_total-int(amount_recieved)
         balance.set(balancedue)
 
@@ -904,29 +908,29 @@ def add_invoice():
 
     global select_customer,email,invoice_date,terms,Due_date,billto,invno,cmpname,cpmemail,place_of_supply,product,hsn,desc,qty,price,total,tax,subtotal,taxamount,grand,amt_received,balance
 
-    select_customer=StringVar()
-    email=StringVar()
-    invoice_date=StringVar()
-    terms=StringVar()
-    Due_date=StringVar()
-    billto=StringVar()
-    invno=StringVar()
-    place_of_supply=StringVar()
-    product=StringVar()
-    hsn=StringVar()
-    desc=StringVar()
-    qty=StringVar()
-    price=StringVar()
-    total=StringVar()
+    select_customer=StringVar(form_frame)
+    email=StringVar(form_frame)
+    invoice_date=StringVar(form_frame)
+    terms=StringVar(form_frame)
+    Due_date=StringVar(form_frame)
+    billto=StringVar(form_frame)
+    invno=StringVar(form_frame)
+    place_of_supply=StringVar(form_frame)
+    product=StringVar(form_frame)
+    hsn=StringVar(form_frame)
+    desc=StringVar(form_frame)
+    qty=StringVar(form_frame)
+    price=StringVar(form_frame)
+    total=StringVar(form_frame)
     total.set("0")
-    tax=StringVar()
-    subtotal=StringVar()
-    taxamount=StringVar()
+    tax=StringVar(form_frame)
+    subtotal=StringVar(form_frame)
+    taxamount=StringVar(form_frame)
     taxamount.set("0")
-    grand=StringVar()
+    grand=StringVar(form_frame)
     grand.set("0")
-    amt_received=StringVar()
-    balance=StringVar()
+    amt_received=StringVar(form_frame)
+    balance=StringVar(form_frame)
 
 
 
@@ -1034,7 +1038,7 @@ def add_invoice():
     product_drop1.place(x=70,y=780,height=40,width=200)
 
     global product2,product3,product4,hsn2,hsn3,hsn4,desc2,desc3,desc4,qty2,qty3,qty4
-    product2=StringVar()
+    product2=StringVar(form_frame)
     product_drop2=ttk.Combobox(form_frame,textvariable = product2)
 
    
@@ -1043,14 +1047,14 @@ def add_invoice():
 
     product_drop2.place(x=70,y=850,height=40,width=200)
 
-    product3=StringVar()
+    product3=StringVar(form_frame)
     product_drop3=ttk.Combobox(form_frame,textvariable = product3)
             
     product_drop3['values']=product1
     product_drop3.bind("<<ComboboxSelected>>",get_selected_product3)
     product_drop3.place(x=70,y=930,height=40,width=200)
 
-    product4=StringVar()
+    product4=StringVar(form_frame)
     product_drop4=ttk.Combobox(form_frame,textvariable = product4)
     product_drop4['values']=product1
     product_drop4.bind("<<ComboboxSelected>>",get_selected_product4)
@@ -1064,15 +1068,15 @@ def add_invoice():
     hsn_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn)
     hsn_input1.place(x=300,y=780,height=40)
 
-    hsn2=StringVar()
+    hsn2=StringVar(form_frame)
     hsn_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn2)
     hsn_input2.place(x=300,y=850,height=40)
 
-    hsn3=StringVar()
+    hsn3=StringVar(form_frame)
     hsn_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn3)
     hsn_input3.place(x=300,y=930,height=40)
 
-    hsn4=StringVar()
+    hsn4=StringVar(form_frame)
     hsn_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = hsn4)
     hsn_input4.place(x=300,y=1000,height=40)
 
@@ -1085,41 +1089,41 @@ def add_invoice():
     desc_input1=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc)
     desc_input1.place(x=500,y=780,height=40)
 
-    desc2=StringVar()
+    desc2=StringVar(form_frame)
     desc_input2=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc2)
     desc_input2.place(x=500,y=850,height=40)
 
-    desc3=StringVar()
+    desc3=StringVar(form_frame)
     desc_input3=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc3)
     desc_input3.place(x=500,y=930,height=40)
 
-    desc4=StringVar()
+    desc4=StringVar(form_frame)
     desc_input4=Entry(form_frame,width=25,bg='#2f516a',fg='#fff',textvariable = desc4)
     desc_input4.place(x=500,y=1000,height=40)
 
     #col-4
     qty_lab=Label(form_frame,text="QUANTITY",bg='#243e55',fg='#fff')
     qty_lab.place(x=800,y=730,)
-
+    qty.set(0)
     qty_input1=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty)
     qty_input1.place(x=750,y=780,height=40)
 
     qty_input1.bind("<KeyRelease>",get_selected_product)
 
 
-    qty2=StringVar()
+    qty2=StringVar(form_frame)
     qty_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty2)
     qty_input2.place(x=750,y=850,height=40)
     qty_input2.bind("<KeyRelease>",get_selected_product2)
 
 
-    qty3=StringVar()
+    qty3=StringVar(form_frame)
     qty_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty3)
     qty_input3.place(x=750,y=930,height=40)
     qty_input3.bind("<KeyRelease>",get_selected_product3)
 
 
-    qty4=StringVar()
+    qty4=StringVar(form_frame)
     qty_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = qty4)
     qty_input4.place(x=750,y=1000,height=40)
     qty_input4.bind("<KeyRelease>",get_selected_product4)
@@ -1134,15 +1138,15 @@ def add_invoice():
     # price_input1.bind("<KeyRelease>",get_qty)
 
     global price2,price3,price4
-    price2=StringVar()
+    price2=StringVar(form_frame)
     price_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price2)
     price_input2.place(x=950,y=850,height=40)
 
-    price3=StringVar()
+    price3=StringVar(form_frame)
     price_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price3)
     price_input3.place(x=950,y=930,height=40)
 
-    price4=StringVar()
+    price4=StringVar(form_frame)
     price_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = price4)
     price_input4.place(x=950,y=1000,height=40)
 
@@ -1157,17 +1161,17 @@ def add_invoice():
     total_input1.place(x=1150,y=780,height=40)
 
     global total2,total3,total4
-    total2=StringVar()
+    total2=StringVar(form_frame)
     total2.set("0")
     total_input2=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total2)
     total_input2.place(x=1150,y=850,height=40)
 
-    total3=StringVar()
+    total3=StringVar(form_frame)
     total3.set("0")
     total_input3=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total3)
     total_input3.place(x=1150,y=930,height=40)
 
-    total4=StringVar()
+    total4=StringVar(form_frame)
     total4.set("0")
     total_input4=Entry(form_frame,width=20,bg='#2f516a',fg='#fff',textvariable = total4)
     total_input4.place(x=1150,y=1000,height=40)
@@ -1186,19 +1190,19 @@ def add_invoice():
 
     tax_drop1.place(x=1350,y=780,height=40,width=200)
     global tax2,tax3,tax4
-    tax2=StringVar()
+    tax2=StringVar(form_frame)
     tax_drop2=ttk.Combobox(form_frame,textvariable = tax2)
     tax_drop2['values']=tax_values
     tax_drop2.bind("<<ComboboxSelected>>",get_selected_product2)
     tax_drop2.place(x=1350,y=850,height=40,width=200)
 
-    tax3=StringVar()
+    tax3=StringVar(form_frame)
     tax_drop3=ttk.Combobox(form_frame,textvariable = tax3)
     tax_drop3['values']=tax_values
     tax_drop3.bind("<<ComboboxSelected>>",get_selected_product3)
     tax_drop3.place(x=1350,y=930,height=40,width=200)
 
-    tax4=StringVar()
+    tax4=StringVar(form_frame)
     tax_drop4=ttk.Combobox(form_frame,textvariable = tax4)
     tax_drop4['values']=tax_values
     tax_drop4.bind("<<ComboboxSelected>>",get_selected_product4)
@@ -1766,7 +1770,7 @@ def edit_customer():
 
 
 
-    user_id=[2]
+    user_id=[4]
     mycursor.execute("SELECT cid FROM app1_company WHERE id_id=%s",(user_id))
     cmp1=mycursor.fetchone()
 
@@ -1800,46 +1804,46 @@ def edit_customer():
     e_email=StringVar(form_frame)
     e_invoice_date=StringVar(form_frame)
     e_terms=StringVar(form_frame)
-    e_Due_date=StringVar()
-    e_billto=StringVar()
-    e_invno=StringVar()
-    e_place_of_supply=StringVar()
-    e_product=StringVar()
-    e_hsn=StringVar()
-    e_desc=StringVar()
-    e_qty=StringVar()
-    e_price=StringVar()
-    e_total=StringVar()
+    e_Due_date=StringVar(form_frame)
+    e_billto=StringVar(form_frame)
+    e_invno=StringVar(form_frame)
+    e_place_of_supply=StringVar(form_frame)
+    e_product=StringVar(form_frame)
+    e_hsn=StringVar(form_frame)
+    e_desc=StringVar(form_frame)
+    e_qty=StringVar(form_frame)
+    e_price=StringVar(form_frame)
+    e_total=StringVar(form_frame)
     e_total.set("0")
-    e_tax=StringVar()
-    e_subtotal=StringVar()
-    e_taxamount=StringVar()
+    e_tax=StringVar(form_frame)
+    e_subtotal=StringVar(form_frame)
+    e_taxamount=StringVar(form_frame)
     e_taxamount.set("0")
-    e_grand=StringVar()
+    e_grand=StringVar(form_frame)
     e_grand.set("0")
-    e_amt_received=StringVar()
-    e_balance=StringVar()
-    e_product2=StringVar()
-    e_product3=StringVar()
-    e_product4=StringVar()
-    e_hsn2=StringVar()
-    e_hsn3=StringVar()
-    e_hsn4=StringVar()
-    e_desc2=StringVar()
-    e_desc3=StringVar()
-    e_desc4=StringVar()
-    e_qty2=StringVar()
-    e_qty3=StringVar()
-    e_qty4=StringVar()
-    e_price2=StringVar()
-    e_price3=StringVar()
-    e_price4=StringVar()
-    e_total2=StringVar()
-    e_total3=StringVar()
-    e_total4=StringVar()
-    e_tax2=StringVar()
-    e_tax3=StringVar()
-    e_tax4=StringVar()
+    e_amt_received=StringVar(form_frame)
+    e_balance=StringVar(form_frame)
+    e_product2=StringVar(form_frame)
+    e_product3=StringVar(form_frame)
+    e_product4=StringVar(form_frame)
+    e_hsn2=StringVar(form_frame)
+    e_hsn3=StringVar(form_frame)
+    e_hsn4=StringVar(form_frame)
+    e_desc2=StringVar(form_frame)
+    e_desc3=StringVar(form_frame)
+    e_desc4=StringVar(form_frame)
+    e_qty2=StringVar(form_frame)
+    e_qty3=StringVar(form_frame)
+    e_qty4=StringVar(form_frame)
+    e_price2=StringVar(form_frame)
+    e_price3=StringVar(form_frame)
+    e_price4=StringVar(form_frame)
+    e_total2=StringVar(form_frame)
+    e_total3=StringVar(form_frame)
+    e_total4=StringVar(form_frame)
+    e_tax2=StringVar(form_frame)
+    e_tax3=StringVar(form_frame)
+    e_tax4=StringVar(form_frame)
     
 
     print("dataaaaaaaaaa",data)
