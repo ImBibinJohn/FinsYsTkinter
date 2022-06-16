@@ -480,6 +480,17 @@ def main():
     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
     treevv.column(7, minwidth=30, width=140, anchor=CENTER)
 
+
+    cur.execute(
+        "SELECT accounts1id,name,acctype,detype,deftaxcode,balance FROM app1_accounts1")
+    val2 = cur.fetchall()
+    if val2:
+        for x in val2:
+            treevv.insert('', 'end', values=(
+                x[0], x[1], x[2], x[3], x[4], x[5]))
+    treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+
+
     cur.execute(
         "SELECT accountsid,name,acctype,detype,deftaxcode,balance FROM app1_accounts")
     val = cur.fetchall()
@@ -488,6 +499,8 @@ def main():
             treevv.insert('', 'end', values=(
                 x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+
+    
 
     def editcoa():
         # def changeedit():
@@ -512,16 +525,33 @@ def main():
         #     D.destroy()
 
         # Get selected item to Edit
-        global edit, bm
+        global edit, bm,s,accdata
         str = treevv.focus()
         values = treevv.item(str, 'values')
         print(values)
         b = [values[0]]
-        print("b is           ",b)
+        n=[values[1]]
+        print("b is           ",n[0])
         cur.execute(
-            "SELECT acctype,name,detype,description,gst,deftaxcode,balance FROM app1_accounts WHERE accountsid=%s", (b))
+            "SELECT name FROM app1_accounts ")
 
-        s = cur.fetchone()
+        accdata= cur.fetchall()
+    
+        for x in accdata:
+            
+            if values[1] in x:
+                cur.execute(
+                    "SELECT acctype,name,detype,description,gst,deftaxcode,balance FROM app1_accounts WHERE name=%s", (n))
+
+                s = cur.fetchone()
+                print("Edited data is1",s)
+                break
+            else:
+                cur.execute(
+                    "SELECT acctype,name,detype,description,gst,deftaxcode,balance FROM app1_accounts1 WHERE name=%s", (n))
+
+                s = cur.fetchone()
+                print("Edited data2 is",s)
         print("Edited data is",s)
         
         def sub_check():
@@ -562,15 +592,39 @@ def main():
                 sub_account = cb.get()
                 deftaxcode = nb.get()
                 finsys_amt = balanceinput.get()
+                for x in accdata:
+                    print("name in x",x)
+                    if name in x:
+                        if sub_account==None:
+                            cur.execute("UPDATE  app1_accounts SET description=%s,gst=%s,deftaxcode=%s where accountsid=%s",(description,'',deftaxcode, b[0]))
 
-                cur.execute("UPDATE  app1_accounts SET acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s where accountsid=%s",(type,detail_type,name,description,sub_account,deftaxcode,finsys_amt, b[0]))
+                            mydata.commit()
+                            edit.destroy()
+                            messagebox.showinfo(title='Success',message='Account updated')
+                        else:
+                            cur.execute("UPDATE  app1_accounts SET description=%s,gst=%s,deftaxcode=%s where accountsid=%s",(description,sub_account,deftaxcode, b[0]))
 
+                            mydata.commit()
+                            edit.destroy()
+                            messagebox.showinfo(title='Success',message='Account updated')
+                    else:
+                        if sub_account==None:
+                            cur.execute("UPDATE  app1_accounts1 SET description=%s,gst=%s,deftaxcode=%s,balance=%s where accountsid=%s",(description,'',deftaxcode,finsys_amt, b[0]))
 
-                # cmp[0],product_id[0],pro[0]
-                # (sql,val)
-                mydata.commit()
-                # D.destroy()
-                messagebox.showinfo(title='Success',message='New Account Added')
+                            mydata.commit()
+                            edit.destroy()
+                            messagebox.showinfo(title='Success',message='Account updated')
+                        else:
+                            cur.execute("UPDATE  app1_accounts1 SET description=%s,gst=%s,deftaxcode=%s,balance=%s where accounts1id=%s",(description,sub_account,deftaxcode,finsys_amt, b[0]))
+
+                            mydata.commit()
+                            edit.destroy()
+                            messagebox.showinfo(title='Success',message='Account updated')
+                        
+                # # cmp[0],product_id[0],pro[0]
+                # # (sql,val)
+                
+                
 
 
         cur.execute('select Pname,Pid from producttable')
