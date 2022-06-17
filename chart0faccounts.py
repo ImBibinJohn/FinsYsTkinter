@@ -1009,7 +1009,7 @@ def main():
         treevvv.column(2, minwidth=30, width=130,anchor=CENTER)
         treevvv.column(3, minwidth=30, width=100,anchor=CENTER)
         treevvv.column(4, minwidth=30, width=100,anchor=CENTER)
-        treevvv.column(5, minwidth=30, width=100,anchor=CENTER)
+        treevvv.column(5, minwidth=30, width=200,anchor=CENTER)
         treevvv.column(6, minwidth=30, width=100,anchor=CENTER)
         treevvv.column(7, minwidth=30, width=100,anchor=CENTER)
             
@@ -1070,15 +1070,118 @@ def main():
 
 #find datas for treeview insertion
 
+
         uid=[4]
         cur.execute("select cid from app1_company where id_id=%s",(uid))
         cmp1=cur.fetchone()
-        cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
-        account=cur.fetchone()
-        balance=account[7]
-        print("account is",account )
+        
 
-        prlframe.mainloop()
+
+        cur.execute("SELECT name FROM app1_accounts ")
+
+        accdata= cur.fetchall()
+    
+        for x in accdata:
+            if values[1] in x:
+                pass
+            else:
+                cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
+                account=cur.fetchone()
+        balance=account[7]
+        
+        if account[3] == 'Account Receivable(Debtors)':
+            cur.execute("select * from app1_invoice where  cid_id=%s",(cmp1))
+            invoic=cur.fetchall()
+            cur.execute("select * from app1_credit where  cid_id=%s",(cmp1))
+            creditnote=cur.fetchall()
+            cur.execute("select * from app1_payment where  cid_id=%s",(cmp1))
+            paymen=cur.fetchall()
+            cur.execute("select * from app1_salesrecpts where  cid_id=%s",(cmp1))
+            salesofline=cur.fetchall()
+            trans='Invoice'
+            accname=account[3]
+            try:
+                for i in invoic:
+                    treevvv.insert('', 'end',values=(i[5],trans,i[3],i[1],accname,0,i[17]))
+            except:
+                pass
+            trans='Credit Note'
+            try:
+                for i in creditnote:
+                    treevvv.insert('', 'end',values=(i[4],trans,i[5],i[1],accname,0,i[16]))
+            except:
+                pass 
+            trans='Payment'
+            try:
+                for i in paymen:
+                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[14]))
+            except:
+                pass 
+            trans='Sales Receipt'
+            try:
+                for i in salesofline:
+                    if i[41]=="True":
+                        treevvv.insert('', 'end',values=(i[4],trans,i[8],i[1],accname,0,i[19]))
+            except:
+                pass 
+
+        elif account[3] == 'Accounts Payable(Creditors)':
+            ty='openbalance'
+            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],'openbalance'))
+            bill=cur.fetchall()
+            ty=''
+            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
+            bill2=cur.fetchall()
+            ty='debit'
+            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
+            bill3=cur.fetchall()
+            cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
+            debit=cur.fetchall()
+            cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
+            expence=cur.fetchall()
+            trans='payment'
+            accname=account[3]
+            try:
+                for i in bill:
+                    
+                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+            except:
+                pass   
+            try:
+                for i in bill2:
+                    
+                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+            except:
+                pass 
+            trans='bill'
+            try:
+                for i in bill3:
+                    
+                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+            except:
+                pass 
+            trans='Payment'
+            try:
+                for i in debit:
+                    
+                    treevvv.insert('', 'end',values=(i[3],trans,i[4],i[1],accname,0,i[54]))
+            except:
+                pass 
+            trans='Payment'
+            try:
+                for i in expence:
+                    
+                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+            except:
+                pass       
+            
+
+    #   bill = bills.objects.filter(cid=cmp1, payornot='openbalance')
+    #         bill2 = bills.objects.filter(cid=cmp1, payornot='')
+    #         bill3 = bills.objects.filter(cid=cmp1, payornot='debit')
+    #         debit = suplrcredit.objects.filter(cid=cmp1)
+    #         expence = expences.objects.filter(cid=cmp1)      
+    #     prlframe.mainloop()
     # accrecivabales()   
 
 
