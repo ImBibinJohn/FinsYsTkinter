@@ -332,14 +332,13 @@ def changing_datas():
     img.image = render
     img.place(x=0,y=0)
     
-    
-    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
-    # F2.place(x=0.0, y=100, width=500, height=1100)
-    # load = Image.open("emp.png")
-    # render = ImageTk.PhotoImage(load)
-    # img = Label(F2,image=render,bg="#243e55")
-    # img.image = render
-    # img.place(x=0,y=0)
+    # size=(500,1100)
+
+
+    # axx=Image.open('emp.png').resize(size)
+    # werx = ImageTk.PhotoImage(axx,master=add)
+    # lab1=tk.Label(F2,image=werx)
+    # lab1.place(x=0,y=0)
     
 
     label2=Label(F, text="Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1523,7 +1522,7 @@ def generate_payslip():
         # print(earr4.get())
         print("why")
         # earn1 = int(float(basic.get())) + int(float(da.get())) + int(float(earr1.get())) + int(float(earr2.get())) + int(float(earr3.get())) + int(float(earr4.get()))
-        # earn1= basicval+daval+earr1val+earr2val+earr3val+earr4val
+        # earn1= basic+da+earr1+earr2+earr3+earr4
         print("wel")
         # print(earn1)
         # print("why")
@@ -1940,16 +1939,22 @@ def generate_payslip():
     label1=Label(F, text="Salary Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=500,y=400)
     
+    
     label1=Label(F, text="Earnings", font=('times new roman', 17, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=200,y=500)
-
+    
+    def bas():
+        ba = label1_basic.get()
+        print("you")
+        print(ba)
+        print("you")
     label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=580)
-    
     label1_basic=Entry(F,bg='#2f516a',fg='#fff', font=('times new roman', 11, 'bold'))
     label1_basic.insert(0,data[28])
     label1_basic.place(x=280,y=580,height=40,width=230)
     label1_basic.configure(state='disabled')
+    bas()
 
     label1_da=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1_da.place(x=40,y=640)
@@ -2047,18 +2052,41 @@ def generate_payslip():
     label1_dedu6.insert(0,data[37])
     label1_dedu6.place(x=940,y=820,height=40,width=230)
     label1_dedu6.bind("<KeyRelease>",get_selected_e_product)
-    def main():
+    def grp():
+        global earn1,basic,ba,das,ear1,ear2,ear3,ear4,da,earr1,earr2,earr3,earr4
+        
+        basic = label1_basic.get()
+        da = label1_da.get()
+        earr1 = label1_earr1.get()
+        earr2 = label1_earr2.get()
+        earr3 = label1_earr3.get()
+        earr4 = label1_earr4.get()
+        earr6 = label1_earr6.get()
+        earr7 = label1_earr7.get()
         lb1 = label1_gros.get()
+    
         print("lb1")
         print(lb1)
+        print(basic)
         print("lb1")
+        
+        earn1= basic+da+earr1+earr2+earr3+earr4
+        
+        gros_pay = earn1 + earr6 + earr7
+        
+        print(gros)
+        gros.set(gros_pay)
+        print("lon")
+        print(gros_pay)
+        print("lon")
     label1=Label(F, text="Gross Pay", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1080)
     label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable='gros', font=('times new roman', 11, 'bold'))
     label1_gros.place(x=900,y=1080,height=40,width=270)
     # gros.set(gros_pay)
     label1_gros.bind("<KeyRelease>",get_selected_e_product)
-    main()
+    grp()
+    
     label1=Label(F, text="Total Deduction", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1140)
     label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable='tded', font=('times new roman', 11, 'bold'))

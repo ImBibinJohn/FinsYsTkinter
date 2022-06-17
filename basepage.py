@@ -188,7 +188,7 @@ class base:
         def payment_method(p):
             pay = paymentvariable.get()
             if pay == 'Employee':
-                import addingemp
+                import employee
             elif pay == 'Payslip':
                 import showpayslip
         paymentvariable = tk.StringVar(lab)
