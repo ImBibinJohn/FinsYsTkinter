@@ -17,7 +17,7 @@ def fun():#db connection
         host='localhost',
         user='root',
         password='',
-        database='finsYs_tkinter'
+        database='finsys_tkinter'
         )
     mycursor = mydb2.cursor()
     
@@ -67,7 +67,7 @@ def add_recon1():
         mycursor = mydb2.cursor()
 
     def add_custom():
-        import addcustomer_form
+        # import addcustomer_form
         fun()
         print("hellboy111")   
         global recon_data
@@ -319,6 +319,13 @@ ax=Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-ba
 wer = ImageTk.PhotoImage(ax,master=root)
 lab1=tk.Label(F2,image=wer)
 lab1.place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+
+# ax1=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
+# tk.Label(F2,image=ax1,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+
+# image3 = tk.PhotoImage(file="bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg")
+# Label(F2, text="", image = image3).grid(row=0, column=0)
+
 
 # f2=tk.Frame(form_frame,bg='#243e54')
 # size=(500,700)
