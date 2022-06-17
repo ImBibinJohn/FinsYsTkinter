@@ -181,19 +181,19 @@ def main():
     treevv.heading(6, text='NON INSPECTED')
     treevv.heading(7, text='INSPECTED BY')
     treevv.heading(8, text='DEPARTMENT')
-    treevv.heading(9, text='QUALIFIED PRODUCTS')
-    treevv.heading(10, text='NON-QUALIFIED PRODUCTS')
+    treevv.heading(9, text='QUALIFIED')
+    treevv.heading(10, text='NON-QUALIFIED')
 
     treevv.column(1, minwidth=10, width=40, anchor=CENTER)  # coloumns
-    treevv.column(2, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(3, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(4, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(5, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(6, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(7, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(8, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(9, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(10, minwidth=30, width=140, anchor=CENTER)
+    treevv.column(2, minwidth=30, width=80, anchor=CENTER)
+    treevv.column(3, minwidth=30, width=30, anchor=CENTER)
+    treevv.column(4, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(5, minwidth=30, width=50, anchor=CENTER)
+    treevv.column(6, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(7, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(8, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(9, minwidth=30, width=50, anchor=CENTER)
+    treevv.column(10, minwidth=30, width=60, anchor=CENTER)
         
     cur.execute("SELECT cid,qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products FROM qualityinspection")
     val = cur.fetchall()
@@ -221,8 +221,8 @@ def main():
                 
            
             print(qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products)
-
-            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%d""", (qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b))
+            # cur.execute("""UPDATE qualitycertificate SET qc_date =%s, qc_sku =%s, qc_pname =%s, qc_custumername =%s, qc_inspdate =%s  WHERE cid=%s""",[qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate, b])
+            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%s""", [qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b])
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()
