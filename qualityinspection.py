@@ -15,7 +15,7 @@ cur = mydata.cursor()
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")
-expense_form.geometry("1500x1000")
+expense_form.geometry("1300x800")
 expense_form['bg'] = '#2f516a'
 wrappen = ttk.LabelFrame(expense_form)
 mycanvas = Canvas(wrappen)
@@ -26,7 +26,7 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 def main():
 
-    global A, data, menu
+    global A
     A = tk.Tk()
     A.title('View')
     A.geometry('1500x1000')
@@ -34,12 +34,12 @@ def main():
     
 
     # head frame
-    head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-    f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='QUALITY INSPECTION', bg="#243e55", height=2,bd=5, relief="groove", font=f, width=106)
+    head = tk.LabelFrame(A, borderwidth=2, bg='#243e54')
+    f = font.Font(family='Times New Roman', size=35)  # font
+    lb = tk.Label(head, text='QUALITY INSPECTION', bg="#243e55", height=3,bd=2, relief="groove", font=f, width=106)
     lb['font'] = f
-    lb.place(relx=0.05, rely=0.2)
-    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
+    lb.place(relx=0.07, rely=0.2)
+    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.11)
 
     # contents frame
     hd = tk.Frame(A, bg='#243e54')
@@ -167,8 +167,8 @@ def main():
 
         D.mainloop()
          
-    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 16, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
-    form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
+    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 21, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
+    form2_frame.place(relx=0.01,rely=0.075,relwidth=1,relheight=0.1)
 
     # table view
 
