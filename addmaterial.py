@@ -22,10 +22,10 @@ def addmaterial():
     mycanvas.bind('<Configure>',lambda e:mycanvas.configure(scrollregion=mycanvas.bbox('all')))
     frame=tk.Frame(mycanvas)
     frame['bg']='#2f516f'
-    mycanvas.create_window((0,0),window=frame,anchor='nw',width=1500,height=1200)
+    mycanvas.create_window((0,0),window=frame,anchor='nw',width=1500,height=2000)
     hf1=tk.Frame(frame,bg='#243e54')
     tk.Label(hf1,text='MATERIAL MASTER',font=('Times New Roman',30),bg='#243e54').place(relx=0.4,rely=0.1)
-    hf1.place(relx=0.1,rely=0.03,relwidth=0.8,relheight=0.1)
+    hf1.place(relx=0.1,rely=0.03,relwidth=0.8,relheight=0.04)
     hf2=tk.Frame(frame,bg='#243e54')
     mycanvass=tk.Canvas(hf2,width=1800,height=1200)
     mycanvass.place(relx=0,rely=0,relwidth=1,relheight=1)
@@ -109,7 +109,8 @@ def addmaterial():
         def clearcomptotquan():  
             totalquantity.delete(0,END)
         def clearcomptotamount():  
-            totalamount.delete(0,END)        
+            totalamount.delete(0,END) 
+            costofcomp.delete(0,END)     
         q=float(quan.get())
         r=float(price.get())
         tot=(q*r)
@@ -122,6 +123,7 @@ def addmaterial():
         total.insert(0,tot)
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod=ttk.Combobox(frame1,values=pro,font=(4))
     prod.bind('<<ComboboxSelected>>',getproductcomp)
     prod.place(relx=0.01,rely=0.19,relheight=0.015,relwidth=0.08)
@@ -170,6 +172,7 @@ def addmaterial():
         totalquantity.insert(14,'Nos')
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod1=ttk.Combobox(frame1,values=pro,font=(4))
     prod1.bind('<<ComboboxSelected>>',getproductcomp1)
     prod1.place(relx=0.01,rely=0.21,relheight=0.015,relwidth=0.08)
@@ -218,6 +221,7 @@ def addmaterial():
         totalquantity.insert(14,'Nos')
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod2=ttk.Combobox(frame1,values=pro,font=(4))
     prod2.bind('<<ComboboxSelected>>',getproductcomp2)
     prod2.place(relx=0.01,rely=0.23,relheight=0.015,relwidth=0.08)
@@ -266,6 +270,7 @@ def addmaterial():
         totalquantity.insert(14,'Nos')
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod3=ttk.Combobox(frame1,values=pro,font=(4))
     prod3.bind('<<ComboboxSelected>>',getproductcomp3)
     prod3.place(relx=0.01,rely=0.25,relheight=0.015,relwidth=0.08)
@@ -314,6 +319,7 @@ def addmaterial():
         totalquantity.insert(14,'Nos')
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod4=ttk.Combobox(frame1,values=pro,font=(4))
     prod4.bind('<<ComboboxSelected>>',getproductcomp4)
     prod4.place(relx=0.01,rely=0.27,relheight=0.015,relwidth=0.08)
@@ -362,6 +368,7 @@ def addmaterial():
         totalquantity.insert(14,'Nos')
         clearcomptotamount()
         totalamount.insert(0,subtot)
+        costofcomp.insert(0,subtot)
     prod5=ttk.Combobox(frame1,values=pro,font=(4))
     prod5.bind('<<ComboboxSelected>>',getproductcomp5)
     prod5.place(relx=0.01,rely=0.29,relheight=0.015,relwidth=0.08)
@@ -415,6 +422,7 @@ def addmaterial():
             totalquantity.insert(14,'Nos')
             clearcomptotamount()
             totalamount.insert(0,subtot)
+            costofcomp.insert(0,subtot)
         def clear1():
             btn.destroy()
         prod6=ttk.Combobox(frame1,values=pro,font=(4))
@@ -471,6 +479,7 @@ def addmaterial():
             totalquantity.insert(14,'Nos')
             clearcomptotamount()
             totalamount.insert(0,subtot)
+            costofcomp.insert(0,subtot)
         def clear2():
             btn1.destroy()
         prod7=ttk.Combobox(frame1,values=pro)
@@ -527,6 +536,7 @@ def addmaterial():
             totalquantity.insert(14,'Nos')
             clearcomptotamount()
             totalamount.insert(0,subtot)
+            costofcomp.insert(0,subtot)
         def clear3():
             btn2.destroy()
         prod8=ttk.Combobox(frame1,values=pro)
@@ -583,6 +593,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear4():
                 btn3.destroy()
             prod9=ttk.Combobox(frame1,values=pro)
@@ -639,6 +650,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear5():
                 btn4.destroy()
             prod10=ttk.Combobox(frame1,values=pro)
@@ -695,6 +707,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear6():
                 btn5.destroy()
             prod11=ttk.Combobox(frame1,values=pro)
@@ -751,6 +764,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear7():
                 btn6.destroy()
             prod12=ttk.Combobox(frame1,values=pro)
@@ -807,6 +821,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear8():
                 btn7.destroy()
             prod13=ttk.Combobox(frame1,values=pro)
@@ -863,6 +878,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear9():
                 btn8.destroy()
             prod14=ttk.Combobox(frame1,values=pro)
@@ -919,6 +935,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear10():
                 btn9.destroy()
             prod15=ttk.Combobox(frame1,values=pro)
@@ -975,6 +992,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear11():
                 btn10.destroy()
             prod16=ttk.Combobox(frame1,values=pro)
@@ -1031,6 +1049,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear12():
                 btn11.destroy()
             prod17=ttk.Combobox(frame1,values=pro)
@@ -1087,6 +1106,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear13():
                 btn12.destroy()
             prod18=ttk.Combobox(frame1,values=pro)
@@ -1143,6 +1163,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear14():
                 btn13.destroy()
             prod19=ttk.Combobox(frame1,values=pro)
@@ -1199,6 +1220,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear15():
                 btn14.destroy()
             prod20=ttk.Combobox(frame1,values=pro)
@@ -1255,6 +1277,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear16():
                 btn15.destroy()
             prod21=ttk.Combobox(frame1,values=pro)
@@ -1311,6 +1334,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear17():
                 btn16.destroy()
             prod22=ttk.Combobox(frame1,values=pro)
@@ -1367,6 +1391,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear18():
                 btn17.destroy()
             prod23=ttk.Combobox(frame1,values=pro)
@@ -1423,6 +1448,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear19():
                 btn18.destroy()
             prod24=ttk.Combobox(frame1,values=pro)
@@ -1479,6 +1505,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear20():
                 btn19.destroy()
             prod25=ttk.Combobox(frame1,values=pro)
@@ -1535,6 +1562,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear21():
                 btn20.destroy()
             prod26=ttk.Combobox(frame1,values=pro)
@@ -1591,6 +1619,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear22():
                 btn21.destroy()
             prod27=ttk.Combobox(frame1,values=pro)
@@ -1647,6 +1676,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear23():
                 btn22.destroy()
             prod28=ttk.Combobox(frame1,values=pro)
@@ -1703,6 +1733,7 @@ def addmaterial():
                 totalquantity.insert(14,'Nos')
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
+                costofcomp.insert(0,subtot)
             def clear24():
                 btn23.destroy()
             prod29=ttk.Combobox(frame1,values=pro)
@@ -1736,6 +1767,10 @@ def addmaterial():
     tk.Label(frame1,text='Price',font=('times new roman', 14),bg='#2f516f').place(relx=0.65,rely=0.17)
     tk.Label(frame1,text='Amount',font=('times new roman', 14),bg='#2f516f').place(relx=0.72,rely=0.17)
     #row11
+    global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
+    qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20=0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+    qtytotalt1,subtott1=0,0.0
     def getproductscrap(s):
         def clearskuscrap():
             skuu1.delete(0,END)
@@ -1753,14 +1788,19 @@ def addmaterial():
             skuu1.insert(0,fetch[0])
             ratee1.insert(0,fet[2])
     def calculatescraptotal(x):
+        global clearscraptotamount,qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext():
             totall1.delete(0, END) 
+        def clearscraptotamount():
+            totalscrapamount.delete(0,END) 
         qq1=float(quann1.get())
         rr1=float(pricee1.get())
         tott1=(qq1*rr1)
-        subtott1=tott1
         clear_scraptext()
         totall1.insert(0,tott1)
+        subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+        clearscraptotamount()
+        totalscrapamount.insert(0,subtott1)
     prodd1=ttk.Combobox(frame1,values=pro,font=(4))
     prodd1.bind('<<ComboboxSelected>>',getproductscrap)
     prodd1.place(relx=0.41,rely=0.19,relheight=0.015,relwidth=0.08)
@@ -1794,14 +1834,17 @@ def addmaterial():
             skuu2.insert(0,fetch[0])
             ratee2.insert(0,fetch[2])
     def calculatescraptotal2(x):
+        global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext2():
             totall2.delete(0, END) 
         qq2=float(quann2.get())
         rr2=float(pricee2.get())
         tott2=(qq2*rr2)
-        subtott2=tott2
         clear_scraptext2()
         totall2.insert(0,tott2)
+        subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+        clearscraptotamount()
+        totalscrapamount.insert(0,subtott1)
     prodd2=ttk.Combobox(frame1,values=pro,font=(4))
     prodd2.bind('<<ComboboxSelected>>',getproductscrap2)
     prodd2.place(relx=0.41,rely=0.21,relheight=0.015,relwidth=0.08)
@@ -1819,6 +1862,7 @@ def addmaterial():
     totall2.place(relx=0.72,rely=0.21,relheight=0.015,relwidth=0.05)
         #row33
     def getproductscrap3(s):
+        global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clearskuscrap3():
             skuu3.delete(0,END)
             ratee3.delete(0,END)
@@ -1835,6 +1879,7 @@ def addmaterial():
             skuu3.insert(0,fetch[0]) 
             ratee3.insert(0,fetch[2])   
     def calculatescraptotal3(x):
+        global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext3():
             totall3.delete(0, END) 
         qq3=float(quann3.get())
@@ -1843,6 +1888,9 @@ def addmaterial():
         subtott3=tott3
         clear_scraptext3()
         totall3.insert(0,tott3)
+        subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+        clearscraptotamount()
+        totalscrapamount.insert(0,subtott1)
     prodd3=ttk.Combobox(frame1,values=pro,font=(4))
     prodd3.bind('<<ComboboxSelected>>',getproductscrap3)
     prodd3.place(relx=0.41,rely=0.23,relheight=0.015,relwidth=0.08)
@@ -1860,6 +1908,7 @@ def addmaterial():
     totall3.place(relx=0.72,rely=0.23,relheight=0.015,relwidth=0.05)
             #row44
     def getproductscrap4(s):
+        
         def clearskuscrap4():
             skuu4.delete(0,END)
             ratee4.delete(0,END)
@@ -1876,14 +1925,17 @@ def addmaterial():
             skuu4.insert(0,fetch[0])  
             ratee4.insert(0,fetch[2]) 
     def calculatescraptotal4(x):
+        global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext4():
             totall4.delete(0, END) 
         qq4=float(quann4.get())
         rr4=float(pricee4.get())
         tott4=(qq4*rr4)
-        subtott4=tott4
         clear_scraptext4()
         totall4.insert(0,tott4)
+        subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+        clearscraptotamount()
+        totalscrapamount.insert(0,subtott1)
     prodd4=ttk.Combobox(frame1,values=pro,font=(4))
     prodd4.bind('<<ComboboxSelected>>',getproductscrap4)
     prodd4.place(relx=0.41,rely=0.25,relheight=0.015,relwidth=0.08)
@@ -1929,12 +1981,15 @@ def addmaterial():
             subtott5=tott5
             clear_scraptext5()
             totall5.insert(0,tott5)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear1():
             btnn.destroy()
-        prodd5=ttk.Combobox(frame1)
+        prodd5=ttk.Combobox(frame1,values=pro,font=(4))
         prodd5.bind('<<ComboboxSelected>>',getproductscrap5)
         prodd5.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.08)
-        skuu5=tk.Entry(frame1)
+        skuu5=tk.Entry(frame1,font=(4))
         skuu5.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)
         quann5=IntVar()  
         qtyy5=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann5)
@@ -1975,15 +2030,17 @@ def addmaterial():
             qq6=float(quann6.get())
             rr6=float(pricee6.get())
             tott6=(qq6*rr6)
-            subtott6=tott6
             clear_scraptext6()
             totall6.insert(0,tott6)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear2():
             btnn1.destroy()    
-        prodd6=ttk.Combobox(frame1)
+        prodd6=ttk.Combobox(frame1,values=pro,font=(4))
         prodd6.bind('<<ComboboxSelected>>',getproductscrap6)
         prodd6.place(relx=0.41,rely=0.29,relheight=0.015,relwidth=0.08)
-        skuu6=tk.Entry(frame1)
+        skuu6=tk.Entry(frame1,font=(4))
         skuu6.place(relx=0.505,rely=0.29,relheight=0.015,relwidth=0.06)
         quann6=IntVar()  
         qtyy6=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann6)
@@ -2027,12 +2084,15 @@ def addmaterial():
             subtott=tott7
             clear_scraptext7()
             totall7.insert(0,tott7)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear3():
             btnn2.destroy()
-        prodd7=ttk.Combobox(frame1,values=pro)
+        prodd7=ttk.Combobox(frame1,values=pro,font=(4))
         prodd7.bind('<<ComboboxSelected>>',getproductscrap7)
         prodd7.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.08)
-        skuu7=tk.Entry(frame1)
+        skuu7=tk.Entry(frame1,font=(4))
         skuu7.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann7=IntVar()  
         qtyy7=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann7)
@@ -2076,12 +2136,15 @@ def addmaterial():
             subtott=tott8
             clear_scraptext8()
             totall8.insert(0,tott8)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear4():
             btnn3.destroy()
-        prodd8=ttk.Combobox(frame1,values=pro)
+        prodd8=ttk.Combobox(frame1,values=pro,font=(4))
         prodd8.bind('<<ComboboxSelected>>',getproductscrap8)
         prodd8.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.08)
-        skuu8=tk.Entry(frame1)
+        skuu8=tk.Entry(frame1,font=(4))
         skuu8.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann8=IntVar()  
         qtyy8=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann8)
@@ -2125,12 +2188,15 @@ def addmaterial():
             subtott=tott9
             clear_scraptext9()
             totall9.insert(0,tott9)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear5():
             btnn4.destroy()
-        prodd9=ttk.Combobox(frame1,values=pro)
+        prodd9=ttk.Combobox(frame1,values=pro,font=(4))
         prodd9.bind('<<ComboboxSelected>>',getproductscrap9)
         prodd9.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu9=tk.Entry(frame1)
+        skuu9=tk.Entry(frame1,font=(4))
         skuu9.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann9=IntVar()  
         qtyy9=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann9)
@@ -2174,12 +2240,15 @@ def addmaterial():
             subtott=tott10
             clear_scraptext10()
             totall10.insert(0,tott10)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear6():
             btnn5.destroy()
-        prodd10=ttk.Combobox(frame1,values=pro)
+        prodd10=ttk.Combobox(frame1,values=pro,font=(4))
         prodd10.bind('<<ComboboxSelected>>',getproductscrap10)
         prodd10.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu10=tk.Entry(frame1)
+        skuu10=tk.Entry(frame1,font=(4))
         skuu10.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann10=IntVar()  
         qtyy10=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann10)
@@ -2220,15 +2289,17 @@ def addmaterial():
             qq11=float(quann11.get())
             rr11=float(pricee11.get())
             tott11=(qq11*rr11)
-            subtott=tott11
             clear_scraptext11()
             totall11.insert(0,tott11)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear7():
             btnn6.destroy()
-        prodd11=ttk.Combobox(frame1,values=pro)
+        prodd11=ttk.Combobox(frame1,values=pro,font=(4))
         prodd11.bind('<<ComboboxSelected>>',getproductscrap11)
         prodd11.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu11=tk.Entry(frame1)
+        skuu11=tk.Entry(frame1,font=(4))
         skuu11.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann11=IntVar()  
         qtyy11=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann11)
@@ -2269,15 +2340,17 @@ def addmaterial():
             qq12=float(quann12.get())
             rr12=float(pricee12.get())
             tott12=(qq12*rr12)
-            subtott=tott12
             clear_scraptext12()
             totall12.insert(0,tott12)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear8():
             btnn7.destroy()
-        prodd12=ttk.Combobox(frame1,values=pro)
+        prodd12=ttk.Combobox(frame1,values=pro,font=(4))
         prodd12.bind('<<ComboboxSelected>>',getproductscrap12)
         prodd12.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu12=tk.Entry(frame1)
+        skuu12=tk.Entry(frame1,font=(4))
         skuu12.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann12=IntVar()  
         qtyy12=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann12)
@@ -2321,12 +2394,15 @@ def addmaterial():
             subtott=tott13
             clear_scraptext13()
             totall13.insert(0,tott13)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear9():
             btnn8.destroy()
-        prodd13=ttk.Combobox(frame1,values=pro)
+        prodd13=ttk.Combobox(frame1,values=pro,font=(4))
         prodd13.bind('<<ComboboxSelected>>',getproductscrap13)
         prodd13.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu13=tk.Entry(frame1)
+        skuu13=tk.Entry(frame1,font=(4))
         skuu13.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann13=IntVar()  
         qtyy13=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann13)
@@ -2370,12 +2446,15 @@ def addmaterial():
             subtott=tott14
             clear_scraptext14()
             totall14.insert(0,tott14)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear10():
             btnn9.destroy()
-        prodd14=ttk.Combobox(frame1,values=pro)
+        prodd14=ttk.Combobox(frame1,values=pro,font=(4))
         prodd14.bind('<<ComboboxSelected>>',getproductscrap14)
         prodd14.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu14=tk.Entry(frame1)
+        skuu14=tk.Entry(frame1,font=(4))
         skuu14.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann14=IntVar()  
         qtyy14=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann14)
@@ -2416,15 +2495,17 @@ def addmaterial():
             qq15=float(quann15.get())
             rr15=float(pricee15.get())
             tott15=(qq15*rr15)
-            subtott=tott15
             clear_scraptext15()
             totall15.insert(0,tott15)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear11():
             btnn10.destroy()
-        prodd15=ttk.Combobox(frame1,values=pro)
+        prodd15=ttk.Combobox(frame1,values=pro,font=(4))
         prodd15.bind('<<ComboboxSelected>>',getproductscrap15)
         prodd15.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu15=tk.Entry(frame1)
+        skuu15=tk.Entry(frame1,font=(4))
         skuu15.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann15=IntVar()  
         qtyy15=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann15)
@@ -2465,15 +2546,17 @@ def addmaterial():
             qq16=float(quann16.get())
             rr16=float(pricee16.get())
             tott16=(qq16*rr16)
-            subtott=tott16
             clear_scraptext16()
             totall16.insert(0,tott16)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear12():
             btnn11.destroy()
-        prodd16=ttk.Combobox(frame1,values=pro)
+        prodd16=ttk.Combobox(frame1,values=pro,font=(4))
         prodd16.bind('<<ComboboxSelected>>',getproductscrap16)
         prodd16.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu16=tk.Entry(frame1)
+        skuu16=tk.Entry(frame1,font=(4))
         skuu16.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann16=IntVar()  
         qtyy16=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann16)
@@ -2517,12 +2600,15 @@ def addmaterial():
             subtott=tott17
             clear_scraptext17()
             totall17.insert(0,tott17)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear13():
             btnn12.destroy()
-        prodd17=ttk.Combobox(frame1,values=pro)
+        prodd17=ttk.Combobox(frame1,values=pro,font=(4))
         prodd17.bind('<<ComboboxSelected>>',getproductscrap17)
         prodd17.place(relx=0.41,rely=y,relheight=0.015,relwidth=0.09)
-        skuu17=tk.Entry(frame1)
+        skuu17=tk.Entry(frame1,font=(4))
         skuu17.place(relx=0.505,rely=y,relheight=0.015,relwidth=0.06)    
         quann17=IntVar()  
         qtyy17=tk.Spinbox(frame1,from_=0,to=50,font=(4),textvariable=quann17)
@@ -2566,6 +2652,9 @@ def addmaterial():
             subtott=tott18
             clear_scraptext18()
             totall18.insert(0,tott18)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear14():
             btnn13.destroy()
         prodd18=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2615,6 +2704,9 @@ def addmaterial():
             subtott=tott19
             clear_scraptext19()
             totall19.insert(0,tott19)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear15():
             btnn14.destroy()
         prodd19=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2664,6 +2756,9 @@ def addmaterial():
             subtott=tott20
             clear_scraptext20()
             totall20.insert(0,tott20)
+            subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
+            clearscraptotamount()
+            totalscrapamount.insert(0,subtott1)
         def scrapclear16():
             btnn15.destroy()
         prodd20=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2686,13 +2781,160 @@ def addmaterial():
    
     btnn=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow)
     btnn.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
-    tk.Label(frame,text='Total Quantity',font=('times new roman', 16),bg='#243e54').place(relx=0.25,rely=0.58,relwidth=0.1,relheight=0.04)
+    tk.Label(frame,text='Total Quantity',font=('times new roman', 16),bg='#2f516f').place(relx=0.25,rely=0.40,relwidth=0.1,relheight=0.03)
     totalquantity=tk.Entry(frame,font=(8))
-    totalquantity.place(relx=0.26,rely=0.63,relwidth=0.08,relheight=0.03)
-    #tk.Label(frame,text='Total Amount',font=(16)).place(relx=0.37,rely=0.56)
-    tk.Label(frame,text='Total Amount',font=('times new roman', 16),bg='#243e54').place(relx=0.38,rely=0.58,relwidth=0.1,relheight=0.04)
+    totalquantity.place(relx=0.26,rely=0.43,relwidth=0.08,relheight=0.02)
+    tk.Label(frame,text='Total Amount',font=('times new roman', 16),bg='#2f516f').place(relx=0.38,rely=0.40,relwidth=0.1,relheight=0.03)
     totalamount=tk.Entry(frame,font=(8))
-    totalamount.place(relx=0.39,rely=0.63,relwidth=0.08,relheight=0.03)
-    hf2.place(relx=0.1,rely=0.15,relwidth=0.8,relheight=0.4)
+    totalamount.place(relx=0.39,rely=0.43,relwidth=0.08,relheight=0.02)
+    tk.Label(frame,text='Total Scrap Amount',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=0.41,relwidth=0.15,relheight=0.03)
+    totalscrapamount=tk.Entry(frame,font=(6))
+    totalscrapamount.place(relx=0.79,rely=0.41,relwidth=0.1,relheight=0.02)
+    tk.Label(frame,text='Cost of components',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=0.44,relwidth=0.15,relheight=0.03)
+    costofcomp=tk.Entry(frame,font=(6))
+    costofcomp.place(relx=0.79,rely=0.44,relwidth=0.1,relheight=0.02)
+    tk.Label(frame,text='Type of Additional Cost',font=('times new roman', 16),bg='#2f516f').place(relx=0.53,rely=0.47,relwidth=0.15,relheight=0.03)
+    additional1=tk.Entry(frame,font=(6))
+    additional1.place(relx=0.55,rely=0.50,relwidth=0.12,relheight=0.02)
+    tk.Label(frame,text='Percentage',font=('times new roman', 16),bg='#2f516f').place(relx=0.67,rely=0.47,relwidth=0.1,relheight=0.03)
+    global v,addbtn,ded,ded1,ded2,ded3,totaddlcost
+    v=0.56
+    ded,ded1,ded2,ded3,totaddlcost=0.0,0.0,0.0,0.0,0.0
+    def labels():
+        global v,addlcost,totaddlcost,ded,ded2,ded3,ded1,subtot,effccost
+        effccost=0.0
+        tk.Label(frame1,text='QTY',bg='#243e54',font=('Times New Roman',14)).place(relx=0.67,rely=0.140)
+        def quantityy(x):
+            qq=float(qqq.get())
+            efrate=(effccost/qq)
+            effrate.insert(0,efrate)
+        qqq=IntVar()
+        quantity=tk.Spinbox(frame1,font=(6),from_=0,to=50,textvariable=qqq)
+        quantity.bind('<FocusIn>',quantityy)
+        quantity.place(relx=0.70,rely=0.140,relwidth=0.03,relheight=0.015)
+        tk.Label(frame,text='Total Addl. Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.53,rely=v,relwidth=0.15,relheight=0.03)
+        addlcost=tk.Entry(frame,font=(6))
+        totaddlcost=float(round(ded+ded1+ded2+ded3)) 
+        addlcost.insert(0,totaddlcost)
+        addlcost.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02) 
+        tk.Label(frame,text='Effective Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.03,relwidth=0.15,relheight=0.03) 
+        effcost=tk.Entry(frame,font=(6))
+        totaddlcost=float(round(ded+ded1+ded2+ded3)) 
+        subtot=tot+tot1+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9+tot10+tot11+tot12+tot13+tot14+tot15+tot16+tot17+tot18+tot19+tot20+tot21+tot22+tot23+tot24+tot25+tot26+tot27+tot28+tot29
+        effccost=round(subtot-totaddlcost)
+        effcost.insert(0,effccost)
+        effcost.place(relx=0.79,rely=v+0.03,relwidth=0.1,relheight=0.02) 
+        tk.Label(frame,text='Effective rate of Primary Item:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.06,relwidth=0.2,relheight=0.03)
+        effrate=tk.Entry(frame,font=(6))
+        effrate.place(relx=0.79,rely=v+0.06,relwidth=0.1,relheight=0.02) 
+    def percen1(q):
+        global ded,ded2,ded3,ded1,totaddlcost,clearaddtotcost
+        add1=additional1.get()
+        percen=float(percentage1.get())
+        if add1:
+            ded=float((percen/100)*subtot)
+            def clear_ded():
+                addtotal1.delete(0,END)
+            clear_ded()   
+            addtotal1.insert(0,ded)
+            def clearaddtotcost():
+                addlcost.delete(0,END)  
+            clearaddtotcost()
+            totaddlcost=float(round(ded+ded1+ded2+ded3)) 
+            addlcost.insert(0,totaddlcost)  
+            labels()        
+    percentage1=tk.Entry(frame,font=(6))
+    percentage1.bind('<KeyRelease>',percen1)
+    percentage1.place(relx=0.697,rely=0.50,relwidth=0.04,relheight=0.02)    
+    tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=0.50,relwidth=0.01,relheight=0.02)   
+    addtotal1=tk.Entry(frame,font=(6))
+    addtotal1.place(relx=0.79,rely=0.50,relwidth=0.1,relheight=0.02)  
+    labels()
+    #additional2
+    additional2=tk.Entry(frame,font=(6))
+    additional2.place(relx=0.55,rely=0.53,relwidth=0.12,relheight=0.02)
+    def percen2(q):
+        global ded,ded2,ded3,ded1,totaddlcost
+        add2=additional2.get()
+        if add2:
+            percen=float(percentage2.get())
+            ded1=float((percen/100)*subtot)
+            def clear_ded2():
+                    addtotal2.delete(0,END)   
+            clear_ded2()   
+            addtotal2.insert(0,ded1) 
+            clearaddtotcost()
+            totaddlcost=float(round(ded+ded1+ded2+ded3))  
+            addlcost.insert(0,totaddlcost)     
+            labels()                
+    percentage2=tk.Entry(frame,font=(6))
+    percentage2.bind('<KeyRelease>',percen2)
+    percentage2.place(relx=0.697,rely=0.53,relwidth=0.04,relheight=0.02)    
+    tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=0.53,relwidth=0.01,relheight=0.02)
+    addtotal2=tk.Entry(frame,font=(6))
+    addtotal2.place(relx=0.79,rely=0.53,relwidth=0.1,relheight=0.02)
+    labels()
+    #additional3
+    def newadditional():
+        global addbtn1,v,ded,ded2,ded3,ded1,totaddlcost
+        def desaddbtn():
+            addbtn.destroy()   
+        def percen3(q):
+            add3=additional3.get()
+            if add3:
+                percen=float(percentage3.get())
+                ded2=float((percen/100)*subtot)
+                def clear_ded3():
+                        addtotal3.delete(0,END)  
+                clear_ded3()   
+                addtotal3.insert(0,ded2)
+                clearaddtotcost()
+                totaddlcost=float(round(ded+ded1+ded2+ded3))    
+                addlcost.insert(0,totaddlcost)              
+        additional3=tk.Entry(frame,font=(6))
+        additional3.place(relx=0.55,rely=v,relwidth=0.12,relheight=0.02)
+        percentage3=tk.Entry(frame,font=(6))
+        percentage3.bind('<KeyRelease>',percen3)
+        percentage3.place(relx=0.697,rely=v,relwidth=0.04,relheight=0.02)
+        tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=v,relwidth=0.01,relheight=0.02)   
+        addtotal3=tk.Entry(frame,font=(6))
+        addtotal3.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02)  
+        addbtn1=tk.Button(frame,text='+',font=(12),command=newadditional2)
+        addbtn1.place(relx=0.75,rely=v,relwidth=0.03,relheight=0.02) 
+        v=v+0.03
+        desaddbtn()  
+        labels()
+    #additinal4
+    def newadditional2():
+        global v,ded,ded3,ded1,totaddlcost,ded2
+        def desaddbtn1():
+            addbtn1.destroy()   
+        def percen4(q):
+            add4=additional4.get()
+            if add4:
+                percen=float(percentage4.get())
+                ded3=float((percen/100)*subtot)
+                def clear_ded4():
+                        addtotal4.delete(0,END)  
+                clear_ded4()   
+                addtotal4.insert(0,ded3)
+                clearaddtotcost()
+                totaddlcost=float(round(ded+ded1+ded3+ded2))
+                addlcost.insert(0,totaddlcost)                          
+        additional4=tk.Entry(frame,font=(6))
+        additional4.place(relx=0.55,rely=v,relwidth=0.12,relheight=0.02)
+        percentage4=tk.Entry(frame,font=(6))
+        percentage4.bind('<KeyRelease>',percen4)
+        percentage4.place(relx=0.697,rely=v,relwidth=0.04,relheight=0.02)
+        tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=v,relwidth=0.01,relheight=0.02)   
+        addtotal4=tk.Entry(frame,font=(6))
+        addtotal4.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02)  
+        v=v+0.03
+        labels()
+        desaddbtn1()  
+    labels()    
+    addbtn=tk.Button(frame,text='+',font=(12),command=newadditional)
+    addbtn.place(relx=0.75,rely=0.53,relwidth=0.03,relheight=0.02) 
+    hf2.place(relx=0.1,rely=0.10,relwidth=0.8,relheight=0.3)
     estwin.mainloop() 
 addmaterial()    
