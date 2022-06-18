@@ -1088,6 +1088,8 @@ def main():
                 cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
                 account=cur.fetchone()
         balance=account[7]
+        oplist=['Input CGST', 'Input SGST','Input IGST']
+        oplist2=['Output IGST','Output SGST','Output CGST']
         
         if account[3] == 'Account Receivable(Debtors)':
             cur.execute("select * from app1_invoice where  cid_id=%s",(cmp1))
@@ -1167,24 +1169,125 @@ def main():
                     treevvv.insert('', 'end',values=(i[3],trans,i[4],i[1],accname,0,i[54]))
             except:
                 pass 
-            trans='Payment'
+            trans='Expence'
             try:
                 for i in expence:
                     
-                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+                    treevvv.insert('', 'end',values=(i[2],trans,i[4],i[1],accname,0,i[56]))
             except:
                 pass       
             
+    
+        elif account[3] in oplist:
+            global supp
+            cur.execute("select * from app1_company where  cid=%s",(cmp1))
+            cmp=cur.fetchone()
+            cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
+            deb=cur.fetchall()
+            debit = []
+            accname=account[3]
+            for i in deb:
+                name = i[1]
+                x = name.split()
+                if len(x) == 3:
+                    firstname = x[0]
+                    lastname = x[1] + ' ' + x[2]
+                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
+                    supp=cur.fetchone()
+                else:
+                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
+                    supp=cur.fetchone()
 
-    #   bill = bills.objects.filter(cid=cmp1, payornot='openbalance')
-    #         bill2 = bills.objects.filter(cid=cmp1, payornot='')
-    #         bill3 = bills.objects.filter(cid=cmp1, payornot='debit')
-    #         debit = suplrcredit.objects.filter(cid=cmp1)
-    #         expence = expences.objects.filter(cid=cmp1)      
-    #     prlframe.mainloop()
-    # accrecivabales()   
+                if supp[21]==cmp[4]:
+                    debit.append(
+                        [i[3], i[4], i[1], float(i[54]) / 2])
+                    
+            cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
+            expen=cur.fetchall()
+            expence = []
+            for i in expen:
+                name = i[1]
+                x = name.split()
+                if len(x) == 3:
+                    firstname = x[0]
+                    lastname = x[1] + ' ' + x[2]
+                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
+                    supp=cur.fetchone()
+                else:
+                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
+                    supp=cur.fetchone()
+                if supp[21]==cmp[4]:
+                    expence.append([i[2], i[4], (i[1]).replace(
+                        u'\xa0', u''), float(i[55]) / 2])
+            trans='Expence'    
+            try:
+                for i in expence:
+                    
+                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+            except:
+                pass 
+                
+            trans='Debit Note'   
+            try:
+                for i in debit:
+                    
+                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+            except:
+                pass 
 
 
+        elif account[3] in oplist2:
+            cur.execute("select * from app1_invoice where cid_id=%s ",(cmp1))
+            invoi=cur.fetchall()
+            cur.execute("select * from app1_company where  cid=%s",(cmp1))
+            cmp=cur.fetchone()
+            accname=account[3]
+            invoic = []
+            for i in invoi:
+                if i[8] == cmp[4]:
+                    invoic.append(
+                        [i[5], i[3], (i[1]).replace(u'\xa0', u''), float(i[40]) / 2])
+           
+            cur.execute("select * from app1_credit where cid_id=%s ",(cmp1))
+            creditnot=cur.fetchall()
+            creditnote = []
+            for i in creditnot:
+                if i[6] == cmp[4]:
+                    creditnote.append(
+                        [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[17]) / 2])
+            # salesrcpt = salesrecpts.objects.filter(cid=cmp1)
+            cur.execute("select * from app1_salesrecpts where cid_id=%s ",(cmp1))
+            salesrcpt=cur.fetchall()
+            salesrecipt = []
+            for i in salesrcpt:
+                if i[6] ==cmp[4]:
+                    salesrecipt.append(
+                        [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[18]) / 2])
+            trans='Expence'    
+            try:
+                for i in invoic:
+                    
+                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+            except:
+                pass 
+                
+            trans='Debit Note'   
+            try:
+                for i in creditnote:
+                    
+                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+            except:
+                pass    
+
+            trans='Debit Note'   
+            try:
+                for i in salesrecipt:
+                    
+                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+            except:
+                pass      
+            
+                
 
 
 
