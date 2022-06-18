@@ -333,6 +333,16 @@ def changing_datas():
     img.place(x=0,y=0)
     
     
+    # imgpath = '/path/to/img.png'
+    # img = PhotoImage(file=imgpath)
+    # img = img.zoom(25) #with 250, I ended up running out of memory
+    # img = img.subsample(32) #mechanically, here it is adjusted to 32 instead of 320
+    # panel = Label(root, image = img)
+        
+    # size=(500,500)
+    # ax=ImageTk.PhotoImage(Image.open("emp.png").resize(size))
+    # tk.Label(F2,image=ax,bg='#213e57').place(x=10,y=5)
+    
     # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
     # F2.place(x=0.0, y=100, width=500, height=1100)
     # load = Image.open("emp.png")
