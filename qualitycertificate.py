@@ -12,19 +12,15 @@ from tkcalendar import Calendar, DateEntry
 import matplotlib.patches
 from datetime import datetime, date, timedelta
 from PIL import Image,ImageTk
-
 import os
 from textwrap import wrap
 from tkinter import filedialog
 from reportlab.pdfgen import canvas
-      # from tkdocviewer import *
 from reportlab.lib import colors
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib.pagesizes import letter, inch
-
-
 
 
 
@@ -51,12 +47,13 @@ def main():
     A['bg'] = '#2f516f'
 
     # head frame
-    head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
+    
+    head = tk.LabelFrame(A, borderwidth=1, bg='#243e54')
     f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='QUALITY CERTIFICATE', bg="#243e55", height=2,bd=5, relief="groove", font=f, width=106)
+    lb = tk.Label(head, text='QUALITY CERTIFICATE', bg="#243e55", height=3,bd=3, relief="groove", font=f, width=114)
     lb['font'] = f
     lb.place(relx=0.05, rely=0.2)
-    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
+    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.125)
 
     # contents frame
     hd = tk.Frame(A, bg='#243e54')
@@ -71,7 +68,6 @@ def main():
         def addit():
             global date1,sku,pname,customername,inspdate
 
-            print('original', datel_input,skul_input,proname_input,cusname_input,insdate_input)
             date1 = datel_input.get()
             sku = skul_input.get()
             pname = proname_input.get()
@@ -80,13 +76,12 @@ def main():
                     
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="fynsystkinter", port='3307')
             cur = con.cursor()
-            print(date1,sku,pname,customername,inspdate)
             cur.execute('INSERT INTO qualitycertificate(qc_date,qc_sku,qc_pname,qc_custumername,qc_inspdate) VALUES (%s,%s,%s,%s,%s)',(date1,sku,pname,customername,inspdate))
                     
             con.commit()
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
             
-            # Get selected item to Edit
+        # Get selected item to Edit
         D = tk.Toplevel(A)
         mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
 
@@ -398,7 +393,6 @@ def main():
             except:
                 pass
 
-
             insdate = tk.Label(
                 form_frame, text="Inspected Date", bg='#fff', fg='#000')
             place_input = StringVar()
@@ -430,11 +424,8 @@ def main():
             note2 = tk.Label(form_frame, text="****END****", bg='#fff', fg='#000')
             note2.place(x=30, y=620, height=20, width=800)
             
-           
             D.mainloop()
 
-
-    
         def download():
             path = filedialog.asksaveasfilename(initialdir=os.getcwd,title="Save File",filetypes=[('Pdf File', '*.pdf',)],defaultextension=".pdf")
 
@@ -474,8 +465,6 @@ def main():
             pdf.drawString(15,150,"This Product Was produced In Accordance With The Guidlines And Monitored In Every Manufacturing Stage.")
             pdf.drawString(250,100,"****END****")
 
-            
-           
             sql_inv_dt='SELECT * FROM qualitycertificate WHERE cid=%s'
             val=(b,)
             cur.execute(sql_inv_dt, val)
@@ -492,8 +481,6 @@ def main():
                                 
                                 pdf.drawString(30,280,str(i[3])) 
                                 pdf.drawString(60,280,str(i[2])) 
-
-
             pdf.save()            
 
         view_btn = ttk.Button(hd, text="View", command=view)
@@ -505,8 +492,8 @@ def main():
         
         hd.mainloop()
 
-    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 19, 'bold'),command=addnew).place(relx=0.3,rely=0.4,relwidth=0.25)
-    tk.Button(form2_frame,text = "VIEW",fg="#000",font=('times new roman', 19, 'bold'),command=viewq).place(relx=0.7,rely=0.4,relwidth=0.25)
+    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 22, 'bold'),command=addnew).place(relx=0.2,rely=0.4,relwidth=0.3, relheight=0.9)
+    tk.Button(form2_frame,text = "VIEW",fg="#000",font=('times new roman', 22, 'bold'),command=viewq).place(relx=0.7,rely=0.4,relwidth=0.3, relheight=0.9)
     A.mainloop()
 
 main()
