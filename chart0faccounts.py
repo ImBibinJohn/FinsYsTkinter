@@ -96,6 +96,7 @@ from tkinter import StringVar
 import mysql.connector
 mydata = mysql.connector.connect(host='localhost', user='root', password='', database='finsysinfox21', port='3307')
 
+
 cur = mydata.cursor()
 
 # yyyyy
@@ -436,6 +437,7 @@ def main():
     bt3 = tk.Button(hd, text='Import',
                     command="")
 
+
     bt1['font'] = ff
     bt2['font'] = ff
     bt3['font'] = ff
@@ -451,6 +453,7 @@ def main():
     searchbox_input.insert(0,"Filter By Name")
     searchbox_input.bind("<KeyRelease>",Searching)
     searchbox_input.place(x=200,y=175,height=40)
+
 
     # searchbox_input.place(relx=0.3, rely=0.3)
     # table view
@@ -479,6 +482,7 @@ def main():
     treevv.column(7, minwidth=30, width=60, anchor=CENTER)
 
 
+
     cur.execute(
         "SELECT accounts1id,name,acctype,detype,deftaxcode,balance FROM app1_accounts1")
     val2 = cur.fetchall()
@@ -497,6 +501,7 @@ def main():
             treevv.insert('', 'end', values=(
                 x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+
 
     
 
@@ -731,6 +736,7 @@ def main():
        
         sub = tk.Button(hd1, text='Update', font=15, bg='#243e54',fg="#fff",
                         command=changeedit).place(relx=0.4, rely=0.8)
+
 
 
 
@@ -1263,7 +1269,7 @@ def main():
         str = treevv.focus()
         values = treevv.item(str, 'values')
         b = [values[0]]
-        
+
     edit_btn = Button(hd, text="Edit", command=editcoa)
     edit_btn.place(relx=0.51, rely=0.85, relheight=0.1, relwidth=0.1)
     runreport_btn = Button(hd, text="Run Report",command=accrecivabales)
