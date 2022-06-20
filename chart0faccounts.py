@@ -94,9 +94,8 @@ from PIL import Image, ImageTk
 
 from tkinter import StringVar
 import mysql.connector
-mydata = mysql.connector.connect(
+mydata = mysql.connector.connect(host='localhost', user='root', password='', database='finsysinfox21', port='3307')
 
-    host='localhost', user='root', password='root', database='finsYs_tkinter')
 
 cur = mydata.cursor()
 
@@ -417,7 +416,7 @@ def main():
     drop['menu'].config(bg='#2f516a', fg="white", font=('Arial', 18))
 
 
-    drop.place(x=1400, y=140)
+    drop.place(x=1150, y=110)
 
 
     # head frame
@@ -425,18 +424,19 @@ def main():
     f = font.Font(family='Times New Roman', size=30)  # font
     lb = tk.Label(head, text='CHART OF ACCOUNTS', bg='#243e54',fg="#fff")
     lb['font'] = f
-    lb.place(relx=0.3, rely=0.2)
+    lb.place(relx=0.35, rely=0.2)
     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
 
     # contents frame
     hd = tk.Frame(A, bg='#243e54')
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
     ff = font.Font(family='Times New Roman', size=15)  # font
-    bt1 = tk.Button(hd, text='Run Report',command="", bg='#243e54',fg="#fff")
-    bt2=Button(hd,text="New",background='#243e55', foreground="white",command=add_account)
+    bt1 = tk.Button(hd, text='Run Report',command="",)
+    bt2=Button(hd,text="New",command=add_account)
     # bt2 = tk.Button(hd, text='New',command="add_account", bg='#243e54')
     bt3 = tk.Button(hd, text='Import',
-                    command="", bg='#243e54',fg="#fff")
+                    command="")
+
 
     bt1['font'] = ff
     bt2['font'] = ff
@@ -449,10 +449,11 @@ def main():
     # text1 = font.Font(familyext1 = Label(A, text="Fi='Times New Roman', size=13,)
     # tlter by name",bg='#243e55', fg='#fff', font=text1)
     searchbox=StringVar()
-    searchbox_input=Entry(A, text="Search Here",textvariable=searchbox,bg="#243e55",fg="#fff",width=35)
+    searchbox_input=Entry(A, text="Search Here",textvariable=searchbox,bg="#2f516f",fg="#fff",width=35)
     searchbox_input.insert(0,"Filter By Name")
     searchbox_input.bind("<KeyRelease>",Searching)
-    searchbox_input.place(x=200,y=220,height=40)
+    searchbox_input.place(x=200,y=175,height=40)
+
 
     # searchbox_input.place(relx=0.3, rely=0.3)
     # table view
@@ -472,13 +473,14 @@ def main():
     treevv.heading(7, text='BANK AMOUNT')
     # treevv.heading7, text='Actions'4
 
-    treevv.column(1, minwidth=30, width=140, anchor=CENTER)  # coloumns
+    treevv.column(1, minwidth=30, width=10, anchor=CENTER)  # coloumns
     treevv.column(2, minwidth=30, width=140, anchor=CENTER)
     treevv.column(3, minwidth=30, width=140, anchor=CENTER)
     treevv.column(4, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(5, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(6, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(7, minwidth=30, width=140, anchor=CENTER)
+    treevv.column(5, minwidth=30, width=40, anchor=CENTER)
+    treevv.column(6, minwidth=30, width=60, anchor=CENTER)
+    treevv.column(7, minwidth=30, width=60, anchor=CENTER)
+
 
 
     cur.execute(
@@ -499,6 +501,7 @@ def main():
             treevv.insert('', 'end', values=(
                 x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+
 
     
 
@@ -734,38 +737,6 @@ def main():
         sub = tk.Button(hd1, text='Update', font=15, bg='#243e54',fg="#fff",
                         command=changeedit).place(relx=0.4, rely=0.8)
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -869,18 +840,10 @@ def main():
 
     def accrecivabales():
 
-
-
         str = treevv.focus()
         values = treevv.item(str, 'values')
         print(values)
         b = [values[0]]
-
-
-
-
-
-
 
         prlframe=Toplevel(A)
         prlframe.title('Account Receivables')
@@ -1306,6 +1269,7 @@ def main():
         str = treevv.focus()
         values = treevv.item(str, 'values')
         b = [values[0]]
+
     edit_btn = Button(hd, text="Edit", command=editcoa)
     edit_btn.place(relx=0.51, rely=0.85, relheight=0.1, relwidth=0.1)
     runreport_btn = Button(hd, text="Run Report",command=accrecivabales)
