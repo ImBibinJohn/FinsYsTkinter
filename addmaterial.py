@@ -1,5 +1,6 @@
 from re import I
 import tkinter as tk
+from tkinter import messagebox
 from PIL import Image, ImageTk
 from tkcalendar import DateEntry
 from tkinter import StringVar, ttk
@@ -87,6 +88,7 @@ def addmaterial():
     qtytotal,subtot=0,0.0
     tot,tot1,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29=0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
     def getproductcomp(s):
+        global tod
         def clearskucomp():
             sku.delete(0,END)
             rate.delete(0,END)
@@ -99,10 +101,12 @@ def addmaterial():
         if fet:
             sku.insert(0,fet[0])
             rate.insert(0,fet[2])
+            tod=float(fet[1])
         elif fetch:
             sku.insert(0,fetch[0])
             rate.insert(0,fetch[2])
-    def calculatetotal(x):
+            tod=float(fetch[1])
+    def calculatetotal(x):  
         global clearcomptotamount,clearcomptotquan,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
         def clear_text():
             total.delete(0, END) 
@@ -110,9 +114,9 @@ def addmaterial():
             totalquantity.delete(0,END)
         def clearcomptotamount():  
             totalamount.delete(0,END) 
-            costofcomp.delete(0,END)     
+            costofcomp.delete(0,END)    
         q=float(quan.get())
-        r=float(price.get())
+        r=float(price.get())  
         tot=(q*r)
         subtot=tot+tot1+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9+tot10+tot11+tot12+tot13+tot14+tot15+tot16+tot17+tot18+tot19+tot20+tot21+tot22+tot23+tot24+tot25+tot26+tot27+tot28+tot29
         qtytotal=int(q+q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15+q16+q17+q18+q19+q20+q21+q22+q23+q24+q25+q26+q27+q28+q29)
@@ -130,7 +134,7 @@ def addmaterial():
     sku=tk.Entry(frame1,font=(4))
     sku.place(relx=0.105,rely=0.19,relheight=0.015,relwidth=0.06)
     quan=IntVar()  
-    qty=tk.Spinbox(frame1,from_=0,to=2147483647,font=(4),textvariable=quan)
+    qty=tk.Spinbox(frame1,from_=0,to=2000,font=(4),textvariable=quan)
     qty.bind('<FocusIn>',calculatetotal)
     qty.place(relx=0.18,rely=0.19,relheight=0.015,relwidth=0.05)
     price=IntVar()
@@ -385,10 +389,10 @@ def addmaterial():
     total5=tk.Entry(frame1,font=(4))
     total5.place(relx=0.31,rely=0.29,relheight=0.015,relwidth=0.05)
     ##adding new row
-    global x,btn
+    global x,btn,fetchrow1details,prod6
     x=0.31
     #row7
-    def addnewrow1():  
+    def addnewrow1(): 
         def getproductcomp6(s):
             def clearskucomp6():
                 sku6.delete(0,END)
@@ -405,7 +409,7 @@ def addmaterial():
             elif fetch:
                 sku6.insert(0,fetch[0])
                 rate6.insert(0,fetch[2])
-        global x,prod6,btn1
+        global x,btn1,sku6,quan6,price6,total6,prod6        
         def calculatetotal6(xx):  
             global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
             def clear_text6():
@@ -444,6 +448,7 @@ def addmaterial():
         clear1()
         btn1=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow2)
         btn1.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
+        return prod6
         #row8
     def addnewrow2():
         def getproductcomp7(s):
@@ -462,7 +467,7 @@ def addmaterial():
             elif fetch:
                 sku7.insert(0,fetch[0])
                 rate7.insert(0,fetch[2])
-        global x,prod7,btn2
+        global x,prod7,btn2,sku7,quan7,price7,total7
         def calculatetotal7(xx):  
             global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
             def clear_text7():
@@ -501,7 +506,7 @@ def addmaterial():
         clear2()
         btn2=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow3)
         btn2.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
-        #row9
+        #row9  
     def addnewrow3():
         def getproductcomp8(s):
             def clearskucomp8():
@@ -519,7 +524,7 @@ def addmaterial():
             elif fetch:
                 sku8.insert(0,fetch[0])
                 rate8.insert(0,fetch[2])
-        global x,btn3
+        global x,btn3,prod8,sku8,quan8,price8,total8     
         def calculatetotal8(xx):   
             global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
             def clear_text8():
@@ -560,23 +565,23 @@ def addmaterial():
         btn3.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
         #row10
     def addnewrow4():
-        def getproductcomp9(s):
-            def clearskucomp9():
-                sku9.delete(0,END)
-                rate9.delete(0,END)
-            clearskucomp9()    
-            prodd=prod9.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku9.insert(0,fet[0])
-                rate9.insert(0,fet[2])
-            elif fetch:
-                sku9.insert(0,fetch[0])
-                rate9.insert(0,fetch[2])
-            global x,btn4
+            def getproductcomp9(s):
+                def clearskucomp9():
+                    sku9.delete(0,END)
+                    rate9.delete(0,END)
+                clearskucomp9()    
+                prodd=prod9.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku9.insert(0,fet[0])
+                    rate9.insert(0,fet[2])
+                elif fetch:
+                    sku9.insert(0,fetch[0])
+                    rate9.insert(0,fetch[2]) 
+            global x,btn4,prod9,sku9,quan9,price9,total9              
             def calculatetotal9(xx): 
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29   
                 def clear_text9():
@@ -617,23 +622,23 @@ def addmaterial():
             btn4.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                 #row11
     def addnewrow5():
-        def getproductcomp10(s):
-            def clearskucomp10():
-                sku10.delete(0,END)
-                rate10.delete(0,END)
-            clearskucomp10()    
-            prodd=prod10.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku10.insert(0,fet[0])
-                rate10.insert(0,fet[2])
-            elif fetch:
-                sku10.insert(0,fetch[0])
-                rate10.insert(0,fetch[2])
-            global x,btn5
+            def getproductcomp10(s):
+                def clearskucomp10():
+                    sku10.delete(0,END)
+                    rate10.delete(0,END)
+                clearskucomp10()    
+                prodd=prod10.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku10.insert(0,fet[0])
+                    rate10.insert(0,fet[2])
+                elif fetch:
+                    sku10.insert(0,fetch[0])
+                    rate10.insert(0,fetch[2])
+            global x,btn5,prod10,sku10,quan10,price10,total10       
             def calculatetotal10(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text10():
@@ -674,23 +679,23 @@ def addmaterial():
             btn5.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
          #row12   
     def addnewrow6():
-        def getproductcomp11(s):
-            def clearskucomp11():
-                sku11.delete(0,END)
-                rate11.delete(0,END)
-            clearskucomp11()    
-            prodd=prod11.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku11.insert(0,fet[0])
-                rate11.insert(0,fet[2])
-            elif fetch:
-                sku11.insert(0,fetch[0])
-                rate11.insert(0,fetch[2])
-            global x,btn6
+            def getproductcomp11(s):
+                def clearskucomp11():
+                    sku11.delete(0,END)
+                    rate11.delete(0,END)
+                clearskucomp11()    
+                prodd=prod11.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku11.insert(0,fet[0])
+                    rate11.insert(0,fet[2])
+                elif fetch:
+                    sku11.insert(0,fetch[0])
+                    rate11.insert(0,fetch[2])
+            global x,btn6,prod11,sku11,quan11,price11,total11 
             def calculatetotal11(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text11():
@@ -731,23 +736,23 @@ def addmaterial():
             btn6.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
              #row13  
     def addnewrow7():
-        def getproductcomp12(s):
-            def clearskucomp12():
-                sku12.delete(0,END)
-                rate12.delete(0,END)
-            clearskucomp12()    
-            prodd=prod12.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku12.insert(0,fet[0])
-                rate12.insert(0,fet[2])
-            elif fetch:
-                sku12.insert(0,fetch[0])
-                rate12.insert(0,fetch[2])
-            global x,btn7
+            def getproductcomp12(s):
+                def clearskucomp12():
+                    sku12.delete(0,END)
+                    rate12.delete(0,END)
+                clearskucomp12()    
+                prodd=prod12.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku12.insert(0,fet[0])
+                    rate12.insert(0,fet[2])
+                elif fetch:
+                    sku12.insert(0,fetch[0])
+                    rate12.insert(0,fetch[2])
+            global x,btn7,prod12,sku12,quan12,price12,total12
             def calculatetotal12(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text12():
@@ -788,23 +793,23 @@ def addmaterial():
             btn7.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                  #row14 
     def addnewrow8():
-        def getproductcomp13(s):
-            def clearskucomp13():
-                sku13.delete(0,END)
-                rate13.delete(0,END)
-            clearskucomp13()    
-            prodd=prod13.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku13.insert(0,fet[0])
-                rate13.insert(0,fet[2])
-            elif fetch:
-                sku13.insert(0,fetch[0])
-                rate13.insert(0,fetch[2])
-            global x,btn8
+            def getproductcomp13(s):
+                def clearskucomp13():
+                    sku13.delete(0,END)
+                    rate13.delete(0,END)
+                clearskucomp13()    
+                prodd=prod13.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku13.insert(0,fet[0])
+                    rate13.insert(0,fet[2])
+                elif fetch:
+                    sku13.insert(0,fetch[0])
+                    rate13.insert(0,fetch[2])
+            global x,btn8,prod13,sku13,quan13,price13,total13
             def calculatetotal13(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text13():
@@ -845,23 +850,23 @@ def addmaterial():
             btn8.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                      #row15 
     def addnewrow9():
-        def getproductcomp14(s):
-            def clearskucomp14():
-                sku14.delete(0,END)
-                rate14.delete(0,END)
-            clearskucomp14()    
-            prodd=prod14.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku14.insert(0,fet[0])
-                rate14.insert(0,fet[2])
-            elif fetch:
-                sku14.insert(0,fetch[0])
-                rate14.insert(0,fetch[2])
-            global x,btn9
+            def getproductcomp14(s):
+                def clearskucomp14():
+                    sku14.delete(0,END)
+                    rate14.delete(0,END)
+                clearskucomp14()    
+                prodd=prod14.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku14.insert(0,fet[0])
+                    rate14.insert(0,fet[2])
+                elif fetch:
+                    sku14.insert(0,fetch[0])
+                    rate14.insert(0,fetch[2])
+            global x,btn9,prod14,sku14,quan14,price14,total14 
             def calculatetotal14(xx):  
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
                 def clear_text14():
@@ -902,23 +907,23 @@ def addmaterial():
             btn9.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                          #row16
     def addnewrow10():
-        def getproductcomp15(s):
-            def clearskucomp15():
-                sku15.delete(0,END)
-                rate15.delete(0,END)
-            clearskucomp15()    
-            prodd=prod15.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku15.insert(0,fet[0])
-                rate15.insert(0,fet[2])
-            elif fetch:
-                sku15.insert(0,fetch[0])
-                rate15.insert(0,fetch[2])
-            global x,btn10
+            def getproductcomp15(s):
+                def clearskucomp15():
+                    sku15.delete(0,END)
+                    rate15.delete(0,END)
+                clearskucomp15()    
+                prodd=prod15.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku15.insert(0,fet[0])
+                    rate15.insert(0,fet[2])
+                elif fetch:
+                    sku15.insert(0,fetch[0])
+                    rate15.insert(0,fetch[2])
+            global x,btn10,prod15,sku15,quan15,price15,total15
             def calculatetotal15(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text15():
@@ -959,23 +964,23 @@ def addmaterial():
             btn10.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)   
                              #row17 
     def addnewrow11():
-        def getproductcomp16(s):
-            def clearskucomp16():
-                sku16.delete(0,END)
-                rate16.delete(0,END)
-            clearskucomp16()    
-            prodd=prod16.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku16.insert(0,fet[0])
-                rate16.insert(0,fet[2])
-            elif fetch:
-                sku16.insert(0,fetch[0])
-                rate16.insert(0,fetch[2])
-            global x,btn11
+            def getproductcomp16(s):
+                def clearskucomp16():
+                    sku16.delete(0,END)
+                    rate16.delete(0,END)
+                clearskucomp16()    
+                prodd=prod16.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku16.insert(0,fet[0])
+                    rate16.insert(0,fet[2])
+                elif fetch:
+                    sku16.insert(0,fetch[0])
+                    rate16.insert(0,fetch[2])
+            global x,btn11,prod16,sku16,quan16,price16,total16 
             def calculatetotal16(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text16():
@@ -1016,23 +1021,23 @@ def addmaterial():
             btn11.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)                                                                     
     #row18
     def addnewrow12():
-        def getproductcomp17(s):
-            def clearskucomp17():
-                sku17.delete(0,END)
-                rate17.delete(0,END)
-            clearskucomp17()    
-            prodd=prod17.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku17.insert(0,fet[0])
-                rate17.insert(0,fet[2])
-            elif fetch:
-                sku17.insert(0,fetch[0])
-                rate17.insert(0,fetch[2])
-            global x,btn12
+            def getproductcomp17(s):
+                def clearskucomp17():
+                    sku17.delete(0,END)
+                    rate17.delete(0,END)
+                clearskucomp17()    
+                prodd=prod17.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku17.insert(0,fet[0])
+                    rate17.insert(0,fet[2])
+                elif fetch:
+                    sku17.insert(0,fetch[0])
+                    rate17.insert(0,fetch[2])
+            global x,btn12,prod17,sku17,quan17,price17,total17 
             def calculatetotal17(xx): 
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29   
                 def clear_text17():
@@ -1073,23 +1078,23 @@ def addmaterial():
             btn12.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
         #row19
     def addnewrow13():
-        def getproductcomp18(s):
-            def clearskucomp18():
-                sku18.delete(0,END)
-                rate18.delete(0,END)
-            clearskucomp18()    
-            prodd=prod18.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku18.insert(0,fet[0])
-                rate18.insert(0,fet[2])
-            elif fetch:
-                sku18.insert(0,fetch[0])
-                rate18.insert(0,fetch[2])
-            global x,btn13
+            global x,btn13,prod18,sku18,quan18,price18,total18 
+            def getproductcomp18(s):
+                def clearskucomp18():
+                    sku18.delete(0,END)
+                    rate18.delete(0,END)
+                clearskucomp18()    
+                prodd=prod18.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku18.insert(0,fet[0])
+                    rate18.insert(0,fet[2])
+                elif fetch:
+                    sku18.insert(0,fetch[0])
+                    rate18.insert(0,fetch[2])
             def calculatetotal18(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text18():
@@ -1130,23 +1135,23 @@ def addmaterial():
             btn13.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
             #row20
     def addnewrow14():
-        def getproductcomp19(s):
-            def clearskucomp19():
-                sku19.delete(0,END)
-                rate19.delete(0,END)
-            clearskucomp19()    
-            prodd=prod19.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku19.insert(0,fet[0])
-                rate19.insert(0,fet[2])
-            elif fetch:
-                sku19.insert(0,fetch[0])
-                rate19.insert(0,fetch[2])
-            global x,btn14
+            def getproductcomp19(s):
+                def clearskucomp19():
+                    sku19.delete(0,END)
+                    rate19.delete(0,END)
+                clearskucomp19()    
+                prodd=prod19.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku19.insert(0,fet[0])
+                    rate19.insert(0,fet[2])
+                elif fetch:
+                    sku19.insert(0,fetch[0])
+                    rate19.insert(0,fetch[2])
+            global x,btn14,prod19,sku19,quan19,price19,total19 
             def calculatetotal19(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text19():
@@ -1187,23 +1192,23 @@ def addmaterial():
             btn14.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
                 #row21
     def addnewrow15():
-        def getproductcomp20(s):
-            def clearskucomp20():
-                sku20.delete(0,END)
-                rate20.delete(0,END)
-            clearskucomp20()    
-            prodd=prod20.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku20.insert(0,fet[0])
-                rate20.insert(0,fet[2])
-            elif fetch:
-                sku20.insert(0,fetch[0])
-                rate20.insert(0,fetch[2])
-            global x,btn15
+            def getproductcomp20(s):
+                def clearskucomp20():
+                    sku20.delete(0,END)
+                    rate20.delete(0,END)
+                clearskucomp20()    
+                prodd=prod20.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku20.insert(0,fet[0])
+                    rate20.insert(0,fet[2])
+                elif fetch:
+                    sku20.insert(0,fetch[0])
+                    rate20.insert(0,fetch[2])
+            global x,btn15,prod20,sku20,quan20,price20,total20 
             def calculatetotal20(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text20():
@@ -1244,23 +1249,23 @@ def addmaterial():
             btn15.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                     #row22
     def addnewrow16():
-        def getproductcomp21(s):
-            def clearskucomp21():
-                sku21.delete(0,END)
-                rate21.delete(0,END)
-            clearskucomp21()    
-            prodd=prod21.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku21.insert(0,fet[0])
-                rate21.insert(0,fet[2])
-            elif fetch:
-                sku21.insert(0,fetch[0])
-                rate21.insert(0,fetch[2])
-            global x,btn16
+            def getproductcomp21(s):
+                def clearskucomp21():
+                    sku21.delete(0,END)
+                    rate21.delete(0,END)
+                clearskucomp21()    
+                prodd=prod21.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku21.insert(0,fet[0])
+                    rate21.insert(0,fet[2])
+                elif fetch:
+                    sku21.insert(0,fetch[0])
+                    rate21.insert(0,fetch[2])
+            global x,btn16,prod21,sku21,quan21,price21,total21
             def calculatetotal21(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text21():
@@ -1301,23 +1306,23 @@ def addmaterial():
             btn16.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
                         #row23
     def addnewrow17():
-        def getproductcomp22(s):
-            def clearskucomp22():
-                sku22.delete(0,END)
-                rate22.delete(0,END)
-            clearskucomp22()    
-            prodd=prod22.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku22.insert(0,fet[0])
-                rate22.insert(0,fet[2])
-            elif fetch:
-                sku22.insert(0,fetch[0])
-                rate22.insert(0,fetch[2])
-            global x,btn17
+            def getproductcomp22(s):
+                def clearskucomp22():
+                    sku22.delete(0,END)
+                    rate22.delete(0,END)
+                clearskucomp22()    
+                prodd=prod22.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku22.insert(0,fet[0])
+                    rate22.insert(0,fet[2])
+                elif fetch:
+                    sku22.insert(0,fetch[0])
+                    rate22.insert(0,fetch[2])
+            global x,btn17,prod22,sku22,quan22,price22,total22 
             def calculatetotal22(xx): 
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29   
                 def clear_text22():
@@ -1358,23 +1363,23 @@ def addmaterial():
             btn17.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
     #row24
     def addnewrow18():
-        def getproductcomp23(s):
-            def clearskucomp23():
-                sku23.delete(0,END)
-                rate23.delete(0,END)
-            clearskucomp23()    
-            prodd=prod23.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku23.insert(0,fet[0])
-                rate23.insert(0,fet[2])
-            elif fetch:
-                sku23.insert(0,fetch[0])
-                rate23.insert(0,fetch[2])
-            global x,btn18
+            def getproductcomp23(s):
+                def clearskucomp23():
+                    sku23.delete(0,END)
+                    rate23.delete(0,END)
+                clearskucomp23()    
+                prodd=prod23.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku23.insert(0,fet[0])
+                    rate23.insert(0,fet[2])
+                elif fetch:
+                    sku23.insert(0,fetch[0])
+                    rate23.insert(0,fetch[2])
+            global x,btn18,prod23,sku23,quan23,price23,total23 
             def calculatetotal23(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text23():
@@ -1415,23 +1420,23 @@ def addmaterial():
             btn18.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
         #row25
     def addnewrow19():
-        def getproductcomp24(s):
-            def clearskucomp24():
-                sku24.delete(0,END)
-                rate24.delete(0,END)
-            clearskucomp24()    
-            prodd=prod24.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku24.insert(0,fet[0])
-                rate24.insert(0,fet[2])
-            elif fetch:
-                sku24.insert(0,fetch[0])
-                rate24.insert(0,fetch[2])
-            global x,btn19
+            def getproductcomp24(s):
+                def clearskucomp24():
+                    sku24.delete(0,END)
+                    rate24.delete(0,END)
+                clearskucomp24()    
+                prodd=prod24.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku24.insert(0,fet[0])
+                    rate24.insert(0,fet[2])
+                elif fetch:
+                    sku24.insert(0,fetch[0])
+                    rate24.insert(0,fetch[2])
+            global x,btn19,prod24,sku24,quan24,price24,total24
             def calculatetotal24(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text24():
@@ -1472,23 +1477,23 @@ def addmaterial():
             btn19.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
      #row26       
     def addnewrow20():
-        def getproductcomp25(s):
-            def clearskucomp25():
-                sku25.delete(0,END)
-                rate25.delete(0,END)
-            clearskucomp25()    
-            prodd=prod25.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku25.insert(0,fet[0])
-                rate25.insert(0,fet[2])
-            elif fetch:
-                sku25.insert(0,fetch[0])
-                rate25.insert(0,fetch[2])
-            global x,btn20
+            def getproductcomp25(s):
+                def clearskucomp25():
+                    sku25.delete(0,END)
+                    rate25.delete(0,END)
+                clearskucomp25()    
+                prodd=prod25.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku25.insert(0,fet[0])
+                    rate25.insert(0,fet[2])
+                elif fetch:
+                    sku25.insert(0,fetch[0])
+                    rate25.insert(0,fetch[2])
+            global x,btn20,prod25,sku25,quan25,price25,total25
             def calculatetotal25(xx):  
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
                 def clear_text25():
@@ -1529,23 +1534,23 @@ def addmaterial():
             btn20.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
          #row27      
     def addnewrow21():
-        def getproductcomp26(s):
-            def clearskucomp26():
-                sku26.delete(0,END)
-                rate26.delete(0,END)
-            clearskucomp26()    
-            prodd=prod26.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku26.insert(0,fet[0])
-                rate26.insert(0,fet[2])
-            elif fetch:
-                sku26.insert(0,fetch[0])
-                rate26.insert(0,fetch[2])
-            global x,btn21
+            def getproductcomp26(s):
+                def clearskucomp26():
+                    sku26.delete(0,END)
+                    rate26.delete(0,END)
+                clearskucomp26()    
+                prodd=prod26.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku26.insert(0,fet[0])
+                    rate26.insert(0,fet[2])
+                elif fetch:
+                    sku26.insert(0,fetch[0])
+                    rate26.insert(0,fetch[2])
+            global x,btn21,prod26,sku26,quan26,price26,total26 
             def calculatetotal26(xx):  
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
                 def clear_text26():
@@ -1586,23 +1591,23 @@ def addmaterial():
             btn21.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
      #row28       
     def addnewrow22():
-        def getproductcomp27(s):
-            def clearskucomp27():
-                sku27.delete(0,END)
-                rate27.delete(0,END)
-            clearskucomp27()    
-            prodd=prod27.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku27.insert(0,fet[0])
-                rate27.insert(0,fet[2])
-            elif fetch:
-                sku27.insert(0,fetch[0])
-                rate27.insert(0,fetch[2])
-            global x,btn22
+            def getproductcomp27(s):
+                def clearskucomp27():
+                    sku27.delete(0,END)
+                    rate27.delete(0,END)
+                clearskucomp27()    
+                prodd=prod27.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku27.insert(0,fet[0])
+                    rate27.insert(0,fet[2])
+                elif fetch:
+                    sku27.insert(0,fetch[0])
+                    rate27.insert(0,fetch[2])
+            global x,btn22,prod27,sku27,quan27,price27,total27 
             def calculatetotal27(xx): 
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29   
                 def clear_text27():
@@ -1643,23 +1648,23 @@ def addmaterial():
             btn22.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
          #row29      
     def addnewrow23():
-        def getproductcomp28(s):
-            def clearskucomp28():
-                sku28.delete(0,END)
-                rate28.delete(0,END)
-            clearskucomp28()    
-            prodd=prod28.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku28.insert(0,fet[0])
-                rate28.insert(0,fet[2])
-            elif fetch:
-                sku28.insert(0,fetch[0])
-                rate28.insert(0,fetch[2])
-            global x,btn23
+            def getproductcomp28(s):
+                def clearskucomp28():
+                    sku28.delete(0,END)
+                    rate28.delete(0,END)
+                clearskucomp28()    
+                prodd=prod28.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku28.insert(0,fet[0])
+                    rate28.insert(0,fet[2])
+                elif fetch:
+                    sku28.insert(0,fetch[0])
+                    rate28.insert(0,fetch[2])
+            global x,btn23,prod28,sku28,quan28,price28,total28
             def calculatetotal28(xx):    
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
                 def clear_text28():
@@ -1700,23 +1705,23 @@ def addmaterial():
             btn23.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
    #30     
     def addnewrow24():
-        def getproductcomp29(s):
-            def clearskucomp29():
-                sku29.delete(0,END)
-                rate29.delete(0,END)
-            clearskucomp29()    
-            prodd=prod29.get()
-            cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
-            fet=cur.fetchone()
-            cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
-            fetch=cur.fetchone()
-            if fet:
-                sku29.insert(0,fet[0])
-                rate29.insert(0,fet[2])
-            elif fetch:
-                sku29.insert(0,fetch[0])
-                rate29.insert(0,fetch[2])
-            global x
+            def getproductcomp29(s):
+                def clearskucomp29():
+                    sku29.delete(0,END)
+                    rate29.delete(0,END)
+                clearskucomp29()    
+                prodd=prod29.get()
+                cur.execute("SELECT sku,initialqty,salesprice FROM inventory WHERE name =%s",([prodd]))
+                fet=cur.fetchone()
+                cur.execute("SELECT sku,initialqty,saleprice FROM noninventory WHERE name =%s",([prodd]))
+                fetch=cur.fetchone()
+                if fet:
+                    sku29.insert(0,fet[0])
+                    rate29.insert(0,fet[2])
+                elif fetch:
+                    sku29.insert(0,fetch[0])
+                    rate29.insert(0,fetch[2])
+            global x,prod29,sku29,quan29,price29,total29         
             def calculatetotal29(xx):   
                 global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29 
                 def clear_text29():
@@ -1971,7 +1976,7 @@ def addmaterial():
             elif fetch:
                 skuu5.insert(0,fetch[0])  
                 ratee5.insert(0,fetch[2]) 
-        global y,btnn1
+        global y,btnn1,prodd5,skuu5,quann5,pricee5,totall5
         def calculatescraptotal5(yy):
             def clear_scraptext5():
                 totall5.delete(0, END) 
@@ -2023,7 +2028,7 @@ def addmaterial():
             elif fetch:
                 skuu6.insert(0,fetch[0])  
                 ratee6.insert(0,fetch[2]) 
-        global y,btnn2
+        global y,btnn2,prodd6,skuu6,quann6,pricee6,totall6
         def calculatescraptotal6(x):
             def clear_scraptext6():
                 totall6.delete(0, END) 
@@ -2074,7 +2079,7 @@ def addmaterial():
             elif fetch:
                 skuu7.insert(0,fetch[0])  
                 ratee7.insert(0,fetch[2])  
-        global y,prod6,btnn3
+        global y,btnn3,prodd7,skuu7,quann7,pricee7,totall7
         def calculatescraptotal7(xx):    
             def clear_scraptext7():
                 totall7.delete(0, END) 
@@ -2126,7 +2131,7 @@ def addmaterial():
             elif fetch:
                 skuu8.insert(0,fetch[0])  
                 ratee8.insert(0,fetch[2])  
-        global y,prod6,btnn4
+        global y,btnn4,prodd8,skuu8,quann8,pricee8,totall8
         def calculatescraptotal8(xx):    
             def clear_scraptext8():
                 totall8.delete(0, END) 
@@ -2178,7 +2183,7 @@ def addmaterial():
             elif fetch:
                 skuu9.insert(0,fetch[0])  
                 ratee9.insert(0,fetch[2])  
-        global y,prod6,btnn5
+        global y,btnn5,prodd9,skuu9,quann9,pricee9,totall9
         def calculatescraptotal9(xx):    
             def clear_scraptext9():
                 totall9.delete(0, END) 
@@ -2230,7 +2235,7 @@ def addmaterial():
             elif fetch:
                 skuu10.insert(0,fetch[0])  
                 ratee10.insert(0,fetch[2])  
-        global y,prod6,btnn6
+        global y,btnn6,prodd10,skuu10,quann10,pricee10,totall10
         def calculatescraptotal10(xx):    
             def clear_scraptext10():
                 totall10.delete(0, END) 
@@ -2282,7 +2287,7 @@ def addmaterial():
             elif fetch:
                 skuu11.insert(0,fetch[0])  
                 ratee11.insert(0,fetch[2])  
-        global y,prod6,btnn7
+        global y,btnn7,prodd11,skuu11,quann11,pricee11,totall11
         def calculatescraptotal11(xx):    
             def clear_scraptext11():
                 totall11.delete(0, END) 
@@ -2333,7 +2338,7 @@ def addmaterial():
             elif fetch:
                 skuu12.insert(0,fetch[0])  
                 ratee12.insert(0,fetch[2])  
-        global y,prod6,btnn8
+        global y,btnn8,prodd12,skuu12,quann12,pricee12,totall12
         def calculatescraptotal12(xx):    
             def clear_scraptext12():
                 totall12.delete(0, END) 
@@ -2384,7 +2389,7 @@ def addmaterial():
             elif fetch:
                 skuu13.insert(0,fetch[0])  
                 ratee13.insert(0,fetch[2])  
-        global y,prod6,btnn9
+        global y,btnn9,prodd13,skuu13,quann13,pricee13,totall13
         def calculatescraptotal13(xx):    
             def clear_scraptext13():
                 totall13.delete(0, END) 
@@ -2436,7 +2441,7 @@ def addmaterial():
             elif fetch:
                 skuu14.insert(0,fetch[0])  
                 ratee14.insert(0,fetch[2])   
-        global y,prod6,btnn10
+        global y,prod6,btnn10,prodd14,skuu14,quann14,pricee14,totall14
         def calculatescraptotal14(xx):    
             def clear_scraptext14():
                 totall14.delete(0, END) 
@@ -2488,7 +2493,7 @@ def addmaterial():
             elif fetch:
                 skuu15.insert(0,fetch[0])  
                 ratee15.insert(0,fetch[2])   
-        global y,prod6,btnn11
+        global y,prod6,btnn11,prodd15,skuu15,quann15,pricee15,totall15
         def calculatescraptotal15(xx):    
             def clear_scraptext15():
                 totall15.delete(0, END) 
@@ -2539,7 +2544,7 @@ def addmaterial():
             elif fetch:
                 skuu16.insert(0,fetch[0])  
                 ratee16.insert(0,fetch[2])   
-        global y,prod6,btnn12
+        global y,prod6,btnn12,prodd16,skuu16,quann16,pricee16,totall16
         def calculatescraptotal16(xx):    
             def clear_scraptext16():
                 totall16.delete(0, END) 
@@ -2590,7 +2595,7 @@ def addmaterial():
             elif fetch:
                 skuu17.insert(0,fetch[0])  
                 ratee17.insert(0,fetch[2])   
-        global y,prod6,btnn13
+        global y,prod6,btnn13,prodd17,skuu17,quann17,pricee17,totall17
         def calculatescraptotal17(xx):    
             def clear_scraptext17():
                 totall17.delete(0, END) 
@@ -2642,7 +2647,7 @@ def addmaterial():
             elif fetch:
                 skuu18.insert(0,fetch[0])  
                 ratee18.insert(0,fetch[2])  
-        global y,prod6,btnn14
+        global y,prod6,btnn14,prodd18,skuu18,quann18,pricee18,totall18
         def calculatescraptotal18(xx):    
             def clear_scraptext18():
                 totall18.delete(0, END) 
@@ -2694,7 +2699,7 @@ def addmaterial():
             elif fetch:
                 skuu19.insert(0,fetch[0])  
                 ratee19.insert(0,fetch[2])  
-        global y,prod6,btnn15
+        global y,prod6,btnn15,prodd19,skuu19,quann19,pricee19,totall19
         def calculatescraptotal19(xx):    
             def clear_scraptext19():
                 totall19.delete(0, END) 
@@ -2746,7 +2751,7 @@ def addmaterial():
             elif fetch:
                 skuu20.insert(0,fetch[0])  
                 ratee20.insert(0,fetch[2])  
-        global y,prod6
+        global y,prod6,prodd20,skuu20,quann20,pricee20,totall20
         def calculatescraptotal20(xx):    
             def clear_scraptext20():
                 totall20.delete(0, END) 
@@ -2817,7 +2822,7 @@ def addmaterial():
         totaddlcost=float(round(ded+ded1+ded2+ded3)) 
         addlcost.insert(0,totaddlcost)
         addlcost.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02) 
-        tk.Label(frame,text='Effective Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.03,relwidth=0.15,relheight=0.03) 
+        tk.Label(frame,text='Effective Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.03,relwidth=0.25,relheight=0.03) 
         effcost=tk.Entry(frame,font=(6))
         totaddlcost=float(round(ded+ded1+ded2+ded3)) 
         subtot=tot+tot1+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9+tot10+tot11+tot12+tot13+tot14+tot15+tot16+tot17+tot18+tot19+tot20+tot21+tot22+tot23+tot24+tot25+tot26+tot27+tot28+tot29
@@ -2935,6 +2940,94 @@ def addmaterial():
     labels()    
     addbtn=tk.Button(frame,text='+',font=(12),command=newadditional)
     addbtn.place(relx=0.75,rely=0.53,relwidth=0.03,relheight=0.02) 
+    def getproductiondetails():
+        p=product.get()
+        sk=sku.get()
+        hs=hsn.get()
+        qt=quanty.get()
+        md=mandate.get()
+        ed=expdate.get()
+        cid=2
+        productiondet="INSERT INTO production (cid,productname,sku,hsn,quantity,manufacturing_date,expiry_date) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+        cur.execute(productiondet,[(cid),(p),(sk),(hs),(qt),(md),(ed)])
+        mydata.commit()
+        cur.execute("SELECT productionid FROM production WHERE productname= %s",([p]))
+        v=cur.fetchone()
+        #components
+        #1st row
+        p1,p2,p3,p4,p5,p6=prod.get(),prod1.get(),prod2.get(),prod3.get(),prod4.get(),prod5.get()
+        sk1,sk2,sk3,sk4,sk5,sk6=sku.get(),sku1.get(),sku2.get(),sku3.get(),sku4.get(),sku5.get()
+        qt1,qt2,qt3,qt4,qt5,qt6=quan.get(),quan1.get(),quan2.get(),quan3.get(),quan4.get(),quan5.get()
+        pr1,pr2,pr3,pr4,pr5,pr6=price.get(),price1.get(),price2.get(),price3.get(),price4.get(),price5.get()
+        tt1,tt2,tt3,tt4,tt5,tt6=total.get(),total1.get(),total2.get(),total3.get(),total4.get(),total5.get()
+        type='Components'
+        raw='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,
+            prod5,sku5,qty5,price5,total5) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6)])    
+        try:
+            p7,p8,p9,p10,pp10=prod6.get(),prod7.get(),prod8.get(),prod9.get(),prod10.get()
+            p11,p12,p13,p14,p15,p16,p17,p18,p19,p20=prod11.get(),prod12.get(),prod13.get(),prod14.get(),prod15.get(),prod16.get(),prod17.get(),prod18.get(),prod19.get(),prod20.get()
+            p21,p22,p23,p24,p25,p26,p27,p28,p29=prod21.get(),prod22.get(),prod23.get(),prod24.get(),prod25.get(),prod26.get(),prod27.get(),prod28.get(),prod29.get()
+            sk7,sk8,sk9,sk10,sk11,sk12=sku6.get(),sku7.get(),sku8.get(),sku9.get(),sku10.get(),sku11.get()
+            sk13,sk14,sk15,sk16,sk17,sk18,sk19,sk20,sk21=sku12.get(),sku13.get(),sku14.get(),sku15.get(),sku16.get(),sku17.get(),sku18.get(),sku19.get(),sku20.get()
+            sk22,sk23,sk24,sk25,sk26,sk27,sk28,sk29,sk30=sku21.get(),sku22.get(),sku23.get(),sku24.get(),sku25.get(),sku26.get(),sku27.get(),sku28.get(),sku29.get()
+            qt7,qt8,qt9,qt10,qqtt10=quan6.get(),quan7.get(),quan8.get(),quan9.get(),quan10.get()
+            qt11,qt12,qt13,qt14,qt15,qt16,qt17,qt18,qt19,qt20=quan11.get(),quan12.get(),quan13.get(),quan14.get(),quan15.get(),quan16.get(),quan17.get(),quan18.get(),quan19.get(),quan20()
+            qt21,qt22,qt23,qt24,qt25,qt26,qt27,qt28,qt29=quan21.get(),quan22.get(),quan23.get(),quan24.get(),quan25.get(),quan26.get(),quan27.get(),quan28.get(),quan29.get()
+            pr7,pr8,pr9,pr10=price6.get(),price7.get(),price8.get(),price9.get()
+            pr11,pr12,pr13,pr14,pr15,pr16,pr17,pr18,pr19,pr20=price10.get(),price11.get(),price12.get(),price13.get(),price14.get(),price15.get(),price16.get(),price17.get(),price18.get(),price19.get()
+            pr21,pr22,pr23,pr24,pr25,pr26,pr27,pr28,pr29,pr30=price20.get(),price21.get(),price22.get(),price23.get(),price24.get(),price25.get(),price26.get(),price27.get(),price28.get(),price29.get()
+            tt7,tt8,tt9,tt10=total6.get(),total7.get(),total8.get(),total9.get()
+            tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20=total10.get(),total11.get(),total12.get(),total13.get(),total14.get(),total15.get(),total16.get(),total17.get(),total18.get(),total19.get()
+            tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30=total20.get(),total21.get(),total22.get(),total23.get(),total24.get(),total25.get(),total26.get(),total27.get(),total28.get(),total29.get()
+            raw1='''INSERT INTO rawmaterials (prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,
+            prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
+            prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,
+            prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total26,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,
+            prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,,%s,%s,%s,%s,%s,,%s,%s,%s,%s,%s,)'''
+            cur.execute(raw1,[(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),(sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),
+            (p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),(p22),(sk23),(qt22),(pr23),(tt23),
+            (p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30)])
+            mydata.commit()
+        except:
+            pass
+            #scrap row1 
+        pp1,pp2,pp3,pp4=prodd1.get(),prodd2.get(),prodd3.get(),prodd4.get()
+        skk1,skk2,skk3,skk4=skuu1.get(),skuu2.get(),skuu3.get(),skuu4.get()
+        qtt1,qtt2,qtt3,qtt4=quann1.get(),quann2.get(),quann3.get(),quann4.get()
+        prr1,prr2,prr3,prr4=pricee1.get(),pricee2.get(),pricee3.get(),pricee4.get()
+        ttt1,ttt2,ttt3,ttt4=totall1.get(),totall2.get(),totall3.get(),totall4.get()
+        type1='Coproducts/scrap'
+        raw1='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(raw1,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4)])
+        try:
+            pp5,pp6,pp7,pp8,pp9,pp10=prodd5.get(),prodd6.get(),prodd7.get(),prodd8.get(),prodd9.get(),prodd10.get()
+            pp11,pp12,pp13,pp14,pp15,pp16,pp17,pp18,pp19,pp20=prodd11.get(),prodd12.get(),prodd13.get(),prodd14.get(),prodd15.get(),prodd16.get(),prodd17.get(),prodd18.get(),prodd19.get(),prodd20.get()
+            skk5,skk6,skk7,skk8,skk9,skk10=skuu5.get(),skuu6.get(),skuu7.get(),skuu8.get(),skuu9.get(),skuu10.get()
+            skk11,skk12,skk13,skk14,skk15,skk16,skk17,skk18,skk19,skk20=skuu11.get(),skuu12.get(),skuu13.get(),skuu14.get(),skuu15.get(),skuu16.get(),skuu17.get(),skuu18.get(),skuu19.get(),skuu20.get()
+            qtt5,qtt6,qtt7,qtt8,qtt9,qtt10=quann5.get(),quann6.get(),quann7.get(),quann8.get(),quann9.get(),quann10.get()
+            qtt11,qtt12,qtt13,qtt14,qtt15,qtt16,qtt17,qtt18,qtt19,qtt20=quann11.get(),quann12.get(),quann13.get(),quann14.get(),quann15.get(),quann16.get(),quann17.get(),quann18.get(),quann19.get(),quann20.get()       
+            prr5,prr6,prr7,prr8,prr9,prr10=pricee5.get(),pricee6.get(),pricee7.get(),pricee8.get(),pricee9.get(),pricee10.get()
+            prr11,prr12,prr13,prr14,prr15,prr16,prr17,prr18,prr19,prr20=pricee11.get(),pricee12.get(),pricee13.get(),pricee14.get(),pricee15.get(),pricee16.get(),pricee17.get(),pricee18.get(),pricee19.get(),pricee20.get()        
+            ttt5,ttt6,ttt7,ttt8,ttt9,ttt10=totall5.get(),totall6.get(),totall7.get(),totall8.get(),totall9.get(),totall10.get()
+            ttt11,ttt12,ttt13,ttt14,ttt15,ttt16,ttt17,ttt18,ttt19,ttt20=totall11.get(),totall12.get(),totall13.get(),totall14.get(),totall15.get(),totall16.get(),totall17.get(),totall18.get(),totall19.get(),totall20.get()
+            raw2='''INSERT INTO rawmaterials (prod4,sku4,qty4,price4,total4,prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,
+                    prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
+                    prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19) 
+            VALUES (%s,%s,%s,,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
+            ,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+            cur.execute(raw2,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4),(pp5),(skk5),(qtt5),(prr5),(ttt5)
+            ,(pp6),(skk6),(qtt6),(prr6),(ttt6),(pp7),(skk7),(qtt7),(prr7),(ttt7),(pp8),(skk8),(qtt8),(prr8),(ttt8),(pp9),(skk9),(qtt9),(prr9),(ttt9),(pp10),(skk10),(qtt10),(prr10),(ttt10),(pp11),(skk11),(qtt11),(prr11),(ttt11),(pp12),(skk12),(qtt12),(prr12),(ttt12)
+            ,(pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17)
+            ,(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20)])
+            mydata.commit()
+        except:
+            pass    
+        estwin.destroy()
+    tk.Button(frame,text='CREATE',bg='#243e54',font=('Times New Roman',20),command=getproductiondetails).place(relx=0.45,rely=0.73,relwidth=0.1,relheight=0.03)
     hf2.place(relx=0.1,rely=0.10,relwidth=0.8,relheight=0.3)
     estwin.mainloop() 
 addmaterial()    
