@@ -96,7 +96,7 @@ from tkinter import StringVar
 import mysql.connector
 mydata = mysql.connector.connect(
 
-    host='localhost', user='root', password='root', database='finsYs_tkinter')
+    host='localhost', user='root', password='', database='finsYs_tkinter')
 
 cur = mydata.cursor()
 
