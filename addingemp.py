@@ -332,14 +332,13 @@ def changing_datas():
     img.image = render
     img.place(x=0,y=0)
     
-    
-    # F2 = LabelFrame(F, font=('times new roman', 15, 'bold'), bd=0, fg="Black", bg="#243e55")
-    # F2.place(x=0.0, y=100, width=500, height=1100)
-    # load = Image.open("emp.png")
-    # render = ImageTk.PhotoImage(load)
-    # img = Label(F2,image=render,bg="#243e55")
-    # img.image = render
-    # img.place(x=0,y=0)
+    # size=(500,1100)
+
+
+    # axx=Image.open('emp.png').resize(size)
+    # werx = ImageTk.PhotoImage(axx,master=add)
+    # lab1=tk.Label(F2,image=werx)
+    # lab1.place(x=0,y=0)
     
 
     label2=Label(F, text="Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
@@ -1517,38 +1516,38 @@ def generate_payslip():
         print("why")
         print(basic.get())
         print(da.get())
-        print(earr1.get())
-        print(earr2.get())
-        print(earr3.get())
-        print(earr4.get())
+        # print(earr1.get())
+        # print(earr2.get())
+        # print(earr3.get())
+        # print(earr4.get())
         print("why")
-        earn1 = int(float(basic.get())) + int(float(da.get())) + int(float(earr1.get())) + int(float(earr2.get())) + int(float(earr3.get())) + int(float(earr4.get()))
-        # earn1= basicval+daval+earr1val+earr2val+earr3val+earr4val
+        # earn1 = int(float(basic.get())) + int(float(da.get())) + int(float(earr1.get())) + int(float(earr2.get())) + int(float(earr3.get())) + int(float(earr4.get()))
+        # earn1= basic+da+earr1+earr2+earr3+earr4
         print("wel")
-        print(earn1)
+        # print(earn1)
+        # print("why")
+        # print(basic.get())
+        # print(da.get())
+        # print(earr1.get())
+        # print(earr2.get())
+        # print(earr3.get())
+        # print(earr4.get())
         print("why")
-        print(basic.get())
-        print(da.get())
-        print(earr1.get())
-        print(earr2.get())
-        print(earr3.get())
-        print(earr4.get())
-        print("why")
-        print(da.get() + earr1.get())
-        gros_pay = earn1 + int(float(label1_earr6.get())) + int(float(label1_earr7.get()))
-        print(gros)
-        gros.set(gros_pay)
+        # print(da.get() + earr1.get())
+        # gros_pay = earn1 + int(float(label1_earr6.get())) + int(float(label1_earr7.get()))
+        # print(gros)
+        # gros.set(gros_pay)
         
         # var dedu1=parseFloat(provi)+parseFloat(prof)+parseInt(esi)+dedu1+dedu2+dedu3+dedu4;
-        dedu1 = int(float(provi.get())) + int(float(prof.get())) + int(float(esi.get())) 
+        # dedu1 = int(float(provi.get())) + int(float(prof.get())) + int(float(esi.get())) 
         print(dedu1)
-        total_deduction = dedu1 + int(float(label1_dedu5.get())) + int(float(label1_dedu6.get()))
-        tded.set(total_deduction)
+        # total_deduction = dedu1 + int(float(label1_dedu5.get())) + int(float(label1_dedu6.get()))
+        # tded.set(total_deduction)
         print(tded)
         
-        gio = earn1 - dedu1
-        net_salary = gio + int(float(label1_earr6.get())) + int(float(label1_earr7.get())) - int(float(label1_dedu5.get())) - int(float(label1_dedu6.get())) 
-        netsal.set(net_salary)
+        # gio = earn1 - dedu1
+        # # net_salary = gio + int(float(label1_earr6.get())) + int(float(label1_earr7.get())) - int(float(label1_dedu5.get())) - int(float(label1_dedu6.get())) 
+        # netsal.set(net_salary)
     
     # var gp1=parseFloat(earn1)-parseFloat(dedu1);
     # document.getElementById('grandtotal').value = gp1 + x + y - a - b;
@@ -1662,58 +1661,61 @@ def generate_payslip():
 
 
 
-    global empname,employeenumber,desig,fper,tper,paydate,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal
+    global empname,employeenumber,desig,fper,tper,paydate,label1_basic,basic,da,ear1,earr1,ear2,earr2,ear3,earr3,ear4,earr4,ear5,earr5,ear6,earr6,ear7,earr7,provi,prof,esi,ded1,dedu1,ded2,dedu2,ded3,dedu3,ded4,dedu4,ded5,dedu5,ded6,dedu6,gros,tded,netsal
     empname=StringVar() 
     employeenumber=StringVar() 
     desig=StringVar() 
     fper=StringVar() 
     tper=StringVar() 
     paydate=StringVar() 
-    basic=StringVar() 
-    da=StringVar() 
+
+    label1_da=StringVar() 
     ear1=StringVar() 
-    earr1=StringVar() 
+    label1_earr1=StringVar() 
     ear2=StringVar() 
-    earr2=StringVar() 
+    label1_earr2=StringVar() 
     ear3=StringVar() 
-    earr3=StringVar() 
+    label1_earr3=StringVar() 
     ear4=StringVar() 
-    earr4=StringVar() 
+    label1_earr4=StringVar() 
     ear5=StringVar() 
     earr5=StringVar() 
     ear6=StringVar() 
-    earr6=StringVar() 
+    label1_earr6=StringVar() 
     ear7=StringVar() 
-    earr7=StringVar() 
+    label1_earr7=StringVar() 
     provi=StringVar() 
     prof=StringVar() 
     esi=StringVar() 
     ded1=StringVar() 
-    dedu1=StringVar() 
+    label1_dedu1=StringVar() 
     ded2=StringVar() 
-    dedu2=StringVar() 
+    label1_dedu2=StringVar() 
     ded3=StringVar() 
-    dedu3=StringVar() 
+    label1_dedu3=StringVar() 
     ded4=StringVar() 
-    dedu4=StringVar() 
+    label1_dedu4=StringVar() 
     ded5=StringVar() 
-    dedu5=StringVar() 
+    label1_dedu5=StringVar() 
     ded6=StringVar() 
-    dedu6=StringVar() 
+    label1_dedu6=StringVar() 
     gros=StringVar() 
     tded=StringVar() 
     netsal=StringVar() 
 
     
+    print(data[1])
+    # existing_empname=data[1]
+    # empname.set(existing_empname)
+
+    # existing_employeenumber=data[3]
+    # employeenumber.set(existing_employeenumber)
     
-    existing_empname=data[1]
-    empname.set(existing_empname)
-
-    existing_employeenumber=data[3]
-    employeenumber.set(existing_employeenumber)
-
-    existing_desig=data[4]
-    desig.set(existing_desig)
+    
+    
+    
+    # existing_desig=data[4]
+    # desig.set(existing_desig)
 
     # existing_fper=data[4]
     # fper.set(existing_fper)
@@ -1724,72 +1726,72 @@ def generate_payslip():
     # existing_paydate=data[6]
     # paydate.set(existing_paydate)
 
-    existing_basic=data[28]
-    basic.set(existing_basic)
+    # existing_basic=data[28]
+    # basic.set(existing_basic)
 
-    existing_da=data[29]
-    da.set(existing_da)
+    # existing_da=data[29]
+    # da.set(existing_da)
 
-    existing_ear1=data[30]
-    ear1.set(existing_ear1)
+    # existing_ear1=data[30]
+    # ear1.set(existing_ear1)
 
-    existing_earr1=data[35]
-    earr1.set(existing_earr1)
+    # existing_earr1=data[35]
+    # earr1.set(existing_earr1)
 
-    existing_ear2=data[31]
-    ear2.set(existing_ear2)
+    # existing_ear2=data[31]
+    # ear2.set(existing_ear2)
     
-    existing_earr2=data[36]
-    if existing_earr2== "":
-        existing_earr2 ="0"
-        earr2.set(existing_earr2)
-    else:
-        earr2.set(existing_earr2)
+    # existing_earr2=data[36]
+    # if existing_earr2== "":
+    #     existing_earr2 ="0"
+    #     earr2.set(existing_earr2)
+    # else:
+    #     earr2.set(existing_earr2)
 
-    existing_ear3=data[32]
-    ear3.set(existing_ear3)
+    # existing_ear3=data[32]
+    # ear3.set(existing_ear3)
     
-    existing_earr3=data[37]
-    if existing_earr3=="":
-        existing_earr3 ="0"
-        earr3.set(existing_earr3)
-    else:    
-        earr3.set(existing_earr3)
+    # existing_earr3=data[37]
+    # if existing_earr3=="":
+    #     existing_earr3 ="0"
+    #     earr3.set(existing_earr3)
+    # else:    
+    #     earr3.set(existing_earr3)
 
-    existing_ear4=data[33]
-    ear4.set(existing_ear4)
+    # existing_ear4=data[33]
+    # ear4.set(existing_ear4)
 
-    existing_earr4=data[38]
-    if existing_earr4 == "": 
+    # existing_earr4=data[38]
+    # if existing_earr4 == "": 
            
-        existing_earr4 = "0"
-        earr4.set(existing_earr4)
-    else:
-        earr4.set(existing_earr4)
+    #     existing_earr4 = "0"
+    #     earr4.set(existing_earr4)
+    # else:
+    #     earr4.set(existing_earr4)
 
-    existing_ear5=data[34]
-    ear5.set(existing_ear5)
+    # existing_ear5=data[34]
+    # ear5.set(existing_ear5)
 
-    existing_earr5=data[39]
-    earr5.set(existing_earr5)
+    # existing_earr5=data[39]
+    # earr5.set(existing_earr5)
 
-    # existing_ear6=data[19]
-    # ear6.set(existing_ear6)
+    # # existing_ear6=data[19]
+    # # ear6.set(existing_ear6)
 
-    existing_earr6=data[35]
-    if existing_earr6 == "":
-        existing_earr6 = "0"
-    else:
-        earr6.set(existing_earr6)
+    # existing_earr6=data[35]
+    # if existing_earr6 == "":
+    #     existing_earr6 = "0"
+    # else:
+    #     earr6.set(existing_earr6)
 
-    # existing_ear7=data[21]
-    # ear7.set(existing_ear7)
+    # # existing_ear7=data[21]
+    # # ear7.set(existing_ear7)
 
-    existing_earr7=data[36]
-    if existing_earr7 == "":
-        existing_earr7 = "0"
-    else:
-        earr7.set(existing_earr7)
+    # existing_earr7=data[36]
+    # if existing_earr7 == "":
+    #     existing_earr7 = "0"
+    # else:
+    #     earr7.set(existing_earr7)
 
     existing_provi=data[40]
     provi.set(existing_provi)
@@ -1800,50 +1802,50 @@ def generate_payslip():
     existing_esi=data[42]
     esi.set(existing_esi)
 
-    # existing_ded1=data[26]
-    # ded1.set(existing_ded1)
+    # # existing_ded1=data[26]
+    # # ded1.set(existing_ded1)
 
-    # existing_dedu1=data[27]
-    # dedu1.set(existing_dedu1)
+    # # existing_dedu1=data[27]
+    # # dedu1.set(existing_dedu1)
 
-    # existing_ded2=data[28]
-    # ded2.set(existing_ded2)
+    # # existing_ded2=data[28]
+    # # ded2.set(existing_ded2)
 
-    # existing_dedu2=data[29]
-    # dedu2.set(existing_dedu2)
+    # # existing_dedu2=data[29]
+    # # dedu2.set(existing_dedu2)
 
-    # existing_ded3=data[30]
-    # ded3.set(existing_ded3)
+    # # existing_ded3=data[30]
+    # # ded3.set(existing_ded3)
 
-    # existing_dedu3=data[31]
-    # dedu3.set(existing_dedu3)
+    # # existing_dedu3=data[31]
+    # # dedu3.set(existing_dedu3)
 
-    # existing_ded4=data[32]
-    # ded4.set(existing_ded4)
+    # # existing_ded4=data[32]
+    # # ded4.set(existing_ded4)
 
-    # existing_dedu4=data[33]
-    # dedu4.set(existing_dedu4)
+    # # existing_dedu4=data[33]
+    # # dedu4.set(existing_dedu4)
 
-    # existing_ded5=data[34]
-    # ded5.set(existing_ded5)
+    # # existing_ded5=data[34]
+    # # ded5.set(existing_ded5)
 
-    existing_dedu5=data[35]
-    if existing_dedu5 == "":
-        existing_dedu5 = "0"
-        dedu5.set(existing_dedu5)
-    else:
-        dedu5.set(existing_dedu5)
+    # existing_dedu5=data[35]
+    # if existing_dedu5 == "":
+    #     existing_dedu5 = "0"
+    #     dedu5.set(existing_dedu5)
+    # else:
+    #     dedu5.set(existing_dedu5)
 
     
-    # existing_ded6=data[36]
-    # ded6.set(existing_ded6)
+    # # existing_ded6=data[36]
+    # # ded6.set(existing_ded6)
 
-    existing_dedu6=data[37]
-    if existing_dedu6 == "":
-         existing_dedu6 = "0"
-         dedu6.set(existing_dedu6)
-    else:
-        dedu6.set(existing_dedu6)
+    # existing_dedu6=data[37]
+    # if existing_dedu6 == "":
+    #      existing_dedu6 = "0"
+    #      dedu6.set(existing_dedu6)
+    # else:
+    #     dedu6.set(existing_dedu6)
 
     
 
@@ -1852,42 +1854,43 @@ def generate_payslip():
 
     # existing_netsal=data[40]
     # netsal.set(existing_netsal)
-    print('war')
-    print(existing_basic)
-    print(existing_da)
-    print(existing_earr1)
-    print(existing_earr2)
-    print(existing_earr3)
-    print(existing_earr4)
-    print("war")
-    base = float(existing_basic)
-    bada = float(existing_da)
-    baerr1 = float(existing_earr1)
-    baerr2 = float(existing_earr2)
-    baerr3 = float(existing_earr3)
-    baerr4 = float(existing_earr4)
+    # print('war')
+    # # print(label1_basic)
+    # print(label1_da)
+    # # print(existing_earr1)
+    # # print(existing_earr2)
+    # # print(existing_earr3)
+    # # print(existing_earr4)
+    # print("war")
     
-    # earn1 = float(existing_basic + existing_da + existing_earr1 + existing_earr2 + existing_earr3 + existing_earr4)
-    earn1 = base + bada + baerr1 + baerr2 + baerr3 + baerr4
-    gros_pay = earn1 + float(existing_earr6) + float(existing_earr7)
-    gros.set(gros_pay)
-    print("car")
-    print(existing_dedu6)
-    print("car")
-    pro = float(existing_provi)
-    prf = float(existing_prof)
-    esk = float(existing_esi)
-    d5 = float(existing_dedu5)
-    d6 = float(existing_dedu6)
-    dedu1 = pro + prf + esk 
-    total_deduction = dedu1 + d5 + d6
-    tded.set(total_deduction)
-    print(tded)
+    # base = float(label1_basic.get())
+    # bada = float(label1_da)
+    # baerr1 = float(label1_earr1)
+    # baerr2 = float(label1_earr2)
+    # baerr3 = float(label1_earr3)
+    # baerr4 = float(label1_earr4)
+    
+    # # earn1 = float(existing_basic + existing_da + existing_earr1 + existing_earr2 + existing_earr3 + existing_earr4)
+    # earn1 = base + bada + baerr1 + baerr2 + baerr3 + baerr4
+    # gros_pay = earn1 + float(label1_earr6) + float(label1_earr7)
+    # gros.set(gros_pay)
+    # print("car")
+    # print(label1_dedu6)
+    # print("car")
+    # pro = float(label1_provi)
+    # prf = float(label1_prof)
+    # esk = float(label1_esi)
+    # d5 = float(label1_dedu5)
+    # d6 = float(label1_dedu6)
+    # dedu1 = pro + prf + esk 
+    # total_deduction = dedu1 + d5 + d6
+    # tded.set(total_deduction)
+    # print(tded)
     
     
-    gio = earn1 - dedu1
-    net_salary = gio + float(existing_earr6) + float(existing_earr7) - d5 - d6
-    netsal.set(net_salary)
+    # gio = earn1 - dedu1
+    # net_salary = gio + float(label1_earr6) + float(label1_earr7) - d5 - d6
+    # netsal.set(net_salary)
     
     
     
@@ -1901,18 +1904,22 @@ def generate_payslip():
 
     label2=Label(F, text="Employee Name", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=100,y=90)
-    label2=Entry(F,bg='#2f516a',fg='#fff',textvariable=empname, font=('times new roman', 11, 'bold'))
-    label2.place(x=100,y=130,height=40,width=300)
+    label22=Entry(F,bg='#2f516a',fg='#fff',textvariable=empname, font=('times new roman', 11, 'bold'))
+    label22.insert(0,data[1])
+    label22.place(x=100,y=130,height=40,width=300)
+    
 
     label3=Label(F, text="Employee Number", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label3.place(x=450,y=90)
-    label3=Entry(F,bg='#2f516a',fg='#fff',textvariable=employeenumber, font=('times new roman', 11, 'bold'))
-    label3.place(x=450,y=130,height=40,width=300)
+    label33=Entry(F,bg='#2f516a',fg='#fff',textvariable=employeenumber, font=('times new roman', 11, 'bold'))
+    label33.insert(0,data[3])
+    label33.place(x=450,y=130,height=40,width=300)
 
     label4=Label(F, text="Designation", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label4.place(x=800,y=90)
-    label4=Entry(F,bg='#2f516a',fg='#fff',textvariable=desig, font=('times new roman', 11, 'bold'))
-    label4.place(x=800,y=130,height=40,width=300)
+    label44=Entry(F,bg='#2f516a',fg='#fff',textvariable=desig, font=('times new roman', 11, 'bold'))
+    label44.insert(0,data[4])
+    label44.place(x=800,y=130,height=40,width=300)
 
     label2=Label(F, text="Pay Peried - From", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label2.place(x=100,y=190)
@@ -1931,61 +1938,79 @@ def generate_payslip():
 
     label1=Label(F, text="Salary Details", font=('times new roman', 20, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=500,y=400)
-
+    
+    
     label1=Label(F, text="Earnings", font=('times new roman', 17, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=200,y=500)
-
+    
+    def bas():
+        ba = label1_basic.get()
+        print("you")
+        print(ba)
+        print("you")
     label1=Label(F, text="Basic Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=40,y=580)
-    label1_basic=Entry(F,bg='#2f516a',fg='#fff',textvariable=basic, font=('times new roman', 11, 'bold'))
+    label1_basic=Entry(F,bg='#2f516a',fg='#fff', font=('times new roman', 11, 'bold'))
+    label1_basic.insert(0,data[28])
     label1_basic.place(x=280,y=580,height=40,width=230)
     label1_basic.configure(state='disabled')
+    bas()
 
     label1_da=Label(F, text="Dearance Allowance", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1_da.place(x=40,y=640)
-    label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable=da, font=('times new roman', 11, 'bold'))
+    label1_da=Entry(F,bg='#2f516a',fg='#fff',textvariable='da', font=('times new roman', 11, 'bold'))
+    label1_da.insert(0,data[29])
     label1_da.place(x=280,y=640,height=40,width=230)
     label1_da.configure(state='disabled')
 
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear1, font=('times new roman', 11, 'bold'))
-
-    label1.place(x=40,y=700,height=40,width=230)
-    label1_earr1=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr1, font=('times new roman', 11, 'bold'))
+    label1c=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear1, font=('times new roman', 11, 'bold'))
+    label1c.insert(0,data[30])
+    label1c.place(x=40,y=700,height=40,width=230)
+    label1_earr1=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr1', font=('times new roman', 11, 'bold'))
+    label1_earr1.insert(0,data[35])
     label1_earr1.place(x=280,y=700,height=40,width=230)
     label1_earr1.configure(state='disabled')
 
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear2, font=('times new roman', 11, 'bold'))
-    label1.place(x=40,y=760,height=40,width=230)
-    label1_earr2=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr2, font=('times new roman', 11, 'bold'))
+    label1ear=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear2, font=('times new roman', 11, 'bold'))
+    label1ear.insert(0,data[31])
+    label1ear.place(x=40,y=760,height=40,width=230)
+    label1_earr2=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr2', font=('times new roman', 11, 'bold'))
+    label1_earr2.insert(0,data[36])
     label1_earr2.place(x=280,y=760,height=40,width=230)
     # label1_earr2.configure(state='disabled')
     label1_earr2.bind("<KeyRelease>",get_selected_e_product)
 
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear3, font=('times new roman', 11, 'bold'))
-    label1.place(x=40,y=820,height=40,width=230)
-    label1_earr3=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr3, font=('times new roman', 11, 'bold'))
+    label1ear3=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear3, font=('times new roman', 11, 'bold'))
+    label1ear3.insert(0,data[32])
+    label1ear3.place(x=40,y=820,height=40,width=230)
+    label1_earr3=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr3', font=('times new roman', 11, 'bold'))
+    label1_earr3.insert(0,data[37])
     label1_earr3.place(x=280,y=820,height=40,width=230)
     # label1_earr3.configure(state='disabled')
     label1_earr3.bind("<KeyRelease>",get_selected_e_product)
 
-    label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear4, font=('times new roman', 11, 'bold'))
-    label1.place(x=40,y=880,height=40,width=230)
-    label1_earr4=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr4, font=('times new roman', 11, 'bold'))
+    label1ear4=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear4, font=('times new roman', 11, 'bold'))
+    label1ear4.insert(0,data[33])
+    label1ear4.place(x=40,y=880,height=40,width=230)
+    label1_earr4=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr4', font=('times new roman', 11, 'bold'))
+    label1_earr4.insert(0,data[38])
     label1_earr4.place(x=280,y=880,height=40,width=230)
     # label1_earr4.configure(state='disabled')
     label1_earr4.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear6, font=('times new roman', 11, 'bold'))
     label1.place(x=40,y=940,height=40,width=230)
-    earr6.set("0")
-    label1_earr6=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr6, font=('times new roman', 11, 'bold'))
+    # earr6.set("0")
+    label1_earr6=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr6', font=('times new roman', 11, 'bold'))
+    label1_earr6.insert(0,data[35])
     label1_earr6.place(x=280,y=940,height=40,width=230)
     label1_earr6.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ear7, font=('times new roman', 11, 'bold'))
     label1.place(x=40,y=1000,height=40,width=230)
-    earr7.set('0')
-    label1_earr7=Entry(F,bg='#2f516a',fg='#fff',textvariable=earr7, font=('times new roman', 11, 'bold'))
+    # earr7.set('0')
+    label1_earr7=Entry(F,bg='#2f516a',fg='#fff',textvariable='earr7', font=('times new roman', 11, 'bold'))
+    label1_earr7.insert(0,data[36])
     label1_earr7.place(x=280,y=1000,height=40,width=230)
     label1_earr7.bind("<KeyRelease>",get_selected_e_product)
 
@@ -2014,34 +2039,63 @@ def generate_payslip():
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded5, font=('times new roman', 11, 'bold'))
     label1.place(x=700,y=760,height=40,width=230)
-    dedu5.set("0")
-    label1_dedu5=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu5, font=('times new roman', 11, 'bold'))
+    # dedu5.set("0")
+    label1_dedu5=Entry(F,bg='#2f516a',fg='#fff',textvariable='dedu5', font=('times new roman', 11, 'bold'))
+    label1_dedu5.insert(0,data[35])
     label1_dedu5.place(x=940,y=760,height=40,width=230)
     label1_dedu5.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Entry(F,bg='#2f516a',fg='#fff',textvariable=ded6, font=('times new roman', 11, 'bold'))
     label1.place(x=700,y=820,height=40,width=230)
-    dedu6.set('0')
-    label1_dedu6=Entry(F,bg='#2f516a',fg='#fff',textvariable=dedu6, font=('times new roman', 11, 'bold'))
+    # dedu6.set('0')
+    label1_dedu6=Entry(F,bg='#2f516a',fg='#fff',textvariable='dedu6', font=('times new roman', 11, 'bold'))
+    label1_dedu6.insert(0,data[37])
     label1_dedu6.place(x=940,y=820,height=40,width=230)
     label1_dedu6.bind("<KeyRelease>",get_selected_e_product)
-
+    def grp():
+        global earn1,basic,ba,das,ear1,ear2,ear3,ear4,da,earr1,earr2,earr3,earr4
+        
+        basic = label1_basic.get()
+        da = label1_da.get()
+        earr1 = label1_earr1.get()
+        earr2 = label1_earr2.get()
+        earr3 = label1_earr3.get()
+        earr4 = label1_earr4.get()
+        earr6 = label1_earr6.get()
+        earr7 = label1_earr7.get()
+        lb1 = label1_gros.get()
+    
+        print("lb1")
+        print(lb1)
+        print(basic)
+        print("lb1")
+        
+        earn1= basic+da+earr1+earr2+earr3+earr4
+        
+        gros_pay = earn1 + earr6 + earr7
+        
+        print(gros)
+        gros.set(gros_pay)
+        print("lon")
+        print(gros_pay)
+        print("lon")
     label1=Label(F, text="Gross Pay", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1080)
-    label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable=gros, font=('times new roman', 11, 'bold'))
+    label1_gros=Entry(F,bg='#2f516a',fg='#fff',textvariable='gros', font=('times new roman', 11, 'bold'))
     label1_gros.place(x=900,y=1080,height=40,width=270)
-    gros.set(gros_pay)
+    # gros.set(gros_pay)
     label1_gros.bind("<KeyRelease>",get_selected_e_product)
-
+    grp()
+    
     label1=Label(F, text="Total Deduction", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1140)
-    label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable=tded, font=('times new roman', 11, 'bold'))
+    label1_tded=Entry(F,bg='#2f516a',fg='#fff',textvariable='tded', font=('times new roman', 11, 'bold'))
     label1_tded.place(x=900,y=1140,height=40,width=270)
     label1_tded.bind("<KeyRelease>",get_selected_e_product)
 
     label1=Label(F, text="Net Salary", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
     label1.place(x=700,y=1200)
-    label1_netsal=Entry(F,bg='#2f516a',fg='#fff',textvariable=netsal, font=('times new roman', 11, 'bold'))
+    label1_netsal=Entry(F,bg='#2f516a',fg='#fff',textvariable='netsal', font=('times new roman', 11, 'bold'))
     label1_netsal.place(x=900,y=1200,height=40,width=270)
     label1_netsal.bind("<KeyRelease>",get_selected_e_product)
 

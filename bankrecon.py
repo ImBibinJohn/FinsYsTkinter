@@ -21,8 +21,7 @@ def fun():#db connection
         )
     mycursor = mydb2.cursor()
     
-def add_custom():
-    import addcustomer_form
+
 
 
 def add_recon1():
@@ -68,7 +67,7 @@ def add_recon1():
         mycursor = mydb2.cursor()
 
     def add_custom():
-        import addcustomer_form
+        # import addcustomer_form
         fun()
         print("hellboy111")   
         global recon_data
@@ -80,13 +79,13 @@ def add_recon1():
         data=mycursor.fetchone()
         print("hellboy")
     
-    root = tk.Tk()
-    root.title("finsYs")
+    shell = tk.Toplevel(root)
+    shell.title("finsYs")
     width=root.winfo_screenwidth()
     height=root.winfo_screenheight()
-    root.geometry("%dx%d" %(width,height))
-    root.configure(bg="#2f516f")
-    wrappen=ttk.LabelFrame(root)
+    shell.geometry("%dx%d" %(width,height))
+    shell.configure(bg="#2f516f")
+    wrappen=ttk.LabelFrame(shell)
     mycanvas=Canvas(wrappen)
     mycanvas.pack(side=LEFT,fill="both",expand="yes")
     yscrollbar=ttk.Scrollbar(wrappen,orient='vertical',command=mycanvas.yview)
@@ -108,7 +107,7 @@ def add_recon1():
     fun()
     mycursor.execute('select * from app1_recon1 ')
     customers=mycursor.fetchall()
-    customers_data=[-1]
+    customers_data=[]
     for cus in customers:
         customers_data.append(cus)
 
@@ -125,8 +124,10 @@ def add_recon1():
     difference=StringVar(form_frame)
 
     data=customers_data[-1]
+    print("wild")
+    print(customers_data[-1])
     print(data)
-    
+    print("wild")
 
     existing_accounttype=data[1]
     accounttype.set(existing_accounttype)
@@ -145,7 +146,9 @@ def add_recon1():
 
     existing_intear=data[9]
     intear.set(existing_intear)
-    
+    print('melc')
+    print(data[2])
+    print('melc')
     begbal = int(data[2])
     ser = int(data[6])
     inte = int(data[9])
@@ -269,7 +272,7 @@ def add_recon1():
 
     wrappen.pack(fill='both',expand='yes',)
 
-    root.mainloop()
+    shell.mainloop()
 
 
 
@@ -313,12 +316,24 @@ head_label.pack()
 F2 = LabelFrame(form_frame, font=('times new roman', 15, 'bold'), bd=10, fg="Black", bg="#243e55")
 F2.place(x=5, y=100, width=500, height=700)
 size=(500,700)
-ax1=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
-tk.Label(F2,image=ax1,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+
+
+ax=Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size)
+wer = ImageTk.PhotoImage(ax,master=root)
+lab1=tk.Label(F2,image=wer)
+lab1.place(relx=0.00,rely=-0,relheight=1,relwidth=1)
+
+# ax1=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
+# tk.Label(F2,image=ax1,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
 
 # image3 = tk.PhotoImage(file="bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg")
 # Label(F2, text="", image = image3).grid(row=0, column=0)
 
+
+# f2=tk.Frame(form_frame,bg='#243e54')
+# size=(500,700)
+# ax=ImageTk.PhotoImage(Image.open('bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg').resize(size))
+# tk.Label(f2,image=ax,bg='#243e54').place(relx=0.00,rely=-0,relheight=1,relwidth=1)
 
 
 wrappen.pack(fill='both',expand='yes',)

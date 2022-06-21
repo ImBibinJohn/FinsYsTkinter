@@ -15,7 +15,7 @@ cur = mydata.cursor()
 
 expense_form = tk.Tk()
 expense_form.title("finsYs")
-expense_form.geometry("1500x1000")
+expense_form.geometry("1300x800")
 expense_form['bg'] = '#2f516a'
 wrappen = ttk.LabelFrame(expense_form)
 mycanvas = Canvas(wrappen)
@@ -26,7 +26,7 @@ yscrollbar.pack(side=RIGHT, fill='y')
 
 def main():
 
-    global A, data, menu
+    global A
     A = tk.Tk()
     A.title('View')
     A.geometry('1500x1000')
@@ -34,12 +34,12 @@ def main():
     
 
     # head frame
-    head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-    f = font.Font(family='Times New Roman', size=25)  # font
-    lb = tk.Label(head, text='QUALITY INSPECTION', bg="#243e55", height=2,bd=5, relief="groove", font=f, width=106)
+    head = tk.LabelFrame(A, borderwidth=2, bg='#243e54')
+    f = font.Font(family='Times New Roman', size=35)  # font
+    lb = tk.Label(head, text='QUALITY INSPECTION', bg="#243e55", height=3,bd=2, relief="groove", font=f, width=106)
     lb['font'] = f
-    lb.place(relx=0.05, rely=0.2)
-    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
+    lb.place(relx=0.07, rely=0.2)
+    head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.11)
 
     # contents frame
     hd = tk.Frame(A, bg='#243e54')
@@ -167,8 +167,8 @@ def main():
 
         D.mainloop()
          
-    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 16, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
-    form2_frame.place(relx=0.01,rely=0.075,relwidth=0.8,relheight=0.09)
+    tk.Button(form2_frame,text = "ADD",fg="#000",font=('times new roman', 21, 'bold'),command=addnew).place(relx=0.8,rely=0.5,relwidth=0.15)
+    form2_frame.place(relx=0.01,rely=0.075,relwidth=1,relheight=0.1)
 
     # table view
 
@@ -181,19 +181,19 @@ def main():
     treevv.heading(6, text='NON INSPECTED')
     treevv.heading(7, text='INSPECTED BY')
     treevv.heading(8, text='DEPARTMENT')
-    treevv.heading(9, text='QUALIFIED PRODUCTS')
-    treevv.heading(10, text='NON-QUALIFIED PRODUCTS')
+    treevv.heading(9, text='QUALIFIED')
+    treevv.heading(10, text='NON-QUALIFIED')
 
     treevv.column(1, minwidth=10, width=40, anchor=CENTER)  # coloumns
-    treevv.column(2, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(3, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(4, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(5, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(6, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(7, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(8, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(9, minwidth=30, width=140, anchor=CENTER)
-    treevv.column(10, minwidth=30, width=140, anchor=CENTER)
+    treevv.column(2, minwidth=30, width=80, anchor=CENTER)
+    treevv.column(3, minwidth=30, width=30, anchor=CENTER)
+    treevv.column(4, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(5, minwidth=30, width=50, anchor=CENTER)
+    treevv.column(6, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(7, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(8, minwidth=30, width=100, anchor=CENTER)
+    treevv.column(9, minwidth=30, width=50, anchor=CENTER)
+    treevv.column(10, minwidth=30, width=60, anchor=CENTER)
         
     cur.execute("SELECT cid,qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products FROM qualityinspection")
     val = cur.fetchall()
@@ -221,8 +221,8 @@ def main():
                 
            
             print(qdate,sku,p_name,inspected_no,noninspected_no,inspected_by,department,qualified_products, nonqualified_products)
-
-            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%d""", (qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b))
+            # cur.execute("""UPDATE qualitycertificate SET qc_date =%s, qc_sku =%s, qc_pname =%s, qc_custumername =%s, qc_inspdate =%s  WHERE cid=%s""",[qc_date,qc_sku,qc_pname,qc_customername,qc_inspdate, b])
+            cur.execute("""UPDATE qualityinspection SET qdate =%s, sku =%s, p_name =%s, inspected_no =%s, noninspected_no =%s, inspected_by =%s, department =%s, qualified_products =%s, nonqualified_products =%s  WHERE cid=%s""", [qdate, sku, p_name, inspected_no, noninspected_no, inspected_by, department, qualified_products, nonqualified_products, b])
             mydata.commit()
             MessageBox.showinfo("Insert Status", "Updated Successfully")
             mydata.close()

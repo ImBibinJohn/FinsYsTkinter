@@ -107,16 +107,20 @@ from tkinter import *
 from tkinter import VERTICAL, ttk
 import tkinter.font as font
 
-# from tkcalendar import DateEntry, Calendar
-
+from tkcalendar import DateEntry, Calendar
+from tkinter import messagebox
+from datetime import datetime, date, timedelta
 # import click
 # from requests import options
 from xml.dom.minicompat import StringTypes
+from PIL import Image, ImageTk
+
 
 from tkinter import StringVar
 import mysql.connector
-mydata = mysql.connector.connect(
-    host='localhost', user='root', password='root', database='finsYs_tkinter')
+mydata = mysql.connector.connect(host='localhost', user='root', password='', database='finsysinfox21', port='3307')
+
+
 
 cur = mydata.cursor()
 
@@ -276,22 +280,7 @@ def main():
     hd = tk.Frame(A, bg='#243e54')
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
     ff = font.Font(family='Times New Roman', size=15)  # font
-<<<<<<< HEAD
-    bt1 = tk.Button(hd, text='Run Report',
-                    command="", bg='#243e54')
-    bt2 = tk.Button(hd, text='New',
-                    command="", bg='#243e54')
-    bt3 = tk.Button(hd, text='Import',
-                    command="", bg='#243e54')
 
-    bt1['font'] = ff
-    bt2['font'] = ff
-    bt3['font'] = ff
-
-    bt1.place(relx=0.65, rely=0.05)
-    bt2.place(relx=0.75, rely=0.05)
-    bt3.place(relx=0.80, rely=0.05)
-=======
 
     bt1 = Button(hd, text="New", command=plus)
     bt1.place(relx=0.65, rely=0.05, relheight=0.1, relwidth=0.1)
@@ -301,7 +290,7 @@ def main():
 
     bt3 = Button(hd, text="Import", command="")
     bt3.place(relx=0.85, rely=0.05, relheight=0.1, relwidth=0.1)
->>>>>>> 0b82a12a5c710be5dc5bb0ecf6e65c0f074d394e
+
 
     text1 = font.Font(family='Times New Roman', size=13,)
     text1 = Label(A, text="Filter by name",
@@ -600,16 +589,13 @@ def main():
         b = [values[0]]
     edit_btn = Button(hd, text="Edit", command=editcoa)
     edit_btn.place(relx=0.50, rely=0.85, relheight=0.1, relwidth=0.1)
-<<<<<<< HEAD
 
-    treevv.bind("<<TreeviewSelect>>")
-=======
+
     report_btn = Button(hd, text="Run report", command=runreport1)
     report_btn.place(relx=0.40, rely=0.85, relheight=0.1, relwidth=0.1)
 
     treevv.bind("<<TreeviewSelect>>")
 
->>>>>>> 0b82a12a5c710be5dc5bb0ecf6e65c0f074d394e
     A.mainloop()
 
 
