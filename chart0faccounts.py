@@ -1,82 +1,3 @@
-# import tkinter as tk
-# from tkinter import *
-# from tkinter import VERTICAL, ttk
-# import tkinter.font as font
-# from tkcalendar import DateEntry, Calendar
-
-
-# def main():
-
-#     global A, data
-#     A = tk.Tk()
-#     A.title('suppliers')
-#     A.geometry('1500x1000')
-#     A['bg'] = '#2f516f'
-
-#     # head frame
-#     head = tk.LabelFrame(A, borderwidth=0, bg='#243e54')
-#     f = font.Font(family='Times New Roman', size=30)  # font
-#     lb = tk.Label(head, text='CHART OF ACCOUNTS', bg='#243e54')
-#     lb['font'] = f
-#     lb.place(relx=0.3, rely=0.2)
-#     head.place(relx=0.1, rely=0.05, relwidth=0.8, relheight=0.1)
-
-#     # contents frame
-#     hd = tk.Frame(A, bg='#243e54')
-#     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
-#     ff = font.Font(family='Times New Roman', size=15)  # font
-#     bt1 = tk.Button(hd, text='Run Report',
-#                     command="", bg='#243e54')
-#     bt2 = tk.Button(hd, text='New',
-#                     command="", bg='#243e54')
-#     bt3 = tk.Button(hd, text='Import',
-#                     command="", bg='#243e54')
-#     bt1['font'] = ff
-#     bt2['font'] = ff
-#     bt3['font'] = ff
-#     bt1.place(relx=0.65, rely=0.05)
-#     bt2.place(relx=0.75, rely=0.05)
-#     bt3.place(relx=0.80, rely=0.05)
-#     text1 = font.Font(family='Times New Roman', size=13,)
-#     text1 = Label(A, text="Filter by name",
-#                   bg='#243e55', fg='#fff', font=text1)
-#     text1.place(x=160, y=170,)
-
-#     # table view
-
-#     treevv = ttk.Treeview(hd, height=7, columns=(
-#         1, 2, 3, 4, 5, 6, 7), show='headings')
-#     treevv.heading(1, text='NAME')  # headings
-#     treevv.heading(2, text='TYPE')
-#     treevv.heading(3, text='DETAIL TYPE')
-#     treevv.heading(4, text='TAX RATE')
-#     treevv.heading(5, text='FINSYS AMOUNT')
-#     treevv.heading(6, text='BANK AMOUNT')
-#     treevv.heading(7, text='ACTION')
-#     #treevv.heading(7, text='Actions')
-
-#     treevv.column(1, minwidth=30, width=140, anchor=CENTER)  # coloumns
-#     treevv.column(2, minwidth=30, width=140, anchor=CENTER)
-#     treevv.column(3, minwidth=30, width=140, anchor=CENTER)
-#     treevv.column(4, minwidth=30, width=140, anchor=CENTER)
-#     treevv.column(5, minwidth=30, width=140, anchor=CENTER)
-#     treevv.column(6, minwidth=30, width=140, anchor=CENTER)
-#     treevv.column(7, minwidth=30, width=140, anchor=CENTER)
-#     #treevv.column(7, minwidth=30, width=120,anchor=CENTER)
-#     data = ['Dhyan Kumar', 'Account Receivable(Debtors)', 'Account Receivable(Debtors)',
-#             '99120.0', '100000', '']
-#     data1 = ['Dhyan Kumar', 'Current Assets', 'Deferred Service Tax Input Credit',
-#              '99120.0', '75048.0', '']
-#     treevv.insert('', 'end', text=data, values=(data))
-#     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
-
-#     A.mainloop()
-
-
-# main()
-
-
-
 from cgitb import text
 from faulthandler import disable
 import tkinter as tk
@@ -89,8 +10,8 @@ from datetime import datetime, date, timedelta
 import datetime as dt
 from PIL import Image, ImageTk
 # import click
-# from requests import options
-# from xml.dom.minicompat import StringTypes
+from requests import options
+from xml.dom.minicompat import StringTypes
 
 from tkinter import StringVar
 import mysql.connector
@@ -104,7 +25,7 @@ cur = mydata.cursor()
 
 def selected(event):
     if menu.get() == 'Chart Of Accounts':
-        import test
+        import chart0faccounts
     elif menu.get() == 'Reconcile':
         import reconcile
 
@@ -506,26 +427,26 @@ def main():
     
 
     def editcoa():
-        # def changeedit():
+        def changeedit():
 
-        #     type = cm1.get()
-        #     name = f.get()
-        #     detail_type = l.get()
-        #     description = co.get()
-        #     sub_account = cb.get()
-        #     deftaxcode = nb.get()
-        #     finsys_amt = balanceinput.get()
+            type = cm1.get()
+            name = f.get()
+            detail_type = l.get()
+            description = co.get()
+            sub_account = cb.get()
+            deftaxcode = nb.get()
+            finsys_amt = balanceinput.get()
 
-        #    # bn=bm.get()
+           # bn=bm.get()
 
-        #     print(b)
-        #     # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
-        #     #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
+            print(b)
+            # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
+            #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
 
-        #     cur.execute("""UPDATE app1_accounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
-        #                 (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
-        #     mydata.commit()
-        #     D.destroy()
+            cur.execute("""UPDATE app1_accounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
+                        (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
+            mydata.commit()
+            D.destroy()
 
         # Get selected item to Edit
         global edit, bm,s,accdata
@@ -639,7 +560,7 @@ def main():
         # global edit, bm
         edit = tk.Toplevel(A)
         edit.title('Edit Account')
-        edit.geometry('2000x1500')
+        edit.geometry('1300x1000')
         
        
         f2 = font.Font(family='Times New Roman', size=30)
@@ -738,105 +659,102 @@ def main():
                         command=changeedit).place(relx=0.4, rely=0.8)
 
 
+        global D
+        D.geometry('1500x700')
+        mycanvas = tk.Canvas(D, width=1500, height=1200)
+        mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+        yscrollbar = ttk.Scrollbar(
+            D, orient='vertical', command=mycanvas.yview)
+        yscrollbar.pack(side=RIGHT, fill=Y)
+        mycanvas.configure(yscrollcommand=yscrollbar.set)
+        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
+            scrollregion=mycanvas.bbox('all')))
+        frame = tk.Frame(mycanvas)
+        frame['bg'] = '#2f516f'
+        mycanvas.create_window((0, 0), window=frame,
+                               anchor='nw', width=1500, height=1000)
 
+        # contents frame
+        hd1 = tk.Frame(frame)
+        hd1['bg'] = '#243e54'
+        f2 = font.Font(family='Times New Roman', size=20)  # font
 
-        # D.geometry('1500x700')
-        # mycanvas = tk.Canvas(D, width=1500, height=1200)
-        # mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
-        # yscrollbar = ttk.Scrollbar(
-        #     D, orient='vertical', command=mycanvas.yview)
-        # yscrollbar.pack(side=RIGHT, fill=Y)
-        # mycanvas.configure(yscrollcommand=yscrollbar.set)
-        # mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
-        #     scrollregion=mycanvas.bbox('all')))
-        # frame = tk.Frame(mycanvas)
-        # frame['bg'] = '#2f516f'
-        # mycanvas.create_window((0, 0), window=frame,
-        #                        anchor='nw', width=1500, height=1000)
+        tk.Label(hd1, text='Account Type', bg='#243e54', font=(
+            'times new roman', 14)).place(relx=0.04, rely=0.05)
+        typeinput = StringVar()
+        cm1 = tk.Entry(hd1, textvariable=typeinput)
+        cm1.insert(1, s[1])
+        cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
 
-        # # contents frame
-        # hd1 = tk.Frame(frame)
-        # hd1['bg'] = '#243e54'
-        # f2 = font.Font(family='Times New Roman', size=20)  # font
+        tk.Label(hd1, text='Name', bg='#243e54', font=(
+            'times new roman', 14)).place(relx=0.5, rely=0.05)
+        nameinput = StringVar()
+        f = tk.Entry(hd1, textvariable=nameinput)
+        f.insert(1, s[2])
+        f.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
 
-        # tk.Label(hd1, text='Account Type', bg='#243e54', font=(
-        #     'times new roman', 14)).place(relx=0.04, rely=0.05)
-        # typeinput = StringVar()
-        # cm1 = tk.Entry(hd1, textvariable=typeinput)
-        # cm1.insert(1, s[1])
-        # cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
+        tk.Label(hd1, text='Detail Type', font=('times new roman', 14),
+                 bg='#243e54').place(relx=0.04, rely=0.25)
+        detailtypeinput = StringVar()
+        l = tk.Entry(hd1, textvariable=detailtypeinput)
+        l.insert(1, s[3])
+        l.place(relx=0.04, rely=0.30, relwidth=0.4, relheight=0.065)
 
-        # tk.Label(hd1, text='Name', bg='#243e54', font=(
-        #     'times new roman', 14)).place(relx=0.5, rely=0.05)
-        # nameinput = StringVar()
-        # f = tk.Entry(hd1, textvariable=nameinput)
-        # f.insert(1, s[2])
-        # f.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+        tk.Label(hd1, text='Description', font=('times new roman', 14),
+                 bg='#243e54').place(relx=0.5, rely=0.25)
+        descriptioninput = StringVar()
+        co = tk.Entry(hd1, textvariable=descriptioninput)
+        #co.insert(1, s[4])
+        co.place(relx=0.5, rely=0.30, relwidth=0.4, relheight=0.065)
 
-        # tk.Label(hd1, text='Detail Type', font=('times new roman', 14),
-        #          bg='#243e54').place(relx=0.04, rely=0.25)
-        # detailtypeinput = StringVar()
-        # l = tk.Entry(hd1, textvariable=detailtypeinput)
-        # l.insert(1, s[3])
-        # l.place(relx=0.04, rely=0.30, relwidth=0.4, relheight=0.065)
+        message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
+        text_box = Text(hd1)
+        text_box.place(relx=0.04, rely=0.40, relwidth=0.4, relheight=0.2)
+        text_box.insert('end', message)
+        text_box.config(state='disabled')
+        Checkbutton(hd1, text="", bg='#243e54',
+                    font=('times new roman', 12)).place(relx=0.5, rely=0.45)
+        tk.Label(hd1, text='Is sub-account', font=('times new roman', 14),
+                 bg='#243e54').place(relx=0.52, rely=0.45)
+        subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
+                           'Input Credit', 'Deferred Service Tax Input Credit', 'Deferred SGST', 'Deferred VAT Input Credit',
+                           'GST Refund', 'Inventory Asset', 'Paid Insurance', 'Service Tax Refund', 'TDS Receivable', 'Uncategorised Asset',
+                           'Accumulated Depreciation', 'Buildings and Improvements', 'Furniture and Equipment', 'Land', 'Leasehold Improvements',
+                           'CGST Payable', 'CST Payable', 'CST Suspense', 'GST Payable', 'GST Suspense', 'IGST Payable', 'Input CGST', 'Input CGST Tax RCM',
+                           'Input IGST', 'Input IGST Tax RCM', 'Input Krishi Kalyan Cess', 'Input Krishi Kalyan Cess RCM', 'Input Service Tax',
+                           'Input Service Tax RCM', 'Input VAT 14%', 'Input VAT 4%', 'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense',
+                           'Output CGST', 'Output CGST Tax RCM', 'Output CST 2%', 'Output IGST', 'Output IGST Tax RCM', 'Output Krishi Kalyan Cess',
+                           'Output Krishi Kalyan Cess DCM', 'Output Service Tax', 'Output Service Tax RCM', 'Output SGST', 'Output SGST Tax RCM',
+                           'Output VAT 14%', 'Output VAT 4%', 'Output VAT 5%', 'Service Tax Payable', 'Service Tax Suspense', 'SGST Payable', 'Swachh Bharat Cess Payable',
+                           'TDS Payable', 'VAT Payable', 'VAT Suspense', 'Opening Balance', 'Equity']
 
-        # tk.Label(hd1, text='Description', font=('times new roman', 14),
-        #          bg='#243e54').place(relx=0.5, rely=0.25)
-        # descriptioninput = StringVar()
-        # co = tk.Entry(hd1, textvariable=descriptioninput)
-        # #co.insert(1, s[4])
-        # co.place(relx=0.5, rely=0.30, relwidth=0.4, relheight=0.065)
+        cb = ttk.Combobox(hd1, values=subaccountinput)
+        cb.insert(1, s[4])
+        cb.place(relx=0.5, rely=0.50, relwidth=0.4, relheight=0.065)
 
-        # message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-        # text_box = Text(hd1)
-        # text_box.place(relx=0.04, rely=0.40, relwidth=0.4, relheight=0.2)
-        # text_box.insert('end', message)
-        # text_box.config(state='disabled')
-        # Checkbutton(hd1, text="", bg='#243e54',
-        #             font=('times new roman', 12)).place(relx=0.5, rely=0.45)
-        # tk.Label(hd1, text='Is sub-account', font=('times new roman', 14),
-        #          bg='#243e54').place(relx=0.52, rely=0.45)
-        # subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
-        #                    'Input Credit', 'Deferred Service Tax Input Credit', 'Deferred SGST', 'Deferred VAT Input Credit',
-        #                    'GST Refund', 'Inventory Asset', 'Paid Insurance', 'Service Tax Refund', 'TDS Receivable', 'Uncategorised Asset',
-        #                    'Accumulated Depreciation', 'Buildings and Improvements', 'Furniture and Equipment', 'Land', 'Leasehold Improvements',
-        #                    'CGST Payable', 'CST Payable', 'CST Suspense', 'GST Payable', 'GST Suspense', 'IGST Payable', 'Input CGST', 'Input CGST Tax RCM',
-        #                    'Input IGST', 'Input IGST Tax RCM', 'Input Krishi Kalyan Cess', 'Input Krishi Kalyan Cess RCM', 'Input Service Tax',
-        #                    'Input Service Tax RCM', 'Input VAT 14%', 'Input VAT 4%', 'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense',
-        #                    'Output CGST', 'Output CGST Tax RCM', 'Output CST 2%', 'Output IGST', 'Output IGST Tax RCM', 'Output Krishi Kalyan Cess',
-        #                    'Output Krishi Kalyan Cess DCM', 'Output Service Tax', 'Output Service Tax RCM', 'Output SGST', 'Output SGST Tax RCM',
-        #                    'Output VAT 14%', 'Output VAT 4%', 'Output VAT 5%', 'Service Tax Payable', 'Service Tax Suspense', 'SGST Payable', 'Swachh Bharat Cess Payable',
-        #                    'TDS Payable', 'VAT Payable', 'VAT Suspense', 'Opening Balance', 'Equity']
+        tk.Label(hd1, text='Default Tax Code', font=('times new roman', 14),
+                 bg='#243e54').place(relx=0.5, rely=0.63)
+        defaulttaxcodeinput = ['18.0% IGST', ' 14.00% ST', '0% IGST', 'Out of Scope', '0% GST', '14.5% ST', '14.0% VAT', '6.0% IGST', '28.0% IGST', '15.0% ST', '28.0% GST', '12.0% GST', '18.0% GST',
+                               '3.0% GST', '0.2% IGST', '5.0% GST', '6.0% GST', '0.2% GST', 'Exempt IGST', '3.0% IGST', '4.0% VAT', '5.0% IGST', '12.36% ST', '5.0% VAT', 'Exempt GST', '12.0% IGST', '2.0% CST']
+        nb = ttk.Combobox(hd1, values=defaulttaxcodeinput)
+        nb.insert(1, s[5])
+        nb.place(relx=0.5, rely=0.7, relwidth=0.4, relheight=0.065)
 
-        # cb = ttk.Combobox(hd1, values=subaccountinput)
-        # cb.insert(1, s[4])
-        # cb.place(relx=0.5, rely=0.50, relwidth=0.4, relheight=0.065)
+        tk.Label(hd1, text='Balance', font=('times new roman', 14),
+                 bg='#243e54').place(relx=0.05, rely=0.65)
+        balanceinput = StringVar()
+        bo = tk.Entry(hd1, textvariable=balanceinput)
+        bo.insert(1, s[6])
+        bo.place(relx=0.05, rely=0.70, relwidth=0.4, relheight=0.065)
 
-        # tk.Label(hd1, text='Default Tax Code', font=('times new roman', 14),
-        #          bg='#243e54').place(relx=0.5, rely=0.63)
-        # defaulttaxcodeinput = ['18.0% IGST', ' 14.00% ST', '0% IGST', 'Out of Scope', '0% GST', '14.5% ST', '14.0% VAT', '6.0% IGST', '28.0% IGST', '15.0% ST', '28.0% GST', '12.0% GST', '18.0% GST',
-        #                        '3.0% GST', '0.2% IGST', '5.0% GST', '6.0% GST', '0.2% GST', 'Exempt IGST', '3.0% IGST', '4.0% VAT', '5.0% IGST', '12.36% ST', '5.0% VAT', 'Exempt GST', '12.0% IGST', '2.0% CST']
-        # nb = ttk.Combobox(hd1, values=defaulttaxcodeinput)
-        # nb.insert(1, s[5])
-        # nb.place(relx=0.5, rely=0.7, relwidth=0.4, relheight=0.065)
+        sub = tk.Button(hd1, text='SUBMIT', font=15, bg='#243e54',
+                        command=changeedit).place(relx=0.5, rely=0.79)
 
-        # tk.Label(hd1, text='Balance', font=('times new roman', 14),
-        #          bg='#243e54').place(relx=0.05, rely=0.65)
-        # balanceinput = StringVar()
-        # bo = tk.Entry(hd1, textvariable=balanceinput)
-        # bo.insert(1, s[6])
-        # bo.place(relx=0.05, rely=0.70, relwidth=0.4, relheight=0.065)
+        hd1.place(relx=0.1, rely=0.15, relwidth=0.8, relheight=0.9)
 
-        # sub = tk.Button(hd1, text='SUBMIT', font=15, bg='#243e54',
-        #                 command=changeedit).place(relx=0.5, rely=0.79)
-
-        # hd1.place(relx=0.1, rely=0.15, relwidth=0.8, relheight=0.9)
-
-        # tk.Frame(frame, bg='#2f516f').place(
-        #     relx=0, rely=0.92, relwidth=1, relheight=0.08)
-        # D.mainloop()
-
-
+        tk.Frame(frame, bg='#2f516f').place(
+            relx=0, rely=0.92, relwidth=1, relheight=0.08)
+        D.mainloop()
 
     def accrecivabales():
 
@@ -861,10 +779,11 @@ def main():
         mycanvas.create_window((0,0),window=profitlossframe,anchor='nw',width=1500,height=2200)
 
         pframe=tk.Frame(profitlossframe,bg='#243e54',width=2000)
-        tk.Label(pframe,text=values[1]+"REPORT",font=('Times New Roman',30),bg='#243e54',fg="#fff").place(relx=0.4,rely=0.05)
+        tk.Label(pframe,text=values[1]+" REPORT",font=('Times New Roman',30),bg='#243e54',fg="#fff").place(relx=0.4,rely=0.05)
         pframe.place(relx=0.1,rely=0.02,relwidth=0.8,relheight=0.05)
 
         form_frame=tk.Frame(profitlossframe,bg='#243e54')
+
 
         def menuuu(e):
             global dte,dtee,fromdate,todate
@@ -923,30 +842,159 @@ def main():
             elif period=='This financial year':
                 cleartree()
                 customvalues()      
-        tk.Button(form_frame,text = "Run Report",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold'),command=accrecifetch).place(relx=0.55,rely=0.5,relwidth=0.15)
-        tk.Button(form_frame,text = "Back",bg="#243e55",fg="#fff",font=('times new roman', 16, 'bold')).place(relx=0.75,rely=0.5,relwidth=0.15)
+        tk.Button(form_frame,text = "Run Report",font=('times new roman', 16, 'bold'),command="").place(relx=0.55,rely=0.5,relwidth=0.15)
+        tk.Button(form_frame,text = "Back",font=('times new roman', 16, 'bold'),command=main).place(relx=0.75,rely=0.5,relwidth=0.15)
         form_frame.place(relx=0.1,rely=0.08,relwidth=0.8,relheight=0.1)
 
+        # b = treevv.item(treevv.focus())["values"][0]
+        # print(b)
+        # sql='SELECT * FROM qualitycertificate WHERE cid=%s'
+        # val=(b,)
+        # cur.execute(sql,val)
+        # s = cur.fetchone()
+        # D = tk.Toplevel(A)
+        # print(s)
+           
+        # F2 = LabelFrame(form_frame, font=('times new roman', 15, ),border=0, fg="Black", bg="#e5e9ec")
+        # F2.place(x=0, y=10, width=800, height=200)
+        # size=(800,210)
+
+        # ax=ImageTk.PhotoImage(Image.open('f2.png').resize(size))
+           
+        # tk.Label(F2,image=ax,bg='#e5e9ec', border=0).place(relx=0.00,rely=-0,relheight=1,relwidth=1 )
+            
+        # tk.Label(form_frame, text="Assets", bg='#fff',fg='#000').place(relx=0.03,rely=-0,relheight=1,relwidth=1 )
+        # tk.Label(form_frame, text="Current Assets", bg='#fff',fg='#000').place(relx=0.04,rely=-0,relheight=1,relwidth=1 )
+        # tk.Label(form_frame, text="Bank", bg='#fff',fg='#000').place(relx=0.05,rely=-0,relheight=1,relwidth=1 )
+        # tk.Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        # datel = Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000')
+        # datel.place(x=200, y=190, width=100)
+        # datel_input = StringVar()
+        # datel_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
+        # datel_input.place(x=350, y=190, height=40)
+        # try:
+        #     datel_input.insert(0, s[1])
+        # except:
+        #      pass
+        
+        # skul = Label(form_frame, text="Total Account Receivables(Debtors)", bg='#fff',fg='#000')
+        # skul.place(x=200, y=240, width=100)
+        # skul_input = StringVar()
+        # skul_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        # skul_input.place(x=350, y=240, height=40)
+        # try:
+        #         skul_input.insert(0, s[3])
+        # except:
+        #         pass
+
+        # proname = Label(form_frame, text="Total Current Assets", bg='#fff', fg='#000')
+        # proname.place(x=200, y=290, width=100)
+        # proname_input = StringVar()
+        # proname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        # proname_input.place(x=350, y=290, height=40)
+        # try:
+        #     proname_input.insert(0, s[2])
+        # except:
+        #     pass
+            
+        # idl = Label(form_frame, text="Total Assets", bg='#fff', fg='#000')
+        # idl.place(x=200, y=340, width=100)
+        # idl_input = StringVar()
+        # idl_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        # idl_input.place(x=350, y=340, height=40)
+        # try:
+        #         idl_input.insert(0, s[0])
+        # except:
+        #         pass
+        
+        # tk.Label(form_frame, text="Liabilities and Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+        # tk.Label(form_frame, text="Current Liabilities", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+        # tk.Label(form_frame, text="Accounts Payable(Creditors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        
+        # cusname = tk.Label(form_frame, text="Total Accounts Payable(Creditors)", bg='#fff', fg='#000')
+        # cusname.place(x=200, y=390, height=15, width=100)
+        # cusname_input = StringVar()
+        # cusname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        # cusname_input.place(x=350, y=390, height=40)
+        # try:
+        #         cusname_input.insert(0, s[4])
+        # except:
+        #         pass
+
+        # insdate = tk.Label(
+        #         form_frame, text="Total Current Liabilities", bg='#fff', fg='#000')
+        # place_input = StringVar()
+        # insdate.place(x=200, y=440, height=15, width=100)
+        # insdate_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
+        # insdate_input.place(x=350, y=440, height=40)
+        # try:
+        #         insdate_input.insert(0, s[5])
+        # except:
+        #         pass
+        
+        # tk.Label(form_frame, text="Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        # refl = Label(form_frame, text="Profit for the Year", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        # refl.place(x=200, y=490, width=160)
+        # ref_input = StringVar()
+        # ref1_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        # ref1_input.place(x=350, y=490, height=40)
+ 
+        # try:
+        #         ref1_input.insert(0, s[3])
+        # except:
+        #         pass
+            
+        # refl1 = Label(form_frame, text="Total Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        # refl1.place(x=200, y=540, width=160)
+        # ref1_input = StringVar()
+        # ref11_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        # ref11_input.place(x=350, y=540, height=40)
+ 
+        # try:
+        #         ref1_input.insert(0, s[3])
+        # except:
+        #         pass
+    
+        # refl2 = Label(form_frame, text="Total Liabilities and Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        # refl2.place(x=200, y=590, width=160)
+        # ref1_input = StringVar()
+        # ref12_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        # ref12_input.place(x=350, y=590, height=40)
+ 
+        # try:
+        #         ref1_input.insert(0, s[3])
+        # except:
+        #         pass
+            
+            
+        # D.mainloop()
+
+
         tableframe=tk.Frame(profitlossframe,bg='#243e54')
+        tableframe.place(relx=0.1,rely=0.2,relwidth=0.8,relheight=0.75)
+
         #image
-        imageframe=tk.Frame(tableframe,bg='#add8e6')
-        size=(200,200)
-        cc='kijuk tech'
-        cur.execute("SELECT cimg,cname FROM app1_company WHERE cname =%s and cid =%s",([cc,cid]))
-        image=cur.fetchone()
-        img=image[0]
-        print("img",img)
-        cv=Image.open(img).resize(size)
-        ax=ImageTk.PhotoImage(cv,master=prlframe)
-        ay=tk.Label(imageframe,image=ax,bg='#243e54')
-        ay.place(relx=0.02,rely=0.08,relheight=0.8,relwidth=0.2)
-        tk.Label(imageframe,text=image[1], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
-        imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
+        # imageframe=tk.Frame(tableframe,bg='#add8e6')
+        # size=(200,200)
+        # cc='kijuk tech'
+        # cur.execute("SELECT cimg,cname FROM app1_company WHERE cname =%s and cid =%s",([cc,cid]))
+        # image=cur.fetchone()
+        # img=image[0]
+        # print("img",img)
+        # cv=Image.open(img).resize(size)
+        # ax=ImageTk.PhotoImage(cv,master=prlframe)
+        # ay=tk.Label(imageframe,image=ax,bg='#243e54')
+        # ay.place(relx=0.02,rely=0.08,relheight=0.8,relwidth=0.2)
+        # tk.Label(imageframe,text=image[1], font=('times new roman', 25, 'bold'),bg="#add8e6").place(relx=0.25,rely=0.4,relwidth=0.2)
+        # imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
         #contents
-        conttframe=tk.Frame(tableframe,bg='white')
-        conttframe.place(relx=0.05,rely=0.17,relwidth=0.9,relheight=0.7)
+        conttframe=tk.Frame(tableframe,bg='#fff')
+        conttframe.place(relx=0.025,rely=0.07,relwidth=0.95,relheight=0.6)
         mycanvass=tk.Canvas(conttframe,width=1200,height=800)
-        mycanvass.place(relx=0,rely=0,relwidth=1,relheight=1)
+        mycanvass.place(relx=1,rely=1,relwidth=1,relheight=1)
         yscrollbar =ttk.Scrollbar(conttframe,orient='vertical',command=mycanvass.yview)
         yscrollbar.pack(side=RIGHT,fill=Y)
         mycanvass.configure(yscrollcommand=yscrollbar.set)
@@ -957,8 +1005,8 @@ def main():
         #table view
         style=ttk.Style()
         style.theme_use('default')
-        style.configure('Treeview',background='silver',foreground='white',fieldbackground='white')
-        treevvv = ttk.Treeview(contframe, height=10, columns=(1,2,3,4,5,6,7), show='headings') 
+        style.configure('Treeview',background='silver',foreground='#000',fieldbackground='#000')
+        treevvv = ttk.Treeview(conttframe, height=10, columns=(1,2,3,4,5,6,7), show='headings') 
         treevvv.heading(1, text='Date')
         treevvv.heading(2, text='TRANSACTION TYPE')#headings
         treevvv.heading(3, text='NO')
@@ -978,291 +1026,319 @@ def main():
             
         treevvv.place(relx=0,rely=0,relwidth=1)  
         def accrevalldates():#all dates
-            cur.execute("SELECT customername, SUM(baldue) FROM app1_invoice WHERE cid=%s GROUP BY customername",([cid]))
-            vall=cur.fetchall()
-            trans='Invoice Balance Due'
+            cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ")
+            val = cur.fetchall()
             try:
-                for i in vall:
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
-            except:
-                pass 
-            transs='Credit Note' 
-            cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE cid =%s GROUP BY customer",([cid]))
-            val=cur.fetchall()   
-            try:
-                for j in val:
-                    treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
-            except:
-                pass          
-        tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
-        def accrevtoday():#today values
-            cur.execute("SELECT customername,SUM(baldue) FROM app1_invoice WHERE invoicedate =%s and cid =%s GROUP BY customername",(fromdate,cid))
-            vall=cur.fetchall()
-            trans='Invoice Balance Due'
-            try:
-                for i in vall:
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
-            except:
-                pass 
-            transs='Credit Note' 
-            cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE creditdate =%s and cid =%s GROUP BY customer",(fromdate,cid))
-            val=cur.fetchall()   
-            try:
-                for j in val:
-                    treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
-            except:
-                pass 
-        def customvalues():#other values
-            cur.execute("SELECT customername,SUM(baldue) FROM app1_invoice WHERE invoicedate BETWEEN %s and %s and cid =%s GROUP BY customername",(fromdate,todate,cid))
-            vall=cur.fetchall()
-            trans='Invoice Balance Due'
-            try:
-                for i in vall:
-                        treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
-            except:
-                pass  
-            transs='Credit Note' 
-            cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE creditdate BETWEEN %s and %s and cid =%s GROUP BY customer",(fromdate,todate,cid))
-            val=cur.fetchall()   
-            try:
-                for j in val:
-                    treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
-            except:
-                pass          
-        
-
-#find datas for treeview insertion
-
-
-        uid=[4]
-        cur.execute("select cid from app1_company where id_id=%s",(uid))
-        cmp1=cur.fetchone()
-        
-
-
-        cur.execute("SELECT name FROM app1_accounts ")
-
-        accdata= cur.fetchall()
-    
-        for x in accdata:
-            if values[1] in x:
-                pass
-            else:
-                cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
-                account=cur.fetchone()
-        balance=account[7]
-        oplist=['Input CGST', 'Input SGST','Input IGST']
-        oplist2=['Output IGST','Output SGST','Output CGST']
-        
-        if account[3] == 'Account Receivable(Debtors)':
-            cur.execute("select * from app1_invoice where  cid_id=%s",(cmp1))
-            invoic=cur.fetchall()
-            cur.execute("select * from app1_credit where  cid_id=%s",(cmp1))
-            creditnote=cur.fetchall()
-            cur.execute("select * from app1_payment where  cid_id=%s",(cmp1))
-            paymen=cur.fetchall()
-            cur.execute("select * from app1_salesrecpts where  cid_id=%s",(cmp1))
-            salesofline=cur.fetchall()
-            trans='Invoice'
-            accname=account[3]
-            try:
-                for i in invoic:
-                    treevvv.insert('', 'end',values=(i[5],trans,i[3],i[1],accname,0,i[17]))
+                for x in val:
+                    treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
             except:
                 pass
-            trans='Credit Note'
-            try:
-                for i in creditnote:
-                    treevvv.insert('', 'end',values=(i[4],trans,i[5],i[1],accname,0,i[16]))
-            except:
-                pass 
-            trans='Payment'
-            try:
-                for i in paymen:
-                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[14]))
-            except:
-                pass 
-            trans='Sales Receipt'
-            try:
-                for i in salesofline:
-                    if i[41]=="True":
-                        treevvv.insert('', 'end',values=(i[4],trans,i[8],i[1],accname,0,i[19]))
-            except:
-                pass 
-
-        elif account[3] == 'Accounts Payable(Creditors)':
-            ty='openbalance'
-            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],'openbalance'))
-            bill=cur.fetchall()
-            ty=''
-            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
-            bill2=cur.fetchall()
-            ty='debit'
-            cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
-            bill3=cur.fetchall()
-            cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
-            debit=cur.fetchall()
-            cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
-            expence=cur.fetchall()
-            trans='payment'
-            accname=account[3]
-            try:
-                for i in bill:
-                    
-                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
-            except:
-                pass   
-            try:
-                for i in bill2:
-                    
-                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
-            except:
-                pass 
-            trans='bill'
-            try:
-                for i in bill3:
-                    
-                    treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
-            except:
-                pass 
-            trans='Payment'
-            try:
-                for i in debit:
-                    
-                    treevvv.insert('', 'end',values=(i[3],trans,i[4],i[1],accname,0,i[54]))
-            except:
-                pass 
-            trans='Expence'
-            try:
-                for i in expence:
-                    
-                    treevvv.insert('', 'end',values=(i[2],trans,i[4],i[1],accname,0,i[56]))
-            except:
-                pass       
-            
-    
-        elif account[3] in oplist:
-            global supp
-            cur.execute("select * from app1_company where  cid=%s",(cmp1))
-            cmp=cur.fetchone()
-            cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
-            deb=cur.fetchall()
-            debit = []
-            accname=account[3]
-            for i in deb:
-                name = i[1]
-                x = name.split()
-                if len(x) == 3:
-                    firstname = x[0]
-                    lastname = x[1] + ' ' + x[2]
-                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
-                    supp=cur.fetchone()
-                else:
-                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
-                    supp=cur.fetchone()
-
-                if supp[21]==cmp[4]:
-                    debit.append(
-                        [i[3], i[4], i[1], float(i[54]) / 2])
-                    
-            cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
-            expen=cur.fetchall()
-            expence = []
-            for i in expen:
-                name = i[1]
-                x = name.split()
-                if len(x) == 3:
-                    firstname = x[0]
-                    lastname = x[1] + ' ' + x[2]
-                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
-                    supp=cur.fetchone()
-                else:
-                    cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
-                    supp=cur.fetchone()
-                if supp[21]==cmp[4]:
-                    expence.append([i[2], i[4], (i[1]).replace(
-                        u'\xa0', u''), float(i[55]) / 2])
-            trans='Expence'    
-            try:
-                for i in expence:
-                    
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
-            except:
-                pass 
-                
-            trans='Debit Note'   
-            try:
-                for i in debit:
-                    
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
-            except:
-                pass 
-
-
-        elif account[3] in oplist2:
-            cur.execute("select * from app1_invoice where cid_id=%s ",(cmp1))
-            invoi=cur.fetchall()
-            cur.execute("select * from app1_company where  cid=%s",(cmp1))
-            cmp=cur.fetchone()
-            accname=account[3]
-            invoic = []
-            for i in invoi:
-                if i[8] == cmp[4]:
-                    invoic.append(
-                        [i[5], i[3], (i[1]).replace(u'\xa0', u''), float(i[40]) / 2])
+            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
            
-            cur.execute("select * from app1_credit where cid_id=%s ",(cmp1))
-            creditnot=cur.fetchall()
-            creditnote = []
-            for i in creditnot:
-                if i[6] == cmp[4]:
-                    creditnote.append(
-                        [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[17]) / 2])
-            # salesrcpt = salesrecpts.objects.filter(cid=cmp1)
-            cur.execute("select * from app1_salesrecpts where cid_id=%s ",(cmp1))
-            salesrcpt=cur.fetchall()
-            salesrecipt = []
-            for i in salesrcpt:
-                if i[6] ==cmp[4]:
-                    salesrecipt.append(
-                        [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[18]) / 2])
-            trans='Expence'    
+           
+           
+           
+        #     cur.execute("SELECT customername, SUM(baldue) FROM app1_invoice WHERE cid=%s GROUP BY customername",([cid]))
+        #     vall=cur.fetchall()
+        #     trans='Invoice Balance Due'
+        #     try:
+        #         for i in vall:
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+        #     except:
+        #         pass 
+        #     transs='Credit Note' 
+        #     cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE cid =%s GROUP BY customer",([cid]))
+        #     val=cur.fetchall()   
+        #     try:
+        #         for j in val:
+        #             treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+        #     except:
+        #         pass          
+        # tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
+        def accrevtoday():#today values
+            cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ",(fromdate,cid))
+            val = cur.fetchall()
             try:
-                for i in invoic:
-                    
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+                for x in val:
+                    treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
             except:
-                pass 
-                
-            trans='Debit Note'   
-            try:
-                for i in creditnote:
-                    
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
-            except:
-                pass    
-
-            trans='Debit Note'   
-            try:
-                for i in salesrecipt:
-                    
-                    treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
-            except:
-                pass      
+                pass
+            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+           
+           
             
+            # cur.execute("SELECT customername,SUM(baldue) FROM app1_invoice WHERE invoicedate =%s and cid =%s GROUP BY customername",(fromdate,cid))
+            # vall=cur.fetchall()
+            # trans='Invoice Balance Due'
+            # try:
+            #     for i in vall:
+            #         treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+            # except:
+            #     pass 
+            # transs='Credit Note' 
+            # cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE creditdate =%s and cid =%s GROUP BY customer",(fromdate,cid))
+            # val=cur.fetchall()   
+            # try:
+            #     for j in val:
+            #         treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+            # except:
+            #     pass 
+        def customvalues():#other values
+            cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ",(fromdate,todate,cid))
+            val = cur.fetchall()
+            try:
+                for x in val:
+                    treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
+            except:
+                pass
+            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+           
+           
+            
+            
+            # cur.execute("SELECT customername,SUM(baldue) FROM app1_invoice WHERE invoicedate BETWEEN %s and %s and cid =%s GROUP BY customername",(fromdate,todate,cid))
+            # vall=cur.fetchall()
+            # trans='Invoice Balance Due'
+            # try:
+            #     for i in vall:
+            #             treevvv.insert('', 'end',values=(i[0],trans,i[1],0,0,0,0,i[1]))
+            # except:
+            #     pass  
+            # transs='Credit Note' 
+            # cur.execute("SELECT customer,SUM(grndtot) FROM app1_credit WHERE creditdate BETWEEN %s and %s and cid =%s GROUP BY customer",(fromdate,todate,cid))
+            # val=cur.fetchall()   
+            # try:
+            #     for j in val:
+            #         treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
+            # except:
+            #     pass          
+        cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ")
+        val = cur.fetchall()
+        try:
+                for x in val:
+                    treevv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
+        except:
+                pass
+        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+           
+           
+
+# find datas for treeview insertion
+
+
+        # uid=[4]
+        # cur.execute("select cid from app1_company where id_id=%s",(uid))
+        # cmp1=cur.fetchone()
+        
+        # cur.execute("SELECT name FROM app1_accounts ")
+
+        # accdata= cur.fetchall()
+    
+        # for x in accdata:
+        #     if values[1] in x:
+        #         pass
+        #     else:
+        #         cur.execute("select * from app1_accounts1 where accounts1id=%s and cid_id=%s",(b[0],cmp1[0]))
+        #         account=cur.fetchone()
+        # oplist=['Input CGST', 'Input SGST','Input IGST']
+        # oplist2=['Output IGST','Output SGST','Output CGST']
+        
+        # if account[3] == 'Account Receivable(Debtors)':
+        #     cur.execute("select * from app1_invoice where  cid_id=%s",(cmp1))
+        #     invoic=cur.fetchall()
+        #     cur.execute("select * from app1_credit where  cid_id=%s",(cmp1))
+        #     creditnote=cur.fetchall()
+        #     cur.execute("select * from app1_payment where  cid_id=%s",(cmp1))
+        #     paymen=cur.fetchall()
+        #     cur.execute("select * from app1_salesrecpts where  cid_id=%s",(cmp1))
+        #     salesofline=cur.fetchall()
+        #     trans='Invoice'
+        #     accname=account[3]
+        #     try:
+        #         for i in invoic:
+        #             treevvv.insert('', 'end',values=(i[5],trans,i[3],i[1],accname,0,i[17]))
+        #     except:
+        #         pass
+        #     trans='Credit Note'
+        #     try:
+        #         for i in creditnote:
+        #             treevvv.insert('', 'end',values=(i[4],trans,i[5],i[1],accname,0,i[16]))
+        #     except:
+        #         pass 
+        #     trans='Payment'
+        #     try:
+        #         for i in paymen:
+        #             treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[14]))
+        #     except:
+        #         pass 
+        #     trans='Sales Receipt'
+        #     try:
+        #         for i in salesofline:
+        #             if i[41]=="True":
+        #                 treevvv.insert('', 'end',values=(i[4],trans,i[8],i[1],accname,0,i[19]))
+        #     except:
+        #         pass 
+
+        # elif account[3] == 'Accounts Payable(Creditors)':
+        #     ty='openbalance'
+        #     cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],'openbalance'))
+        #     bill=cur.fetchall()
+        #     ty=''
+        #     cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
+        #     bill2=cur.fetchall()
+        #     ty='debit'
+        #     cur.execute("select * from app1_bills where  cid_id=%s and payornot=%s",(cmp1[0],ty))
+        #     bill3=cur.fetchall()
+        #     cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
+        #     debit=cur.fetchall()
+        #     cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
+        #     expence=cur.fetchall()
+        #     trans='payment'
+        #     accname=account[3]
+        #     try:
+        #         for i in bill:
+                    
+        #             treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+        #     except:
+        #         pass   
+        #     try:
+        #         for i in bill2:
+                    
+        #             treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+        #     except:
+        #         pass 
+        #     trans='bill'
+        #     try:
+        #         for i in bill3:
+                    
+        #             treevvv.insert('', 'end',values=(i[4],trans,i[6],i[1],accname,0,i[58]))
+        #     except:
+        #         pass 
+        #     trans='Payment'
+        #     try:
+        #         for i in debit:
+                    
+        #             treevvv.insert('', 'end',values=(i[3],trans,i[4],i[1],accname,0,i[54]))
+        #     except:
+        #         pass 
+        #     trans='Expence'
+        #     try:
+        #         for i in expence:
+                    
+        #             treevvv.insert('', 'end',values=(i[2],trans,i[4],i[1],accname,0,i[56]))
+        #     except:
+        #         pass       
+            
+    
+        # elif account[3] in oplist:
+        #     global supp
+        #     cur.execute("select * from app1_company where  cid=%s",(cmp1))
+        #     cmp=cur.fetchone()
+        #     cur.execute("select * from app1_suplrcredit where  cid_id=%s",(cmp1))
+        #     deb=cur.fetchall()
+        #     debit = []
+        #     accname=account[3]
+        #     for i in deb:
+        #         name = i[1]
+        #         x = name.split()
+        #         if len(x) == 3:
+        #             firstname = x[0]
+        #             lastname = x[1] + ' ' + x[2]
+        #             cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
+        #             supp=cur.fetchone()
+        #         else:
+        #             cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
+        #             supp=cur.fetchone()
+
+        #         if supp[21]==cmp[4]:
+        #             debit.append(
+        #                 [i[3], i[4], i[1], float(i[54]) / 2])
+                    
+        #     cur.execute("select * from app1_expences where  cid_id=%s",(cmp1))
+        #     expen=cur.fetchall()
+        #     expence = []
+        #     for i in expen:
+        #         name = i[1]
+        #         x = name.split()
+        #         if len(x) == 3:
+        #             firstname = x[0]
+        #             lastname = x[1] + ' ' + x[2]
+        #             cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(firstname,lastname,cmp1[0]))
+        #             supp=cur.fetchone()
+        #         else:
+        #             cur.execute("select * from app1_supplier where firstname=%s and lastname=%s and cid_id=%s",(x[0],x[1],cmp1[0]))
+        #             supp=cur.fetchone()
+        #         if supp[21]==cmp[4]:
+        #             expence.append([i[2], i[4], (i[1]).replace(
+        #                 u'\xa0', u''), float(i[55]) / 2])
+        #     trans='Expence'    
+        #     try:
+        #         for i in expence:
+                    
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+        #     except:
+        #         pass 
                 
+        #     trans='Debit Note'   
+        #     try:
+        #         for i in debit:
+                    
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+        #     except:
+        #         pass 
 
 
+        # elif account[3] in oplist2:
+        #     cur.execute("select * from app1_invoice where cid_id=%s ",(cmp1))
+        #     invoi=cur.fetchall()
+        #     cur.execute("select * from app1_company where  cid=%s",(cmp1))
+        #     cmp=cur.fetchone()
+        #     accname=account[3]
+        #     invoic = []
+        #     for i in invoi:
+        #         if i[8] == cmp[4]:
+        #             invoic.append(
+        #                 [i[5], i[3], (i[1]).replace(u'\xa0', u''), float(i[40]) / 2])
+           
+        #     cur.execute("select * from app1_credit where cid_id=%s ",(cmp1))
+        #     creditnot=cur.fetchall()
+        #     creditnote = []
+        #     for i in creditnot:
+        #         if i[6] == cmp[4]:
+        #             creditnote.append(
+        #                 [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[17]) / 2])
+        #     # salesrcpt = salesrecpts.objects.filter(cid=cmp1)
+        #     cur.execute("select * from app1_salesrecpts where cid_id=%s ",(cmp1))
+        #     salesrcpt=cur.fetchall()
+        #     salesrecipt = []
+        #     for i in salesrcpt:
+        #         if i[6] ==cmp[4]:
+        #             salesrecipt.append(
+        #                 [i[4], i[5], (i[1]).replace(u'\xa0', u''), float(i[18]) / 2])
+        #     trans='Expence'    
+        #     try:
+        #         for i in invoic:
+                    
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+        #     except:
+        #         pass 
+                
+        #     trans='Debit Note'   
+        #     try:
+        #         for i in creditnote:
+                    
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+        #     except:
+        #         pass    
 
-
-
-
-
-
-
-
-
-
+        #     trans='Debit Note'   
+        #     try:
+        #         for i in salesrecipt:
+                    
+        #             treevvv.insert('', 'end',values=(i[0],trans,i[1],i[2],accname,0,i[3]))
+        #     except:
+        #         pass      
+            
 
 
     def set():
