@@ -121,6 +121,7 @@ import mysql.connector
 mydata = mysql.connector.connect(host='localhost', user='root', password='', database='finsysinfox21', port='3307')
 
 
+
 cur = mydata.cursor()
 
 # yyyyy
@@ -280,6 +281,7 @@ def main():
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
     ff = font.Font(family='Times New Roman', size=15)  # font
 
+
     bt1 = Button(hd, text="New", command=plus)
     bt1.place(relx=0.65, rely=0.05, relheight=0.1, relwidth=0.1)
 
@@ -288,6 +290,7 @@ def main():
 
     bt3 = Button(hd, text="Import", command="")
     bt3.place(relx=0.85, rely=0.05, relheight=0.1, relwidth=0.1)
+
 
     text1 = font.Font(family='Times New Roman', size=13,)
     text1 = Label(A, text="Filter by name",
@@ -586,6 +589,7 @@ def main():
         b = [values[0]]
     edit_btn = Button(hd, text="Edit", command=editcoa)
     edit_btn.place(relx=0.50, rely=0.85, relheight=0.1, relwidth=0.1)
+
 
     report_btn = Button(hd, text="Run report", command=runreport1)
     report_btn.place(relx=0.40, rely=0.85, relheight=0.1, relwidth=0.1)

@@ -148,6 +148,7 @@ from turtle import width
 from tkcalendar import DateEntry, Calendar
 from datetime import datetime
 
+
 from tkinter import messagebox
 
 
@@ -200,6 +201,7 @@ def time():
 
 
 
+
         edit = tk.Tk()
         edit.title('Time Activity')
         edit.geometry('1400x1000')
@@ -218,6 +220,7 @@ def time():
                     bg='#243e55', fg='#fff', font=text1)
         text1.place(x=390, y=10,)
 
+
         text2 = font.Font(family='Times New Roman', size=20,)
         text2 = Label(f2,
                     text="Which account do you want to reconcile?", bg='#243e55', font=text2, fg='#fff')
@@ -225,6 +228,7 @@ def time():
 
         tk.Label(f2, text='Account', font=('times new roman', 15),
                 bg='#243e55', fg='#fff').place(relx=0.23, rely=0.13)
+
 
         def comboinput1():
             cur.execute("SELECT accountname FROM app1_accountype")
@@ -247,10 +251,12 @@ def time():
         # account.bind("<<ComboboxSelected>>",get_selected_account)
         account.place(relx=0.23, rely=0.18, relwidth=0.48, relheight=0.05)
 
+
         text3 = font.Font(family='Times New Roman', size=20)
         text3 = Label(f2,
                     text="Add the following information", bg='#243e55', font=text3, fg='#fff')
         text3.place(x=390, y=150,)
+
 
         tk.Label(f2, text='Begining Balance', font=('times new roman', 15),
                 bg='#243e55', fg='#fff').place(relx=0.23, rely=0.35)
@@ -294,6 +300,7 @@ def time():
         # dat2.insert(0,)
         tk.Label(f2, text='Service Charge', font=('times new roman', 15),
                 bg='#243e55', fg='#fff').place(relx=0.40, rely=0.65)
+
         serchar=StringVar(f2)
         serchar.set(expexists[6])
         service_charge = tk.Entry(f2,textvariable=serchar)
@@ -302,6 +309,7 @@ def time():
 
         tk.Label(f2, text='Expense Account', font=('times new roman', 15),
                 bg='#243e55', fg='#fff').place(relx=0.57, rely=0.65)
+
 
         # def comboinput2():
         #     cur.execute("SELECT variable1 FROM expense_account")
@@ -324,6 +332,7 @@ def time():
         expense_account.place(relx=0.57, rely=0.7, relwidth=0.14, relheight=0.05)
 
 
+
         selectlist=['CGST Payable' ,'CST Payable','CST Suspense' ,'GST Payable' , 'GST Suspense','IGST Payable' ,'Input CGST' ,'Input CGST Tax RCM' ,'Input IGST' ,'Input IGST Tax RCM' ,'Input Krishi Kalyan Cess' ,'Input Krishi Kalyan Cess RCM' ,'Input Service Tax','Input Service Tax RCM' ,'Input SGST' ,'Input SGST Tax RCM','Input VAT 14 %','Input VAT 4%' ,'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense' ,'Output CGST' , 'Output CGST Tax RCM' ,'Output CST 2%' ,'Output IGST', 'Output IGST Tax RCM' ,'Output Krishi Kalyan Cess' ,'Output Krishi Kalyan Cess RCM' ,'Output Service Tax','Output Service Tax RCM' ,'Output SGST', 'Output SGST Tax RCM' , 'Output VAT 14%' , 'Output VAT 4%' ,'Output VAT 5%' ,'Service Tax Payable' , 'Service Tax Suspense','SGST Payable','SGST Suspense' ,'Swachh Barath Cess Payable' ,'Swachh Barath Cess Suspense' , 'TDS Payable', 'VAT Payable', 'VAT Suspense']
         if Aaccount not in selectlist:
 
@@ -338,6 +347,7 @@ def time():
                
                 tk.Label(f2, text='Interest Earned', font=('times new roman', 15),
                         bg='#243e55', fg='#fff').place(relx=0.40, rely=0.80)
+
                 interest_input=StringVar(f2)
                 interest_input.set(incomeacc[2])
                 interest_earned = tk.Entry(f2,textvariable=interest_input)
@@ -346,6 +356,7 @@ def time():
 
                 tk.Label(f2, text='Income Account', font=('times new roman', 15),
                         bg='#243e55', fg='#fff').place(relx=0.57, rely=0.80)
+
 
 
 
@@ -363,9 +374,11 @@ def time():
 
 
 
+
     
 
         tk.Button(f2, text='Save', font=('times new roman', 16),command=changedata).place(relx=0.37, rely=0.95, relwidth=0.2, relheight=0.05)
+
         f2.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.7)
         edit.mainloop()
 
@@ -389,6 +402,7 @@ def time():
         head_frame.place(relx=0.04, rely=0.05,)
         tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),bg='#243e54', fg='#fff').place(relx=0.45, rely=0.04)
 
+
        
         if expexists[10]==cmp[0]:
             print("expexists[0]",expexists[6])
@@ -396,6 +410,7 @@ def time():
         # mention account name at top
             tk.Label(head_frame, text=expexists[1], font=('Times New Roman', 30),
                     bg='#243e54', fg='#fff').place(relx=0.45, rely=0.16)
+
          # mention ending date at top
             tk.Label(head_frame, text="Statement ending date ", font=('Times New Roman', 15),
             bg='#243e54', fg='#fff').place(relx=0.45, rely=0.28)
@@ -408,6 +423,7 @@ def time():
             tk.Label(head_frame, text='PAYMENTS', font=('Times New Roman', 20),
                         bg='#243e54', fg='#198fed').place(relx=0.01, rely=0.63)
 
+
         if incomeacc[6]==cmp[0]:
             print("income data is",incomeacc[6])
             tk.Label(head_frame, text=incomeacc[2], font=('Times New Roman', 20),
@@ -416,6 +432,7 @@ def time():
                 
             tk.Label(head_frame, text='DEPOSITS', font=('Times New Roman', 20),
                     bg='#243e54', fg='#198fed').place(relx=0.12, rely=0.63)
+
 
         
 
@@ -432,6 +449,7 @@ def time():
               command=edit_info).place(relx=0.5, rely=0.6, relwidth=0.1, relheight=0.1)
         tk.Button(head_frame, text='Save for later', font=('times new roman', 16), bg='#243e54',fg='#198fed',
               command="").place(relx=0.6, rely=0.6, relwidth=0.1, relheight=0.1)
+
         # tk.Button(head_frame, text='', font=('times new roman', 16), bg='#243e54',fg='#198fed',
         # command="").place(relx=0.9, rely=0.6, relwidth=0.05, relheight=0.1)
         saveop=["Finish Now","Save Later","Close without saving"]
@@ -439,6 +457,7 @@ def time():
         save = ttk.Combobox(head_frame, values=saveop,textvariable=save_mode)
         # account.current(0)
         save.place(relx=0.7, rely=0.6, relwidth=0.1, relheight=0.1)
+
 
 
 
@@ -467,6 +486,7 @@ def time():
         tk.Label(content_frame, text="ACCOUNT" ,font=('Times New Roman', 15),
                     bg='#243e54', fg='#FFF').place(relx=0.4, rely=0.3)
 
+
         tk.Label(content_frame, text="PAYEE" ,font=('Times New Roman', 15),
                     bg='#243e54', fg='#FFF').place(relx=0.5, rely=0.3)
 
@@ -479,6 +499,7 @@ def time():
 
         tk.Label(content_frame, text="PAYMENT(INR)" ,font=('Times New Roman', 15),
                     bg='#243e54', fg='#FFF').place(relx=0.8, rely=0.3)
+
 
         #ssetting values 
         if expexists[10]==cmp[0]:
@@ -494,6 +515,7 @@ def time():
             bg='#243e54', fg='#FFF').place(relx=0.85, rely=0.5)
 
 
+
         if incomeacc[6]==cmp[0]:
             if incomeacc[1]!='':
                 tk.Label(content_frame, text=incomeacc[1] ,font=('Times New Roman', 15),
@@ -506,6 +528,7 @@ def time():
                         bg='#243e54', fg='#FFF').place(relx=0.6, rely=0.6)
                 tk.Label(content_frame, text=incomeacc[2] ,font=('Times New Roman', 15),
                         bg='#243e54', fg='#FFF').place(relx=0.75, rely=0.6)
+
 
 
 
@@ -600,6 +623,7 @@ def time():
     win = tk.Tk()
     win.title('Time Activity')
     win.geometry('1400x1000')
+
     win['bg'] = '#2f516f'
     f1 = tk.Frame(win, bg='#243e54')
     tk.Label(f1, text='Reconciled', font=('Times New Roman', 30),
@@ -626,6 +650,7 @@ def time():
 
     tk.Label(f2, text='Account', font=('times new roman', 15),
              bg='#243e55', fg='#fff').place(relx=0.23, rely=0.13)
+
 
     def comboinput1():
         cur.execute("SELECT accountname FROM app1_accountype")
@@ -657,11 +682,13 @@ def time():
 
 
 
+
             um=[ "incacc","Finance Charge Income","Insurance Proceeds Received","Interest Income","Proceeds From Sale of Asset","Shipping and Delivery Income","Billable Expense Income","Consulting Income","Product Sales","Sales","Sales-Hardware","Sales-Software","Sales-Support and Maintenance","Sales Discounts","Sales of Product Income","Uncategorised Income","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred Service Tax Input Credit","Deferred SGST","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Accumulated Depreciation","Building and Improvements","Furniture and Equipments","Land","Leasehold Improvements","Vehicles","CGST Payable","CST Payable","CST Suspense","GST Payable","GST Suspense","IGST Payable","Input CGST","Input CGST Tax RCM","Input IGST","Input IGST Tax RCM","Input Krishi Kalyan Cess","Input Krishi Kalyan Cess RCM","Input Service Tax","Input Service Tax RCM","Input SGST","Input SGST Tax RCM","Input VAT 14%","Input VAT 4%","Input VAT 5%","Krishi Kalyan Cess Payable","Krishi Kalyan Cess Suspense","Output CGST","Output CSGT Tax RCM","Output CGST 2%","Output IGST","Output IGST Tax RCM","Output Krishi Kalyan Cess","Output Krishi Kalyan Cess RCM","Output Service Tax","Output Service Tax RCM","Output SGST","Output SGST Tax RCM","Output VAT 14%","Output VAT 4%","Output VAT 5%","Service Tax Payable","Service Tax Suspense","SGST Payable","Swachh Bharat Cess Payable","Swachh Bharat Cess Suspense","TDS Payable","VAT Payable","Retained Earnings","VAT Suspense","Equipment Rental for Jobs","Freight and Shipping Costs","Merchant Account Fees","Purchases-Hardware for Resale","Purchases-Software for Resale","Subcontracted Services","Tools and Craft Supplies","Advertising/Promotional","Bank Charges","Business License and Permits","Charitable Contributions","Computer and Internet Expense","Continuing Education","Depreciation Expense","Dues and Subscriptions","Housekeeping Charges","Insurance Expense","Insurance Expense-General Liability Expenses","Insurance Expense-Health Insurance","Insurance Expense-Life and Disability Insurance","Interest Expense","Meals and Entertainment","Office Supplies","Postage and Delivery","Printing and Reproduction","Professional Fees","Rent Expense","Repair and Maintenance","Small Tools and Equipments","Swachh Bharat Cess Expense","Taxes-Property","Telephone Expense","Travel Expense","Uncategorised Expense","Utilities","Ask My Accountant","CGST write-off","GST write-off","IGST write-off","Miscellaneous Expense","Political Contributions","Reconcilation Discrepancies","SGST write-off","Tax write-off","Vehicle Expenses"]
             income_input=StringVar()
             income_account = ttk.Combobox(f2, values=um,textvariable=income_input)
             income_account.current(0)
             income_account.place(relx=0.57, rely=0.85, relwidth=0.14, relheight=0.05)
+
         
             
            
@@ -682,6 +709,7 @@ def time():
     text3 = Label(f2,
                   text="Add the following information", bg='#243e55', font=text3, fg='#fff')
     text3.place(x=390, y=150,)
+
 
     tk.Label(f2, text='Begining Balance', font=('times new roman', 15),
              bg='#243e55', fg='#fff').place(relx=0.23, rely=0.35)
@@ -718,6 +746,7 @@ def time():
     tk.Label(f2, text='Expense Account', font=('times new roman', 15),
              bg='#243e55', fg='#fff').place(relx=0.57, rely=0.65)
 
+
     # def comboinput2():
     #     cur.execute("SELECT variable1 FROM expense_account")
     #     val = cur.fetchall()
@@ -727,6 +756,7 @@ def time():
     # ym = ['-----']
     # comboinput2()
     ym=["expacc","Advertising/Promotional","Bank Charges","Business Licenses and Permits","Charitable Contributions","Computer and Internet Expense","Continuing Education","Depreciation Expense","Dues and Subscriptions","Housekeeping Charges","Insurance Expense","Insurance Expense-General Liability Insurance","Insurance Expense-Health Insurance","Insurance Expense-Professional Liability","Interest Expense","Meals and Entertainment","Office Supplies","Postage ang Delivery","Printing and Reproduction","Professional Fees","Purchases","Rent Expense","Repair and Maintenance","Small Tools and Equipments","Swachh Bharath Cess Expense","Taxes-Property","Telephone Expense","Travel Expense","Uncategorised Expenses","Utilities","Ask My Accountant","CGST write-off","GST write-off","IGST write-off","Miscelleneous Expense","Political Contribution","Reconcilation Discrepancies","SGST write-off","Tax write-off","Vehicle Expenses","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Cedit","Deferred Service Tax Input Credit","Deferred SGST","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Accumulated Depreciation","Buildings and Improvements","Furniture and Equipments","Land","Leasehold Improvements","Vehicles","CGST Payable","CST Payable","CST Suspense","GST Payable","GST Suspense","IGST Payable","Input CGST","Input CGST Tax RCM","Input IGST","Input IGST Tax RCM","Input Krishi Kalyan Cess","Input Krishi Kalyan Cess RCM","Input Service Tax","Input SGST","Input SGST Tax RCM","Input VAT","Input VAT 14%","Input VAT 4%","Input VAT 5%","Krishi Kalyan Cess Payable","Krishi Kalyan Cess Suspense","Output CGST","Output CGST Tax RCM","Output CST 2%","Output IGST","Output IGST Tax RCM","Output Krishi Kalyan Cess","Output Krishi Kalyan Cess RCM","Output Service Tax","Output Service Tax RCM","Output SGST","Output VAT 14%","Output VAT 4%","Output VAT 5%","Service Tax Payable","Service Tax Suspense","SGST Payable","Swachh Bharat Cess Payable","Swachh Bharat Cess Suspense","TDS Payable","VAT Payable","VAT Suspense","Opening Balance Equity","Retained Earnings","Billable Expense Income","Consulting Income","Products Sales","Sales","Sales-Hardware","Sales-Software","Sales-Support and Maintenance","Sales Discounts","Sales of Product Income","Uncategorised Income","Cost of Sales","Equipments Rental for Jobs","Freight and Shipping Cost","Merchant Account Fees","Purchase-Hardware for Resale","Purchase-Software for Resale","Sub-contracted Services","Tools and Craft Supplies","Finance Charge Income","Insurance Proceeds Received","Interest Income","Proceeds from Sale of Asset","Shipping and Delivery Income"]
+
 
 
 
@@ -750,3 +780,4 @@ def time():
 
 
 time()
+
