@@ -148,27 +148,19 @@ from turtle import width
 from tkcalendar import DateEntry, Calendar
 from datetime import datetime
 
+
 from tkinter import messagebox
 
 
 from tkinter import StringVar
 import mysql.connector
-mydata = mysql.connector.connect(
+mydata = mysql.connector.connect(host='localhost', user='root', password='', database='finsysinfox21', port='3307')
 
-    host='localhost', user='root', password='root', database='finsYs_tkinter')
 
 cur = mydata.cursor()
 
 
-
-
-
-
 def time():
-
-        
-
-
 
 
     def edit_info():
@@ -209,9 +201,10 @@ def time():
 
 
 
+
         edit = tk.Tk()
         edit.title('Time Activity')
-        edit.geometry('2000x1000')
+        edit.geometry('1400x1000')
         edit['bg'] = '#2f516f'\
 
         f2 = tk.Frame(edit, bg='#243e54')
@@ -225,29 +218,23 @@ def time():
         text1 = font.Font(family='Times New Roman', size=13,)
         text1 = Label(f2, text="Open your statement and we'll get started.",
                     bg='#243e55', fg='#fff', font=text1)
-        text1.place(x=390, y=0,)
+        text1.place(x=390, y=10,)
+
 
         text2 = font.Font(family='Times New Roman', size=20,)
         text2 = Label(f2,
                     text="Which account do you want to reconcile?", bg='#243e55', font=text2, fg='#fff')
-        text2.place(x=350, y=60,)
+        text2.place(x=350, y=40,)
 
         tk.Label(f2, text='Account', font=('times new roman', 15),
-                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.15)
+                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.13)
+
 
         def comboinput1():
             cur.execute("SELECT accountname FROM app1_accountype")
             val = cur.fetchall()
             for row in val:
                 tm.append(row[0])
-
-
-        
-           
-            
-                
-            
-
 
         global tm
         tm = []
@@ -262,12 +249,14 @@ def time():
         
         # account.current(0)
         # account.bind("<<ComboboxSelected>>",get_selected_account)
-        account.place(relx=0.23, rely=0.21, relwidth=0.48, relheight=0.05)
+        account.place(relx=0.23, rely=0.18, relwidth=0.48, relheight=0.05)
+
 
         text3 = font.Font(family='Times New Roman', size=20)
         text3 = Label(f2,
                     text="Add the following information", bg='#243e55', font=text3, fg='#fff')
-        text3.place(x=350, y=200,)
+        text3.place(x=390, y=150,)
+
 
         tk.Label(f2, text='Begining Balance', font=('times new roman', 15),
                 bg='#243e55', fg='#fff').place(relx=0.23, rely=0.35)
@@ -299,26 +288,28 @@ def time():
         text4 = font.Font(family='Times New Roman', size=20,)
         text4 = Label(f2,
                     text="Enter the service charge or interest earned, if necessary", bg='#243e55', font=text4, fg='#fff')
-        text4.place(x=350, y=330,)
+        text4.place(x=320, y=300,)
 
         tk.Label(f2, text='Date', font=('times new roman', 15),
-                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.54)
+                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.65)
         date2 = StringVar(f2)
         date2.set(expexists[4])
         dat2=DateEntry(f2, textvariable=date2).place(
-            relx=0.23, rely=0.60, relwidth=0.14, relheight=0.05)
+            relx=0.23, rely=0.70, relwidth=0.14, relheight=0.05)
         
         # dat2.insert(0,)
         tk.Label(f2, text='Service Charge', font=('times new roman', 15),
-                bg='#243e55', fg='#fff').place(relx=0.40, rely=0.54)
+                bg='#243e55', fg='#fff').place(relx=0.40, rely=0.65)
+
         serchar=StringVar(f2)
         serchar.set(expexists[6])
         service_charge = tk.Entry(f2,textvariable=serchar)
         
-        service_charge.place(relx=0.40, rely=0.6, relwidth=0.14, relheight=0.05)
+        service_charge.place(relx=0.40, rely=0.7, relwidth=0.14, relheight=0.05)
 
         tk.Label(f2, text='Expense Account', font=('times new roman', 15),
-                bg='#243e55', fg='#fff').place(relx=0.57, rely=0.55)
+                bg='#243e55', fg='#fff').place(relx=0.57, rely=0.65)
+
 
         # def comboinput2():
         #     cur.execute("SELECT variable1 FROM expense_account")
@@ -338,7 +329,8 @@ def time():
         expacc.set(expexists[7])
         expense_account = ttk.Combobox(f2, values=ym,textvariable=expacc)
         
-        expense_account.place(relx=0.57, rely=0.60, relwidth=0.14, relheight=0.05)
+        expense_account.place(relx=0.57, rely=0.7, relwidth=0.14, relheight=0.05)
+
 
 
         selectlist=['CGST Payable' ,'CST Payable','CST Suspense' ,'GST Payable' , 'GST Suspense','IGST Payable' ,'Input CGST' ,'Input CGST Tax RCM' ,'Input IGST' ,'Input IGST Tax RCM' ,'Input Krishi Kalyan Cess' ,'Input Krishi Kalyan Cess RCM' ,'Input Service Tax','Input Service Tax RCM' ,'Input SGST' ,'Input SGST Tax RCM','Input VAT 14 %','Input VAT 4%' ,'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense' ,'Output CGST' , 'Output CGST Tax RCM' ,'Output CST 2%' ,'Output IGST', 'Output IGST Tax RCM' ,'Output Krishi Kalyan Cess' ,'Output Krishi Kalyan Cess RCM' ,'Output Service Tax','Output Service Tax RCM' ,'Output SGST', 'Output SGST Tax RCM' , 'Output VAT 14%' , 'Output VAT 4%' ,'Output VAT 5%' ,'Service Tax Payable' , 'Service Tax Suspense','SGST Payable','SGST Suspense' ,'Swachh Barath Cess Payable' ,'Swachh Barath Cess Suspense' , 'TDS Payable', 'VAT Payable', 'VAT Suspense']
@@ -347,22 +339,24 @@ def time():
                 print("incomeacc[1]",incomeacc[1])
                 incdat=incomeacc[1]
                 tk.Label(f2, text='Date', font=('times new roman', 15),
-                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.70)
+                bg='#243e55', fg='#fff').place(relx=0.23, rely=0.80)
                 date3 = StringVar(f2)
                 date3.set(incdat)
                 incdate=DateEntry(f2, textvariable=date3).place(
-                        relx=0.23, rely=0.75, relwidth=0.14, relheight=0.05)
+                        relx=0.23, rely=0.85, relwidth=0.14, relheight=0.05)
                
                 tk.Label(f2, text='Interest Earned', font=('times new roman', 15),
-                        bg='#243e55', fg='#fff').place(relx=0.40, rely=0.70)
+                        bg='#243e55', fg='#fff').place(relx=0.40, rely=0.80)
+
                 interest_input=StringVar(f2)
                 interest_input.set(incomeacc[2])
                 interest_earned = tk.Entry(f2,textvariable=interest_input)
                 
-                interest_earned.place(relx=0.40, rely=0.75, relwidth=0.14, relheight=0.05)
+                interest_earned.place(relx=0.40, rely=0.85, relwidth=0.14, relheight=0.05)
 
                 tk.Label(f2, text='Income Account', font=('times new roman', 15),
-                        bg='#243e55', fg='#fff').place(relx=0.57, rely=0.70)
+                        bg='#243e55', fg='#fff').place(relx=0.57, rely=0.80)
+
 
 
 
@@ -373,7 +367,8 @@ def time():
                 income_account = ttk.Combobox(f2, values=um,textvariable=income_input)
                 
                 # income_account.current(0)
-                income_account.place(relx=0.57, rely=0.75, relwidth=0.14, relheight=0.05)
+                income_account.place(relx=0.57, rely=0.85, relwidth=0.14, relheight=0.05)
+
 
 
 
@@ -382,8 +377,8 @@ def time():
 
     
 
-        tk.Button(f2, text='Save', font=('times new roman', 16), fg='#fff',bg='#2f516f',
-                command=changedata).place(relx=0.37, rely=0.85, relwidth=0.2, relheight=0.05)
+        tk.Button(f2, text='Save', font=('times new roman', 16),command=changedata).place(relx=0.37, rely=0.95, relwidth=0.2, relheight=0.05)
+
         f2.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.7)
         edit.mainloop()
 
@@ -401,12 +396,12 @@ def time():
     def show_result():
         global expexists
         reconcile=Toplevel(win)
-        reconcile.geometry('2000x1000')
+        reconcile.geometry('1400x1000')
         reconcile['bg'] = '#2f516f'
-        head_frame = tk.Frame(reconcile, bg='#243e54',height=380,width=1500)
-        head_frame.place(relx=0.1, rely=0.05,)
-        tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),
-                bg='#243e54', fg='#fff').place(relx=0.45, rely=0.06)
+        head_frame = tk.Frame(reconcile, bg='#243e54',height=280,width=1300)
+        head_frame.place(relx=0.04, rely=0.05,)
+        tk.Label(head_frame, text='Reconciled', font=('Times New Roman', 30),bg='#243e54', fg='#fff').place(relx=0.45, rely=0.04)
+
 
        
         if expexists[10]==cmp[0]:
@@ -414,27 +409,30 @@ def time():
 
         # mention account name at top
             tk.Label(head_frame, text=expexists[1], font=('Times New Roman', 30),
-                    bg='#243e54', fg='#fff').place(relx=0.4, rely=0.16)
+                    bg='#243e54', fg='#fff').place(relx=0.45, rely=0.16)
+
          # mention ending date at top
             tk.Label(head_frame, text="Statement ending date ", font=('Times New Roman', 15),
             bg='#243e54', fg='#fff').place(relx=0.45, rely=0.28)
             tk.Label(head_frame, text=expexists[4], font=('Times New Roman', 15),
-            bg='#243e54', fg='#fff').place(relx=0.47, rely=0.33)
+            bg='#243e54', fg='#fff').place(relx=0.5, rely=0.37)
 
 
             tk.Label(head_frame, text=expexists[6], font=('Times New Roman', 20),
-                    bg='#243e54', fg='#198fed').place(relx=0.07, rely=0.52)
+                    bg='#243e54', fg='#198fed').place(relx=0.04, rely=0.52)
             tk.Label(head_frame, text='PAYMENTS', font=('Times New Roman', 20),
-                        bg='#243e54', fg='#198fed').place(relx=0.05, rely=0.6)
+                        bg='#243e54', fg='#198fed').place(relx=0.01, rely=0.63)
+
 
         if incomeacc[6]==cmp[0]:
             print("income data is",incomeacc[6])
             tk.Label(head_frame, text=incomeacc[2], font=('Times New Roman', 20),
-                    bg='#243e54', fg='#198fed').place(relx=0.23, rely=0.52)
+                    bg='#243e54', fg='#198fed').place(relx=0.15, rely=0.52)
 
                 
             tk.Label(head_frame, text='DEPOSITS', font=('Times New Roman', 20),
-                    bg='#243e54', fg='#198fed').place(relx=0.2, rely=0.6)
+                    bg='#243e54', fg='#198fed').place(relx=0.12, rely=0.63)
+
 
         
 
@@ -442,89 +440,95 @@ def time():
             cleared=int(expexists[2])-(int(expexists[6])+int(incomeacc[2]))
             print("clear data is ",cleared)
             tk.Label(head_frame, text=cleared, font=('Times New Roman', 20),
-                    bg='#243e54', fg='#198fed').place(relx=0.35, rely=0.52)
+                    bg='#243e54', fg='#198fed').place(relx=0.23, rely=0.52)
 
             tk.Label(head_frame, text='DIFFERENCE', font=('Times New Roman', 20),
-            bg='#243e54', fg='#198fed').place(relx=0.32, rely=0.6)
+            bg='#243e54', fg='#198fed').place(relx=0.20, rely=0.63)
 
         tk.Button(head_frame, text='Edit info', font=('times new roman', 16), bg='#243e54',fg='#198fed',
-              command=edit_info).place(relx=0.65, rely=0.6, relwidth=0.15, relheight=0.1)
-        tk.Button(head_frame, text='save fo later', font=('times new roman', 16), bg='#243e54',fg='#198fed',
-              command="").place(relx=0.8, rely=0.6, relwidth=0.1, relheight=0.1)
+              command=edit_info).place(relx=0.5, rely=0.6, relwidth=0.1, relheight=0.1)
+        tk.Button(head_frame, text='Save for later', font=('times new roman', 16), bg='#243e54',fg='#198fed',
+              command="").place(relx=0.6, rely=0.6, relwidth=0.1, relheight=0.1)
+
         # tk.Button(head_frame, text='', font=('times new roman', 16), bg='#243e54',fg='#198fed',
         # command="").place(relx=0.9, rely=0.6, relwidth=0.05, relheight=0.1)
         saveop=["Finish Now","Save Later","Close without saving"]
         save_mode=StringVar()
         save = ttk.Combobox(head_frame, values=saveop,textvariable=save_mode)
         # account.current(0)
-        save.place(relx=0.9, rely=0.6, relwidth=0.07, relheight=0.1)
+        save.place(relx=0.7, rely=0.6, relwidth=0.1, relheight=0.1)
 
 
 
 
 
 
-        content_frame = tk.Frame(reconcile, bg='#243e54',height=400,width=1500)
-        content_frame.place(relx=0.1, rely=0.5)
+
+        content_frame = tk.Frame(reconcile, bg='#243e54',height=300,width=1300)
+        content_frame.place(relx=0.04, rely=0.5)
         
         tk.Button(content_frame, text='Payments', font=('times new roman', 16), bg='#243e54',fg='#198fed',
-              command="").place(relx=0.4, rely=0.15, relwidth=0.1, relheight=0.1)
+              command="").place(relx=0.35, rely=0.15, relwidth=0.07, relheight=0.1)
         tk.Button(content_frame, text='Deposits', font=('times new roman', 16), bg='#243e54',fg='#198fed',
-              command="").place(relx=0.5, rely=0.15, relwidth=0.1, relheight=0.1)
+              command="").place(relx=0.45, rely=0.15, relwidth=0.07, relheight=0.1)
         tk.Button(content_frame, text='All', font=('times new roman', 16), bg='#243e54',fg='#198fed',
-        command="").place(relx=0.6, rely=0.15, relwidth=0.05, relheight=0.1)
+        command="").place(relx=0.55, rely=0.15, relwidth=0.07, relheight=0.1)
 
         tk.Label(content_frame, text="DATE" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.03, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.1, rely=0.3)
 
         tk.Label(content_frame, text="TYPE" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.13, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.2, rely=0.3)
 
         tk.Label(content_frame, text="REF.NO" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.23, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.3, rely=0.3)
 
         tk.Label(content_frame, text="ACCOUNT" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.35, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.4, rely=0.3)
+
 
         tk.Label(content_frame, text="PAYEE" ,font=('Times New Roman', 15),
                     bg='#243e54', fg='#FFF').place(relx=0.5, rely=0.3)
 
         tk.Label(content_frame, text="MEMO" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.59, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.6, rely=0.3)
 
 
         tk.Label(content_frame, text="DEPOSITE(INR)" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.69, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.7, rely=0.3)
 
         tk.Label(content_frame, text="PAYMENT(INR)" ,font=('Times New Roman', 15),
-                    bg='#243e54', fg='#FFF').place(relx=0.85, rely=0.3)
+                    bg='#243e54', fg='#FFF').place(relx=0.8, rely=0.3)
+
 
         #ssetting values 
         if expexists[10]==cmp[0]:
             tk.Label(content_frame, text=expexists[5] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.03, rely=0.5)
+                        bg='#243e54', fg='#FFF').place(relx=0.1, rely=0.5)
             tk.Label(content_frame, text=expexists[8] ,font=('Times New Roman', 15),
-            bg='#243e54', fg='#FFF').place(relx=0.13, rely=0.5)
+            bg='#243e54', fg='#FFF').place(relx=0.2, rely=0.5)
             tk.Label(content_frame, text=expexists[7] ,font=('Times New Roman', 15),
-            bg='#243e54', fg='#FFF').place(relx=0.31, rely=0.5)
+            bg='#243e54', fg='#FFF').place(relx=0.4, rely=0.5)
             tk.Label(content_frame, text=expexists[9] ,font=('Times New Roman', 15),
-            bg='#243e54', fg='#FFF').place(relx=0.59, rely=0.5)
+            bg='#243e54', fg='#FFF').place(relx=0.6, rely=0.5)
             tk.Label(content_frame, text=expexists[6] ,font=('Times New Roman', 15),
-            bg='#243e54', fg='#FFF').place(relx=0.87, rely=0.5)
+            bg='#243e54', fg='#FFF').place(relx=0.85, rely=0.5)
+
 
 
         if incomeacc[6]==cmp[0]:
             if incomeacc[1]!='':
                 tk.Label(content_frame, text=incomeacc[1] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.03, rely=0.6)
+                        bg='#243e54', fg='#FFF').place(relx=0.1, rely=0.6)
                 tk.Label(content_frame, text=incomeacc[4] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.13, rely=0.6)
+                        bg='#243e54', fg='#FFF').place(relx=0.2, rely=0.6)
                 tk.Label(content_frame, text=incomeacc[3] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.31, rely=0.6)
+                        bg='#243e54', fg='#FFF').place(relx=0.4, rely=0.6)
                 tk.Label(content_frame, text=incomeacc[5] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.59, rely=0.6)
+                        bg='#243e54', fg='#FFF').place(relx=0.6, rely=0.6)
                 tk.Label(content_frame, text=incomeacc[2] ,font=('Times New Roman', 15),
-                        bg='#243e54', fg='#FFF').place(relx=0.72, rely=0.6)
+                        bg='#243e54', fg='#FFF').place(relx=0.75, rely=0.6)
+
 
 
 
@@ -618,7 +622,8 @@ def time():
             
     win = tk.Tk()
     win.title('Time Activity')
-    win.geometry('2000x1000')
+    win.geometry('1400x1000')
+
     win['bg'] = '#2f516f'
     f1 = tk.Frame(win, bg='#243e54')
     tk.Label(f1, text='Reconciled', font=('Times New Roman', 30),
@@ -641,10 +646,11 @@ def time():
     text2 = font.Font(family='Times New Roman', size=20,)
     text2 = Label(f2,
                   text="Which account do you want to reconcile?", bg='#243e55', font=text2, fg='#fff')
-    text2.place(x=350, y=60,)
+    text2.place(x=350, y=40,)
 
     tk.Label(f2, text='Account', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.23, rely=0.15)
+             bg='#243e55', fg='#fff').place(relx=0.23, rely=0.13)
+
 
     def comboinput1():
         cur.execute("SELECT accountname FROM app1_accountype")
@@ -659,19 +665,20 @@ def time():
         selectlist=['CGST Payable' ,'CST Payable','CST Suspense' ,'GST Payable' , 'GST Suspense','IGST Payable' ,'Input CGST' ,'Input CGST Tax RCM' ,'Input IGST' ,'Input IGST Tax RCM' ,'Input Krishi Kalyan Cess' ,'Input Krishi Kalyan Cess RCM' ,'Input Service Tax','Input Service Tax RCM' ,'Input SGST' ,'Input SGST Tax RCM','Input VAT 14 %','Input VAT 4%' ,'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense' ,'Output CGST' , 'Output CGST Tax RCM' ,'Output CST 2%' ,'Output IGST', 'Output IGST Tax RCM' ,'Output Krishi Kalyan Cess' ,'Output Krishi Kalyan Cess RCM' ,'Output Service Tax','Output Service Tax RCM' ,'Output SGST', 'Output SGST Tax RCM' , 'Output VAT 14%' , 'Output VAT 4%' ,'Output VAT 5%' ,'Service Tax Payable' , 'Service Tax Suspense','SGST Payable','SGST Suspense' ,'Swachh Barath Cess Payable' ,'Swachh Barath Cess Suspense' , 'TDS Payable', 'VAT Payable', 'VAT Suspense']
         if sele_account not in selectlist:
             tk.Label(f2, text='Date', font=('times new roman', 15),
-            bg='#243e55', fg='#fff').place(relx=0.23, rely=0.70)
+            bg='#243e55', fg='#fff').place(relx=0.23, rely=0.8)
             date3 = StringVar()
             DateEntry(f2, textvariable=date3).place(
-                relx=0.23, rely=0.75, relwidth=0.14, relheight=0.05)
+                relx=0.23, rely=0.85, relwidth=0.14, relheight=0.05)
 
             tk.Label(f2, text='Interest Earned', font=('times new roman', 15),
-                    bg='#243e55', fg='#fff').place(relx=0.40, rely=0.70)
+                    bg='#243e55', fg='#fff').place(relx=0.40, rely=0.80)
             interest_input=StringVar()
             interest_earned = tk.Entry(f2,textvariable=interest_input)
-            interest_earned.place(relx=0.40, rely=0.75, relwidth=0.14, relheight=0.05)
+            interest_earned.place(relx=0.40, rely=0.85, relwidth=0.14, relheight=0.05)
 
             tk.Label(f2, text='Income Account', font=('times new roman', 15),
-                    bg='#243e55', fg='#fff').place(relx=0.57, rely=0.70)
+                    bg='#243e55', fg='#fff').place(relx=0.57, rely=0.80)
+
 
 
 
@@ -680,7 +687,8 @@ def time():
             income_input=StringVar()
             income_account = ttk.Combobox(f2, values=um,textvariable=income_input)
             income_account.current(0)
-            income_account.place(relx=0.57, rely=0.75, relwidth=0.14, relheight=0.05)
+            income_account.place(relx=0.57, rely=0.85, relwidth=0.14, relheight=0.05)
+
         
             
            
@@ -695,12 +703,13 @@ def time():
     account = ttk.Combobox(f2, values=tm,textvariable=selected_account)
     # account.current(0)
     account.bind("<<ComboboxSelected>>",get_selected_account)
-    account.place(relx=0.23, rely=0.21, relwidth=0.48, relheight=0.05)
+    account.place(relx=0.23, rely=0.18, relwidth=0.48, relheight=0.05)
 
     text3 = font.Font(family='Times New Roman', size=20)
     text3 = Label(f2,
                   text="Add the following information", bg='#243e55', font=text3, fg='#fff')
-    text3.place(x=350, y=200,)
+    text3.place(x=390, y=150,)
+
 
     tk.Label(f2, text='Begining Balance', font=('times new roman', 15),
              bg='#243e55', fg='#fff').place(relx=0.23, rely=0.35)
@@ -721,21 +730,22 @@ def time():
     text4 = font.Font(family='Times New Roman', size=20,)
     text4 = Label(f2,
                   text="Enter the service charge or interest earned, if necessary", bg='#243e55', font=text4, fg='#fff')
-    text4.place(x=350, y=330,)
+    text4.place(x=320, y=300,)
 
     tk.Label(f2, text='Date', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.23, rely=0.54)
+             bg='#243e55', fg='#fff').place(relx=0.23, rely=0.65)
     date2 = StringVar()
     DateEntry(f2, textvariable=date2).place(
-        relx=0.23, rely=0.60, relwidth=0.14, relheight=0.05)
+        relx=0.23, rely=0.7, relwidth=0.14, relheight=0.05)
 
     tk.Label(f2, text='Service Charge', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.40, rely=0.54)
+             bg='#243e55', fg='#fff').place(relx=0.40, rely=0.65)
     service_charge = tk.Entry(f2)
-    service_charge.place(relx=0.40, rely=0.6, relwidth=0.14, relheight=0.05)
+    service_charge.place(relx=0.40, rely=0.7, relwidth=0.14, relheight=0.05)
 
     tk.Label(f2, text='Expense Account', font=('times new roman', 15),
-             bg='#243e55', fg='#fff').place(relx=0.57, rely=0.55)
+             bg='#243e55', fg='#fff').place(relx=0.57, rely=0.65)
+
 
     # def comboinput2():
     #     cur.execute("SELECT variable1 FROM expense_account")
@@ -751,18 +761,19 @@ def time():
 
 
 
+
     
     expense_account = ttk.Combobox(f2, values=ym)
     expense_account.current(0)
-    expense_account.place(relx=0.57, rely=0.60, relwidth=0.14, relheight=0.05)
+    expense_account.place(relx=0.57, rely=0.7, relwidth=0.14, relheight=0.05)
 
 
 
 
    
 
-    tk.Button(f2, text='Start Reconciling', font=('times new roman', 16), fg='#fff',bg='#2f516f',
-              command=getdetails).place(relx=0.37, rely=0.85, relwidth=0.2, relheight=0.05)
+    tk.Button(f2, text='Start Reconciling', font=('times new roman', 16),
+              command=getdetails).place(relx=0.37, rely=0.95, relwidth=0.2, relheight=0.05)
     f2.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.7)
     win.mainloop()
 
