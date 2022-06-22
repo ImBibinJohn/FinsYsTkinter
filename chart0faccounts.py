@@ -1,5 +1,3 @@
-
-
 from cgitb import text
 from faulthandler import disable
 import tkinter as tk
@@ -1007,7 +1005,7 @@ def main():
         #table view
         style=ttk.Style()
         style.theme_use('default')
-        style.configure('Treeview',background='silver',foreground='#000',fieldbackground='white')
+        style.configure('Treeview',background='silver',foreground='#000',fieldbackground='#000')
         treevvv = ttk.Treeview(conttframe, height=10, columns=(1,2,3,4,5,6,7), show='headings') 
         treevvv.heading(1, text='Date')
         treevvv.heading(2, text='TRANSACTION TYPE')#headings
