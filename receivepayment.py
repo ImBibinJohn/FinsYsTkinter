@@ -333,19 +333,22 @@ mycursor.execute("SELECT cname,cemail,state FROM app1_company WHERE id_id=%s",(u
 cmp_data=mycursor.fetchone()
 
 
-global select_customer,email,invno,paydate,paymethod,deposit,amountrec,tabdescription,tabduedate,taboriginalamount,tabopenbalance,tabpayment
+global select_customer,email,invno,paydate,paymethod,deposit,amountrec,amountrecon,tabdescription,tabduedate,taboriginalamount,tabopenbalance,tabpayment,amountapply
 select_customer = StringVar(form_frame)
 email = StringVar(form_frame)
 invno = StringVar(form_frame)
 paydate = StringVar(form_frame)
 paymethod = StringVar(form_frame)
+add = StringVar(form_frame)
 deposit = StringVar(form_frame)
 amountrec = StringVar(form_frame)
+amountrecon = StringVar(form_frame)
 tabdescription = StringVar(form_frame)
 tabduedate = StringVar(form_frame)
 taboriginalamount = StringVar(form_frame)
 tabopenbalance = StringVar(form_frame)
 tabpayment = StringVar(form_frame)
+amountapply = StringVar(form_frame)
 
 
 F = LabelFrame(form_frame, font=('times new roman', 15, 'bold'),padx=30, pady=30, bd=0, fg="Black", bg="#243e55")
@@ -422,17 +425,38 @@ label33.place(x=100,y=210,height=40,width=300)
 
 
 
+def pmethod(event):
+    global add
+    p = drop1paymethod.get()
+    print("wel",p)
+      
+    if p == 'Add New':
+        def wer(n):
+            cc=label44add.get()
+            pro1.append(cc)
+            print("ff",pro1)
+        drop1paymethod.set("")
+        label44add=Entry(F,bg='#2f516a',fg='#fff',textvariable=add, font=('times new roman', 11, 'bold'))
+        label44add.place(x=100,y=340,height=40,width=300)
+        label44add.bind("<FocusIn>",wer)
+    else:
+        add.set("")
+    
+pro1=["Cash","Check","Credit Card","Add New"]
 sanitizer1_lbl=tk.Label(F,text="Payment Method",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-drop1=ttk.Combobox(F,textvariable='accounttype')
-drop1['values']=("Cash","Check","Credit Card","Add New")
-sanitizer1_lbl.place(x=100,y=250)
-drop1.place(x=100,y=290,height=40,width=300)
+drop1paymethod=ttk.Combobox(F,values=pro1)
 
-sanitizer1_lbl=tk.Label(F,text="Deposit To",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
-drop1=ttk.Combobox(F,textvariable='accounttype')
-drop1['values']=("Deferred CGST","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred SGST","Deferred Service Tax Input Credit","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Undeposited Fund")
-sanitizer1_lbl.place(x=800,y=250)
-drop1.place(x=800,y=290,height=40,width=270)
+sanitizer1_lbl.place(x=100,y=250)
+drop1paymethod.bind("<<ComboboxSelected>>",pmethod)
+drop1paymethod.place(x=100,y=290,height=40,width=300)
+
+
+
+sanitizer_lbl=tk.Label(F,text="Deposit To",font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
+drop1accounttype=ttk.Combobox(F,textvariable='accounttype')
+drop1accounttype['values']=("Deferred CGST","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred SGST","Deferred Service Tax Input Credit","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Undeposited Fund")
+sanitizer_lbl.place(x=800,y=250)
+drop1accounttype.place(x=800,y=290,height=40,width=270)
 
 add_custom=Button(F,text="+",bg='#2f516a',fg='#fff',bd=3,relief="solid",width=3,height=2,command=add_accountss)
 add_custom.place(x=1075,y=290)
@@ -441,21 +465,25 @@ add_custom.place(x=1075,y=290)
 def key_press(event):
     def dec():
         label4amount.delete(0,END)
+        label44tabpayment.delete(0,END)
+        label44amountapply.delete(0,END)
     # dec()   
     act=label44amountrec.get()
     print("wowo",act)
     dec()
     label4amount.insert(0,label44amountrec.get())
+    label44tabpayment.insert(0,label44amountrec.get())
+    label44amountapply.insert(0,label44amountrec.get())
     
 label4=Label(F, text="Amount Recieved", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
 label4.place(x=800,y=340)
 label44amountrec=Entry(F,bg='#2f516a',fg='#fff',textvariable=amountrec, font=('times new roman', 11, 'bold'))
 label44amountrec.place(x=800,y=380,height=40,width=300)
-label44amountrec.bind('<FocusIn>', key_press)
+label44amountrec.bind('<KeyRelease>', key_press)
 
 label4=Label(F, text="AMOUNT RECIEVED", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
 label4.place(x=800,y=430)
-label4amount=Entry(F,bg='#2f516a',fg='#fff',textvariable=amountrec, font=('times new roman', 11, 'bold'))
+label4amount=Entry(F,bg='#2f516a',fg='black',textvariable=amountrecon, font=('times new roman', 11, 'bold'),)
 label4amount.place(x=800,y=470,height=40,width=300)
 
 
@@ -491,10 +519,24 @@ label4.place(x=735,y=540)
 label44tabopenbalance=Entry(F,bg='#2f516a',fg='#fff',textvariable=tabopenbalance, font=('times new roman', 11, 'bold'))
 label44tabopenbalance.place(x=735,y=580,height=40,width=210)
 
+
+def key_press1(event):
+    def decc():
+        label4amount.delete(0,END)
+        label44amountrec.delete(0,END)
+        label44amountapply.delete(0,END)
+    # # dec()   
+    acc=label44tabpayment.get()
+    print("wowoc",acc)
+    decc()
+    label4amount.insert(0,label44tabpayment.get())
+    label44amountrec.insert(0,label44tabpayment.get())
+    label44amountapply.insert(0,label44tabpayment.get())
 label4=Label(F, text="PAYMENT", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
 label4.place(x=955,y=540)
 label44tabpayment=Entry(F,bg='#2f516a',fg='#fff',textvariable=tabpayment, font=('times new roman', 11, 'bold'))
 label44tabpayment.place(x=955,y=580,height=40,width=210)
+label44tabpayment.bind('<KeyRelease>', key_press1)
 
 
 
@@ -504,8 +546,8 @@ label44tabpayment.place(x=955,y=580,height=40,width=210)
 
 label4=Label(F, text="Amount to Apply", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
 label4.place(x=750,y=670)
-label44=Entry(F,bg='#2f516a',fg='#fff',textvariable='desig', font=('times new roman', 11, 'bold'))
-label44.place(x=955,y=670,height=40,width=210)
+label44amountapply=Entry(F,bg='#2f516a',fg='#fff',textvariable=amountapply, font=('times new roman', 11, 'bold'))
+label44amountapply.place(x=955,y=670,height=40,width=210)
 
 
 label4=Label(F, text="Amount to Credit", font=('times new roman', 12, 'bold'), bd=12, bg="#243e55", fg="#fff")
