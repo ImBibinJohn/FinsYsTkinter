@@ -2960,72 +2960,66 @@ def addmaterial():
         qt1,qt2,qt3,qt4,qt5,qt6=quan.get(),quan1.get(),quan2.get(),quan3.get(),quan4.get(),quan5.get()
         pr1,pr2,pr3,pr4,pr5,pr6=price.get(),price1.get(),price2.get(),price3.get(),price4.get(),price5.get()
         tt1,tt2,tt3,tt4,tt5,tt6=total.get(),total1.get(),total2.get(),total3.get(),total4.get(),total5.get()
+        p7,p8,p9,p10,pp10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29='','','','','','','','','','','','','','','','','','','','','','','','',
+        sk7,sk8,sk9,sk10,sk11,sk12,sk13,sk14,sk15,sk16,sk17,sk18,sk19,sk20,sk21,sk22,sk23,sk24,sk25,sk26,sk27,sk28,sk29,sk30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        qt7,qt8,qt9,qt10,qqtt10,qt11,qt12,qt13,qt14,qt15,qt16,qt17,qt18,qt19,qt20,qt21,qt22,qt23,qt24,qt25,qt26,qt27,qt28,qt29=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        pr7,pr8,pr9,pr10,pr11,pr12,pr13,pr14,pr15,pr16,pr17,pr18,pr19,pr20,pr21,pr22,pr23,pr24,pr25,pr26,pr27,pr28,pr29,pr30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        tt7,tt8,tt9,tt10,tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20,tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        try:
+            if prod6.get():
+                    p7=prod6.get()
+                    sk7=sku6.get()
+                    qt7=quan6.get()
+                    pr7=price6.get()
+                    tt7=total6.get()
+            elif prod7.get():
+                    p8=prod7.get()
+                    sk8=sku7.get()
+                    qt8=quan7.get()
+                    pr8=price7.get()
+                    tt8=total7.get()
+            elif prod8.get():
+                    p9=prod8.get()
+                    sk9=sku8.get()
+                    qt9=quan8.get()
+                    pr9=price8.get()
+                    tt9=total8.get() 
+            elif prod9.get():
+                    p10=prod9.get()
+                    sk10=sku9.get()
+                    qt10=quan9.get()
+                    pr10=price9.get()
+                    tt10=total9.get()                               
+        except:
+            pass            
         type='Components'
         raw='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,
-            prod5,sku5,qty5,price5,total5) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6)])    
-        try:
-            p7,p8,p9,p10,pp10=prod6.get(),prod7.get(),prod8.get(),prod9.get(),prod10.get()
-            p11,p12,p13,p14,p15,p16,p17,p18,p19,p20=prod11.get(),prod12.get(),prod13.get(),prod14.get(),prod15.get(),prod16.get(),prod17.get(),prod18.get(),prod19.get(),prod20.get()
-            p21,p22,p23,p24,p25,p26,p27,p28,p29=prod21.get(),prod22.get(),prod23.get(),prod24.get(),prod25.get(),prod26.get(),prod27.get(),prod28.get(),prod29.get()
-            sk7,sk8,sk9,sk10,sk11,sk12=sku6.get(),sku7.get(),sku8.get(),sku9.get(),sku10.get(),sku11.get()
-            sk13,sk14,sk15,sk16,sk17,sk18,sk19,sk20,sk21=sku12.get(),sku13.get(),sku14.get(),sku15.get(),sku16.get(),sku17.get(),sku18.get(),sku19.get(),sku20.get()
-            sk22,sk23,sk24,sk25,sk26,sk27,sk28,sk29,sk30=sku21.get(),sku22.get(),sku23.get(),sku24.get(),sku25.get(),sku26.get(),sku27.get(),sku28.get(),sku29.get()
-            qt7,qt8,qt9,qt10,qqtt10=quan6.get(),quan7.get(),quan8.get(),quan9.get(),quan10.get()
-            qt11,qt12,qt13,qt14,qt15,qt16,qt17,qt18,qt19,qt20=quan11.get(),quan12.get(),quan13.get(),quan14.get(),quan15.get(),quan16.get(),quan17.get(),quan18.get(),quan19.get(),quan20()
-            qt21,qt22,qt23,qt24,qt25,qt26,qt27,qt28,qt29=quan21.get(),quan22.get(),quan23.get(),quan24.get(),quan25.get(),quan26.get(),quan27.get(),quan28.get(),quan29.get()
-            pr7,pr8,pr9,pr10=price6.get(),price7.get(),price8.get(),price9.get()
-            pr11,pr12,pr13,pr14,pr15,pr16,pr17,pr18,pr19,pr20=price10.get(),price11.get(),price12.get(),price13.get(),price14.get(),price15.get(),price16.get(),price17.get(),price18.get(),price19.get()
-            pr21,pr22,pr23,pr24,pr25,pr26,pr27,pr28,pr29,pr30=price20.get(),price21.get(),price22.get(),price23.get(),price24.get(),price25.get(),price26.get(),price27.get(),price28.get(),price29.get()
-            tt7,tt8,tt9,tt10=total6.get(),total7.get(),total8.get(),total9.get()
-            tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20=total10.get(),total11.get(),total12.get(),total13.get(),total14.get(),total15.get(),total16.get(),total17.get(),total18.get(),total19.get()
-            tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30=total20.get(),total21.get(),total22.get(),total23.get(),total24.get(),total25.get(),total26.get(),total27.get(),total28.get(),total29.get()
-            raw1='''INSERT INTO rawmaterials (prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,
-            prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
-            prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,
-            prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total26,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,
-            prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29) 
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
-            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
-            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,,%s,%s,%s,%s,%s,,%s,%s,%s,%s,%s,)'''
-            cur.execute(raw1,[(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),(sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),
-            (p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),(p22),(sk23),(qt22),(pr23),(tt23),
-            (p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30)])
-            mydata.commit()
-        except:
-            pass
-            #scrap row1 
+        prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
+        prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,
+        prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total25,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+        %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6),(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),
+        (sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),(p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),
+        (p22),(sk23),(qt22),(pr23),(tt23),(p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30)])    
+        mydata.commit()      
         pp1,pp2,pp3,pp4=prodd1.get(),prodd2.get(),prodd3.get(),prodd4.get()
         skk1,skk2,skk3,skk4=skuu1.get(),skuu2.get(),skuu3.get(),skuu4.get()
         qtt1,qtt2,qtt3,qtt4=quann1.get(),quann2.get(),quann3.get(),quann4.get()
         prr1,prr2,prr3,prr4=pricee1.get(),pricee2.get(),pricee3.get(),pricee4.get()
         ttt1,ttt2,ttt3,ttt4=totall1.get(),totall2.get(),totall3.get(),totall4.get()
+        pp5,pp6,pp7,pp8,pp9,pp10,pp11,pp12,pp13,pp14,pp15,pp16,pp17,pp18,pp19,pp20='','','','','','','','','','','','','','','',''
+        skk5,skk6,skk7,skk8,skk9,skk10,skk11,skk12,skk13,skk14,skk15,skk16,skk17,skk18,skk19,skk20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        qtt5,qtt6,qtt7,qtt8,qtt9,qtt10,qtt11,qtt12,qtt13,qtt14,qtt15,qtt16,qtt17,qtt18,qtt19,qtt20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        prr5,prr6,prr7,prr8,prr9,prr10,prr11,prr12,prr13,prr14,prr15,prr16,prr17,prr18,prr19,prr20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        ttt5,ttt6,ttt7,ttt8,ttt9,ttt10,ttt11,ttt12,ttt13,ttt14,ttt15,ttt16,ttt17,ttt18,ttt19,ttt20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        """
         type1='Coproducts/scrap'
-        raw1='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(raw1,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4)])
-        try:
-            pp5,pp6,pp7,pp8,pp9,pp10=prodd5.get(),prodd6.get(),prodd7.get(),prodd8.get(),prodd9.get(),prodd10.get()
-            pp11,pp12,pp13,pp14,pp15,pp16,pp17,pp18,pp19,pp20=prodd11.get(),prodd12.get(),prodd13.get(),prodd14.get(),prodd15.get(),prodd16.get(),prodd17.get(),prodd18.get(),prodd19.get(),prodd20.get()
-            skk5,skk6,skk7,skk8,skk9,skk10=skuu5.get(),skuu6.get(),skuu7.get(),skuu8.get(),skuu9.get(),skuu10.get()
-            skk11,skk12,skk13,skk14,skk15,skk16,skk17,skk18,skk19,skk20=skuu11.get(),skuu12.get(),skuu13.get(),skuu14.get(),skuu15.get(),skuu16.get(),skuu17.get(),skuu18.get(),skuu19.get(),skuu20.get()
-            qtt5,qtt6,qtt7,qtt8,qtt9,qtt10=quann5.get(),quann6.get(),quann7.get(),quann8.get(),quann9.get(),quann10.get()
-            qtt11,qtt12,qtt13,qtt14,qtt15,qtt16,qtt17,qtt18,qtt19,qtt20=quann11.get(),quann12.get(),quann13.get(),quann14.get(),quann15.get(),quann16.get(),quann17.get(),quann18.get(),quann19.get(),quann20.get()       
-            prr5,prr6,prr7,prr8,prr9,prr10=pricee5.get(),pricee6.get(),pricee7.get(),pricee8.get(),pricee9.get(),pricee10.get()
-            prr11,prr12,prr13,prr14,prr15,prr16,prr17,prr18,prr19,prr20=pricee11.get(),pricee12.get(),pricee13.get(),pricee14.get(),pricee15.get(),pricee16.get(),pricee17.get(),pricee18.get(),pricee19.get(),pricee20.get()        
-            ttt5,ttt6,ttt7,ttt8,ttt9,ttt10=totall5.get(),totall6.get(),totall7.get(),totall8.get(),totall9.get(),totall10.get()
-            ttt11,ttt12,ttt13,ttt14,ttt15,ttt16,ttt17,ttt18,ttt19,ttt20=totall11.get(),totall12.get(),totall13.get(),totall14.get(),totall15.get(),totall16.get(),totall17.get(),totall18.get(),totall19.get(),totall20.get()
-            raw2='''INSERT INTO rawmaterials (prod4,sku4,qty4,price4,total4,prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,
-                    prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
-                    prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19) 
-            VALUES (%s,%s,%s,,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
-            ,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-            cur.execute(raw2,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4),(pp5),(skk5),(qtt5),(prr5),(ttt5)
-            ,(pp6),(skk6),(qtt6),(prr6),(ttt6),(pp7),(skk7),(qtt7),(prr7),(ttt7),(pp8),(skk8),(qtt8),(prr8),(ttt8),(pp9),(skk9),(qtt9),(prr9),(ttt9),(pp10),(skk10),(qtt10),(prr10),(ttt10),(pp11),(skk11),(qtt11),(prr11),(ttt11),(pp12),(skk12),(qtt12),(prr12),(ttt12)
-            ,(pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17)
-            ,(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20)])
-            mydata.commit()
-        except:
-            pass    
+        raw1='''INSERT INTO rawmaterials (productionid,cid,type1,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3prod4,sku4,qty4,price4,total4,prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,
+        sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        cur.execute(raw1,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4),(pp5),(skk5),(qtt5),(prr5),(ttt5),(pp6),(skk6),(qtt6),(prr6),(ttt6),(pp7),(skk7),(qtt7),(prr7),(ttt7),(pp8),(skk8),(qtt8),(prr8),(ttt8),(pp9),(skk9),(qtt9),(prr9),(ttt9),(pp10),(skk10),(qtt10),(prr10),(ttt10),(pp11),(skk11),(qtt11),(prr11),(ttt11),(pp12),(skk12),(qtt12),
+        (prr12),(ttt12),(pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17),(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20)])
+        mydata.commit()"""
         estwin.destroy()
     tk.Button(frame,text='CREATE',bg='#243e54',font=('Times New Roman',20),command=getproductiondetails).place(relx=0.45,rely=0.73,relwidth=0.1,relheight=0.03)
     hf2.place(relx=0.1,rely=0.10,relwidth=0.8,relheight=0.3)
