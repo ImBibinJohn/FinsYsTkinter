@@ -85,10 +85,10 @@ def addmaterial():
     #row1
     global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
     q,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-    qtytotal,subtot=0,0.0
+    qtytotal,subtott=0,0.0
     tot,tot1,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29=0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
     def getproductcomp(s):
-        global tod
+        global tod,intqty
         def clearskucomp():
             sku.delete(0,END)
             rate.delete(0,END)
@@ -145,6 +145,7 @@ def addmaterial():
     total.place(relx=0.31,rely=0.19,relheight=0.015,relwidth=0.05)
     #row2
     def getproductcomp1(s):
+        global intqty1
         def clearskucomp1():
             sku1.delete(0,END)
             rate1.delete(0,END)
@@ -194,6 +195,7 @@ def addmaterial():
     total1.place(relx=0.31,rely=0.21,relheight=0.015,relwidth=0.05)
     #row3
     def getproductcomp2(s):
+        global intqty2
         def clearskucomp2():
             sku2.delete(0,END)
             rate2.delete(0,END)
@@ -243,6 +245,7 @@ def addmaterial():
     total2.place(relx=0.31,rely=0.23,relheight=0.015,relwidth=0.05)
     #row4
     def getproductcomp3(s):
+        global intqty3
         def clearskucomp3():
             sku3.delete(0,END)
             rate3.delete(0,END)
@@ -292,6 +295,7 @@ def addmaterial():
     total3.place(relx=0.31,rely=0.25,relheight=0.015,relwidth=0.05)
     #row5
     def getproductcomp4(s):
+        global intqty4
         def clearskucomp4():
             sku4.delete(0,END)
             rate4.delete(0,END)
@@ -341,6 +345,7 @@ def addmaterial():
     total4.place(relx=0.31,rely=0.27,relheight=0.015,relwidth=0.05)
     #row6
     def getproductcomp5(s):
+        global intqty5
         def clearskucomp5():
             sku5.delete(0,END)
             rate5.delete(0,END)
@@ -394,6 +399,7 @@ def addmaterial():
     #row7
     def addnewrow1(): 
         def getproductcomp6(s):
+            global intqty6
             def clearskucomp6():
                 sku6.delete(0,END)
                 rate6.delete(0,END)
@@ -406,9 +412,11 @@ def addmaterial():
             if fet:
                 sku6.insert(0,fet[0])
                 rate6.insert(0,fet[2])
+                intqty6=fet[1]
             elif fetch:
                 sku6.insert(0,fetch[0])
                 rate6.insert(0,fetch[2])
+                intqty6=fetch[1]
         global x,btn1,sku6,quan6,price6,total6,prod6        
         def calculatetotal6(xx):  
             global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29  
@@ -1791,7 +1799,7 @@ def addmaterial():
             ratee1.insert(0,fet[2])
         elif fetch:
             skuu1.insert(0,fetch[0])
-            ratee1.insert(0,fet[2])
+            ratee1.insert(0,fetch[2])
     def calculatescraptotal(x):
         global clearscraptotamount,qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext():
@@ -1803,6 +1811,7 @@ def addmaterial():
         tott1=(qq1*rr1)
         clear_scraptext()
         totall1.insert(0,tott1)
+        qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
         subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
         clearscraptotamount()
         totalscrapamount.insert(0,subtott1)
@@ -1847,6 +1856,7 @@ def addmaterial():
         tott2=(qq2*rr2)
         clear_scraptext2()
         totall2.insert(0,tott2)
+        qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
         subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
         clearscraptotamount()
         totalscrapamount.insert(0,subtott1)
@@ -1938,6 +1948,7 @@ def addmaterial():
         tott4=(qq4*rr4)
         clear_scraptext4()
         totall4.insert(0,tott4)
+        qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
         subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
         clearscraptotamount()
         totalscrapamount.insert(0,subtott1)
@@ -1978,6 +1989,7 @@ def addmaterial():
                 ratee5.insert(0,fetch[2]) 
         global y,btnn1,prodd5,skuu5,quann5,pricee5,totall5
         def calculatescraptotal5(yy):
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext5():
                 totall5.delete(0, END) 
             qq5=float(quann5.get())
@@ -1986,6 +1998,7 @@ def addmaterial():
             subtott5=tott5
             clear_scraptext5()
             totall5.insert(0,tott5)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2030,6 +2043,7 @@ def addmaterial():
                 ratee6.insert(0,fetch[2]) 
         global y,btnn2,prodd6,skuu6,quann6,pricee6,totall6
         def calculatescraptotal6(x):
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext6():
                 totall6.delete(0, END) 
             qq6=float(quann6.get())
@@ -2037,6 +2051,7 @@ def addmaterial():
             tott6=(qq6*rr6)
             clear_scraptext6()
             totall6.insert(0,tott6)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2080,7 +2095,8 @@ def addmaterial():
                 skuu7.insert(0,fetch[0])  
                 ratee7.insert(0,fetch[2])  
         global y,btnn3,prodd7,skuu7,quann7,pricee7,totall7
-        def calculatescraptotal7(xx):    
+        def calculatescraptotal7(xx): 
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20   
             def clear_scraptext7():
                 totall7.delete(0, END) 
             qq7=float(quann7.get())
@@ -2089,6 +2105,7 @@ def addmaterial():
             subtott=tott7
             clear_scraptext7()
             totall7.insert(0,tott7)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2132,7 +2149,8 @@ def addmaterial():
                 skuu8.insert(0,fetch[0])  
                 ratee8.insert(0,fetch[2])  
         global y,btnn4,prodd8,skuu8,quann8,pricee8,totall8
-        def calculatescraptotal8(xx):    
+        def calculatescraptotal8(xx):
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20    
             def clear_scraptext8():
                 totall8.delete(0, END) 
             qq8=float(quann8.get())
@@ -2141,6 +2159,7 @@ def addmaterial():
             subtott=tott8
             clear_scraptext8()
             totall8.insert(0,tott8)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2184,7 +2203,8 @@ def addmaterial():
                 skuu9.insert(0,fetch[0])  
                 ratee9.insert(0,fetch[2])  
         global y,btnn5,prodd9,skuu9,quann9,pricee9,totall9
-        def calculatescraptotal9(xx):    
+        def calculatescraptotal9(xx): 
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20   
             def clear_scraptext9():
                 totall9.delete(0, END) 
             qq9=float(quann9.get())
@@ -2193,6 +2213,7 @@ def addmaterial():
             subtott=tott9
             clear_scraptext9()
             totall9.insert(0,tott9)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2236,7 +2257,8 @@ def addmaterial():
                 skuu10.insert(0,fetch[0])  
                 ratee10.insert(0,fetch[2])  
         global y,btnn6,prodd10,skuu10,quann10,pricee10,totall10
-        def calculatescraptotal10(xx):    
+        def calculatescraptotal10(xx):  
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20  
             def clear_scraptext10():
                 totall10.delete(0, END) 
             qq10=float(quann10.get())
@@ -2245,6 +2267,7 @@ def addmaterial():
             subtott=tott10
             clear_scraptext10()
             totall10.insert(0,tott10)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2289,6 +2312,7 @@ def addmaterial():
                 ratee11.insert(0,fetch[2])  
         global y,btnn7,prodd11,skuu11,quann11,pricee11,totall11
         def calculatescraptotal11(xx):    
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext11():
                 totall11.delete(0, END) 
             qq11=float(quann11.get())
@@ -2296,6 +2320,7 @@ def addmaterial():
             tott11=(qq11*rr11)
             clear_scraptext11()
             totall11.insert(0,tott11)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2340,6 +2365,7 @@ def addmaterial():
                 ratee12.insert(0,fetch[2])  
         global y,btnn8,prodd12,skuu12,quann12,pricee12,totall12
         def calculatescraptotal12(xx):    
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext12():
                 totall12.delete(0, END) 
             qq12=float(quann12.get())
@@ -2347,6 +2373,7 @@ def addmaterial():
             tott12=(qq12*rr12)
             clear_scraptext12()
             totall12.insert(0,tott12)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2391,14 +2418,15 @@ def addmaterial():
                 ratee13.insert(0,fetch[2])  
         global y,btnn9,prodd13,skuu13,quann13,pricee13,totall13
         def calculatescraptotal13(xx):    
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext13():
                 totall13.delete(0, END) 
             qq13=float(quann13.get())
             rr13=float(pricee13.get())
             tott13=(qq13*rr13)
-            subtott=tott13
             clear_scraptext13()
             totall13.insert(0,tott13)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2443,6 +2471,7 @@ def addmaterial():
                 ratee14.insert(0,fetch[2])   
         global y,prod6,btnn10,prodd14,skuu14,quann14,pricee14,totall14
         def calculatescraptotal14(xx):    
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
             def clear_scraptext14():
                 totall14.delete(0, END) 
             qq14=float(quann14.get())
@@ -2451,6 +2480,7 @@ def addmaterial():
             subtott=tott14
             clear_scraptext14()
             totall14.insert(0,tott14)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2494,7 +2524,8 @@ def addmaterial():
                 skuu15.insert(0,fetch[0])  
                 ratee15.insert(0,fetch[2])   
         global y,prod6,btnn11,prodd15,skuu15,quann15,pricee15,totall15
-        def calculatescraptotal15(xx):    
+        def calculatescraptotal15(xx):   
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20 
             def clear_scraptext15():
                 totall15.delete(0, END) 
             qq15=float(quann15.get())
@@ -2502,6 +2533,7 @@ def addmaterial():
             tott15=(qq15*rr15)
             clear_scraptext15()
             totall15.insert(0,tott15)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2545,7 +2577,8 @@ def addmaterial():
                 skuu16.insert(0,fetch[0])  
                 ratee16.insert(0,fetch[2])   
         global y,prod6,btnn12,prodd16,skuu16,quann16,pricee16,totall16
-        def calculatescraptotal16(xx):    
+        def calculatescraptotal16(xx): 
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20   
             def clear_scraptext16():
                 totall16.delete(0, END) 
             qq16=float(quann16.get())
@@ -2553,6 +2586,7 @@ def addmaterial():
             tott16=(qq16*rr16)
             clear_scraptext16()
             totall16.insert(0,tott16)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2596,15 +2630,16 @@ def addmaterial():
                 skuu17.insert(0,fetch[0])  
                 ratee17.insert(0,fetch[2])   
         global y,prod6,btnn13,prodd17,skuu17,quann17,pricee17,totall17
-        def calculatescraptotal17(xx):    
+        def calculatescraptotal17(xx):   
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20 
             def clear_scraptext17():
                 totall17.delete(0, END) 
             qq17=float(quann17.get())
             rr17=float(pricee17.get())
             tott17=(qq17*rr17)
-            subtott=tott17
             clear_scraptext17()
             totall17.insert(0,tott17)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2648,15 +2683,16 @@ def addmaterial():
                 skuu18.insert(0,fetch[0])  
                 ratee18.insert(0,fetch[2])  
         global y,prod6,btnn14,prodd18,skuu18,quann18,pricee18,totall18
-        def calculatescraptotal18(xx):    
+        def calculatescraptotal18(xx): 
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20   
             def clear_scraptext18():
                 totall18.delete(0, END) 
             qq18=float(quann18.get())
             rr18=float(pricee18.get())
             tott18=(qq18*rr18)
-            subtott=tott18
             clear_scraptext18()
             totall18.insert(0,tott18)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2700,15 +2736,16 @@ def addmaterial():
                 skuu19.insert(0,fetch[0])  
                 ratee19.insert(0,fetch[2])  
         global y,prod6,btnn15,prodd19,skuu19,quann19,pricee19,totall19
-        def calculatescraptotal19(xx):    
+        def calculatescraptotal19(xx):   
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20 
             def clear_scraptext19():
                 totall19.delete(0, END) 
             qq19=float(quann19.get())
             rr19=float(pricee19.get())
             tott19=(qq19*rr19)
-            subtott=tott19
             clear_scraptext19()
             totall19.insert(0,tott19)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2752,15 +2789,16 @@ def addmaterial():
                 skuu20.insert(0,fetch[0])  
                 ratee20.insert(0,fetch[2])  
         global y,prod6,prodd20,skuu20,quann20,pricee20,totall20
-        def calculatescraptotal20(xx):    
+        def calculatescraptotal20(xx):  
+            global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20  
             def clear_scraptext20():
                 totall20.delete(0, END) 
             qq20=float(quann20.get())
             rr20=float(pricee20.get())
             tott20=(qq20*rr20)
-            subtott=tott20
             clear_scraptext20()
             totall20.insert(0,tott20)
+            qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
@@ -2802,14 +2840,15 @@ def addmaterial():
     additional1=tk.Entry(frame,font=(6))
     additional1.place(relx=0.55,rely=0.50,relwidth=0.12,relheight=0.02)
     tk.Label(frame,text='Percentage',font=('times new roman', 16),bg='#2f516f').place(relx=0.67,rely=0.47,relwidth=0.1,relheight=0.03)
-    global v,addbtn,ded,ded1,ded2,ded3,totaddlcost
+    global v,addbtn,ded,ded1,ded2,ded3,totaddlcost,effccost,efrate
     v=0.56
     ded,ded1,ded2,ded3,totaddlcost=0.0,0.0,0.0,0.0,0.0
     def labels():
-        global v,addlcost,totaddlcost,ded,ded2,ded3,ded1,subtot,effccost
+        global v,addlcost,totaddlcost,ded,ded2,ded3,ded1,subtot,effccost,efrate
         effccost=0.0
         tk.Label(frame1,text='QTY',bg='#243e54',font=('Times New Roman',14)).place(relx=0.67,rely=0.140)
         def quantityy(x):
+            global efrate
             qq=float(qqq.get())
             efrate=(effccost/qq)
             effrate.insert(0,efrate)
@@ -2833,7 +2872,7 @@ def addmaterial():
         effrate=tk.Entry(frame,font=(6))
         effrate.place(relx=0.79,rely=v+0.06,relwidth=0.1,relheight=0.02) 
     def percen1(q):
-        global ded,ded2,ded3,ded1,totaddlcost,clearaddtotcost
+        global ded,ded2,ded3,ded1,totaddlcost,clearaddtotcost,add1,percen
         add1=additional1.get()
         percen=float(percentage1.get())
         if add1:
@@ -2859,11 +2898,11 @@ def addmaterial():
     additional2=tk.Entry(frame,font=(6))
     additional2.place(relx=0.55,rely=0.53,relwidth=0.12,relheight=0.02)
     def percen2(q):
-        global ded,ded2,ded3,ded1,totaddlcost
+        global ded,ded2,ded3,ded1,totaddlcost,percent1,add2
         add2=additional2.get()
         if add2:
-            percen=float(percentage2.get())
-            ded1=float((percen/100)*subtot)
+            percent1=float(percentage2.get())
+            ded1=float((percent1/100)*subtot)
             def clear_ded2():
                     addtotal2.delete(0,END)   
             clear_ded2()   
@@ -2941,6 +2980,7 @@ def addmaterial():
     addbtn=tk.Button(frame,text='+',font=(12),command=newadditional)
     addbtn.place(relx=0.75,rely=0.53,relwidth=0.03,relheight=0.02) 
     def getproductiondetails():
+        print(add1,percen,totaddlcost)
         p=product.get()
         sk=sku.get()
         hs=hsn.get()
@@ -2965,61 +3005,419 @@ def addmaterial():
         qt7,qt8,qt9,qt10,qqtt10,qt11,qt12,qt13,qt14,qt15,qt16,qt17,qt18,qt19,qt20,qt21,qt22,qt23,qt24,qt25,qt26,qt27,qt28,qt29=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         pr7,pr8,pr9,pr10,pr11,pr12,pr13,pr14,pr15,pr16,pr17,pr18,pr19,pr20,pr21,pr22,pr23,pr24,pr25,pr26,pr27,pr28,pr29,pr30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         tt7,tt8,tt9,tt10,tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20,tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        if prod.get():
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p1,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p1,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt1
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt1
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                mydata.commit()  
+        if prod1.get():  
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p2,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p2,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt2
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt2
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
+                mydata.commit()
+        if prod2.get():  
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p3,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p3,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt3
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt3
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
+                mydata.commit()
+        if prod3.get():  
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p4,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p4,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt4
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt4
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
+                mydata.commit()    
+        if prod4.get():  
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p5,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p5,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt5
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt5
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                mydata.commit()    
+        if prod5.get():  
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p6,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p6,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qt6
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qt6
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
+                mydata.commit()                                                         
         try:
             if prod6.get():
-                    p7=prod6.get()
-                    sk7=sku6.get()
-                    qt7=quan6.get()
-                    pr7=price6.get()
-                    tt7=total6.get()
-            elif prod7.get():
+                p7=prod6.get()
+                sk7=sku6.get()
+                qt7=quan6.get()
+                pr7=price6.get()
+                tt7=total6.get()
+            if prod7.get():
                     p8=prod7.get()
                     sk8=sku7.get()
                     qt8=quan7.get()
                     pr8=price7.get()
                     tt8=total7.get()
-            elif prod8.get():
+            if prod8.get():
                     p9=prod8.get()
                     sk9=sku8.get()
                     qt9=quan8.get()
                     pr9=price8.get()
                     tt9=total8.get() 
-            elif prod9.get():
+            if prod9.get():
                     p10=prod9.get()
                     sk10=sku9.get()
                     qt10=quan9.get()
                     pr10=price9.get()
-                    tt10=total9.get()                               
+                    tt10=total9.get()  
+            if prod10.get():
+                    pp10=prod10.get()
+                    sk11=sku10.get()
+                    qqtt10=quan10.get()
+                    pr11=price10.get()
+                    tt11=total10.get() 
+            if prod11.get():
+                    p11=prod11.get()
+                    sk12=sku11.get()
+                    qt11=quan11.get()
+                    pr12=price11.get()
+                    tt12=total11.get()  
+            if prod12.get():
+                    p12=prod12.get()
+                    sk13=sku12.get()
+                    qt12=quan12.get()
+                    pr13=price12.get()
+                    tt13=total12.get()   
+            if prod13.get():
+                    p13=prod13.get()
+                    sk14=sku13.get()
+                    qt13=quan13.get()
+                    pr14=price13.get()
+                    tt14=total13.get()
+            if prod14.get():
+                    p14=prod14.get()
+                    sk15=sku14.get()
+                    qt14=quan14.get()
+                    pr15=price14.get()
+                    tt15=total14.get() 
+            if prod15.get():
+                    p15=prod15.get()
+                    sk16=sku15.get()
+                    qt15=quan15.get()
+                    pr16=price15.get()
+                    tt16=total15.get() 
+            if prod16.get():
+                    p16=prod16.get()
+                    sk17=sku16.get()
+                    qt16=quan16.get()
+                    pr17=price16.get()
+                    tt17=total16.get()
+            if prod17.get():
+                    p17=prod17.get()
+                    sk18=sku17.get()
+                    qt17=quan17.get()
+                    pr18=price17.get()
+                    tt18=total17.get()
+            if prod18.get():
+                    p18=prod18.get()
+                    sk19=sku18.get()
+                    qt18=quan18.get()
+                    pr19=price18.get()
+                    tt19=total18.get()
+            if prod19.get():
+                    p19=prod19.get()
+                    sk20=sku19.get()
+                    qt19=quan19.get()
+                    pr20=price19.get()
+                    tt20=total19.get() 
+            if prod20.get():
+                    p20=prod20.get()
+                    sk21=sku20.get()
+                    qt20=quan20.get()
+                    pr21=price20.get()
+                    tt21=total20.get()
+            if prod21.get():
+                    p21=prod21.get()
+                    sk22=sku21.get()
+                    qt21=quan21.get()
+                    pr22=price21.get()
+                    tt22=total21.get() 
+            if prod22.get():
+                    p22=prod22.get()
+                    sk23=sku22.get()
+                    qt22=quan22.get()
+                    pr23=price22.get()
+                    tt23=total22.get()
+            if prod23.get():
+                    p23=prod23.get()
+                    sk24=sku23.get()
+                    qt23=quan23.get()
+                    pr24=price23.get()
+                    tt24=total23.get()   
+            if prod24.get():
+                    p24=prod24.get()
+                    sk25=sku24.get()
+                    qt24=quan24.get()
+                    pr25=price24.get()
+                    tt25=total24.get() 
+            if prod25.get():
+                    p25=prod25.get()
+                    sk26=sku25.get()
+                    qt25=quan25.get()
+                    pr26=price25.get()
+                    tt26=total25.get()
+            if prod26.get():
+                    p26=prod26.get()
+                    sk27=sku26.get()
+                    qt26=quan26.get()
+                    pr27=price26.get()
+                    tt27=total26.get() 
+            if prod27.get():
+                    p27=prod27.get()
+                    sk28=sku27.get()
+                    qt27=quan27.get()
+                    pr28=price27.get()
+                    tt28=total27.get()
+            if prod28.get():
+                    p28=prod28.get()
+                    sk29=sku28.get()
+                    qt28=quan28.get()
+                    pr29=price28.get()
+                    tt29=total28.get()
+            if prod29.get():
+                    p29=prod29.get()
+                    sk30=sku29.get()
+                    qt29=quan29.get()
+                    pr30=price29.get()
+                    tt30=total29.get()                                                                                                                                                                                                                                                                                                        
         except:
             pass            
         type='Components'
-        raw='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,
-        prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
-        prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,
-        prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total25,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
-        %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6),(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),
-        (sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),(p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),
-        (p22),(sk23),(qt22),(pr23),(tt23),(p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30)])    
-        mydata.commit()      
+        try:
+            if prod.get():
+                raw='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,
+                prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
+                prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,
+                prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total25,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29,taxdes,taxper,taxamt,taxdes1,taxper1,taxamt1,totalquantity,subtotal,totaltax,effectivecost,effectiverate) 
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+                %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6),(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),
+                (sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),(p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),
+                (p22),(sk23),(qt22),(pr23),(tt23),(p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30),(add1),(percen),(ded),(add2),(percent1),(ded1),(qtytotal),(subtot),(totaddlcost),(effccost),(efrate)])    
+                mydata.commit()
+                cur.execute
+        except:
+            pass          
         pp1,pp2,pp3,pp4=prodd1.get(),prodd2.get(),prodd3.get(),prodd4.get()
         skk1,skk2,skk3,skk4=skuu1.get(),skuu2.get(),skuu3.get(),skuu4.get()
         qtt1,qtt2,qtt3,qtt4=quann1.get(),quann2.get(),quann3.get(),quann4.get()
         prr1,prr2,prr3,prr4=pricee1.get(),pricee2.get(),pricee3.get(),pricee4.get()
         ttt1,ttt2,ttt3,ttt4=totall1.get(),totall2.get(),totall3.get(),totall4.get()
-        pp5,pp6,pp7,pp8,pp9,pp10,pp11,pp12,pp13,pp14,pp15,pp16,pp17,pp18,pp19,pp20='','','','','','','','','','','','','','','',''
+        pp5,pp6,pp7,pp8,pp9,ppp10,pp11,pp12,pp13,pp14,pp15,pp16,pp17,pp18,pp19,pp20='','','','','','','','','','','','','','','',''
         skk5,skk6,skk7,skk8,skk9,skk10,skk11,skk12,skk13,skk14,skk15,skk16,skk17,skk18,skk19,skk20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         qtt5,qtt6,qtt7,qtt8,qtt9,qtt10,qtt11,qtt12,qtt13,qtt14,qtt15,qtt16,qtt17,qtt18,qtt19,qtt20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         prr5,prr6,prr7,prr8,prr9,prr10,prr11,prr12,prr13,prr14,prr15,prr16,prr17,prr18,prr19,prr20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         ttt5,ttt6,ttt7,ttt8,ttt9,ttt10,ttt11,ttt12,ttt13,ttt14,ttt15,ttt16,ttt17,ttt18,ttt19,ttt20=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        """
-        type1='Coproducts/scrap'
-        raw1='''INSERT INTO rawmaterials (productionid,cid,type1,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3prod4,sku4,qty4,price4,total4,prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,
-        sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        cur.execute(raw1,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4),(pp5),(skk5),(qtt5),(prr5),(ttt5),(pp6),(skk6),(qtt6),(prr6),(ttt6),(pp7),(skk7),(qtt7),(prr7),(ttt7),(pp8),(skk8),(qtt8),(prr8),(ttt8),(pp9),(skk9),(qtt9),(prr9),(ttt9),(pp10),(skk10),(qtt10),(prr10),(ttt10),(pp11),(skk11),(qtt11),(prr11),(ttt11),(pp12),(skk12),(qtt12),
-        (prr12),(ttt12),(pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17),(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20)])
-        mydata.commit()"""
+        if prodd1.get():
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([pp1,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([pp1,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qtt1
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp1,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qtt1
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp1,cid))
+                mydata.commit()
+        if prodd2.get():
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([pp2,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([pp2,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qtt2
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp2,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qtt2
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp2,cid))
+                mydata.commit()    
+        if prodd3.get():
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([pp3,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([pp3,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qtt3
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp3,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qtt3
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp3,cid))
+                mydata.commit()   
+        if prodd4.get():
+            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([pp4,cid]))
+            check1=cur.fetchone()
+            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([pp4,cid]))
+            check2=cur.fetchone()
+            if check1:
+                acqty=int(check1[1])-qtt1
+                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp4,cid))
+                mydata.commit()
+            if check2:
+                acqty=int(check2[1])-qtt1
+                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp4,cid))
+                mydata.commit()                         
+        try:
+            if prodd5.get():
+                pp5=prod5.get()
+                skk5=skuu5.get()
+                qtt5=quann5.get()
+                prr5=pricee5.get()
+                ttt5=totall5.get()
+            if prodd6.get():
+                pp6=prod6.get()
+                skk6=skuu6.get()
+                qtt6=quann6.get()
+                prr6=pricee6.get()
+                ttt6=totall6.get()
+            if prodd7.get():
+                pp7=prod7.get()
+                skk7=skuu7.get()
+                qtt7=quann7.get()
+                prr7=pricee7.get()
+                ttt7=totall7.get()  
+            if prodd8.get():
+                pp8=prod8.get()
+                skk8=skuu8.get()
+                qtt8=quann8.get()
+                prr8=pricee8.get()
+                ttt8=totall8.get()                  
+            if prodd9.get():
+                pp9=prod9.get()
+                skk9=skuu9.get()
+                qtt9=quann9.get()
+                prr9=pricee9.get()
+                ttt9=totall9.get()  
+            if prodd10.get():
+                ppp10=prod10.get()
+                skk10=skuu10.get()
+                qtt10=quann10.get()
+                prr10=pricee10.get()
+                ttt10=totall10.get()  
+            if prodd11.get():
+                pp11=prod11.get()
+                skk11=skuu11.get()
+                qtt11=quann11.get()
+                prr11=pricee11.get()
+                ttt11=totall11.get()  
+            if prodd12.get():
+                pp12=prod12.get()
+                skk12=skuu12.get()
+                qtt12=quann12.get()
+                prr12=pricee12.get()
+                ttt12=totall12.get()  
+            if prodd13.get():
+                pp13=prod13.get()
+                skk13=skuu13.get()
+                qtt13=quann13.get()
+                prr13=pricee13.get()
+                ttt13=totall13.get()                  
+            if prodd14.get():
+                pp14=prod14.get()
+                skk14=skuu14.get()
+                qtt14=quann14.get()
+                prr14=pricee14.get()
+                ttt14=totall14.get()  
+            if prodd15.get():
+                pp15=prod15.get()
+                skk15=skuu15.get()
+                qtt15=quann15.get()
+                prr15=pricee15.get()
+                ttt15=totall15.get()   
+            if prodd16.get():
+                pp16=prod16.get()
+                skk16=skuu16.get()
+                qtt16=quann16.get()
+                prr16=pricee16.get()
+                ttt16=totall16.get()  
+            if prodd17.get():
+                pp17=prod17.get()
+                skk17=skuu17.get()
+                qtt17=quann17.get()
+                prr17=pricee17.get()
+                ttt17=totall17.get()
+            if prodd18.get():
+                pp18=prod18.get()
+                skk18=skuu18.get()
+                qtt18=quann18.get()
+                prr18=pricee18.get()
+                ttt18=totall18.get()     
+            if prodd19.get():
+                pp19=prod19.get()
+                skk19=skuu19.get()
+                qtt19=quann19.get()
+                prr19=pricee19.get()
+                ttt19=totall19.get() 
+            if prodd20.get():
+                pp20=prod20.get()
+                skk20=skuu20.get()
+                qtt20=quann20.get()
+                prr20=pricee20.get()
+                ttt20=totall20.get()                                                                                                 
+        except:
+            pass    
+        if prodd1.get():
+            type1='Coproducts/Scrap'
+            raw1="""INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,prod5,sku5,qty5,price5,total5,
+            prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,
+            prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,totalquantity,subtotal) 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            cur.execute(raw1,[(v[0]),(cid),(type1),(pp1),(skk1),(qtt1),(prr1),(ttt1),(pp2),(skk2),(qtt2),(prr2),(ttt2),(pp3),(skk3),(qtt3),(prr3),(ttt3),(pp4),(skk4),(qtt4),(prr4),(ttt4),(pp5),(skk5),(qtt5),(prr5),(ttt5),
+            (pp6),(skk6),(qtt6),(prr6),(ttt6),(pp7),(skk7),(qtt7),(prr7),(ttt7),(pp8),(skk8),(qtt8),(prr8),(ttt8),(pp9),(skk9),(qtt9),(prr9),(ttt9),(ppp10),(skk10),(qtt10),(prr10),(ttt10),(pp11),(skk11),(qtt11),(prr11),(ttt11),(pp12),(skk12),(qtt12),(prr12),(ttt12),
+            (pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17),(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20),(qtytotalt1),(subtott1)])
+            mydata.commit()
         estwin.destroy()
     tk.Button(frame,text='CREATE',bg='#243e54',font=('Times New Roman',20),command=getproductiondetails).place(relx=0.45,rely=0.73,relwidth=0.1,relheight=0.03)
     hf2.place(relx=0.1,rely=0.10,relwidth=0.8,relheight=0.3)
