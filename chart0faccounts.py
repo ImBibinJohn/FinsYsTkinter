@@ -314,8 +314,171 @@ def main():
         treevv.selection_set(selections)
 
 
+    expense_form = tk.Tk()
+    expense_form.title("New")
+    expense_form.geometry("1300x800")
+    expense_form['bg'] = '#2f516a'
+    wrappen = ttk.LabelFrame(expense_form)
+    mycanvas = Canvas(wrappen)
+    mycanvas.pack(side=LEFT, fill="both", expand="yes")
+    yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
+    yscrollbar.pack(side=RIGHT, fill='y')
+    def view():
+            
+        
+        # Get selected item to Edit
 
+        b = treevv.item(treevv.focus())["values"][0]
+        print(b)
+        sql='SELECT * FROM app1_accounts1 WHERE name=%s'
+        val=(b,)
+        cur.execute(sql,val)
+        s = cur.fetchone()
+        D = tk.Toplevel(A)
+        print(s)
+        
 
+        mycanvas.configure(yscrollcommand=yscrollbar.set)
+        mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox('all')))
+
+        full_frame = Frame(mycanvas, width=1500, height=1100, bg='#2f516a')
+        mycanvas.create_window((0, 0), window=full_frame, anchor="nw")
+
+        heading_frame = Frame(mycanvas)
+        mycanvas.create_window((0, 40), window=heading_frame, anchor="nw")
+        headingfont = font.Font(family='Times New Roman', size=25,)
+        credit_heading = Label(heading_frame, text="Run Report", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=95)
+        credit_heading.pack(padx=0, pady=0)
+
+        # form fields
+        form2_frame = Frame(mycanvas, width=1200, height=900, bg='#243e55')
+        mycanvas.create_window((20, 150), window=form2_frame, anchor="nw")
+        
+        form_frame = Frame(mycanvas, width=800, height=700, bg='#fff')
+        mycanvas.create_window((200, 250), window=form_frame, anchor="nw")
+        
+        
+
+        
+        
+        
+        F2 = LabelFrame(form_frame, font=('times new roman', 15, ),border=0, fg="Black", bg="#e5e9ec")
+        F2.place(x=0, y=10, width=800, height=200)
+        size=(800,210)
+
+        ax=ImageTk.PhotoImage(Image.open('f3.png').resize(size))
+        
+        tk.Label(F2,image=ax,bg='#e5e9ec', border=0).place(relx=0.00,rely=-0,relheight=1,relwidth=1 )
+        
+        
+        tk.Label(form_frame, text="Assets", bg='#fff',fg='#000').place(relx=0.03,rely=-0,relheight=1,relwidth=1 )
+        tk.Label(form_frame, text="Current Assets", bg='#fff',fg='#000').place(relx=0.04,rely=-0,relheight=1,relwidth=1 )
+        tk.Label(form_frame, text="Bank", bg='#fff',fg='#000').place(relx=0.05,rely=-0,relheight=1,relwidth=1 )
+        tk.Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        datel = Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000')
+        datel.place(x=200, y=190, width=100)
+        datel_input = StringVar()
+        datel_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
+        datel_input.place(x=350, y=190, height=40)
+        try:
+            datel_input.insert(0, s[1])
+        except:
+             pass
+        
+        skul = Label(form_frame, text="Total Account Receivables(Debtors)", bg='#fff',fg='#000')
+        skul.place(x=200, y=240, width=100)
+        skul_input = StringVar()
+        skul_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        skul_input.place(x=350, y=240, height=40)
+        try:
+                skul_input.insert(0, s[3])
+        except:
+                pass
+
+        proname = Label(form_frame, text="Total Current Assets", bg='#fff', fg='#000')
+        proname.place(x=200, y=290, width=100)
+        proname_input = StringVar()
+        proname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        proname_input.place(x=350, y=290, height=40)
+        try:
+            proname_input.insert(0, s[2])
+        except:
+            pass
+            
+        idl = Label(form_frame, text="Total Assets", bg='#fff', fg='#000')
+        idl.place(x=200, y=340, width=100)
+        idl_input = StringVar()
+        idl_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        idl_input.place(x=350, y=340, height=40)
+        try:
+                idl_input.insert(0, s[0])
+        except:
+                pass
+        
+        tk.Label(form_frame, text="Liabilities and Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+        tk.Label(form_frame, text="Current Liabilities", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+        tk.Label(form_frame, text="Accounts Payable(Creditors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        
+        cusname = tk.Label(form_frame, text="Total Accounts Payable(Creditors)", bg='#fff', fg='#000')
+        cusname.place(x=200, y=390, height=15, width=100)
+        cusname_input = StringVar()
+        cusname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
+        cusname_input.place(x=350, y=390, height=40)
+        try:
+                cusname_input.insert(0, s[4])
+        except:
+                pass
+
+        insdate = tk.Label(
+                form_frame, text="Total Current Liabilities", bg='#fff', fg='#000')
+        place_input = StringVar()
+        insdate.place(x=200, y=440, height=15, width=100)
+        insdate_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
+        insdate_input.place(x=350, y=440, height=40)
+        try:
+                insdate_input.insert(0, s[5])
+        except:
+                pass
+        
+        tk.Label(form_frame, text="Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
+
+        refl = Label(form_frame, text="Profit for the Year", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        refl.place(x=200, y=490, width=160)
+        ref_input = StringVar()
+        ref1_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        ref1_input.place(x=350, y=490, height=40)
+ 
+        try:
+                ref1_input.insert(0, s[3])
+        except:
+                pass
+            
+        refl1 = Label(form_frame, text="Total Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        refl1.place(x=200, y=540, width=160)
+        ref1_input = StringVar()
+        ref11_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        ref11_input.place(x=350, y=540, height=40)
+ 
+        try:
+                ref1_input.insert(0, s[3])
+        except:
+                pass
+    
+        refl2 = Label(form_frame, text="Total Liabilities and Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
+        refl2.place(x=200, y=590, width=160)
+        ref1_input = StringVar()
+        ref12_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
+        ref12_input.place(x=350, y=590, height=40)
+ 
+        try:
+                ref1_input.insert(0, s[3])
+        except:
+                pass
+            
+            
+        D.mainloop()
 
 
 
@@ -352,16 +515,16 @@ def main():
     hd = tk.Frame(A, bg='#243e54')
     hd.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
     ff = font.Font(family='Times New Roman', size=15)  # font
-    bt1 = tk.Button(hd, text='Run Report',command="",)
+    bt1 = tk.Button(hd, text='Run Report',command=view,)
     bt2=Button(hd,text="New",command=add_account)
     # bt2 = tk.Button(hd, text='New',command="add_account", bg='#243e54')
-    bt3 = tk.Button(hd, text='Import',
-                    command="")
+    bt3 = tk.Button(hd, text='Import',command="")
 
 
     bt1['font'] = ff
     bt2['font'] = ff
     bt3['font'] = ff
+    
 
     bt1.place(relx=0.65, rely=0.05)
     bt2.place(relx=0.75, rely=0.05)
@@ -423,6 +586,7 @@ def main():
                 x[0], x[1], x[2], x[3], x[4], x[5]))
     treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
 
+    
 
     
 
@@ -863,114 +1027,7 @@ def main():
            
         # tk.Label(F2,image=ax,bg='#e5e9ec', border=0).place(relx=0.00,rely=-0,relheight=1,relwidth=1 )
             
-        # tk.Label(form_frame, text="Assets", bg='#fff',fg='#000').place(relx=0.03,rely=-0,relheight=1,relwidth=1 )
-        # tk.Label(form_frame, text="Current Assets", bg='#fff',fg='#000').place(relx=0.04,rely=-0,relheight=1,relwidth=1 )
-        # tk.Label(form_frame, text="Bank", bg='#fff',fg='#000').place(relx=0.05,rely=-0,relheight=1,relwidth=1 )
-        # tk.Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
-
-        # datel = Label(form_frame, text="Account Receivables(Debtors)", bg='#fff',fg='#000')
-        # datel.place(x=200, y=190, width=100)
-        # datel_input = StringVar()
-        # datel_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
-        # datel_input.place(x=350, y=190, height=40)
-        # try:
-        #     datel_input.insert(0, s[1])
-        # except:
-        #      pass
         
-        # skul = Label(form_frame, text="Total Account Receivables(Debtors)", bg='#fff',fg='#000')
-        # skul.place(x=200, y=240, width=100)
-        # skul_input = StringVar()
-        # skul_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
-        # skul_input.place(x=350, y=240, height=40)
-        # try:
-        #         skul_input.insert(0, s[3])
-        # except:
-        #         pass
-
-        # proname = Label(form_frame, text="Total Current Assets", bg='#fff', fg='#000')
-        # proname.place(x=200, y=290, width=100)
-        # proname_input = StringVar()
-        # proname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
-        # proname_input.place(x=350, y=290, height=40)
-        # try:
-        #     proname_input.insert(0, s[2])
-        # except:
-        #     pass
-            
-        # idl = Label(form_frame, text="Total Assets", bg='#fff', fg='#000')
-        # idl.place(x=200, y=340, width=100)
-        # idl_input = StringVar()
-        # idl_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
-        # idl_input.place(x=350, y=340, height=40)
-        # try:
-        #         idl_input.insert(0, s[0])
-        # except:
-        #         pass
-        
-        # tk.Label(form_frame, text="Liabilities and Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
-        # tk.Label(form_frame, text="Current Liabilities", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
-        # tk.Label(form_frame, text="Accounts Payable(Creditors)", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
-
-        
-        # cusname = tk.Label(form_frame, text="Total Accounts Payable(Creditors)", bg='#fff', fg='#000')
-        # cusname.place(x=200, y=390, height=15, width=100)
-        # cusname_input = StringVar()
-        # cusname_input = Entry(form_frame, width=25, bg='#fff', fg='#000')
-        # cusname_input.place(x=350, y=390, height=40)
-        # try:
-        #         cusname_input.insert(0, s[4])
-        # except:
-        #         pass
-
-        # insdate = tk.Label(
-        #         form_frame, text="Total Current Liabilities", bg='#fff', fg='#000')
-        # place_input = StringVar()
-        # insdate.place(x=200, y=440, height=15, width=100)
-        # insdate_input = Entry(form_frame, width=25, bg="#fff",fg='#000')
-        # insdate_input.place(x=350, y=440, height=40)
-        # try:
-        #         insdate_input.insert(0, s[5])
-        # except:
-        #         pass
-        
-        # tk.Label(form_frame, text="Equity", bg='#fff',fg='#000').place(relx=0.06,rely=-0,relheight=1,relwidth=1 )
-
-        # refl = Label(form_frame, text="Profit for the Year", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
-        # refl.place(x=200, y=490, width=160)
-        # ref_input = StringVar()
-        # ref1_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
-        # ref1_input.place(x=350, y=490, height=40)
- 
-        # try:
-        #         ref1_input.insert(0, s[3])
-        # except:
-        #         pass
-            
-        # refl1 = Label(form_frame, text="Total Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
-        # refl1.place(x=200, y=540, width=160)
-        # ref1_input = StringVar()
-        # ref11_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
-        # ref11_input.place(x=350, y=540, height=40)
- 
-        # try:
-        #         ref1_input.insert(0, s[3])
-        # except:
-        #         pass
-    
-        # refl2 = Label(form_frame, text="Total Liabilities and Equity", bg='#fff',fg='#000', font=('times new roman',16,'bold'))
-        # refl2.place(x=200, y=590, width=160)
-        # ref1_input = StringVar()
-        # ref12_input = Entry(form_frame, width=5, bg='#fff', fg='#000')
-        # ref12_input.place(x=350, y=590, height=40)
- 
-        # try:
-        #         ref1_input.insert(0, s[3])
-        # except:
-        #         pass
-            
-            
-        # D.mainloop()
 
 
         tableframe=tk.Frame(profitlossframe,bg='#243e54')
@@ -992,21 +1049,13 @@ def main():
         # imageframe.place(relx=0.05,rely=0.02,relwidth=0.9,relheight=0.15)
         #contents
         conttframe=tk.Frame(tableframe,bg='#fff')
-        conttframe.place(relx=0.025,rely=0.07,relwidth=0.95,relheight=0.6)
-        mycanvass=tk.Canvas(conttframe,width=1200,height=800)
+        conttframe.place(relx=0.025,rely=0.07,relwidth=0.95,relheight=0.3)
+        mycanvass=tk.Canvas(conttframe,width=1200,height=200)
         mycanvass.place(relx=1,rely=1,relwidth=1,relheight=1)
-        yscrollbar =ttk.Scrollbar(conttframe,orient='vertical',command=mycanvass.yview)
-        yscrollbar.pack(side=RIGHT,fill=Y)
-        mycanvass.configure(yscrollcommand=yscrollbar.set)
-        mycanvass.bind('<Configure>',lambda e:mycanvass.configure(scrollregion=mycanvass.bbox('all')))
-        contframe=tk.Frame(mycanvass)
-        contframe['bg']='white'
-        mycanvass.create_window((0,0),window=contframe,anchor='nw',width=1100,height=2200)
         #table view
         style=ttk.Style()
-        style.theme_use('default')
-        style.configure('Treeview',background='silver',foreground='#000',fieldbackground='#000')
-        treevvv = ttk.Treeview(conttframe, height=10, columns=(1,2,3,4,5,6,7), show='headings') 
+        style.configure('Treeview',background='silver',foreground='#000',fieldbackground='white')
+        treevvv = ttk.Treeview(conttframe, height=8, columns=(1,2,3,4,5,6,7), show='headings') 
         treevvv.heading(1, text='Date')
         treevvv.heading(2, text='TRANSACTION TYPE')#headings
         treevvv.heading(3, text='NO')
@@ -1015,7 +1064,6 @@ def main():
         treevvv.heading(6, text='CLR')
         treevvv.heading(7, text='AMOUNT')
         
-
         treevvv.column(1, minwidth=10, width=120,anchor=CENTER)#coloumns
         treevvv.column(2, minwidth=30, width=130,anchor=CENTER)
         treevvv.column(3, minwidth=30, width=100,anchor=CENTER)
@@ -1025,15 +1073,23 @@ def main():
         treevvv.column(7, minwidth=30, width=100,anchor=CENTER)
             
         treevvv.place(relx=0,rely=0,relwidth=1)  
+        cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ")
+        val = cur.fetchall()
+        for x in val:
+            print(val)
+            treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
+        treevvv.place(relx=0, rely=0, relwidth=1, relheight=1)
+           
+
         def accrevalldates():#all dates
             cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ")
-            val = cur.fetchall()
+            val = cur.fetchone()
             try:
                 for x in val:
                     treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
             except:
                 pass
-            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+            treevvv.place(relx=0,rely=0,relwidth=1)  
            
            
            
@@ -1054,7 +1110,7 @@ def main():
         #             treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
         #     except:
         #         pass          
-        # tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
+        tableframe.place(relx=0.1,rely=0.19,relwidth=0.8,relheight=0.7)
         def accrevtoday():#today values
             cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ",(fromdate,cid))
             val = cur.fetchall()
@@ -1063,7 +1119,7 @@ def main():
                     treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
             except:
                 pass
-            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+            treevvv.place(relx=0,rely=0,relwidth=1)  
            
            
             
@@ -1091,7 +1147,7 @@ def main():
                     treevvv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
             except:
                 pass
-            treevvv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
+            treevvv.place(relx=0,rely=0,relwidth=1)  
            
            
             
@@ -1112,15 +1168,7 @@ def main():
             #         treevvv.insert('', 'end',values=(j[0],transs,j[1],0,0,0,0,j[1]))
             # except:
             #     pass          
-        cur.execute( "SELECT accounts1id,name,acctype,detype,deftaxcode,balance,asof FROM app1_accounts1 ")
-        val = cur.fetchall()
-        try:
-                for x in val:
-                    treevv.insert('', 'end', values=(x[8], x[2], 0, x[3], x[1],0,x[9]))
-        except:
-                pass
-        treevv.place(relx=0, rely=0.2, relwidth=1, relheight=0.6)
-           
+        
            
 
 # find datas for treeview insertion
