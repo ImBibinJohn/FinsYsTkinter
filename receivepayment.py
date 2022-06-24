@@ -28,128 +28,128 @@ def add_accountss():
     
     
     
-    # def sub_check():
-    #     if sub_account.get()==1:
-    #         subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
-    #                     'Input Credit', 'Deferred Service Tax Input Credit', 'Deferred SGST', 'Deferred VAT Input Credit',
-    #                     'GST Refund', 'Inventory Asset', 'Paid Insurance', 'Service Tax Refund', 'TDS Receivable', 'Uncategorised Asset',
-    #                     'Accumulated Depreciation', 'Buildings and Improvements', 'Furniture and Equipment', 'Land', 'Leasehold Improvements',
-    #                     'CGST Payable', 'CST Payable', 'CST Suspense', 'GST Payable', 'GST Suspense', 'IGST Payable', 'Input CGST', 'Input CGST Tax RCM',
-    #                     'Input IGST', 'Input IGST Tax RCM', 'Input Krishi Kalyan Cess', 'Input Krishi Kalyan Cess RCM', 'Input Service Tax',
-    #                     'Input Service Tax RCM', 'Input VAT 14%', 'Input VAT 4%', 'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense',
-    #                     'Output CGST', 'Output CGST Tax RCM', 'Output CST 2%', 'Output IGST', 'Output IGST Tax RCM', 'Output Krishi Kalyan Cess',
-    #                     'Output Krishi Kalyan Cess DCM', 'Output Service Tax', 'Output Service Tax RCM', 'Output SGST', 'Output SGST Tax RCM',
-    #                     'Output VAT 14%', 'Output VAT 4%', 'Output VAT 5%', 'Service Tax Payable', 'Service Tax Suspense', 'SGST Payable', 'Swachh Bharat Cess Payable',
-    #                     'TDS Payable', 'VAT Payable', 'VAT Suspense', 'Opening Balance', 'Equity']
+    def sub_check():
+        if sub_account.get()==1:
+            subaccountinput = ['Deferred CGST', 'Deferred GST Input Credit', 'Deferred Krishi Kalyan Cess',
+                        'Input Credit', 'Deferred Service Tax Input Credit', 'Deferred SGST', 'Deferred VAT Input Credit',
+                        'GST Refund', 'Inventory Asset', 'Paid Insurance', 'Service Tax Refund', 'TDS Receivable', 'Uncategorised Asset',
+                        'Accumulated Depreciation', 'Buildings and Improvements', 'Furniture and Equipment', 'Land', 'Leasehold Improvements',
+                        'CGST Payable', 'CST Payable', 'CST Suspense', 'GST Payable', 'GST Suspense', 'IGST Payable', 'Input CGST', 'Input CGST Tax RCM',
+                        'Input IGST', 'Input IGST Tax RCM', 'Input Krishi Kalyan Cess', 'Input Krishi Kalyan Cess RCM', 'Input Service Tax',
+                        'Input Service Tax RCM', 'Input VAT 14%', 'Input VAT 4%', 'Input VAT 5%', 'Krishi Kalyan Cess Payable', 'Krishi Kalyan Cess Suspense',
+                        'Output CGST', 'Output CGST Tax RCM', 'Output CST 2%', 'Output IGST', 'Output IGST Tax RCM', 'Output Krishi Kalyan Cess',
+                        'Output Krishi Kalyan Cess DCM', 'Output Service Tax', 'Output Service Tax RCM', 'Output SGST', 'Output SGST Tax RCM',
+                        'Output VAT 14%', 'Output VAT 4%', 'Output VAT 5%', 'Service Tax Payable', 'Service Tax Suspense', 'SGST Payable', 'Swachh Bharat Cess Payable',
+                        'TDS Payable', 'VAT Payable', 'VAT Suspense', 'Opening Balance', 'Equity']
 
-    #         cb = ttk.Combobox(hd1, values=subaccountinput)
-    #         cb.current(0)
-    #         cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
-    #     else:
+            cb = ttk.Combobox(hd1, values=subaccountinput)
+            cb.current(0)
+            cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
+        else:
             
-    #         cb = Entry(hd1)
+            cb = Entry(hd1)
 
-    #         cb.insert(0, " Deffered CGST")
-    #         cb.config(state='disabled')
+            cb.insert(0, " Deffered CGST")
+            cb.config(state='disabled')
 
-    #         cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
-    # def cancel():
-    #     add.destroy()
+            cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
+    def cancel():
+        add.destroy()
         
 
-    # def save_data():
-    #         typelist=[]
-    #         type = typeinput.get()
-    #         typelist.append(type)
+    def save_data():
+            typelist=[]
+            type = typeinput.get()
+            typelist.append(type)
             
-    #         #data fetched from app1_accountype
-    #         sql="select * from app1_accountype where accountname=%s"
-    #         mycursor.execute(sql,typelist)
-    #         pro=mycursor.fetchone()
+            #data fetched from app1_accountype
+            sql="select * from app1_accountype where accountname=%s"
+            mycursor.execute(sql,typelist)
+            pro=mycursor.fetchone()
 
-    #         sql2="select Pid from producttable where Pname=%s"
-    #         mycursor.execute(sql2,typelist)
-    #         product_id=mycursor.fetchone()
+            sql2="select Pid from producttable where Pname=%s"
+            mycursor.execute(sql,typelist)
+            product_id=mycursor.fetchone()
 
-            
-
-
-    #         # cur.execute("select cid from app1_company where id_id=%s",(uid))
-    #         # cmp1=cur.fetchone()
-    #         detlist=[]
-    #         accname = f.get()
-    #         detail_type = l.get()
-    #         detlist.append(detail_type)
-    #         description = co.get()
-    #         sub_account = cb.get()
-    #         deftaxcode = nb.get()
-    #         finsys_amt = balanceinput.get()
-    #         cmp=cmp1
-    #         asof=asof_input.get()
-
-    #             #fetch data from app1_accountype
-    #         prosql="select * from app1_accountype where accountname=%s"
-    #         mycursor.execute(prosql,detlist)
-    #         prodetdata=mycursor.fetchone()
             
 
 
-    #         # fetch data from app1_accounts
-    #         sql3="select *  from app1_accounts "
-    #         mycursor.execute(sql3)
-    #         accounts_data=mycursor.fetchall()
-    #         fet_data=[]
-            
-    #         for data in accounts_data:
-            
-    #             if data[3]==accname and data[1]==type and data[10]==cmp:
-    #                 reda=data
-    #                 fet_data.append(reda)
+            # cur.execute("select cid from app1_company where id_id=%s",(uid))
+            # cmp1=cur.fetchone()
+            detlist=[]
+            accname = fnameinput.get()
+            detail_type = l.get()
+            detlist.append(detail_type)
+            description = co.get()
+            sub_account = cb.get()
+            deftaxcode = nb.get()
+         
+            cmp=cmp1
+           
 
-    #         # fetch data from app1_accounts1
-    #         sql3="select *  from app1_accounts1 "
-    #         mycursor.execute(sql3)
-    #         accounts_data=mycursor.fetchall()
-    #         fet_data1=[]
-    #         for data in accounts_data:
-
-    #             if data[3]==accname and data[1]==type and data[10]==cmp:
-    #                 reda1=data
-    #                 fet_data1.append(reda1)
+                #fetch data from app1_accountype
+            prosql="select * from app1_accountype where accountname=%s"
+            mycursor.execute(prosql,detlist)
+            prodetdata=mycursor.fetchone()
             
 
 
+            # fetch data from app1_accounts
+            sql3="select *  from app1_accounts "
+            mycursor.execute(sql3)
+            accounts_data=mycursor.fetchall()
+            fet_data=[]
+            
+            for data in accounts_data:
+            
+                if data[3]==accname and data[1]==type and data[10]==cmp:
+                    reda=data
+                    fet_data.append(reda)
+
+            # fetch data from app1_accounts1
+            sql3="select *  from app1_accounts1 "
+            mycursor.execute(sql3)
+            accounts_data=mycursor.fetchall()
+            fet_data1=[]
+            for data in accounts_data:
+
+                if data[3]==accname and data[1]==type and data[10]==cmp:
+                    reda1=data
+                    fet_data1.append(reda1)
+            
 
 
-    #         if  prodetdata!=None :
-    #             if fet_data!=None or fet_data1!=None:
-    #                 messagebox.showerror('error',f"Account with {accname} already exists. Please provide another name.")
-    #         else:
-    #             sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,balance,asof,balfordisp,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-    #             val=(type,detail_type,accname,description,sub_account,deftaxcode,finsys_amt,asof,finsys_amt,cmp[0],product_id[0],pro[0])
-    #             mycursor.execute(sql,val)
-    #             mydata.commit()
 
-    #             # sql1="INSERT INTO app1_accounts1 (detype,balance,cid_id) VALUES(%s,%s,%s)" #adding values into db
-    #             # val1=(detail_type,finsys_amt,cmp[0])
-    #             # cur.execute(sql1,val1)
+
+            if  prodetdata!=None :
+                if fet_data!=None or fet_data1!=None:
+                    messagebox.showerror('error',f"Account with {accname} already exists. Please provide another name.")
+            else:
+                sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,balance,asof,balfordisp,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+                val=(type,detail_type,accname,description,sub_account,deftaxcode,cmp[0],product_id[0],pro[0])
+                mycursor.execute(sql,val)
+                mydb2.commit()
+
+                # sql1="INSERT INTO app1_accounts1 (detype,balance,cid_id) VALUES(%s,%s,%s)" #adding values into db
+                # val1=(detail_type,finsys_amt,cmp[0])
+                # cur.execute(sql1,val1)
                 
 
 
-    #             sql2="INSERT INTO app1_accountype (accountname,accountbal,cid_id) VALUES(%s,%s,%s)" #adding values into db
-    #             val2=(detail_type,finsys_amt,cmp[0])
-    #             mycursor.execute(sql2,val2)
-    #             mydata.commit()
+                sql2="INSERT INTO app1_accountype (accountname,accountbal,cid_id) VALUES(%s,%s,%s)" #adding values into db
+                val2=(detail_type,cmp[0])
+                mycursor.execute(sql2,val2)
+                mydb2.commit()
 
-    #             mycursor.execute("select * from app1_accounts1 where name=%s and cid_id=%s ",("Opening Balance Equity",cmp[0]))
-    #             balaceeq=mycursor.fetchone()
-    #             balance=round(balaceeq[7]+float(finsys_amt),2)
+                mycursor.execute("select * from app1_accounts1 where name=%s and cid_id=%s ",("Opening Balance Equity",cmp[0]))
+                balaceeq=mycursor.fetchone()
+                balance=round(balaceeq[7]+float(),2)
 
-    #             mycursor.execute("UPDATE app1_accounts1 SET balance =%s where accounts1id=%s and cid_id=%s",(balance,balaceeq[0],cmp[0]))
-    #             mydata.commit()
+                mycursor.execute("UPDATE app1_accounts1 SET balance =%s where accounts1id=%s and cid_id=%s",(balance,balaceeq[0],cmp[0]))
+                mydb2.commit()
                 
-    #             messagebox.showinfo(title='Success',message='New Account Added')
-    #             add.destroy()
+                messagebox.showinfo(title='Success',message='New Account Added')
+                add.destroy()
 
 
 
@@ -159,6 +159,7 @@ def add_accountss():
     mycursor.execute('select Itemname from itemstable')
     item_data=mycursor.fetchall()
     print("dataaaaaaaaaa",product_data)
+    print("pta",item_data)
 
     global add, bm
     add = tk.Toplevel(root)
@@ -201,14 +202,24 @@ def add_accountss():
     for pro_data in product_data:
         value.append(pro_data[0])
         cm1['values']=value
+    # cm1['values']=('Bank','Current Assets')
     cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
 
     tk.Label(hd1, text='Name', bg='#243e54', fg="#fff",font=(
         'times new roman', 14)).place(relx=0.5, rely=0.05)
     nameinput = StringVar()
-    f = tk.Entry(hd1, textvariable=nameinput,bg="#3E505C",fg="#fff")
+    fnameinput = tk.Entry(hd1, textvariable=nameinput,bg="#3E505C",fg="#fff")
 
-    f.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+    fnameinput.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+
+
+    def detype(g):
+        def dtl():
+            fnameinput.delete(0,END)
+        ok=l.get()
+        print("ctc",ok)
+        dtl()
+        fnameinput.insert(0,l.get())
 
     tk.Label(hd1, text='Detail Type',fg="#fff", font=('times new roman', 14),
                 bg='#243e54').place(relx=0.04, rely=0.2)
@@ -218,7 +229,7 @@ def add_accountss():
     for it_data in item_data:
         itemvalue.append(it_data)
         l['values']=itemvalue
-
+        l.bind('<<ComboboxSelected>>',detype)
     l.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
 
     tk.Label(hd1, text='Description',fg="#fff", font=('times new roman', 14),
@@ -234,18 +245,19 @@ def add_accountss():
     text_box.insert('end', message)
     text_box.config(state='disabled')
     sub_account= IntVar()
-    sub_account_input=Checkbutton(hd1,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54',height=4,command='sub_check').place(relx=0.5, rely=0.35)
+    sub_account_input=Checkbutton(hd1,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54',height=4,command='sub_check').place(relx=0.5, rely=0.32)
 
 
     tk.Label(hd1, text='Is sub-account', fg="#fff",font=('times new roman', 14),
                 bg='#243e54').place(relx=0.55, rely=0.35)
     # subaccountinput="Deffered_CGST"
-
-    cb = Entry(hd1,text="Deffered CGST",bg="#3E505C",fg="#fff")
-    cb.insert(0, " Deffered CGST")
-    # cb.config(state='disabled')
-
+    typeinput = StringVar()
+    cb =ttk.Combobox(hd1,textvariable = typeinput)
+    cb['values']=("Deferred CGST","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred Service Tax Input Credit","Deferred SGST","Deferred VAT Input Credit","GST Refund","Inventory Asset","Paid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Accumulated Depreciation","Buildings and Improvements","Furniture and Equipment","Land","Leasehold Improvements","CGST Payable","CST Payable","CST Suspense","GST Payable","GST Suspense","IGST Payable","Input CGST","Input CGST Tax RCM","Input IGST","Input IGST Tax RCM","Input Krishi Kalyan Cess","Input Krishi Kalyan Cess RCM","Input Service Tax","Input Service Tax RCM","Input SGST","Input SGST Tax RCM","Input VAT 14%","Input VAT 4%","Input VAT 5%","Krishi Kalyan Cess Payable","Krishi Kalyan Cess Suspense","Output CGST","Output CGST Tax RCM","Output CST 2%","Output IGST","Output IGST Tax RCM","Output Krishi Kalyan Cess","Output Krishi Kalyan Cess RCM","Output Service Tax","Output Service Tax RCM","Output SGST","Output SGST Tax RCM","Output VAT 14%","Output VAT 4%","Output VAT 5%","Service Tax Payable","Service Tax Suspense","SGST Payable","SGST Suspense","Swachh Bharat Cess Payable","Swachh Bharat Cess Suspense","TDS Payable","VAT Payable","VAT Suspense","Opening Balance","Equity")
+   
     cb.place(relx=0.5, rely=0.4, relwidth=0.4, relheight=0.065)
+    
+    
 
     tk.Label(hd1, text='Default Tax Code', font=('times new roman', 14),fg="#fff",
                 bg='#243e54').place(relx=0.5, rely=0.5)
@@ -257,7 +269,7 @@ def add_accountss():
 
    
     sub = tk.Button(hd1, text='Create', font=15, bg='#243e54',fg="#fff",width=40,
-                    command='save_data').place(relx=0.28, rely=0.8)
+                    command=save_data).place(relx=0.28, rely=0.8)
 
         
 
@@ -426,15 +438,16 @@ label33.place(x=100,y=210,height=40,width=300)
 
 
 def pmethod(event):
-    global add
+    global add,pro1
     p = drop1paymethod.get()
     print("wel",p)
       
     if p == 'Add New':
         def wer(n):
             cc=label44add.get()
-            pro1.append(cc)
+            pro1.insert(0,cc)
             print("ff",pro1)
+            drop1paymethod.insert(0,label44add.get())
         drop1paymethod.set("")
         label44add=Entry(F,bg='#2f516a',fg='#fff',textvariable=add, font=('times new roman', 11, 'bold'))
         label44add.place(x=100,y=340,height=40,width=300)
