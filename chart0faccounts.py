@@ -201,8 +201,7 @@ def add_account():
 
       # font
 
-    tk.Label(hd1, text='Account Type', bg='#243e54', fg="#fff",font=(
-        'times new roman', 14)).place(relx=0.04, rely=0.05)
+    tk.Label(hd1, text='Account Type', bg='#243e54', fg="#fff",font=('times new roman', 14)).place(relx=0.04, rely=0.05)
     typeinput = StringVar()
     cm1 =ttk.Combobox(hd1,textvariable = typeinput)
     value=[]
@@ -314,20 +313,20 @@ def main():
         treevv.selection_set(selections)
 
 
-    expense_form = tk.Tk()
-    expense_form.title("New")
-    expense_form.geometry("1300x800")
-    expense_form['bg'] = '#2f516a'
-    wrappen = ttk.LabelFrame(expense_form)
-    mycanvas = Canvas(wrappen)
-    mycanvas.pack(side=LEFT, fill="both", expand="yes")
-    yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
-    yscrollbar.pack(side=RIGHT, fill='y')
+    
     def view():
             
         
         # Get selected item to Edit
-
+        expense_form = tk.Tk()
+        expense_form.title("New")
+        expense_form.geometry("1300x800")
+        expense_form['bg'] = '#2f516a'
+        wrappen = ttk.LabelFrame(expense_form)
+        mycanvas = Canvas(wrappen)
+        mycanvas.pack(side=LEFT, fill="both", expand="yes")
+        yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
+        yscrollbar.pack(side=RIGHT, fill='y')
         b = treevv.item(treevv.focus())["values"][0]
         print(b)
         sql='SELECT * FROM app1_accounts1 WHERE name=%s'
@@ -607,8 +606,7 @@ def main():
             # cur.execute("""UPDATE chartofaccounts SET type =%s, name =%s, detail_type =%s, description =%s, sub_account =%s, deftaxcode =%s, finsys_amt =%s, WHERE id =%s""",
             #            (type, name, detail_type, description, sub_account, deftaxcode, finsys_amt, b[0],))
 
-            cur.execute("""UPDATE app1_accounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""",
-                        (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b[0],))
+            cur.execute("""UPDATE app1_accounts SET type =%s, name =%s, detail_type =%s, description =%s, finsys_amt =%s, deftaxcode =%s, sub_account =%s WHERE id =%s""", (type, name, detail_type, description, finsys_amt, deftaxcode, sub_account, b))
             mydata.commit()
             D.destroy()
 
@@ -619,9 +617,8 @@ def main():
         print(values)
         b = [values[0]]
         n=[values[1]]
-        print("b is           ",n[0])
-        cur.execute(
-            "SELECT name FROM app1_accounts ")
+        print("b is",n[0])
+        cur.execute("SELECT name FROM app1_accounts ")
 
         accdata= cur.fetchall()
     
@@ -635,8 +632,7 @@ def main():
                 print("Edited data is1",s)
                 break
             else:
-                cur.execute(
-                    "SELECT acctype,name,detype,description,gst,deftaxcode,balance FROM app1_accounts1 WHERE name=%s", (n))
+                cur.execute("SELECT acctype,name,detype,description,gst,deftaxcode,balance FROM app1_accounts1 WHERE name=%s", (n))
 
                 s = cur.fetchone()
                 print("Edited data2 is",s)
@@ -769,7 +765,7 @@ def main():
         for it_data in item_data:
             itemvalue.append(it_data)
             l['values']=itemvalue
-        l.insert(1, s[2])    
+        l.insert(1, s[2])     
 
         l.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
 
