@@ -15,9 +15,25 @@ def viewpricelist():
     tk.Label(f1,text='PRICE LIST',bg='#243e54',font=('Times New Roman',24)).place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.8)
     f1.place(relx=0.1,rely=0.05,relheight=0.1,relwidth=0.8)
     f2=tk.Frame(viewpricewin,bg='#243e54')
-    serch=tk.Entry(f2)
+    def searchedprice():
+        searchs=serch.get()
+        for item in treevv.get_children():
+            treevv.delete(item) 
+        if searchs!='':  
+            cur.execute("SELECT priceid,productname,sku,price FROM pricelist WHERE productname LIKE %s ",(searchs,))    
+            xx=cur.fetchall()
+            if xx:
+                for x in xx:
+                    treevv.insert('', 'end',values=(x[0],x[1],x[2],x[3]))
+        else:
+            cur.execute("SELECT priceid,productname,sku,price FROM pricelist")
+            val=cur.fetchall()
+            if val:
+                for x in val:
+                    treevv.insert('', 'end',values=(x[0],x[1],x[2],x[3]))    
+    serch=tk.Entry(f2,)
     serch.place(relx=0,rely=0,relwidth=0.2,relheight=0.07)
-    search=tk.Button(f2,text='Search',bg='#243e54',font=('Times New Roman',14))
+    search=tk.Button(f2,text='Search',bg='#243e54',font=('Times New Roman',14),command=searchedprice)
     search.place(relx=0.25,rely=0,relwidth=0.15,relheight=0.07)
     #tree
         #table view
@@ -108,6 +124,7 @@ def viewpricelist():
             pricee=price.get()
             cur.execute("UPDATE pricelist set productname =%s, sku =%s, price =%s WHERE priceid =%s",(prodd,skuu,pricee,b[0],))
             mydata.commit()
+            messagebox.showinfo('Sucessfully','Pricelist editted sucessfully')  
             editpricewin.destroy()
         tk.Button(frame,text='CREATE',bg='green',font=('Times New Roman',16),command=savepricelistdetails).place(relx=0.3,rely=0.6,relheight=0.2,relwidth=0.4)
         editpricewin.mainloop()

@@ -35,7 +35,7 @@ def addmaterial():
     mycanvass.configure(yscrollcommand=yscrollbarr.set)
     mycanvass.bind('<Configure>',lambda e:mycanvass.configure(scrollregion=mycanvass.bbox('all')))
     frame1=tk.Frame(mycanvass)
-    frame1['bg']='#243e54'
+    frame1['bg']='#2f516f'
     mycanvass.create_window((0,0),window=frame1,anchor='nw',width=1500,height=2500)
             #PRODUCT  
     global quanty      
@@ -57,10 +57,10 @@ def addmaterial():
     tk.Label(frame1,text='Expiry Date',bg='#2f516f',font=('times new roman', 14)).place(relx=0.45,rely=0.08)
     expdate=StringVar()
     DateEntry(frame1,textvariable=expdate,date_pattern='y-mm-dd').place(relx=0.45,rely=0.10,relwidth=0.2,relheight=0.015)
-    tk.Label(frame1,text='Manufacture',bg='#243e54',font=('Times New Roman',30)).place(relx=0.31,rely=0.125)
+    tk.Label(frame1,text='Manufacture',bg='#2f516f',font=('Times New Roman',30)).place(relx=0.31,rely=0.125)
     #components
-    tk.Label(frame1,text='Components',bg='#243e54',font=('Times New Roman',24)).place(relx=0.15,rely=0.140)
-    tk.Label(frame1,text='Max:30',bg='#243e54',font=('Times New Roman',12)).place(relx=0.05,rely=0.143)
+    tk.Label(frame1,text='Components',bg='#2f516f',font=('Times New Roman',24)).place(relx=0.15,rely=0.140)
+    tk.Label(frame1,text='Max:30',bg='#2f516f',font=('Times New Roman',12)).place(relx=0.05,rely=0.143)
     tk.Label(frame1,text='Product Name',font=('times new roman', 14),bg='#2f516f').place(relx=0.01,rely=0.17)
     tk.Label(frame1,text='SKU',font=('times new roman', 14),bg='#2f516f').place(relx=0.105,rely=0.17)
     tk.Label(frame1,text='Quantity',font=('times new roman', 14),bg='#2f516f').place(relx=0.18,rely=0.17)
@@ -84,12 +84,12 @@ def addmaterial():
     except:
                 pass
     #row1
-    global effcost,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
+    global axx,effcost,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
     q,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
     qtytotal,subtott=0,0.0
     tot,tot1,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29=0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
     def getproductcomp(s):
-        global tod,intqty
+        global tod
         def clearskucomp():
             sku.delete(0,END)
             rate.delete(0,END)
@@ -108,7 +108,7 @@ def addmaterial():
             rate.insert(0,fetch[2])
             tod=float(fetch[1])
     def calculatetotal(x):  
-        global clearcomptotamount,clearcomptotquan,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
+        global axx,clearcomptotamount,clearcomptotquan,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
         def clear_text():
             total.delete(0, END) 
         def clearcomptotquan():  
@@ -130,9 +130,9 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
         ax=float(quanty.get())
-        axx=(subtot+subtott+totaddlcost)/ax
+        axx=(subtot+subtott1+totaddlcost)/ax
         effrate.delete(0,END)
         effrate.insert(0,axx)
     prod=ttk.Combobox(frame1,values=pro,font=(4))
@@ -169,7 +169,7 @@ def addmaterial():
             sku1.insert(0,fetch[0])
             rate1.insert(0,fetch[2])
     def calculatetotal1(x):
-        global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
+        global axx,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
         def clear_text1():
             total1.delete(0, END) 
         q1=float(quan1.get())
@@ -186,7 +186,11 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prod1=ttk.Combobox(frame1,values=pro,font=(4))
     prod1.bind('<<ComboboxSelected>>',getproductcomp1)
     prod1.place(relx=0.01,rely=0.21,relheight=0.015,relwidth=0.08)
@@ -221,7 +225,7 @@ def addmaterial():
             sku2.insert(0,fetch[0])
             rate2.insert(0,fetch[2])
     def calculatetotal2(x):
-        global qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
+        global axx,qtytotal,q,q1,tot,tot1,subtot,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,tot2,tot3,tot4,tot5,tot6,tot7,tot8,tot9,tot10,tot11,tot12,tot13,tot14,tot15,tot16,tot17,tot18,tot19,tot20,tot21,tot22,tot23,tot24,tot25,tot26,tot27,tot28,tot29
         def clear_text2():
             total2.delete(0, END) 
         q2=float(quan2.get())
@@ -238,7 +242,11 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)  
+        effcost.insert(0,subtot+subtott1+totaddlcost)  
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prod2=ttk.Combobox(frame1,values=pro,font=(4))
     prod2.bind('<<ComboboxSelected>>',getproductcomp2)
     prod2.place(relx=0.01,rely=0.23,relheight=0.015,relwidth=0.08)
@@ -290,7 +298,11 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prod3=ttk.Combobox(frame1,values=pro,font=(4))
     prod3.bind('<<ComboboxSelected>>',getproductcomp3)
     prod3.place(relx=0.01,rely=0.25,relheight=0.015,relwidth=0.08)
@@ -342,7 +354,11 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prod4=ttk.Combobox(frame1,values=pro,font=(4))
     prod4.bind('<<ComboboxSelected>>',getproductcomp4)
     prod4.place(relx=0.01,rely=0.27,relheight=0.015,relwidth=0.08)
@@ -394,7 +410,11 @@ def addmaterial():
         totalamount.insert(0,subtot)
         costofcomp.insert(0,subtot)
         effcost.delete(0,END)
-        effcost.insert(0,subtot+subtott+totaddlcost)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prod5=ttk.Combobox(frame1,values=pro,font=(4))
     prod5.bind('<<ComboboxSelected>>',getproductcomp5)
     prod5.place(relx=0.01,rely=0.29,relheight=0.015,relwidth=0.08)
@@ -453,7 +473,11 @@ def addmaterial():
             totalamount.insert(0,subtot)
             costofcomp.insert(0,subtot)
             effcost.delete(0,END)
-            effcost.insert(0,subtot+subtott+totaddlcost)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def clear1():
             btn.destroy()
         prod6=ttk.Combobox(frame1,values=pro,font=(4))
@@ -473,8 +497,8 @@ def addmaterial():
         total6.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
         x=x+0.02
         clear1()
-        btn1=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow2)
-        btn1.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
+        btn1=tk.Button(frame1,text='+',font=(6),command=addnewrow2)
+        btn1.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
         return prod6
         #row8
     def addnewrow2():
@@ -513,7 +537,11 @@ def addmaterial():
             totalamount.insert(0,subtot)
             costofcomp.insert(0,subtot)
             effcost.delete(0,END)
-            effcost.insert(0,subtot+subtott+totaddlcost)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def clear2():
             btn1.destroy()
         prod7=ttk.Combobox(frame1,values=pro)
@@ -533,8 +561,8 @@ def addmaterial():
         total7.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
         x=x+0.02
         clear2()
-        btn2=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow3)
-        btn2.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
+        btn2=tk.Button(frame1,text='+',font=(6),command=addnewrow3)
+        btn2.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
         #row9  
     def addnewrow3():
         def getproductcomp8(s):
@@ -572,7 +600,11 @@ def addmaterial():
             totalamount.insert(0,subtot)
             costofcomp.insert(0,subtot)
             effcost.delete(0,END)
-            effcost.insert(0,subtot+subtott+totaddlcost)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def clear3():
             btn2.destroy()
         prod8=ttk.Combobox(frame1,values=pro)
@@ -592,8 +624,8 @@ def addmaterial():
         total8.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
         x=x+0.02
         clear3()
-        btn3=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow4)
-        btn3.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
+        btn3=tk.Button(frame1,text='+',font=(6),command=addnewrow4)
+        btn3.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
         #row10
     def addnewrow4():
             def getproductcomp9(s):
@@ -631,7 +663,11 @@ def addmaterial():
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
                 effcost.delete(0,END)
-                effcost.insert(0,subtot+subtott+totaddlcost)                
+                effcost.insert(0,subtot+subtott1+totaddlcost)  
+                ax=float(quanty.get())
+                axx=(subtot+subtott1+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)              
             def clear4():
                 btn3.destroy()
             prod9=ttk.Combobox(frame1,values=pro)
@@ -651,8 +687,8 @@ def addmaterial():
             total9.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear4()
-            btn4=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow5)
-            btn4.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn4=tk.Button(frame1,text='+',font=(6),command=addnewrow5)
+            btn4.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
                 #row11
     def addnewrow5():
             def getproductcomp10(s):
@@ -691,6 +727,10 @@ def addmaterial():
                 costofcomp.insert(0,subtot)
                 effcost.delete(0,END)
                 effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear5():
                 btn4.destroy()
             prod10=ttk.Combobox(frame1,values=pro)
@@ -710,8 +750,8 @@ def addmaterial():
             total10.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear5()
-            btn5=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow6)
-            btn5.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01) 
+            btn5=tk.Button(frame1,text='+',font=(6),command=addnewrow6)
+            btn5.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
          #row12   
     def addnewrow6():
             def getproductcomp11(s):
@@ -750,6 +790,10 @@ def addmaterial():
                 costofcomp.insert(0,subtot)
                 effcost.delete(0,END)
                 effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear6():
                 btn5.destroy()
             prod11=ttk.Combobox(frame1,values=pro)
@@ -769,8 +813,8 @@ def addmaterial():
             total11.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear6()
-            btn6=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow7)
-            btn6.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn6=tk.Button(frame1,text='+',font=(6),command=addnewrow7)
+            btn6.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
              #row13  
     def addnewrow7():
             def getproductcomp12(s):
@@ -809,6 +853,10 @@ def addmaterial():
                 costofcomp.insert(0,subtot)
                 effcost.delete(0,END)
                 effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear7():
                 btn6.destroy()
             prod12=ttk.Combobox(frame1,values=pro)
@@ -828,8 +876,8 @@ def addmaterial():
             total12.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear7()
-            btn7=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow8)
-            btn7.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn7=tk.Button(frame1,text='+',font=(6),command=addnewrow8)
+            btn7.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
                  #row14 
     def addnewrow8():
             def getproductcomp13(s):
@@ -868,6 +916,10 @@ def addmaterial():
                 costofcomp.insert(0,subtot)
                 effcost.delete(0,END)
                 effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear8():
                 btn7.destroy()
             prod13=ttk.Combobox(frame1,values=pro)
@@ -887,8 +939,8 @@ def addmaterial():
             total13.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear8()
-            btn8=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow9)
-            btn8.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn8=tk.Button(frame1,text='+',font=(6),command=addnewrow9)
+            btn8.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
                      #row15 
     def addnewrow9():
             def getproductcomp14(s):
@@ -925,6 +977,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear9():
                 btn8.destroy()
             prod14=ttk.Combobox(frame1,values=pro)
@@ -944,8 +1002,8 @@ def addmaterial():
             total14.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear9()
-            btn9=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow10)
-            btn9.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn9=tk.Button(frame1,text='+',font=(6),command=addnewrow10)
+            btn9.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
                          #row16
     def addnewrow10():
             def getproductcomp15(s):
@@ -982,6 +1040,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear10():
                 btn9.destroy()
             prod15=ttk.Combobox(frame1,values=pro)
@@ -1001,8 +1065,8 @@ def addmaterial():
             total15.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear10()
-            btn10=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow11)
-            btn10.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)   
+            btn10=tk.Button(frame1,text='+',font=(6),command=addnewrow11)
+            btn10.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
                              #row17 
     def addnewrow11():
             def getproductcomp16(s):
@@ -1039,6 +1103,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear11():
                 btn10.destroy()
             prod16=ttk.Combobox(frame1,values=pro)
@@ -1058,8 +1128,8 @@ def addmaterial():
             total16.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear11()
-            btn11=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow12)
-            btn11.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)                                                                     
+            btn11=tk.Button(frame1,text='+',font=(6),command=addnewrow12)
+            btn11.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)                                                                   
     #row18
     def addnewrow12():
             def getproductcomp17(s):
@@ -1096,6 +1166,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear12():
                 btn11.destroy()
             prod17=ttk.Combobox(frame1,values=pro)
@@ -1115,8 +1191,8 @@ def addmaterial():
             total17.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear12()
-            btn12=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow13)
-            btn12.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn12=tk.Button(frame1,text='+',font=(6),command=addnewrow13)
+            btn12.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
         #row19
     def addnewrow13():
             global x,btn13,prod18,sku18,quan18,price18,total18 
@@ -1153,6 +1229,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear13():
                 btn12.destroy()
             prod18=ttk.Combobox(frame1,values=pro)
@@ -1172,8 +1254,8 @@ def addmaterial():
             total18.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear13()
-            btn13=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow14)
-            btn13.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn13=tk.Button(frame1,text='+',font=(6),command=addnewrow14)
+            btn13.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
             #row20
     def addnewrow14():
             def getproductcomp19(s):
@@ -1210,6 +1292,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear14():
                 btn13.destroy()
             prod19=ttk.Combobox(frame1,values=pro)
@@ -1229,8 +1317,8 @@ def addmaterial():
             total19.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear14()
-            btn14=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow15)
-            btn14.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
+            btn14=tk.Button(frame1,text='+',font=(6),command=addnewrow15)
+            btn14.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
                 #row21
     def addnewrow15():
             def getproductcomp20(s):
@@ -1267,6 +1355,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear15():
                 btn14.destroy()
             prod20=ttk.Combobox(frame1,values=pro)
@@ -1286,8 +1380,8 @@ def addmaterial():
             total20.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear15()
-            btn15=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow16)
-            btn15.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn15=tk.Button(frame1,text='+',font=(6),command=addnewrow16)
+            btn15.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
                     #row22
     def addnewrow16():
             def getproductcomp21(s):
@@ -1324,6 +1418,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear16():
                 btn15.destroy()
             prod21=ttk.Combobox(frame1,values=pro)
@@ -1343,8 +1443,8 @@ def addmaterial():
             total21.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear16()
-            btn16=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow17)
-            btn16.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn16=tk.Button(frame1,text='+',font=(6),command=addnewrow17)
+            btn16.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
                         #row23
     def addnewrow17():
             def getproductcomp22(s):
@@ -1381,6 +1481,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear17():
                 btn16.destroy()
             prod22=ttk.Combobox(frame1,values=pro)
@@ -1400,8 +1506,8 @@ def addmaterial():
             total22.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear17()
-            btn17=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow18)
-            btn17.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn17=tk.Button(frame1,text='+',font=(6),command=addnewrow18)
+            btn17.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
     #row24
     def addnewrow18():
             def getproductcomp23(s):
@@ -1438,6 +1544,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear18():
                 btn17.destroy()
             prod23=ttk.Combobox(frame1,values=pro)
@@ -1457,8 +1569,8 @@ def addmaterial():
             total23.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear18()
-            btn18=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow19)
-            btn18.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn18=tk.Button(frame1,text='+',font=(6),command=addnewrow19)
+            btn18.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
         #row25
     def addnewrow19():
             def getproductcomp24(s):
@@ -1495,6 +1607,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear19():
                 btn18.destroy()
             prod24=ttk.Combobox(frame1,values=pro)
@@ -1514,8 +1632,8 @@ def addmaterial():
             total24.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear19()
-            btn19=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow20)
-            btn19.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn19=tk.Button(frame1,text='+',font=(6),command=addnewrow20)
+            btn19.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
      #row26       
     def addnewrow20():
             def getproductcomp25(s):
@@ -1552,6 +1670,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear20():
                 btn19.destroy()
             prod25=ttk.Combobox(frame1,values=pro)
@@ -1571,8 +1695,8 @@ def addmaterial():
             total25.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear20()
-            btn20=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow21)
-            btn20.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn20=tk.Button(frame1,text='+',font=(6),command=addnewrow21)
+            btn20.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
          #row27      
     def addnewrow21():
             def getproductcomp26(s):
@@ -1609,6 +1733,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear21():
                 btn20.destroy()
             prod26=ttk.Combobox(frame1,values=pro)
@@ -1628,8 +1758,8 @@ def addmaterial():
             total26.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear21()
-            btn21=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow22)
-            btn21.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)  
+            btn21=tk.Button(frame1,text='+',font=(6),command=addnewrow22)
+            btn21.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
      #row28       
     def addnewrow22():
             def getproductcomp27(s):
@@ -1666,6 +1796,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear22():
                 btn21.destroy()
             prod27=ttk.Combobox(frame1,values=pro)
@@ -1685,8 +1821,8 @@ def addmaterial():
             total27.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear22()
-            btn22=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow23)
-            btn22.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn22=tk.Button(frame1,text='+',font=(6),command=addnewrow23)
+            btn22.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
          #row29      
     def addnewrow23():
             def getproductcomp28(s):
@@ -1723,6 +1859,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear23():
                 btn22.destroy()
             prod28=ttk.Combobox(frame1,values=pro)
@@ -1742,8 +1884,8 @@ def addmaterial():
             total28.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear23()
-            btn23=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow24)
-            btn23.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+            btn23=tk.Button(frame1,text='+',font=(6),command=addnewrow24)
+            btn23.place(relx=0.26,rely=x,relwidth=0.05,relheight=0.02)
    #30     
     def addnewrow24():
             def getproductcomp29(s):
@@ -1780,6 +1922,12 @@ def addmaterial():
                 clearcomptotamount()
                 totalamount.insert(0,subtot)
                 costofcomp.insert(0,subtot)
+                effcost.delete(0,END)
+                effcost.insert(0,subtot+subtott+totaddlcost)
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)
             def clear24():
                 btn23.destroy()
             prod29=ttk.Combobox(frame1,values=pro)
@@ -1799,14 +1947,14 @@ def addmaterial():
             total29.place(relx=0.31,rely=x,relheight=0.015,relwidth=0.05)
             x=x+0.02
             clear24()                                                                                                                                                                                                                                                                          
-    btn=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewrow1)
-    btn.place(relx=0.26,rely=x,relwidth=0.1,relheight=0.01)
+    btn=tk.Button(frame1,text='+',font=(6),command=addnewrow1)
+    btn.place(relx=0.31,rely=x,relwidth=0.05,relheight=0.01)
     #coproducts/scrap
     #
     ##
     ######
-    tk.Label(frame1,text='Coproducts/Scrap',bg='#243e54',font=('Times New Roman',24)).place(relx=0.51,rely=0.140)
-    tk.Label(frame1,text='Max :20',bg='#243e54',font=('Times New Roman',12)).place(relx=0.43,rely=0.143)
+    tk.Label(frame1,text='Coproducts/Scrap',bg='#2f516f',font=('Times New Roman',24)).place(relx=0.51,rely=0.140)
+    tk.Label(frame1,text='Max :20',bg='#2f516f',font=('Times New Roman',12)).place(relx=0.43,rely=0.143)
     tk.Label(frame1,text='Product Name',font=('times new roman', 14),bg='#2f516f').place(relx=0.41,rely=0.17)
     tk.Label(frame1,text='SKU',font=('times new roman', 14),bg='#2f516f').place(relx=0.505,rely=0.17)
     tk.Label(frame1,text='Quantity',font=('times new roman', 14),bg='#2f516f').place(relx=0.585,rely=0.17)
@@ -1834,7 +1982,7 @@ def addmaterial():
             skuu1.insert(0,fetch[0])
             ratee1.insert(0,fetch[2])
     def calculatescraptotal(x):
-        global clearscraptotamount,qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
+        global axx,clearscraptotamount,qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext():
             totall1.delete(0, END) 
         def clearscraptotamount():
@@ -1850,6 +1998,10 @@ def addmaterial():
         totalscrapamount.insert(0,subtott1)
         effcost.delete(0,END)
         effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prodd1=ttk.Combobox(frame1,values=pro,font=(4))
     prodd1.bind('<<ComboboxSelected>>',getproductscrap)
     prodd1.place(relx=0.41,rely=0.19,relheight=0.015,relwidth=0.08)
@@ -1883,7 +2035,7 @@ def addmaterial():
             skuu2.insert(0,fetch[0])
             ratee2.insert(0,fetch[2])
     def calculatescraptotal2(x):
-        global qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
+        global axx,qtytotalt1,subtott1,qq1,qq2,qq3,qq4,qq5,qq6,qq7,qq8,qq9,qq10,qq11,qq12,qq13,qq14,qq15,qq16,qq17,qq18,qq19,qq20,tott1,tott2,tott3,tott4,tott5,tott6,tott7,tott8,tott9,tott10,tott11,tott12,tott13,tott14,tott15,tott16,tott17,tott18,tott19,tott20
         def clear_scraptext2():
             totall2.delete(0, END) 
         qq2=float(quann2.get())
@@ -1897,6 +2049,10 @@ def addmaterial():
         totalscrapamount.insert(0,subtott1)
         effcost.delete(0,END)
         effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prodd2=ttk.Combobox(frame1,values=pro,font=(4))
     prodd2.bind('<<ComboboxSelected>>',getproductscrap2)
     prodd2.place(relx=0.41,rely=0.21,relheight=0.015,relwidth=0.08)
@@ -1943,6 +2099,12 @@ def addmaterial():
         subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
         clearscraptotamount()
         totalscrapamount.insert(0,subtott1)
+        effcost.delete(0,END)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prodd3=ttk.Combobox(frame1,values=pro,font=(4))
     prodd3.bind('<<ComboboxSelected>>',getproductscrap3)
     prodd3.place(relx=0.41,rely=0.23,relheight=0.015,relwidth=0.08)
@@ -1989,6 +2151,12 @@ def addmaterial():
         subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
         clearscraptotamount()
         totalscrapamount.insert(0,subtott1)
+        effcost.delete(0,END)
+        effcost.insert(0,subtot+subtott1+totaddlcost)
+        ax=float(quanty.get())
+        axx=(subtot+subtott1+totaddlcost)/ax
+        effrate.delete(0,END)
+        effrate.insert(0,axx)
     prodd4=ttk.Combobox(frame1,values=pro,font=(4))
     prodd4.bind('<<ComboboxSelected>>',getproductscrap4)
     prodd4.place(relx=0.41,rely=0.25,relheight=0.015,relwidth=0.08)
@@ -2039,6 +2207,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear1():
             btnn.destroy()
         prodd5=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2058,8 +2232,8 @@ def addmaterial():
         totall5.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear1()
-        btnn1=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow2)
-        btnn1.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01) 
+        btnn1=tk.Button(frame1,text='+',font=(6),command=addnewscraprow2)
+        btnn1.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
     #66
     def addnewscraprow2():
         def getproductscrap6(s):
@@ -2092,6 +2266,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear2():
             btnn1.destroy()    
         prodd6=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2111,8 +2291,8 @@ def addmaterial():
         totall6.place(relx=0.72,rely=0.29,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear2()
-        btnn2=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow3)
-        btnn2.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01) 
+        btnn2=tk.Button(frame1,text='+',font=(6),command=addnewscraprow3)
+        btnn2.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
         #row7
     def addnewscraprow3(): 
         def getproductscrap7(s):
@@ -2146,6 +2326,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott1+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott1+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear3():
             btnn2.destroy()
         prodd7=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2165,8 +2351,8 @@ def addmaterial():
         totall7.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear3()
-        btnn3=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow4)
-        btnn3.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn3=tk.Button(frame1,text='+',font=(6),command=addnewscraprow4)
+        btnn3.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
             #row8
     def addnewscraprow4():  
         def getproductscrap8(s):
@@ -2200,6 +2386,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear4():
             btnn3.destroy()
         prodd8=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2219,8 +2411,8 @@ def addmaterial():
         totall8.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear4()
-        btnn4=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow5)
-        btnn4.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn4=tk.Button(frame1,text='+',font=(6),command=addnewscraprow5)
+        btnn4.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
                 #row9
     def addnewscraprow5():  
         def getproductscrap9(s):
@@ -2254,6 +2446,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear5():
             btnn4.destroy()
         prodd9=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2273,8 +2471,8 @@ def addmaterial():
         totall9.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear5()
-        btnn5=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow6)
-        btnn5.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn5=tk.Button(frame1,text='+',font=(6),command=addnewscraprow6)
+        btnn5.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
     #row10
     def addnewscraprow6():  
         def getproductscrap10(s):
@@ -2301,13 +2499,18 @@ def addmaterial():
             qq10=float(quann10.get())
             rr10=float(pricee10.get())
             tott10=(qq10*rr10)
-            subtott=tott10
             clear_scraptext10()
             totall10.insert(0,tott10)
             qtytotalt1=qq1+qq2+qq3+qq4+qq5+qq6+qq7+qq8+qq9+qq10+qq11+qq12+qq13+qq14+qq15+qq16+qq17+qq18+qq19+qq20
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear6():
             btnn5.destroy()
         prodd10=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2327,8 +2530,8 @@ def addmaterial():
         totall10.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear6()
-        btnn6=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow7)
-        btnn6.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn6=tk.Button(frame1,text='+',font=(6),command=addnewscraprow7)
+        btnn6.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
         #row11
     def addnewscraprow7():  
         def getproductscrap11(s):
@@ -2361,6 +2564,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear7():
             btnn6.destroy()
         prodd11=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2380,8 +2589,8 @@ def addmaterial():
         totall11.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear7()
-        btnn7=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow8)
-        btnn7.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn7=tk.Button(frame1,text='+',font=(6),command=addnewscraprow8)
+        btnn7.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
             #row12
     def addnewscraprow8():  
         def getproductscrap12(s):
@@ -2414,6 +2623,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear8():
             btnn7.destroy()
         prodd12=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2433,8 +2648,8 @@ def addmaterial():
         totall12.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear8()
-        btnn8=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow9)
-        btnn8.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01) 
+        btnn8=tk.Button(frame1,text='+',font=(6),command=addnewscraprow9)
+        btnn8.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
                 #row13
     def addnewscraprow9():  
         def getproductscrap13(s):
@@ -2467,6 +2682,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear9():
             btnn8.destroy()
         prodd13=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2486,8 +2707,8 @@ def addmaterial():
         totall13.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear9()
-        btnn9=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow10)
-        btnn9.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn9=tk.Button(frame1,text='+',font=(6),command=addnewscraprow10)
+        btnn9.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
         #row14
     def addnewscraprow10():
         def getproductscrap14(s):
@@ -2521,6 +2742,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear10():
             btnn9.destroy()
         prodd14=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2540,8 +2767,8 @@ def addmaterial():
         totall14.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear10()
-        btnn10=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow11)
-        btnn10.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01) 
+        btnn10=tk.Button(frame1,text='+',font=(6),command=addnewscraprow11)
+        btnn10.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
     #row15
     def addnewscraprow11(): 
         def getproductscrap15(s):
@@ -2574,6 +2801,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear11():
             btnn10.destroy()
         prodd15=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2593,8 +2826,8 @@ def addmaterial():
         totall15.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear11()
-        btnn11=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow12)
-        btnn11.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn11=tk.Button(frame1,text='+',font=(6),command=addnewscraprow12)
+        btnn11.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
         #row16
     def addnewscraprow12(): 
         def getproductscrap16(s):
@@ -2627,6 +2860,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear12():
             btnn11.destroy()
         prodd16=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2646,8 +2885,8 @@ def addmaterial():
         totall16.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear12()
-        btnn12=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow13)
-        btnn12.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn12=tk.Button(frame1,text='+',font=(6),command=addnewscraprow13)
+        btnn12.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
             #row17
     def addnewscraprow13(): 
         def getproductscrap17(s):
@@ -2680,6 +2919,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear13():
             btnn12.destroy()
         prodd17=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2699,8 +2944,8 @@ def addmaterial():
         totall17.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear13()
-        btnn13=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow14)
-        btnn13.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn13=tk.Button(frame1,text='+',font=(6),command=addnewscraprow14)
+        btnn13.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
                 #row18
     def addnewscraprow14():  
         def getproductscrap18(s):
@@ -2733,6 +2978,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear14():
             btnn13.destroy()
         prodd18=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2752,8 +3003,8 @@ def addmaterial():
         totall18.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear14()
-        btnn14=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow15)
-        btnn14.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+        btnn14=tk.Button(frame1,text='+',font=(6),command=addnewscraprow15)
+        btnn14.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
                     #row19
     def addnewscraprow15():  
         def getproductscrap19(s):
@@ -2786,6 +3037,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear15():
             btnn14.destroy()
         prodd19=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2805,8 +3062,8 @@ def addmaterial():
         totall19.place(relx=0.72,rely=y,relheight=0.015,relwidth=0.05)
         y=y+0.02
         scrapclear15()
-        btnn15=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow16)
-        btnn15.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01) 
+        btnn15=tk.Button(frame1,text='+',font=(6),command=addnewscraprow16)
+        btnn15.place(relx=0.67,rely=y,relwidth=0.05,relheight=0.02) 
                         #row20
     def addnewscraprow16():  
         def getproductscrap20(s):
@@ -2839,6 +3096,12 @@ def addmaterial():
             subtott1=tott1+tott2+tott3+tott4+tott5+tott6+tott7+tott8+tott9+tott10+tott11+tott12+tott13+tott14+tott15+tott16+tott17+tott18+tott19+tott20
             clearscraptotamount()
             totalscrapamount.insert(0,subtott1)
+            effcost.delete(0,END)
+            effcost.insert(0,subtot+subtott+totaddlcost)
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
         def scrapclear16():
             btnn15.destroy()
         prodd20=ttk.Combobox(frame1,values=pro,font=(4))
@@ -2859,8 +3122,8 @@ def addmaterial():
         y=y+0.02
         scrapclear16()                                                                                   
    
-    btnn=tk.Button(frame1,text='ADD PRODUCT',font=(6),command=addnewscraprow)
-    btnn.place(relx=0.67,rely=y,relwidth=0.1,relheight=0.01)
+    btnn=tk.Button(frame1,text='+',font=(6),command=addnewscraprow)
+    btnn.place(relx=0.72,rely=y,relwidth=0.05,relheight=0.01)
     tk.Label(frame,text='Total Quantity',font=('times new roman', 16),bg='#2f516f').place(relx=0.25,rely=0.40,relwidth=0.1,relheight=0.03)
     totalquantity=tk.Entry(frame,font=(8))
     totalquantity.place(relx=0.26,rely=0.43,relwidth=0.08,relheight=0.02)
@@ -2875,29 +3138,32 @@ def addmaterial():
     costofcomp.place(relx=0.79,rely=0.44,relwidth=0.1,relheight=0.02)
     tk.Label(frame,text='Type of Additional Cost',font=('times new roman', 16),bg='#2f516f').place(relx=0.53,rely=0.47,relwidth=0.15,relheight=0.03)
     tk.Label(frame,text='Percentage',font=('times new roman', 16),bg='#2f516f').place(relx=0.67,rely=0.47,relwidth=0.1,relheight=0.03)
-    global v,addlcost,totaddlcost,ded,ded2,ded3,ded1,subtot,effccost,efrate
-    v=0.56
+    global v,addlcost,totaddlcost,ded,ded2,ded3,ded1,subtot,effccost,efrate,labels,effcost,effrate
+    v=0.60
     ded,ded1,ded2,ded3,totaddlcost=0.0,0.0,0.0,0.0,0.0        
     effccost=0.0
-    tk.Label(frame,text='Total Addl. Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.53,rely=v,relwidth=0.15,relheight=0.03)
-    addlcost=tk.Entry(frame,font=(6))
-    totaddlcost=float(round(ded+ded1+ded2+ded3)) 
-    addlcost.insert(0,totaddlcost)
-    addlcost.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02) 
-    tk.Label(frame,text='Effective Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.03,relwidth=0.25,relheight=0.03) 
-    effcost=tk.Entry(frame,font=(6))
-    totaddlcost=float(round(ded+ded1+ded2+ded3)) 
-    subtot=tot+tot1+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9+tot10+tot11+tot12+tot13+tot14+tot15+tot16+tot17+tot18+tot19+tot20+tot21+tot22+tot23+tot24+tot25+tot26+tot27+tot28+tot29
-    effccost=round(subtot+totaddlcost+subtott1)
-    effcost.insert(0,effccost)
-    effcost.place(relx=0.79,rely=v+0.03,relwidth=0.1,relheight=0.02) 
-    tk.Label(frame,text='Effective rate of Primary Item:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.06,relwidth=0.2,relheight=0.03)
-    effrate=tk.Entry(frame,font=(6))
-    effrate.place(relx=0.79,rely=v+0.06,relwidth=0.1,relheight=0.02) 
+    def labels():    
+        global effcost,effrate,addlcost
+        tk.Label(frame,text='Total Addl. Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.53,rely=v,relwidth=0.15,relheight=0.03)
+        addlcost=tk.Entry(frame,font=(6))
+        totaddlcost=float(round(ded+ded1+ded2+ded3)) 
+        addlcost.insert(0,totaddlcost)
+        addlcost.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02) 
+        tk.Label(frame,text='Effective Cost:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.03,relwidth=0.25,relheight=0.03) 
+        effcost=tk.Entry(frame,font=(6))
+        totaddlcost=float(round(ded+ded1+ded2+ded3)) 
+        subtot=tot+tot1+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9+tot10+tot11+tot12+tot13+tot14+tot15+tot16+tot17+tot18+tot19+tot20+tot21+tot22+tot23+tot24+tot25+tot26+tot27+tot28+tot29
+        effccost=round(subtot+totaddlcost+subtott1)
+        effcost.insert(0,effccost)
+        effcost.place(relx=0.79,rely=v+0.03,relwidth=0.1,relheight=0.02) 
+        tk.Label(frame,text='Effective rate of Primary Item:',font=('times new roman', 16),bg='#2f516f').place(relx=0.50,rely=v+0.06,relwidth=0.2,relheight=0.03)
+        effrate=tk.Entry(frame,font=(6))
+        effrate.place(relx=0.79,rely=v+0.06,relwidth=0.1,relheight=0.02) 
+    labels()   
     def percen1(q):
-        global ded,ded2,ded3,ded1,totaddlcost,clearaddtotcost,add1,percen
+        global ded,ded2,ded3,ded1,totaddlcost,clearaddtotcost,add1,percen,axx
         add1=additional1.get()
-        percen=float(percentage1.get())
+        percen=float(per1.get())
         if add1:
             ded=float((percen/100)*subtot)
             def clear_ded():
@@ -2911,9 +3177,14 @@ def addmaterial():
             addlcost.insert(0,totaddlcost) 
             effcost.delete(0,END) 
             effcost.insert(0,subtot+subtott1+totaddlcost) 
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
     additional1=tk.Entry(frame,font=(6))
-    additional1.place(relx=0.55,rely=0.50,relwidth=0.12,relheight=0.02)               
-    percentage1=tk.Entry(frame,font=(6))
+    additional1.place(relx=0.55,rely=0.50,relwidth=0.12,relheight=0.02)   
+    per1=IntVar()            
+    percentage1=tk.Entry(frame,font=(6),textvariable=per1)
     percentage1.bind('<KeyRelease>',percen1)
     percentage1.place(relx=0.697,rely=0.50,relwidth=0.04,relheight=0.02)    
     tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=0.50,relwidth=0.01,relheight=0.02)   
@@ -2923,10 +3194,10 @@ def addmaterial():
     additional2=tk.Entry(frame,font=(6))
     additional2.place(relx=0.55,rely=0.53,relwidth=0.12,relheight=0.02)
     def percen2(q):
-        global ded,ded2,ded3,ded1,totaddlcost,percent1,add2
+        global ded,ded2,ded3,ded1,totaddlcost,percent1,add2,axx
         add2=additional2.get()
         if add2:
-            percent1=float(percentage2.get())
+            percent1=float(per2.get())
             ded1=float((percent1/100)*subtot)
             def clear_ded2():
                     addtotal2.delete(0,END)   
@@ -2934,22 +3205,30 @@ def addmaterial():
             addtotal2.insert(0,ded1) 
             clearaddtotcost()
             totaddlcost=float(round(ded+ded1+ded2+ded3))  
-            addlcost.insert(0,totaddlcost)                  
-    percentage2=tk.Entry(frame,font=(6))
+            addlcost.insert(0,totaddlcost) 
+            effcost.delete(0,END) 
+            effcost.insert(0,subtot+subtott1+totaddlcost) 
+            ax=float(quanty.get())
+            axx=(subtot+subtott+totaddlcost)/ax
+            effrate.delete(0,END)
+            effrate.insert(0,axx)
+    per2=IntVar()                         
+    percentage2=tk.Entry(frame,font=(6),textvariable=per2)
     percentage2.bind('<KeyRelease>',percen2)
     percentage2.place(relx=0.697,rely=0.53,relwidth=0.04,relheight=0.02)    
     tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=0.53,relwidth=0.01,relheight=0.02)
     addtotal2=tk.Entry(frame,font=(6))
     addtotal2.place(relx=0.79,rely=0.53,relwidth=0.1,relheight=0.02)
+    labels()
     #additional3
     def newadditional():
-        global addbtn1,v,ded,ded2,ded3,ded1,totaddlcost
+        global addbtn1,v,ded,ded2,ded3,ded1,totaddlcost,axx,percen2,additional3,percentage3,addtotal3
         def desaddbtn():
             addbtn.destroy()   
         def percen3(q):
             add3=additional3.get()
             if add3:
-                percen=float(percentage3.get())
+                percen2=float(per3.get())
                 ded2=float((percen/100)*subtot)
                 def clear_ded3():
                         addtotal3.delete(0,END)  
@@ -2957,50 +3236,28 @@ def addmaterial():
                 addtotal3.insert(0,ded2)
                 clearaddtotcost()
                 totaddlcost=float(round(ded+ded1+ded2+ded3))    
-                addlcost.insert(0,totaddlcost)              
+                addlcost.insert(0,totaddlcost)  
+                effcost.delete(0,END) 
+                effcost.insert(0,subtot+subtott1+totaddlcost)    
+                ax=float(quanty.get())
+                axx=(subtot+subtott+totaddlcost)/ax
+                effrate.delete(0,END)
+                effrate.insert(0,axx)         
         additional3=tk.Entry(frame,font=(6))
-        additional3.place(relx=0.55,rely=v,relwidth=0.12,relheight=0.02)
-        percentage3=tk.Entry(frame,font=(6))
+        additional3.place(relx=0.55,rely=0.56,relwidth=0.12,relheight=0.02)
+        per3=IntVar()
+        percentage3=tk.Entry(frame,font=(6),textvariable=per3)
         percentage3.bind('<KeyRelease>',percen3)
-        percentage3.place(relx=0.697,rely=v,relwidth=0.04,relheight=0.02)
-        tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=v,relwidth=0.01,relheight=0.02)   
+        percentage3.place(relx=0.697,rely=0.56,relwidth=0.04,relheight=0.02)
+        tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=0.56,relwidth=0.01,relheight=0.02)   
         addtotal3=tk.Entry(frame,font=(6))
-        addtotal3.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02)  
-        addbtn1=tk.Button(frame,text='+',font=(12),command=newadditional2)
-        addbtn1.place(relx=0.75,rely=v,relwidth=0.03,relheight=0.02) 
+        addtotal3.place(relx=0.79,rely=0.56,relwidth=0.1,relheight=0.02)  
         v=v+0.03
         desaddbtn()  
-    #additinal4
-    def newadditional2():
-        global v,ded,ded3,ded1,totaddlcost,ded2
-        def desaddbtn1():
-            addbtn1.destroy()   
-        def percen4(q):
-            add4=additional4.get()
-            if add4:
-                percen=float(percentage4.get())
-                ded3=float((percen/100)*subtot)
-                def clear_ded4():
-                        addtotal4.delete(0,END)  
-                clear_ded4()   
-                addtotal4.insert(0,ded3)
-                clearaddtotcost()
-                totaddlcost=float(round(ded+ded1+ded3+ded2))
-                addlcost.insert(0,totaddlcost)                          
-        additional4=tk.Entry(frame,font=(6))
-        additional4.place(relx=0.55,rely=v,relwidth=0.12,relheight=0.02)
-        percentage4=tk.Entry(frame,font=(6))
-        percentage4.bind('<KeyRelease>',percen4)
-        percentage4.place(relx=0.697,rely=v,relwidth=0.04,relheight=0.02)
-        tk.Label(frame,font=(6),text='%').place(relx=0.72,rely=v,relwidth=0.01,relheight=0.02)   
-        addtotal4=tk.Entry(frame,font=(6))
-        addtotal4.place(relx=0.79,rely=v,relwidth=0.1,relheight=0.02)  
-        v=v+0.03
-        desaddbtn1()  
-    #addbtn=tk.Button(frame,text='+',font=(12),command=newadditional)
-    #addbtn.place(relx=0.75,rely=0.53,relwidth=0.03,relheight=0.02) 
+    addbtn=tk.Button(frame,text='+',font=(12),command=newadditional)
+    addbtn.place(relx=0.697,rely=0.555,relwidth=0.04,relheight=0.015)     
     def getproductiondetails():
-        print(add1,percen,totaddlcost)
+        global axx
         p=product.get()
         sk=sku.get()
         hs=hsn.get()
@@ -3015,125 +3272,131 @@ def addmaterial():
         v=cur.fetchone()
         #components
         #1st row
-        p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,pp10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29='','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''
+        p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,pp10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,add1,add2,add3='','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''
         sk1,sk2,sk3,sk4,sk5,sk6,sk7,sk8,sk9,sk10,sk11,sk12,sk13,sk14,sk15,sk16,sk17,sk18,sk19,sk20,sk21,sk22,sk23,sk24,sk25,sk26,sk27,sk28,sk29,sk30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         qt1,qt2,qt3,qt4,qt5,qt6,qt7,qt8,qt9,qt10,qqtt10,qt11,qt12,qt13,qt14,qt15,qt16,qt17,qt18,qt19,qt20,qt21,qt22,qt23,qt24,qt25,qt26,qt27,qt28,qt29=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         pr1,pr2,pr3,pr4,pr5,pr6,pr7,pr8,pr9,pr10,pr11,pr12,pr13,pr14,pr15,pr16,pr17,pr18,pr19,pr20,pr21,pr22,pr23,pr24,pr25,pr26,pr27,pr28,pr29,pr30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        tt1,tt2,tt3,tt4,tt5,tt6,tt7,tt8,tt9,tt10,tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20,tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        if prod.get():
-                p1=prod.get()
-                sk1=sku.get()
-                qt1=quan.get()
-                pr1=price.get()
-                tt1=total.get()
-        if prod1.get():
-                p2=prod1.get()
-                sk2=sku1.get()
-                qt2=quan1.get()
-                pr2=price1.get()
-                tt2=total1.get() 
-        if prod2.get():
-                p3=prod2.get()
-                sk3=sku2.get()
-                qt3=quan2.get()
-                pr3=price2.get()
-                tt3=total2.get()
-        if prod3.get():
-                p4=prod3.get()
-                sk4=sku3.get()
-                qt4=quan3.get()
-                pr4=price3.get()
-                tt4=total3.get() 
-        if prod4.get():
-                p5=prod4.get()
-                sk5=sku4.get()
-                qt5=quan4.get()
-                pr5=price4.get()
-                tt5=total4.get()
-        if prod5.get():
-                p6=prod5.get()
-                sk6=sku5.get()
-                qt6=quan5.get()
-                pr6=price5.get()
-                tt6=total5.get()                                                     
-        if prod.get():
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p1,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p1,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt1
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt1
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
-                mydata.commit()  
-        if prod1.get():  
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p2,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p2,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt2
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt2
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
-                mydata.commit()
-        if prod2.get():  
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p3,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p3,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt3
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt3
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
-                mydata.commit()
-        if prod3.get():  
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p4,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p4,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt4
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt4
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
-                mydata.commit()    
-        if prod4.get():  
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p5,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p5,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt5
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt5
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
-                mydata.commit()    
-        if prod5.get():  
-            cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p6,cid]))
-            check1=cur.fetchone()
-            cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p6,cid]))
-            check2=cur.fetchone()
-            if check1:
-                acqty=int(check1[1])-qt6
-                cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
-                mydata.commit()
-            if check2:
-                acqty=int(check2[1])-qt6
-                cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
-                mydata.commit()                                                         
+        tt1,tt2,tt3,tt4,tt5,tt6,tt7,tt8,tt9,tt10,tt11,tt12,tt13,tt14,tt15,tt16,tt17,tt18,tt19,tt20,tt21,tt22,tt23,tt24,tt25,tt26,tt27,tt28,tt29,tt30,percen,percent1,ded,ded1,percen2,ded2=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        try:
+            if prod.get():
+                    p1=prod.get()
+                    sk1=sku.get()
+                    qt1=quan.get()
+                    pr1=price.get()
+                    tt1=total.get()
+            if prod1.get():
+                    p2=prod1.get()
+                    sk2=sku1.get()
+                    qt2=quan1.get()
+                    pr2=price1.get()
+                    tt2=total1.get() 
+            if prod2.get():
+                    p3=prod2.get()
+                    sk3=sku2.get()
+                    qt3=quan2.get()
+                    pr3=price2.get()
+                    tt3=total2.get()
+            if prod3.get():
+                    p4=prod3.get()
+                    sk4=sku3.get()
+                    qt4=quan3.get()
+                    pr4=price3.get()
+                    tt4=total3.get() 
+            if prod4.get():
+                    p5=prod4.get()
+                    sk5=sku4.get()
+                    qt5=quan4.get()
+                    pr5=price4.get()
+                    tt5=total4.get()
+            if prod5.get():
+                    p6=prod5.get()
+                    sk6=sku5.get()
+                    qt6=quan5.get()
+                    pr6=price5.get()
+                    tt6=total5.get() 
+        except:
+            pass 
+        try:                                                               
+            if prod.get():
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p1,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p1,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt1
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt1
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                    mydata.commit()  
+            if prod1.get():  
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p2,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p2,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt2
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt2
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p2,cid))
+                    mydata.commit()
+            if prod2.get():  
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p3,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p3,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt3
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt3
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p3,cid))
+                    mydata.commit()
+            if prod3.get():  
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p4,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p4,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt4
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt4
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p4,cid))
+                    mydata.commit()    
+            if prod4.get():  
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p5,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p5,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt5
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt5
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p1,cid))
+                    mydata.commit()    
+            if prod5.get():  
+                cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p6,cid]))
+                check1=cur.fetchone()
+                cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p6,cid]))
+                check2=cur.fetchone()
+                if check1:
+                    acqty=int(check1[1])-qt6
+                    cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
+                    mydata.commit()
+                if check2:
+                    acqty=int(check2[1])-qt6
+                    cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p6,cid))
+                    mydata.commit()  
+        except:
+            pass                                                                    
         try:
             if prod6.get():
                 p7=prod6.get()
@@ -3141,102 +3404,357 @@ def addmaterial():
                 qt7=quan6.get()
                 pr7=price6.get()
                 tt7=total6.get()
+                try:
+                    cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p7,cid]))
+                    check1=cur.fetchone()
+                    cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p7,cid]))
+                    check2=cur.fetchone()
+                    if check1:
+                        acqty=int(check1[1])-qt7
+                        cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p7,cid))
+                        mydata.commit()
+                    if check2:
+                        acqty=int(check2[1])-qt7
+                        cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p7,cid))
+                        mydata.commit() 
+                except:
+                    pass               
             if prod7.get():
                     p8=prod7.get()
                     sk8=sku7.get()
                     qt8=quan7.get()
                     pr8=price7.get()
                     tt8=total7.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p8,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p8,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt8
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p8,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt8
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p8,cid))
+                            mydata.commit()  
+                    except:
+                        pass              
             if prod8.get():
                     p9=prod8.get()
                     sk9=sku8.get()
                     qt9=quan8.get()
                     pr9=price8.get()
                     tt9=total8.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p9,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p9,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt9
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p9,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt9
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p9,cid))
+                            mydata.commit()   
+                    except:
+                        pass             
             if prod9.get():
                     p10=prod9.get()
                     sk10=sku9.get()
                     qt10=quan9.get()
                     pr10=price9.get()
                     tt10=total9.get()  
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p10,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p10,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt10
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p10,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt10
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p10,cid))
+                            mydata.commit() 
+                    except:
+                        pass               
             if prod10.get():
                     pp10=prod10.get()
                     sk11=sku10.get()
                     qqtt10=quan10.get()
                     pr11=price10.get()
                     tt11=total10.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([pp10,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([pp10,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qqtt10
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp10,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qqtt10
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,pp10,cid))
+                            mydata.commit()
+                    except:
+                        pass                
             if prod11.get():
                     p11=prod11.get()
                     sk12=sku11.get()
                     qt11=quan11.get()
                     pr12=price11.get()
                     tt12=total11.get()  
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p11,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p11,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt11
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p11,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt11
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p11,cid))
+                            mydata.commit()    
+                    except:
+                        pass            
             if prod12.get():
                     p12=prod12.get()
                     sk13=sku12.get()
                     qt12=quan12.get()
                     pr13=price12.get()
                     tt13=total12.get()   
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p12,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p12,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt12
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p12,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt12
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p12,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod13.get():
                     p13=prod13.get()
                     sk14=sku13.get()
                     qt13=quan13.get()
                     pr14=price13.get()
                     tt14=total13.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p13,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p13,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt13
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p13,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt13
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p13,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod14.get():
                     p14=prod14.get()
                     sk15=sku14.get()
                     qt14=quan14.get()
                     pr15=price14.get()
                     tt15=total14.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p14,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p14,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt14
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p14,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt14
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p14,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod15.get():
                     p15=prod15.get()
                     sk16=sku15.get()
                     qt15=quan15.get()
                     pr16=price15.get()
                     tt16=total15.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p15,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p15,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt15
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p15,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt15
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p15,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod16.get():
                     p16=prod16.get()
                     sk17=sku16.get()
                     qt16=quan16.get()
                     pr17=price16.get()
                     tt17=total16.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p16,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p16,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt16
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p16,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt16
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p16,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod17.get():
                     p17=prod17.get()
                     sk18=sku17.get()
                     qt17=quan17.get()
                     pr18=price17.get()
                     tt18=total17.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p17,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p17,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt17
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p17,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt17
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p17,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod18.get():
                     p18=prod18.get()
                     sk19=sku18.get()
                     qt18=quan18.get()
                     pr19=price18.get()
                     tt19=total18.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p18,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p18,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt18
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p18,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt18
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p18,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod19.get():
                     p19=prod19.get()
                     sk20=sku19.get()
                     qt19=quan19.get()
                     pr20=price19.get()
                     tt20=total19.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p19,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p19,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt19
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p19,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt19
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p19,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod20.get():
                     p20=prod20.get()
                     sk21=sku20.get()
                     qt20=quan20.get()
                     pr21=price20.get()
                     tt21=total20.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p20,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p20,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt20
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p20,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt20
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p20,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod21.get():
                     p21=prod21.get()
                     sk22=sku21.get()
                     qt21=quan21.get()
                     pr22=price21.get()
                     tt22=total21.get() 
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p20,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p21,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt21
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p21,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt21
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p21,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod22.get():
                     p22=prod22.get()
                     sk23=sku22.get()
                     qt22=quan22.get()
                     pr23=price22.get()
                     tt23=total22.get()
+                    try:
+                        cur.execute("SELECT name,initialqty FROM inventory WHERE name =%s and cid =%s",([p22,cid]))
+                        check1=cur.fetchone()
+                        cur.execute("SELECT name,initialqty FROM noninventory WHERE name =%s and cid =%s",([p22,cid]))
+                        check2=cur.fetchone()
+                        if check1:
+                            acqty=int(check1[1])-qt22
+                            cur.execute("UPDATE inventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p22,cid))
+                            mydata.commit()
+                        if check2:
+                            acqty=int(check2[1])-qt22
+                            cur.execute("UPDATE noninventory set initialqty =%s WHERE name =%s and cid =%s",(acqty,p22,cid))
+                            mydata.commit()    
+                    except:
+                        pass     
             if prod23.get():
                     p23=prod23.get()
                     sk24=sku23.get()
@@ -3278,22 +3796,37 @@ def addmaterial():
                     sk30=sku29.get()
                     qt29=quan29.get()
                     pr30=price29.get()
-                    tt30=total29.get()                                                                                                                                                                                                                                                                                                        
+                    tt30=total29.get()                                                                                                                                                                                                                                                                                                      
         except:
-            pass            
+            pass      
+        try:
+            if additional1.get():
+                add1=additional1.get()
+                percent1=percentage1.get()
+                ded=addtotal1.get()
+            if additional2.get(): 
+                add2=additional2.get()
+                percen2=percentage2.get()
+                ded1=addtotal2.get()
+            if additional3.get():
+                add3=additional3.get()
+                percen2=percentage3.get()
+                ded2=addtotal3.get()
+        except:
+                pass      
         type='Components'
         if prod.get():
                 raw='''INSERT INTO rawmaterials (productionid,cid,Type,prod,sku,qty,price,total,prod1,sku1,qty1,price1,total1,prod2,sku2,qty2,price2,total2,prod3,sku3,qty3,price3,total3,prod4,sku4,qty4,price4,total4,
                 prod5,sku5,qty5,price5,total5,prod6,sku6,qty6,price6,total6,prod7,sku7,qty7,price7,total7,prod8,sku8,qty8,price8,total8,prod9,sku9,qty9,price9,total9,prod10,sku10,qty10,price10,total10,prod11,sku11,qty11,price11,total11,prod12,sku12,qty12,price12,total12,prod13,sku13,qty13,price13,total13,prod14,sku14,qty14,price14,total14,prod15,sku15,qty15,price15,total15,
                 prod16,sku16,qty16,price16,total16,prod17,sku17,qty17,price17,total17,prod18,sku18,qty18,price18,total18,prod19,sku19,qty19,price19,total19,prod20,sku20,qty20,price20,total20,prod21,sku21,qty21,price21,total21,prod22,sku22,qty22,price22,total22,prod23,sku23,qty23,price23,total23,
-                prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total25,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29,taxdes,taxper,taxamt,taxdes1,taxper1,taxamt1,totalquantity,subtotal,totaltax,effectivecost,effectiverate) 
+                prod24,sku24,qty24,price24,total24,prod25,sku25,qty25,price25,total25,prod26,sku26,qty26,price26,total26,prod27,sku27,qty27,price27,total27,prod28,sku28,qty28,price28,total28,prod29,sku29,qty29,price29,total29,taxdes,taxper,taxamt,taxdes1,taxper1,taxamt1,taxdes2,taxper2,taxamt2,totalquantity,subtotal,totaltax,effectivecost,effectiverate) 
                 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
-                %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                 cur.execute(raw,[(v[0]),(cid),(type),(p1),(sk1),(qt1),(pr1),(tt1),(p2),(sk2),(qt2),(pr2),(tt2),(p3),(sk3),(qt3),(pr3),(tt3),(p4),(sk4),(qt4),(pr4),(tt4),(p5),(sk5),(qt5),(pr5),(tt5),(p6),(sk6),(qt6),(pr6),(tt6),(p7),(sk7),(qt7),(pr7),(tt7),(p8),(sk8),(qt8),(pr8),(tt8),(p9),(sk9),(qt9),(pr9),(tt9),(p10),(sk10),(qt10),(pr10),(tt10),(pp10),
                 (sk11),(qqtt10),(pr11),(tt11),(p11),(sk12),(qt11),(pr12),(tt12),(p12),(sk13),(qt12),(pr13),(tt13),(p13),(sk14),(qt13),(pr14),(tt14),(p14),(sk15),(qt14),(pr15),(tt15),(p15),(sk16),(qt15),(pr16),(tt16),(p16),(sk17),(qt16),(pr17),(tt17),(p17),(sk18),(qt17),(pr18),(tt18),(p18),(sk19),(qt18),(pr19),(tt19),(p19),(sk20),(qt19),(pr20),(tt20),(p20),(sk21),(qt20),(pr21),(tt21),(p21),(sk22),(qt21),(pr22),(tt22),
-                (p22),(sk23),(qt22),(pr23),(tt23),(p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30),(add1),(percen),(ded),(add2),(percent1),(ded1),(qtytotal),(subtot),(totaddlcost),(effccost),(efrate)])    
+                (p22),(sk23),(qt22),(pr23),(tt23),(p23),(sk24),(qt23),(pr24),(tt24),(p24),(sk25),(qt24),(pr25),(tt25),(p25),(sk26),(qt25),(pr26),(tt26),(p26),(sk27),(qt26),(pr27),(tt27),(p27),(sk28),(qt27),(pr28),(tt28),(p28),(sk29),(qt28),(pr29),(tt29),(p29),(sk30),(qt29),(pr30),(tt30),(add1),(percen),(ded),(add2),(percent1),(ded1),(add3),(percen2),(ded2),(qtytotal),(subtot),(totaddlcost),(subtot+totaddlcost+subtott1),(axx)])    
                 mydata.commit()
-                print('sucessfull')
+                messagebox.showinfo('Sucessfull','Product added sucessfully')  
         try:       
             pp1,pp2,pp3,pp4=prodd1.get(),prodd2.get(),prodd3.get(),prodd4.get()
             skk1,skk2,skk3,skk4=skuu1.get(),skuu2.get(),skuu3.get(),skuu4.get()
@@ -3470,7 +4003,7 @@ def addmaterial():
             (pp13),(skk13),(qtt13),(prr13),(ttt13),(pp14),(skk14),(qtt14),(prr14),(ttt14),(pp15),(skk15),(qtt15),(prr15),(ttt15),(pp16),(skk16),(qtt16),(prr16),(ttt16),(pp17),(skk17),(qtt17),(prr17),(ttt17),(pp18),(skk18),(qtt18),(prr18),(ttt18),(pp19),(skk19),(qtt19),(prr19),(ttt19),(pp20),(skk20),(qtt20),(prr20),(ttt20),(qtytotalt1),(subtott1)])
             mydata.commit()
         estwin.destroy()
-    tk.Button(frame,text='CREATE',bg='#243e54',font=('Times New Roman',20),command=getproductiondetails).place(relx=0.45,rely=0.73,relwidth=0.1,relheight=0.03)
-    hf2.place(relx=0.1,rely=0.10,relwidth=0.8,relheight=0.3)
+    tk.Button(frame,text='CREATE',bg='#243e54',font=('Times New Roman',20),command=getproductiondetails).place(relx=0.45,rely=0.70,relwidth=0.1,relheight=0.03)
+    hf2.place(relx=0.1,rely=0.10,relwidth=0.89,relheight=0.3)
     estwin.mainloop() 
 addmaterial()    

@@ -64,6 +64,7 @@ def pricelist():
         list="INSERT INTO pricelist (cid,productname,sku,price) VALUES (%s,%s,%s,%s)"
         cur.execute(list,[(cid),(prodd),(skuu),(pricee)])
         mydata.commit()
+        messagebox.showinfo('Sucessfully','Pricelist added sucessfully')  
         pricewin.destroy()
     tk.Button(frame,text='CREATE',bg='green',font=('Times New Roman',16),command=savepricelistdetails).place(relx=0.3,rely=0.6,relheight=0.2,relwidth=0.4)
     pricewin.mainloop()
