@@ -17,9 +17,10 @@ def fun():#db connection
         host='localhost',
         user='root',
         password='',
-        database='finsYs_tkinter'
+        database='finsYs_tkinter',
+        # buffer=True
         )
-    mycursor = mydb2.cursor()
+    mycursor = mydb2.cursor(buffered=True)
     
 
 # def add_invoice():
@@ -56,100 +57,101 @@ def add_accountss():
     def cancel():
         add.destroy()
         
-
+    fun()
     def save_data():
-            typelist=[]
-            type = typeinput.get()
-            typelist.append(type)
-            
-            #data fetched from app1_accountype
-            sql="select * from app1_accountype where accountname=%s"
-            mycursor.execute(sql,typelist)
-            pro=mycursor.fetchone()
+        fun()
+        typelist=[]
+        type = typeinput.get()
+        typelist.append(type)
+        
+        #data fetched from app1_accountype
+        sql="select * from app1_accountype where accountname=%s"
+        mycursor.execute(sql,typelist)
+        pro=mycursor.fetchone()
 
-            sql2="select Pid from producttable where Pname=%s"
-            mycursor.execute(sql,typelist)
-            product_id=mycursor.fetchone()
+        sql2="select Pid from producttable where Pname=%s"
+        mycursor.execute(sql2,typelist)
+        product_id=mycursor.fetchone()
 
-            
-
-
-            # cur.execute("select cid from app1_company where id_id=%s",(uid))
-            # cmp1=cur.fetchone()
-            detlist=[]
-            accname = fnameinput.get()
-            detail_type = l.get()
-            detlist.append(detail_type)
-            description = co.get()
-            sub_account = cb.get()
-            deftaxcode = nb.get()
-         
-            cmp=cmp1
-           
-
-                #fetch data from app1_accountype
-            prosql="select * from app1_accountype where accountname=%s"
-            mycursor.execute(prosql,detlist)
-            prodetdata=mycursor.fetchone()
             
 
 
-            # fetch data from app1_accounts
-            sql3="select *  from app1_accounts "
-            mycursor.execute(sql3)
-            accounts_data=mycursor.fetchall()
-            fet_data=[]
+        # cur.execute("select cid from app1_company where id_id=%s",(uid))
+        # cmp1=cur.fetchone()
+        detlist=[]
+        accname = fnameinput.get()
+        detail_type = l.get()
+        detlist.append(detail_type)
+        description = co.get()
+        sub_account = cb.get()
+        deftaxcode = nb.get()
+        
+        cmp=cmp1
+        
+
+            #fetch data from app1_accountype
+        prosql="select * from app1_accountype where accountname=%s"
+        mycursor.execute(prosql,detlist)
+        prodetdata=mycursor.fetchone()
+        
+
+
+        # fetch data from app1_accounts
+        sql3="select *  from app1_accounts "
+        mycursor.execute(sql3)
+        accounts_data=mycursor.fetchall()
+        fet_data=[]
+        
+        for data in accounts_data:
+        
+            if data[3]==accname and data[1]==type and data[10]==cmp:
+                reda=data
+                fet_data.append(reda)
+
+        # fetch data from app1_accounts1
+        sql3="select *  from app1_accounts1 "
+        mycursor.execute(sql3)
+        accounts_data=mycursor.fetchall()
+        fet_data1=[]
+        for data in accounts_data:
+
+            if data[3]==accname and data[1]==type and data[10]==cmp:
+                reda1=data
+                fet_data1.append(reda1)
+        
+
+
+
+
+        if  prodetdata!=None :
+            if fet_data!=None or fet_data1!=None:
+                messagebox.showerror('error',f"Account with {accname} already exists. Please provide another name.")
+        else:
+            sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
+            val=(type,detail_type,accname,description,sub_account,deftaxcode,cmp[0],product_id[0],pro[0])
+            mycursor.execute(sql,val)
+            mydb2.commit()
+
+            # sql1="INSERT INTO app1_accounts1 (detype,balance,cid_id) VALUES(%s,%s,%s)" #adding values into db
+            # val1=(detail_type,finsys_amt,cmp[0])
+            # cur.execute(sql1,val1)
             
-            for data in accounts_data:
+
+
+            sql2="INSERT INTO app1_accountype (accountname,accountbal,cid_id) VALUES(%s,%s,%s)" #adding values into db
+            val2=(detail_type,cmp[0])
+            mycursor.execute(sql2,val2)
+            mydb2.commit()
+
+            mycursor.execute("select * from app1_accounts1 where name=%s and cid_id=%s ",("Opening Balance Equity",cmp[0]))
+            balaceeq=mycursor.fetchone()
+            balance=round(balaceeq[7]+float(),2)
+
+            mycursor.execute("UPDATE app1_accounts1 SET balance =%s where accounts1id=%s and cid_id=%s",(balance,balaceeq[0],cmp[0]))
+            mydb2.commit()
             
-                if data[3]==accname and data[1]==type and data[10]==cmp:
-                    reda=data
-                    fet_data.append(reda)
-
-            # fetch data from app1_accounts1
-            sql3="select *  from app1_accounts1 "
-            mycursor.execute(sql3)
-            accounts_data=mycursor.fetchall()
-            fet_data1=[]
-            for data in accounts_data:
-
-                if data[3]==accname and data[1]==type and data[10]==cmp:
-                    reda1=data
-                    fet_data1.append(reda1)
-            
-
-
-
-
-            if  prodetdata!=None :
-                if fet_data!=None or fet_data1!=None:
-                    messagebox.showerror('error',f"Account with {accname} already exists. Please provide another name.")
-            else:
-                sql="INSERT INTO app1_accounts (acctype,detype,name,description,gst,deftaxcode,balance,asof,balfordisp,cid_id,productid_id,proid_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" #adding values into db
-                val=(type,detail_type,accname,description,sub_account,deftaxcode,cmp[0],product_id[0],pro[0])
-                mycursor.execute(sql,val)
-                mydb2.commit()
-
-                # sql1="INSERT INTO app1_accounts1 (detype,balance,cid_id) VALUES(%s,%s,%s)" #adding values into db
-                # val1=(detail_type,finsys_amt,cmp[0])
-                # cur.execute(sql1,val1)
-                
-
-
-                sql2="INSERT INTO app1_accountype (accountname,accountbal,cid_id) VALUES(%s,%s,%s)" #adding values into db
-                val2=(detail_type,cmp[0])
-                mycursor.execute(sql2,val2)
-                mydb2.commit()
-
-                mycursor.execute("select * from app1_accounts1 where name=%s and cid_id=%s ",("Opening Balance Equity",cmp[0]))
-                balaceeq=mycursor.fetchone()
-                balance=round(balaceeq[7]+float(),2)
-
-                mycursor.execute("UPDATE app1_accounts1 SET balance =%s where accounts1id=%s and cid_id=%s",(balance,balaceeq[0],cmp[0]))
-                mydb2.commit()
-                
-                messagebox.showinfo(title='Success',message='New Account Added')
-                add.destroy()
+            messagebox.showinfo(title='Success',message='New Account Added')
+            add.destroy()
 
 
 
