@@ -30,11 +30,13 @@ yscrollbar = ttk.Scrollbar(wrappen, orient='vertical', command=mycanvas.yview)
 yscrollbar.pack(side=RIGHT, fill='y')
 
 def add_account():
-    
+        # def cancel():
+        #     hd1.destroy()
+            
         global D
         def addit():
             global acctype,detype,name,description,gst,balance,asof
-
+            print(acctype_inp,detype_inp,name_inp,description_inp,gst_inp,balance_inp,asof_inp)
             acctype = acctype_inp.get()
             detype = detype_inp.get()
             name = name_inp.get()
@@ -46,7 +48,7 @@ def add_account():
                     
             con = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="finsysinfox21", port='3307')
             cur = con.cursor()
-            cur.execute('INSERT INTO app1_accounts1(acctype,detype,name,description,gst,balance,asof) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(acctype,detype,name,description,gst,balance,asof))      
+            cur.execute('INSERT INTO app1_accounts1(acctype,detype,name,description,gst,balance,asof) VALUES (%s,%s,%s,%s,%s,%s,%s)',(acctype,detype,name,description,gst,balance,asof))      
             con.commit()
             
             MessageBox.showinfo("Insert Status", "Inserted Successfully")
@@ -63,42 +65,62 @@ def add_account():
         headingfont = font.Font(family='Times New Roman', size=25,)
         credit_heading = Label(heading_frame, text="Account", fg='#fff',bg='#243e55', height=2, bd=5, relief="groove", font=headingfont, width=80)
         credit_heading.pack(padx=0, pady=0)
+        hd1 = tk.Frame(mycanvas,width=900,height=650)
+        hd1['bg'] = '#243e54'
+        hd1.place(relx=0.1, rely=0.2)
             # form fields
         sub_headingfont = font.Font(family='Times New Roman', size=20,)
-        form_frame = Frame(mycanvas, width=1100, height=300, bg='#243e55')
-        mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
-
-        datel = Label(form_frame, text="Account Type", bg='#243e55', fg='#fff')
-        datel.place(x=30, y=30,)
+        # form_frame = Frame(mycanvas, width=1100, height=300, bg='#243e55')
+        # mycanvas.create_window((0, 150), window=form_frame, anchor="nw")
+        cur.execute('SELECT Pname,Pid from producttable')
+        product_data=cur.fetchall()
+        datel = Label(hd1, text="Account Type", bg='#243e55', fg='#fff')
+        datel.place(relx=0.04, rely=0.05)
         acctype_inp = StringVar()
-        acctype_inp = Entry(form_frame, width=25, bg="#2f516f").place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
+        acctype_inp = Entry(hd1, width=25, bg='#2f516f', fg='#fff').place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
+        # StringVar()
+        # cm1 =ttk.Combobox(hd1,textvariable = acctype_inp)
+        # value=[]
+        # for pro_data in product_data:
+        #         value.append(pro_data[0])
+        #         cm1['values']=value
+        # cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
         
-        skul = tk.Label(form_frame, text="Name", bg='#243e55', fg='#fff')
-        skul.place(x=300, y=30, height=15, width=80)
-        detype_inp = StringVar()
-        detype_inp = Entry(form_frame, width=25, bg='#2f516f', fg='#fff')
-        detype_inp.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+        skul = tk.Label(hd1, text="Name", bg='#243e55', fg='#fff')
+        skul.place(relx=0.5, rely=0.05)
+        name_inp = StringVar()
+        name_inp = Entry(hd1, width=25, bg='#2f516f', fg='#fff')
+        name_inp.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
         wrappen.pack(fill='both', expand='yes',)
 
-        proname = Label(form_frame, text="Detail Type", bg='#243e55', fg='#fff')
-        proname.place(x=600, y=30,)
-        name_inp = StringVar()
-        name_inp = Entry(form_frame, width=50, bg='#2f516f', fg='#fff')
-        name_inp.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
-         
-        cusname = tk.Label(form_frame, text="Description", bg='#243e55', fg='#fff')
-        cusname.place(x=30, y=100, height=15, width=120)
+        cur.execute('SELECT Itemname from itemstable')
+        item_data=cur.fetchall()
+        proname = Label(hd1, text="Detail Type", bg='#243e55', fg='#fff')
+        proname.place(relx=0.04, rely=0.2)
+        detype_inp = StringVar()
+        detype_inp = Entry(hd1, width=55, bg='#2f516f', fg='#fff').place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
+        wrappen.pack(fill='both', expand='yes',)
+        # StringVar()
+        # l =ttk.Combobox(hd1,textvariable = detype_inp)
+        # itemvalue=[]
+        # for it_data in item_data:
+        #     itemvalue.append(it_data)
+        #     l['values']=itemvalue
+        # l.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
+
+        cusname = tk.Label(hd1, text="Description", bg='#243e55', fg='#fff')
+        cusname.place(relx=0.5, rely=0.2)
         description_inp = StringVar()
-        description_inp = Entry(form_frame, width=55, bg='#2f516f', fg='#fff')
+        description_inp = Entry(hd1, width=55, bg='#2f516f', fg='#fff')
         description_inp.place(relx=0.5, rely=0.25, relwidth=0.4, relheight=0.065)
         wrappen.pack(fill='both', expand='yes',)
 
-        insdate = tk.Label(form_frame, text="Default Tax Code", bg='#243e55', fg='#fff')
+        insdate = tk.Label(hd1, text="Default Tax Code", bg='#243e55', fg='#fff')
         insdate.place(relx=0.5, rely=0.5)
+        gst_inp=StringVar()
         defaulttaxcodeinput = ['18.0% IGST', ' 14.00% ST', '0% IGST', 'Out of Scope', '0% GST', '14.5% ST', '14.0% VAT', '6.0% IGST', '28.0% IGST', '15.0% ST', '28.0% GST', '12.0% GST', '18.0% GST',
                             '3.0% GST', '0.2% IGST', '5.0% GST', '6.0% GST', '0.2% GST', 'Exempt IGST', '3.0% IGST', '4.0% VAT', '5.0% IGST', '12.36% ST', '5.0% VAT', 'Exempt GST', '12.0% IGST', '2.0% CST']
-        gst_inp = StringVar()
-        gst_inp = ttk.Combobox(form_frame, values=defaulttaxcodeinput).place(relx=0.5, rely=0.55, relwidth=0.4, relheight=0.065)
+        gst_inp = ttk.Combobox(hd1, values=defaulttaxcodeinput).place(relx=0.5, rely=0.55, relwidth=0.4, relheight=0.065)
         wrappen.pack(fill='both', expand='yes',)
         
         # insdate = tk.Label(form_frame, text="Balance", bg='#243e55', fg='#fff')
@@ -110,32 +132,35 @@ def add_account():
         
         
         message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
-        text_box = Text(form_frame,bg="#3E505C",fg="#fff")
+        text_box = Text(hd1,bg="#3E505C",fg="#fff")
         text_box.place(relx=0.04, rely=0.35, relwidth=0.4, relheight=0.4)
         text_box.insert('end', message)
         text_box.config(state='disabled')
         sub_account= IntVar()
-        sub_account_input=Checkbutton(form_frame,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54').place(relx=0.5, rely=0.35)
+        sub_account_input=Checkbutton(hd1,onvalue=1, offvalue = 0 ,variable = sub_account, bg='#243e54').place(relx=0.5, rely=0.35)
    
    
-        insdate = tk.Label(form_frame, text="Balance", bg='#243e55', fg='#fff')
-        insdate.place(x=600, y=100, height=15, width=150)
+        insdate = tk.Label(hd1, text="Balance", bg='#243e55', fg='#fff')
+        insdate.place(relx=0.5, rely=0.65)
         balance_inp = StringVar()
-        balance_inp = Entry(form_frame, width=25, bg="#2f516f")
+        balance_inp = Entry(hd1, width=25, bg="#2f516f")
         balance_inp.place(relx=0.5, rely=0.70, relwidth=0.19, relheight=0.065)
         wrappen.pack(fill='both', expand='yes',)
         
         date = dt.datetime.now()
         formated_date = f"{date:%Y-%m-%d }"
         asof_input = StringVar()
-        asof_inp = tk.Entry(form_frame, text=formated_date,textvariable=asof_input,bg="#3E505C",fg="#fff")
+        asof_inp = Entry(hd1, text=formated_date,textvariable=asof_input,bg="#3E505C",fg="#fff")
         asof_inp.insert(0,formated_date)
         asof_inp.place(relx=0.71, rely=0.70, relwidth=0.19 ,relheight=0.065)
+        wrappen.pack(fill='both', expand='yes',)
 
         
+        # cancel_butt = tk.Button(hd1, text='Cancel', font=15, bg='#243e54',fg="#fff",command=cancel).place(relx=0.1, rely=0.8)
 
-        submit = tk.Button(form_frame, text="Save", command=addit)
-        submit.place(x=580, y=200, width=100)
+        
+        submit = tk.Button(hd1, text="Save", command=addit)
+        submit.place(relx=0.2, rely=0.8)
 
         D.mainloop()
 
@@ -414,13 +439,13 @@ def main():
         #         todate = f'{pyear}-03-31'
         
 
-    tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.08)
-    options=["All dates", "Custom","Today","This month"]
-    drop= ttk.Combobox(form2_frame,values=options,font=16)
-    drop.current(0)
-    drop.bind('<<ComboboxSelected>>',menuu)
-    drop.place(relx=0.05,rely=0.5,relwidth=0.2,relheight=0.5)
-        #buttons
+    # tk.Label(form2_frame,text="Select Date",bg='#243e55',fg='#fff',font=('times new roman', 16, 'bold')).place(relx=0.05,rely=0.08)
+    # options=["All dates", "Custom","Today","This month"]
+    # drop= ttk.Combobox(form2_frame,values=options,font=16)
+    # drop.current(0)
+    # drop.bind('<<ComboboxSelected>>',menuu)
+    # drop.place(relx=0.05,rely=0.5,relwidth=0.2,relheight=0.5)
+    #     #buttons
 
     def cleartree():#to clear treeview
         for item in treevv.get_children():
@@ -547,7 +572,7 @@ def main():
         str = treevv.focus()
         values = treevv.item(str, 'values')
         print(values)
-        b = treevv.item(treevv.focus())["values"][0]
+        b = [values[0]]
         n=[values[1]]
         print("b is",n[0])
         cur.execute("SELECT name FROM app1_accounts ")
