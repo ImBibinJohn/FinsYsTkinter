@@ -8,6 +8,19 @@ from datetime import datetime, date, timedelta
 mydata=mysql.connector.connect(host='localhost', user='root', password='', database='finsys_tkinter1')
 cur=mydata.cursor()
 def salespayments():  
+    def getpaymenvalues():
+        a=estcus.get()
+        c=invno.get()
+        d=estdate.get()
+        e=paymet.get()
+        f=drop1accounttype.get()
+        g=label44amountrec.get()
+        h=label44tabpayment.get()
+        i=label44amountapply.get()
+        j=label44amountcredit.get()
+        cur.execute("""UPDATE payment SET title =%s, firstname =%s, lastname =%s, company =%s, mobile =%s, email =%s, website =%s, billingrate =%s, terms =%s, openingbalance =%s,accountno =%s, gsttype =%s,gstin =%s, taxregisterationno =%s, effectivedate =%s, defaultexpenceaccount =%s, tds =%s, street =%s, city =%s, state =%s, pincode =%s, country =%s, notes =%s WHERE supplier_id =%s""",)
+            
+
     estwin=tk.Tk()
     estwin.title('Sales Records')
     estwin.geometry('1500x1000')
@@ -105,10 +118,137 @@ def salespayments():
     drop1accounttype=ttk.Combobox(hf2,textvariable='accounttype')
     drop1accounttype['values']=("Deferred CGST","Deferred GST Input Credit","Deferred IGST","Deferred Krishi Kalyan Cess Input Credit","Deferred SGST","Deferred Service Tax Input Credit","Deferred VAT Input Credit","GST Refund","Inventory Asset","Krishi Kalyan Cess Refund","Prepaid Insurance","Service Tax Refund","TDS Receivable","Uncategorised Asset","Undeposited Fund")
     drop1accounttype.place(relx=0.55,rely=0.24,relwidth=0.2,relheight=0.03) 
+    def deffadd():
+
+        global add, bm
+        add = tk.Toplevel(estwin)
+        add.title('Add Account')
+        add.geometry('1000x800')
+
+        # mycanvas = tk.Canvas(add, width=2000, height=1200)
+        # mycanvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+        # yscrollbar = ttk.Scrollbar(
+        #     add, orient='vertical', command=mycanvas.yview)
+        # yscrollbar.pack(side=RIGHT, fill=Y)
+        # mycanvas.configure(yscrollcommand=yscrollbar.set)
+        # mycanvas.bind('<Configure>', lambda e: mycanvas.configure(
+        #     scrollregion=mycanvas.bbox('all')))
+        # frame = tk.Frame(mycanvas)
+        add['bg'] = '#2f516f'
+
+        # mycanvas.create_window((0, 0), window=frame,
+        #                         anchor='nw', width=2000, height=1000)
+
+        # # contents frame
+        
+        uid=[4]
+        acc_heading= Label(add, text="ACCOUNT CREATE",bd=0,relief="groove",bg='#2f516f', fg='#fff',height=2,pady=2,width=100)
+        acc_heading.pack()
+        hd1 = tk.Frame(add,width=900,height=650)
+        hd1['bg'] = '#243e54'
+        hd1.place(relx=0.05, rely=0.1)
+
+            # font
+
+        tk.Label(hd1, text='Account Type', bg='#243e54', fg="#fff",font=(
+            'times new roman', 14)).place(relx=0.04, rely=0.05)
+        value=['Bank','Current Assests']    
+        cm1 =ttk.Combobox(hd1,values=value)
+        cm1.place(relx=0.04, rely=0.10, relwidth=0.4, relheight=0.065)
+
+        tk.Label(hd1, text='Name', bg='#243e54', fg="#fff",font=(
+            'times new roman', 14)).place(relx=0.5, rely=0.05)
+        nameinput = StringVar()
+        fnameinput = tk.Entry(hd1, textvariable=nameinput,bg="#3E505C",fg="#fff")
+
+        fnameinput.place(relx=0.5, rely=0.10, relwidth=0.4, relheight=0.065)
+
+
+        def detype(g):
+            def dtl():
+                fnameinput.delete(0,END)
+            ok=l.get()
+            print("ctc",ok)
+            dtl()
+            fnameinput.insert(0,l.get())
+
+        tk.Label(hd1, text='Detail Type',fg="#fff", font=('times new roman', 14),
+                    bg='#243e54').place(relx=0.04, rely=0.2)           
+        def combopinput():
+            cur.execute("SELECT itemname FROM itemmodel")
+            val=cur.fetchall()         
+            for row in val:
+                itemvalue.append(row[0]) 
+        itemvalue=[]           
+        combopinput()                 
+        l =ttk.Combobox(hd1,values=itemvalue)
+        
+        l.place(relx=0.04, rely=0.25, relwidth=0.4, relheight=0.065)
+
+        tk.Label(hd1, text='Description',fg="#fff", font=('times new roman', 14),
+                    bg='#243e54').place(relx=0.5, rely=0.2)
+        descriptioninput = StringVar()
+        co = tk.Entry(hd1, textvariable=descriptioninput,bg="#3E505C",fg="#fff")
+        #co.insert(1, s[4])
+        co.place(relx=0.5, rely=0.25, relwidth=0.4, relheight=0.065)
+
+        message = '''Use Cash and Cash Equivalents to track cash or assets, that can be converted into cash immediately.For example marketable securities and Treasury bills.'''
+        text_box = Text(hd1,bg="#3E505C",fg="#fff")
+        text_box.place(relx=0.04, rely=0.35, relwidth=0.4, relheight=0.3)
+        text_box.insert('end', message)
+        text_box.config(state='disabled')
+
+        # subaccountinput="Deffered_CGST"
+        typeinput = StringVar()
+        def activator():
+            global cb
+            bal=['Deferred CGST','Deferred GST Input Credit','Deferred Krishi Kalyan Cess',
+            'Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit',
+            'GST Refund','Inventory Asset','Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset',
+            'Accumulated Depreciation','Buildings and Improvements','Furniture and Equipment','Land','Leasehold Improvements',
+            'CGST Payable','CST Payable','CST Suspense','GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM',
+            'Input IGST','Input IGST Tax RCM','Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax',
+            'Input Service Tax RCM','Input VAT 14%','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense',
+            'Output CGST','Output CGST Tax RCM','Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess',
+            'Output Krishi Kalyan Cess DCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM',
+            'Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable',
+            'TDS Payable','VAT Payable','VAT Suspense','Opening Balance','Equity']
+
+            cb=ttk.Combobox(hd1,values=bal)
+            cb.place(relx=0.5,rely=0.43,relwidth=0.4,relheight=0.065)
+        ch=IntVar()
+        Checkbutton(hd1, text = "Is sub-account ",bg='#243e54',font=('times new roman', 12),command=activator,variable=ch).place(relx=0.50,rely=0.35)    
+        
+        
+
+        tk.Label(hd1, text='Default Tax Code', font=('times new roman', 14),fg="#fff",
+                    bg='#243e54').place(relx=0.5, rely=0.5)
+        defaulttaxcodeinput = ['18.0% IGST', ' 14.00% ST', '0% IGST', 'Out of Scope', '0% GST', '14.5% ST', '14.0% VAT', '6.0% IGST', '28.0% IGST', '15.0% ST', '28.0% GST', '12.0% GST', '18.0% GST',
+                                '3.0% GST', '0.2% IGST', '5.0% GST', '6.0% GST', '0.2% GST', 'Exempt IGST', '3.0% IGST', '4.0% VAT', '5.0% IGST', '12.36% ST', '5.0% VAT', 'Exempt GST', '12.0% IGST', '2.0% CST']
+        nb = ttk.Combobox(hd1, values=defaulttaxcodeinput)
+
+        nb.place(relx=0.5, rely=0.55, relwidth=0.4, relheight=0.065)
+
+    
+        sub = tk.Button(hd1, text='Create', font=15, bg='#243e54',fg="#fff",width=40,).place(relx=0.28, rely=0.8)
+    tk.Button(hf2,text='+',font=(14),command=deffadd).place(relx=0.755,rely=0.24,relwidth=0.025,relheight=0.03)
+    def key_press(event):
+        def dec():
+            label4amount.delete(0,END)
+            label44tabpayment.delete(0,END)
+            label44amountcredit.delete(0,END)
+        # dec()   
+        act=label44amountrec.get()
+        print("wowo",act)
+        dec()
+        label4amount.insert(0,label44amountrec.get())
+        label44tabpayment.insert(0,label44amountrec.get())
+        label44amountcredit.insert(0,label44amountrec.get())
     Label(hf2, text="Amount Recieved", font=('times new roman', 14),bg='#2f516f').place(relx=0.72,rely=0.32) 
     label44amountrec=Entry(hf2,font=('times new roman', 11))
     label44amountrec.place(relx=0.72,rely=0.35,relwidth=0.2,relheight=0.03) 
-    #label44amountrec.bind('<KeyRelease>')
+    label44amountrec.bind('<KeyRelease>',key_press)
 
     Label(hf2, text="AMOUNT RECIEVED", font=('times new roman', 12), bd=12,bg='#2f516f').place(relx=0.72,rely=0.40) 
     label4amount=Entry(hf2, font=('times new roman',11))
@@ -116,8 +256,7 @@ def salespayments():
 
     label4=Label(hf2, text="#", font=('times new roman', 12,'bold'), bd=12, bg='#2f516f')
     label4.place(relx=0.05,rely=0.55)
-    label44=Entry(hf2,textvariable='desig', font=('times new roman', 11))
-    label44.place(relx=0.05,rely=0.62,relwidth=0.05,relheight=0.03)
+    tk.Label(hf2,text='1',font=('times new roman', 14),bg='#2f516f').place(relx=0.05,rely=0.62,relwidth=0.05,relheight=0.03)   
 
     label4=Label(hf2, text="DESCRIPTION", font=('times new roman', 12,'bold'), bd=12, bg='#2f516f')
     label4.place(relx=0.12,rely=0.55)
@@ -151,10 +290,10 @@ def salespayments():
 
     label4=Label(hf2, text="Amount to Credit", font=('times new roman', 14, 'bold'), bd=12,bg="#2f516f" )
     label4.place(relx=0.60,rely=0.77)
-    label44=Entry(hf2,font=('times new roman', 11, 'bold'))
-    label44.place(relx=0.75,rely=0.77,relwidth=0.15,relheight=0.04)
+    label44amountcredit=Entry(hf2,font=('times new roman', 11, 'bold'))
+    label44amountcredit.place(relx=0.75,rely=0.77,relwidth=0.15,relheight=0.04)
 
-    tk.Button(hf2,text='Save',bg="#2f516f",font=('times new roman', 14, 'bold')).place(relx=0.65,rely=0.9,relwidth=0.1,relheight=0.05)
+    tk.Button(hf2,text='Save',bg="#2f516f",font=('times new roman', 14, 'bold'),command=getpaymenvalues).place(relx=0.65,rely=0.9,relwidth=0.1,relheight=0.05)
 
     hf2.place(relx=0.1,rely=0.12,relwidth=0.8,relheight=0.7)
     estwin.mainloop()   
